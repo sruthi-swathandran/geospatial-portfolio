@@ -1,0 +1,212 @@
+{
+  "event": "India",
+  "iso": "IND",
+  "s1": "2016-08-12",
+  "orbit": "descending",
+  "rel": 77,
+  "val": 68,
+  "bbox": [
+    92.1507,
+    24.8471,
+    94.1634,
+    28.2848
+  ],
+  "scenes": {
+    "sentinel-1-rtc|FLOOD": [
+      {
+        "id": "S1A_IW_GRDH_1SDV_20160812T234622_20160812T234651_012574_013B43_rtc",
+        "datetime": "2016-08-12 23:46",
+        "orbit_state": "descending",
+        "rel_orbit": 77,
+        "polarisations": [
+          "VV",
+          "VH"
+        ],
+        "mode": "IW",
+        "platform": "SENTINEL-1A"
+      },
+      {
+        "id": "S1A_IW_GRDH_1SDV_20160812T234651_20160812T234716_012574_013B43_rtc",
+        "datetime": "2016-08-12 23:47",
+        "orbit_state": "descending",
+        "rel_orbit": 77,
+        "polarisations": [
+          "VV",
+          "VH"
+        ],
+        "mode": "IW",
+        "platform": "SENTINEL-1A"
+      },
+      {
+        "id": "S1A_IW_GRDH_1SDV_20160812T234716_20160812T234741_012574_013B43_rtc",
+        "datetime": "2016-08-12 23:47",
+        "orbit_state": "descending",
+        "rel_orbit": 77,
+        "polarisations": [
+          "VV",
+          "VH"
+        ],
+        "mode": "IW",
+        "platform": "SENTINEL-1A"
+      }
+    ],
+    "sentinel-1-rtc|DRY REFERENCE": [
+      {
+        "id": "S1A_IW_GRDH_1SSV_20160707T234617_20160707T234630_012049_012A02_rtc",
+        "datetime": "2016-07-07 23:46",
+        "orbit_state": "descending",
+        "rel_orbit": 77,
+        "polarisations": [
+          "VV"
+        ],
+        "mode": "IW",
+        "platform": "SENTINEL-1A"
+      },
+      {
+        "id": "S1A_IW_GRDH_1SDV_20160719T234621_20160719T234650_012224_012FB2_rtc",
+        "datetime": "2016-07-19 23:46",
+        "orbit_state": "descending",
+        "rel_orbit": 77,
+        "polarisations": [
+          "VV",
+          "VH"
+        ],
+        "mode": "IW",
+        "platform": "SENTINEL-1A"
+      },
+      {
+        "id": "S1A_IW_GRDH_1SDV_20160719T234650_20160719T234715_012224_012FB2_rtc",
+        "datetime": "2016-07-19 23:47",
+        "orbit_state": "descending",
+        "rel_orbit": 77,
+        "polarisations": [
+          "VV",
+          "VH"
+        ],
+        "mode": "IW",
+        "platform": "SENTINEL-1A"
+      },
+      {
+        "id": "S1A_IW_GRDH_1SDV_20160719T234715_20160719T234740_012224_012FB2_rtc",
+        "datetime": "2016-07-19 23:47",
+        "orbit_state": "descending",
+        "rel_orbit": 77,
+        "polarisations": [
+          "VV",
+          "VH"
+        ],
+        "mode": "IW",
+        "platform": "SENTINEL-1A"
+      },
+      {
+        "id": "S1A_IW_GRDH_1SSV_20160731T234607_20160731T234632_012399_013574_rtc",
+        "datetime": "2016-07-31 23:46",
+        "orbit_state": "descending",
+        "rel_orbit": 77,
+        "polarisations": [
+          "VV"
+        ],
+        "mode": "IW",
+        "platform": "SENTINEL-1A"
+      }
+    ],
+    "sentinel-1-grd|FLOOD": [
+      {
+        "id": "S1A_IW_GRDH_1SDV_20160812T234622_20160812T234651_012574_013B43",
+        "datetime": "2016-08-12 23:46",
+        "orbit_state": "descending",
+        "rel_orbit": 77,
+        "polarisations": [
+          "VV",
+          "VH"
+        ],
+        "mode": "IW",
+        "platform": "sentinel-1a"
+      },
+      {
+        "id": "S1A_IW_GRDH_1SDV_20160812T234651_20160812T234716_012574_013B43",
+        "datetime": "2016-08-12 23:47",
+        "orbit_state": "descending",
+        "rel_orbit": 77,
+        "polarisations": [
+          "VV",
+          "VH"
+        ],
+        "mode": "IW",
+        "platform": "sentinel-1a"
+      },
+      {
+        "id": "S1A_IW_GRDH_1SDV_20160812T234716_20160812T234741_012574_013B43",
+        "datetime": "2016-08-12 23:47",
+        "orbit_state": "descending",
+        "rel_orbit": 77,
+        "polarisations": [
+          "VV",
+          "VH"
+        ],
+        "mode": "IW",
+        "platform": "sentinel-1a"
+      }
+    ],
+    "sentinel-1-grd|DRY REFERENCE": [
+      {
+        "id": "S1A_IW_GRDH_1SSV_20160707T234617_20160707T234630_012049_012A02",
+        "datetime": "2016-07-07 23:46",
+        "orbit_state": "descending",
+        "rel_orbit": 77,
+        "polarisations": [
+          "VV"
+        ],
+        "mode": "IW",
+        "platform": "sentinel-1a"
+      },
+      {
+        "id": "S1A_IW_GRDH_1SDV_20160719T234621_20160719T234650_012224_012FB2",
+        "datetime": "2016-07-19 23:46",
+        "orbit_state": "descending",
+        "rel_orbit": 77,
+        "polarisations": [
+          "VV",
+          "VH"
+        ],
+        "mode": "IW",
+        "platform": "sentinel-1a"
+      },
+      {
+        "id": "S1A_IW_GRDH_1SDV_20160719T234650_20160719T234715_012224_012FB2",
+        "datetime": "2016-07-19 23:47",
+        "orbit_state": "descending",
+        "rel_orbit": 77,
+        "polarisations": [
+          "VV",
+          "VH"
+        ],
+        "mode": "IW",
+        "platform": "sentinel-1a"
+      },
+      {
+        "id": "S1A_IW_GRDH_1SDV_20160719T234715_20160719T234740_012224_012FB2",
+        "datetime": "2016-07-19 23:47",
+        "orbit_state": "descending",
+        "rel_orbit": 77,
+        "polarisations": [
+          "VV",
+          "VH"
+        ],
+        "mode": "IW",
+        "platform": "sentinel-1a"
+      },
+      {
+        "id": "S1A_IW_GRDH_1SSV_20160731T234607_20160731T234632_012399_013574",
+        "datetime": "2016-07-31 23:46",
+        "orbit_state": "descending",
+        "rel_orbit": 77,
+        "polarisations": [
+          "VV"
+        ],
+        "mode": "IW",
+        "platform": "sentinel-1a"
+      }
+    ]
+  }
+}

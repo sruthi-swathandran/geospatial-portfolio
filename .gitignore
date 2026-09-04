@@ -1,0 +1,41 @@
+# --- data: never commit imagery -------------------------------------------
+# GitHub rejects files over 100 MB and warns above 50 MB. A single Sentinel-1
+# scene is larger than the entire rest of this repo will ever be. Everything
+# under data/ is reproducible by re-running the scripts, so it stays local.
+data/
+*/data/
+*.tif
+*.tiff
+*.SAFE/
+*.zip
+*.nc
+*.h5
+
+# Exception: small vector files you hand-made and cannot regenerate
+# (validation polygons for RS-02, for example) SHOULD be committed.
+!*/data/labels/**
+!*.geojson
+
+# --- results: commit the numbers, not the rasters --------------------------
+*/results/**/*.tif
+*/results/**/*.pmtiles
+# CSVs, metrics and figures stay tracked — they are the portfolio.
+
+# --- python ---------------------------------------------------------------
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.venv/
+env/
+*.egg-info/
+
+# --- secrets --------------------------------------------------------------
+.env
+*.key
+credentials.json
+
+# --- os -------------------------------------------------------------------
+.DS_Store
+Thumbs.db
+desktop.ini
+.venv2/

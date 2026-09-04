@@ -1,0 +1,91 @@
+# Conda environment for the geospatial portfolio (RS-01 / RS-02 / RS-03).
+#
+# Two things in here exist because of problems we actually hit, not theory:
+#
+# 1. "- nodefaults" under channels.
+#    Listing conda-forge does NOT stop conda from also using the channels in
+#    your .condarc. Mixing them gives you packages compiled against different
+#    C libraries, which surfaces at import time as:
+#        ImportError: DLL load failed while importing _warp:
+#        The specified procedure could not be found.
+#
+# 2. "--no-deps" in the pip section, and every pip dependency listed as a
+#    conda package above it.
+#    A pip install inside a conda env will happily overwrite conda's compiled
+#    packages with PyPI wheels that bundle their own DLLs. Those two builds
+#    then fight, and which one wins depends on import order — which is why the
+#    same environment failed on rasterio in one script and passed in another.
+#    --no-deps means pip installs exactly what it is told and touches nothing
+#    else. Keep it that way: if you ever need a new package here, install it
+#    with conda first, and only fall back to pip (with --no-deps) if conda-forge
+#    genuinely does not have it.
+#
+# Build it:
+#   conda deactivate
+#   conda env remove -n geo-portfolio -y
+#   conda env create -f environment.yml
+#   conda activate geo-portfolio
+#   python verify_env.py
+#
+name: geo-portfolio
+
+channels:
+  - conda-forge
+  - nodefaults
+
+dependencies:
+  - python=3.11
+
+  # --- C libraries named explicitly so they resolve once, not three times ---
+  - libgdal
+  - gdal
+  - proj
+  - geos
+  - freetype
+  - libpng
+  - zlib
+
+  # --- STAC access ---
+  - pystac-client
+  - pystac
+  - odc-stac
+  - stackstac
+
+  # --- raster / array ---
+  - rasterio
+  - rioxarray
+  - xarray
+  - dask
+  - numpy
+  - scipy
+  - scikit-image
+
+  # --- vector ---
+  - geopandas
+  - shapely
+  - pyproj
+  - fiona
+
+  # --- tabular / modelling ---
+  - pandas
+  - pyarrow
+  - scikit-learn
+
+  # --- plotting / notebooks ---
+  - matplotlib
+  - pillow
+  - jupyterlab
+  - ipykernel
+  - tqdm
+
+  # --- planetary-computer's dependencies, from conda so pip never installs them
+  - pydantic
+  - python-dotenv
+  - click
+  - requests
+  - packaging
+
+  - pip
+  - pip:
+      - --no-deps
+      - planetary-computer
