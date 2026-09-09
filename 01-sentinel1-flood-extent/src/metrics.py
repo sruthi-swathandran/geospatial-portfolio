@@ -112,3 +112,20 @@ def macro(confusions: list[dict]) -> dict:
 def format_row(name: str, s: dict) -> str:
     return (f"{name:<28} IoU {s['iou']:.3f}  P {s['precision']:.3f}  "
             f"R {s['recall']:.3f}  F1 {s['f1']:.3f}")
+
+def mapped_area_px(pred: np.ndarray, truth: np.ndarray,
+                   ignore_value: int = -1) -> int:
+    """
+    Count predicted-water pixels ON LABELLED GROUND ONLY.
+
+    Added after review. Every area-versus-truth comparison in this project
+    counted predicted water over the whole chip while truth could only be
+    counted where a label exists, so predictions falling on no-data label
+    pixels inflated the map side of the comparison and made the map look
+    closer to truth than it is. On the 65 India chips that was 3,140 ha, and
+    it turned a real -22.1% shortfall into an apparent -5%.
+
+    confusion() already excludes ignore_value, so tp + fp is exactly this
+    quantity; this helper exists so the intent is visible at the call site.
+    """
+    return int(np.sum((pred == 1) & (truth != ignore_value)))

@@ -1,0 +1,13 @@
+group,files,bytes,megabytes,file_types
+data,1,27,0.0,(none) x1
+data/boundaries,1,44274715,44.27,.geojson x1
+data/dem,68,10137824,10.14,.tif x68
+data/dem_scene,50,503577417,503.58,.tif x50
+data/gsw,65,1224347,1.22,.tif x65
+data/gsw_scene,46,6561020,6.56,.tif x46
+data/reference,340,713713108,713.71,.tif x340
+data/sen1floods11,481,385243359,385.24,".tif x476, .csv x4, .json x1"
+data/worldcover,49,11072261,11.07,.tif x49
+results,54,9177044,9.18,".csv x37, .json x8, .geojson x7, (none) x1, .txt x1"
+results/figures,27,10797485,10.8,".png x26, .pdf x1"
+results/fullscene,31,17414156,17.41,".png x13, .tif x12, .json x6"

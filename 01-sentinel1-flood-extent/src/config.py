@@ -102,5 +102,54 @@ EVENT_VH_THRESHOLD = -21.56
 # contains little or no water.
 MAX_WATER_THRESHOLD_VH = -15.0
 MAX_WATER_THRESHOLD_VV = -12.0
-SLOPE_MAX_DEG = 5.0            # above this, radar shadow/layover dominates
-GSW_PERMANENT_MIN = 80         # JRC occurrence % counted as permanent water
+
+# --------------------------------------------------------------------------
+# Full-scene refinement
+# --------------------------------------------------------------------------
+# CHANGED 2016 review: these were declared here as 5.0 and 80 while the
+# pipeline actually ran 8.0 and 50, so the file that exists to be the source of
+# truth stated two parameters wrongly. Corrected to the values in use, and the
+# other two refinement parameters moved here from argparse defaults.
+#
+# Between them these four set roughly 45% of the subtraction between the raw
+# threshold output (217,490 ha) and the reported flood area (119,779 ha). They
+# were the least visible decisions in the project and the most consequential,
+# which is the wrong way round.
+#
+# None of them can be validated: the Sen1Floods11 labels cover 65 floodplain
+# chips and none of these situations appears in them. Each is justified by a
+# measurement on the scene itself, recorded in results/refine_scene_20m.csv.
+
+SLOPE_MAX_DEG = 8.0            # 99.3% of the permanent channel sits below this
+GSW_PERMANENT_MIN = 50         # JRC occurrence %; 95% of that area is labelled water
+EDGE_BUFFER_PX = 30            # 600 m at 20 m; flood runs 17% there against 1.9% inside
+MIN_OBJECT_PX_SCENE = 10       # 0.4 ha at 20 m; below this is a sample, not a flood
+
+TILE_PX = 2048                 # processing tile side
+TILE_HALO_PX = 16              # enough for a 5x5 Lee filter and the morphology after it
+
+# --------------------------------------------------------------------------
+# Resampling, declared per variable
+# --------------------------------------------------------------------------
+# odc-loader defaults to nearest (odc/loader/types.py:506). Leaving that
+# implicit meant three of four raster loads were resampled by an undeclared
+# rule, including the two that feed the threshold and the slope mask.
+#
+# These values reproduce the behaviour the published numbers were computed
+# with. They are declared rather than changed, so alternatives can be tested
+# against a known baseline instead of being slipped in. See REVIEW.md S-01/S-02.
+RESAMPLING = {
+    "sar": "nearest",          # 10 m gamma0 onto the target grid
+    "dem": "nearest",          # 30 m Copernicus DEM, feeds the slope mask
+    "occurrence": "nearest",   # JRC continuous %, average would be defensible
+    "landcover": "mode",       # categorical: must never be interpolated
+}
+
+CROPLAND_CLASS = 40            # ESA WorldCover code
+GEOBOUNDARIES_API = "https://www.geoboundaries.org/api/current/gbOpen/IND/ADM2/"
+
+
+def pixel_ha(res_m: float) -> float:
+    """Hectares per pixel. Derived rather than hard-coded, because 0.01 was
+    written into two scripts and is silently wrong at any resolution but 10 m."""
+    return (res_m * res_m) / 10_000.0

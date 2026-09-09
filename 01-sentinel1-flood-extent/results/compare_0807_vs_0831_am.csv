@@ -1,0 +1,11 @@
+quantity,hectares
+seen_by_both,3159751.7
+seen_only_2016-08-07,5432.3
+seen_only_2016-08-31,0.0
+overlap_flood_both_dates,41834.7
+overlap_drained_by_2016-08-31,48950.2
+overlap_new_by_2016-08-31,3156.7
+wedge_flood_2016-08-07,130.0
+wedge_flood_2016-08-31,0.0
+persistence_fraction,0.4608
+date_to_date_iou,0.4453

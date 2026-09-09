@@ -1,0 +1,47 @@
+{
+  "event": "India",
+  "method": "single-date pooled Otsu on RTC gamma0 VH, Lee 5x5",
+  "polarisation": "VH",
+  "speckle_filter": "Lee 5x5 on linear power",
+  "slope_mask": null,
+  "slope_mask_reason": "swept 2 to 20 degrees in step 10; removed true water faster than shadow, precision +0.008 for recall -0.003",
+  "change_detection": null,
+  "change_detection_reason": "step 9c; best change threshold was the one that made the constraint inert, and the change signal alone scored IoU 0.147 against 0.130 for labelling the whole scene as water",
+  "permanent_water": {
+    "source": "JRC Global Surface Water occurrence",
+    "cut_percent": 50,
+    "note": "used only to report flood extent, never in a score, because the hand labels mark permanent water as water"
+  },
+  "operating_points": {
+    "max_iou": {
+      "threshold": -18.75,
+      "iou_valid": 0.6118,
+      "iou_test": 0.6805,
+      "iou_all": 0.5186,
+      "p_all": 0.7797,
+      "r_all": 0.6076,
+      "area_ha": 14405.3,
+      "flood_only_ha": 13659.0,
+      "area_err": -0.2206
+    },
+    "area_matched": {
+      "threshold": -17.75,
+      "iou_valid": 0.5994,
+      "iou_test": 0.6978,
+      "iou_all": 0.5221,
+      "p_all": 0.6872,
+      "r_all": 0.6849,
+      "area_ha": 18421.5,
+      "flood_only_ha": 18297.1,
+      "area_err": -0.0033
+    }
+  },
+  "published_baseline_same_chips": {
+    "precision": 0.8199,
+    "recall": 0.6012,
+    "iou": 0.5311,
+    "area_ha": 13553.8
+  },
+  "truth_area_ha": 18483.4,
+  "n_chips": 65
+}

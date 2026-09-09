@@ -70,6 +70,24 @@ def lee_filter(db: np.ndarray, size: int = SPECKLE_WINDOW) -> np.ndarray:
     return np.where(valid, out, np.nan)
 
 
+def block_mean(a: np.ndarray, size: int = 5) -> np.ndarray:
+    """
+    Mean filter that tolerates NaN, keeping NaN where the input had it.
+
+    Used before comparing two SAR images. Speckle is an independent random
+    realisation in each processing chain, so over low-contrast ground it
+    dominates the variance and drives pixel correlation towards zero even when
+    both images are correct. Averaging suppresses speckle by roughly the square
+    root of the window area while leaving real structure intact, which is what
+    makes correlation a usable agreement measure at all.
+    """
+    valid = np.isfinite(a)
+    if not valid.any():
+        return a
+    filled = np.where(valid, a, np.nanmean(a[valid]))
+    return np.where(valid, uniform_filter(filled, size), np.nan)
+
+
 def ashman_d(values: np.ndarray, threshold: float) -> float:
     lo, hi = values[values <= threshold], values[values > threshold]
     if lo.size < 2 or hi.size < 2:
