@@ -44,7 +44,7 @@ ground with no label involved.
 **Consequence for the headline.** The map under-counts labelled water by 22.1%
 at the operating point the full-scene product uses. The reported 119,779 ha is
 therefore more likely an underestimate of water extent than a near-unbiased
-figure. Scaling by the chip-scale ratio gives roughly 153,800 ha, but that
+figure. Scaling by the chip-scale ratio gives 153,681 ha, but that
 assumes chip error rates transfer to terrain the chips never sampled, which
 finding F-08 says they should not be assumed to.
 
@@ -124,7 +124,7 @@ output and the reported area. The script bins every water pixel once by slope,
 occurrence and distance from the swath edge, then answers all 216 combinations
 from that one histogram. Across the full grid the reported flood area ranges
 35,187 to 275,969 ha; within the defensible band of slope 5 to 12 degrees and
-occurrence 25 to 70 percent it is 61,522 to 173,395 ha, a factor of 2.8. The
+occurrence 25 to 70 percent it is 60,783 to 186,921 ha, a factor of 3.08. The
 published choice sits at 122,832 ha before the MMU.
 
 ### C-09 `compare_dates.py` assumed the first map was the later one
@@ -147,7 +147,7 @@ headline is now a range.
 | | Map-optimal, −18.75 dB | Area-matched, −17.75 dB |
 |---|---:|---:|
 | Flood water | 119,779 ha | 170,625 ha |
-| Flooded cropland | 43,494 ha | 80,923 ha |
+| Flooded cropland | 46,943 ha | 87,127 ha |
 
 Neither figure replaces the other and neither is withdrawn. The two thresholds
 score 0.519 and 0.522 IoU on the chips, indistinguishable inside an interval of
@@ -174,7 +174,7 @@ re-run.
 | Flood 31 Aug, in overlap | 38,887 ha | 44,991 ha |
 | Persistence | 56.9% | 46.1% |
 | Net change | to 60.2% | to 49.6% |
-| Total flood fall | 39.9% | 50.5% |
+| Total flood fall | 39.8% | 50.4% |
 | Flooded cropland fall | 80.8% | 82.5% |
 
 The total-flood recession is threshold-dependent and is now reported as a range.
@@ -186,6 +186,71 @@ A prediction that was wrong, recorded rather than dropped: relaxing the
 threshold was expected to add terrain and edge noise. On 7 August 87% of what it
 adds is cropland, because partially inundated fields with emergent crop sit at
 intermediate backscatter. On 31 August, post-drainage, that falls to 57%.
+
+### C-12 The cropland figure was measured on a smaller footprint than the flood
+
+**Cause.** `district_stats.py` sums flooded cropland over geoBoundaries ADM2
+polygons. On 12 August the swath reaches ground those polygons do not cover, so
+the district sum accounts for 110,081 ha of the 119,779 ha of mapped flood. The
+headline paired a scene-wide flood figure with a district-restricted cropland
+figure and presented the second as a share of the first.
+
+**Fix.** `cropland_scene.py` counts flooded cropland over the same raster the
+flood figure uses, by windowing each WorldCover tile onto the refined water
+raster rather than mosaicking. Tile windows are checked for overlap before
+anything is counted, and the flood total is cross-checked against
+`fullscene_stats_*.json`. Results in `results/cropland_scene.csv`.
+
+| Quantity | Superseded | Corrected |
+|---|---:|---:|
+| Flooded cropland, 12 Aug, map-optimal | 43,494 ha | 46,943 ha |
+| Flooded cropland, 12 Aug, area-matched | 80,923 ha | 87,127 ha |
+
+The 7 and 31 August figures are unchanged. Those passes are on relative orbit 4
+and fall entirely inside Indian district polygons, so the district sum and the
+scene total agree to the hectare.
+
+The share of mapped flood sitting on cropland moves from 39.5% to 39.2% at the
+map-optimal point, so the reading does not change. The magnitude does.
+
+One limitation the measurement exposed: the fetched WorldCover tiles cover
+97.8% of the grid. The uncovered 2.2% is counted as not cropland, so every
+cropland figure in this repository is a floor rather than a best estimate.
+
+### C-13 Two numbers that were quoted for months and stored nowhere
+
+**Cause.** `verify_all.py` section A traces every number in README.md against
+`results/`. It has never looked at `docs/index.html`, and it skips decimals and
+percentages. Two claims lived in that blind spot.
+
+Macro IoU 0.280 was computed by `accuracy_ci.py`, printed to the console, and
+never written to a file. The permanent-water sensitivity on the public page
+read 11,067 to 23,423 ha, a pair that appears nowhere in `results/`; the
+measurement in `mask_terrain_water.csv` is 8,893 to 19,458 ha. And the
+swath-edge rate, 17% of area against 1.9%, had no producer at all.
+
+**Fix.** Section A2 now traces the public page the same way section A traces
+the README. `accuracy_ci.py` writes `macro_iou`, `macro_iou_sd` and
+`macro_iou_min` per split. `build_docs_page.py` reads the sensitivity range
+from `mask_terrain_water.csv` rather than carrying it as a literal. And
+`edge_rate.py` measures the swath-edge rate from the raw and refined rasters.
+
+| Quantity | Superseded | Measured |
+|---|---:|---:|
+| Permanent-water sensitivity, on chips | 11,067 to 23,423 ha | 8,893 to 19,458 ha |
+| Flood called inside the 600 m buffer | 17% of area | 32.9% |
+| Flood called in the interior | 1.9% of area | 3.1% |
+
+The buffer rate was wrong by nearly a factor of two, and in the direction that
+strengthens the argument for the buffer rather than weakening it: the contrast
+is about eleven to one, not nine to one. The measurement is confirmed
+independently, since 79,785 ha of buffer at 32.9% is 26,249 ha of flood against
+the 26,223 ha `refine_figure.py` measures as moving to no data.
+
+**What this says about the audit.** A number matching something in `results/`
+is weak evidence, because with 22,516 indexed values a tolerance will land on
+an unrelated value sooner or later: 11,067 matched by coincidence while its
+own partner did not. The misses are the signal. The report now says so.
 
 ---
 

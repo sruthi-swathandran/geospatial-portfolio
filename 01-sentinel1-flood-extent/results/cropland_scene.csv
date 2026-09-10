@@ -1,0 +1,7 @@
+variant,flood_scene_ha,flooded_cropland_scene_ha,cropland_imaged_scene_ha,imaged_scene_ha,flood_districts_ha,flooded_cropland_districts_ha,cropland_outside_districts_ha,pct_of_flood_on_cropland_scene
+"12 Aug, map-optimal",119778.9,46942.6,851359.4,6264775.1,110081.3,43494.5,3448.1,39.19
+"12 Aug, area-matched",170625.4,87126.8,851359.4,6264775.1,155595.6,80923.1,6203.7,51.06
+"7 Aug, map-optimal",64703.8,30035.1,427451.8,3165184.0,64703.7,30034.9,0.2,46.42
+"7 Aug, area-matched",90915.0,52881.6,427451.8,3165184.0,90915.1,52881.7,-0.1,58.17
+"31 Aug, map-optimal",38886.9,5776.0,427102.1,3159751.7,38886.9,5776.0,-0.0,14.85
+"31 Aug, area-matched",44991.4,9255.7,427102.1,3159751.7,44991.2,9255.9,-0.2,20.57

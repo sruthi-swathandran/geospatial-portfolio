@@ -41,3 +41,4 @@ desktop.ini
 .venv2/
 Claude outputs/ 
 commit_msg.txt 
+*.bak*

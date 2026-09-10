@@ -396,34 +396,101 @@ def main() -> None:
     good = np.isfinite(fl_vh)
     water = good & (fl_vh <= t_abs)
     water_s = water & (slope <= cut)
-    perm = np.isfinite(occ) & (occ >= 80)
+    # CHANGED: was hard-coded at 80 while the pipeline ran 50. Read it from
+    # config so the illustration cannot drift away from the product.
+    from matplotlib.colors import ListedColormap
+    perm_cut = float(getattr(config, "GSW_PERMANENT_MIN", 50))
+    perm = np.isfinite(occ) & (occ >= perm_cut)
 
-    panels = [(fl_vh, "flood VH (dB)", "gray", None),
-              (slope, "slope (degrees)", "magma", (0, 20)),
-              (occ, "GSW occurrence (%)", "Blues", (0, 100)),
-              (label.astype(float), "hand label", "Blues", (0, 1)),
-              (water.astype(float), "threshold only", "Blues", (0, 1)),
-              (water_s.astype(float), f"+ slope <= {cut:.0f} deg",
-               "Blues", (0, 1)),
-              ((water_s & ~perm).astype(float), "+ permanent water removed",
-               "Blues", (0, 1)),
-              ((water_s & perm).astype(float), "the part that is the river",
-               "Blues", (0, 1))]
+    def _share(m):
+        return float(np.count_nonzero(m)) / max(float(np.count_nonzero(good)),
+                                                1.0)
 
-    fig, axes = plt.subplots(2, 4, figsize=(15, 8))
-    for ax, (img, title, cmap, lim) in zip(axes.ravel(), panels):
+    C_LAND, C_WATER = "#EDEAE3", "#1B5E8C"
+    C_INK, C_MUTED, C_RULE = "#16222B", "#5C6B76", "#C9D2D8"
+    binary = ListedColormap([C_LAND, C_WATER])
+
+    panels = [
+        (fl_vh, "Flood VH (dB)", "gray", None, None),
+        (slope, "Slope (degrees)", "magma", (0, 20), None),
+        (occ, "JRC occurrence (%)", "Blues", (0, 100), None),
+        (label.astype(float), "Hand label", binary, (0, 1),
+         _share(label == 1)),
+        (water.astype(float), "1. Threshold only", binary, (0, 1),
+         _share(water)),
+        (water_s.astype(float), f"2. After slope \u2264 {cut:.0f}\u00b0",
+         binary, (0, 1), _share(water_s)),
+        ((water_s & ~perm).astype(float),
+         f"3. After removing occurrence \u2265 {perm_cut:.0f}%",
+         binary, (0, 1), _share(water_s & ~perm)),
+        ((water_s & perm).astype(float), "What that last step removed",
+         binary, (0, 1), _share(water_s & perm)),
+    ]
+
+    fig = plt.figure(figsize=(15.4, 9.9), layout="constrained")
+    fig.get_layout_engine().set(w_pad=0.02, h_pad=0.02, hspace=0.0,
+                                wspace=0.0)
+    outer = fig.add_gridspec(3, 1, height_ratios=[0.62, 7.6, 1.44])
+    hax = fig.add_subplot(outer[0])
+    hax.set_axis_off()
+    fax = fig.add_subplot(outer[2])
+    fax.set_axis_off()
+    grid = outer[1].subgridspec(2, 4, wspace=0.05, hspace=0.10)
+
+    for k, (img, title, cmap, lim, frac) in enumerate(panels):
+        ax = fig.add_subplot(grid[k // 4, k % 4])
         im = np.array(img, dtype=float)
         if lim:
-            ax.imshow(im, cmap=cmap, vmin=lim[0], vmax=lim[1])
+            ax.imshow(im, cmap=cmap, vmin=lim[0], vmax=lim[1],
+                      interpolation="nearest")
         else:
             f = im[np.isfinite(im)]
             ax.imshow(im, cmap=cmap, vmin=np.percentile(f, 2),
-                      vmax=np.percentile(f, 98))
-        ax.set_title(title, fontsize=9)
-        ax.set_xticks([]); ax.set_yticks([])
-    fig.suptitle(f"{EVENT} chip {chip_id}: water extent to flood extent")
-    fig.tight_layout()
-    fig.savefig(FIGURES / "mask_terrain_water.png", dpi=130)
+                      vmax=np.percentile(f, 98), interpolation="nearest")
+        ax.set_title(title, fontsize=9.6, color=C_INK, fontweight="bold",
+                     pad=5, loc="left")
+        if frac is not None:
+            ax.text(0.035, 0.035, f"{frac * 100:.1f}% of the chip",
+                    transform=ax.transAxes, fontsize=8.4, color=C_INK,
+                    va="bottom", ha="left",
+                    bbox=dict(boxstyle="round,pad=0.34", fc="white",
+                              ec=C_RULE, lw=0.6, alpha=0.93))
+        ax.set_xticks([])
+        ax.set_yticks([])
+        for sp in ax.spines.values():
+            sp.set_edgecolor(C_RULE)
+            sp.set_linewidth(0.7)
+
+    hax.text(0, 1.0, f"From water extent to flood extent, {EVENT} chip "
+             f"{chip_id}", fontsize=14, fontweight="bold", color=C_INK,
+             va="top", ha="left", transform=hax.transAxes)
+    hax.text(0, 0.0, "Top row is what goes in. Bottom row is the chain, one "
+             "step per panel. In the four mask panels the dark shade is water "
+             "and the pale shade is not, and the\npercentage is of the "
+             "chip's valid pixels.", fontsize=9.8, color=C_MUTED,
+             va="bottom", ha="left", transform=hax.transAxes,
+             linespacing=1.55)
+
+    fax.text(0, 1.0,
+             "The slope cut drawn here is the best value measured on these "
+             "chips in section 2 above. The full scene uses SLOPE_MAX_DEG "
+             "from config.py, which is a\ndifferent number for a real "
+             "reason: these chips sit on the floodplain and contain almost no "
+             "steep ground, so the cut that helps here is not the cut that "
+             "helps there.\n"
+             "The permanent-water cut is read from config.GSW_PERMANENT_MIN "
+             "rather than written into this figure, so the illustration and "
+             "the pipeline cannot disagree.\n"
+             "Step 3 is what turns a water-extent map into a flood-extent "
+             "map. It also lowers IoU against these labels, because the "
+             "labels mark the river as water. Section 1\nmeasures that "
+             "before anything is masked, which is why flood extent is "
+             "reported as an area with no score beside it.",
+             fontsize=8.4, color=C_MUTED, va="top", ha="left",
+             transform=fax.transAxes, linespacing=1.62)
+
+    fig.savefig(FIGURES / "mask_terrain_water.png", dpi=200,
+                facecolor="white", bbox_inches="tight")
 
     print(f"\nwrote mask_terrain_water.csv and "
           f"figures/mask_terrain_water.png (chip {chip_id})")

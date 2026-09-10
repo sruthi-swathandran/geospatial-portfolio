@@ -178,6 +178,11 @@ def main() -> None:
         if not rows:
             continue
         sc = pooled(rows)
+        # Macro weights every chip equally rather than by pixel count. It was
+        # printed below and never stored, so the 0.280 quoted in README.md and
+        # on the public page had no file behind it.
+        macro_split = np.array(
+            [scores(r["tp"], r["fp"], r["fn"], r["tn"])["iou"] for r in rows])
         lo, hi = boot(rows, "iou")
         plo, phi = boot(rows, "precision")
         rlo, rhi = boot(rows, "recall")
@@ -194,6 +199,9 @@ def main() -> None:
             "overall_accuracy": round(sc["oa"], 4),
             "quantity_disagreement": round(sc["quantity_disagreement"], 4),
             "allocation_disagreement": round(sc["allocation_disagreement"], 4),
+            "macro_iou": round(float(np.nanmean(macro_split)), 4),
+            "macro_iou_sd": round(float(np.nanstd(macro_split)), 4),
+            "macro_iou_min": round(float(np.nanmin(macro_split)), 4),
         })
 
     macro = np.array([scores(r["tp"], r["fp"], r["fn"], r["tn"])["iou"]

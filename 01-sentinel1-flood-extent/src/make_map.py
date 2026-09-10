@@ -67,15 +67,31 @@ with rasterio.open(MAIN) as s:
     img = s.read(1, out_shape=(H // DEC, W // DEC))
     left, bottom, right, top = s.bounds
 
-def crop_ha(path):
-    tot = 0.0
-    with open(path, encoding="utf-8") as fh:
-        for r in csv.DictReader(fh):
-            tot += float(r["flooded_cropland_ha"])
-    return tot
+def crop_scene_ha(label):
+    """Flooded cropland over the whole raster, the figure the README quotes.
 
-crop_m = crop_ha(RESULTS / "district_flood_stats.csv")
-crop_a = crop_ha(RESULTS / "district_flood_stats_areamatched.csv")
+    Summing flooded_cropland_ha over district_flood_stats.csv gives a sum over
+    ADM2 polygons instead. On 12 August those polygons account for 110,081 of
+    the 119,779 ha of mapped flood, so the cropland total that goes with them
+    is 43,494 ha against the scene's 46,943. Every other row of the area table
+    is a pixel count over the whole scene, so mixing the two footprints in one
+    table put a district figure beside a scene figure and invited the reader
+    to divide one by the other. See CHANGELOG.md C-12.
+    """
+    p = RESULTS / "cropland_scene.csv"
+    if not p.exists():
+        raise SystemExit(
+            f"{p.name} not found. Run cropland_scene.py first.\n"
+            f"Falling back to the district sums would put a different number "
+            f"on this sheet than the README carries. Nothing written.")
+    with open(p, encoding="utf-8") as fh:
+        for r in csv.DictReader(fh):
+            if r["variant"].strip() == label:
+                return float(r["flooded_cropland_scene_ha"])
+    raise SystemExit(f"no row named {label!r} in {p.name}. Nothing written.")
+
+crop_m = crop_scene_ha("12 Aug, map-optimal")
+crop_a = crop_scene_ha("12 Aug, area-matched")
 
 # ---------------------------------------------------------------- districts
 gj = json.load(open(RESULTS / "district_flood_stats.geojson", encoding="utf-8"))
@@ -244,7 +260,7 @@ meta = [
     ("BOUNDARIES", "geoBoundaries ADM2 India, current vintage, CC BY 4.0.\n"
                    "Assam districts have been created since 2016"),
     ("VALIDATION", "Sen1Floods11 hand labels, 65 chips, IoU 0.519\n"
-                   "(95% CI 0.395–0.609). The refinement steps above are\n"
+                   "(95% CI [0.395, 0.609]). The refinement steps above are\n"
                    "unvalidated: no labelled data covers them"),
     ("PRODUCED", dt.date.today().strftime("%d %B %Y") +
                  " · github.com/sruthi-swathandran/geospatial-portfolio"),

@@ -251,32 +251,79 @@ def main() -> None:
     panels += [(predict(v, d).astype(float), v, "Blues", (0, 1))
                for v in variants]
 
-    cols = 4
+    from matplotlib.colors import ListedColormap
+    C_LAND, C_WATER = "#EDEAE3", "#1B5E8C"
+    C_INK, C_MUTED, C_RULE = "#16222B", "#5C6B76", "#C9D2D8"
+    binary = ListedColormap([C_LAND, C_WATER])
+
+    # Fewest empty cells in the last row. With two references there are 13
+    # panels, which at four columns left one panel alone beside three gaps.
+    cols = min((4, 5, 6), key=lambda c: ((-len(panels)) % c, c))
     rows_n = int(np.ceil(len(panels) / cols))
-    fig, axes = plt.subplots(rows_n, cols, figsize=(3.5 * cols, 3.8 * rows_n))
-    axes = np.atleast_1d(axes).ravel()
-    for ax, (img, title, cmap, lim) in zip(axes, panels):
+
+    # A constrained layout with the header and footer as real axes. tight_layout
+    # cannot see figure-level text, and with aspect-locked images it leaves the
+    # lower rows' titles sitting on the images above them.
+    fig = plt.figure(figsize=(3.3 * cols, 3.5 * rows_n + 1.7),
+                     layout="constrained")
+    fig.get_layout_engine().set(w_pad=0.02, h_pad=0.02, hspace=0.0, wspace=0.0)
+    outer = fig.add_gridspec(3, 1, height_ratios=[0.66, 3.5 * rows_n, 1.04])
+    hax = fig.add_subplot(outer[0])
+    hax.set_axis_off()
+    fax = fig.add_subplot(outer[2])
+    fax.set_axis_off()
+    grid = outer[1].subgridspec(rows_n, cols, wspace=0.05, hspace=0.14)
+
+    for k, (img, title, cmap, lim) in enumerate(panels):
+        ax = fig.add_subplot(grid[k // cols, k % cols])
         img = np.array(img, dtype=float)
         if cmap == "Blues":
             img[img == -1] = np.nan
-        if lim:
-            ax.imshow(img, cmap=cmap, vmin=lim[0], vmax=lim[1])
+            ax.imshow(img, cmap=binary, vmin=0, vmax=1,
+                      interpolation="nearest")
+        elif lim:
+            ax.imshow(img, cmap=cmap, vmin=lim[0], vmax=lim[1],
+                      interpolation="nearest")
         else:
             f = img[np.isfinite(img)]
             ax.imshow(img, cmap=cmap, vmin=np.percentile(f, 2),
-                      vmax=np.percentile(f, 98))
+                      vmax=np.percentile(f, 98), interpolation="nearest")
         if title in variants:
             s = M.evaluate(predict(title, d), d["label"])
-            title = f"{title}\nIoU {s['iou']:.3f}  R {s['recall']:.2f}"
-        ax.set_title(title, fontsize=8)
-        ax.set_xticks([]); ax.set_yticks([])
-    for ax in axes[len(panels):]:
-        ax.axis("off")
+            title = (f"{title}\nIoU {s['iou']:.3f}   R {s['recall']:.2f}")
+        ax.set_title(title, fontsize=9, color=C_INK, loc="left", pad=4,
+                     linespacing=1.35)
+        ax.set_xticks([])
+        ax.set_yticks([])
+        for sp in ax.spines.values():
+            sp.set_edgecolor(C_RULE)
+            sp.set_linewidth(0.7)
 
-    fig.suptitle(f"{EVENT} chip {chip_id}: single date against change, "
-                 f"{len(available)} reference(s)")
-    fig.tight_layout()
-    fig.savefig(FIGURES / "change_detection.png", dpi=130)
+    hax.text(0, 1.0, f"One date against change, {EVENT} chip {chip_id}",
+             fontsize=14, fontweight="bold", color=C_INK, va="top", ha="left",
+             transform=hax.transAxes)
+    hax.text(0, 0.0, f"{len(available)} reference date(s). In the mask panels "
+             f"dark is water and pale is not. In the change panels red is a "
+             f"drop in backscatter and blue is a rise.",
+             fontsize=9.8, color=C_MUTED, va="bottom", ha="left",
+             transform=hax.transAxes)
+
+    fax.text(0, 1.0,
+             "c0 is the plain single-date threshold, here so the change "
+             "variants have something to be measured against. c1 uses the drop "
+             "alone. c2 requires\nthe drop and darkness on the flood date. c3 "
+             "adds VV agreement and morphological cleanup. Against the July "
+             "reference every change variant\ncollapses, because a large "
+             "share of the labelled water was already below the water "
+             "threshold on that date and can produce no change signal.\nThe "
+             "pre-monsoon reference recovers more and still falls well short "
+             "of thresholding a single date, which is why change detection is "
+             "not in the pipeline.",
+             fontsize=8.4, color=C_MUTED, va="top", ha="left",
+             transform=fax.transAxes, linespacing=1.62)
+
+    fig.savefig(FIGURES / "change_detection.png", dpi=200,
+                facecolor="white", bbox_inches="tight")
     print(f"\nwrote change_detection.csv and figures/change_detection.png "
           f"(chip {chip_id})")
 

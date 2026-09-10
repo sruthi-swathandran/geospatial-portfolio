@@ -1,0 +1,228 @@
+VERIFICATION REPORT
+project: D:\geospatial-portfolio\01-sentinel1-flood-extent
+read-only; nothing in the repo is modified
+
+indexed 22600 numeric values from results/
+
+
+==============================================================================
+A. EVERY NUMBER IN THE README, TRACED TO A FILE
+==============================================================================
+  · 247 numbers matched a value in results/
+  · 163 skipped as years, codes or section numbers
+[WARN] 6 numbers could not be matched to any file. Each needs a human decision: derived, rounded, or wrong.
+
+--- unmatched README numbers ------------------------------------------------
+  L136           64,615   flood, 7 Aug                64,615 ha         90,785 ha
+  L196           27,600   holds 36,755 ha, so on 12 August it would have been nearer 27,600 ha. **A naive
+  L240           71,489   *The raw threshold output beside the refined map. Removing the swath edge, steep terrain and objects below the minimum mapping unit is what takes 2...
+  L309          729,161   passes share 1,819,972 ha, and eight tiles covering 729,161 ha of that were
+  L381           64,615   | Acquisition date | 7 Aug vs 31 Aug, same ground | 64,615 ha to 38,887 ha |
+  L552        6,344,561   | `full_scene.py --res 20` | ~25 min | 46 tiles, 6,344,561 ha classified before refinement |
+
+==============================================================================
+A2. EVERY NUMBER ON docs/index.html, TRACED TO A FILE
+==============================================================================
+  · 9 numbers matched a value in results/
+[PASS] every number on the public page traces to results/
+        A match means some file in results/ holds that value, not that it is
+        the right value. The misses are the strong signal.
+
+==============================================================================
+B. INTERNAL CONSISTENCY
+==============================================================================
+
+--- scene totals against the sum of district totals -------------------------
+[WARN] 12 Aug, map-optimal: scene 119,779 ha, districts sum to 110,081 ha, -8.1%
+  · districts clip to ADM2 polygons, so a small shortfall is expected; a large one is not
+[WARN] 12 Aug, area-matched: scene 170,625 ha, districts sum to 155,596 ha, -8.8%
+  · districts clip to ADM2 polygons, so a small shortfall is expected; a large one is not
+[PASS] 7 Aug, map-optimal: scene 64,704 ha, districts sum to 64,704 ha, -0.0%
+  · districts clip to ADM2 polygons, so a small shortfall is expected; a large one is not
+[PASS] 7 Aug, area-matched: scene 90,915 ha, districts sum to 90,915 ha, +0.0%
+  · districts clip to ADM2 polygons, so a small shortfall is expected; a large one is not
+[PASS] 31 Aug, map-optimal: scene 38,887 ha, districts sum to 38,887 ha, +0.0%
+  · districts clip to ADM2 polygons, so a small shortfall is expected; a large one is not
+[PASS] 31 Aug, area-matched: scene 44,991 ha, districts sum to 44,991 ha, -0.0%
+  · districts clip to ADM2 polygons, so a small shortfall is expected; a large one is not
+
+--- raw threshold output against the refined figure -------------------------
+[PASS] 12 Aug, map-optimal: edge buffer removed 26,223 ha, 217,490 to 191,267
+[PASS] 12 Aug, map-optimal: 191,267 − steep 68,437 − small 3,052 = 119,779 against reported 119,779, gap +0 ha
+[PASS] 12 Aug, area-matched: edge buffer removed 28,447 ha, 319,398 to 290,951
+[PASS] 12 Aug, area-matched: 290,951 − steep 115,947 − small 4,379 = 170,625 against reported 170,625, gap +0 ha
+[PASS] 7 Aug, map-optimal: edge buffer removed 5,908 ha, 84,777 to 78,870
+[PASS] 7 Aug, map-optimal: 78,870 − steep 13,712 − small 454 = 64,704 against reported 64,704, gap -0 ha
+[PASS] 7 Aug, area-matched: edge buffer removed 7,202 ha, 120,675 to 113,473
+[PASS] 7 Aug, area-matched: 113,473 − steep 21,938 − small 620 = 90,915 against reported 90,915, gap -0 ha
+[PASS] 31 Aug, map-optimal: edge buffer removed 5,385 ha, 56,849 to 51,464
+[PASS] 31 Aug, map-optimal: 51,464 − steep 12,154 − small 423 = 38,887 against reported 38,887, gap +0 ha
+[PASS] 31 Aug, area-matched: edge buffer removed 6,203 ha, 70,937 to 64,734
+[PASS] 31 Aug, area-matched: 64,734 − steep 19,167 − small 576 = 44,991 against reported 44,991, gap +0 ha
+
+--- slope histogram against the refined totals ------------------------------
+[PASS] 12 Aug, map-optimal: 7 slope bins sum to 191,268 ha against flood_ha_before 191,267, +0.00%
+[PASS] 12 Aug, map-optimal: bins at or above 8° hold 68,437 ha against removed_steep_ha 68,437, gap +0 ha
+  · 12 Aug, map-optimal: 35.8% of mapped flood sits above 8°
+  · 12 Aug, map-optimal: 0.71% of permanent water sits above 8°, so 99.3% below
+[PASS] 12 Aug, map-optimal: CSV footer kept_ha 119,779 against stats flood_ha_after 119,779
+[PASS] 12 Aug, area-matched: 7 slope bins sum to 290,951 ha against flood_ha_before 290,951, +0.00%
+[PASS] 12 Aug, area-matched: bins at or above 8° hold 115,947 ha against removed_steep_ha 115,947, gap -0 ha
+  · 12 Aug, area-matched: 39.9% of mapped flood sits above 8°
+  · 12 Aug, area-matched: 0.96% of permanent water sits above 8°, so 99.0% below
+[PASS] 12 Aug, area-matched: CSV footer kept_ha 170,625 against stats flood_ha_after 170,625
+[PASS] 7 Aug, map-optimal: 7 slope bins sum to 78,870 ha against flood_ha_before 78,870, +0.00%
+[PASS] 7 Aug, map-optimal: bins at or above 8° hold 13,712 ha against removed_steep_ha 13,712, gap +0 ha
+  · 7 Aug, map-optimal: 17.4% of mapped flood sits above 8°
+  · 7 Aug, map-optimal: 0.87% of permanent water sits above 8°, so 99.1% below
+[PASS] 7 Aug, map-optimal: CSV footer kept_ha 64,704 against stats flood_ha_after 64,704
+[PASS] 7 Aug, area-matched: 7 slope bins sum to 113,473 ha against flood_ha_before 113,473, +0.00%
+[PASS] 7 Aug, area-matched: bins at or above 8° hold 21,938 ha against removed_steep_ha 21,938, gap +0 ha
+  · 7 Aug, area-matched: 19.3% of mapped flood sits above 8°
+  · 7 Aug, area-matched: 0.94% of permanent water sits above 8°, so 99.1% below
+[PASS] 7 Aug, area-matched: CSV footer kept_ha 90,915 against stats flood_ha_after 90,915
+[PASS] 31 Aug, map-optimal: 7 slope bins sum to 51,464 ha against flood_ha_before 51,464, -0.00%
+[PASS] 31 Aug, map-optimal: bins at or above 8° hold 12,154 ha against removed_steep_ha 12,154, gap +0 ha
+  · 31 Aug, map-optimal: 23.6% of mapped flood sits above 8°
+  · 31 Aug, map-optimal: 0.85% of permanent water sits above 8°, so 99.2% below
+[PASS] 31 Aug, map-optimal: CSV footer kept_ha 38,887 against stats flood_ha_after 38,887
+[PASS] 31 Aug, area-matched: 7 slope bins sum to 64,734 ha against flood_ha_before 64,734, +0.00%
+[PASS] 31 Aug, area-matched: bins at or above 8° hold 19,167 ha against removed_steep_ha 19,167, gap +0 ha
+  · 31 Aug, area-matched: 29.6% of mapped flood sits above 8°
+  · 31 Aug, area-matched: 0.91% of permanent water sits above 8°, so 99.1% below
+[PASS] 31 Aug, area-matched: CSV footer kept_ha 44,991 against stats flood_ha_after 44,991
+
+--- the published cell of the sensitivity grid ------------------------------
+  · published cell: slope 8.0, occurrence 50, edge 600
+[PASS] published slope 8 against config 8
+[PASS] published occurrence 50 against config 50
+[PASS] published edge px 30 against config 30
+[PASS] grid says 122,832 ha at the published settings against 122,831 ha pre-MMU (119,779 reported + 3,052 removed by the MMU), +0.00%
+  · the grid is pre-MMU by construction; CHANGELOG C-08 says so, and the README chain table shows the same value at that step
+
+--- config constants against what the stats files record was run ------------
+[PASS] 12 Aug, map-optimal: slope cut run at 8, config declares 8
+[PASS] 12 Aug, map-optimal: min pixels run at 10, config declares 10
+[PASS] 12 Aug, map-optimal: occurrence cut run at 50, config declares 50
+[PASS] 12 Aug, area-matched: slope cut run at 8, config declares 8
+[PASS] 12 Aug, area-matched: min pixels run at 10, config declares 10
+[PASS] 12 Aug, area-matched: occurrence cut run at 50, config declares 50
+[PASS] 12 Aug, area-matched: resampling matches config
+[PASS] 7 Aug, map-optimal: slope cut run at 8, config declares 8
+[PASS] 7 Aug, map-optimal: min pixels run at 10, config declares 10
+[PASS] 7 Aug, map-optimal: occurrence cut run at 50, config declares 50
+[PASS] 7 Aug, area-matched: slope cut run at 8, config declares 8
+[PASS] 7 Aug, area-matched: min pixels run at 10, config declares 10
+[PASS] 7 Aug, area-matched: occurrence cut run at 50, config declares 50
+[PASS] 7 Aug, area-matched: resampling matches config
+[PASS] 31 Aug, map-optimal: slope cut run at 8, config declares 8
+[PASS] 31 Aug, map-optimal: min pixels run at 10, config declares 10
+[PASS] 31 Aug, map-optimal: occurrence cut run at 50, config declares 50
+[PASS] 31 Aug, area-matched: slope cut run at 8, config declares 8
+[PASS] 31 Aug, area-matched: min pixels run at 10, config declares 10
+[PASS] 31 Aug, area-matched: occurrence cut run at 50, config declares 50
+[PASS] 31 Aug, area-matched: resampling matches config
+
+--- the 7 to 31 August change figures ---------------------------------------
+  · map-optimal: seen_by_both 3,159,751.7, seen_only_2016-08-07 5,432.3, seen_only_2016-08-31 0.0, overlap_flood_both_dates 36,772.4, overlap_drained_by_2016-08-31 27,843.0, overlap_new_by_2016-08-31 2,114.4, wedge_flood_2016-08-07 88.3, wedge_flood_2016-08-31 0.0, persistence_fraction 0.6, date_to_date_iou 0.6
+  · map-optimal: implied flood 7 Aug 64,615 ha, 31 Aug 38,887 ha, fall 39.8%, persistence 56.9%
+  · area-matched: seen_by_both 3,159,751.7, seen_only_2016-08-07 5,432.3, seen_only_2016-08-31 0.0, overlap_flood_both_dates 41,834.7, overlap_drained_by_2016-08-31 48,950.2, overlap_new_by_2016-08-31 3,156.7, wedge_flood_2016-08-07 130.0, wedge_flood_2016-08-31 0.0, persistence_fraction 0.5, date_to_date_iou 0.4
+  · area-matched: implied flood 7 Aug 90,785 ha, 31 Aug 44,991 ha, fall 50.4%, persistence 46.1%
+
+--- the accuracy headline ---------------------------------------------------
+  ·    all  n= 65  IoU 0.5186 [0.3947, 0.6086]  P 0.7797  R 0.6076
+  ·  train  n= 37  IoU 0.3258 [0.2263, 0.4383]  P 0.6322  R 0.402
+  ·  valid  n= 14  IoU 0.6118 [0.3191, 0.7503]  P 0.8082  R 0.7157
+  ·   test  n= 14  IoU 0.6805 [0.5037, 0.7756]  P 0.8749  R 0.7538
+  · final_method.json operating_points: {"max_iou": {"threshold": -18.75, "iou_valid": 0.6118, "iou_test": 0.6805, "iou_all": 0.5186, "p_all": 0.7797, "r_all": 0.6076, "area_ha": 14405.3, "flood_only_ha": 13659.0, "area_err": -0.2206}, "area_matched": {"threshold": -17.75, "iou_valid": 0.5994, "iou_test": 0.6978, "iou_all": 0.5221, "p_all": 0.6872, "r_all": 0.6849, "area_ha": 18421.5, "flood_only_ha": 18297.1, "area_err": -0.0033}}
+  · operating_point.csv at -18.75 dB: iou_all 0.5186, iou_valid 0.6118, area_err -0.2206
+[PASS] operating_point iou_all 0.5186 against accuracy_ci all 0.5186, difference 0.0000
+
+--- what the change sweep actually peaks at ---------------------------------
+  · overall best: iou_all 0.5159 at threshold 2.0 dB, smooth 9, gate 1
+  · best where the change test still requires a drop (threshold <= -0.5 dB): iou_all 0.3516 at -0.5 dB, smooth 1, gate 1
+[WARN] the sweep peaks at a POSITIVE threshold, meaning the change test admits pixels that got brighter and is constraining nothing. Any sentence quoting the peak as 'change detection scores X' is wrong.
+[PASS] peak is interior to the swept range [-12.0, 4.0]
+
+--- the Earth Engine comparison, at each product's own peak -----------------
+  ·    gee_lee: best iou_all 0.5347 at -20.25 dB, p_all 0.7531, r_all 0.6484
+  ·    gee_raw: best iou_all 0.4963 at -21.5 dB, p_all 0.6856, r_all 0.6425
+  ·    rtc_lee: best iou_all 0.5249 at -18.25 dB, p_all 0.7376, r_all 0.6454
+  · gee_lee to rtc_lee: -0.0098 IoU, -0.0155 precision
+  · gee_raw to gee_lee: +0.0384 IoU, +0.0675 precision
+  · gee_raw to rtc_lee: +0.0286 IoU, +0.0520 precision
+  · if the README quotes a different pair or a common threshold rather than each product's own peak, say which
+
+--- cross-orbit agreement ---------------------------------------------------
+  · 8 tiles, 18.23 M pixels
+  · pixel-weighted median offset, all pixels: -0.0153 dB
+  · pixel-weighted median offset, land only: -0.0473 dB
+  · unweighted median of tile medians: -0.0510 dB
+  · mean absolute tile median: 0.2526 dB
+  · the README quotes one of these. Check which, and that the wording matches the statistic
+
+--- imaged area per date, as recorded in the stats files --------------------
+  · 12 Aug, map-optimal: land 6,067,831 + flood 217,490 + permanent 59,240 = 6,344,561 ha BEFORE refinement, nodata 1,405,031
+  · refinement moves the 600 m swath rim to nodata, so the imaged area AFTER refinement is smaller. If the README table mixes the two, that is the discrepancy.
+  · 12 Aug, area-matched: land 5,964,209 + flood 319,398 + permanent 60,954 = 6,344,560 ha BEFORE refinement, nodata 1,405,031
+  · refinement moves the 600 m swath rim to nodata, so the imaged area AFTER refinement is smaller. If the README table mixes the two, that is the discrepancy.
+  · 7 Aug, map-optimal: land 3,122,415 + flood 84,777 + permanent 23,875 = 3,231,068 ha BEFORE refinement, nodata 4,518,524
+  · refinement moves the 600 m swath rim to nodata, so the imaged area AFTER refinement is smaller. If the README table mixes the two, that is the discrepancy.
+  · 7 Aug, area-matched: land 3,086,105 + flood 120,675 + permanent 24,288 = 3,231,068 ha BEFORE refinement, nodata 4,518,524
+  · refinement moves the 600 m swath rim to nodata, so the imaged area AFTER refinement is smaller. If the README table mixes the two, that is the discrepancy.
+  · 31 Aug, map-optimal: land 3,145,175 + flood 56,849 + permanent 23,502 = 3,225,526 ha BEFORE refinement, nodata 4,524,065
+  · refinement moves the 600 m swath rim to nodata, so the imaged area AFTER refinement is smaller. If the README table mixes the two, that is the discrepancy.
+  · 31 Aug, area-matched: land 3,130,658 + flood 70,937 + permanent 23,932 = 3,225,526 ha BEFORE refinement, nodata 4,524,065
+  · refinement moves the 600 m swath rim to nodata, so the imaged area AFTER refinement is smaller. If the README table mixes the two, that is the discrepancy.
+
+==============================================================================
+C. NUMERIC LITERALS IN src/ THAT DUPLICATE A CONFIG CONSTANT
+==============================================================================
+[PASS] no literal found that contradicts a config constant
+
+==============================================================================
+D. FIGURE FRESHNESS
+==============================================================================
+[PASS] accuracy_ci.png is newer than its source data
+[PASS] change_detection.png is newer than its source data
+[PASS] change_sweep.png is newer than its source data
+[PASS] compare_0807_vs_0831.png is newer than its source data
+[PASS] compare_0807_vs_0831_am.png is newer than its source data
+[PASS] compare_0812_vs_0807.png is newer than its source data
+[PASS] flood_extent_map.png is newer than its source data
+[PASS] flood_recession.png is newer than its source data
+[PASS] flood_three_dates.png is newer than its source data
+[PASS] flooded_cropland.png is newer than its source data
+[PASS] flooded_cropland_20160807.png is newer than its source data
+[PASS] flooded_cropland_20160831.png is newer than its source data
+[PASS] flooded_cropland_areamatched.png is newer than its source data
+[PASS] mask_terrain_water.png is newer than its source data
+[PASS] operating_point.png is newer than its source data
+[PASS] orbit_offset.png is newer than its source data
+[PASS] product_vs_window.png is newer than its source data
+[PASS] sensitivity_grid.png is newer than its source data
+[PASS] no figure is older than the data behind it
+
+--- figures referenced by README that do not exist --------------------------
+[PASS] results/figures/accuracy_ci.png
+[PASS] results/figures/change_sweep.png
+[PASS] results/figures/flood_extent_map.png
+[PASS] results/figures/flood_recession.png
+[PASS] results/figures/flood_three_dates.png
+[PASS] results/figures/flooded_cropland.png
+[PASS] results/figures/mask_terrain_water.png
+[PASS] results/figures/operating_point.png
+[PASS] results/figures/orbit_offset.png
+[PASS] results/figures/product_vs_window.png
+[PASS] results/figures/sensitivity_grid.png
+[PASS] results/fullscene/refine_before_after.png
+
+==============================================================================
+SUMMARY
+==============================================================================
+  0 failures
+  4 warnings
+
+A warning is not automatically a problem. It is a place where this script
+cannot decide on its own and a person has to. A failure is a contradiction
+between two files that both claim to describe the same thing.

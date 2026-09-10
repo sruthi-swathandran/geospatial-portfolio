@@ -1,0 +1,7 @@
+variant,buffer_ha,buffer_flood_ha,buffer_flood_pct,interior_ha,interior_flood_ha,interior_flood_pct,ratio
+"12 Aug, map-optimal",79785.5,26222.8,32.87,6264775.1,191267.4,3.05,10.77
+"12 Aug, area-matched",79785.5,28447.0,35.65,6264775.1,290951.3,4.64,7.68
+"7 Aug, map-optimal",65883.7,5907.6,8.97,3165184.0,78869.6,2.49,3.6
+"7 Aug, area-matched",65883.7,7201.9,10.93,3165184.0,113472.8,3.59,3.05
+"31 Aug, map-optimal",65774.6,5385.2,8.19,3159751.7,51464.0,1.63,5.03
+"31 Aug, area-matched",65774.6,6202.9,9.43,3159751.7,64733.8,2.05,4.6

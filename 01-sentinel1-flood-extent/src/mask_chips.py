@@ -240,32 +240,74 @@ def main() -> None:
               (otsu, "authors' Otsu", "Blues")]
     panels += [(predict(v, vv, vh, args.tile)[0], v, "Blues") for v in args.variants]
 
-    cols = 4
-    rows_n = int(np.ceil(len(panels) / cols))
-    fig, axes = plt.subplots(rows_n, cols, figsize=(3.4 * cols, 3.7 * rows_n))
-    axes = np.atleast_1d(axes).ravel()
+    from matplotlib.colors import ListedColormap
+    C_LAND, C_WATER = "#EDEAE3", "#1B5E8C"
+    C_INK, C_MUTED, C_RULE = "#16222B", "#5C6B76", "#C9D2D8"
+    binary = ListedColormap([C_LAND, C_WATER])
 
-    for ax, (img, title, cmap) in zip(axes, panels):
+    # Fewest empty cells in the last row, preferring the narrower grid on ties.
+    cols = min((4, 5, 6), key=lambda c: ((-len(panels)) % c, c))
+    rows_n = int(np.ceil(len(panels) / cols))
+
+    # A constrained layout with the header and footer as real axes. tight_layout
+    # cannot see figure-level text, and with aspect-locked images it leaves the
+    # lower rows' titles sitting on the images above them.
+    fig = plt.figure(figsize=(3.3 * cols, 3.5 * rows_n + 1.6),
+                     layout="constrained")
+    fig.get_layout_engine().set(w_pad=0.02, h_pad=0.02, hspace=0.0, wspace=0.0)
+    outer = fig.add_gridspec(3, 1, height_ratios=[0.66, 3.5 * rows_n, 0.94])
+    hax = fig.add_subplot(outer[0])
+    hax.set_axis_off()
+    fax = fig.add_subplot(outer[2])
+    fax.set_axis_off()
+    grid = outer[1].subgridspec(rows_n, cols, wspace=0.05, hspace=0.14)
+
+    for k, (img, title, cmap) in enumerate(panels):
+        ax = fig.add_subplot(grid[k // cols, k % cols])
         img = np.asarray(img, dtype=float).copy()
         if cmap == "Blues":
             scored = img.astype(int)
             img[img == -1] = np.nan
-            ax.imshow(img, cmap=cmap, vmin=0, vmax=1)
+            ax.imshow(img, cmap=binary, vmin=0, vmax=1,
+                      interpolation="nearest")
             if title != "hand label":
                 s = M.evaluate(scored, label)
-                title = f"{title}\nIoU {s['iou']:.3f}  P {s['precision']:.2f}  R {s['recall']:.2f}"
+                title = (f"{title}\nIoU {s['iou']:.3f}   P {s['precision']:.2f}"
+                         f"   R {s['recall']:.2f}")
         else:
             finite = img[np.isfinite(img)]
             ax.imshow(img, cmap=cmap, vmin=np.percentile(finite, 2),
-                      vmax=np.percentile(finite, 98))
-        ax.set_title(title, fontsize=9)
-        ax.set_xticks([]); ax.set_yticks([])
-    for ax in axes[len(panels):]:
-        ax.axis("off")
+                      vmax=np.percentile(finite, 98), interpolation="nearest")
+        ax.set_title(title, fontsize=9, color=C_INK, loc="left", pad=4,
+                     linespacing=1.35)
+        ax.set_xticks([])
+        ax.set_yticks([])
+        for sp in ax.spines.values():
+            sp.set_edgecolor(C_RULE)
+            sp.set_linewidth(0.7)
 
-    fig.suptitle(f"{EVENT} chip {chip_id} ({splits.get(chip_id, '?')}) — variants")
-    fig.tight_layout()
-    fig.savefig(FIGURES / "variant_comparison.png", dpi=130)
+    hax.text(0, 1.0, f"Nine ways to threshold one chip, {EVENT} {chip_id} "
+             f"({splits.get(chip_id, '?')})", fontsize=14, fontweight="bold",
+             color=C_INK, va="top", ha="left", transform=hax.transAxes)
+    hax.text(0, 0.0, "Dark is water, pale is not. The scores are for this chip "
+             "alone; the table above averages over all of them.",
+             fontsize=9.8, color=C_MUTED, va="bottom", ha="left",
+             transform=hax.transAxes)
+
+    fax.text(0, 1.0,
+             "The round 1 variants are kept in the record rather than deleted. "
+             "v0 to v5 estimate a threshold from the chip itself, which fails "
+             "wherever the chip\nholds little water: Otsu still returns a "
+             "value, and what it returns is the land distribution split down "
+             "the middle. v6 applies the published per-event\nthreshold "
+             "instead. v7 and v8 refuse to guess, declaring the chip dry when "
+             "no tile has a bimodal histogram with a physically plausible dark "
+             "mode.",
+             fontsize=8.4, color=C_MUTED, va="top", ha="left",
+             transform=fax.transAxes, linespacing=1.62)
+
+    fig.savefig(FIGURES / "variant_comparison.png", dpi=200,
+                facecolor="white", bbox_inches="tight")
     print(f"wrote figures/variant_comparison.png (chip {chip_id})")
 
 

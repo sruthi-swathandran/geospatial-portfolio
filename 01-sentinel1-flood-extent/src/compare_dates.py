@@ -289,7 +289,7 @@ def main() -> None:
                               ("#eef3f6", "seen by both, dry"),
                               ("#f7f9fa", "seen by one pass"))]
     ax.legend(handles=handles, fontsize=8, loc="lower left", framealpha=.95)
-    ax.set_title(f"{EVENT}: two acquisitions, five days apart\n"
+    ax.set_title(f"{EVENT}: two acquisitions, {gap} days apart\n"
                  f"persistence {persist:.0%}, IoU {iou:.2f} in the overlap",
                  fontsize=10)
     fig.tight_layout()

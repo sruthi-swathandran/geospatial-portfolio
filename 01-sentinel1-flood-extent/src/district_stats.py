@@ -365,27 +365,11 @@ def main() -> None:
         json.dumps({"type": "FeatureCollection", "features": out_feats}),
         encoding="utf-8")
 
-    top = rows[:args.top][::-1]
-    fig, ax = plt.subplots(figsize=(9, 0.42 * len(top) + 2.2))
-    y = np.arange(len(top))
-    ax.barh(y, [r["flooded_cropland_ha"] for r in top], color="#2b6f8f")
-    ax.set_yticks(y)
-    ax.set_yticklabels([r["district"][:28] for r in top], fontsize=9)
-    ax.set_xlabel("flooded cropland (hectares)")
-    ax.set_title(f"{EVENT}, 12 August 2016: flooded cropland by district\n"
-                 f"Sentinel-1 at {res:g} m, cropland from ESA WorldCover "
-                 f"{', '.join(years)}", fontsize=10)
-    ax.grid(axis="x", alpha=0.25)
-    for i, r in enumerate(top):
-        ax.text(r["flooded_cropland_ha"], i,
-                f"  {r['pct_of_imaged_cropland_flooded']:.0f}% of imaged "
-                f"cropland, district {r['imaged_pct_of_district']:.0f}% imaged",
-                va="center", fontsize=7.5, color="#444444")
-    fig.tight_layout()
-    fig.savefig(FIGURES / f"{stem.replace('district_flood_stats', 'flooded_cropland')}.png", dpi=130)
-
-    print(f"\nwrote {stem}.csv, {stem}.geojson and figures/"
-          f"{stem.replace('district_flood_stats', 'flooded_cropland')}.png")
+    print(f"\nwrote {stem}.csv and {stem}.geojson")
+    print("The chart for this table is drawn by make_figures.py, which owns "
+          "flooded_cropland*.png.\nIt was drawn here as well, in a second "
+          "style, with 12 August hard-coded into every\nvariant's title, and "
+          "whichever script ran last decided what shipped.")
 
 
 if __name__ == "__main__":
