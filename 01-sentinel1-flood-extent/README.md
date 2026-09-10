@@ -14,7 +14,7 @@ hand labels pixel by pixel, the other chosen so the mapped area is unbiased
 against those labels. They differ by one decibel. Every figure in this README is
 reported with the decision that moves it and the amount it moves by.
 
-Interactive map: `docs/index.html` (GitHub Pages ready)
+Interactive map: [three acquisitions and the recession between them](https://sruthi-swathandran.github.io/geospatial-portfolio/01-sentinel1-flood-extent/docs/)
 
 This repository has been through a methodological audit. `REVIEW.md` lists every
 finding with its severity and evidence, including three that remain open.
