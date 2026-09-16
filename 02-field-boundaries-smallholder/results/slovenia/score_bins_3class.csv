@@ -1,0 +1,9 @@
+country,bin,lo_native_px,hi_native_px,parcels,object_recall,median_best_iou
+slovenia,under 2x2,0,4,958,0.0021,0.0
+slovenia,2x2 to 3x3,4,9,1048,0.0143,0.0
+slovenia,3x3 to 4x4,9,16,870,0.0575,0.0
+slovenia,4x4 to 5x5,16,25,814,0.1192,0.0
+slovenia,5x5 to 7x7,25,49,1386,0.2309,0.0255
+slovenia,7x7 to 10x10,49,100,1090,0.3917,0.2288
+slovenia,10x10 to 20x20,100,400,631,0.4786,0.4669
+slovenia,over 20x20,400,,34,0.6765,0.8264
