@@ -1,0 +1,10 @@
+quantity,value
+country,india
+chips_read,40
+grid_pixel_m,6.0658
+native_pixel_m,10.0
+adjacent_equal_across,0.007263
+adjacent_equal_down,0.006857
+adjacent_equal_mean,0.00706
+expected_if_nearest_neighbour,0.393425
+lag2_over_lag1,1.8827

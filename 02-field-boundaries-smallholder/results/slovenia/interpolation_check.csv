@@ -1,0 +1,10 @@
+quantity,value
+country,slovenia
+chips_read,40
+grid_pixel_m,4.1383
+native_pixel_m,10.0
+adjacent_equal_across,0.007126
+adjacent_equal_down,0.005187
+adjacent_equal_mean,0.006157
+expected_if_nearest_neighbour,0.586175
+lag2_over_lag1,1.921
