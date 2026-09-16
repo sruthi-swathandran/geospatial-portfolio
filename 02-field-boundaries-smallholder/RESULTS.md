@@ -22,12 +22,16 @@ inference or unexplained, it says so.
    as field boundary. There is no interior anywhere in those chips, so no
    parcel in them can be matched at any threshold.
 3. Recall against parcel width shows a threshold near three native pixels
-   across. Below it, delineation does not happen.
-4. Our India object recall of 0.053 sits inside FTW's own published range for
-   India without fine-tuning, which runs 0.03 to 0.14 across three pre-training
-   sets. Our scoring has been checked against theirs and matches. What is still
-   unexplained is narrower: a model trained on FTW minus India scores 0.14
-   while checkpoints that include India score 0.053.
+   across. Below it the released checkpoint finds 1 parcel in 441, which is
+   0.23% with a 95% interval of [0.01, 1.26].
+4. Our India object recall is 0.027 against reconstructed parcels, and 0.053 in
+   FTW's own convention, which scores against the eroded interior. The 0.053 is
+   the figure that compares to theirs, and it sits inside FTW's published range
+   for India without fine-tuning, which runs 0.03 to 0.14 across three
+   pre-training sets. Our scoring has been checked against theirs and matches.
+   What is still unexplained is narrower: a model trained on FTW minus India
+   scores 0.14 while checkpoints that include India score 0.053 on the same
+   terms.
 
 ---
 
@@ -72,11 +76,15 @@ model for finding real parcels. The FTW paper reaches the same conclusion:
 | pixel IoU | 0.248 | 0.229 | 0.430 | 0.595 | 0.57 |
 | pixel recall | 0.253 | 0.233 | 0.455 | 0.635 | 0.63 |
 | pixel precision | 0.931 | 0.931 | 0.886 | 0.904 | |
-| object recall | 0.060 | 0.053 | 0.181 | 0.289 | 0.14 |
-| object precision | withheld | withheld | 0.251 | 0.312 | |
+| object recall | 0.030 | 0.027 | 0.145 | 0.222 | 0.14 |
+| object precision | withheld | withheld | 0.201 | 0.240 | |
 
-All figures are the 3-class checkpoints. Training on fifteen extra countries
-moves Slovenia a long way and moves India slightly backwards.
+All figures are the 3-class checkpoints. Object recall and precision here are
+measured against reconstructed parcels, while FTW's published column is in
+their convention against eroded interiors, where our India FULL figure would
+read 0.053 rather than 0.027. See S-08. Training on fifteen extra countries
+moves Slovenia a long way and leaves India where it was, 59 parcels found
+against 54 out of 1,983, which is inside the noise.
 
 Our Slovenia FULL row sits almost on FTW's published India row, 0.595 against
 0.57 and 0.635 against 0.63. That is the calibration check: when the model
@@ -128,17 +136,17 @@ across its largest inscribed circle:
 
 | width, native 10 m px | India found | Slovenia found |
 |---|---:|---:|
-| under 2 | 0.0% | 3.2% |
-| 2 to 3 | 0.0% | 25.0% |
-| 3 to 4 | 1.4% | 50.4% |
-| 4 to 5 | 5.5% | 58.7% |
-| 5 to 7 | 8.1% | 67.4% |
-| 7 to 10 | 12.9% | 73.7% |
-| 10 to 15 | 17.0% | 71.3% |
+| under 2 | 0.0% | 1.5% |
+| 2 to 3 | 0.4% | 13.0% |
+| 3 to 4 | 0.2% | 36.3% |
+| 4 to 5 | 1.1% | 47.6% |
+| 5 to 7 | 3.7% | 62.1% |
+| 7 to 10 | 6.4% | 69.6% |
+| 10 to 15 | 15.1% | 69.6% |
 | over 15 | 30.0% | 82.4% |
 
-Slovenia steps from 3.2% to 50.4% between two and four pixels across, then
-flattens near 70 to 80%. Its area curve over the same parcels climbs steadily
+Slovenia steps from 1.5% to 36.3% between two and four pixels across, then
+climbs more slowly and flattens near 70%. Its area curve over the same parcels climbs steadily
 with no step in it. **Width shows a threshold where area shows a gradient**,
 and the threshold sits where a one to two pixel boundary on each side stops
 leaving an interior.
@@ -174,10 +182,14 @@ Identical to every digit reported. The pixel scoring here is theirs.
 
 Object recall differs, and the reason is the counting unit.
 
-| | our parcels | their shapes | our recall | their recall |
+| | our parcels | their shapes | our recall, FTW convention | their recall |
 |---|---:|---:|---:|---:|
 | India | 1,983 | 2,059 | 0.053 | 0.048 |
 | Slovenia | 6,831 | 10,429 | 0.289 | 0.190 |
+
+Both recall columns here are measured against eroded interiors so that they are
+like for like. Against reconstructed parcels the same predictions give 0.027
+and 0.222. See S-08.
 
 Their truth shapes come from `rasterio.features.shapes` on the 2-class mask, so
 a parcel whose eroded interior pinches into disconnected pieces counts once per
@@ -235,6 +247,33 @@ against their best India row. Their own India results without fine-tuning span
 0.053 sits inside that range. The narrower question that survives is why a
 model trained on FTW minus India beats checkpoints that include it.
 
+**S-08. Object IoU was measured against the eroded instance mask.** C-04
+established that FTW's instance raster is the parcel with its outer ring
+removed, and every size figure in this project is quoted on the reconstructed
+parcel. The object scorer was not. It passed the eroded mask as truth, so
+predictions were matched against a target smaller than the field it stands
+for. A shrunken target is easier to hit, and erosion takes proportionally more
+from a small parcel, so the effect is largest exactly where this project's
+claims live. India's object recall moves from 0.053 to 0.027 and Slovenia's
+from 0.289 to 0.222, factors of 1.95 and 1.30. Slovenia's object precision
+moves from 0.312 to 0.240. Slovenia's width curve moves from 3.2% found under
+two native pixels and 50.4% at three to four, to 1.5% and 36.3%. Every pixel
+metric is unchanged, because those never touched the instance raster.
+
+FTW's own `get_object_level_metrics` takes `semantic_2class` as truth, where
+value 1 is the interior, so the eroded target is their convention as well. The
+0.053 is therefore the figure to set beside their published India range of
+0.03 to 0.14, and 0.027 is the figure for the question of whether the tool
+finds fields. Both belong here with the convention named, which is what S-07
+now says.
+
+This surfaced because a scorer written later for stage 2b disagreed with the
+original by a factor of two on the same predictions. `reconcile_ftw.py` runs
+every combination of truth raster and prediction class and writes
+`results/<country>/scorer_reconciliation.csv`, which located the cause instead
+of guessing at it. Three separate code paths now return the same India
+figures.
+
 ---
 
 ## Open, not resolved
@@ -242,10 +281,11 @@ model trained on FTW minus India beats checkpoints that include it.
 **O-03. A model trained without India beats checkpoints trained with it.** FTW
 report object recall 0.14 for a model pre-trained on FTW minus India and tested
 on India without fine-tuning, alongside 0.03 for a France-pretrained model and
-0.05 for an AI4Boundaries-pretrained one. We measure 0.053 with the released
-CC-BY and FULL checkpoints, both of which include India in training. Our figure
-sits inside their range, so the framing is not that we score far below them. It
-is that seeing the country in training should help and appears not to.
+0.05 for an AI4Boundaries-pretrained one. We measure 0.053 in their convention 
+with the released CC-BY and FULL checkpoints, both of which include India in 
+training.Our figure sits inside their range, so the framing is not that we score
+far below them. It is that seeing the country in training should help and 
+appears not to.
 
 Three explanations were named and all three have now been tested.
 

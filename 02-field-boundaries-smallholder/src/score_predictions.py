@@ -155,8 +155,11 @@ def score_country(country, iou_thr, classes, tag):
         tn += int((~yt & ~yp & valid).sum())
         valid_px += int(valid.sum())
 
-        # object metrics against individual parcels
-        ious, n_comp = parcel_ious(inst, pred == 1)
+        # The reconstructed parcel, not the eroded instance mask. C-04
+        # established the parcel as this project's unit and every size figure
+        # uses it, so the IoU has to be measured against the same object.
+        # reconcile_ftw.py carries the FTW-convention number alongside.
+        ious, n_comp = parcel_ious(full, pred == 1)
         n_pred_objects += n_comp
         hit_components = set()
         for pid, (iou, comp) in ious.items():
