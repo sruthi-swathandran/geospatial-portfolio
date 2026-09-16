@@ -1,0 +1,67 @@
+district,state,test,train,val,total
+Ivancna Gorica,Zahodna Slovenija,29,90,18,137
+Slovenska Bistrica,Vzhodna,27,115,16,158
+Trebnje,Vzhodna,19,47,18,84
+Cerknica,Vzhodna,16,109,1,126
+Brezovica,Zahodna Slovenija,14,41,0,55
+Lovrenc na Pohorju,Vzhodna,12,40,0,52
+Dobrepolje,Zahodna Slovenija,10,46,4,60
+Maribor,Vzhodna,10,55,9,74
+Zrece,Vzhodna,9,28,4,41
+Slovenske Konjice,Vzhodna,9,20,0,29
+Horjul,Zahodna Slovenija,9,7,2,18
+Dolenjske Toplice,Vzhodna,9,1,0,10
+Podlehnik,Vzhodna,6,6,0,12
+Trnovska vas,Vzhodna,6,9,0,15
+Postojna,Vzhodna,5,8,8,21
+Logatec,Zahodna Slovenija,4,7,9,20
+Kidricevo,Vzhodna,4,25,15,44
+Podvelka,Vzhodna,3,17,0,20
+Videm,Vzhodna,3,30,5,38
+Race-Fram,Vzhodna,3,19,10,32
+Destrnik,Vzhodna,3,18,0,21
+Borovnica,Zahodna Slovenija,3,24,0,27
+Goriunica,Vzhodna,2,4,1,7
+Ljubljana,Zahodna Slovenija,2,48,15,65
+Suremberk,Vzhodna,2,87,1,90
+Star-e,Vzhodna,2,18,3,23
+Grosuplje,Zahodna Slovenija,2,66,15,83
+Pesnica,Vzhodna,2,8,2,12
+Dornava,Vzhodna,1,10,0,11
+Dobrova-Polhov Gradec,Zahodna Slovenija,1,2,4,7
+Ribnica,Vzhodna,1,30,0,31
+Benedikt,Vzhodna,0,3,0,3
+Bloke,Vzhodna,0,42,0,42
+Hajdina,Vzhodna,0,11,3,14
+Makole,Vzhodna,0,10,0,10
+Majrperk,Vzhodna,0,22,0,22
+Litija,Vzhodna,0,35,0,35
+Log-Dragomer,Zahodna Slovenija,0,4,2,6
+Ikofljica,Zahodna Slovenija,0,23,4,27
+Jurkinci,Vzhodna,0,20,0,20
+Kocevje,Vzhodna,0,10,0,10
+Lenart,Vzhodna,0,36,0,36
+Ig,Zahodna Slovenija,0,51,8,59
+Gornja Radgona,Vzhodna,0,4,0,4
+Cirkulane,Vzhodna,0,9,0,9
+Cerkvenjak,Vzhodna,0,14,0,14
+Duplek,Vzhodna,0,24,0,24
+Hoce-Slivnica,Vzhodna,0,21,14,35
+Poljcane,Vzhodna,0,2,0,2
+Markovci,Vzhodna,0,9,8,17
+Selnica ob Dravi,Vzhodna,0,29,0,29
+Rube,Vzhodna,0,35,3,38
+Rmartno pri Litiji,Zahodna Slovenija,0,40,0,40
+Ptuj,Vzhodna,0,37,1,38
+Oplotnica,Vzhodna,0,21,0,21
+Mirna,Vzhodna,0,3,0,3
+Miklavl na Dravskem polju,Vzhodna,0,6,0,6
+Sodracica,Vzhodna,0,21,0,21
+Sveti Jurij v Slovenskih goricah,Vzhodna,0,5,0,5
+Sveti Jurij ob lcavnici,Vzhodna,0,8,0,8
+Sveti Andrac v Slov. goricah,Vzhodna,0,12,0,12
+Sveta Trojica v Slovenskih goricah,Vzhodna,0,15,0,15
+Velike La,Zahodna Slovenija,0,56,7,63
+Vitanje,Vzhodna,0,4,0,4
+Vojnik,Vzhodna,0,0,5,5
+Vrhnika,Zahodna Slovenija,0,56,1,57

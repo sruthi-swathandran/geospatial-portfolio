@@ -1,0 +1,506 @@
+district,state,none,test,train,val,total
+Jodhpur,Rājasthān,0,17,5,0,22
+Guntur,Andhra Pradesh,0,11,0,0,11
+Jaipur,Rājasthān,0,11,1,0,12
+Rewa,Madhya Pradesh,0,10,0,0,10
+Hanumangarh,Rājasthān,0,10,0,1,11
+Vizianagaram,Andhra Pradesh,0,8,1,0,9
+Solapur,Mahārāshtra,0,8,6,7,21
+Pratapgarh,Uttar Pradesh,0,7,3,0,10
+Bundi,Rājasthān,0,6,0,0,6
+Bijapur,Karnātaka,0,6,5,0,11
+Koraput,Odisha,0,6,0,0,6
+Bijnor,Uttar Pradesh,0,6,0,0,6
+Alwar,Rājasthān,0,6,3,0,9
+Rajkot,Gujarāt,0,6,3,0,9
+Ahmadabad,Gujarāt,0,6,0,0,6
+Jhunjhunun,Rājasthān,0,6,2,0,8
+Chittoor,Andhra Pradesh,0,6,0,1,7
+Bharatpur,Rājasthān,0,5,1,0,6
+Banda,Uttar Pradesh,0,5,0,0,5
+Mandsaur,Madhya Pradesh,0,5,2,0,7
+Vadodara,Gujarāt,0,5,0,0,5
+Sawai Madhopur,Rājasthān,0,5,0,0,5
+Allahabad,Uttar Pradesh,0,5,0,0,5
+Osmanabad,Mahārāshtra,0,5,5,0,10
+Tonk,Rājasthān,0,5,2,0,7
+Harda,Madhya Pradesh,0,5,0,0,5
+Ratlam,Madhya Pradesh,0,5,0,0,5
+Sidhi,Madhya Pradesh,0,5,0,0,5
+Balangir,Odisha,0,5,2,0,7
+Mahoba,Uttar Pradesh,0,4,3,0,7
+Kota,Rājasthān,0,4,0,0,4
+Banswara,Rājasthān,0,4,1,0,5
+Buxar,Bihār,0,4,0,0,4
+Nainital,Uttarākhand,0,4,0,0,4
+Nabarangapur,Odisha,0,4,3,0,7
+Sundargarh,Odisha,0,3,3,0,6
+Dewas,Madhya Pradesh,0,3,2,0,5
+Anand,Gujarāt,0,3,0,0,3
+Bastar,Chhattīsgarh,0,3,0,0,3
+Krishna,Andhra Pradesh,0,3,3,0,6
+Kheda,Gujarāt,0,3,0,0,3
+Karauli,Rājasthān,0,3,0,0,3
+Jamnagar,Gujarāt,0,3,6,0,9
+Khunti,Jhārkhand,0,3,0,0,3
+Chittaurgarh,Rājasthān,0,3,3,0,6
+Gumla,Jhārkhand,0,3,0,0,3
+Fatehpur,Uttar Pradesh,0,3,1,0,4
+Agra,Uttar Pradesh,1,3,1,0,5
+Tiruchirappalli,Tamil Nādu,0,3,0,0,3
+Ganganagar,Rājasthān,0,3,7,0,10
+Gandhinagar,Gujarāt,0,3,1,0,4
+Jaunpur,Uttar Pradesh,0,3,2,0,5
+Gwalior,Madhya Pradesh,1,3,0,0,4
+Sikar,Rājasthān,0,3,3,0,6
+Baran,Rājasthān,0,3,0,2,5
+Prakasam,Andhra Pradesh,0,3,5,3,11
+Sirsa,Haryāna,0,3,1,0,4
+Chatra,Jhārkhand,0,3,0,0,3
+Neemuch,Madhya Pradesh,0,3,0,0,3
+Panch Mahals,Gujarāt,0,3,0,0,3
+Pashchimi Singhbhum,Jhārkhand,0,3,2,0,5
+Bhiwani,Haryāna,0,2,0,5,7
+Surendranagar,Gujarāt,0,2,1,0,3
+Rewari,Haryāna,0,2,0,0,2
+Rayagada,Odisha,0,2,0,0,2
+Simdega,Jhārkhand,0,2,0,0,2
+Singrauli,Madhya Pradesh,0,2,0,0,2
+Ballia,Uttar Pradesh,0,2,1,0,3
+Baloda Bazar,Chhattīsgarh,0,2,0,0,2
+Palamu,Jhārkhand,0,2,0,0,2
+Bhojpur,Bihār,0,2,0,0,2
+Hamirpur,Uttar Pradesh,0,2,3,0,5
+Anantapur,Andhra Pradesh,2,2,8,5,17
+Jehanabad,Bihār,0,2,0,0,2
+Hoshangabad,Madhya Pradesh,0,2,2,0,4
+Churu,Rājasthān,0,2,3,0,5
+Gulbarga,Karnātaka,0,2,9,0,11
+Gaya,Bihār,0,2,0,0,2
+Mirzapur,Uttar Pradesh,0,2,5,0,7
+Jyotiba Phule Nagar,Uttar Pradesh,0,2,0,0,2
+Mahasamund,Chhattīsgarh,0,2,0,0,2
+Koriya,Chhattīsgarh,0,2,2,0,4
+Dausa,Rājasthān,0,2,0,0,2
+Sehore,Madhya Pradesh,0,2,1,0,3
+Nagaur,Rājasthān,0,2,9,0,11
+Ranchi,Jhārkhand,0,2,2,0,4
+Belgaum,Karnātaka,0,2,10,0,12
+Srikakulam,Andhra Pradesh,0,2,4,0,6
+Satna,Madhya Pradesh,0,2,2,0,4
+Sangli,Mahārāshtra,0,2,0,8,10
+Udham Singh Nagar,Uttarākhand,0,1,0,0,1
+Sabar Kantha,Gujarāt,0,1,4,0,5
+Thiruvarur,Tamil Nādu,0,1,3,0,4
+Subarnapur,Odisha,0,1,1,0,2
+Rampur,Uttar Pradesh,0,1,0,0,1
+Sambhal,Uttar Pradesh,0,1,1,0,2
+Arwal,Bihār,0,1,0,0,1
+Ranipet,Tamil Nādu,0,1,0,0,1
+Rohtas,Bihār,0,1,1,0,2
+Bikaner,Rājasthān,0,1,14,1,16
+Rae Bareli,Uttar Pradesh,0,1,2,0,3
+Chhatarpur,Madhya Pradesh,0,1,2,2,5
+Mansa,Punjab,0,1,0,4,5
+Malkangiri,Odisha,0,1,1,0,2
+Betul,Madhya Pradesh,0,1,3,4,8
+Nalanda,Bihār,0,1,0,2,3
+Namakkal,Tamil Nādu,1,1,0,0,2
+Nawada,Bihār,0,1,0,3,4
+Morena,Madhya Pradesh,0,1,0,1,2
+Pilibhit,Uttar Pradesh,0,1,0,1,2
+Perambalur,Tamil Nādu,0,1,0,0,1
+Bharuch,Gujarāt,0,1,4,0,5
+Raisen,Madhya Pradesh,0,1,1,0,2
+Nuapada,Odisha,0,1,2,0,3
+Porbandar,Gujarāt,0,1,0,0,1
+Mayiladuthurai,Tamil Nādu,0,1,2,0,3
+Mahisagar,Gujarāt,0,1,1,0,2
+Kadapa(YSR),Andhra Pradesh,0,1,8,0,9
+Junagadh,Gujarāt,0,1,0,0,1
+Jhalawar,Rājasthān,0,1,6,0,7
+Kaushambi,Uttar Pradesh,0,1,0,0,1
+Latehar,Jhārkhand,0,1,0,0,1
+Leh(Ladakh),Ladākh,0,1,0,0,1
+Mahendragarh,Haryāna,0,1,0,0,1
+Dakshin Dinajpur,West Bengal,0,1,0,0,1
+Morbi,Gujarāt,0,1,0,0,1
+Chitrakoot,Uttar Pradesh,0,1,0,0,1
+Dhaulpur,Rājasthān,0,1,0,0,1
+Gir Somnath,Gujarāt,0,1,0,0,1
+Dungarpur,Rājasthān,0,1,0,0,1
+Udaipur,Rājasthān,0,1,4,0,5
+Ariyalur,Tamil Nādu,0,1,0,0,1
+Aravali,Gujarāt,0,1,1,0,2
+Valsad,Gujarāt,0,0,2,0,2
+Yavatmal,Mahārāshtra,0,0,2,8,10
+Adilabad,Telangāna,0,0,1,4,5
+Agar,Madhya Pradesh,0,0,1,0,1
+Supaul,Bihār,0,0,3,0,3
+Surajpur,Chhattīsgarh,0,0,1,1,2
+Surat,Gujarāt,0,0,2,0,2
+Surguja,Chhattīsgarh,0,0,2,0,2
+Bahraich,Uttar Pradesh,0,0,6,0,6
+Baksa,Assam,0,0,3,0,3
+Balaghat,Madhya Pradesh,0,0,3,0,3
+Baleshwar,Odisha,0,0,7,0,7
+Balod,Chhattīsgarh,0,0,2,0,2
+Balrampur,Uttar Pradesh,0,0,3,6,9
+Aligarh,Uttar Pradesh,0,0,6,0,6
+Ambala,Haryāna,0,0,1,0,1
+Ambedkar Nagar,Uttar Pradesh,0,0,2,0,2
+Amethi,Uttar Pradesh,0,0,1,0,1
+Amravati,Mahārāshtra,0,0,2,14,16
+Suryapet,Telangāna,0,0,4,0,4
+Gariaband,Chhattīsgarh,0,0,1,0,1
+Gaurella Pendra Marwahi,Chhattīsgarh,0,0,6,0,6
+Gautam Buddha Nagar,Uttar Pradesh,0,0,1,0,1
+Ghaziabad,Uttar Pradesh,0,0,2,0,2
+Ghazipur,Uttar Pradesh,0,0,4,0,4
+Giridih,Jhārkhand,0,0,1,1,2
+Gonda,Uttar Pradesh,0,0,2,0,2
+Dohad,Gujarāt,0,0,4,0,4
+Dumka,Jhārkhand,0,0,1,0,1
+Durg,Chhattīsgarh,0,0,1,0,1
+East Godavari,Andhra Pradesh,0,0,4,1,5
+Erode,Tamil Nādu,0,0,1,0,1
+Etah,Uttar Pradesh,0,0,2,0,2
+Alirajpur,Madhya Pradesh,0,0,3,0,3
+Wanaparthy,Telangāna,1,0,0,0,1
+Wardha,Mahārāshtra,0,0,0,3,3
+Ganjam,Odisha,0,0,8,0,8
+Garhwa,Jhārkhand,0,0,0,4,4
+Etawah,Uttar Pradesh,0,0,0,2,2
+Faizabad,Uttar Pradesh,0,0,2,0,2
+Faridkot,Punjab,0,0,2,0,2
+Farrukhabad,Uttar Pradesh,0,0,4,0,4
+Fatehabad,Haryāna,0,0,0,2,2
+Fatehgarh Sahib,Punjab,0,0,0,1,1
+Fazilka,Punjab,0,0,4,0,4
+Firozabad,Uttar Pradesh,0,0,1,3,4
+Debagarh,Odisha,0,0,5,0,5
+Dehradun,Uttarākhand,1,0,0,0,1
+Deoghar,Jhārkhand,0,0,2,0,2
+Deoria,Uttar Pradesh,0,0,3,0,3
+Devbhumi Dwarka,Gujarāt,0,0,3,2,5
+Dhamtari,Chhattīsgarh,0,0,1,0,1
+Jaisalmer,Rājasthān,0,0,6,4,10
+Jajapur,Odisha,0,0,2,0,2
+Jalandhar,Punjab,0,0,3,0,3
+Jalaun,Uttar Pradesh,0,0,2,2,4
+Gondiya,Mahārāshtra,0,0,5,0,5
+Gorakhpur,Uttar Pradesh,0,0,3,0,3
+Guna,Madhya Pradesh,0,0,0,1,1
+Gurdaspur,Punjab,0,0,3,0,3
+Gurgaon,Haryāna,0,0,4,0,4
+Hapur,Uttar Pradesh,0,0,1,0,1
+Hardoi,Uttar Pradesh,0,0,3,3,6
+Hardwar,Uttarākhand,0,0,1,0,1
+Hassan,Karnātaka,0,0,9,0,9
+Firozpur,Punjab,0,0,3,0,3
+Gadag,Karnātaka,0,0,5,0,5
+Gadchiroli,Mahārāshtra,0,0,2,0,2
+Jangaon,Telangāna,0,0,2,0,2
+Janjgir-Champa,Chhattīsgarh,0,0,5,0,5
+Jashpur,Chhattīsgarh,0,0,6,0,6
+Jayashankar,Telangāna,0,0,1,0,1
+Jhabua,Madhya Pradesh,0,0,6,0,6
+Jhajjar,Haryāna,0,0,0,1,1
+Haveri,Karnātaka,0,0,3,0,3
+Hingoli,Mahārāshtra,0,0,5,0,5
+Hisar,Haryāna,0,0,0,3,3
+Hoshiarpur,Punjab,0,0,2,0,2
+Hugli,West Bengal,0,0,5,0,5
+Imphal West,Manipur,0,0,1,0,1
+Indore,Madhya Pradesh,0,0,3,0,3
+Jabalpur,Madhya Pradesh,0,0,4,0,4
+Jagatsinghapur,Odisha,0,0,2,0,2
+Jagtial,Telangāna,0,0,3,0,3
+Jalor,Rājasthān,0,0,0,14,14
+Jalpaiguri,West Bengal,0,0,1,0,1
+Jammu,Jammu and Kashmīr,0,0,1,0,1
+Jamtara,Jhārkhand,0,0,1,0,1
+Dhanbad,Jhārkhand,0,0,5,0,5
+Dhar,Madhya Pradesh,0,0,11,0,11
+Dharwad,Karnātaka,0,0,6,0,6
+Dhenkanal,Odisha,0,0,4,0,4
+Dhubri,Assam,0,0,2,0,2
+Dhule,Mahārāshtra,0,0,2,0,2
+Dibrugarh,Assam,0,0,1,0,1
+Dindori,Madhya Pradesh,0,0,3,0,3
+Coimbatore,Tamil Nādu,0,0,4,0,4
+Cuddalore,Tamil Nādu,0,0,2,1,3
+Cuttack,Odisha,0,0,3,0,3
+Jamui,Bihār,0,0,1,0,1
+Karnal,Haryāna,0,0,5,1,6
+Karur,Tamil Nādu,1,0,3,0,4
+Katihar,Bihār,0,0,4,0,4
+Katni,Madhya Pradesh,0,0,6,0,6
+Jhansi,Uttar Pradesh,0,0,6,0,6
+Jhargram,West Bengal,0,0,4,0,4
+Jind,Haryāna,0,0,0,2,2
+Jogulamba,Telangāna,0,0,2,0,2
+Jorhat,Assam,0,0,2,0,2
+Kabeerdham,Chhattīsgarh,0,0,3,0,3
+Kachchh,Gujarāt,0,0,11,1,12
+Kalahandi,Odisha,0,0,7,0,7
+Kallakurichi,Tamil Nādu,0,0,0,2,2
+Kamareddy,Telangāna,1,0,1,0,2
+Jalgaon,Mahārāshtra,0,0,16,0,16
+Jalna,Mahārāshtra,0,0,5,0,5
+Koch Bihar,West Bengal,0,0,2,0,2
+Kodagu,Karnātaka,0,0,1,0,1
+Kolar,Karnātaka,1,0,1,1,3
+Kolhapur,Mahārāshtra,0,0,4,0,4
+Komaram Bheem,Telangāna,0,0,0,1,1
+Kondagaon,Chhattīsgarh,0,0,8,0,8
+Kamrup,Assam,0,0,1,0,1
+Kancheepuram,Tamil Nādu,0,0,2,0,2
+Kangpokpi,Manipur,0,0,1,0,1
+Kannauj,Uttar Pradesh,0,0,3,0,3
+Kanpur Dehat,Uttar Pradesh,0,0,2,1,3
+Kanpur Nagar,Uttar Pradesh,0,0,3,0,3
+Kanshiram Nagar,Uttar Pradesh,0,0,1,0,1
+Kapurthala,Punjab,0,0,2,0,2
+Karimganj,Assam,0,0,1,0,1
+Karimnagar,Telangāna,0,0,3,0,3
+Chandrapur,Mahārāshtra,0,0,0,6,6
+Kurnool,Andhra Pradesh,2,0,12,0,14
+Kurukshetra,Haryāna,0,0,3,0,3
+Kushinagar,Uttar Pradesh,0,0,0,1,1
+Lakhimpur,Assam,0,0,2,0,2
+Lakhisarai,Bihār,0,0,0,1,1
+Lalitpur,Uttar Pradesh,0,0,2,3,5
+Latur,Mahārāshtra,0,0,10,0,10
+Kendrapara,Odisha,0,0,3,0,3
+Kendujhar,Odisha,0,0,6,0,6
+Khagaria,Bihār,0,0,0,2,2
+Khammam,Telangāna,0,0,5,0,5
+Khandwa (East Nimar),Madhya Pradesh,0,0,2,2,4
+Khargone (West Nimar),Madhya Pradesh,0,0,4,0,4
+Kheri,Uttar Pradesh,0,0,0,9,9
+Khordha,Odisha,0,0,1,0,1
+Mainpuri,Uttar Pradesh,0,0,1,1,2
+Maldah,West Bengal,0,0,2,0,2
+Koppal,Karnātaka,0,0,6,0,6
+Korba,Chhattīsgarh,0,0,4,0,4
+Krishnagiri,Tamil Nādu,0,0,3,0,3
+Dakshina Kannada,Karnātaka,0,0,1,0,1
+Damoh,Madhya Pradesh,0,0,1,1,2
+Darbhanga,Bihār,0,0,1,0,1
+Darjiling,West Bengal,0,0,1,0,1
+Darrang,Assam,0,0,1,0,1
+Datia,Madhya Pradesh,0,0,4,1,5
+Davanagere,Karnātaka,0,0,8,0,8
+Burhanpur,Madhya Pradesh,0,0,3,1,4
+Cachar,Assam,0,0,1,0,1
+Chamarajanagar,Karnātaka,0,0,1,0,1
+Chandauli,Uttar Pradesh,0,0,2,0,2
+Mathura,Uttar Pradesh,0,0,3,0,3
+Mau,Uttar Pradesh,0,0,2,0,2
+Mayurbhanj,Odisha,1,0,4,0,5
+Medak,Telangāna,0,0,1,0,1
+Meerut,Uttar Pradesh,0,0,3,0,3
+Moga,Punjab,0,0,3,0,3
+Lohit,Arunāchal Pradesh,0,0,2,0,2
+Lower Dibang Valley,Arunāchal Pradesh,1,0,0,0,1
+Lucknow,Uttar Pradesh,0,0,1,0,1
+Ludhiana,Punjab,0,0,0,7,7
+Madhepura,Bihār,0,0,2,0,2
+Madhubani,Bihār,0,0,1,0,1
+Mahabubabad,Telangāna,0,0,1,0,1
+Mahabubnagar,Telangāna,0,0,2,0,2
+Mahesana,Gujarāt,0,0,2,0,2
+Mahrajganj,Uttar Pradesh,0,0,2,0,2
+Nagarkurnool,Telangāna,0,0,8,0,8
+Nagpur,Mahārāshtra,0,0,7,0,7
+Mancherial,Telangāna,0,0,3,0,3
+Mandi,Himāchal Pradesh,0,0,1,0,1
+Mandla,Madhya Pradesh,0,0,3,0,3
+Mandya,Karnātaka,0,0,2,1,3
+Chengalputtu,Tamil Nādu,0,0,1,0,1
+Chhindwara,Madhya Pradesh,0,0,10,0,10
+Chhota Udaipur,Gujarāt,0,0,1,0,1
+Chikkaballapura,Karnātaka,0,0,0,3,3
+Chikmagalur,Karnātaka,0,0,2,0,2
+Chirang,Assam,0,0,2,0,2
+Chitradurga,Karnātaka,0,0,6,1,7
+Bhopal,Madhya Pradesh,0,0,0,3,3
+Bid,Mahārāshtra,0,0,13,0,13
+Bidar,Karnātaka,0,0,2,0,2
+Narsimhapur,Madhya Pradesh,0,0,4,0,4
+Nashik,Mahārāshtra,0,0,11,0,11
+Navsari,Gujarāt,0,0,1,0,1
+Nirmal,Telangāna,0,0,2,0,2
+Niwari,Madhya Pradesh,0,0,1,0,1
+Nizamabad,Telangāna,0,0,2,0,2
+Morigaon,Assam,0,0,1,0,1
+Muktsar,Punjab,0,0,5,0,5
+Munger,Bihār,0,0,0,2,2
+Murshidabad,West Bengal,0,0,4,1,5
+Muzaffarnagar,Uttar Pradesh,0,0,2,0,2
+Muzaffarpur,Bihār,0,0,1,0,1
+Mysore,Karnātaka,0,0,7,0,7
+Nadia,West Bengal,0,0,0,2,2
+Nagaon,Assam,0,0,2,0,2
+Nagapattinam,Tamil Nādu,0,0,2,0,2
+Begusarai,Bihār,0,0,0,1,1
+Bellary,Karnātaka,0,0,8,0,8
+Bemetra,Chhattīsgarh,0,0,2,0,2
+Palghar,Mahārāshtra,0,0,2,0,2
+Pali,Rājasthān,0,0,3,7,10
+Palwal,Haryāna,0,0,2,0,2
+Panipat,Haryāna,0,0,1,0,1
+Panna,Madhya Pradesh,0,0,2,0,2
+Papum Pare,Arunāchal Pradesh,0,0,1,0,1
+Parbhani,Mahārāshtra,0,0,8,0,8
+Nalbari,Assam,0,0,2,0,2
+Nalgonda,Telangāna,0,0,10,0,10
+Nanded,Mahārāshtra,0,0,11,0,11
+Nandurbar,Mahārāshtra,0,0,4,0,4
+Narayanpet,Telangāna,0,0,1,0,1
+Narmada,Gujarāt,0,0,3,0,3
+Purba Medinipur,West Bengal,0,0,1,0,1
+North Garo Hills,Meghālaya,0,0,1,0,1
+North Twenty Four Parganas,West Bengal,0,0,3,0,3
+North West,Delhi,0,0,1,0,1
+Pakur,Jhārkhand,0,0,2,0,2
+Palakkad,Kerala,0,0,2,0,2
+Bilaspur,Chhattīsgarh,0,0,4,0,4
+Birbhum,West Bengal,0,0,5,0,5
+Biswanath,Assam,0,0,2,0,2
+Bokaro,Jhārkhand,0,0,2,0,2
+Bongaigaon,Assam,0,0,2,0,2
+Budaun,Uttar Pradesh,0,0,4,0,4
+Bulandshahr,Uttar Pradesh,0,0,1,0,1
+Buldana,Mahārāshtra,0,0,13,0,13
+Bathinda,Punjab,0,0,3,0,3
+Baudh,Odisha,0,0,3,0,3
+Raipur,Chhattīsgarh,0,0,2,0,2
+Rajgarh,Madhya Pradesh,0,0,2,3,5
+Rajnandgaon,Chhattīsgarh,0,0,5,0,5
+Rajouri,Jammu and Kashmīr,0,0,1,0,1
+Rajsamand,Rājasthān,0,0,6,0,6
+Ramanagara,Karnātaka,0,0,2,1,3
+Ramanathapuram,Tamil Nādu,0,0,0,1,1
+Paschim Barddhaman,West Bengal,0,0,1,0,1
+Paschim Medinipur,West Bengal,0,0,4,0,4
+Patan,Gujarāt,0,0,4,0,4
+Pathankot,Punjab,0,0,1,0,1
+Patiala,Punjab,0,0,0,4,4
+Peddapalli,Telangāna,0,0,2,0,2
+Pudukkottai,Tamil Nādu,0,0,0,2,2
+Pune,Mahārāshtra,0,0,8,1,9
+Purba Champaran,Bihār,0,0,0,2,2
+Purnia,Bihār,0,0,2,0,2
+Puruliya,West Bengal,0,0,4,0,4
+Raichur,Karnātaka,0,0,5,0,5
+Raigarh,Mahārāshtra,0,0,1,0,1
+Bhadradri,Telangāna,0,0,4,0,4
+Bhadrak,Odisha,0,0,1,0,1
+Bhagalpur,Bihār,0,0,2,0,2
+Bhandara,Mahārāshtra,0,0,5,0,5
+Bhavnagar,Gujarāt,1,0,5,0,6
+Bhilwara,Rājasthān,0,0,5,0,5
+Bhind,Madhya Pradesh,0,0,0,4,4
+Banas Kantha,Gujarāt,2,0,4,0,6
+Bandipore,Jammu and Kashmīr,0,0,1,0,1
+Bangalore,Karnātaka,0,0,1,0,1
+Banka,Bihār,0,0,5,0,5
+Bankura,West Bengal,0,0,10,0,10
+Azamgarh,Uttar Pradesh,0,0,6,0,6
+Bagalkot,Karnātaka,0,0,8,0,8
+Baghpat,Uttar Pradesh,0,0,2,0,2
+Sangareddy,Telangāna,0,0,5,0,5
+Sangrur,Punjab,0,0,0,7,7
+Saraikela-Kharsawan,Jhārkhand,0,0,2,0,2
+Satara,Mahārāshtra,0,0,0,3,3
+Ramgarh,Jhārkhand,0,0,1,0,1
+Rangareddy,Telangāna,0,0,5,0,5
+Ratnagiri,Mahārāshtra,0,0,1,0,1
+Rohtak,Haryāna,0,0,0,4,4
+Rudraprayag,Uttarākhand,0,0,1,0,1
+Rupnagar,Punjab,0,0,3,1,4
+Sagar,Madhya Pradesh,0,0,0,6,6
+Purbi Singhbhum,Jhārkhand,0,0,2,0,2
+Puri,Odisha,0,0,2,0,2
+Sahibganj,Jhārkhand,0,0,3,0,3
+Sahibzada Ajit Singh Nagar,Punjab,0,0,0,2,2
+Salem,Tamil Nādu,0,0,0,1,1
+Samastipur,Bihār,0,0,0,1,1
+Samba,Jammu and Kashmīr,0,0,2,0,2
+Sambalpur,Odisha,0,0,3,0,3
+Bara Banki,Uttar Pradesh,0,0,2,0,2
+Barddhaman,West Bengal,0,0,4,0,4
+Bareilly,Uttar Pradesh,0,0,1,0,1
+Barmer,Rājasthān,0,0,3,13,16
+Barnala,Punjab,0,0,0,1,1
+Barpeta,Assam,0,0,3,0,3
+Barwani,Madhya Pradesh,0,0,5,0,5
+Ashoknagar,Madhya Pradesh,1,0,0,0,1
+Auraiya,Uttar Pradesh,0,0,0,2,2
+Aurangabad,Mahārāshtra,0,0,5,0,5
+South Tripura,Tripura,0,0,1,0,1
+South Twenty Four Parganas,West Bengal,0,0,3,0,3
+Sri Potti Sriramulu Nellore,Andhra Pradesh,0,0,4,3,7
+Seoni,Madhya Pradesh,0,0,11,0,11
+Shahjahanpur,Uttar Pradesh,0,0,1,4,5
+Shajapur,Madhya Pradesh,0,0,0,1,1
+Sheikhpura,Bihār,0,0,0,1,1
+Shimoga,Karnātaka,0,0,5,0,5
+Shivpuri,Madhya Pradesh,0,0,0,3,3
+Shrawasti,Uttar Pradesh,0,0,4,0,4
+Siddharthnagar,Uttar Pradesh,0,0,3,0,3
+Siddipet,Telangāna,0,0,7,0,7
+Sipahijula,Tripura,0,0,1,0,1
+Sirmaur,Himāchal Pradesh,0,0,1,0,1
+Sirohi,Rājasthān,0,0,1,6,7
+Saharanpur,Uttar Pradesh,0,0,9,0,9
+Tapi,Gujarāt,0,0,3,0,3
+Tarn Taran,Punjab,0,0,2,0,2
+Tehri Garhwal,Uttarākhand,0,0,1,0,1
+Tenkasi,Tamil Nādu,0,0,1,0,1
+Thoothukkudi,Tamil Nādu,1,0,0,0,1
+Tikamgarh,Madhya Pradesh,0,0,2,0,2
+Tinsukia,Assam,0,0,2,0,2
+Sitamarhi,Bihār,0,0,2,1,3
+Sitapur,Uttar Pradesh,0,0,0,3,3
+Sivasagar,Assam,0,0,2,0,2
+Siwan,Bihār,0,0,0,1,1
+Solan,Himāchal Pradesh,0,0,1,0,1
+Sonbhadra,Uttar Pradesh,0,0,0,3,3
+Sonipat,Haryāna,0,0,1,0,1
+Sonitpur,Assam,0,0,2,0,2
+South Salmara-Mankachar,Assam,0,0,1,0,1
+Ahmadnagar,Mahārāshtra,0,0,29,0,29
+Vellore,Tamil Nādu,0,0,0,1,1
+Vidisha,Madhya Pradesh,2,0,0,4,6
+Vikarabad,Telangāna,0,0,3,0,3
+Viluppuram,Tamil Nādu,0,0,3,1,4
+Virudhunagar,Tamil Nādu,1,0,2,0,3
+Visakhapatnam,Andhra Pradesh,0,0,4,0,4
+Udalguri,Assam,0,0,2,0,2
+Udhampur,Jammu and Kashmīr,0,0,1,0,1
+Ujjain,Madhya Pradesh,0,0,6,0,6
+Umaria,Madhya Pradesh,0,0,1,0,1
+Unnao,Uttar Pradesh,0,0,6,0,6
+Uttar Bastar Kanker,Chhattīsgarh,0,0,5,0,5
+Uttara Kannada,Karnātaka,0,0,1,0,1
+Akola,Mahārāshtra,0,0,0,8,8
+Sultanpur,Uttar Pradesh,0,0,2,0,2
+Washim,Mahārāshtra,0,0,6,0,6
+West Godavari,Andhra Pradesh,0,0,4,0,4
+Yadadri Bhongiri,Telangāna,0,0,3,0,3
+Yadgir,Karnātaka,0,0,6,0,6
+Yamunanagar,Haryāna,0,0,2,0,2
+Alipurduar,West Bengal,0,0,1,0,1
+Tirupathur,Tamil Nādu,0,0,0,1,1
+Tiruppur,Tamil Nādu,0,0,1,0,1
+Tiruvannamalai,Tamil Nādu,0,0,1,1,2
+Tumkur,Karnātaka,0,0,5,3,8
+Amreli,Gujarāt,0,0,11,0,11
+Amritsar,Punjab,0,0,2,0,2
+Anantnag,Jammu and Kashmīr,0,0,1,0,1
+Anugul,Odisha,0,0,3,0,3
+Anuppur,Madhya Pradesh,0,0,4,0,4
+Ajmer,Rājasthān,0,0,9,0,9

@@ -1,0 +1,5 @@
+combination,found,parcels,pooled,per_chip
+"truth reconstructed, pred class 1",1518,6831,0.2222,0.1279
+"truth eroded instance, pred class 1",1971,6831,0.2885,0.1679
+"truth reconstructed, pred class 1+2",248,6831,0.0363,0.0496
+"truth eroded instance, pred class 1+2",119,6831,0.0174,0.0222

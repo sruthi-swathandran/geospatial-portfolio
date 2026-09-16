@@ -1,0 +1,134 @@
+district,state,test_chips,parcels,median_width_px,share_narrow,median_area_px,median_iou,recall
+Agra,Uttar Pradesh,3,15,4.25,0.133,27.6,0.0,0.0
+Ahmadabad,Gujarāt,6,30,4.82,0.1,42.8,0.034,0.067
+Allahabad,Uttar Pradesh,5,25,3.03,0.48,18.4,0.0,0.0
+Alwar,Rājasthān,6,30,4.25,0.2,24.4,0.0,0.0
+Anand,Gujarāt,3,15,3.77,0.0,31.2,0.228,0.267
+Anantapur,Andhra Pradesh,2,10,2.11,1.0,10.1,0.014,0.0
+Aravali,Gujarāt,1,5,3.03,0.0,41.2,0.0,0.0
+Ariyalur,Tamil Nādu,1,5,3.03,0.0,20.6,0.182,0.0
+Arwal,Bihār,1,5,2.82,0.6,11.0,0.0,0.0
+Balangir,Odisha,5,25,2.82,0.52,14.3,0.0,0.0
+Ballia,Uttar Pradesh,2,10,3.4,0.0,24.3,0.0,0.0
+Baloda Bazar,Chhattīsgarh,2,10,3.77,0.2,27.0,0.0,0.0
+Banda,Uttar Pradesh,5,25,5.46,0.04,54.0,0.191,0.2
+Banswara,Rājasthān,4,20,3.03,0.35,16.7,0.0,0.0
+Baran,Rājasthān,3,15,6.47,0.0,86.8,0.289,0.267
+Bastar,Chhattīsgarh,3,15,2.82,0.533,14.0,0.0,0.0
+Belgaum,Karnātaka,2,10,5.14,0.1,64.5,0.094,0.3
+Betul,Madhya Pradesh,1,5,3.03,0.4,19.5,0.0,0.0
+Bharatpur,Rājasthān,5,25,3.23,0.36,22.8,0.0,0.0
+Bharuch,Gujarāt,1,5,4.25,0.0,34.6,0.031,0.0
+Bhiwani,Haryāna,2,10,7.89,0.0,110.3,0.0,0.0
+Bhojpur,Bihār,2,10,3.5,0.3,27.9,0.0,0.0
+Bijapur,Karnātaka,6,30,4.82,0.067,51.5,0.024,0.167
+Bijnor,Uttar Pradesh,6,30,3.77,0.267,37.9,0.0,0.0
+Bikaner,Rājasthān,1,5,15.58,0.0,318.7,0.723,0.8
+Bundi,Rājasthān,6,30,4.25,0.067,26.7,0.11,0.2
+Buxar,Bihār,4,20,3.03,0.45,17.1,0.0,0.0
+Chatra,Jhārkhand,3,11,2.82,0.636,11.4,0.0,0.0
+Chhatarpur,Madhya Pradesh,1,5,2.11,1.0,6.2,0.0,0.0
+Chitrakoot,Uttar Pradesh,1,5,5.46,0.2,43.7,0.0,0.0
+Chittaurgarh,Rājasthān,3,15,3.77,0.267,40.4,0.0,0.067
+Chittoor,Andhra Pradesh,6,30,2.47,0.533,12.5,0.0,0.0
+Churu,Rājasthān,2,10,5.46,0.0,86.6,0.038,0.0
+Dakshin Dinajpur,West Bengal,1,5,1.82,0.8,7.4,0.0,0.0
+Dausa,Rājasthān,2,10,5.46,0.0,43.9,0.0,0.0
+Dewas,Madhya Pradesh,3,15,9.18,0.0,162.1,0.0,0.0
+Dhaulpur,Rājasthān,1,5,4.82,0.0,66.2,0.062,0.0
+Dungarpur,Rājasthān,1,5,3.03,0.4,17.6,0.0,0.0
+Fatehpur,Uttar Pradesh,3,15,3.23,0.2,24.6,0.0,0.0
+Gandhinagar,Gujarāt,3,15,5.46,0.067,47.8,0.0,0.0
+Ganganagar,Rājasthān,3,15,6.67,0.0,95.6,0.056,0.0
+Gaya,Bihār,2,10,3.03,0.1,15.1,0.0,0.0
+Gir Somnath,Gujarāt,1,5,7.07,0.2,67.3,0.065,0.2
+Gulbarga,Karnātaka,2,10,7.89,0.0,91.0,0.07,0.0
+Gumla,Jhārkhand,3,15,2.82,0.533,13.6,0.0,0.0
+Guntur,Andhra Pradesh,11,55,3.77,0.182,36.0,0.0,0.055
+Gwalior,Madhya Pradesh,3,15,3.77,0.067,21.7,0.046,0.067
+Hamirpur,Uttar Pradesh,2,10,3.77,0.1,32.2,0.0,0.0
+Hanumangarh,Rājasthān,10,50,5.46,0.1,64.1,0.044,0.06
+Harda,Madhya Pradesh,5,25,7.53,0.16,85.3,0.062,0.04
+Hoshangabad,Madhya Pradesh,2,10,3.77,0.1,25.4,0.0,0.0
+Jaipur,Rājasthān,11,55,4.4,0.109,37.9,0.0,0.0
+Jamnagar,Gujarāt,3,15,9.1,0.0,139.7,0.11,0.067
+Jaunpur,Uttar Pradesh,3,15,2.11,0.733,12.1,0.0,0.0
+Jehanabad,Bihār,2,10,2.11,1.0,10.3,0.0,0.0
+Jhalawar,Rājasthān,1,5,1.82,1.0,8.1,0.0,0.0
+Jhunjhunun,Rājasthān,6,30,4.25,0.067,39.5,0.0,0.0
+Jodhpur,Rājasthān,17,84,7.35,0.0,102.0,0.033,0.048
+Junagadh,Gujarāt,1,5,6.47,0.0,126.1,0.364,0.0
+Jyotiba Phule Nagar,Uttar Pradesh,2,10,4.15,0.3,25.5,0.0,0.0
+Kadapa(YSR),Andhra Pradesh,1,5,4.54,0.0,34.6,0.0,0.0
+Karauli,Rājasthān,3,15,4.54,0.0,42.6,0.0,0.067
+Kaushambi,Uttar Pradesh,1,5,3.03,0.4,16.5,0.0,0.0
+Kheda,Gujarāt,3,15,4.4,0.2,38.2,0.113,0.067
+Khunti,Jhārkhand,3,15,2.82,0.533,12.1,0.0,0.0
+Koraput,Odisha,6,24,3.03,0.417,17.8,0.0,0.0
+Koriya,Chhattīsgarh,2,10,3.4,0.4,21.1,0.0,0.0
+Kota,Rājasthān,4,20,7.48,0.0,85.1,0.388,0.4
+Krishna,Andhra Pradesh,3,15,5.46,0.067,53.3,0.125,0.133
+Latehar,Jhārkhand,1,5,2.11,0.8,10.3,0.0,0.0
+Leh(Ladakh),Ladākh,1,5,2.82,0.6,14.0,0.0,0.0
+Mahasamund,Chhattīsgarh,2,10,2.32,0.6,15.6,0.0,0.0
+Mahendragarh,Haryāna,1,5,5.46,0.0,40.1,0.0,0.0
+Mahisagar,Gujarāt,1,5,3.03,0.2,10.7,0.0,0.0
+Mahoba,Uttar Pradesh,4,20,5.0,0.1,46.0,0.097,0.0
+Malkangiri,Odisha,1,5,2.82,0.6,12.1,0.0,0.0
+Mandsaur,Madhya Pradesh,5,25,4.25,0.0,35.7,0.209,0.12
+Mansa,Punjab,1,5,11.53,0.0,151.1,0.387,0.4
+Mayiladuthurai,Tamil Nādu,1,5,4.25,0.0,38.6,0.515,0.6
+Mirzapur,Uttar Pradesh,2,10,4.61,0.0,40.1,0.0,0.0
+Morbi,Gujarāt,1,5,6.78,0.0,115.4,0.163,0.0
+Morena,Madhya Pradesh,1,5,4.25,0.0,26.8,0.0,0.0
+Nabarangapur,Odisha,4,20,2.93,0.5,21.7,0.0,0.0
+Nagaur,Rājasthān,2,10,7.57,0.0,76.5,0.003,0.0
+Nainital,Uttarākhand,4,20,3.77,0.4,30.1,0.0,0.0
+Nalanda,Bihār,1,5,4.25,0.4,33.4,0.0,0.0
+Namakkal,Tamil Nādu,1,5,2.82,0.8,12.1,0.0,0.0
+Nawada,Bihār,1,5,2.11,0.8,7.7,0.0,0.0
+Neemuch,Madhya Pradesh,3,15,5.46,0.0,44.1,0.057,0.133
+Nuapada,Odisha,1,5,1.82,1.0,9.2,0.0,0.0
+Osmanabad,Mahārāshtra,5,25,6.67,0.0,71.0,0.092,0.2
+Palamu,Jhārkhand,2,10,2.82,0.7,14.5,0.0,0.0
+Panch Mahals,Gujarāt,3,15,3.03,0.333,21.3,0.0,0.0
+Pashchimi Singhbhum,Jhārkhand,3,15,2.82,0.533,15.1,0.0,0.0
+Perambalur,Tamil Nādu,1,5,3.03,0.0,16.5,0.0,0.0
+Pilibhit,Uttar Pradesh,1,5,6.26,0.0,54.8,0.02,0.0
+Porbandar,Gujarāt,1,5,7.89,0.0,113.6,0.0,0.0
+Prakasam,Andhra Pradesh,3,15,4.82,0.0,54.0,0.227,0.0
+Pratapgarh,Uttar Pradesh,7,35,3.77,0.314,27.2,0.0,0.0
+Rae Bareli,Uttar Pradesh,1,5,3.23,0.2,17.6,0.0,0.0
+Raisen,Madhya Pradesh,1,5,4.25,0.0,18.0,0.087,0.0
+Rajkot,Gujarāt,6,30,5.46,0.1,88.4,0.046,0.033
+Rampur,Uttar Pradesh,1,5,3.03,0.4,19.1,0.0,0.0
+Ranchi,Jhārkhand,2,10,1.82,0.9,6.2,0.0,0.0
+Ranipet,Tamil Nādu,1,5,3.03,0.2,16.9,0.259,0.0
+Ratlam,Madhya Pradesh,5,25,4.4,0.04,46.7,0.0,0.0
+Rayagada,Odisha,2,10,4.25,0.2,34.0,0.0,0.0
+Rewa,Madhya Pradesh,10,50,3.5,0.24,19.8,0.0,0.06
+Rewari,Haryāna,2,10,6.67,0.0,48.0,0.191,0.3
+Rohtas,Bihār,1,5,2.11,0.6,11.4,0.0,0.2
+Sabar Kantha,Gujarāt,1,5,5.46,0.0,46.0,0.0,0.0
+Sambhal,Uttar Pradesh,1,5,3.77,0.2,21.0,0.0,0.0
+Sangli,Mahārāshtra,2,10,4.85,0.0,57.0,0.0,0.0
+Satna,Madhya Pradesh,2,10,3.77,0.0,43.2,0.0,0.0
+Sawai Madhopur,Rājasthān,5,25,6.47,0.0,73.5,0.0,0.16
+Sehore,Madhya Pradesh,2,10,5.69,0.0,58.8,0.012,0.0
+Sidhi,Madhya Pradesh,5,25,1.82,0.84,7.0,0.0,0.0
+Sikar,Rājasthān,3,15,3.03,0.133,23.9,0.0,0.0
+Simdega,Jhārkhand,2,10,3.03,0.4,13.6,0.0,0.0
+Singrauli,Madhya Pradesh,2,10,1.96,0.9,9.4,0.0,0.0
+Sirsa,Haryāna,3,15,5.46,0.067,48.5,0.341,0.2
+Solapur,Mahārāshtra,8,40,4.4,0.15,41.7,0.023,0.075
+Srikakulam,Andhra Pradesh,2,10,3.5,0.4,22.8,0.0,0.0
+Subarnapur,Odisha,1,5,3.03,0.4,18.4,0.0,0.0
+Sundargarh,Odisha,3,15,2.82,0.667,9.9,0.0,0.0
+Surendranagar,Gujarāt,2,10,8.64,0.0,136.6,0.226,0.2
+Thiruvarur,Tamil Nādu,1,5,4.25,0.0,30.1,0.231,0.0
+Tiruchirappalli,Tamil Nādu,3,15,3.23,0.133,23.2,0.0,0.0
+Tonk,Rājasthān,5,25,5.46,0.04,59.6,0.0,0.08
+Udaipur,Rājasthān,1,4,2.82,0.75,19.9,0.0,0.0
+Udham Singh Nagar,Uttarākhand,1,5,6.26,0.0,47.0,0.412,0.2
+Vadodara,Gujarāt,5,25,5.46,0.0,60.6,0.211,0.28
+Vizianagaram,Andhra Pradesh,8,40,3.03,0.375,15.3,0.0,0.0

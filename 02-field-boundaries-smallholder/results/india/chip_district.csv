@@ -1,0 +1,2003 @@
+aoi_id,district,state,split
+g2_0000,Jodhpur,Rājasthān,test
+g2_0001,Shivpuri,Madhya Pradesh,val
+g2_0002,Alwar,Rājasthān,test
+g2_0003,Sitapur,Uttar Pradesh,val
+g0_0004,Amravati,Mahārāshtra,val
+g2_0005,Firozpur,Punjab,train
+g2_0006,Rewa,Madhya Pradesh,test
+g2_0007,Alwar,Rājasthān,test
+g2_0008,Pali,Rājasthān,val
+g2_0009,Bahraich,Uttar Pradesh,train
+g2_0010,Tonk,Rājasthān,test
+g2_0011,Hanumangarh,Rājasthān,test
+g0_0012,Latur,Mahārāshtra,train
+g2_0013,Nagaur,Rājasthān,test
+g0_0014,Jalna,Mahārāshtra,train
+g2_0015,Sonipat,Haryāna,train
+g2_0016,Sagar,Madhya Pradesh,val
+g2_0017,Baran,Rājasthān,test
+g2_0018,Jaipur,Rājasthān,test
+g0_0019,Chitradurga,Karnātaka,train
+g3_0020,Khunti,Jhārkhand,test
+g0_0021,Davanagere,Karnātaka,train
+g2_0022,Panch Mahals,Gujarāt,test
+g2_0023,Balrampur,Uttar Pradesh,train
+g2_0024,Shahjahanpur,Uttar Pradesh,val
+g0_0025,Nanded,Mahārāshtra,train
+g0_0026,Aurangabad,Mahārāshtra,train
+g0_0027,Ramanagara,Karnātaka,val
+g2_0028,Rae Bareli,Uttar Pradesh,train
+g2_0029,Firozabad,Uttar Pradesh,val
+g0_0030,Chittoor,Andhra Pradesh,test
+g1_0031,Dhenkanal,Odisha,train
+g0_0032,Gulbarga,Karnātaka,train
+g0_0033,Ahmadnagar,Mahārāshtra,train
+g0_0034,Bagalkot,Karnātaka,train
+g2_0035,Udaipur,Rājasthān,train
+g2_0036,Shivpuri,Madhya Pradesh,val
+g2_0037,Patan,Gujarāt,train
+g2_0038,Kanpur Nagar,Uttar Pradesh,train
+g0_0039,Nalgonda,Telangāna,train
+g3_0040,South Twenty Four Parganas,West Bengal,train
+g2_0041,Jalor,Rājasthān,val
+g2_0042,Gurgaon,Haryāna,train
+g2_0043,Ganganagar,Rājasthān,train
+g0_0044,Ahmadnagar,Mahārāshtra,train
+g2_0045,Muktsar,Punjab,train
+g1_0046,Sambalpur,Odisha,train
+g0_0047,Aurangabad,Mahārāshtra,train
+g2_0048,Jamnagar,Gujarāt,train
+g2_0049,Pilibhit,Uttar Pradesh,val
+g0_0050,Adilabad,Telangāna,train
+g1_0051,Ganjam,Odisha,train
+g0_0052,Nashik,Mahārāshtra,train
+g0_0053,Sri Potti Sriramulu Nellore,Andhra Pradesh,train
+g0_0054,Koppal,Karnātaka,train
+g0_0055,Karur,Tamil Nādu,train
+g0_0056,Yadadri Bhongiri,Telangāna,train
+g2_0057,Dhar,Madhya Pradesh,train
+g3_0058,Garhwa,Jhārkhand,val
+g0_0059,Medak,Telangāna,train
+g2_0060,Bundi,Rājasthān,test
+g2_0061,Gonda,Uttar Pradesh,train
+g2_0062,Karauli,Rājasthān,test
+g0_0063,Bemetra,Chhattīsgarh,train
+g0_0064,Bellary,Karnātaka,train
+g2_0065,Jaunpur,Uttar Pradesh,test
+g0_0066,Bagalkot,Karnātaka,train
+g0_0067,Bijapur,Karnātaka,train
+g0_0068,Kolhapur,Mahārāshtra,train
+g2_0069,Kachchh,Gujarāt,train
+g0_0070,Kodagu,Karnātaka,train
+g2_0071,Bharatpur,Rājasthān,test
+g2_0072,Kota,Rājasthān,test
+g0_0073,Ariyalur,Tamil Nādu,test
+g0_0074,Wardha,Mahārāshtra,val
+g2_0075,Jaipur,Rājasthān,test
+g3_0076,Balrampur,Uttar Pradesh,val
+g2_0077,Sirsa,Haryāna,test
+g2_0078,Bara Banki,Uttar Pradesh,train
+g3_0079,Gumla,Jhārkhand,test
+g2_0080,Ajmer,Rājasthān,train
+g3_0081,Sundargarh,Odisha,train
+g2_0082,Kanshiram Nagar,Uttar Pradesh,train
+g0_0083,Yavatmal,Mahārāshtra,train
+g1_0084,Sundargarh,Odisha,train
+g0_0085,Thiruvarur,Tamil Nādu,train
+g2_0086,Bhilwara,Rājasthān,train
+g2_0087,Sirsa,Haryāna,train
+g0_0088,Bagalkot,Karnātaka,train
+g0_0089,Jogulamba,Telangāna,train
+g0_0090,Krishnagiri,Tamil Nādu,train
+g0_0091,Nabarangapur,Odisha,test
+g2_0092,Bhilwara,Rājasthān,train
+g3_0093,Bankura,West Bengal,train
+g1_0094,Debagarh,Odisha,train
+g1_0095,Srikakulam,Andhra Pradesh,train
+g3_0096,Buxar,Bihār,test
+g0_0097,Belgaum,Karnātaka,train
+g2_0098,Jodhpur,Rājasthān,test
+g2_0099,Firozabad,Uttar Pradesh,val
+g0_0100,Pune,Mahārāshtra,train
+g2_0101,Ganganagar,Rājasthān,test
+g0_0102,Bid,Mahārāshtra,train
+g2_0103,Sirohi,Rājasthān,val
+g0_0104,Krishnagiri,Tamil Nādu,train
+g2_0105,Anand,Gujarāt,test
+g0_0106,Nandurbar,Mahārāshtra,train
+g0_0107,Amreli,Gujarāt,train
+g0_0108,Parbhani,Mahārāshtra,train
+g3_0109,Nawada,Bihār,val
+g0_0110,Kadapa(YSR),Andhra Pradesh,train
+g0_0111,Anantapur,Andhra Pradesh,val
+g2_0112,Pratapgarh,Uttar Pradesh,test
+g2_0113,Etawah,Uttar Pradesh,val
+g0_0114,Rajnandgaon,Chhattīsgarh,train
+g2_0115,Jodhpur,Rājasthān,test
+g3_0116,Deoghar,Jhārkhand,train
+g0_0117,Sri Potti Sriramulu Nellore,Andhra Pradesh,train
+g2_0118,Kanpur Nagar,Uttar Pradesh,train
+g3_0119,Pashchimi Singhbhum,Jhārkhand,test
+g0_0120,Bid,Mahārāshtra,train
+g0_0121,Khammam,Telangāna,train
+g0_0122,Jalna,Mahārāshtra,train
+g0_0123,Wardha,Mahārāshtra,val
+g1_0124,Anugul,Odisha,train
+g3_0125,Siwan,Bihār,val
+g0_0126,Nanded,Mahārāshtra,train
+g0_0127,Thoothukkudi,Tamil Nādu,none
+g2_0128,Barmer,Rājasthān,val
+g2_0129,Dhar,Madhya Pradesh,train
+g0_0130,Betul,Madhya Pradesh,train
+g3_0131,Jamtara,Jhārkhand,train
+g2_0132,Sikar,Rājasthān,train
+g2_0133,Muktsar,Punjab,train
+g2_0134,Tonk,Rājasthān,test
+g2_0135,Hanumangarh,Rājasthān,test
+g3_0136,Purba Medinipur,West Bengal,train
+g2_0137,Jamnagar,Gujarāt,test
+g2_0138,Rohtak,Haryāna,val
+g2_0139,Pilibhit,Uttar Pradesh,test
+g0_0140,Solapur,Mahārāshtra,test
+g3_0141,South Tripura,Tripura,train
+g1_0142,Srikakulam,Andhra Pradesh,train
+g2_0143,Ahmadabad,Gujarāt,test
+g3_0144,Pakur,Jhārkhand,train
+g0_0145,Jalgaon,Mahārāshtra,train
+g3_0146,South Twenty Four Parganas,West Bengal,train
+g0_0147,Jalgaon,Mahārāshtra,train
+g3_0148,Samastipur,Bihār,val
+g2_0149,Ahmadabad,Gujarāt,test
+g2_0150,Kabeerdham,Chhattīsgarh,train
+g2_0151,Kheri,Uttar Pradesh,val
+g2_0152,Hamirpur,Uttar Pradesh,train
+g0_0153,Mayiladuthurai,Tamil Nādu,train
+g2_0154,Kheri,Uttar Pradesh,val
+g3_0155,Jhargram,West Bengal,train
+g0_0156,Gadchiroli,Mahārāshtra,train
+g3_0157,North Twenty Four Parganas,West Bengal,train
+g3_0158,Palamu,Jhārkhand,test
+g0_0159,Guntur,Andhra Pradesh,test
+g2_0160,Jodhpur,Rājasthān,train
+g2_0161,Jaisalmer,Rājasthān,val
+g2_0162,Shahjahanpur,Uttar Pradesh,val
+g0_0163,Pune,Mahārāshtra,val
+g2_0164,Pali,Rājasthān,val
+g2_0165,Anand,Gujarāt,test
+g2_0166,Jyotiba Phule Nagar,Uttar Pradesh,test
+g0_0167,Ahmadnagar,Mahārāshtra,train
+g0_0168,Khammam,Telangāna,train
+g2_0169,Bhind,Madhya Pradesh,val
+g0_0170,Malkangiri,Odisha,train
+g2_0171,Bikaner,Rājasthān,train
+g2_0172,Hardoi,Uttar Pradesh,val
+g0_0173,Sangli,Mahārāshtra,val
+g2_0174,Pali,Rājasthān,val
+g2_0175,Pratapgarh,Uttar Pradesh,train
+g0_0176,Anantapur,Andhra Pradesh,val
+g2_0177,Karnal,Haryāna,train
+g0_0178,Gulbarga,Karnātaka,train
+g2_0179,Alirajpur,Madhya Pradesh,train
+g2_0180,Rajgarh,Madhya Pradesh,train
+g2_0181,Ajmer,Rājasthān,train
+g2_0182,Kheri,Uttar Pradesh,val
+g0_0183,Jalgaon,Mahārāshtra,train
+g0_0184,Akola,Mahārāshtra,val
+g2_0185,Kheri,Uttar Pradesh,val
+g2_0186,Yamunanagar,Haryāna,train
+g2_0187,Kheda,Gujarāt,test
+g0_0188,Nashik,Mahārāshtra,train
+g2_0189,Fatehpur,Uttar Pradesh,train
+g0_0190,Haveri,Karnātaka,train
+g0_0191,Jangaon,Telangāna,train
+g0_0192,Gadag,Karnātaka,train
+g0_0193,Kondagaon,Chhattīsgarh,train
+g0_0194,Mayiladuthurai,Tamil Nādu,test
+g0_0195,Tumkur,Karnātaka,train
+g0_0196,Jalgaon,Mahārāshtra,train
+g2_0197,Aligarh,Uttar Pradesh,train
+g0_0198,Nalgonda,Telangāna,train
+g2_0199,Mainpuri,Uttar Pradesh,train
+g2_0200,Ujjain,Madhya Pradesh,train
+g3_0201,Jashpur,Chhattīsgarh,train
+g2_0202,Unnao,Uttar Pradesh,train
+g0_0203,Sangareddy,Telangāna,train
+g2_0204,Datia,Madhya Pradesh,train
+g2_0205,Baran,Rājasthān,test
+g0_0206,Kadapa(YSR),Andhra Pradesh,test
+g1_0207,Kalahandi,Odisha,train
+g0_0208,Bellary,Karnātaka,train
+g1_0209,Koraput,Odisha,test
+g0_0210,Bidar,Karnātaka,train
+g2_0211,Sitapur,Uttar Pradesh,val
+g3_0212,Bhagalpur,Bihār,train
+g0_0213,Nanded,Mahārāshtra,train
+g0_0214,Bid,Mahārāshtra,train
+g2_0215,Hanumangarh,Rājasthān,test
+g2_0216,Narsimhapur,Madhya Pradesh,train
+g2_0217,Khargone (West Nimar),Madhya Pradesh,train
+g0_0218,Nalgonda,Telangāna,train
+g1_0219,Debagarh,Odisha,train
+g0_0220,Latur,Mahārāshtra,train
+g3_0221,Hugli,West Bengal,train
+g2_0222,Pali,Rājasthān,val
+g2_0223,Vidisha,Madhya Pradesh,val
+g3_0224,Udalguri,Assam,train
+g0_0225,Kancheepuram,Tamil Nādu,train
+g3_0226,Jamui,Bihār,train
+g2_0227,Sabar Kantha,Gujarāt,train
+g3_0228,Sonitpur,Assam,train
+g2_0229,Jhalawar,Rājasthān,train
+g3_0230,Koch Bihar,West Bengal,train
+g0_0231,Tumkur,Karnātaka,val
+g2_0232,Bhopal,Madhya Pradesh,val
+g0_0233,Nagapattinam,Tamil Nādu,train
+g2_0234,Rajouri,Jammu and Kashmīr,train
+g2_0235,Samba,Jammu and Kashmīr,train
+g2_0236,Kannauj,Uttar Pradesh,train
+g2_0237,Rewa,Madhya Pradesh,test
+g0_0238,Belgaum,Karnātaka,train
+g2_0239,Bijnor,Uttar Pradesh,test
+g3_0240,Bhagalpur,Bihār,train
+g0_0241,Koppal,Karnātaka,train
+g2_0242,Datia,Madhya Pradesh,train
+g2_0243,Tonk,Rājasthān,test
+g0_0244,Chikkaballapura,Karnātaka,val
+g3_0245,Dumka,Jhārkhand,train
+g2_0246,Kachchh,Gujarāt,train
+g0_0247,Amreli,Gujarāt,train
+g2_0248,Unnao,Uttar Pradesh,train
+g2_0249,Rajsamand,Rājasthān,train
+g0_0250,Ahmadnagar,Mahārāshtra,train
+g2_0251,Moga,Punjab,train
+g0_0252,Prakasam,Andhra Pradesh,val
+g0_0253,Adilabad,Telangāna,val
+g2_0254,Ambedkar Nagar,Uttar Pradesh,train
+g1_0255,Vizianagaram,Andhra Pradesh,test
+g0_0256,Yavatmal,Mahārāshtra,val
+g0_0257,Coimbatore,Tamil Nādu,train
+g0_0258,Guntur,Andhra Pradesh,test
+g0_0259,Solapur,Mahārāshtra,test
+g2_0260,Banas Kantha,Gujarāt,none
+g0_0261,Jangaon,Telangāna,train
+g2_0262,Tikamgarh,Madhya Pradesh,train
+g1_0263,Koraput,Odisha,test
+g1_0264,Vizianagaram,Andhra Pradesh,test
+g0_0265,Buldana,Mahārāshtra,train
+g0_0266,Amravati,Mahārāshtra,train
+g2_0267,Barmer,Rājasthān,val
+g2_0268,Kurukshetra,Haryāna,train
+g3_0269,South Salmara-Mankachar,Assam,train
+g0_0270,Nandurbar,Mahārāshtra,train
+g3_0271,Ramgarh,Jhārkhand,train
+g2_0272,Rewari,Haryāna,test
+g2_0273,Rudraprayag,Uttarākhand,train
+g0_0274,Raipur,Chhattīsgarh,train
+g2_0275,Sehore,Madhya Pradesh,test
+g2_0276,Nagaur,Rājasthān,test
+g0_0277,Kallakurichi,Tamil Nādu,val
+g2_0278,Muktsar,Punjab,train
+g2_0279,Koriya,Chhattīsgarh,train
+g2_0280,Jind,Haryāna,val
+g0_0281,Karimnagar,Telangāna,train
+g2_0282,Sawai Madhopur,Rājasthān,test
+g0_0283,Mysore,Karnātaka,train
+g3_0284,Bhojpur,Bihār,test
+g0_0285,Chandrapur,Mahārāshtra,val
+g2_0286,Jamnagar,Gujarāt,train
+g0_0287,Tumkur,Karnātaka,val
+g2_0288,Shahjahanpur,Uttar Pradesh,val
+g0_0289,Davanagere,Karnātaka,train
+g0_0290,Tumkur,Karnātaka,train
+g2_0291,Jodhpur,Rājasthān,test
+g3_0292,Baleshwar,Odisha,train
+g2_0293,Vidisha,Madhya Pradesh,val
+g0_0294,Anantapur,Andhra Pradesh,train
+g3_0295,Murshidabad,West Bengal,train
+g2_0296,Pali,Rājasthān,val
+g0_0297,Bid,Mahārāshtra,train
+g2_0298,Rewa,Madhya Pradesh,test
+g2_0299,Saharanpur,Uttar Pradesh,train
+g0_0300,Jalgaon,Mahārāshtra,train
+g3_0301,Kushinagar,Uttar Pradesh,val
+g0_0302,Chikkaballapura,Karnātaka,val
+g0_0303,Siddipet,Telangāna,train
+g3_0304,Dibrugarh,Assam,train
+g0_0305,Raichur,Karnātaka,train
+g0_0306,Prakasam,Andhra Pradesh,train
+g2_0307,Ratlam,Madhya Pradesh,test
+g0_0308,Ahmadnagar,Mahārāshtra,train
+g2_0309,Bhilwara,Rājasthān,train
+g0_0310,Kurnool,Andhra Pradesh,train
+g2_0311,Jaisalmer,Rājasthān,train
+g3_0312,Simdega,Jhārkhand,test
+g0_0313,Nagpur,Mahārāshtra,train
+g2_0314,Vadodara,Gujarāt,test
+g2_0315,Jyotiba Phule Nagar,Uttar Pradesh,test
+g2_0316,Jalor,Rājasthān,val
+g2_0317,Kanpur Dehat,Uttar Pradesh,train
+g0_0318,Suryapet,Telangāna,train
+g0_0319,Yavatmal,Mahārāshtra,val
+g0_0320,Kallakurichi,Tamil Nādu,val
+g3_0321,Ballia,Uttar Pradesh,train
+g0_0322,Palakkad,Kerala,train
+g3_0323,Ranchi,Jhārkhand,train
+g2_0324,Barmer,Rājasthān,val
+g2_0325,Farrukhabad,Uttar Pradesh,train
+g2_0326,Aravali,Gujarāt,test
+g2_0327,Saharanpur,Uttar Pradesh,train
+g0_0328,Raichur,Karnātaka,train
+g3_0329,Bongaigaon,Assam,train
+g0_0330,Pune,Mahārāshtra,train
+g1_0331,Baudh,Odisha,train
+g2_0332,Saharanpur,Uttar Pradesh,train
+g0_0333,Nalgonda,Telangāna,train
+g0_0334,Amreli,Gujarāt,train
+g2_0335,Bundi,Rājasthān,test
+g2_0336,Bhiwani,Haryāna,test
+g3_0337,Raigarh,Mahārāshtra,train
+g2_0338,Agra,Uttar Pradesh,test
+g2_0339,Kurukshetra,Haryāna,train
+g2_0340,Karauli,Rājasthān,test
+g0_0341,Rangareddy,Telangāna,train
+g0_0342,Hassan,Karnātaka,train
+g0_0343,Nashik,Mahārāshtra,train
+g2_0344,Chhatarpur,Madhya Pradesh,test
+g2_0345,Banswara,Rājasthān,test
+g3_0346,Ghazipur,Uttar Pradesh,train
+g2_0347,Katni,Madhya Pradesh,train
+g2_0348,Rewari,Haryāna,test
+g0_0349,Palghar,Mahārāshtra,train
+g0_0350,Solapur,Mahārāshtra,train
+g0_0351,Erode,Tamil Nādu,train
+g2_0352,Ganganagar,Rājasthān,train
+g0_0353,Siddipet,Telangāna,train
+g0_0354,Rajkot,Gujarāt,train
+g0_0355,Gadchiroli,Mahārāshtra,train
+g0_0356,Amreli,Gujarāt,train
+g2_0357,Sabar Kantha,Gujarāt,train
+g2_0358,Harda,Madhya Pradesh,test
+g0_0359,Buldana,Mahārāshtra,train
+g3_0360,Alipurduar,West Bengal,train
+g0_0361,Amreli,Gujarāt,train
+g3_0362,Mau,Uttar Pradesh,train
+g2_0363,Banas Kantha,Gujarāt,train
+g0_0364,Nalgonda,Telangāna,train
+g0_0365,Nabarangapur,Odisha,train
+g2_0366,Bhind,Madhya Pradesh,val
+g2_0367,Singrauli,Madhya Pradesh,test
+g2_0368,Pratapgarh,Uttar Pradesh,test
+g3_0369,Murshidabad,West Bengal,train
+g0_0370,Janjgir-Champa,Chhattīsgarh,train
+g2_0371,Chhatarpur,Madhya Pradesh,val
+g3_0372,Birbhum,West Bengal,train
+g2_0373,Jhunjhunun,Rājasthān,test
+g0_0374,Gulbarga,Karnātaka,train
+g2_0375,Bilaspur,Chhattīsgarh,train
+g0_0376,Jagtial,Telangāna,train
+g2_0377,Katni,Madhya Pradesh,train
+g2_0378,Saharanpur,Uttar Pradesh,train
+g0_0379,Bagalkot,Karnātaka,train
+g3_0380,Garhwa,Jhārkhand,val
+g2_0381,Nagaur,Rājasthān,train
+g0_0382,Ahmadnagar,Mahārāshtra,train
+g2_0383,Budaun,Uttar Pradesh,train
+g0_0384,Chikmagalur,Karnātaka,train
+g2_0385,Nainital,Uttarākhand,test
+g2_0386,Mahendragarh,Haryāna,test
+g3_0387,Mirzapur,Uttar Pradesh,train
+g2_0388,Banswara,Rājasthān,test
+g0_0389,Haveri,Karnātaka,train
+g2_0390,Jamnagar,Gujarāt,train
+g0_0391,Chitradurga,Karnātaka,train
+g2_0392,Faizabad,Uttar Pradesh,train
+g2_0393,Lalitpur,Uttar Pradesh,val
+g0_0394,Sangli,Mahārāshtra,val
+g0_0395,Palakkad,Kerala,train
+g2_0396,Mahisagar,Gujarāt,train
+g3_0397,Khunti,Jhārkhand,test
+g3_0398,Bankura,West Bengal,train
+g2_0399,Ahmadabad,Gujarāt,test
+g2_0400,Bundi,Rājasthān,test
+g0_0401,Anantapur,Andhra Pradesh,none
+g0_0402,Visakhapatnam,Andhra Pradesh,train
+g3_0403,Jehanabad,Bihār,test
+g2_0404,Balrampur,Uttar Pradesh,train
+g3_0405,Nalbari,Assam,train
+g2_0406,Bijnor,Uttar Pradesh,test
+g3_0407,Balrampur,Uttar Pradesh,val
+g0_0408,Tapi,Gujarāt,train
+g0_0409,Chitradurga,Karnātaka,train
+g2_0410,Vadodara,Gujarāt,test
+g0_0411,Rangareddy,Telangāna,train
+g2_0412,Khandwa (East Nimar),Madhya Pradesh,train
+g3_0413,Ghazipur,Uttar Pradesh,train
+g0_0414,Tumkur,Karnātaka,train
+g2_0415,Nagaur,Rājasthān,train
+g2_0416,Bareilly,Uttar Pradesh,train
+g3_0417,Paschim Medinipur,West Bengal,train
+g2_0418,Ratlam,Madhya Pradesh,test
+g2_0419,Jabalpur,Madhya Pradesh,train
+g2_0420,Ghaziabad,Uttar Pradesh,train
+g0_0421,Kondagaon,Chhattīsgarh,train
+g2_0422,Farrukhabad,Uttar Pradesh,train
+g3_0423,Gorakhpur,Uttar Pradesh,train
+g2_0424,Patiala,Punjab,val
+g3_0425,Balrampur,Uttar Pradesh,val
+g0_0426,Chittoor,Andhra Pradesh,test
+g2_0427,Bhavnagar,Gujarāt,train
+g2_0428,Hoshiarpur,Punjab,train
+g2_0429,Allahabad,Uttar Pradesh,test
+g1_0430,Ganjam,Odisha,train
+g0_0431,Belgaum,Karnātaka,train
+g2_0432,Churu,Rājasthān,train
+g0_0433,Solapur,Mahārāshtra,val
+g2_0434,Gonda,Uttar Pradesh,train
+g2_0435,Ajmer,Rājasthān,train
+g0_0436,Seoni,Madhya Pradesh,train
+g2_0437,Vidisha,Madhya Pradesh,val
+g2_0438,Bara Banki,Uttar Pradesh,train
+g2_0439,Koriya,Chhattīsgarh,test
+g2_0440,Bhind,Madhya Pradesh,val
+g0_0441,Jalgaon,Mahārāshtra,train
+g1_0442,Jajapur,Odisha,train
+g2_0443,Agra,Uttar Pradesh,train
+g2_0444,Ludhiana,Punjab,val
+g3_0445,Barddhaman,West Bengal,train
+g2_0446,Mahoba,Uttar Pradesh,train
+g2_0447,Udhampur,Jammu and Kashmīr,train
+g2_0448,Kachchh,Gujarāt,train
+g0_0449,Perambalur,Tamil Nādu,test
+g0_0450,Hassan,Karnātaka,train
+g2_0451,Jaipur,Rājasthān,train
+g3_0452,Bankura,West Bengal,train
+g0_0453,Satara,Mahārāshtra,val
+g2_0454,Jodhpur,Rājasthān,test
+g3_0455,Chirang,Assam,train
+g0_0456,Amravati,Mahārāshtra,val
+g0_0457,Yadgir,Karnātaka,train
+g2_0458,Jhunjhunun,Rājasthān,test
+g0_0459,Kadapa(YSR),Andhra Pradesh,train
+g2_0460,Nagaur,Rājasthān,train
+g2_0461,Saharanpur,Uttar Pradesh,train
+g0_0462,Nashik,Mahārāshtra,train
+g2_0463,Jaipur,Rājasthān,test
+g3_0464,Mirzapur,Uttar Pradesh,train
+g2_0465,Mansa,Punjab,val
+g0_0466,Khammam,Telangāna,train
+g3_0467,Deoria,Uttar Pradesh,train
+g2_0468,Anuppur,Madhya Pradesh,train
+g0_0469,Kurnool,Andhra Pradesh,train
+g2_0470,Bundi,Rājasthān,test
+g0_0471,Ahmadnagar,Mahārāshtra,train
+g2_0472,Hisar,Haryāna,val
+g3_0473,Sivasagar,Assam,train
+g1_0474,Vizianagaram,Andhra Pradesh,test
+g2_0475,Harda,Madhya Pradesh,test
+g0_0476,Solapur,Mahārāshtra,test
+g3_0477,Maldah,West Bengal,train
+g3_0478,Paschim Medinipur,West Bengal,train
+g2_0479,Rajsamand,Rājasthān,train
+g0_0480,Mancherial,Telangāna,train
+g2_0481,Banas Kantha,Gujarāt,train
+g1_0482,Rayagada,Odisha,test
+g2_0483,Barmer,Rājasthān,val
+g2_0484,Jhabua,Madhya Pradesh,train
+g0_0485,Barwani,Madhya Pradesh,train
+g0_0486,Kolhapur,Mahārāshtra,train
+g2_0487,Jammu,Jammu and Kashmīr,train
+g0_0488,Nandurbar,Mahārāshtra,train
+g3_0489,Jashpur,Chhattīsgarh,train
+g0_0490,Amreli,Gujarāt,train
+g0_0491,Koppal,Karnātaka,train
+g3_0492,Ranchi,Jhārkhand,test
+g2_0493,Banda,Uttar Pradesh,test
+g0_0494,Chhindwara,Madhya Pradesh,train
+g1_0495,Kendrapara,Odisha,train
+g0_0496,Kurnool,Andhra Pradesh,train
+g2_0497,Rajgarh,Madhya Pradesh,val
+g2_0498,Bikaner,Rājasthān,train
+g2_0499,Indore,Madhya Pradesh,train
+g0_0500,Bhandara,Mahārāshtra,train
+g2_0501,Gaurella Pendra Marwahi,Chhattīsgarh,train
+g0_0502,Ahmadnagar,Mahārāshtra,train
+g3_0503,Lakhimpur,Assam,train
+g3_0504,Purba Champaran,Bihār,val
+g0_0505,Sangli,Mahārāshtra,val
+g2_0506,Baran,Rājasthān,test
+g0_0507,Rangareddy,Telangāna,train
+g2_0508,Ujjain,Madhya Pradesh,train
+g2_0509,Mandsaur,Madhya Pradesh,test
+g3_0510,Deoria,Uttar Pradesh,train
+g3_0511,Saraikela-Kharsawan,Jhārkhand,train
+g0_0512,Raichur,Karnātaka,train
+g0_0513,Mancherial,Telangāna,train
+g2_0514,Patan,Gujarāt,train
+g0_0515,Amravati,Mahārāshtra,val
+g0_0516,Koraput,Odisha,test
+g2_0517,Sabar Kantha,Gujarāt,test
+g2_0518,Churu,Rājasthān,test
+g3_0519,Ranchi,Jhārkhand,test
+g0_0520,Nalgonda,Telangāna,train
+g2_0521,Hanumangarh,Rājasthān,test
+g2_0522,Bahraich,Uttar Pradesh,train
+g2_0523,Panch Mahals,Gujarāt,test
+g2_0524,Bhind,Madhya Pradesh,val
+g2_0525,Amethi,Uttar Pradesh,train
+g0_0526,Hingoli,Mahārāshtra,train
+g0_0527,Narmada,Gujarāt,train
+g0_0528,Nanded,Mahārāshtra,train
+g2_0529,Jhunjhunun,Rājasthān,train
+g1_0530,Mahasamund,Chhattīsgarh,test
+g2_0531,Bikaner,Rājasthān,train
+g2_0532,Seoni,Madhya Pradesh,train
+g0_0533,Amravati,Mahārāshtra,val
+g3_0534,Dhubri,Assam,train
+g0_0535,Burhanpur,Madhya Pradesh,train
+g0_0536,Ramanagara,Karnātaka,train
+g3_0537,Katihar,Bihār,train
+g2_0538,Sirohi,Rājasthān,val
+g0_0539,Yavatmal,Mahārāshtra,val
+g0_0540,Krishnagiri,Tamil Nādu,train
+g2_0541,Palwal,Haryāna,train
+g0_0542,Nashik,Mahārāshtra,train
+g2_0543,Kanpur Dehat,Uttar Pradesh,val
+g3_0544,Dhanbad,Jhārkhand,train
+g2_0545,Hardoi,Uttar Pradesh,train
+g2_0546,Bhilwara,Rājasthān,train
+g0_0547,Mandya,Karnātaka,train
+g2_0548,Guna,Madhya Pradesh,val
+g0_0549,Narmada,Gujarāt,train
+g0_0550,Nalgonda,Telangāna,train
+g3_0551,Bhojpur,Bihār,test
+g3_0552,Giridih,Jhārkhand,train
+g2_0553,Tarn Taran,Punjab,train
+g2_0554,Palwal,Haryāna,train
+g0_0555,Akola,Mahārāshtra,val
+g2_0556,Chitrakoot,Uttar Pradesh,test
+g3_0557,Darjiling,West Bengal,train
+g3_0558,Nalanda,Bihār,val
+g2_0559,Harda,Madhya Pradesh,test
+g0_0560,Solapur,Mahārāshtra,val
+g2_0561,Budaun,Uttar Pradesh,train
+g0_0562,Amravati,Mahārāshtra,val
+g2_0563,Leh(Ladakh),Ladākh,test
+g3_0564,Mayurbhanj,Odisha,train
+g2_0565,Mahesana,Gujarāt,train
+g0_0566,Namakkal,Tamil Nādu,test
+g2_0567,Mahoba,Uttar Pradesh,test
+g1_0568,Ganjam,Odisha,train
+g2_0569,Hisar,Haryāna,val
+g1_0570,Kalahandi,Odisha,train
+g1_0571,Cuttack,Odisha,train
+g0_0572,Peddapalli,Telangāna,train
+g3_0573,Khagaria,Bihār,val
+g2_0574,Dohad,Gujarāt,train
+g2_0575,Harda,Madhya Pradesh,test
+g2_0576,Rajkot,Gujarāt,test
+g2_0577,Seoni,Madhya Pradesh,train
+g0_0578,Chhindwara,Madhya Pradesh,train
+g2_0579,Hanumangarh,Rājasthān,val
+g0_0580,Buldana,Mahārāshtra,train
+g3_0581,Ghazipur,Uttar Pradesh,train
+g3_0582,Purbi Singhbhum,Jhārkhand,train
+g3_0583,Jehanabad,Bihār,test
+g3_0584,Supaul,Bihār,train
+g0_0585,Chitradurga,Karnātaka,train
+g0_0586,Bijapur,Karnātaka,test
+g0_0587,Mancherial,Telangāna,train
+g2_0588,Jodhpur,Rājasthān,test
+g1_0589,Vizianagaram,Andhra Pradesh,test
+g0_0590,Rajkot,Gujarāt,test
+g2_0591,Jhalawar,Rājasthān,train
+g2_0592,Bhiwani,Haryāna,val
+g0_0593,Bid,Mahārāshtra,train
+g2_0594,Vadodara,Gujarāt,test
+g0_0595,Dhule,Mahārāshtra,train
+g0_0596,Kondagaon,Chhattīsgarh,train
+g0_0597,Jalna,Mahārāshtra,train
+g0_0598,Nanded,Mahārāshtra,train
+g3_0599,Sonbhadra,Uttar Pradesh,val
+g0_0600,Chitradurga,Karnātaka,val
+g2_0601,Nagaur,Rājasthān,train
+g2_0602,Tonk,Rājasthān,train
+g2_0603,Bikaner,Rājasthān,train
+g3_0604,Lakhisarai,Bihār,val
+g3_0605,Cachar,Assam,train
+g0_0606,Uttar Bastar Kanker,Chhattīsgarh,train
+g3_0607,Dhanbad,Jhārkhand,train
+g2_0608,Kota,Rājasthān,test
+g2_0609,Gaurella Pendra Marwahi,Chhattīsgarh,train
+g3_0610,Latehar,Jhārkhand,test
+g2_0611,Gandhinagar,Gujarāt,test
+g2_0612,Kachchh,Gujarāt,train
+g0_0613,Solapur,Mahārāshtra,train
+g3_0614,Munger,Bihār,val
+g3_0615,Korba,Chhattīsgarh,train
+g2_0616,Dindori,Madhya Pradesh,train
+g2_0617,Anand,Gujarāt,test
+g2_0618,Balaghat,Madhya Pradesh,train
+g1_0619,Debagarh,Odisha,train
+g0_0620,Amravati,Mahārāshtra,val
+g1_0621,Baudh,Odisha,train
+g3_0622,Banka,Bihār,train
+g1_0623,Kalahandi,Odisha,train
+g1_0624,Kalahandi,Odisha,train
+g0_0625,Uttar Bastar Kanker,Chhattīsgarh,train
+g0_0626,Kurnool,Andhra Pradesh,train
+g0_0627,Nabarangapur,Odisha,train
+g0_0628,Bastar,Chhattīsgarh,test
+g0_0629,Malkangiri,Odisha,test
+g1_0630,Visakhapatnam,Andhra Pradesh,train
+g2_0631,Rewa,Madhya Pradesh,test
+g3_0632,Sipahijula,Tripura,train
+g0_0633,Sangli,Mahārāshtra,test
+g2_0634,Barmer,Rājasthān,val
+g0_0635,Vikarabad,Telangāna,train
+g2_0636,Barmer,Rājasthān,val
+g0_0637,Amravati,Mahārāshtra,val
+g2_0638,Bikaner,Rājasthān,val
+g0_0639,Akola,Mahārāshtra,val
+g2_0640,Bundi,Rājasthān,test
+g3_0641,Lohit,Arunāchal Pradesh,train
+g2_0642,Jaisalmer,Rājasthān,val
+g2_0643,Jaisalmer,Rājasthān,val
+g2_0644,Jaisalmer,Rājasthān,train
+g3_0645,Tinsukia,Assam,train
+g0_0646,East Godavari,Andhra Pradesh,train
+g3_0647,Papum Pare,Arunāchal Pradesh,train
+g2_0648,Jodhpur,Rājasthān,test
+g2_0649,Jodhpur,Rājasthān,train
+g0_0650,Guntur,Andhra Pradesh,test
+g2_0651,Pratapgarh,Uttar Pradesh,train
+g2_0652,Farrukhabad,Uttar Pradesh,train
+g2_0653,Bhilwara,Rājasthān,train
+g2_0654,Jaisalmer,Rājasthān,train
+g2_0655,Aravali,Gujarāt,train
+g3_0656,Lower Dibang Valley,Arunāchal Pradesh,none
+g2_0657,Bhiwani,Haryāna,val
+g3_0658,Barpeta,Assam,train
+g0_0659,Jalgaon,Mahārāshtra,train
+g3_0660,Jashpur,Chhattīsgarh,train
+g2_0661,Barmer,Rājasthān,val
+g2_0662,Jalor,Rājasthān,val
+g0_0663,Hassan,Karnātaka,train
+g3_0664,Sonbhadra,Uttar Pradesh,val
+g0_0665,Anantapur,Andhra Pradesh,train
+g3_0666,Sitamarhi,Bihār,val
+g2_0667,Rewa,Madhya Pradesh,test
+g0_0668,Gulbarga,Karnātaka,train
+g2_0669,Bikaner,Rājasthān,train
+g2_0670,Jabalpur,Madhya Pradesh,train
+g2_0671,Churu,Rājasthān,test
+g3_0672,Palamu,Jhārkhand,test
+g2_0673,Faridkot,Punjab,train
+g2_0674,Ludhiana,Punjab,val
+g0_0675,Khargone (West Nimar),Madhya Pradesh,train
+g3_0676,Chandauli,Uttar Pradesh,train
+g0_0677,Ahmadnagar,Mahārāshtra,train
+g2_0678,Sirohi,Rājasthān,val
+g0_0679,Kurnool,Andhra Pradesh,train
+g0_0680,Dharwad,Karnātaka,train
+g0_0681,Buldana,Mahārāshtra,train
+g0_0682,Washim,Mahārāshtra,train
+g3_0683,Birbhum,West Bengal,train
+g0_0684,Ahmadnagar,Mahārāshtra,train
+g1_0685,Kendujhar,Odisha,train
+g3_0686,Supaul,Bihār,train
+g0_0687,Mandya,Karnātaka,val
+g3_0688,Dakshin Dinajpur,West Bengal,test
+g3_0689,Banka,Bihār,train
+g2_0690,Katni,Madhya Pradesh,train
+g0_0691,Bhavnagar,Gujarāt,none
+g3_0692,Nagaon,Assam,train
+g3_0693,Sitamarhi,Bihār,train
+g2_0694,Harda,Madhya Pradesh,test
+g2_0695,Kachchh,Gujarāt,val
+g0_0696,Chittoor,Andhra Pradesh,test
+g3_0697,Nawada,Bihār,val
+g2_0698,Jodhpur,Rājasthān,test
+g2_0699,Mainpuri,Uttar Pradesh,val
+g1_0700,Baleshwar,Odisha,train
+g2_0701,Barmer,Rājasthān,train
+g2_0702,Dhaulpur,Rājasthān,test
+g2_0703,Chhindwara,Madhya Pradesh,train
+g0_0704,Davanagere,Karnātaka,train
+g0_0705,Anantapur,Andhra Pradesh,test
+g0_0706,Aurangabad,Mahārāshtra,train
+g0_0707,Khandwa (East Nimar),Madhya Pradesh,val
+g0_0708,Latur,Mahārāshtra,train
+g2_0709,Seoni,Madhya Pradesh,train
+g0_0710,Krishna,Andhra Pradesh,test
+g2_0711,Ludhiana,Punjab,val
+g2_0712,Chittaurgarh,Rājasthān,train
+g3_0713,Gaya,Bihār,test
+g2_0714,Hoshangabad,Madhya Pradesh,test
+g0_0715,Solapur,Mahārāshtra,train
+g2_0716,Kanpur Nagar,Uttar Pradesh,train
+g0_0717,Tapi,Gujarāt,train
+g2_0718,Gurdaspur,Punjab,train
+g0_0719,Buldana,Mahārāshtra,train
+g2_0720,Jhalawar,Rājasthān,train
+g0_0721,Nandurbar,Mahārāshtra,train
+g3_0722,Korba,Chhattīsgarh,train
+g0_0723,Buldana,Mahārāshtra,train
+g0_0724,Thiruvarur,Tamil Nādu,test
+g0_0725,Cuddalore,Tamil Nādu,train
+g3_0726,Darbhanga,Bihār,train
+g2_0727,Kachchh,Gujarāt,train
+g0_0728,Yavatmal,Mahārāshtra,val
+g2_0729,Mahoba,Uttar Pradesh,test
+g1_0730,Baloda Bazar,Chhattīsgarh,test
+g0_0731,Davanagere,Karnātaka,train
+g0_0732,East Godavari,Andhra Pradesh,train
+g2_0733,Jhunjhunun,Rājasthān,test
+g0_0734,Osmanabad,Mahārāshtra,train
+g3_0735,Birbhum,West Bengal,train
+g0_0736,Tumkur,Karnātaka,val
+g0_0737,Prakasam,Andhra Pradesh,test
+g0_0738,Gondiya,Mahārāshtra,train
+g0_0739,Yavatmal,Mahārāshtra,val
+g2_0740,Mandsaur,Madhya Pradesh,train
+g3_0741,Ballia,Uttar Pradesh,test
+g2_0742,Balrampur,Uttar Pradesh,train
+g2_0743,Ajmer,Rājasthān,train
+g0_0744,Yadgir,Karnātaka,train
+g0_0745,Davanagere,Karnātaka,train
+g2_0746,Sagar,Madhya Pradesh,val
+g3_0747,South Twenty Four Parganas,West Bengal,train
+g2_0748,Chittaurgarh,Rājasthān,train
+g0_0749,Tiruvannamalai,Tamil Nādu,val
+g2_0750,Jhalawar,Rājasthān,train
+g3_0751,Banka,Bihār,train
+g0_0752,Chandrapur,Mahārāshtra,val
+g2_0753,Vidisha,Madhya Pradesh,val
+g1_0754,Ganjam,Odisha,train
+g3_0755,Nawada,Bihār,val
+g2_0756,Hamirpur,Uttar Pradesh,test
+g0_0757,Parbhani,Mahārāshtra,train
+g2_0758,Nagaur,Rājasthān,train
+g0_0759,Tirupathur,Tamil Nādu,val
+g0_0760,Pudukkottai,Tamil Nādu,val
+g3_0761,Purba Champaran,Bihār,val
+g2_0762,Shahjahanpur,Uttar Pradesh,train
+g3_0763,Sonitpur,Assam,train
+g3_0764,Janjgir-Champa,Chhattīsgarh,train
+g2_0765,Bikaner,Rājasthān,train
+g0_0766,Sangli,Mahārāshtra,val
+g0_0767,Parbhani,Mahārāshtra,train
+g0_0768,Akola,Mahārāshtra,val
+g2_0769,Jhunjhunun,Rājasthān,test
+g0_0770,Jalgaon,Mahārāshtra,train
+g0_0771,Jalgaon,Mahārāshtra,train
+g0_0772,Buldana,Mahārāshtra,train
+g0_0773,Osmanabad,Mahārāshtra,test
+g0_0774,Hassan,Karnātaka,train
+g1_0775,Balangir,Odisha,test
+g0_0776,Washim,Mahārāshtra,train
+g0_0777,Nabarangapur,Odisha,train
+g2_0778,Hapur,Uttar Pradesh,train
+g2_0779,Rae Bareli,Uttar Pradesh,train
+g3_0780,Mayurbhanj,Odisha,train
+g3_0781,Pashchimi Singhbhum,Jhārkhand,test
+g2_0782,Pratapgarh,Uttar Pradesh,test
+g3_0783,Ballia,Uttar Pradesh,test
+g2_0784,Kapurthala,Punjab,train
+g3_0785,Bankura,West Bengal,train
+g0_0786,Bijapur,Karnātaka,train
+g3_0787,Hugli,West Bengal,train
+g2_0789,Patiala,Punjab,val
+g2_0790,Jalandhar,Punjab,train
+g0_0791,Yadgir,Karnātaka,train
+g0_0792,Tiruchirappalli,Tamil Nādu,test
+g0_0793,Karur,Tamil Nādu,train
+g3_0794,Jaunpur,Uttar Pradesh,train
+g2_0795,Bhopal,Madhya Pradesh,val
+g2_0796,Agra,Uttar Pradesh,none
+g2_0797,Pali,Rājasthān,val
+g0_0798,Nashik,Mahārāshtra,train
+g0_0799,Ahmadnagar,Mahārāshtra,train
+g2_0800,Sangrur,Punjab,val
+g3_0801,Deoghar,Jhārkhand,train
+g0_0802,Suryapet,Telangāna,train
+g0_0803,Ranipet,Tamil Nādu,test
+g0_0804,Anantapur,Andhra Pradesh,val
+g1_0805,Bhadrak,Odisha,train
+g0_0806,Amravati,Mahārāshtra,val
+g0_0807,Bastar,Chhattīsgarh,test
+g0_0808,Guntur,Andhra Pradesh,test
+g0_0809,Satara,Mahārāshtra,val
+g2_0810,Mandsaur,Madhya Pradesh,test
+g2_0811,Bhiwani,Haryāna,val
+g2_0812,Sirsa,Haryāna,test
+g2_0813,Anuppur,Madhya Pradesh,train
+g1_0814,Kalahandi,Odisha,train
+g2_0815,Indore,Madhya Pradesh,train
+g0_0816,Gulbarga,Karnātaka,train
+g1_0817,Srikakulam,Andhra Pradesh,test
+g2_0818,Bundi,Rājasthān,test
+g0_0819,Kondagaon,Chhattīsgarh,train
+g2_0820,Bhopal,Madhya Pradesh,val
+g2_0821,Alwar,Rājasthān,test
+g0_0822,Rangareddy,Telangāna,train
+g0_0823,Koppal,Karnātaka,train
+g2_0824,Amritsar,Punjab,train
+g0_0825,Bellary,Karnātaka,train
+g2_0826,Sangrur,Punjab,val
+g3_0827,Purbi Singhbhum,Jhārkhand,train
+g1_0828,Visakhapatnam,Andhra Pradesh,train
+g3_0829,Azamgarh,Uttar Pradesh,train
+g2_0830,Bhiwani,Haryāna,val
+g2_0831,Hanumangarh,Rājasthān,test
+g2_0832,Ujjain,Madhya Pradesh,train
+g0_0833,Chitradurga,Karnātaka,train
+g0_0834,Washim,Mahārāshtra,train
+g0_0835,Bijapur,Karnātaka,train
+g3_0836,Madhubani,Bihār,train
+g2_0837,Morena,Madhya Pradesh,val
+g0_0838,Betul,Madhya Pradesh,val
+g3_0839,Puruliya,West Bengal,train
+g1_0840,Jagatsinghapur,Odisha,train
+g0_0841,Dhule,Mahārāshtra,train
+g3_0842,Mirzapur,Uttar Pradesh,train
+g3_0843,Garhwa,Jhārkhand,val
+g2_0844,Jalandhar,Punjab,train
+g0_0845,Kurnool,Andhra Pradesh,train
+g0_0846,Nalgonda,Telangāna,train
+g2_0847,Chittaurgarh,Rājasthān,test
+g2_0848,Chhatarpur,Madhya Pradesh,train
+g2_0849,Alwar,Rājasthān,train
+g2_0850,Surendranagar,Gujarāt,test
+g2_0851,Alwar,Rājasthān,test
+g3_0852,Barddhaman,West Bengal,train
+g0_0853,Tiruvannamalai,Tamil Nādu,train
+g0_0854,Aurangabad,Mahārāshtra,train
+g2_0855,Gwalior,Madhya Pradesh,test
+g0_0856,Buldana,Mahārāshtra,train
+g2_0857,Neemuch,Madhya Pradesh,test
+g0_0858,Bid,Mahārāshtra,train
+g2_0859,Chittaurgarh,Rājasthān,test
+g2_0860,Seoni,Madhya Pradesh,train
+g2_0861,Jalor,Rājasthān,val
+g2_0862,Kheri,Uttar Pradesh,val
+g0_0863,Jalgaon,Mahārāshtra,train
+g0_0864,Bijapur,Karnātaka,train
+g2_0865,Sagar,Madhya Pradesh,val
+g2_0866,Kheri,Uttar Pradesh,val
+g2_0867,Pathankot,Punjab,train
+g0_0868,Kurnool,Andhra Pradesh,train
+g2_0869,Meerut,Uttar Pradesh,train
+g2_0870,Nainital,Uttarākhand,test
+g2_0871,Seoni,Madhya Pradesh,train
+g0_0872,Gondiya,Mahārāshtra,train
+g2_0873,Etah,Uttar Pradesh,train
+g0_0874,Bhadradri,Telangāna,train
+g1_0875,Baleshwar,Odisha,train
+g2_0876,Sidhi,Madhya Pradesh,test
+g2_0877,Mandla,Madhya Pradesh,train
+g2_0878,Gaurella Pendra Marwahi,Chhattīsgarh,train
+g0_0879,Jamnagar,Gujarāt,test
+g2_0880,Patiala,Punjab,val
+g2_0881,Barwani,Madhya Pradesh,train
+g2_0882,Rewa,Madhya Pradesh,test
+g2_0883,Barwani,Madhya Pradesh,train
+g1_0884,Ganjam,Odisha,train
+g3_0885,Paschim Medinipur,West Bengal,train
+g0_0886,Ramanathapuram,Tamil Nādu,val
+g2_0887,Barmer,Rājasthān,train
+g3_0888,Mayurbhanj,Odisha,none
+g0_0889,Parbhani,Mahārāshtra,train
+g1_0890,Baloda Bazar,Chhattīsgarh,test
+g2_0891,Saharanpur,Uttar Pradesh,train
+g2_0892,Panna,Madhya Pradesh,train
+g2_0893,Fazilka,Punjab,train
+g2_0894,Sahibzada Ajit Singh Nagar,Punjab,val
+g2_0895,Jaunpur,Uttar Pradesh,test
+g2_0896,North West,Delhi,train
+g2_0897,Allahabad,Uttar Pradesh,test
+g0_0898,Kadapa(YSR),Andhra Pradesh,train
+g3_0899,Janjgir-Champa,Chhattīsgarh,train
+g2_0900,Pratapgarh,Uttar Pradesh,test
+g2_0901,Gandhinagar,Gujarāt,test
+g0_0902,Mysore,Karnātaka,train
+g1_0903,Puri,Odisha,train
+g2_0904,Udaipur,Rājasthān,train
+g0_0905,Mysore,Karnātaka,train
+g0_0906,Chengalputtu,Tamil Nādu,train
+g0_0907,Parbhani,Mahārāshtra,train
+g3_0908,Garhwa,Jhārkhand,val
+g0_0909,Nashik,Mahārāshtra,train
+g0_0910,Nagpur,Mahārāshtra,train
+g3_0911,Surguja,Chhattīsgarh,train
+g0_0912,Bellary,Karnātaka,train
+g2_0913,Jhalawar,Rājasthān,train
+g2_0914,Betul,Madhya Pradesh,test
+g2_0915,Vidisha,Madhya Pradesh,none
+g2_0916,Lucknow,Uttar Pradesh,train
+g0_0917,Ahmadnagar,Mahārāshtra,train
+g2_0918,Jhabua,Madhya Pradesh,train
+g0_0919,Vellore,Tamil Nādu,val
+g2_0920,Saharanpur,Uttar Pradesh,train
+g2_0921,Bahraich,Uttar Pradesh,train
+g0_0922,Amravati,Mahārāshtra,val
+g3_0923,Biswanath,Assam,train
+g2_0924,Jodhpur,Rājasthān,test
+g2_0925,Moga,Punjab,train
+g3_0926,Pashchimi Singhbhum,Jhārkhand,test
+g2_0927,Nagaur,Rājasthān,train
+g0_0928,Amravati,Mahārāshtra,val
+g0_0929,Nagarkurnool,Telangāna,train
+g3_0930,Gorakhpur,Uttar Pradesh,train
+g0_0931,Burhanpur,Madhya Pradesh,train
+g2_0932,Dohad,Gujarāt,train
+g0_0933,Siddipet,Telangāna,train
+g0_0934,Krishna,Andhra Pradesh,train
+g0_0935,Nagpur,Mahārāshtra,train
+g2_0936,Narsimhapur,Madhya Pradesh,train
+g2_0937,Hoshiarpur,Punjab,train
+g2_0938,Dehradun,Uttarākhand,none
+g2_0939,Ludhiana,Punjab,val
+g0_0940,Solapur,Mahārāshtra,val
+g0_0941,Gadag,Karnātaka,train
+g2_0942,Sidhi,Madhya Pradesh,test
+g0_0943,Prakasam,Andhra Pradesh,test
+g1_0944,Vizianagaram,Andhra Pradesh,train
+g0_0945,Gulbarga,Karnātaka,train
+g1_0946,Khordha,Odisha,train
+g2_0947,Rewa,Madhya Pradesh,test
+g0_0948,Rangareddy,Telangāna,train
+g2_0949,Neemuch,Madhya Pradesh,test
+g0_0950,Bangalore,Karnātaka,train
+g1_0951,Mayurbhanj,Odisha,train
+g3_0952,Karimganj,Assam,train
+g2_0953,Morena,Madhya Pradesh,test
+g0_0954,Bhandara,Mahārāshtra,train
+g3_0955,Buxar,Bihār,test
+g0_0956,Namakkal,Tamil Nādu,none
+g0_0957,Guntur,Andhra Pradesh,test
+g2_0958,Devbhumi Dwarka,Gujarāt,train
+g1_0959,Kendujhar,Odisha,train
+g3_0960,Hugli,West Bengal,train
+g0_0961,Prakasam,Andhra Pradesh,val
+g1_0962,Nuapada,Odisha,train
+g0_0963,Nashik,Mahārāshtra,train
+g0_0964,Bidar,Karnātaka,train
+g2_0965,Muktsar,Punjab,train
+g0_0966,Belgaum,Karnātaka,train
+g0_0967,Surat,Gujarāt,train
+g2_0968,Chhindwara,Madhya Pradesh,train
+g0_0969,Nagpur,Mahārāshtra,train
+g2_0970,Jhajjar,Haryāna,val
+g2_0971,Ganganagar,Rājasthān,test
+g1_0972,Kendrapara,Odisha,train
+g2_0973,Betul,Madhya Pradesh,val
+g2_0974,Bikaner,Rājasthān,train
+g3_0975,Siddharthnagar,Uttar Pradesh,train
+g2_0976,Mandsaur,Madhya Pradesh,test
+g0_0977,Shimoga,Karnātaka,train
+g0_0978,Akola,Mahārāshtra,val
+g0_0979,Krishna,Andhra Pradesh,test
+g0_0980,Palghar,Mahārāshtra,train
+g0_0981,Nalgonda,Telangāna,train
+g1_0982,Jajapur,Odisha,train
+g0_0983,Jalgaon,Mahārāshtra,train
+g2_0984,Baghpat,Uttar Pradesh,train
+g0_0985,Chikkaballapura,Karnātaka,val
+g3_0986,Koch Bihar,West Bengal,train
+g0_0987,Ahmadnagar,Mahārāshtra,train
+g2_0988,Dindori,Madhya Pradesh,train
+g3_0989,Pakur,Jhārkhand,train
+g0_0990,Amravati,Mahārāshtra,val
+g1_0991,Kendrapara,Odisha,train
+g2_0992,Saharanpur,Uttar Pradesh,train
+g3_0993,Madhepura,Bihār,train
+g0_0994,Kondagaon,Chhattīsgarh,train
+g2_0995,Mahisagar,Gujarāt,test
+g2_0996,Nagaur,Rājasthān,train
+g0_0997,Tenkasi,Tamil Nādu,train
+g0_0998,Nashik,Mahārāshtra,train
+g2_0999,Alwar,Rājasthān,train
+g2_1000,Unnao,Uttar Pradesh,train
+g2_1001,Bharatpur,Rājasthān,test
+g0_1002,Kadapa(YSR),Andhra Pradesh,train
+g3_1003,Sundargarh,Odisha,test
+g2_1004,Balaghat,Madhya Pradesh,train
+g0_1005,Gulbarga,Karnātaka,test
+g0_1006,Kadapa(YSR),Andhra Pradesh,train
+g0_1007,Gondiya,Mahārāshtra,train
+g3_1008,Paschim Medinipur,West Bengal,train
+g2_1009,Seoni,Madhya Pradesh,train
+g0_1010,Kadapa(YSR),Andhra Pradesh,train
+g2_1011,Sambhal,Uttar Pradesh,train
+g1_1012,Vizianagaram,Andhra Pradesh,test
+g2_1013,Ajmer,Rājasthān,train
+g3_1014,Barddhaman,West Bengal,train
+g0_1015,Gulbarga,Karnātaka,train
+g2_1016,Bharatpur,Rājasthān,test
+g2_1017,Fatehpur,Uttar Pradesh,test
+g0_1018,Kurnool,Andhra Pradesh,none
+g3_1019,Bokaro,Jhārkhand,train
+g2_1020,Bulandshahr,Uttar Pradesh,train
+g0_1021,Shimoga,Karnātaka,train
+g2_1022,Kheda,Gujarāt,test
+g2_1023,Fazilka,Punjab,train
+g0_1024,Amreli,Gujarāt,train
+g0_1025,Kamareddy,Telangāna,train
+g0_1026,Ahmadnagar,Mahārāshtra,train
+g0_1027,Bhavnagar,Gujarāt,train
+g3_1028,Koriya,Chhattīsgarh,train
+g3_1029,North Twenty Four Parganas,West Bengal,train
+g2_1030,Agra,Uttar Pradesh,test
+g0_1031,Chandrapur,Mahārāshtra,val
+g0_1032,Bid,Mahārāshtra,train
+g0_1033,Mahabubabad,Telangāna,train
+g1_1034,Cuttack,Odisha,train
+g0_1035,Kondagaon,Chhattīsgarh,train
+g1_1036,Srikakulam,Andhra Pradesh,train
+g3_1037,Surguja,Chhattīsgarh,train
+g0_1038,Bagalkot,Karnātaka,train
+g3_1039,Mahrajganj,Uttar Pradesh,train
+g0_1040,Dhamtari,Chhattīsgarh,train
+g0_1041,Belgaum,Karnātaka,train
+g3_1042,Munger,Bihār,val
+g2_1043,Dausa,Rājasthān,test
+g0_1044,Anantapur,Andhra Pradesh,train
+g3_1045,Banka,Bihār,train
+g0_1046,Janjgir-Champa,Chhattīsgarh,train
+g0_1047,Kolhapur,Mahārāshtra,train
+g0_1048,Adilabad,Telangāna,val
+g0_1049,Mysore,Karnātaka,train
+g0_1050,Ahmadnagar,Mahārāshtra,train
+g0_1051,Osmanabad,Mahārāshtra,train
+g0_1052,Bellary,Karnātaka,train
+g2_1053,Ratlam,Madhya Pradesh,test
+g1_1054,Puri,Odisha,train
+g3_1055,Bankura,West Bengal,train
+g2_1056,Sidhi,Madhya Pradesh,test
+g2_1057,Ajmer,Rājasthān,train
+g0_1058,Sri Potti Sriramulu Nellore,Andhra Pradesh,train
+g0_1059,Amravati,Mahārāshtra,train
+g2_1060,Bharatpur,Rājasthān,test
+g0_1061,Solapur,Mahārāshtra,train
+g2_1062,Jamnagar,Gujarāt,test
+g0_1063,Nirmal,Telangāna,train
+g2_1064,Lalitpur,Uttar Pradesh,val
+g0_1065,Navsari,Gujarāt,train
+g0_1066,Belgaum,Karnātaka,train
+g2_1067,Bilaspur,Chhattīsgarh,train
+g2_1068,Katni,Madhya Pradesh,train
+g3_1069,Jaunpur,Uttar Pradesh,train
+g2_1070,Jodhpur,Rājasthān,train
+g0_1071,Tumkur,Karnātaka,train
+g1_1072,Balangir,Odisha,test
+g2_1073,Jaipur,Rājasthān,test
+g2_1074,Muzaffarnagar,Uttar Pradesh,train
+g0_1075,Solapur,Mahārāshtra,train
+g2_1076,Mansa,Punjab,val
+g2_1077,Pali,Rājasthān,train
+g2_1078,Farrukhabad,Uttar Pradesh,train
+g2_1079,Dhar,Madhya Pradesh,train
+g2_1080,Hardoi,Uttar Pradesh,val
+g2_1081,Jhansi,Uttar Pradesh,train
+g0_1082,Vikarabad,Telangāna,train
+g2_1083,Sabar Kantha,Gujarāt,train
+g2_1084,Hardoi,Uttar Pradesh,train
+g2_1085,Nagaur,Rājasthān,train
+g0_1086,Bhadradri,Telangāna,train
+g2_1087,Shrawasti,Uttar Pradesh,train
+g0_1088,Davanagere,Karnātaka,train
+g3_1089,Surajpur,Chhattīsgarh,train
+g2_1090,Banda,Uttar Pradesh,test
+g0_1091,Nanded,Mahārāshtra,train
+g2_1092,Gwalior,Madhya Pradesh,test
+g1_1093,Anugul,Odisha,train
+g0_1094,Gondiya,Mahārāshtra,train
+g2_1095,Bikaner,Rājasthān,train
+g2_1096,Damoh,Madhya Pradesh,train
+g0_1097,Yavatmal,Mahārāshtra,val
+g3_1098,Chatra,Jhārkhand,test
+g0_1099,Coimbatore,Tamil Nādu,train
+g2_1100,Sangrur,Punjab,val
+g0_1101,Amreli,Gujarāt,train
+g2_1102,Hardoi,Uttar Pradesh,val
+g0_1103,Bharuch,Gujarāt,train
+g2_1104,Muzaffarnagar,Uttar Pradesh,train
+g2_1105,Karnal,Haryāna,train
+g0_1106,Pune,Mahārāshtra,train
+g1_1107,Ganjam,Odisha,train
+g0_1108,Nagpur,Mahārāshtra,train
+g2_1109,Mandsaur,Madhya Pradesh,train
+g2_1110,Jhansi,Uttar Pradesh,train
+g2_1111,Sawai Madhopur,Rājasthān,test
+g2_1112,Barmer,Rājasthān,val
+g3_1113,Balrampur,Uttar Pradesh,val
+g3_1114,Baksa,Assam,train
+g0_1115,Bellary,Karnātaka,train
+g0_1116,Vikarabad,Telangāna,train
+g3_1117,Nadia,West Bengal,val
+g0_1118,Jalgaon,Mahārāshtra,train
+g0_1119,Buldana,Mahārāshtra,train
+g2_1120,Bharuch,Gujarāt,test
+g0_1121,Siddipet,Telangāna,train
+g2_1122,Baghpat,Uttar Pradesh,train
+g3_1123,Nagaon,Assam,train
+g0_1124,Surat,Gujarāt,train
+g0_1125,Kurnool,Andhra Pradesh,train
+g3_1126,Jashpur,Chhattīsgarh,train
+g2_1127,Seoni,Madhya Pradesh,train
+g2_1128,Barnala,Punjab,val
+g3_1129,Dhubri,Assam,train
+g0_1130,Rajnandgaon,Chhattīsgarh,train
+g2_1131,Hisar,Haryāna,val
+g3_1132,Chandauli,Uttar Pradesh,train
+g0_1133,Prakasam,Andhra Pradesh,train
+g3_1134,Udalguri,Assam,train
+g0_1135,Yavatmal,Mahārāshtra,train
+g1_1136,Vizianagaram,Andhra Pradesh,test
+g0_1137,Sri Potti Sriramulu Nellore,Andhra Pradesh,val
+g2_1138,Satna,Madhya Pradesh,train
+g2_1139,Kabeerdham,Chhattīsgarh,train
+g0_1140,Nanded,Mahārāshtra,train
+g0_1141,Bellary,Karnātaka,train
+g3_1142,Murshidabad,West Bengal,val
+g2_1143,Tonk,Rājasthān,train
+g2_1144,Aligarh,Uttar Pradesh,train
+g2_1145,Sambhal,Uttar Pradesh,test
+g2_1146,Ashoknagar,Madhya Pradesh,none
+g0_1147,Jalgaon,Mahārāshtra,train
+g2_1148,Surendranagar,Gujarāt,test
+g2_1149,Jaipur,Rājasthān,test
+g2_1150,Devbhumi Dwarka,Gujarāt,train
+g2_1151,Barmer,Rājasthān,val
+g0_1152,Krishna,Andhra Pradesh,train
+g2_1153,Fatehabad,Haryāna,val
+g2_1154,Jhalawar,Rājasthān,test
+g2_1155,Sirohi,Rājasthān,val
+g3_1156,Lakhimpur,Assam,train
+g2_1157,Datia,Madhya Pradesh,train
+g2_1158,Sahibzada Ajit Singh Nagar,Punjab,val
+g2_1159,Patan,Gujarāt,train
+g3_1160,Bongaigaon,Assam,train
+g0_1161,Buldana,Mahārāshtra,train
+g2_1162,Gurgaon,Haryāna,train
+g0_1163,Sangareddy,Telangāna,train
+g2_1164,Kheri,Uttar Pradesh,val
+g0_1165,Nalgonda,Telangāna,train
+g2_1166,Unnao,Uttar Pradesh,train
+g0_1167,Jagtial,Telangāna,train
+g0_1168,Nuapada,Odisha,train
+g2_1169,Ganganagar,Rājasthān,train
+g2_1170,Kheri,Uttar Pradesh,val
+g0_1171,Ahmadnagar,Mahārāshtra,train
+g2_1172,Jind,Haryāna,val
+g2_1173,Kachchh,Gujarāt,train
+g3_1174,Sundargarh,Odisha,test
+g2_1175,Hanumangarh,Rājasthān,test
+g0_1176,Nagarkurnool,Telangāna,train
+g0_1177,Anantapur,Andhra Pradesh,train
+g2_1178,Jodhpur,Rājasthān,test
+g0_1179,Jalgaon,Mahārāshtra,train
+g0_1180,Rajkot,Gujarāt,test
+g2_1181,Gurdaspur,Punjab,train
+g0_1182,Chikmagalur,Karnātaka,train
+g3_1183,Lohit,Arunāchal Pradesh,train
+g0_1184,Sangli,Mahārāshtra,val
+g2_1185,Agar,Madhya Pradesh,train
+g0_1186,Nagarkurnool,Telangāna,train
+g3_1187,Birbhum,West Bengal,train
+g0_1188,Kolar,Karnātaka,val
+g2_1189,Ujjain,Madhya Pradesh,train
+g0_1190,Solapur,Mahārāshtra,train
+g1_1191,Nuapada,Odisha,test
+g2_1192,Karnal,Haryāna,train
+g3_1193,Pashchimi Singhbhum,Jhārkhand,train
+g2_1194,Jalor,Rājasthān,val
+g3_1195,Ranchi,Jhārkhand,train
+g2_1196,Gurdaspur,Punjab,train
+g2_1197,Rae Bareli,Uttar Pradesh,test
+g2_1198,Pratapgarh,Uttar Pradesh,test
+g2_1199,Gurgaon,Haryāna,train
+g2_1200,Ganganagar,Rājasthān,train
+g2_1201,Neemuch,Madhya Pradesh,test
+g2_1202,Rupnagar,Punjab,train
+g2_1203,Bahraich,Uttar Pradesh,train
+g2_1204,Janjgir-Champa,Chhattīsgarh,train
+g2_1205,Bathinda,Punjab,train
+g2_1206,Bijnor,Uttar Pradesh,test
+g2_1207,Hanumangarh,Rājasthān,test
+g2_1208,Bathinda,Punjab,train
+g0_1209,Amravati,Mahārāshtra,val
+g0_1210,Solapur,Mahārāshtra,test
+g2_1211,Jaipur,Rājasthān,test
+g2_1212,Fatehabad,Haryāna,val
+g2_1213,Alirajpur,Madhya Pradesh,train
+g2_1214,Bandipore,Jammu and Kashmīr,train
+g2_1215,Kannauj,Uttar Pradesh,train
+g2_1216,Shrawasti,Uttar Pradesh,train
+g2_1217,Rajkot,Gujarāt,test
+g2_1218,Sagar,Madhya Pradesh,val
+g2_1219,Bikaner,Rājasthān,train
+g2_1220,Ganganagar,Rājasthān,train
+g0_1221,Sangareddy,Telangāna,train
+g0_1222,East Godavari,Andhra Pradesh,train
+g3_1223,Nalbari,Assam,train
+g3_1224,Kendujhar,Odisha,train
+g3_1225,Sitamarhi,Bihār,train
+g0_1226,Bagalkot,Karnātaka,train
+g0_1227,Kurnool,Andhra Pradesh,train
+g3_1228,Madhepura,Bihār,train
+g3_1229,Sheikhpura,Bihār,val
+g2_1230,Dindori,Madhya Pradesh,train
+g1_1231,Jagatsinghapur,Odisha,train
+g0_1232,Viluppuram,Tamil Nādu,val
+g2_1233,Porbandar,Gujarāt,test
+g0_1234,Belgaum,Karnātaka,test
+g0_1235,Kolar,Karnātaka,train
+g2_1236,Niwari,Madhya Pradesh,train
+g2_1237,Sikar,Rājasthān,train
+g0_1238,Bhavnagar,Gujarāt,train
+g2_1239,Churu,Rājasthān,train
+g0_1240,Ahmadnagar,Mahārāshtra,train
+g2_1241,Ratlam,Madhya Pradesh,test
+g2_1242,Chhindwara,Madhya Pradesh,train
+g0_1243,Solapur,Mahārāshtra,test
+g0_1244,Tapi,Gujarāt,train
+g0_1245,Chittoor,Andhra Pradesh,test
+g2_1246,Ganganagar,Rājasthān,train
+g3_1247,Jhargram,West Bengal,train
+g1_1248,Koraput,Odisha,test
+g2_1249,Kurukshetra,Haryāna,train
+g2_1250,Chhindwara,Madhya Pradesh,train
+g3_1251,Khagaria,Bihār,val
+g2_1252,Rajkot,Gujarāt,test
+g0_1253,Pudukkottai,Tamil Nādu,val
+g0_1254,Sri Potti Sriramulu Nellore,Andhra Pradesh,train
+g0_1255,Osmanabad,Mahārāshtra,train
+g3_1256,Jalpaiguri,West Bengal,train
+g0_1257,Nanded,Mahārāshtra,train
+g0_1258,Amravati,Mahārāshtra,val
+g0_1259,Cuddalore,Tamil Nādu,train
+g2_1260,Jalor,Rājasthān,val
+g0_1261,Mayiladuthurai,Tamil Nādu,train
+g0_1262,Karur,Tamil Nādu,none
+g0_1263,Krishna,Andhra Pradesh,test
+g2_1264,Chittaurgarh,Rājasthān,test
+g2_1265,Bijnor,Uttar Pradesh,test
+g0_1266,Jalgaon,Mahārāshtra,train
+g0_1267,Virudhunagar,Tamil Nādu,train
+g2_1268,Dausa,Rājasthān,test
+g0_1269,Osmanabad,Mahārāshtra,train
+g0_1270,Rajnandgaon,Chhattīsgarh,train
+g2_1271,Fatehgarh Sahib,Punjab,val
+g0_1272,Chandrapur,Mahārāshtra,val
+g0_1273,Yadadri Bhongiri,Telangāna,train
+g2_1274,Jodhpur,Rājasthān,test
+g2_1275,Bemetra,Chhattīsgarh,train
+g0_1276,Bellary,Karnātaka,train
+g0_1277,Chandrapur,Mahārāshtra,val
+g2_1278,Chhindwara,Madhya Pradesh,train
+g0_1279,Solapur,Mahārāshtra,val
+g2_1280,Ajmer,Rājasthān,train
+g0_1281,Solapur,Mahārāshtra,val
+g2_1282,Bathinda,Punjab,train
+g2_1283,Faizabad,Uttar Pradesh,train
+g0_1284,Hingoli,Mahārāshtra,train
+g1_1285,Srikakulam,Andhra Pradesh,train
+g0_1286,Koppal,Karnātaka,train
+g2_1287,Jodhpur,Rājasthān,test
+g3_1288,Mahrajganj,Uttar Pradesh,train
+g0_1289,Nanded,Mahārāshtra,train
+g2_1290,Banda,Uttar Pradesh,test
+g2_1291,Lalitpur,Uttar Pradesh,train
+g2_1292,Devbhumi Dwarka,Gujarāt,val
+g2_1293,Ahmadabad,Gujarāt,test
+g0_1294,Hassan,Karnātaka,train
+g3_1295,Biswanath,Assam,train
+g0_1296,Nagpur,Mahārāshtra,train
+g2_1297,Sitapur,Uttar Pradesh,val
+g2_1298,Raisen,Madhya Pradesh,train
+g2_1299,Jodhpur,Rājasthān,test
+g2_1300,Singrauli,Madhya Pradesh,test
+g3_1301,Chirang,Assam,train
+g0_1302,Kamareddy,Telangāna,none
+g2_1303,Anantnag,Jammu and Kashmīr,train
+g0_1304,Yadgir,Karnātaka,train
+g2_1305,Tonk,Rājasthān,test
+g0_1306,Yavatmal,Mahārāshtra,val
+g2_1307,Ratlam,Madhya Pradesh,test
+g0_1308,Osmanabad,Mahārāshtra,train
+g2_1309,Alwar,Rājasthān,test
+g2_1310,Sidhi,Madhya Pradesh,test
+g2_1311,Alirajpur,Madhya Pradesh,train
+g0_1312,Karur,Tamil Nādu,train
+g3_1313,Barddhaman,West Bengal,train
+g2_1314,Rupnagar,Punjab,train
+g0_1315,Haveri,Karnātaka,train
+g0_1316,Chittoor,Andhra Pradesh,test
+g2_1317,Sabar Kantha,Gujarāt,train
+g3_1318,Simdega,Jhārkhand,test
+g2_1319,Fazilka,Punjab,train
+g0_1320,West Godavari,Andhra Pradesh,train
+g2_1321,Dewas,Madhya Pradesh,test
+g0_1322,Bhadradri,Telangāna,train
+g2_1323,Panipat,Haryāna,train
+g0_1324,Nagarkurnool,Telangāna,train
+g0_1325,Burhanpur,Madhya Pradesh,val
+g2_1326,Chhota Udaipur,Gujarāt,train
+g0_1327,Latur,Mahārāshtra,train
+g0_1328,Nizamabad,Telangāna,train
+g0_1329,Mahabubnagar,Telangāna,train
+g2_1330,Allahabad,Uttar Pradesh,test
+g0_1331,Suryapet,Telangāna,train
+g2_1332,Rohtak,Haryāna,val
+g0_1333,Khammam,Telangāna,train
+g0_1334,Virudhunagar,Tamil Nādu,train
+g2_1335,Meerut,Uttar Pradesh,train
+g2_1336,Chhindwara,Madhya Pradesh,train
+g2_1337,Bahraich,Uttar Pradesh,train
+g2_1338,Seoni,Madhya Pradesh,train
+g0_1339,Viluppuram,Tamil Nādu,train
+g2_1340,Kota,Rājasthān,test
+g2_1341,Jaisalmer,Rājasthān,val
+g0_1342,Gulbarga,Karnātaka,train
+g0_1343,Rajkot,Gujarāt,test
+g2_1344,Aligarh,Uttar Pradesh,train
+g0_1345,Jogulamba,Telangāna,train
+g2_1346,Sawai Madhopur,Rājasthān,test
+g3_1347,Buxar,Bihār,test
+g2_1348,Rewa,Madhya Pradesh,test
+g2_1349,Bhiwani,Haryāna,val
+g2_1350,Baran,Rājasthān,val
+g3_1351,Nawada,Bihār,test
+g2_1352,Rewa,Madhya Pradesh,test
+g2_1353,Kachchh,Gujarāt,train
+g0_1354,Shimoga,Karnātaka,train
+g2_1355,Barmer,Rājasthān,val
+g0_1356,Virudhunagar,Tamil Nādu,none
+g2_1357,Kapurthala,Punjab,train
+g0_1358,Thiruvarur,Tamil Nādu,train
+g0_1359,Kolar,Karnātaka,none
+g3_1360,Siddharthnagar,Uttar Pradesh,train
+g0_1361,Prakasam,Andhra Pradesh,train
+g0_1362,Ahmadnagar,Mahārāshtra,train
+g2_1363,Rajgarh,Madhya Pradesh,train
+g2_1364,Kaushambi,Uttar Pradesh,test
+g2_1365,Hardoi,Uttar Pradesh,train
+g0_1366,Nagpur,Mahārāshtra,train
+g0_1367,Nabarangapur,Odisha,test
+g2_1368,Nainital,Uttarākhand,test
+g3_1369,Begusarai,Bihār,val
+g2_1370,Jalor,Rājasthān,val
+g2_1371,Jhabua,Madhya Pradesh,train
+g2_1372,Patan,Gujarāt,train
+g0_1373,Bid,Mahārāshtra,train
+g2_1374,Gwalior,Madhya Pradesh,test
+g2_1375,Jhunjhunun,Rājasthān,train
+g2_1376,Satna,Madhya Pradesh,test
+g2_1377,Kachchh,Gujarāt,train
+g0_1378,Gadag,Karnātaka,train
+g2_1379,Shahjahanpur,Uttar Pradesh,val
+g2_1380,Udham Singh Nagar,Uttarākhand,test
+g0_1381,Sangareddy,Telangāna,train
+g0_1382,Washim,Mahārāshtra,train
+g2_1383,Dhar,Madhya Pradesh,train
+g2_1384,Dewas,Madhya Pradesh,test
+g0_1385,Latur,Mahārāshtra,train
+g2_1386,Jodhpur,Rājasthān,test
+g0_1387,Chandrapur,Mahārāshtra,val
+g0_1388,Ramanagara,Karnātaka,train
+g0_1389,Kancheepuram,Tamil Nādu,train
+g0_1390,Siddipet,Telangāna,train
+g2_1391,Sagar,Madhya Pradesh,val
+g2_1392,Sikar,Rājasthān,train
+g2_1393,Mirzapur,Uttar Pradesh,test
+g2_1394,Bikaner,Rājasthān,train
+g2_1395,Koriya,Chhattīsgarh,test
+g2_1396,Chittaurgarh,Rājasthān,train
+g2_1397,Dhar,Madhya Pradesh,train
+g2_1398,Jodhpur,Rājasthān,test
+g0_1399,Bijapur,Karnātaka,test
+g0_1400,Gariaband,Chhattīsgarh,train
+g2_1401,Dohad,Gujarāt,train
+g0_1402,Osmanabad,Mahārāshtra,test
+g0_1403,Raichur,Karnātaka,train
+g2_1404,Hamirpur,Uttar Pradesh,test
+g0_1405,Amreli,Gujarāt,train
+g0_1406,Gadag,Karnātaka,train
+g2_1407,Rohtak,Haryāna,val
+g0_1408,Nagarkurnool,Telangāna,train
+g2_1409,Jhabua,Madhya Pradesh,train
+g0_1410,Nagarkurnool,Telangāna,train
+g0_1411,Bid,Mahārāshtra,train
+g0_1412,Narayanpet,Telangāna,train
+g0_1413,Jayashankar,Telangāna,train
+g0_1414,Pune,Mahārāshtra,train
+g3_1415,Pashchimi Singhbhum,Jhārkhand,train
+g0_1416,Gadag,Karnātaka,train
+g0_1417,Bid,Mahārāshtra,train
+g2_1418,Jaipur,Rājasthān,test
+g0_1419,West Godavari,Andhra Pradesh,train
+g0_1420,Yavatmal,Mahārāshtra,val
+g2_1421,Jalor,Rājasthān,val
+g1_1422,Sambalpur,Odisha,train
+g2_1423,Bilaspur,Chhattīsgarh,train
+g2_1424,Ludhiana,Punjab,val
+g0_1425,Betul,Madhya Pradesh,train
+g3_1426,Sivasagar,Assam,train
+g2_1427,Damoh,Madhya Pradesh,val
+g0_1428,Coimbatore,Tamil Nādu,train
+g0_1429,Dharwad,Karnātaka,train
+g2_1430,Mansa,Punjab,val
+g0_1431,Ahmadnagar,Mahārāshtra,train
+g2_1432,Jalor,Rājasthān,val
+g2_1433,Mandsaur,Madhya Pradesh,test
+g2_1434,Hamirpur,Uttar Pradesh,train
+g0_1435,Nashik,Mahārāshtra,train
+g2_1436,Karnal,Haryāna,train
+g3_1437,Jorhat,Assam,train
+g2_1438,Mahesana,Gujarāt,train
+g2_1439,Allahabad,Uttar Pradesh,test
+g3_1440,Chatra,Jhārkhand,test
+g2_1441,Bikaner,Rājasthān,train
+g0_1442,Cuddalore,Tamil Nādu,val
+g2_1443,Devbhumi Dwarka,Gujarāt,train
+g3_1444,Azamgarh,Uttar Pradesh,train
+g2_1445,Jalaun,Uttar Pradesh,val
+g0_1446,Anantapur,Andhra Pradesh,train
+g2_1447,Sangrur,Punjab,val
+g2_1448,Yamunanagar,Haryāna,train
+g1_1449,Kendujhar,Odisha,train
+g3_1450,Nadia,West Bengal,val
+g2_1451,Karauli,Rājasthān,test
+g3_1452,Barpeta,Assam,train
+g2_1453,Jalor,Rājasthān,val
+g0_1454,Akola,Mahārāshtra,val
+g2_1455,Aligarh,Uttar Pradesh,train
+g0_1456,Buldana,Mahārāshtra,train
+g0_1457,Siddipet,Telangāna,train
+g2_1458,Nagaur,Rājasthān,train
+g0_1459,Sangli,Mahārāshtra,val
+g0_1460,Guntur,Andhra Pradesh,test
+g3_1461,Purnia,Bihār,train
+g2_1462,Gautam Buddha Nagar,Uttar Pradesh,train
+g0_1463,Satara,Mahārāshtra,val
+g0_1464,Bhandara,Mahārāshtra,train
+g0_1465,Latur,Mahārāshtra,train
+g0_1466,Rajkot,Gujarāt,train
+g2_1467,Jaipur,Rājasthān,test
+g2_1468,Udaipur,Rājasthān,train
+g0_1469,Akola,Mahārāshtra,val
+g0_1470,Anantapur,Andhra Pradesh,val
+g2_1471,Banswara,Rājasthān,test
+g2_1472,Sagar,Madhya Pradesh,val
+g2_1473,Firozabad,Uttar Pradesh,train
+g2_1474,Jhunjhunun,Rājasthān,test
+g2_1475,Morbi,Gujarāt,test
+g3_1476,Sahibganj,Jhārkhand,train
+g0_1477,Bid,Mahārāshtra,train
+g2_1478,Ahmadabad,Gujarāt,test
+g2_1479,Hardwar,Uttarākhand,train
+g2_1480,Ghaziabad,Uttar Pradesh,train
+g3_1481,Imphal West,Manipur,train
+g0_1482,Bhandara,Mahārāshtra,train
+g2_1483,Karnal,Haryāna,train
+g2_1484,Satna,Madhya Pradesh,train
+g3_1485,Dhanbad,Jhārkhand,train
+g0_1486,Chittoor,Andhra Pradesh,val
+g3_1487,Buxar,Bihār,test
+g2_1488,Banda,Uttar Pradesh,test
+g0_1489,Belgaum,Karnātaka,test
+g0_1490,Washim,Mahārāshtra,train
+g2_1491,Banas Kantha,Gujarāt,train
+g2_1492,Jhansi,Uttar Pradesh,train
+g1_1493,Sambalpur,Odisha,train
+g0_1494,Gulbarga,Karnātaka,test
+g0_1495,Latur,Mahārāshtra,train
+g0_1496,Belgaum,Karnātaka,train
+g1_1497,Baleshwar,Odisha,train
+g0_1498,Bharuch,Gujarāt,train
+g0_1499,Kondagaon,Chhattīsgarh,train
+g2_1500,Jaipur,Rājasthān,test
+g0_1501,Kolhapur,Mahārāshtra,train
+g2_1502,Barmer,Rājasthān,val
+g2_1503,Kannauj,Uttar Pradesh,train
+g0_1504,Chittoor,Andhra Pradesh,test
+g2_1505,Anuppur,Madhya Pradesh,train
+g2_1506,Jhansi,Uttar Pradesh,train
+g0_1507,Anantapur,Andhra Pradesh,test
+g2_1508,Panna,Madhya Pradesh,train
+g2_1509,Dhar,Madhya Pradesh,train
+g3_1510,Deoria,Uttar Pradesh,train
+g2_1511,Vadodara,Gujarāt,test
+g3_1512,Azamgarh,Uttar Pradesh,train
+g2_1513,Jamnagar,Gujarāt,train
+g0_1514,Balod,Chhattīsgarh,train
+g3_1515,Nalanda,Bihār,test
+g2_1516,Sikar,Rājasthān,test
+g2_1517,Mahoba,Uttar Pradesh,test
+g0_1518,Gondiya,Mahārāshtra,train
+g3_1519,Balrampur,Uttar Pradesh,val
+g0_1520,Nirmal,Telangāna,train
+g2_1521,Allahabad,Uttar Pradesh,test
+g0_1522,Thiruvarur,Tamil Nādu,train
+g2_1523,Rewa,Madhya Pradesh,test
+g0_1524,Balod,Chhattīsgarh,train
+g2_1525,Jaisalmer,Rājasthān,train
+g0_1526,Anantapur,Andhra Pradesh,train
+g2_1527,Dewas,Madhya Pradesh,test
+g1_1528,Dhenkanal,Odisha,train
+g0_1529,Raichur,Karnātaka,train
+g1_1530,Nabarangapur,Odisha,test
+g1_1531,Anugul,Odisha,train
+g2_1532,Bikaner,Rājasthān,train
+g2_1533,Chhatarpur,Madhya Pradesh,train
+g2_1534,Sehore,Madhya Pradesh,train
+g2_1535,Jhunjhunun,Rājasthān,test
+g0_1536,Ahmadnagar,Mahārāshtra,train
+g0_1537,Adilabad,Telangāna,val
+g2_1538,Hanumangarh,Rājasthān,test
+g0_1539,Osmanabad,Mahārāshtra,test
+g2_1540,Jaisalmer,Rājasthān,train
+g2_1541,Kanpur Dehat,Uttar Pradesh,train
+g0_1542,Jalgaon,Mahārāshtra,train
+g0_1543,Sangli,Mahārāshtra,val
+g0_1544,Ahmadnagar,Mahārāshtra,train
+g2_1545,Rohtak,Haryāna,val
+g0_1546,Bid,Mahārāshtra,train
+g0_1547,Komaram Bheem,Telangāna,val
+g0_1548,Dharwad,Karnātaka,train
+g2_1549,Sangrur,Punjab,val
+g0_1550,Bijapur,Karnātaka,test
+g0_1551,Amravati,Mahārāshtra,val
+g0_1552,Burhanpur,Madhya Pradesh,train
+g3_1553,Dhanbad,Jhārkhand,train
+g2_1554,Alwar,Rājasthān,test
+g3_1555,Balrampur,Uttar Pradesh,val
+g1_1556,Rayagada,Odisha,test
+g2_1557,Dungarpur,Rājasthān,test
+g2_1558,Meerut,Uttar Pradesh,train
+g0_1559,Parbhani,Mahārāshtra,train
+g0_1560,Kurnool,Andhra Pradesh,train
+g0_1561,Anantapur,Andhra Pradesh,train
+g2_1562,Gaurella Pendra Marwahi,Chhattīsgarh,train
+g3_1563,Bankura,West Bengal,train
+g2_1564,Jhansi,Uttar Pradesh,train
+g2_1565,Sultanpur,Uttar Pradesh,train
+g3_1566,Sonbhadra,Uttar Pradesh,val
+g3_1567,Katihar,Bihār,train
+g2_1568,Satna,Madhya Pradesh,test
+g2_1569,Gandhinagar,Gujarāt,train
+g2_1570,Rajsamand,Rājasthān,train
+g0_1571,Anantapur,Andhra Pradesh,train
+g0_1572,Nanded,Mahārāshtra,train
+g0_1573,Bharuch,Gujarāt,train
+g0_1574,Pune,Mahārāshtra,train
+g0_1575,Latur,Mahārāshtra,train
+g3_1576,Purnia,Bihār,train
+g0_1577,Bhavnagar,Gujarāt,train
+g1_1578,Mahasamund,Chhattīsgarh,test
+g1_1579,Baleshwar,Odisha,train
+g2_1580,Devbhumi Dwarka,Gujarāt,val
+g3_1581,Gorakhpur,Uttar Pradesh,train
+g1_1582,Subarnapur,Odisha,train
+g2_1583,Aligarh,Uttar Pradesh,train
+g0_1584,Kurnool,Andhra Pradesh,none
+g2_1585,Karnal,Haryāna,val
+g2_1586,Jalaun,Uttar Pradesh,train
+g0_1587,Viluppuram,Tamil Nādu,train
+g2_1588,Bikaner,Rājasthān,train
+g2_1589,Banas Kantha,Gujarāt,none
+g3_1590,Morigaon,Assam,train
+g3_1591,Murshidabad,West Bengal,train
+g0_1592,Bagalkot,Karnātaka,train
+g0_1593,Dharwad,Karnātaka,train
+g2_1594,Rupnagar,Punjab,val
+g2_1595,Budaun,Uttar Pradesh,train
+g0_1596,Nagarkurnool,Telangāna,train
+g2_1597,Dhar,Madhya Pradesh,train
+g2_1598,Mahoba,Uttar Pradesh,train
+g2_1599,Rajgarh,Madhya Pradesh,val
+g2_1600,Etah,Uttar Pradesh,train
+g2_1601,Moga,Punjab,train
+g2_1602,Fatehpur,Uttar Pradesh,test
+g2_1603,Banswara,Rājasthān,train
+g2_1604,Kheda,Gujarāt,test
+g2_1605,Kachchh,Gujarāt,train
+g3_1606,Murshidabad,West Bengal,train
+g0_1607,Bijapur,Karnātaka,test
+g0_1608,Balaghat,Madhya Pradesh,train
+g0_1609,Amreli,Gujarāt,train
+g0_1610,Dharwad,Karnātaka,train
+g0_1611,Washim,Mahārāshtra,train
+g0_1612,Ahmadnagar,Mahārāshtra,train
+g1_1613,Kalahandi,Odisha,train
+g2_1614,Banda,Uttar Pradesh,test
+g2_1615,Mandla,Madhya Pradesh,train
+g0_1616,Bhandara,Mahārāshtra,train
+g3_1617,Dhanbad,Jhārkhand,train
+g3_1618,Giridih,Jhārkhand,val
+g3_1619,Ambedkar Nagar,Uttar Pradesh,train
+g0_1620,Yadgir,Karnātaka,train
+g0_1621,Belgaum,Karnātaka,train
+g0_1622,Nanded,Mahārāshtra,train
+g2_1623,Saharanpur,Uttar Pradesh,train
+g3_1624,Katihar,Bihār,train
+g1_1625,Kalahandi,Odisha,train
+g2_1626,Sidhi,Madhya Pradesh,test
+g0_1627,Belgaum,Karnātaka,train
+g0_1628,Mandya,Karnātaka,train
+g2_1629,Baran,Rājasthān,val
+g0_1630,Chamarajanagar,Karnātaka,train
+g2_1631,Katni,Madhya Pradesh,train
+g3_1632,Rohtas,Bihār,train
+g3_1633,Korba,Chhattīsgarh,train
+g0_1634,Kabeerdham,Chhattīsgarh,train
+g0_1635,Bijapur,Karnātaka,test
+g0_1636,Karimnagar,Telangāna,train
+g1_1637,Baleshwar,Odisha,train
+g2_1638,Sirsa,Haryāna,test
+g2_1639,Datia,Madhya Pradesh,train
+g0_1640,Sri Potti Sriramulu Nellore,Andhra Pradesh,val
+g2_1641,Mathura,Uttar Pradesh,train
+g2_1642,Unnao,Uttar Pradesh,train
+g1_1643,Balangir,Odisha,train
+g2_1644,Jalaun,Uttar Pradesh,val
+g2_1645,Khandwa (East Nimar),Madhya Pradesh,val
+g2_1646,Jaunpur,Uttar Pradesh,test
+g0_1647,Shimoga,Karnātaka,train
+g2_1648,Dohad,Gujarāt,train
+g0_1649,Nashik,Mahārāshtra,train
+g2_1650,Datia,Madhya Pradesh,val
+g0_1651,Junagadh,Gujarāt,test
+g3_1652,Bankura,West Bengal,train
+g0_1653,Aurangabad,Mahārāshtra,train
+g2_1654,Firozpur,Punjab,train
+g0_1655,Hingoli,Mahārāshtra,train
+g2_1656,Seoni,Madhya Pradesh,train
+g0_1657,Latur,Mahārāshtra,train
+g2_1658,Gurgaon,Haryāna,train
+g2_1659,Mandsaur,Madhya Pradesh,test
+g3_1660,Hugli,West Bengal,train
+g2_1661,Kachchh,Gujarāt,train
+g2_1662,Sirohi,Rājasthān,val
+g2_1663,Jalaun,Uttar Pradesh,train
+g3_1664,Kendujhar,Odisha,train
+g0_1665,East Godavari,Andhra Pradesh,val
+g3_1666,Mau,Uttar Pradesh,train
+g2_1667,Jamnagar,Gujarāt,train
+g2_1668,Sultanpur,Uttar Pradesh,train
+g0_1669,Jagtial,Telangāna,train
+g2_1670,Jodhpur,Rājasthān,test
+g0_1671,Tiruppur,Tamil Nādu,train
+g2_1672,Aligarh,Uttar Pradesh,train
+g2_1673,Bharatpur,Rājasthān,train
+g2_1674,Sawai Madhopur,Rājasthān,test
+g0_1675,Ahmadnagar,Mahārāshtra,train
+g2_1676,Udaipur,Rājasthān,test
+g0_1677,Davanagere,Karnātaka,train
+g2_1678,Pali,Rājasthān,train
+g3_1679,Jashpur,Chhattīsgarh,train
+g2_1680,Bahraich,Uttar Pradesh,train
+g2_1681,Sawai Madhopur,Rājasthān,test
+g3_1682,Paschim Barddhaman,West Bengal,train
+g2_1683,Barwani,Madhya Pradesh,train
+g0_1684,Suryapet,Telangāna,train
+g3_1685,Sundargarh,Odisha,train
+g3_1686,Darrang,Assam,train
+g0_1687,Solapur,Mahārāshtra,test
+g2_1688,Bikaner,Rājasthān,test
+g2_1689,Bijnor,Uttar Pradesh,test
+g2_1690,Alwar,Rājasthān,train
+g0_1691,Pune,Mahārāshtra,train
+g0_1692,Shimoga,Karnātaka,train
+g2_1693,Jodhpur,Rājasthān,train
+g3_1694,Azamgarh,Uttar Pradesh,train
+g2_1695,Sikar,Rājasthān,test
+g2_1696,Umaria,Madhya Pradesh,train
+g2_1697,Faridkot,Punjab,train
+g2_1698,Jalor,Rājasthān,val
+g2_1699,Hanumangarh,Rājasthān,test
+g2_1700,Jaipur,Rājasthān,test
+g0_1701,Ahmadnagar,Mahārāshtra,train
+g2_1702,Hamirpur,Uttar Pradesh,train
+g1_1703,Vizianagaram,Andhra Pradesh,test
+g2_1704,Amritsar,Punjab,train
+g3_1705,Tinsukia,Assam,train
+g2_1706,Surendranagar,Gujarāt,train
+g2_1707,Vadodara,Gujarāt,test
+g0_1708,Coimbatore,Tamil Nādu,train
+g2_1709,Jalor,Rājasthān,val
+g0_1710,Tumkur,Karnātaka,train
+g2_1711,Korba,Chhattīsgarh,train
+g0_1712,Betul,Madhya Pradesh,train
+g0_1713,Pune,Mahārāshtra,train
+g2_1714,Dhar,Madhya Pradesh,train
+g3_1715,Surajpur,Chhattīsgarh,val
+g0_1716,Ahmadnagar,Mahārāshtra,train
+g2_1717,Pali,Rājasthān,train
+g2_1718,Jhalawar,Rājasthān,train
+g3_1719,Jorhat,Assam,train
+g3_1720,Hugli,West Bengal,train
+g0_1721,Tiruchirappalli,Tamil Nādu,test
+g2_1722,Jaipur,Rājasthān,test
+g0_1723,Chitradurga,Karnātaka,train
+g2_1724,Narsimhapur,Madhya Pradesh,train
+g2_1725,Rajkot,Gujarāt,train
+g0_1726,Dharwad,Karnātaka,train
+g2_1727,Lalitpur,Uttar Pradesh,train
+g3_1728,Jashpur,Chhattīsgarh,train
+g2_1729,Chhatarpur,Madhya Pradesh,val
+g0_1730,Yadgir,Karnātaka,train
+g2_1731,Bilaspur,Chhattīsgarh,train
+g0_1732,Dakshina Kannada,Karnātaka,train
+g2_1733,Sehore,Madhya Pradesh,test
+g2_1734,Muktsar,Punjab,train
+g2_1735,Barwani,Madhya Pradesh,train
+g0_1736,Betul,Madhya Pradesh,val
+g2_1737,Fatehpur,Uttar Pradesh,test
+g2_1738,Samba,Jammu and Kashmīr,train
+g2_1739,Rajgarh,Madhya Pradesh,val
+g1_1740,Kendujhar,Odisha,train
+g0_1741,Ratnagiri,Mahārāshtra,train
+g0_1742,Mysore,Karnātaka,train
+g2_1743,Khandwa (East Nimar),Madhya Pradesh,train
+g2_1744,Gaurella Pendra Marwahi,Chhattīsgarh,train
+g2_1745,Kheri,Uttar Pradesh,val
+g2_1746,Sangrur,Punjab,val
+g1_1747,Subarnapur,Odisha,test
+g3_1748,Gaya,Bihār,test
+g2_1749,Dhar,Madhya Pradesh,train
+g0_1750,Prakasam,Andhra Pradesh,train
+g1_1751,Baudh,Odisha,train
+g2_1752,Sikar,Rājasthān,test
+g0_1753,Parbhani,Mahārāshtra,train
+g0_1754,Sangareddy,Telangāna,train
+g3_1755,North Garo Hills,Meghālaya,train
+g2_1756,Lalitpur,Uttar Pradesh,val
+g0_1757,Kurnool,Andhra Pradesh,train
+g2_1758,Tikamgarh,Madhya Pradesh,train
+g2_1759,Bijnor,Uttar Pradesh,test
+g0_1760,Kadapa(YSR),Andhra Pradesh,train
+g3_1761,Katihar,Bihār,train
+g0_1762,Guntur,Andhra Pradesh,test
+g2_1763,Ajmer,Rājasthān,train
+g2_1764,Firozpur,Punjab,train
+g3_1765,Birbhum,West Bengal,train
+g2_1766,Mahoba,Uttar Pradesh,test
+g0_1767,Mysore,Karnātaka,train
+g2_1768,Jalor,Rājasthān,val
+g2_1769,Nainital,Uttarākhand,test
+g3_1770,Gumla,Jhārkhand,test
+g2_1771,Bhiwani,Haryāna,test
+g0_1772,Adilabad,Telangāna,val
+g0_1773,Mahabubnagar,Telangāna,train
+g0_1774,Uttar Bastar Kanker,Chhattīsgarh,train
+g2_1775,Mahoba,Uttar Pradesh,train
+g0_1776,Guntur,Andhra Pradesh,test
+g2_1777,Hoshangabad,Madhya Pradesh,train
+g0_1778,Raipur,Chhattīsgarh,train
+g0_1779,Bharuch,Gujarāt,train
+g3_1780,Puruliya,West Bengal,train
+g3_1781,Bokaro,Jhārkhand,train
+g3_1782,Kangpokpi,Manipur,train
+g0_1783,Salem,Tamil Nādu,val
+g0_1784,Kurnool,Andhra Pradesh,train
+g3_1785,Arwal,Bihār,test
+g0_1786,Anantapur,Andhra Pradesh,val
+g0_1787,Hingoli,Mahārāshtra,train
+g2_1788,Etawah,Uttar Pradesh,val
+g0_1789,Solapur,Mahārāshtra,val
+g2_1790,Dhar,Madhya Pradesh,train
+g2_1791,Chhindwara,Madhya Pradesh,train
+g2_1792,Sirohi,Rājasthān,val
+g3_1793,Banka,Bihār,train
+g0_1794,Guntur,Andhra Pradesh,test
+g3_1795,North Twenty Four Parganas,West Bengal,train
+g1_1796,Visakhapatnam,Andhra Pradesh,train
+g2_1797,Unnao,Uttar Pradesh,train
+g2_1798,Barmer,Rājasthān,val
+g1_1799,Dhenkanal,Odisha,train
+g2_1800,Pratapgarh,Uttar Pradesh,test
+g2_1801,Dewas,Madhya Pradesh,train
+g2_1802,Jaisalmer,Rājasthān,train
+g2_1803,Jhabua,Madhya Pradesh,train
+g2_1804,Churu,Rājasthān,train
+g0_1805,Mysore,Karnātaka,train
+g0_1806,Osmanabad,Mahārāshtra,test
+g2_1807,Dewas,Madhya Pradesh,train
+g2_1808,Firozabad,Uttar Pradesh,val
+g2_1809,Ludhiana,Punjab,val
+g3_1810,Azamgarh,Uttar Pradesh,train
+g0_1811,Durg,Chhattīsgarh,train
+g0_1812,Prakasam,Andhra Pradesh,train
+g3_1813,Maldah,West Bengal,train
+g0_1814,Jalna,Mahārāshtra,train
+g0_1815,Hingoli,Mahārāshtra,train
+g3_1816,Bankura,West Bengal,train
+g2_1817,Sirmaur,Himāchal Pradesh,train
+g0_1818,Solapur,Mahārāshtra,val
+g0_1819,Hassan,Karnātaka,train
+g0_1820,Bastar,Chhattīsgarh,test
+g2_1821,Pratapgarh,Uttar Pradesh,train
+g0_1822,Prakasam,Andhra Pradesh,test
+g2_1823,Mansa,Punjab,test
+g3_1824,Baleshwar,Odisha,train
+g2_1825,Hoshangabad,Madhya Pradesh,train
+g3_1826,Siddharthnagar,Uttar Pradesh,train
+g0_1827,Hassan,Karnātaka,train
+g1_1828,Balangir,Odisha,test
+g0_1829,Yadadri Bhongiri,Telangāna,train
+g2_1830,Jabalpur,Madhya Pradesh,train
+g0_1831,Koppal,Karnātaka,train
+g2_1832,Patiala,Punjab,val
+g2_1833,Mathura,Uttar Pradesh,train
+g2_1834,Anuppur,Madhya Pradesh,train
+g0_1835,Karimnagar,Telangāna,train
+g3_1836,Khunti,Jhārkhand,test
+g2_1837,Ganganagar,Rājasthān,train
+g2_1838,Mathura,Uttar Pradesh,train
+g0_1839,Gir Somnath,Gujarāt,test
+g0_1840,Davanagere,Karnātaka,train
+g3_1841,Ghazipur,Uttar Pradesh,train
+g2_1842,Mandla,Madhya Pradesh,train
+g2_1843,Jamnagar,Gujarāt,train
+g2_1844,Raisen,Madhya Pradesh,test
+g0_1845,Guntur,Andhra Pradesh,test
+g2_1846,Tehri Garhwal,Uttarākhand,train
+g3_1847,Mirzapur,Uttar Pradesh,train
+g3_1848,Baksa,Assam,train
+g2_1849,Narsimhapur,Madhya Pradesh,train
+g0_1850,Bijapur,Karnātaka,test
+g2_1851,Betul,Madhya Pradesh,val
+g2_1852,Pratapgarh,Uttar Pradesh,test
+g3_1853,Barpeta,Assam,train
+g3_1854,Rohtas,Bihār,test
+g3_1855,Nalanda,Bihār,val
+g2_1856,Hanumangarh,Rājasthān,test
+g0_1857,Ahmadnagar,Mahārāshtra,train
+g2_1858,Kachchh,Gujarāt,train
+g0_1859,Amreli,Gujarāt,train
+g1_1860,Debagarh,Odisha,train
+g2_1861,Rajsamand,Rājasthān,train
+g0_1862,Viluppuram,Tamil Nādu,train
+g0_1863,Rajnandgaon,Chhattīsgarh,train
+g0_1864,Parbhani,Mahārāshtra,train
+g1_1865,Balangir,Odisha,train
+g0_1866,Hassan,Karnātaka,train
+g2_1867,Gandhinagar,Gujarāt,test
+g3_1868,Jhargram,West Bengal,train
+g0_1869,Guntur,Andhra Pradesh,test
+g0_1870,Bhadradri,Telangāna,train
+g0_1871,Nizamabad,Telangāna,train
+g2_1872,Ujjain,Madhya Pradesh,train
+g0_1873,Wanaparthy,Telangāna,none
+g1_1874,Koraput,Odisha,test
+g2_1875,Auraiya,Uttar Pradesh,val
+g0_1876,Belgaum,Karnātaka,train
+g3_1877,Bankura,West Bengal,train
+g2_1878,Bharatpur,Rājasthān,test
+g2_1879,Jalandhar,Punjab,train
+g1_1880,Balangir,Odisha,test
+g2_1881,Agra,Uttar Pradesh,test
+g2_1882,Banas Kantha,Gujarāt,train
+g2_1883,Ganganagar,Rājasthān,test
+g2_1884,Tonk,Rājasthān,test
+g2_1885,Rajsamand,Rājasthān,train
+g2_1886,Pali,Rājasthān,val
+g2_1887,Fazilka,Punjab,train
+g0_1888,Peddapalli,Telangāna,train
+g2_1889,Rampur,Uttar Pradesh,test
+g2_1890,Khargone (West Nimar),Madhya Pradesh,train
+g1_1891,Ganjam,Odisha,train
+g2_1892,Khargone (West Nimar),Madhya Pradesh,train
+g1_1893,Cuttack,Odisha,train
+g2_1894,Ujjain,Madhya Pradesh,train
+g2_1895,Sangrur,Punjab,val
+g2_1896,Bikaner,Rājasthān,train
+g2_1897,Shrawasti,Uttar Pradesh,train
+g2_1898,Kota,Rājasthān,test
+g2_1899,Ahmadabad,Gujarāt,test
+g0_1900,East Godavari,Andhra Pradesh,train
+g0_1901,Sangli,Mahārāshtra,test
+g3_1902,Saraikela-Kharsawan,Jhārkhand,train
+g2_1903,Shivpuri,Madhya Pradesh,val
+g3_1904,Sahibganj,Jhārkhand,train
+g0_1905,Bagalkot,Karnātaka,train
+g0_1906,Kondagaon,Chhattīsgarh,train
+g0_1907,Ahmadnagar,Mahārāshtra,train
+g2_1908,Gwalior,Madhya Pradesh,none
+g2_1909,Mandi,Himāchal Pradesh,train
+g2_1910,Hoshangabad,Madhya Pradesh,test
+g3_1911,Sundargarh,Odisha,test
+g2_1912,Jhabua,Madhya Pradesh,train
+g2_1913,Barmer,Rājasthān,train
+g2_1914,Solan,Himāchal Pradesh,train
+g1_1915,Dhenkanal,Odisha,train
+g0_1916,Nagapattinam,Tamil Nādu,train
+g2_1917,Ajmer,Rājasthān,train
+g0_1918,Sri Potti Sriramulu Nellore,Andhra Pradesh,val
+g0_1919,Buldana,Mahārāshtra,train
+g0_1920,Bijapur,Karnātaka,train
+g0_1921,Jalna,Mahārāshtra,train
+g0_1922,Solapur,Mahārāshtra,test
+g2_1923,Indore,Madhya Pradesh,train
+g2_1924,Tarn Taran,Punjab,train
+g3_1925,Chatra,Jhārkhand,test
+g2_1926,Jhansi,Uttar Pradesh,train
+g1_1927,Vizianagaram,Andhra Pradesh,test
+g2_1928,Banswara,Rājasthān,test
+g0_1929,Anantapur,Andhra Pradesh,none
+g2_1930,Panch Mahals,Gujarāt,test
+g3_1931,Bankura,West Bengal,train
+g1_1932,Srikakulam,Andhra Pradesh,test
+g3_1933,Muzaffarpur,Bihār,train
+g2_1934,Ambala,Haryāna,train
+g2_1935,Jodhpur,Rājasthān,train
+g2_1936,Chhindwara,Madhya Pradesh,train
+g0_1937,Uttar Bastar Kanker,Chhattīsgarh,train
+g0_1938,Solapur,Mahārāshtra,test
+g1_1939,Debagarh,Odisha,train
+g2_1940,Jodhpur,Rājasthān,test
+g2_1941,Udaipur,Rājasthān,train
+g2_1942,Seoni,Madhya Pradesh,train
+g0_1943,Narmada,Gujarāt,train
+g3_1944,Puruliya,West Bengal,train
+g0_1945,Ahmadnagar,Mahārāshtra,train
+g1_1946,Nabarangapur,Odisha,test
+g2_1947,Rupnagar,Punjab,train
+g2_1948,Shajapur,Madhya Pradesh,val
+g0_1949,Uttara Kannada,Karnātaka,train
+g3_1950,Mirzapur,Uttar Pradesh,train
+g0_1951,Tiruchirappalli,Tamil Nādu,test
+g2_1952,Shrawasti,Uttar Pradesh,train
+g0_1953,Uttar Bastar Kanker,Chhattīsgarh,train
+g0_1954,Akola,Mahārāshtra,val
+g3_1955,Jhargram,West Bengal,train
+g2_1956,Rajsamand,Rājasthān,train
+g0_1957,Kadapa(YSR),Andhra Pradesh,train
+g3_1958,Mayurbhanj,Odisha,train
+g2_1959,Jalor,Rājasthān,val
+g2_1960,Katni,Madhya Pradesh,train
+g1_1961,Ganjam,Odisha,train
+g1_1962,Koraput,Odisha,test
+g0_1963,Ahmadnagar,Mahārāshtra,train
+g3_1964,Gumla,Jhārkhand,test
+g3_1965,Kamrup,Assam,train
+g0_1966,Siddipet,Telangāna,train
+g0_1967,Krishna,Andhra Pradesh,train
+g0_1968,Valsad,Gujarāt,train
+g2_1969,Gaurella Pendra Marwahi,Chhattīsgarh,train
+g0_1970,Khammam,Telangāna,train
+g0_1971,West Godavari,Andhra Pradesh,train
+g2_1972,Budaun,Uttar Pradesh,train
+g3_1973,Sahibganj,Jhārkhand,train
+g0_1974,Gulbarga,Karnātaka,train
+g1_1975,Balangir,Odisha,test
+g0_1976,West Godavari,Andhra Pradesh,train
+g0_1977,Buldana,Mahārāshtra,train
+g3_1978,Azamgarh,Uttar Pradesh,train
+g0_1979,Prakasam,Andhra Pradesh,val
+g0_1980,Bid,Mahārāshtra,train
+g3_1981,Supaul,Bihār,train
+g2_1982,Mirzapur,Uttar Pradesh,test
+g0_1983,Nagarkurnool,Telangāna,train
+g2_1984,Vidisha,Madhya Pradesh,none
+g0_1985,Osmanabad,Mahārāshtra,test
+g0_1986,Bhavnagar,Gujarāt,train
+g0_1987,Sangli,Mahārāshtra,val
+g2_1988,Jabalpur,Madhya Pradesh,train
+g0_1989,Valsad,Gujarāt,train
+g0_1990,Hassan,Karnātaka,train
+g0_1991,Pune,Mahārāshtra,train
+g2_1992,Barmer,Rājasthān,val
+g0_1993,Latur,Mahārāshtra,train
+g3_1994,Puruliya,West Bengal,train
+g2_1995,Sirohi,Rājasthān,train
+g0_1996,Wardha,Mahārāshtra,val
+g2_1997,Mansa,Punjab,val
+g2_1998,Auraiya,Uttar Pradesh,val
+g0_1999,Rajnandgaon,Chhattīsgarh,train
+g2_2000,Ludhiana,Punjab,val
+g2_2001,Dhar,Madhya Pradesh,train
+g3_2002,Baksa,Assam,train
