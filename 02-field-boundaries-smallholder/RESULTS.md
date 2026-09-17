@@ -34,6 +34,9 @@ inference or unexplained, it says so.
    terms.
 
 ---
+Stage 2b tests whether that number is about the imagery or about the
+checkpoint, by running untrained methods over the same chips. See
+COMPARISON.md.
 
 ## What was run
 
