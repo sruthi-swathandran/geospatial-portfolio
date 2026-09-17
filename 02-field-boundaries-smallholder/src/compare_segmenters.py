@@ -197,6 +197,7 @@ def main() -> None:
 
     px_m = F.grid_pixel_m()
     min_px = int(round(args.min_size_m2 / (px_m * px_m)))
+    suffix = f"_min{int(args.min_size_m2)}"
     rng = np.random.default_rng(args.seed)
 
     print(RULE)
@@ -308,7 +309,7 @@ def main() -> None:
                 if r["method"] == method:
                     r["recall_at_ftw_budget"] = round(rec, 4)
 
-    sp = F.RESULTS / "segmenter_comparison.csv"
+    sp = F.RESULTS / f"segmenter_comparison{suffix}.csv"
     with open(sp, "w", newline="", encoding="utf-8") as fh:
         w = csv.DictWriter(fh, fieldnames=list(summary[0]))
         w.writeheader()
@@ -316,7 +317,7 @@ def main() -> None:
     print(f"\n  wrote {sp.relative_to(F.PROJECT)}")
 
     for method, (key, gap) in best.items():
-        tag = "seg_ftw" if method == "ftw" else f"seg_{method}"
+        tag = ("seg_ftw" if method == "ftw" else f"seg_{method}") + suffix
         for p in S.write_tables(rows[key], F.RESULTS, tag):
             print(f"  wrote {p.relative_to(F.PROJECT)}  "
                   f"(setting {key[1]}, gap {gap:+.3f})")
