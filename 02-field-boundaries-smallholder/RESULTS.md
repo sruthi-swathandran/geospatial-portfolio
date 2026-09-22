@@ -12,6 +12,15 @@ work today would pick up.
 Every number traces to a file under `results/`. Where a number is a bound, an
 inference or unexplained, it says so.
 
+## Where this sits
+
+`FINDINGS.md` measures the reference data before any model runs. `RESULTS.md`
+runs FTW's published method against it. `COMPARISON.md` puts two classical
+methods and a foundation model beside that checkpoint over the same chips, and
+that is where the current headline numbers live. A technical review of all
+three documents is in `REVIEW.md`. The gaps it found that change how these
+numbers should be read are listed under Known gaps in `COMPARISON.md`.
+
 ---
 
 ## The short version
@@ -124,6 +133,16 @@ at about five native pixels across. In a wall-to-wall mosaic of parcels that
 size, most ground genuinely does lie within a boundary's width of an edge. The
 resolution limit does not appear as a blurred outline. It appears as a scene
 where the model finds edges everywhere and has nowhere left to put an interior.
+
+**Stage 2b puts that explanation in doubt.** The labelled Slovenian parcels
+are about half the width of the labelled Indian ones, 22.0 m median against
+42.5 m, with 64.9% of them under 30 m against India's 22.2%. If densely packed
+small parcels drove the saturation, Slovenia should saturate harder, and it
+does not: 18 objects per chip there against 175 here. What holds the argument
+back is that India's labels are presence-only, and an annotator drawing five
+parcels by hand is likely to pick visible ones, so the true Indian parcel
+population may run smaller than its labelled median says. See the cross-country
+table in `COMPARISON.md` and F-01 in `REVIEW.md`.
 
 Slovenia's 87 chips predicting no field at all are a different case and not a
 failure: those chips are forested hills with almost nothing labelled either.

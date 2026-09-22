@@ -11,6 +11,15 @@ Data: [Fields of The World](https://source.coop/kerner-lab/fields-of-the-world),
 India subset, with Slovenia as a control. CC-BY-4.0, imagery Copernicus / ESA.
 Nothing here comes from any non-public source.
 
+## Where this sits
+
+`FINDINGS.md` measures the reference data before any model runs. `RESULTS.md`
+runs FTW's published method against it. `COMPARISON.md` puts two classical
+methods and a foundation model beside that checkpoint over the same chips, and
+that is where the current headline numbers live. A technical review of all
+three documents is in `REVIEW.md`. The gaps it found that change how these
+numbers should be read are listed under Known gaps in `COMPARISON.md`.
+
 Every file below exists for both countries under `results/<country>/` and
 `figures/<country>/`. Paths are written as India's; swap the country for the
 control's.

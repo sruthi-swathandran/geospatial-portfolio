@@ -171,7 +171,7 @@ def aggregate(path: Path, iou_cut: float, country: str, min_size: float,
     print(f"  {'composite':>10} {'setting':>12} {'objects':>8} {'parcels':>8} "
           f"{'med IoU':>8} {'recall':>7} {'null':>7} {'gap':>7}")
 
-    summary, best = [], (None, -9.0)
+    summary, best, tables = [], (None, -9.0), {}
     for comp in sorted({r["composite"] for r in raw}):
         for pair in SETTINGS:
             name = setting_name(pair)
@@ -181,6 +181,7 @@ def aggregate(path: Path, iou_cut: float, country: str, min_size: float,
                     and r["setting"] == name and r["is_null"]]
             if not real:
                 continue
+            tables[(comp, name)] = real
             ious = np.array([r["best_iou"] for r in real])
             nious = (np.array([r["best_iou"] for r in null]) if null
                      else np.array([0.0]))
@@ -208,14 +209,24 @@ def aggregate(path: Path, iou_cut: float, country: str, min_size: float,
         w.writerows(summary)
     print(f"\n  wrote {out.relative_to(F.PROJECT)}")
 
+    def keep_cols(rs):
+        cols = ("country", "chip", "parcel_id", "full_px", "hectares",
+                "native_10m_px", "best_iou", "found", "width_native_px")
+        return [{k: r[k] for k in cols}
+                for r in [dict(r, country=country) for r in rs]]
+
+    # Every setting, not just the winner, so the width comparison across
+    # methods can be read at a matched object count afterwards. See O-11.
+    for (comp, name), rs in tables.items():
+        slug = name.split("/")[0].replace(".", "p")
+        S.write_tables(keep_cols(rs), F.RESULTS,
+                       f"seg_sam_{model}_{comp}_{slug}_min{int(min_size)}")
+    print(f"  wrote per-setting tables for {len(tables)} combinations")
+
     if best[0]:
-        comp, name, rows = best[0]
-        keep = [{k: r[k] for k in
-                 ("country", "chip", "parcel_id", "full_px", "hectares",
-                  "native_10m_px", "best_iou", "found", "width_native_px")}
-                for r in [dict(r, country=country) for r in rows]]
+        comp, name, rs = best[0]
         tag = f"seg_sam_{model}_{comp}_min{int(min_size)}"
-        for p in S.write_tables(keep, F.RESULTS, tag):
+        for p in S.write_tables(keep_cols(rs), F.RESULTS, tag):
             print(f"  wrote {p.relative_to(F.PROJECT)}  "
                   f"({comp}, {name}, gap {best[1]:+.3f})")
 
@@ -238,7 +249,8 @@ def main() -> None:
     ap.add_argument("--points", type=int, default=32)
     ap.add_argument("--composites", default="true,false")
     ap.add_argument("--ref-tag", default="3class_full")
-    ap.add_argument("--limit", type=int, default=60)
+    ap.add_argument("--limit", type=int, default=0,
+                    help="0 means every chip")
     ap.add_argument("--iou", type=float, default=0.5)
     ap.add_argument("--min-size-m2", type=float, default=500.0)
     ap.add_argument("--null-draws", type=int, default=3)
@@ -260,7 +272,7 @@ def main() -> None:
                 f"_min{int(args.min_size_m2)}.csv")
 
     if args.aggregate_only:
-        aggregate(raw_path, args.iou, F.COUNTRY, args.min_size_m2)
+        aggregate(raw_path, args.iou, F.COUNTRY, args.min_size_m2, args.model)
         return
 
     try:
@@ -277,7 +289,9 @@ def main() -> None:
     pred_dir = F.RESULTS / f"pred_{args.ref_tag}"
     if not pred_dir.exists():
         sys.exit(f"{pred_dir} not found, so I cannot match the chip list")
-    chips = [p.name for p in sorted(pred_dir.glob("*.tif"))][:args.limit]
+    chips = [p.name for p in sorted(pred_dir.glob("*.tif"))]
+    if args.limit:
+        chips = chips[:args.limit]
 
     comps = [c.strip() for c in args.composites.split(",") if c.strip()]
     for c in comps:

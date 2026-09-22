@@ -50,8 +50,8 @@ except Exception:                                             # noqa: BLE001
 RULE = "=" * 78
 
 SWEEPS = {
-    "watershed": [0.005, 0.01, 0.02, 0.05, 0.10, 0.20],
-    "felzenszwalb": [25, 50, 100, 200, 400, 800],
+    "watershed": [0.005, 0.01, 0.02, 0.05, 0.08, 0.10, 0.13, 0.16, 0.20, 0.30],
+    "felzenszwalb": [25, 50, 100, 150, 200, 300, 400, 800],
 }
 
 
@@ -315,6 +315,19 @@ def main() -> None:
         w.writeheader()
         w.writerows(summary)
     print(f"\n  wrote {sp.relative_to(F.PROJECT)}")
+
+    # Every setting gets its own tables, not just the winner. The width
+    # comparison across methods is only fair at a matched object count, and
+    # baking in whichever setting won on gap makes that impossible after the
+    # fact. See O-11.
+    for key in runs:
+        if not rows[key]:
+            continue
+        method, param = key
+        stem = ("seg_ftw" if method == "ftw"
+                else f"seg_{method}_{str(param).replace('.', 'p')}")
+        S.write_tables(rows[key], F.RESULTS, stem + suffix)
+    print(f"  wrote per-setting tables for {len(runs)} settings")
 
     for method, (key, gap) in best.items():
         tag = ("seg_ftw" if method == "ftw" else f"seg_{method}") + suffix
