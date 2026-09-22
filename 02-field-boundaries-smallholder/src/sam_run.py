@@ -215,7 +215,7 @@ def aggregate(path: Path, iou_cut: float, country: str, min_size: float,
         return [{k: r[k] for k in cols}
                 for r in [dict(r, country=country) for r in rs]]
 
-    # Every setting, not just the winner, so the width comparison across
+    # Every setting gets its own tables, so the width comparison across
     # methods can be read at a matched object count afterwards. See O-11.
     for (comp, name), rs in tables.items():
         slug = name.split("/")[0].replace(".", "p")
@@ -253,7 +253,8 @@ def main() -> None:
                     help="0 means every chip")
     ap.add_argument("--iou", type=float, default=0.5)
     ap.add_argument("--min-size-m2", type=float, default=500.0)
-    ap.add_argument("--null-draws", type=int, default=3)
+    ap.add_argument("--null-draws", type=int, default=3,
+                    help="3 is enough where the gap is large. For a\n                          small gap, null_strength.py measures the\n                          null at 200 draws and reruns none of this")
     ap.add_argument("--threads", type=int, default=0)
     ap.add_argument("--seed", type=int, default=20260917)
     ap.add_argument("--aggregate-only", action="store_true")

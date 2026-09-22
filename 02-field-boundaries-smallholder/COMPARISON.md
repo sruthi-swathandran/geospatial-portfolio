@@ -28,10 +28,13 @@ should be read are listed under Known gaps below.
    18 objects per chip. No competing method was run coarse enough to be read at
    that budget, so their figures there are upper bounds rather than
    measurements. See B-08.
-3. FTW's Indian output sits close to its own null. Recall 0.027 against a null
-   of 0.022 on 1,983 parcels, a gap of +0.005. The null itself moves by about
-   that much between runs at three draws, so this says the checkpoint is near
-   chance without establishing by how much. See Known gaps.
+3. FTW's Indian output barely clears its own null, measured properly. At 200
+   draws rather than three, random Voronoi cells of the same count average
+   0.0209 against the checkpoint's 0.0272. Three draws in 200 beat it outright
+   and the best reached 0.0308, above the trained model, on cells that never
+   saw the imagery. The gap is +0.0063, about twelve parcels in 1,983, and it
+   clears the null at roughly one draw in seventy. Real, and small enough that
+   the three-draw version in the table below could not have established it.
 4. The checkpoint shatters on India. It emits 175 objects per chip into scenes
    holding five labelled parcels, against 18 per chip on Slovenia where about
    37 exist. The boundary saturation measured in stage 2, where 321 of 399
@@ -193,6 +196,13 @@ At FTW's budget of 175 objects per chip:
 
 Every figure in that table sits inside its method's measured sweep, so the
 Indian comparison is a measurement throughout.
+
+The null column comes from three draws, which is the sweep's default and is
+ample everywhere the gap runs to +0.09 or beyond. It is not ample for FTW's
+row. `src\null_strength.py` remeasures that one at 200 draws without rerunning
+any segmentation, and it puts the null at 0.0209 with a standard deviation of
+0.0030, so FTW's gap is +0.0063 rather than the +0.005 shown here. Every draw
+is kept in `results/india/null_draws_ftw.csv`.
 
 Felzenszwalb is barely above its null anywhere and below it at the finest
 setting. It was designed for three-channel photographs and warns when handed
@@ -504,6 +514,21 @@ country difference. Cross-country bands are now cut in metres.
 **B-10. Slovenian chips were described as holding about 32 parcels.** 6,831
 parcels across 185 labelled chips is about 37.
 
+**B-11. The null ran at three draws where the gap needed more.** FTW's Indian
+null read 0.022 from three draws and 0.0209 from two hundred, which moved the
+gap from +0.005 to +0.0063. Three draws was never enough to separate those,
+since the null's own standard deviation at that setting is 0.0030. The sweep
+still runs three draws, because everywhere else the gap is thirty times that
+spread; the one row that needed more is remeasured on its own.
+
+**B-12. Every published interval assumed parcels were independent.** They sit
+about 5 to a chip in India and 37 in Slovenia, sharing the scene, the season,
+the cloud state and the annotator, so the effective sample size is nearer the
+chip count than the parcel count. Clopper-Pearson on parcels gave FTW's
+Slovenian recall as [21.23, 23.21] where resampling chips gives [18.55, 25.87].
+No conclusion in this document turns on it, since the differences it reports
+are five-fold and larger, and every interval was still too narrow.
+
 ---
 
 ## Known gaps
@@ -511,16 +536,21 @@ parcels across 185 labelled chips is about 37.
 These come from the review in `REVIEW.md` and they change how the numbers above
 should be read. The full list of 21 findings is in that document.
 
-**The null has three draws.** FTW's Indian gap of +0.005 is smaller than the
-amount the null moves between runs at that setting, so finding 3 states a
-direction without a magnitude. Raising the draw count is the fix and it has not
-been done.
+**The null at three draws, now measured at 200.** Closed. FTW's Indian gap is
++0.0063 against a null whose standard deviation is 0.0030, and 3 draws in 200
+of random cells beat the checkpoint outright. The direction holds and the
+magnitude is now known. Run `src\null_strength.py` to reproduce it.
 
-**Intervals treat parcels as independent.** India carries about 5 parcels per
-chip and Slovenia about 37, and parcels in a chip share the scene, the season,
-the cloud state and the annotator. Any interval quoted from this project is
-narrower than it should be, which matters for the close calls rather than the
-large differences.
+**Intervals treated parcels as independent, now measured by chip.** Closed, and
+the correction is larger than expected. Resampling whole chips rather than
+parcels widens FTW's Slovenian interval from [21.23, 23.21] to
+[18.55, 25.87], which is 3.69 times wider, and its Indian interval from
+[2.05, 3.54] to [1.71, 3.88], 1.45 times wider. Slovenia suffers more because
+it carries about 37 parcels per chip against India's 5, so its parcels repeat
+each other more. Every interval this project has published should be read at
+the chip-level width. Run `src\bootstrap_ci.py` to reproduce it. Width bands
+holding fewer than ten found parcels fall back to the parcel-level interval,
+because a bootstrap over chips cannot resolve a tail it almost never samples.
 
 **Every reported setting is the best of its own sweep**, chosen on the same
 parcels the result is quoted from. There is no held-out split in this project.
@@ -551,6 +581,9 @@ python src\compare_segmenters.py --country slovenia
 python src\sam_run.py --country india --model vit_h
 python src\sam_run.py --country slovenia --model vit_h
 python src\build_comparison.py
+python src\null_strength.py --country india --method ftw --draws 200
+python src\bootstrap_ci.py --country india --by-width
+python src\bootstrap_ci.py --country slovenia --by-width
 python src\check_tables.py
 python src\figure_budget.py
 python src\threshold_check.py --country india --width-file parcel_width_seg_watershed_min500.csv
@@ -575,6 +608,7 @@ Outputs land in `results/<country>/`:
 | `score_parcels_seg_<method>_min500.csv` | per-parcel IoU |
 | `parcel_width_seg_<method>_min500.csv` | the same with the width column |
 | `parcel_contrast.csv` | per-parcel boundary contrast, unvalidated |
+| `null_draws_ftw.csv` | every null draw behind finding 3 |
 | `scorer_reconciliation.csv` | truth and prediction combinations, for S-08 |
 | `probe/` | the 5-chip ViT-B timing probe that chose ViT-H |
 

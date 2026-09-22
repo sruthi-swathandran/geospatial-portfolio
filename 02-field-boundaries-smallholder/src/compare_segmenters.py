@@ -167,7 +167,8 @@ def main() -> None:
     ap.add_argument("--ref-tag", default="3class_full")
     ap.add_argument("--limit", type=int, default=0)
     ap.add_argument("--iou", type=float, default=0.5)
-    ap.add_argument("--null-draws", type=int, default=3)
+    ap.add_argument("--null-draws", type=int, default=3,
+                    help="3 is enough where the gap is large. For a\n                          small gap, null_strength.py measures the\n                          null at 200 draws and reruns none of this")
     ap.add_argument("--min-size-m2", type=float, default=500.0,
                     help="FTW polygonize's own default, 0 to disable")
     ap.add_argument("--seed", type=int, default=20260916)
@@ -316,7 +317,7 @@ def main() -> None:
         w.writerows(summary)
     print(f"\n  wrote {sp.relative_to(F.PROJECT)}")
 
-    # Every setting gets its own tables, not just the winner. The width
+    # Every setting gets its own tables, the winner included. The width
     # comparison across methods is only fair at a matched object count, and
     # baking in whichever setting won on gap makes that impossible after the
     # fact. See O-11.
