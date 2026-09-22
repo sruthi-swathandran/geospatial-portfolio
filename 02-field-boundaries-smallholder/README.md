@@ -226,8 +226,18 @@ grid pixels covers a different physical size in each country.
 
 ## Running it
 
-Python 3.11. Dependencies are not yet pinned for this project, which is open
-finding F-09 in `REVIEW.md`.
+Python 3.11.9. The two torch pins carry a `+cpu` local version that PyPI does
+not serve, so they install from PyTorch's own index first and the rest follows:
+
+```
+pip install torch==2.14.0 torchvision==0.29.0 ^
+    --index-url https://download.pytorch.org/whl/cpu
+pip install -r requirements.txt
+```
+
+`requirements-lock.txt` holds the complete 168-package environment the
+published numbers came from. It is a Windows freeze, so audit against it rather
+than installing from it. No GPU is used anywhere here.
 
 ```
 python src\ftw_download.py --country india

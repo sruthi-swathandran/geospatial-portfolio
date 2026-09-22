@@ -38,6 +38,9 @@ Work done since this review was written. Everything else below still stands.
 | F-08 | Closed | The 4-chip residue is deleted. The 5-chip ViT-B probe moved to `results/india/probe/` |
 | F-17 | Closed | Tables carry every row the CSVs carry |
 | F-20 | Closed | `FINDINGS.md` and `RESULTS.md` open with a stage map pointing at each other and here |
+| F-09 | Closed | `requirements.txt` pins the 15 packages `src/` imports at the versions that produced the tables, with the CPU torch index spelled out. `requirements-lock.txt` holds the full 168-package freeze |
+| F-13 | Closed | `sam_probe.py` moved into `src/`, with a docstring saying it ran on 5 chips and that its recall column is a smoke test |
+| F-19 | Closed | READMEs written for RS-02 and for the repository root |
 | F-21 | Closed | Committed |
 
 One finding was raised by the work rather than the review. **B-08**: four of the
@@ -45,10 +48,9 @@ five figures at Slovenia's object budget are clamped, because no competing
 method was run coarse enough to reach 18 objects per chip. FTW's Slovenian win
 is wider than any table can currently state.
 
-Still open and worth doing next: **F-19**, the README, which is what a reader
-meets first. Then **F-13**, `sam_probe.py` living outside the repository, and
-**F-09**, unpinned dependencies. **F-07**, **F-10**, **F-11**, **F-12** and
-**F-14** are each a piece of measurement rather than a fix.
+Still open: **F-07**, **F-10**, **F-11**, **F-12** and **F-14**, each of which
+is a measurement to run rather than a fix to apply. **F-15** and **F-16** are
+provenance details, **F-18** is a line of documentation.
 
 ---
 

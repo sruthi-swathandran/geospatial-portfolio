@@ -1,0 +1,44 @@
+# Direct dependencies for RS-02, pinned to the versions the published numbers
+# were computed with. Python 3.11.9. Transitive dependencies resolve from
+# these; the complete environment as it stood is in requirements-lock.txt.
+#
+# The lock file is a Windows freeze and carries packages that will not install
+# on Linux or macOS. Use this file to install, the lock file to audit.
+#
+# torch and torchvision are pinned to CPU builds, which carry a +cpu local
+# version that PyPI does not serve. Install those two from PyTorch's own index
+# first, then the rest:
+#
+#   pip install torch==2.14.0 torchvision==0.29.0 ^
+#       --index-url https://download.pytorch.org/whl/cpu
+#   pip install -r requirements.txt
+#
+# No GPU is used anywhere in this project. A CUDA build works and buys nothing,
+# since SAM is bound by its prompt grid on this workload rather than by the
+# encoder.
+
+# the benchmark, its released checkpoints and its inference CLI.
+# this pulls segmentation_models_pytorch, which loads FTW's U-Net.
+ftw-tools==1.4.3
+
+# arrays, rasters and geometry
+numpy==2.4.6
+scipy==1.17.1
+pandas==3.0.5
+rasterio==1.4.4
+pyproj==3.7.2
+geopandas==1.1.4
+shapely==2.1.2
+
+# segmentation baselines
+scikit-image==0.26.0
+segment-anything==1.0
+
+# model runtime. torchvision is required by segment-anything at import.
+torch==2.14.0
+torchvision==0.29.0
+torchmetrics==1.9.0
+
+# figures and downloads
+matplotlib==3.11.2
+requests==2.34.2
