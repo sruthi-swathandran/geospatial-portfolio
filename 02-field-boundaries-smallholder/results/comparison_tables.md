@@ -125,10 +125,10 @@ SAM at threshold 0.50, classical methods at their best setting.
 
 | ground width | parcels | FTW 3-class FULL | watershed | SAM ViT-H true colour | SAM ViT-H false colour |
 |---|---:|---:|---:|---:|---:|
-| under 20 m | 2,842 | 1.48% | 5.42% | 3.80% | 2.74% |
-| 20 to 30 m | 1,590 | 12.89% | 35.97% | 24.40% | 21.01% |
-| 30 to 50 m | 1,261 | 41.24% | 63.36% | 47.26% | 41.87% |
-| 50 m up | 1,138 | 65.91% | 73.11% | 69.51% | 66.52% |
+| under 20 m | 2,163 | 0.51% | 2.91% | 2.50% | 1.57% |
+| 20 to 30 m | 1,229 | 7.81% | 20.91% | 14.48% | 12.12% |
+| 30 to 50 m | 1,740 | 23.62% | 47.64% | 32.01% | 27.76% |
+| 50 m up | 1,699 | 58.80% | 71.10% | 64.39% | 60.68% |
 
 ## Slovenia, the same widths cut finer
 
@@ -136,13 +136,13 @@ SAM at threshold 0.50, classical methods at their best setting.
 
 | width, native 10 m px | parcels | FTW 3-class FULL | watershed | SAM ViT-H true colour | SAM ViT-H false colour |
 |---|---:|---:|---:|---:|---:|
-| under 2 | 2,842 | 1.48% | 5.42% | 3.80% | 2.74% |
-| 2 to 3 | 1,590 | 12.89% | 35.97% | 24.40% | 21.01% |
-| 3 to 4 | 706 | 36.26% | 60.06% | 42.63% | 34.56% |
-| 4 to 5 | 555 | 47.57% | 67.57% | 53.15% | 51.17% |
-| 5 to 7 | 620 | 62.10% | 72.90% | 63.71% | 61.61% |
-| 7 to 10 | 369 | 69.65% | 77.51% | 76.15% | 71.27% |
-| 10 and over | 149 | 72.48% | 63.09% | 77.18% | 75.17% |
+| under 2 | 2,163 | 0.51% | 2.91% | 2.50% | 1.57% |
+| 2 to 3 | 1,229 | 7.81% | 20.91% | 14.48% | 12.12% |
+| 3 to 4 | 1,193 | 18.86% | 42.92% | 27.75% | 24.14% |
+| 4 to 5 | 547 | 34.00% | 57.95% | 41.32% | 35.65% |
+| 5 to 7 | 827 | 48.49% | 68.80% | 55.86% | 50.67% |
+| 7 to 10 | 553 | 66.18% | 75.23% | 69.80% | 67.09% |
+| 10 and over | 319 | 72.73% | 69.91% | 77.12% | 75.55% |
 
 ## The same width band in both countries
 
@@ -150,15 +150,93 @@ Same sensor, same method, same physical parcel size.
 
 | ground width | method | India | Slovenia | ratio |
 |---|---|---:|---:|---:|
-| under 20 m | FTW 3-class FULL | 0/196, 0.00% | 42/2,842, 1.48% | not readable |
-| 20 to 30 m | FTW 3-class FULL | 1/245, 0.41% | 205/1,590, 12.89% | 31.6x |
-| 30 to 50 m | FTW 3-class FULL | 5/867, 0.58% | 520/1,261, 41.24% | 71.5x |
-| 50 m up | FTW 3-class FULL | 48/675, 7.11% | 750/1,138, 65.91% | 9.3x |
-| under 20 m | watershed | 2/196, 1.02% | 154/2,842, 5.42% | 5.3x |
-| 20 to 30 m | watershed | 12/245, 4.90% | 572/1,590, 35.97% | 7.3x |
-| 30 to 50 m | watershed | 195/867, 22.49% | 799/1,261, 63.36% | 2.8x |
-| 50 m up | watershed | 279/675, 41.33% | 832/1,138, 73.11% | 1.8x |
-| under 20 m | SAM ViT-H true colour | 1/196, 0.51% | 108/2,842, 3.80% | 7.4x |
-| 20 to 30 m | SAM ViT-H true colour | 5/245, 2.04% | 388/1,590, 24.40% | 12.0x |
-| 30 to 50 m | SAM ViT-H true colour | 76/867, 8.77% | 596/1,261, 47.26% | 5.4x |
-| 50 m up | SAM ViT-H true colour | 228/675, 33.78% | 791/1,138, 69.51% | 2.1x |
+| under 20 m | FTW 3-class FULL | 0/196, 0.00% | 11/2,163, 0.51% | not readable |
+| 20 to 30 m | FTW 3-class FULL | 1/245, 0.41% | 96/1,229, 7.81% | 19.1x |
+| 30 to 50 m | FTW 3-class FULL | 5/867, 0.58% | 411/1,740, 23.62% | 41.0x |
+| 50 m up | FTW 3-class FULL | 48/675, 7.11% | 999/1,699, 58.80% | 8.3x |
+| under 20 m | watershed | 2/196, 1.02% | 63/2,163, 2.91% | 2.9x |
+| 20 to 30 m | watershed | 12/245, 4.90% | 257/1,229, 20.91% | 4.3x |
+| 30 to 50 m | watershed | 195/867, 22.49% | 829/1,740, 47.64% | 2.1x |
+| 50 m up | watershed | 279/675, 41.33% | 1208/1,699, 71.10% | 1.7x |
+| under 20 m | SAM ViT-H true colour | 1/196, 0.51% | 54/2,163, 2.50% | 4.9x |
+| 20 to 30 m | SAM ViT-H true colour | 5/245, 2.04% | 178/1,229, 14.48% | 7.1x |
+| 30 to 50 m | SAM ViT-H true colour | 76/867, 8.77% | 557/1,740, 32.01% | 3.7x |
+| 50 m up | SAM ViT-H true colour | 228/675, 33.78% | 1094/1,699, 64.39% | 1.9x |
+
+## India, what the methods emit
+
+| method | objects/chip | no object | exactly one | 5 or more | matched share | parcels |
+|---|---:|---:|---:|---:|---:|---:|
+| FTW 3-class FULL | 175.0 | 74.4% | 18.9% | 0.3% | 0.08% | 1,983 |
+| SAM ViT-H false 0.50 (subset) | 190.4 | 8.7% | 33.0% | 8.5% | 0.42% | 494 |
+| watershed 0.02 | 675.9 | 0.0% | 7.2% | 38.2% | 0.18% | 1,983 |
+
+## India, held-out setting choice
+
+| method | published | held out | optimism | setting |
+|---|---:|---:|---:|---|
+| watershed | 0.2461 | 0.2444 | +0.0016 | 0.02 in 62% of splits |
+| felzenszwalb | 0.0842 | 0.0848 | -0.0005 | 100.0 in 100% of splits |
+| sam_vit_h_true | 0.1563 | 0.1574 | -0.0011 | 0.5 in 100% of splits |
+| sam_vit_h_false | 0.1725 | 0.1736 | -0.0012 | 0.5 in 100% of splits |
+
+## Slovenia, what the methods emit
+
+| method | objects/chip | no object | exactly one | 5 or more | matched share | parcels |
+|---|---:|---:|---:|---:|---:|---:|
+| FTW 3-class FULL | 18.3 | 55.3% | 38.2% | 0.1% | 44.91% | 6,831 |
+| watershed 0.05 | 281.9 | 0.1% | 13.0% | 27.8% | 4.52% | 6,831 |
+
+## Slovenia, held-out setting choice
+
+| method | published | held out | optimism | setting |
+|---|---:|---:|---:|---|
+| watershed | 0.3450 | 0.3470 | -0.0020 | 0.05 in 100% of splits |
+| felzenszwalb | 0.2088 | 0.2082 | +0.0006 | 100.0 in 100% of splits |
+| sam_vit_h_true | 0.2757 | 0.2710 | +0.0047 | 0.5 in 100% of splits |
+| sam_vit_h_false | 0.2484 | 0.2420 | +0.0064 | 0.5 in 100% of splits |
+
+## India, every method on the parcels the SAM subset covered
+
+| method | parcels | objects/chip | no object | exactly one | 5 or more |
+|---|---:|---:|---:|---:|---:|
+| FTW 3-class FULL | 494 | 175.0 | 75.3% | 18.2% | 0.0% |
+| SAM ViT-H false 0.50 | 494 | 190.4 | 8.7% | 33.0% | 8.5% |
+| watershed 0.02 | 494 | 675.9 | 0.0% | 7.1% | 30.8% |
+
+## Label registration
+
+
+### Displacement, overall
+
+| | India | Slovenia |
+|---|---:|---:|
+| parcels | 1,983 | 6,823 |
+| pixel east to west | 6.087 m | 4.169 m |
+| pixel north to south | 6.086 m | 5.998 m |
+| signed mean displacement | +4.13 m | +3.80 m |
+| median unsigned | 6.00 m | 6.00 m |
+| median parcel width | 42.3 m | 30.4 m |
+| median gain | 1.029x | 1.008x |
+| peak on the drawn edge | 38.8% | 47.6% |
+| same on a borrowed field | 13.1% | 14.9% |
+
+### Displacement and recall at matched ground width
+
+| ground width | India offset | India recall | Slovenia offset | Slovenia recall |
+|---|---:|---:|---:|---:|
+| under 20 m | +9.92 m | 0.00% | +5.92 m | 0.51% |
+| 20 to 30 m | +6.64 m | 0.41% | +3.79 m | 7.81% |
+| 30 to 50 m | +3.91 m | 0.58% | +2.71 m | 23.62% |
+| 50 m up | +1.81 m | 7.11% | +2.23 m | 58.80% |
+
+### Edge over the parcel's own interior
+
+| | India | Slovenia |
+|---|---:|---:|
+| median | 1.297x | 1.588x |
+| share at or below 1.0 | 14.2% | 7.2% |
+| parcels wide enough | 1,467 | 4,307 |
+| by width, 20 to 30 m | 1.118x | 1.257x |
+| by width, 30 to 50 m | 1.236x | 1.441x |
+| by width, 50 m up | 1.420x | 2.005x |

@@ -59,8 +59,8 @@ should be read are listed under Known gaps below.
    fields a foundation model with three channels beats the trained model with
    eight by nearly three times.
 9. The floor is not explained by parcel width. At matched ground width, in the
-   same sensor and by the same method, Slovenian parcels are found between 1.8
-   and 71.5 times more often than Indian ones of the same size. Whatever
+   same sensor and by the same method, Slovenian parcels are found between 1.7
+   and 41.0 times more often than Indian ones of the same size. Whatever
    separates the two countries is not resolution. See What this says.
 10. Everything here is still poor in absolute terms. One parcel in six at FTW's
    object budget is not a usable field map for India.
@@ -70,16 +70,18 @@ should be read are listed under Known gaps below.
     the clearest evidence here that FTW is a good model failing on India
     rather than a weak model everywhere.
 12. Label geometry does not explain the country gap. Measured against the image
-    gradient, Indian and Slovenian labels are displaced almost identically in
-    the pixel space IoU is scored in, +0.69 px against +0.66 px. In the two
-    widest pixel bands India's labels are the better placed of the two, and
-    India is still found 6 to 11 times less often. The explanation this
-    document carried through three versions is wrong. See B-15.
+    gradient on rings cut in metres, Indian and Slovenian labels are displaced
+    by +4.13 m and +3.80 m. In the widest band India's labels are the better
+    placed of the two, +1.81 m against +2.23 m, and India is still found 8.3
+    times less often. Below that India's labels are worse by 1.4 to 1.7 times
+    while the recall gap runs 19 to 41 times, which a difference of a few
+    metres cannot produce. The explanation this document carried through three
+    versions is wrong. See B-15.
 13. Indian field boundaries are fainter, and that is measured rather than
     inferred. Against each parcel's own interior, so that no chip statistic
     enters, the Indian edge runs 1.297x its own field against Slovenia's
-    1.573x, and 14.2% of Indian boundaries are no stronger than the crop
-    inside them against 7.7% in Slovenia. The gap widens with parcel size
+    1.588x, and 14.2% of Indian boundaries are no stronger than the crop
+    inside them against 7.2% in Slovenia. The gap widens with parcel size
     instead of narrowing. A contributor of known size rather than a full
     explanation.
 14. Choosing each method's setting on the data it is reported from was worth
@@ -349,13 +351,13 @@ setting, which is `h` 0.02 for India and 0.05 for Slovenia.
 
 | width, native 10 m px | parcels | FTW | watershed | SAM true | SAM false |
 |---|---:|---:|---:|---:|---:|
-| under 2 | 2,842 | 1.48% | 5.42% | 3.80% | 2.74% |
-| 2 to 3 | 1,590 | 12.89% | 35.97% | 24.40% | 21.01% |
-| 3 to 4 | 706 | 36.26% | 60.06% | 42.63% | 34.56% |
-| 4 to 5 | 555 | 47.57% | 67.57% | 53.15% | 51.17% |
-| 5 to 7 | 620 | 62.10% | 72.90% | 63.71% | 61.61% |
-| 7 to 10 | 369 | 69.65% | 77.51% | 76.15% | 71.27% |
-| 10 and over | 149 | 72.48% | 63.09% | 77.18% | 75.17% |
+| under 2 | 2,163 | 0.51% | 2.91% | 2.50% | 1.57% |
+| 2 to 3 | 1,229 | 7.81% | 20.91% | 14.48% | 12.12% |
+| 3 to 4 | 1,193 | 18.86% | 42.92% | 27.75% | 24.14% |
+| 4 to 5 | 547 | 34.00% | 57.95% | 41.32% | 35.65% |
+| 5 to 7 | 827 | 48.49% | 68.80% | 55.86% | 50.67% |
+| 7 to 10 | 553 | 66.18% | 75.23% | 69.80% | 67.09% |
+| 10 and over | 319 | 72.73% | 69.91% | 77.12% | 75.55% |
 
 Four things in those tables.
 
@@ -509,18 +511,18 @@ rate in each if that is true. It is not.
 
 | ground width | method | India | Slovenia | ratio |
 |---|---|---:|---:|---:|
-| under 20 m | FTW 3-class FULL | 0/196, 0.00% | 42/2,842, 1.48% | not readable |
-| 20 to 30 m | FTW 3-class FULL | 1/245, 0.41% | 205/1,590, 12.89% | 31.6x |
-| 30 to 50 m | FTW 3-class FULL | 5/867, 0.58% | 520/1,261, 41.24% | 71.5x |
-| 50 m up | FTW 3-class FULL | 48/675, 7.11% | 750/1,138, 65.91% | 9.3x |
-| under 20 m | watershed | 2/196, 1.02% | 154/2,842, 5.42% | 5.3x |
-| 20 to 30 m | watershed | 12/245, 4.90% | 572/1,590, 35.97% | 7.3x |
-| 30 to 50 m | watershed | 195/867, 22.49% | 799/1,261, 63.36% | 2.8x |
-| 50 m up | watershed | 279/675, 41.33% | 832/1,138, 73.11% | 1.8x |
-| under 20 m | SAM ViT-H true | 1/196, 0.51% | 108/2,842, 3.80% | 7.4x |
-| 20 to 30 m | SAM ViT-H true | 5/245, 2.04% | 388/1,590, 24.40% | 12.0x |
-| 30 to 50 m | SAM ViT-H true | 76/867, 8.77% | 596/1,261, 47.26% | 5.4x |
-| 50 m up | SAM ViT-H true | 228/675, 33.78% | 791/1,138, 69.51% | 2.1x |
+| under 20 m | FTW 3-class FULL | 0/196, 0.00% | 11/2,163, 0.51% | not readable |
+| 20 to 30 m | FTW 3-class FULL | 1/245, 0.41% | 96/1,229, 7.81% | 19.1x |
+| 30 to 50 m | FTW 3-class FULL | 5/867, 0.58% | 411/1,740, 23.62% | 41.0x |
+| 50 m up | FTW 3-class FULL | 48/675, 7.11% | 999/1,699, 58.80% | 8.3x |
+| under 20 m | watershed | 2/196, 1.02% | 63/2,163, 2.91% | 2.9x |
+| 20 to 30 m | watershed | 12/245, 4.90% | 257/1,229, 20.91% | 4.3x |
+| 30 to 50 m | watershed | 195/867, 22.49% | 829/1,740, 47.64% | 2.1x |
+| 50 m up | watershed | 279/675, 41.33% | 1208/1,699, 71.10% | 1.7x |
+| under 20 m | SAM ViT-H true | 1/196, 0.51% | 54/2,163, 2.50% | 4.9x |
+| 20 to 30 m | SAM ViT-H true | 5/245, 2.04% | 178/1,229, 14.48% | 7.1x |
+| 30 to 50 m | SAM ViT-H true | 76/867, 8.77% | 557/1,740, 32.01% | 3.7x |
+| 50 m up | SAM ViT-H true | 228/675, 33.78% | 1094/1,699, 64.39% | 1.9x |
 
 Widths are in metres here rather than native pixels, because the two countries
 sit on grids of different fineness. India's chips measure 6.067 m per grid
@@ -531,7 +533,7 @@ below by about half. See B-09.
 
 Read the 30 to 50 m row. Those parcels are three to five native pixels wide,
 which is at or above the floor. The checkpoint returns 0.58% on India and
-41.24% on Slovenia for parcels of the same physical size in the same sensor.
+23.62% on Slovenia for parcels of the same physical size in the same sensor.
 Watershed and SAM show the same ordering, so it is not an artefact of any one
 method.
 
@@ -544,7 +546,7 @@ method collapses below three native pixels, and the two that read the imagery
 well elsewhere collapse there too. That is a solid description of Indian
 parcels. Attributing it to the resolution of the imagery goes further than the
 data supports, because the same imagery at the same physical parcel size
-performs between two and seventy times better in Slovenia.
+performs between two and forty times better in Slovenia.
 
 **Label geometry was the leading candidate and it is now ruled out.** The
 argument was that India is presence-only with five hand-drawn parcels per chip
@@ -553,26 +555,26 @@ would be depressed whatever the imagery showed. `src\label_registration.py`
 tests it by walking each parcel's boundary inward and outward through the image
 gradient and asking where the strongest edge actually sits.
 
-In the pixel space IoU is scored in, the two countries are almost the same:
-India's labels sit +0.691 px inside the strongest edge and Slovenia's +0.661 px,
-with a median unsigned displacement of exactly one pixel in each. India's
-parcels are also the larger of the two in pixels, 7.00 against 5.32, so on
-label-geometry grounds India should score better.
+Measured on rings cut every six metres of ground in both countries, the two
+sets of labels are displaced by similar amounts: India's sit +4.13 m inside the
+strongest edge and Slovenia's +3.80 m, with a median unsigned displacement of
+6.00 m in each. Both clear their own nulls by a wide margin, 38.8% of Indian
+parcels peaking on the drawn edge against 13.1% when the walk is given a
+gradient field from an unrelated chip, and 47.6% against 14.9% in Slovenia.
 
-| pixel width | India label offset | India recall | Slovenia label offset | Slovenia recall |
+| ground width | India label offset | India recall | Slovenia label offset | Slovenia recall |
 |---|---:|---:|---:|---:|
-| under 4 px | +1.475 px | 0.00% | +1.064 px | 0.63% |
-| 4 to 6 px | +0.888 px | 0.41% | +0.582 px | 6.45% |
-| 6 to 8 px | +0.535 px | 0.78% | +0.425 px | 22.65% |
-| 8 to 12 px | **+0.316 px** | 3.95% | +0.416 px | 42.36% |
-| 12 px up | **+0.288 px** | 11.19% | +0.345 px | 65.91% |
+| under 20 m | +9.92 m | 0.00% | +5.92 m | 0.51% |
+| 20 to 30 m | +6.64 m | 0.41% | +3.79 m | 7.81% |
+| 30 to 50 m | +3.91 m | 0.58% | +2.71 m | 23.62% |
+| 50 m up | **+1.81 m** | 7.11% | +2.23 m | 58.80% |
 
-Read the last two rows. India's labels are the better placed of the two and
-India is still found 6 to 11 times less often. A hypothesis that predicts the
-opposite of the data is finished. In the narrow bands India's labels are worse,
-by 1.26x to 1.53x, so label quality contributes something there, and the recall
-gap in those same bands is 15.6x to 28.9x, which a difference of a third of a
-pixel cannot produce.
+Read the last row. Among parcels over 50 m across India's labels are the
+better placed of the two, +1.81 m against +2.23 m, and India is still found 8.3
+times less often. A hypothesis that predicts the opposite of the data is
+finished. In the narrower bands India's labels are worse, by 1.4x to 1.7x, so
+label quality contributes something there, and the recall gap in those same
+bands runs 19x to 41x, which a few metres of displacement cannot produce.
 
 The estimator behind that table is checked against displacements it was given
 before it was pointed at real labels. Run `src\label_registration.py
@@ -588,11 +590,11 @@ statistic enters the comparison:
 
 | | India | Slovenia |
 |---|---:|---:|
-| edge over its own field interior, median | 1.297x | 1.573x |
-| share where the edge is no stronger than the field | 14.2% | 7.7% |
-| by width, 20 to 30 m | 1.118x | 1.311x |
-| by width, 30 to 50 m | 1.236x | 1.662x |
-| by width, 50 m up | 1.420x | 2.159x |
+| edge over its own field interior, median | 1.297x | 1.588x |
+| share where the edge is no stronger than the field | 14.2% | 7.2% |
+| by width, 20 to 30 m | 1.118x | 1.257x |
+| by width, 30 to 50 m | 1.236x | 1.441x |
+| by width, 50 m up | 1.420x | 2.005x |
 
 The gap widens as parcels get larger, which is not the shape a resolution
 artefact takes. Only parcels wide enough to survive two erosions can be
@@ -757,7 +759,7 @@ surroundings against 7.9% in Slovenia. Stage 2 found four of five Indian chips
 are called mostly boundary, so that denominator is inflated by scene texture in
 exactly the country the claim was about. Measured against each parcel's own
 interior the Indian figure is 14.2%, less than half, while Slovenia barely
-moves from 7.9% to 7.7%. The overstated pair was never published; it was
+moves from 7.9% to 7.2%. The overstated pair was never published; it was
 reported in working notes and corrected before it reached this document.
 
 **B-16. The checkpoint was described as shattering Indian parcels.** It does
@@ -771,6 +773,48 @@ in this document is the best of its sweep chosen on the reporting data, which
 the review raised as a Major finding. Measured over 40 chip-level splits per
 country it moves recall by at most +0.0064, and seven of eight method and
 country pairs pick the same setting in every split.
+
+**B-18. The two countries are not on the same kind of grid, and this project
+assumed they were.** Fields of The World ships India on non-square degree
+pixels chosen so that a pixel is square on the ground, 6.069 m by 6.068 m. It
+ships Slovenia on square degree pixels, which at latitude 46.6 come out 4.138 m
+across and 6.002 m tall, taller than wide by 1.450. `grid_pixel_m()` measures
+the geodesic width of a chip and divides by its pixel count, so it returns the
+east to west size and nothing else, and `seg_score.parcel_width_px` compounds
+that by running a distance transform with no sampling argument, which counts a
+step north as the same length as a step east. Correct on India by luck of how
+FTW built it. Wrong on Slovenia in proportion to how the parcel is oriented.
+Found by `src\grid_check.py`, written to close F-11, which the review had
+filed as a formality.
+
+**B-19. Every Slovenian parcel width was understated, and a third of them were
+in the wrong band.** The corrected ground width runs 1.275x the published one
+at the median and 1.505x at the ninetieth percentile. Slovenia's median parcel
+is 30.4 m rather than 22.0 m, its share under 30 m is 49.7% rather than 64.9%,
+and 2,280 of 6,831 parcels move band. India moves by 1.002x and no parcel
+changes band, which is the control.
+
+Nothing method-related moves, because no width enters a recall figure. What
+moves is every table cut by width. The headline that Slovenia outperforms India
+at matched ground width was **1.8 to 71.5 times** and is **1.7 to 41.0 times**:
+
+| band | India | Slovenia, was | Slovenia, now | ratio was | now |
+|---|---:|---:|---:|---:|---:|
+| 20 to 30 m | 0.41% | 12.89% | 7.81% | 31.6x | 19.1x |
+| 30 to 50 m | 0.58% | 41.24% | 23.62% | 71.5x | 41.0x |
+| 50 m up | 7.11% | 65.91% | 58.80% | 9.3x | 8.3x |
+
+The conclusion is unchanged and its size was overstated by up to forty per
+cent. Slovenia still beats India at matched ground width by every method in
+every band, so resolution is still ruled out and so is label geometry.
+
+The label registration walk carried the same fault, cutting its rings at whole
+pixels, so the displacement figures reported before this were measuring
+different ground distances in the two countries. Rings are now cut every six
+metres and the transform is given `sampling`, so India reads +4.13 m and
+Slovenia +3.80 m on the same basis. `src\width_ground.py` measures the
+correction and `src\apply_width_fix.py` applies it to all 68 affected tables
+per country, keeping the old column as `width_native_px_published`.
 
 ---
 
@@ -815,10 +859,12 @@ self-test against known displacements. What is still missing is a check that it
 tracks what an analyst would call a visible edge, so the Jodhpur question is
 answered at national scale and unvalidated against human judgement.
 
-**The measured grid has not been reconciled with FTW's published
-specification.** 6.067 m and 4.139 m are measured geodesically from the chips.
-If that measurement is wrong then every normalised width in three documents is
-wrong with it.
+**The measured grid is now reconciled, and it was wrong.** Not the
+measurement itself, which was right about the east to west size, but the
+assumption that one number describes a pixel. Slovenia's are 1.450 times taller
+than wide. See B-18 and B-19. What is still not checked is the north to south
+figure against anything FTW publishes, since the reconciliation here is against
+the chips rather than against a specification.
 
 ---
 
@@ -833,6 +879,12 @@ python src\compare_segmenters.py --country india
 python src\compare_segmenters.py --country slovenia
 python src\sam_run.py --country india --model vit_h
 python src\sam_run.py --country slovenia --model vit_h
+python src\grid_check.py --country india
+python src\grid_check.py --country slovenia
+python src\width_ground.py --country india
+python src\width_ground.py --country slovenia
+python src\apply_width_fix.py --country india
+python src\apply_width_fix.py --country slovenia
 python src\build_comparison.py
 python src\null_strength.py --country india --method ftw --draws 200
 python src\label_registration.py --self-test
@@ -874,6 +926,7 @@ Outputs land in `results/<country>/`:
 | `label_registration.csv` | per-parcel edge displacement and contrast |
 | `precision_<method>_min500.csv` | per-parcel fragmentation, and object counts |
 | `holdout_selection.csv` | what choosing a setting on the reporting data cost |
+| `parcel_width_ground.csv` | parcel width in metres on rectangular pixels |
 | `scorer_reconciliation.csv` | truth and prediction combinations, for S-08 |
 | `probe/` | the 5-chip ViT-B timing probe that chose ViT-H |
 

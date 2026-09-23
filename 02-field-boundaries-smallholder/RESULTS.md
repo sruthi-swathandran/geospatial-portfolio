@@ -135,8 +135,9 @@ resolution limit does not appear as a blurred outline. It appears as a scene
 where the model finds edges everywhere and has nowhere left to put an interior.
 
 **Stage 2b puts that explanation in doubt.** The labelled Slovenian parcels
-are about half the width of the labelled Indian ones, 22.0 m median against
-42.5 m, with 64.9% of them under 30 m against India's 22.2%. If densely packed
+are about three quarters the width of the labelled Indian ones, 30.4 m median
+against 42.3 m, with 49.7% of them under 30 m against India's 22.2%. If densely
+packed
 small parcels drove the saturation, Slovenia should saturate harder, and it
 does not: 18 objects per chip there against 175 here. What holds the argument
 back is that India's labels are presence-only, and an annotator drawing five

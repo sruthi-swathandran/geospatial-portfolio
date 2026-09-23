@@ -16,7 +16,7 @@ So the Indian failure belongs to the method rather than to a shortage of signal
 in the imagery, at least above about three native pixels of parcel width. Below
 that every method collapses, and this project establishes that the collapse is
 not explained by parcel width either. At matched ground width, in the same
-sensor and by the same method, Slovenian parcels are found between 1.8 and 71.5
+sensor and by the same method, Slovenian parcels are found between 1.7 and 41.0
 times more often than Indian ones of the same size. That difference is
 measured, and its cause is not established.
 
@@ -126,22 +126,23 @@ should be found at about the same rate in each if that reading is right.
 
 | ground width | method | India | Slovenia | ratio |
 |---|---|---:|---:|---:|
-| 20 to 30 m | FTW 3-class FULL | 0.41% | 12.89% | 31.6x |
-| 30 to 50 m | FTW 3-class FULL | 0.58% | 41.24% | 71.5x |
-| 50 m up | FTW 3-class FULL | 7.11% | 65.91% | 9.3x |
-| 20 to 30 m | watershed | 4.90% | 35.97% | 7.3x |
-| 30 to 50 m | watershed | 22.49% | 63.36% | 2.8x |
-| 50 m up | watershed | 41.33% | 73.11% | 1.8x |
-| 20 to 30 m | SAM ViT-H true | 2.04% | 24.40% | 12.0x |
-| 30 to 50 m | SAM ViT-H true | 8.77% | 47.26% | 5.4x |
-| 50 m up | SAM ViT-H true | 33.78% | 69.51% | 2.1x |
+| 20 to 30 m | FTW 3-class FULL | 0.41% | 7.81% | 19.1x |
+| 30 to 50 m | FTW 3-class FULL | 0.58% | 23.62% | 41.0x |
+| 50 m up | FTW 3-class FULL | 7.11% | 58.80% | 8.3x |
+| 20 to 30 m | watershed | 4.90% | 20.91% | 4.3x |
+| 30 to 50 m | watershed | 22.49% | 47.64% | 2.1x |
+| 50 m up | watershed | 41.33% | 71.10% | 1.7x |
+| 20 to 30 m | SAM ViT-H true | 2.04% | 14.48% | 7.1x |
+| 30 to 50 m | SAM ViT-H true | 8.77% | 32.01% | 3.7x |
+| 50 m up | SAM ViT-H true | 33.78% | 64.39% | 1.9x |
 
 The 30 to 50 m row holds parcels three to five native pixels wide, at or above
 the threshold. Three methods with nothing in common all show the same ordering,
 so it is not an artefact of any one of them.
 
-Two further facts point the same way. The labelled Slovenian parcels are **half
-the width** of the labelled Indian ones, 22.0 m median against 42.5 m, and the
+Two further facts point the same way. The labelled Slovenian parcels are **about
+three quarters the width** of the labelled Indian ones, 30.4 m median against
+42.3 m, and the
 model saturates its boundary class on four of five Indian chips while doing
 nothing of the kind in Slovenia. The country with the smaller fields is the
 country where the model works.

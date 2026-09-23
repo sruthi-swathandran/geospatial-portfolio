@@ -60,30 +60,40 @@ except Exception:                                             # noqa: BLE001
 
 RULE = "=" * 78
 
-# Rings at whole grid pixels, inward and outward. Whole pixels because that is
-# all the imagery supports: the median Indian parcel is about six pixels
-# across, so asking where its edge sits to a third of a pixel is asking for
-# precision the grid does not carry.
-RING_PX = np.arange(-3.0, 3.01, 1.0)
-RING_HALF_PX = 0.5
+# Rings in metres, inward and outward. Metres rather than pixels because
+# grid_check.py found Slovenia's pixels are 4.138 m across and 6.002 m tall,
+# so a ring cut at a whole pixel covers different ground depending on which
+# way it runs, and differently again between the two countries. Six metres is
+# about one pixel in either country, which is all the imagery supports: the
+# median Indian parcel is roughly six pixels across, so asking where its edge
+# sits to a fraction of that is asking for precision the grid does not carry.
+# This is B-18.
+RING_M = np.arange(-18.0, 18.01, 6.0)
+RING_HALF_M = 3.0
 MIN_RING_PIXELS = 8
 
 WIDTH_EDGES_M = [0, 20, 30, 50, np.inf]
 WIDTH_LABELS_M = ["under 20 m", "20 to 30 m", "30 to 50 m", "50 m up"]
 
 
-def signed_distance(mask: np.ndarray) -> np.ndarray:
-    """Distance from the drawn boundary, negative inside and positive outside.
+def signed_distance(mask: np.ndarray, x_m: float, y_m: float) -> np.ndarray:
+    """Distance from the drawn boundary in metres, negative inside.
 
-    The raw difference of the two transforms reads +1 on the first pixel
-    outside and -1 on the last pixel inside, with nothing between them, so a
-    ring cut at zero would select no pixels at all. Collapsing that gap puts
-    the boundary band at zero, where it belongs. This is B-14.
+    sampling gives the transform the physical size of a step along each axis,
+    so the distance comes back in metres and a pixel taller than it is wide is
+    handled rather than assumed away.
+
+    The raw difference of the two transforms reads one pixel out on the first
+    pixel outside and one pixel in on the last pixel inside, with nothing
+    between them, so a ring cut at zero would select nothing at all.
+    Collapsing that gap puts the boundary band at zero, where it belongs.
+    This is B-14.
     """
     from scipy.ndimage import distance_transform_edt
-    raw = (distance_transform_edt(~mask).astype(np.float32)
-           - distance_transform_edt(mask).astype(np.float32))
-    return np.where(raw > 0, raw - 1.0, raw + 1.0).astype(np.float32)
+    step = min(x_m, y_m)
+    raw = (distance_transform_edt(~mask, sampling=(y_m, x_m)).astype(np.float32)
+           - distance_transform_edt(mask, sampling=(y_m, x_m)).astype(np.float32))
+    return np.where(raw > 0, raw - step, raw + step).astype(np.float32)
 
 
 def interior_contrast(mask, grad, chip_median):
@@ -109,11 +119,11 @@ def profile(signed, grad, chip_median):
     A ring that collapses to a handful of pixels inside a small parcel returns
     nan rather than a number built from four samples.
     """
-    out = np.full(len(RING_PX), np.nan, dtype=np.float32)
+    out = np.full(len(RING_M), np.nan, dtype=np.float32)
     if chip_median <= 0:
         return out
-    for i, r in enumerate(RING_PX):
-        ring = np.abs(signed - r) <= RING_HALF_PX
+    for i, r in enumerate(RING_M):
+        ring = np.abs(signed - r) <= RING_HALF_M
         if int(ring.sum()) >= MIN_RING_PIXELS:
             out[i] = grad[ring].mean() / chip_median
     return out
@@ -121,19 +131,41 @@ def profile(signed, grad, chip_median):
 
 def peak(prof):
     """Where the profile peaks, and how much better that is than the drawn edge."""
-    zero = int(np.argmin(np.abs(RING_PX)))
+    zero = int(np.argmin(np.abs(RING_M)))
     ok = np.isfinite(prof)
     if ok.sum() < 3 or not ok[zero]:
         return np.nan, np.nan, np.nan
     idx = np.flatnonzero(ok)
     best = idx[np.argmax(prof[idx])]
-    return float(RING_PX[best]), float(prof[best]), float(prof[zero])
+    return float(RING_M[best]), float(prof[best]), float(prof[zero])
+
+
+def chip_pixel_m(path, geod):
+    """Ground size of one pixel on this chip, east to west and north to south."""
+    import rasterio
+    with rasterio.open(path) as s:
+        left, bottom, right, top = s.bounds
+        midlat, midlon = (bottom + top) / 2, (left + right) / 2
+        _, _, w_m = geod.inv(left, midlat, right, midlat)
+        _, _, h_m = geod.inv(midlon, bottom, midlon, top)
+        return w_m / s.width, h_m / s.height
+
+
+def ground_width(mask, x_m, y_m):
+    """Largest inscribed circle in metres, on pixels that may not be square."""
+    from scipy.ndimage import distance_transform_edt
+    if not mask.any():
+        return 0.0
+    d = distance_transform_edt(np.pad(mask, 1, constant_values=False),
+                               sampling=(y_m, x_m))
+    return max(min(x_m, y_m), float(d.max()) * 2.0 - min(x_m, y_m))
 
 
 def measure(chips, px_m):
     """One row per parcel: where its gradient peaks against where it was drawn."""
     import compare_segmenters as C
-    import seg_score as S
+    from pyproj import Geod
+    geod = Geod(ellps="WGS84")
 
     rows, tic = [], time.time()
     previous = None                      # a gradient field from another chip
@@ -151,9 +183,10 @@ def measure(chips, px_m):
         med = float(np.median(grad))
         null_pair, previous = previous, (grad, med)
 
+        x_m, y_m = chip_pixel_m(F.INSTANCE / chip, geod)
         for pid in np.unique(full[full > 0]):
             mask = full == pid
-            signed = signed_distance(mask)
+            signed = signed_distance(mask, x_m, y_m)
             prof = profile(signed, grad, med)
             off, best, drawn = peak(prof)
             if not np.isfinite(off):
@@ -163,9 +196,10 @@ def measure(chips, px_m):
                 "country": F.COUNTRY,
                 "chip": chip,
                 "parcel_id": int(pid),
-                "width_native_px": round(S.parcel_width_px(mask) * px_m / 10.0, 3),
-                "offset_px": round(off, 1),
-                "offset_m": round(off * px_m, 2),
+                "px_x_m": round(x_m, 4),
+                "px_y_m": round(y_m, 4),
+                "width_native_px": round(ground_width(mask, x_m, y_m) / 10.0, 3),
+                "offset_m": round(off, 1),
                 "drawn_contrast": round(drawn, 4),
                 "peak_contrast": round(best, 4),
                 "gain": round(best / drawn, 4) if drawn > 0 else np.nan,
@@ -176,13 +210,13 @@ def measure(chips, px_m):
             }
             # Keep the whole walk, so a question about the shape of the
             # profile never needs another four minutes of gradient building.
-            for k, r in enumerate(RING_PX):
-                row[f"ring_{int(r):+d}"] = (round(float(prof[k]), 4)
-                                            if np.isfinite(prof[k]) else np.nan)
+            for k, r in enumerate(RING_M):
+                row[f"ring_{int(r):+d}m"] = (round(float(prof[k]), 4)
+                                             if np.isfinite(prof[k]) else np.nan)
             if null_pair is not None:
                 noff, nbest, ndrawn = peak(
                     profile(signed, null_pair[0], null_pair[1]))
-                row["null_offset_px"] = round(noff, 1) if np.isfinite(noff) else np.nan
+                row["null_offset_m"] = round(noff, 1) if np.isfinite(noff) else np.nan
                 row["null_gain"] = (round(nbest / ndrawn, 4)
                                     if np.isfinite(ndrawn) and ndrawn > 0
                                     else np.nan)
@@ -198,19 +232,19 @@ def measure(chips, px_m):
 
 def summarise(rows, px_m) -> None:
     import pandas as pd
-    df = pd.DataFrame(rows).dropna(subset=["offset_px"])
+    df = pd.DataFrame(rows).dropna(subset=["offset_m"])
     if df.empty:
         sys.exit("no parcels measured")
-    off = df["offset_px"]
-    limit = RING_PX.max()
+    off = df["offset_m"]
+    limit = RING_M.max()
 
     print("\n" + RULE)
     print(f"RESULT, {F.COUNTRY.upper()}")
     print(RULE)
-    print(f"  {len(df):,} parcels, grid {px_m:.3f} m, rings at whole pixels "
-          f"from {-limit:.0f} to {limit:+.0f}")
-    print(f"  which is {-limit * px_m:.1f} m to {limit * px_m:+.1f} m on the "
-          f"ground here\n")
+    print(f"  {len(df):,} parcels, rings every 6 m on the ground from "
+          f"{-limit:.0f} m to {limit:+.0f} m")
+    print(f"  east to west pixel {df['px_x_m'].mean():.3f} m, north to south "
+          f"{df['px_y_m'].mean():.3f} m\n")
 
     print(f"  THE GAIN, best nearby edge over the drawn edge")
     print(f"    median                          {df['gain'].median():.3f}x")
@@ -234,23 +268,23 @@ def summarise(rows, px_m) -> None:
     print(f"\n  DISPLACEMENT")
     print(f"    peak sits on the drawn edge     "
           f"{float((off == 0).mean()) * 100:.1f}% of parcels")
-    print(f"    within one pixel of it          "
-          f"{float((off.abs() <= 1).mean()) * 100:.1f}%")
+    print(f"    within one ring of it           "
+          f"{float((off.abs() <= 6).mean()) * 100:.1f}%")
     print(f"    median, unsigned                "
-          f"{off.abs().median() * px_m:.2f} m")
+          f"{off.abs().median():.2f} m")
     print(f"    mean, signed                    "
-          f"{off.mean() * px_m:+.2f} m (positive is drawn inside the edge)")
+          f"{off.mean():+.2f} m (positive is drawn inside the edge)")
     print(f"    pinned at the search limit      "
           f"{float((off.abs() >= limit).mean()) * 100:.1f}%")
 
-    if "null_offset_px" in df.columns:
-        n = df.dropna(subset=["null_offset_px"])
+    if "null_offset_m" in df.columns:
+        n = df.dropna(subset=["null_offset_m"])
         if len(n):
             print(f"\n  the same walk on a gradient field from another chip:")
             print(f"    peak on the drawn edge          "
-                  f"{float((n['null_offset_px'] == 0).mean()) * 100:.1f}%")
+                  f"{float((n['null_offset_m'] == 0).mean()) * 100:.1f}%")
             print(f"    pinned at the search limit      "
-                  f"{float((n['null_offset_px'].abs() >= limit).mean()) * 100:.1f}%")
+                  f"{float((n['null_offset_m'].abs() >= limit).mean()) * 100:.1f}%")
 
     print("\n  by parcel width")
     band = pd.cut(df["width_native_px"] * 10.0, WIDTH_EDGES_M,
@@ -264,8 +298,8 @@ def summarise(rows, px_m) -> None:
         eoi = s["edge_over_interior"].median() if "edge_over_interior" in s else np.nan
         eoi_txt = f"{eoi:>13.3f}x" if np.isfinite(eoi) else f"{'':>14}"
         print(f"    {lab:>12} {len(s):>8,} {s['gain'].median():>11.3f}x "
-              f"{float((s['offset_px'] == 0).mean()) * 100:>11.1f}% "
-              f"{s['offset_px'].mean() * px_m:>+12.2f} m {eoi_txt}")
+              f"{float((s['offset_m'] == 0).mean()) * 100:>11.1f}% "
+              f"{s['offset_m'].mean():>+12.2f} m {eoi_txt}")
 
 
 def self_test(trials: int = 300, seed: int = 11) -> bool:
@@ -283,14 +317,14 @@ def self_test(trials: int = 300, seed: int = 11) -> bool:
     """
     from scipy.ndimage import gaussian_filter
     rng = np.random.default_rng(seed)
-    got = {0: [], 2: []}
+    got = {0: [], 12: []}
 
     for _ in range(trials):
-        size, c = 80, 40
-        half = int(rng.integers(3, 18))
+        size, c = 140, 70
+        half = int(rng.integers(14, 34))
         blur = float(rng.uniform(0.5, 1.6))
         noise = float(rng.uniform(0.0, 0.12))
-        for true_off in (0, 2):
+        for true_off in (0, 12):
             r = half + true_off
             img = np.zeros((size, size), np.float32)
             img[c - r:c + r, c - r:c + r] = 1.0
@@ -299,7 +333,8 @@ def self_test(trials: int = 300, seed: int = 11) -> bool:
             grad = np.hypot(gy, gx)
             mask = np.zeros((size, size), bool)
             mask[c - half:c + half, c - half:c + half] = True
-            off, best, drawn = peak(profile(signed_distance(mask), grad,
+            off, best, drawn = peak(profile(signed_distance(mask, 1.0, 1.0),
+                                            grad,
                                             float(np.median(grad)) or 1e-6))
             if np.isfinite(off):
                 got[true_off].append((off, best / drawn))
@@ -308,14 +343,14 @@ def self_test(trials: int = 300, seed: int = 11) -> bool:
     print(f"SELF TEST, {trials} synthetic parcels at each offset")
     print(RULE)
     ok = True
-    for true_off in (0, 2):
+    for true_off in (0, 12):
         offs = np.array([o for o, _ in got[true_off]])
         gains = np.array([g for _, g in got[true_off]])
         hit = float((offs == true_off).mean()) if true_off == 0 else \
-            float((offs >= 1).mean())
+            float((offs >= 6).mean())
         flagged = float((gains > 1.05).mean())
         label = ("drawn on the edge" if true_off == 0
-                 else "drawn 2 px inside the edge")
+                 else "drawn two rings inside the edge")
         print(f"  {label:<28} n={len(offs):>4}")
         print(f"    recovered correctly        {hit * 100:5.1f}%")
         print(f"    median gain                {np.median(gains):.3f}x")

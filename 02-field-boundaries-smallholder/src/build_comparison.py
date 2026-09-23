@@ -298,6 +298,190 @@ def legacy_map(country: str) -> list:
     return lines
 
 
+
+# --- tables added after the review, from the measurements it asked for -----
+
+PIXEL_EDGES = [0, 4, 6, 8, 12, np.inf]
+PIXEL_LABELS = ["under 4 px", "4 to 6 px", "6 to 8 px", "8 to 12 px",
+                "12 px up"]
+
+PRECISION_NAMES = {
+    "ftw": "FTW 3-class FULL",
+    "watershed_0.02": "watershed 0.02",
+    "watershed_0.05": "watershed 0.05",
+    "sam_vit_h_false_0p5": "SAM ViT-H false 0.50",
+}
+
+
+def grid_m(country: str) -> float:
+    """The measured pixel size, with FTW_COUNTRY pointed at the right one."""
+    import importlib
+    import os
+    os.environ["FTW_COUNTRY"] = country
+    importlib.reload(F)
+    return F.grid_pixel_m()
+
+
+def precision_table(country: str) -> list:
+    """Fragmentation and matched share, from the per-run summary rows."""
+    path = results_dir(country) / "precision_summary.csv"
+    if not path.exists():
+        return [f"`{path.name}` not written yet, so this table is empty."]
+    d = pd.read_csv(path)
+    d = d[d["min_size_m2"] == 500].sort_values("objects_per_chip")
+    lines = [
+        "| method | objects/chip | no object | exactly one | 5 or more | "
+        "matched share | parcels |",
+        "|---|---:|---:|---:|---:|---:|---:|",
+    ]
+    for _, r in d.iterrows():
+        name = PRECISION_NAMES.get(str(r["method"]), str(r["method"]))
+        note = " (subset)" if r["subset"] else ""
+        lines.append(
+            f"| {name}{note} | {r['objects_per_chip']:,.1f} | "
+            f"{r['no_object_pct']:.1f}% | {r['exactly_one_pct']:.1f}% | "
+            f"{r['five_or_more_pct']:.1f}% | "
+            f"{r['matched_share'] * 100:.2f}% | {int(r['parcels']):,} |")
+    return lines
+
+
+def matched_parcel_table(country: str, subset_method: str) -> list:
+    """Every method read on the parcels the subset run covered.
+
+    A method measured on 100 chips cannot be set beside one measured on 399
+    without this, because the two chip sets carry different parcel sizes.
+    """
+    rd = results_dir(country)
+    ref = rd / f"precision_{subset_method}_min500.csv"
+    if not ref.exists():
+        return [f"`{ref.name}` not written yet, so this table is empty."]
+    keys = set(map(tuple, pd.read_csv(ref)[["chip", "parcel_id"]].values))
+
+    summary = pd.read_csv(rd / "precision_summary.csv")
+    opc = dict(zip(summary["method"], summary["objects_per_chip"]))
+
+    lines = [
+        "| method | parcels | objects/chip | no object | exactly one "
+        "| 5 or more |",
+        "|---|---:|---:|---:|---:|---:|",
+    ]
+    for f in sorted(rd.glob("precision_*_min500.csv")):
+        tag = f.name[len("precision_"):-len("_min500.csv")]
+        d = pd.read_csv(f)
+        d = d[[tuple(x) in keys for x in d[["chip", "parcel_id"]].values]]
+        if not len(d):
+            continue
+        o = d["objects_over"]
+        name = PRECISION_NAMES.get(tag, tag)
+        # A generated table that prints nan tells the reader nothing about
+        # why. Say which run is missing instead.
+        rate = opc.get(tag)
+        rate_txt = (f"{rate:,.1f}" if rate is not None and np.isfinite(rate)
+                    else "no summary row")
+        lines.append(
+            f"| {name} | {len(d):,} | {rate_txt} | "
+            f"{float((o == 0).mean()) * 100:.1f}% | "
+            f"{float((o == 1).mean()) * 100:.1f}% | "
+            f"{float((o >= 5).mean()) * 100:.1f}% |")
+    return lines
+
+
+def holdout_table(country: str) -> list:
+    path = results_dir(country) / "holdout_selection.csv"
+    if not path.exists():
+        return [f"`{path.name}` not written yet, so this table is empty."]
+    d = pd.read_csv(path)
+    lines = ["| method | published | held out | optimism | setting |",
+             "|---|---:|---:|---:|---|"]
+    for _, r in d.iterrows():
+        lines.append(
+            f"| {r['method']} | {r['published_recall']:.4f} | "
+            f"{r['heldout_recall_median']:.4f} | {r['optimism']:+.4f} | "
+            f"{r['modal_setting']} in "
+            f"{r['setting_stability'] * 100:.0f}% of splits |")
+    return lines
+
+
+def registration_tables(iou: float) -> list:
+    """Label displacement and edge contrast, both countries side by side.
+
+    Everything here is cut in metres. An earlier version banded by pixel width,
+    which has no single meaning on Slovenia's grid: its pixels are 4.138 m
+    across and 6.002 m tall, so a width counted in pixels is a different
+    distance depending on which way the parcel runs. See B-18.
+    """
+    out, frames = [], {}
+    for c in COUNTRIES:
+        path = results_dir(c) / "label_registration.csv"
+        if not path.exists():
+            return [f"`label_registration.csv` missing for {c}."]
+        d = pd.read_csv(path)
+        d["metres"] = d["width_native_px"] * 10.0
+        rec = pd.read_csv(results_dir(c) / "parcel_width_seg_ftw_min500.csv")
+        d = d.merge(rec[["chip", "parcel_id", "best_iou"]],
+                    on=["chip", "parcel_id"], how="left")
+        d["hit"] = d["best_iou"] >= iou
+        frames[c] = d
+
+    a, b = frames["india"], frames["slovenia"]
+    out.append("\n### Displacement, overall\n")
+    out += ["| | India | Slovenia |", "|---|---:|---:|"]
+    out.append(f"| parcels | {len(a):,} | {len(b):,} |")
+    out.append(f"| pixel east to west | {a['px_x_m'].mean():.3f} m "
+               f"| {b['px_x_m'].mean():.3f} m |")
+    out.append(f"| pixel north to south | {a['px_y_m'].mean():.3f} m "
+               f"| {b['px_y_m'].mean():.3f} m |")
+    out.append(f"| signed mean displacement | {a['offset_m'].mean():+.2f} m "
+               f"| {b['offset_m'].mean():+.2f} m |")
+    out.append(f"| median unsigned | {a['offset_m'].abs().median():.2f} m "
+               f"| {b['offset_m'].abs().median():.2f} m |")
+    out.append(f"| median parcel width | {a['metres'].median():.1f} m "
+               f"| {b['metres'].median():.1f} m |")
+    out.append(f"| median gain | {a['gain'].median():.3f}x "
+               f"| {b['gain'].median():.3f}x |")
+    out.append(f"| peak on the drawn edge | "
+               f"{float((a['offset_m'] == 0).mean()) * 100:.1f}% | "
+               f"{float((b['offset_m'] == 0).mean()) * 100:.1f}% |")
+    out.append(f"| same on a borrowed field | "
+               f"{float((a['null_offset_m'] == 0).mean()) * 100:.1f}% | "
+               f"{float((b['null_offset_m'] == 0).mean()) * 100:.1f}% |")
+
+    out.append("\n### Displacement and recall at matched ground width\n")
+    out += ["| ground width | India offset | India recall | Slovenia offset "
+            "| Slovenia recall |", "|---|---:|---:|---:|---:|"]
+    for lab in WIDTH_LABELS_M:
+        sa = a[pd.cut(a["metres"], WIDTH_EDGES_M, labels=WIDTH_LABELS_M,
+                      right=False) == lab]
+        sb = b[pd.cut(b["metres"], WIDTH_EDGES_M, labels=WIDTH_LABELS_M,
+                      right=False) == lab]
+        if not len(sa) or not len(sb):
+            continue
+        out.append(f"| {lab} | {sa['offset_m'].mean():+.2f} m | "
+                   f"{sa['hit'].mean() * 100:.2f}% | "
+                   f"{sb['offset_m'].mean():+.2f} m | "
+                   f"{sb['hit'].mean() * 100:.2f}% |")
+
+    out.append("\n### Edge over the parcel's own interior\n")
+    out += ["| | India | Slovenia |", "|---|---:|---:|"]
+    ea = a["edge_over_interior"].dropna()
+    eb = b["edge_over_interior"].dropna()
+    out.append(f"| median | {ea.median():.3f}x | {eb.median():.3f}x |")
+    out.append(f"| share at or below 1.0 | "
+               f"{float((ea <= 1.0).mean()) * 100:.1f}% | "
+               f"{float((eb <= 1.0).mean()) * 100:.1f}% |")
+    out.append(f"| parcels wide enough | {len(ea):,} | {len(eb):,} |")
+    for lab in WIDTH_LABELS_M:
+        sa = a[pd.cut(a["metres"], WIDTH_EDGES_M, labels=WIDTH_LABELS_M,
+                      right=False) == lab]
+        sb = b[pd.cut(b["metres"], WIDTH_EDGES_M, labels=WIDTH_LABELS_M,
+                      right=False) == lab]
+        va = sa["edge_over_interior"].median()
+        vb = sb["edge_over_interior"].median()
+        if np.isfinite(va) and np.isfinite(vb):
+            out.append(f"| by width, {lab} | {va:.3f}x | {vb:.3f}x |")
+    return out
+
+
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--sam-setting", default="0p50",
@@ -347,6 +531,19 @@ def main() -> None:
     out.append("Same sensor, same method, same physical parcel size.\n")
     out += cross_country_table(["ftw", "watershed", "sam_true"],
                                args.sam_setting, args.iou)
+
+    for country in COUNTRIES:
+        out.append(f"\n## {country.capitalize()}, what the methods emit\n")
+        out += precision_table(country)
+        out.append(f"\n## {country.capitalize()}, held-out setting choice\n")
+        out += holdout_table(country)
+
+    out.append("\n## India, every method on the parcels the SAM subset "
+               "covered\n")
+    out += matched_parcel_table("india", "sam_vit_h_false_0p5")
+
+    out.append("\n## Label registration\n")
+    out += registration_tables(args.iou)
 
     dest = F.PROJECT / "results" / "comparison_tables.md"
     dest.parent.mkdir(parents=True, exist_ok=True)

@@ -212,6 +212,34 @@ def main() -> None:
     df.to_csv(out, index=False)
     print(f"\n  wrote {out.relative_to(F.PROJECT)}, {len(df):,} parcels")
 
+    # One summary row per run, appended, so build_comparison.py can write the
+    # tables rather than have them typed. The object counts live only here:
+    # the per-parcel file cannot carry how many objects a method emitted.
+    over_all = df["objects_over"]
+    summary = {
+        "method": tag,
+        "min_size_m2": int(args.min_size_m2),
+        "chips": n_chips,
+        "parcels": len(df),
+        "objects": n_objects,
+        "objects_per_chip": round(n_objects / n_chips, 1) if n_chips else 0,
+        "matched_objects": n_matched,
+        "matched_share": round(n_matched / n_objects, 6) if n_objects else 0,
+        "no_object_pct": round(float((over_all == 0).mean()) * 100, 1),
+        "exactly_one_pct": round(float((over_all == 1).mean()) * 100, 1),
+        "five_or_more_pct": round(float((over_all >= 5).mean()) * 100, 1),
+        "median_objects_over": int(over_all.median()),
+        "subset": bool(args.limit),
+    }
+    spath = F.RESULTS / "precision_summary.csv"
+    prev = (pd.read_csv(spath) if spath.exists()
+            else pd.DataFrame(columns=list(summary)))
+    prev = prev[~((prev["method"] == tag)
+                  & (prev["min_size_m2"] == summary["min_size_m2"]))]
+    pd.concat([prev, pd.DataFrame([summary])], ignore_index=True).to_csv(
+        spath, index=False)
+    print(f"  wrote {spath.relative_to(F.PROJECT)}")
+
     over = df["objects_over"]
     print("\n" + RULE)
     print("RESULT")

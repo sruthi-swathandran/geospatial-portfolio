@@ -41,6 +41,9 @@ Work done since this review was written. Everything else below still stands.
 | F-09 | Closed | `requirements.txt` pins the 15 packages `src/` imports at the versions that produced the tables, with the CPU torch index spelled out. `requirements-lock.txt` holds the full 168-package freeze |
 | F-13 | Closed | `sam_probe.py` moved into `src/`, with a docstring saying it ran on 5 chips and that its recall column is a smoke test |
 | F-19 | Closed | READMEs written for RS-02 and for the repository root |
+| F-10 | Closed | Fragmentation measured in both countries, precision measured on Slovenia where the cadastre allows it. India's matched-object share is a floor and stays one. SAM measured on 100 of 399 chips |
+| F-11 | **Closed, and it found something** | FTW ships the two countries on different grid conventions. Slovenia's pixels are 4.138 m across and 6.002 m tall, and every Slovenian width in the repository was understated. See B-18 and B-19 |
+| F-07 | Closed | Held-out selection over 40 chip splits per country moves recall by at most +0.0064 |
 | F-21 | Closed | Committed |
 
 One finding was raised by the work rather than the review. **B-08**: four of the
@@ -48,9 +51,19 @@ five figures at Slovenia's object budget are clamped, because no competing
 method was run coarse enough to reach 18 objects per chip. FTW's Slovenian win
 is wider than any table can currently state.
 
-Still open: **F-07**, **F-10**, **F-11**, **F-12** and **F-14**, each of which
-is a measurement to run rather than a fix to apply. **F-15** and **F-16** are
-provenance details, **F-18** is a line of documentation.
+Still open: **F-12**, the parcel reconstruction, which can be bounded by a
+sensitivity sweep but not validated without independently digitised parcels.
+**F-14**, whether the contrast measure tracks what an analyst would call a
+visible edge; it is now measured against each parcel's own interior and its
+machinery passes a self-test, so what remains is the human check. **F-15** and
+**F-16** are provenance details and **F-18** is a line of documentation.
+
+One finding was raised by the work rather than by the review, and it is the
+largest error the project has found in itself: **B-18**, that the benchmark
+ships two countries on grids of different shape, and that a third of Slovenia's
+parcels were therefore counted in the wrong width band. Every ratio in the
+cross-country table fell by up to forty per cent when it was corrected. The
+conclusion survived. F-11 was filed here as a formality and was not one.
 
 ---
 
