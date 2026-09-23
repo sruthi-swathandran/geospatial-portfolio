@@ -1,0 +1,5 @@
+country,method,published_setting,published_recall,heldout_recall_median,optimism,modal_setting,setting_stability,splits
+slovenia,watershed,0.05,0.345,0.347,-0.002,0.05,1.0,40
+slovenia,felzenszwalb,100,0.2088,0.2082,0.0006,100,1.0,40
+slovenia,sam_vit_h_true,0.50,0.2757,0.271,0.0047,0.50,1.0,40
+slovenia,sam_vit_h_false,0.50,0.2484,0.242,0.0064,0.50,1.0,40

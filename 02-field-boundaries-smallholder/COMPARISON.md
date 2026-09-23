@@ -35,28 +35,58 @@ should be read are listed under Known gaps below.
    saw the imagery. The gap is +0.0063, about twelve parcels in 1,983, and it
    clears the null at roughly one draw in seventy. Real, and small enough that
    the three-draw version in the table below could not have established it.
-4. The checkpoint shatters on India. It emits 175 objects per chip into scenes
-   holding five labelled parcels, against 18 per chip on Slovenia where about
-   37 exist. The boundary saturation measured in stage 2, where 321 of 399
-   Indian chips are called more than half boundary, appears here as fragmented
-   output.
-5. Watershed clears its null across the entire sweep, from 40 objects per chip
+4. The checkpoint does not shatter Indian parcels, it misses them. It emits
+   175 objects per chip into scenes holding five labelled parcels, and 74.4%
+   of those parcels have no predicted object touching them at all. Watershed,
+   at 676 objects per chip, touches every one and cuts 38.2% into five pieces
+   or more. Two opposite failures that this document described as one until
+   the objects were counted. See B-16.
+5. SAM spends the same budget as the checkpoint and puts it in the right
+   places. At 190 objects per chip against FTW's 175, it reaches 91.3% of
+   labelled parcels where FTW reaches 24.7%, and leaves 33.0% covered by
+   exactly one object against FTW's 18.2% and watershed's 7.1%. Since one
+   object covering one parcel is the precondition for a good IoU, this is
+   where its recall advantage comes from. Measured on 100 of 399 chips.
+6. Watershed clears its null across the entire sweep, from 40 objects per chip
    to 917, with a gap running +0.018 to +0.196 that never reaches zero. A
    margin that survives a twentyfold range of settings is not a parameter
    fluke.
-6. The floor at three native pixels is soft. Watershed finds 14 of 441 parcels
+7. The floor at three native pixels is soft. Watershed finds 14 of 441 parcels
    below it, 3.17% against 30.74% above. SAM finds 6. FTW finds 1. Parcels that
    narrow are recoverable about a tenth as often, rather than never.
-7. Above ten native pixels on India the ordering changes again. SAM finds
+8. Above ten native pixels on India the ordering changes again. SAM finds
    50.79% of those parcels, watershed 23.02% and FTW 17.46%. For large Indian
    fields a foundation model with three channels beats the trained model with
    eight by nearly three times.
-8. The floor is not explained by parcel width. At matched ground width, in the
+9. The floor is not explained by parcel width. At matched ground width, in the
    same sensor and by the same method, Slovenian parcels are found between 1.8
    and 71.5 times more often than Indian ones of the same size. Whatever
    separates the two countries is not resolution. See What this says.
-9. Everything here is still poor in absolute terms. One parcel in six at FTW's
+10. Everything here is still poor in absolute terms. One parcel in six at FTW's
    object budget is not a usable field map for India.
+11. On Slovenia, where the cadastre is complete and precision is therefore
+    measurable, the checkpoint is right 44.9% of the time from 18 objects per
+    chip and watershed 4.5% of the time from 282. A tenfold difference, and
+    the clearest evidence here that FTW is a good model failing on India
+    rather than a weak model everywhere.
+12. Label geometry does not explain the country gap. Measured against the image
+    gradient, Indian and Slovenian labels are displaced almost identically in
+    the pixel space IoU is scored in, +0.69 px against +0.66 px. In the two
+    widest pixel bands India's labels are the better placed of the two, and
+    India is still found 6 to 11 times less often. The explanation this
+    document carried through three versions is wrong. See B-15.
+13. Indian field boundaries are fainter, and that is measured rather than
+    inferred. Against each parcel's own interior, so that no chip statistic
+    enters, the Indian edge runs 1.297x its own field against Slovenia's
+    1.573x, and 14.2% of Indian boundaries are no stronger than the crop
+    inside them against 7.7% in Slovenia. The gap widens with parcel size
+    instead of narrowing. A contributor of known size rather than a full
+    explanation.
+14. Choosing each method's setting on the data it is reported from was worth
+    almost nothing. Over 40 chip-level splits per country, picking on one half
+    and reading on the other moves recall by between -0.002 and +0.006, and
+    seven of the eight method and country pairs choose the same setting in
+    every split.
 
 ---
 
@@ -354,6 +384,123 @@ usable on India.
 
 ---
 
+## What the methods emit
+
+Recall says what a method finds. It says nothing about what it invents, which
+is F-10 in `REVIEW.md` and was open until now.
+
+Ordinary precision is not computable on India, and saying so is half the
+answer. Five parcels per chip are drawn and 98.96% of each chip was never
+labelled, so an object over unlabelled ground may be a perfectly good field
+nobody recorded. Two things are computable.
+
+**Fragmentation**, which works in both countries: how many predicted objects
+overlap one labelled parcel. A method that cuts one field into ten pieces
+shows it here whatever the labelling.
+
+| on India, all 1,983 parcels | objects/chip | parcels with no object | covered by exactly one | cut into 5 or more |
+|---|---:|---:|---:|---:|
+| FTW 3-class FULL | 175.0 | 74.4% | 18.9% | 0.3% |
+| watershed 0.02 | 675.9 | 0.0% | 7.2% | 38.2% |
+
+SAM costs 75 seconds per chip to regenerate, so it was measured on the first
+100 chips rather than all 399. Those chips run slightly small, a median parcel
+of 6.21 grid pixels against 7.00 across the country, so the three methods are
+compared below on the same 494 parcels rather than against the full-set figures
+above.
+
+| on the same 494 parcels | objects/chip | parcels with no object | covered by exactly one | cut into 5 or more |
+|---|---:|---:|---:|---:|
+| FTW 3-class FULL | 175.0 | 75.3% | 18.2% | 0.0% |
+| **SAM ViT-H false 0.50** | **190.4** | **8.7%** | **33.0%** | **8.5%** |
+| watershed 0.02 | 675.9 | 0.0% | 7.1% | 30.8% |
+
+That middle row is the most useful thing in this section. SAM spends
+essentially the checkpoint's budget, 190 objects per chip against 175, and
+reaches 91.3% of the labelled parcels where the checkpoint reaches 24.7%. It
+also leaves a third of them covered by exactly one object, which is the
+precondition for clearing IoU 0.5, against FTW's 18.2% and watershed's 7.1%.
+SAM's recall advantage on India is not that it emits more. It is that it emits
+in the right places.
+
+| on Slovenia | objects/chip | parcels with no object | covered by exactly one | cut into 5 or more |
+|---|---:|---:|---:|---:|
+| FTW 3-class FULL | 18.3 | 55.3% | 38.2% | 0.1% |
+| watershed 0.05 | 281.9 | 0.1% | 13.0% | 27.8% |
+
+These are opposite failures. The checkpoint emits 175 objects into an Indian
+chip and three quarters of the labelled parcels there receive nothing at all,
+so its objects are somewhere other than the fields. Watershed reaches every
+parcel and shreds four in ten. A write-up that calls both of them
+over-segmentation is describing one of them wrongly, which is B-16.
+
+The 500 square metre filter is not what causes the misses. Run with no filter
+at all, FTW emits 292 objects per chip instead of 175 and still leaves 62.3%
+of parcels untouched. About a sixth of the misses are the filter deleting
+fragments the model did find, and five sixths are the model finding nothing.
+The matched object count stays at exactly 54 either way, so none of the 46,679
+sub-threshold objects would have scored: FTW's polygonize default is deleting
+only junk.
+
+**Matched object share**, which is precision on Slovenia and a floor on India.
+
+| method | India, floor | Slovenia, precision |
+|---|---:|---:|
+| FTW 3-class FULL | 0.08% | **44.91%** |
+| SAM ViT-H false 0.50 | 0.42% | not measured |
+| watershed | 0.18% | 4.52% |
+
+Read the Slovenian column. The checkpoint is right about 45% of the time while
+emitting 18 objects per chip, and watershed is right 4.5% of the time while
+emitting 282. Recall alone had watershed within striking distance of FTW on
+that country; precision puts a factor of ten between them. This is the
+strongest evidence in the project that FTW is a good model failing on India
+rather than a weak model everywhere, and it took measuring what the methods
+invent to see it.
+
+The Indian column compares methods against each other and nothing else. Both
+numbers are floors, and they are low because 98.96% of the chip carries no
+label to match against.
+
+*Source: `precision_<method>_min500.csv` in each country, written by
+`src\precision.py`.*
+
+---
+
+## Were the settings fitted to the data they are reported on
+
+Every figure in this document comes from the best setting of a sweep, chosen
+on the same parcels it is then quoted from. That is F-07, and the size of the
+resulting optimism had never been measured.
+
+It is now, and it is small. Chips are shuffled and cut in half, the best
+setting is chosen on one half and read on the other, forty times per country.
+
+| method | India optimism | India setting | Slovenia optimism | Slovenia setting |
+|---|---:|---|---:|---|
+| watershed | +0.0016 | 0.02 in 62% of splits | -0.0020 | 0.05 in 100% |
+| felzenszwalb | -0.0005 | 100 in 100% | +0.0006 | 100 in 100% |
+| SAM ViT-H true | -0.0011 | 0.50 in 100% | +0.0047 | 0.50 in 100% |
+| SAM ViT-H false | -0.0012 | 0.50 in 100% | +0.0064 | 0.50 in 100% |
+
+The largest optimism anywhere is +0.0064 on a recall of 0.248, about 2.6%
+relative, and every figure in the table sits well inside the chip-level
+intervals in Known gaps. Seven of the eight pairs pick the identical setting in
+every single split, so the parameter was never free enough to fit. India's
+watershed at 62% is the one near-tie, between h of 0.02 and its neighbours,
+and the published and held-out values differ by 0.0016 regardless.
+
+Two limits on that. It tests selection among settings within a sweep, so the
+choices fixed by convention rather than tuned, IoU 0.5 and the 500 square metre
+filter and which composites to run, are not covered. And it tests raw recall at
+the chosen setting rather than the budget-matched column, which interpolates
+across settings and so selects differently.
+
+*Source: `holdout_selection.csv` in each country, written by
+`src\holdout.py`.*
+
+---
+
 ## The same width band in both countries
 
 The floor claim says the limit is the imagery. Both countries are Sentinel-2 at
@@ -399,12 +546,66 @@ parcels. Attributing it to the resolution of the imagery goes further than the
 data supports, because the same imagery at the same physical parcel size
 performs between two and seventy times better in Slovenia.
 
-The leading candidate for the country difference is label geometry. India is
-presence-only with five hand-drawn parcels per chip, Slovenia is a complete
-cadastre, and IoU against a loosely drawn polygon is depressed whatever the
-imagery shows. Parcel shape and cropping calendar are the other two candidates.
-None of them is resolution, which is the point. Separating them needs the label
-registration test described in `REVIEW.md`, which has not been run.
+**Label geometry was the leading candidate and it is now ruled out.** The
+argument was that India is presence-only with five hand-drawn parcels per chip
+while Slovenia is a complete cadastre, so IoU against a loosely drawn polygon
+would be depressed whatever the imagery showed. `src\label_registration.py`
+tests it by walking each parcel's boundary inward and outward through the image
+gradient and asking where the strongest edge actually sits.
+
+In the pixel space IoU is scored in, the two countries are almost the same:
+India's labels sit +0.691 px inside the strongest edge and Slovenia's +0.661 px,
+with a median unsigned displacement of exactly one pixel in each. India's
+parcels are also the larger of the two in pixels, 7.00 against 5.32, so on
+label-geometry grounds India should score better.
+
+| pixel width | India label offset | India recall | Slovenia label offset | Slovenia recall |
+|---|---:|---:|---:|---:|
+| under 4 px | +1.475 px | 0.00% | +1.064 px | 0.63% |
+| 4 to 6 px | +0.888 px | 0.41% | +0.582 px | 6.45% |
+| 6 to 8 px | +0.535 px | 0.78% | +0.425 px | 22.65% |
+| 8 to 12 px | **+0.316 px** | 3.95% | +0.416 px | 42.36% |
+| 12 px up | **+0.288 px** | 11.19% | +0.345 px | 65.91% |
+
+Read the last two rows. India's labels are the better placed of the two and
+India is still found 6 to 11 times less often. A hypothesis that predicts the
+opposite of the data is finished. In the narrow bands India's labels are worse,
+by 1.26x to 1.53x, so label quality contributes something there, and the recall
+gap in those same bands is 15.6x to 28.9x, which a difference of a third of a
+pixel cannot produce.
+
+The estimator behind that table is checked against displacements it was given
+before it was pointed at real labels. Run `src\label_registration.py
+--self-test`: 300 correctly drawn synthetic parcels all read as correctly drawn
+with a median gain of exactly 1.000, and 300 displaced by two pixels all read as
+displaced. Two earlier versions of the measurement failed, both in ways that
+produced confident numbers; see B-13 and B-14.
+
+**What does carry part of it is contrast.** Indian field boundaries are fainter
+than Slovenian ones against the same sensor. Measured as the gradient on the
+drawn boundary divided by the gradient inside that same parcel, so that no chip
+statistic enters the comparison:
+
+| | India | Slovenia |
+|---|---:|---:|
+| edge over its own field interior, median | 1.297x | 1.573x |
+| share where the edge is no stronger than the field | 14.2% | 7.7% |
+| by width, 20 to 30 m | 1.118x | 1.311x |
+| by width, 30 to 50 m | 1.236x | 1.662x |
+| by width, 50 m up | 1.420x | 2.159x |
+
+The gap widens as parcels get larger, which is not the shape a resolution
+artefact takes. Only parcels wide enough to survive two erosions can be
+measured, 1,467 of 1,983 in India and 4,307 of 6,827 in Slovenia, so this is
+silent about the narrowest band in each country.
+
+A 1.2x contrast deficit is a contributor of measured size rather than an
+explanation of a 6 to 29 times recall gap. Parcel shape and the cropping
+calendar behind FTW's two seasonal windows remain untested, and the windows in
+particular were chosen for a European calendar rather than a kharif and rabi
+one.
+
+*Source: `label_registration.csv` in each country.*
 
 **Above the floor, the method is the lever.** Between three and ten native
 pixels an untrained watershed finds between five and thirteen times as many
@@ -442,11 +643,10 @@ of which has been read here beyond its title.
 
 **That width is the only thing that matters.** The district work in stage 3
 found Jodhpur with the widest parcels in the Indian test set, 7.35 native
-pixels median and none below the threshold, still at 0.048 recall. Boundary
-contrast was measured afterwards to test the arid-ground explanation and the
-measurement is in `results/<country>/parcel_contrast.csv`. It is not reported
-here because the measure itself has not been validated against anything. See
-Known gaps.
+pixels median and none below the threshold, still at 0.048 recall. That was
+written off as an anecdote until contrast was measured at national scale, and
+it now reads as the first sighting of the effect in What this says rather than
+as a curiosity.
 
 **That the Slovenian margin is quantified.** Four of the five figures at
 Slovenia's object budget are clamped. See B-08.
@@ -531,6 +731,49 @@ are five-fold and larger, and every interval was still too narrow.
 
 ---
 
+**B-13. The label registration test was built twice before it worked.** The
+first version translated each parcel's boundary band rigidly across a
+49-offset window and kept the strongest gradient. It put 64% of parcels at the
+edge of the search window, 33 of 125 exactly on its corner, and matched its own
+null to within 2.7 m. The median Indian parcel is 6.2 grid pixels wide, so
+shifting a band three pixels carries it onto the neighbours, and maximising
+gradient over a rigid shift finds whichever direction holds more edges rather
+than the parcel's own. The rewrite walks along the boundary normal instead, so
+the ring follows the parcel however far it moves.
+
+**B-14. The second version could not score the drawn position at all.** A
+signed distance transform reads +1 on the first pixel outside a mask and -1 on
+the last pixel inside, with nothing between, so the ring cut at radius zero
+with half-width 0.5 selected no pixels. The drawn boundary scored nan on every
+parcel and could never win, the reported gain printed as nan, and the smallest
+displacement the run could report was one whole pixel. Both of these produced
+confident-looking numbers and were caught by a sanity line in the output rather
+than by the result looking wrong. The estimator now ships with a self-test
+against known displacements.
+
+**B-15. Boundary contrast was overstated by its denominator.** Dividing the
+edge gradient by the chip's median put 33.5% of Indian boundaries below their
+surroundings against 7.9% in Slovenia. Stage 2 found four of five Indian chips
+are called mostly boundary, so that denominator is inflated by scene texture in
+exactly the country the claim was about. Measured against each parcel's own
+interior the Indian figure is 14.2%, less than half, while Slovenia barely
+moves from 7.9% to 7.7%. The overstated pair was never published; it was
+reported in working notes and corrected before it reached this document.
+
+**B-16. The checkpoint was described as shattering Indian parcels.** It does
+the opposite. It emits 175 objects per chip and leaves 74.4% of labelled
+parcels with nothing touching them, while watershed at 676 objects reaches
+every parcel and cuts 38.2% into five pieces or more. Finding 4 inferred
+fragmentation from the object count without counting what the objects overlap.
+
+**B-17. Selection optimism was assumed to matter and does not.** Every setting
+in this document is the best of its sweep chosen on the reporting data, which
+the review raised as a Major finding. Measured over 40 chip-level splits per
+country it moves recall by at most +0.0064, and seven of eight method and
+country pairs pick the same setting in every split.
+
+---
+
 ## Known gaps
 
 These come from the review in `REVIEW.md` and they change how the numbers above
@@ -552,15 +795,25 @@ the chip-level width. Run `src\bootstrap_ci.py` to reproduce it. Width bands
 holding fewer than ten found parcels fall back to the parcel-level interval,
 because a bootstrap over chips cannot resolve a tail it almost never samples.
 
-**Every reported setting is the best of its own sweep**, chosen on the same
-parcels the result is quoted from. There is no held-out split in this project.
+**Every reported setting is the best of its own sweep.** Closed, and it was
+worth at most +0.0064 of recall. See the held-out section above.
 
-**Precision is not measured on India.** Every Indian figure here is recall.
-The null and the budget column bound over-segmentation indirectly, and neither
-is a precision measurement.
+**Precision on India is a floor rather than a figure.** Closed as far as the
+labelling allows. Fragmentation is measured in both countries and precision is
+measured on Slovenia, where the cadastre is complete. India's 98.96%
+unlabelled ground means its matched-object share can only bound precision from
+below, and no amount of computation changes that.
 
-**Boundary contrast is unvalidated**, which is why the Jodhpur question stays
-open rather than being answered with the numbers already computed.
+**SAM's precision is not measured at all.** Its segmentations are not kept on
+disk and a full pass costs 26 hours, so `precision.py` refuses rather than
+guessing. The claim that SAM is the best method above ten native pixels
+therefore rests on recall alone.
+
+**Boundary contrast is now measured against each parcel's own interior**, which
+removes the chip from the comparison, and the machinery behind it passes a
+self-test against known displacements. What is still missing is a check that it
+tracks what an analyst would call a visible edge, so the Jodhpur question is
+answered at national scale and unvalidated against human judgement.
 
 **The measured grid has not been reconciled with FTW's published
 specification.** 6.067 m and 4.139 m are measured geodesically from the chips.
@@ -582,6 +835,15 @@ python src\sam_run.py --country india --model vit_h
 python src\sam_run.py --country slovenia --model vit_h
 python src\build_comparison.py
 python src\null_strength.py --country india --method ftw --draws 200
+python src\label_registration.py --self-test
+python src\label_registration.py --country india
+python src\label_registration.py --country slovenia
+python src\precision.py --country india --method ftw
+python src\precision.py --country india --method watershed --setting 0.02
+python src\precision.py --country slovenia --method ftw
+python src\precision.py --country slovenia --method watershed --setting 0.05
+python src\holdout.py --country india
+python src\holdout.py --country slovenia
 python src\bootstrap_ci.py --country india --by-width
 python src\bootstrap_ci.py --country slovenia --by-width
 python src\check_tables.py
@@ -609,6 +871,9 @@ Outputs land in `results/<country>/`:
 | `parcel_width_seg_<method>_min500.csv` | the same with the width column |
 | `parcel_contrast.csv` | per-parcel boundary contrast, unvalidated |
 | `null_draws_ftw.csv` | every null draw behind finding 3 |
+| `label_registration.csv` | per-parcel edge displacement and contrast |
+| `precision_<method>_min500.csv` | per-parcel fragmentation, and object counts |
+| `holdout_selection.csv` | what choosing a setting on the reporting data cost |
 | `scorer_reconciliation.csv` | truth and prediction combinations, for S-08 |
 | `probe/` | the 5-chip ViT-B timing probe that chose ViT-H |
 

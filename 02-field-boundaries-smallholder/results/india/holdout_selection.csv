@@ -1,0 +1,5 @@
+country,method,published_setting,published_recall,heldout_recall_median,optimism,modal_setting,setting_stability,splits
+india,watershed,0.02,0.2461,0.2444,0.0016,0.02,0.625,40
+india,felzenszwalb,100,0.0842,0.0848,-0.0005,100,1.0,40
+india,sam_vit_h_true,0.50,0.1563,0.1574,-0.0011,0.50,1.0,40
+india,sam_vit_h_false,0.50,0.1725,0.1736,-0.0012,0.50,1.0,40
