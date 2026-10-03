@@ -86,6 +86,7 @@ def scan(names, px_m):
                 fu = (full == fid)
                 fu_px = int(fu.sum())
                 ys, xs = np.where(fu)
+                ha_per_px = float(np.prod(F.chip_pixel_xy_m(name))) / 10_000.0
                 full_ha = fu_px * ha_per_px
                 fields.append({
                     "chip": name,

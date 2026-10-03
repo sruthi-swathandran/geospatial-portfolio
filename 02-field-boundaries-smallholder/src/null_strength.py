@@ -106,7 +106,7 @@ def main() -> None:
     import seg_score as S
 
     px_m = F.grid_pixel_m()
-    min_px = int(round(args.min_size_m2 / (px_m * px_m)))
+    min_px = int(round(args.min_size_m2 / F.grid_pixel_area_m2()))
     rng = np.random.default_rng(args.seed)
 
     print(RULE)
@@ -151,7 +151,7 @@ def main() -> None:
         hits = 0
         for chip in kept:
             seg = C.drop_small(C.ftw_segments(chip, args.ref_tag), min_px)
-            rows = S.rows_for_chip(chip, truth[chip], seg, F.COUNTRY, px_m)
+            rows = S.rows_for_chip(chip, truth[chip], seg, F.COUNTRY, px_m, px_xy=F.chip_pixel_xy_m(chip))
             hits += sum(1 for r in rows if r["best_iou"] >= args.iou)
         observed = hits / n_parcels
 
@@ -160,7 +160,7 @@ def main() -> None:
         hits = 0
         for chip in kept:
             seg = C.null_segments(truth[chip].shape, counts[chip], rng)
-            rows = S.rows_for_chip(chip, truth[chip], seg, F.COUNTRY, px_m)
+            rows = S.rows_for_chip(chip, truth[chip], seg, F.COUNTRY, px_m, px_xy=F.chip_pixel_xy_m(chip))
             hits += sum(1 for r in rows if r["best_iou"] >= args.iou)
         rates.append(hits / n_parcels)
         if (d + 1) % 10 == 0 or d + 1 == args.draws:

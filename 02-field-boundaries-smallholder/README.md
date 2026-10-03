@@ -30,7 +30,7 @@ number that changed, with the superseded value and why it was wrong.
 | Benchmark | Fields of The World, India subset with Slovenia as the control |
 | Imagery | Sentinel-2, two seasonal windows, eight bands |
 | Resolution | 10 m native, chips shipped on a 6.067 m grid for India and 4.139 m for Slovenia |
-| Chip | 256 by 256 pixels, about 241 ha in India and 112 ha in Slovenia |
+| Chip | 256 by 256 pixels, about 241 ha in India and 163 ha in Slovenia |
 | Test set | 399 Indian chips, 228 Slovenian |
 | Parcels scored | 1,983 India, 6,831 Slovenia |
 | Methods | FTW 3-class checkpoint, watershed, felzenszwalb, SAM ViT-H |
@@ -55,18 +55,18 @@ measured sweep.
 | felzenszwalb | 0.031 | 0.016 | +0.015 |
 | FTW 3-class FULL | 0.027 | 0.022 | +0.005 |
 
-**Slovenia, at 18 objects per chip.** Only FTW's figure is a measurement. No
-competing method was run coarse enough to reach 18 objects per chip, so the
+**Slovenia, at 20 objects per chip.** Only FTW's figure is a measurement. No
+competing method was run coarse enough to reach 20 objects per chip, so the
 other four are the value at each method's own coarsest setting and every one of
 them overstates that method.
 
 | method | recall at the budget | how |
 |---|---:|---|
 | FTW 3-class FULL | 0.222 | measured |
-| SAM ViT-H true colour | at most 0.233 | clamped, sweep stops at 85 objects |
-| SAM ViT-H false colour | at most 0.206 | clamped, sweep stops at 82 objects |
+| SAM ViT-H true colour | at most 0.234 | clamped, sweep stops at 89 objects |
+| SAM ViT-H false colour | at most 0.206 | clamped, sweep stops at 85 objects |
 | watershed | at most 0.081 | clamped, sweep stops at 26 objects |
-| felzenszwalb | at most 0.035 | clamped, sweep stops at 54 objects |
+| felzenszwalb | at most 0.037 | clamped, sweep stops at 65 objects |
 
 Slovenia is the control. FTW trained there on a complete cadastre, and there it
 wins at a fraction of the object budget any untrained method needs. Had it lost,
@@ -75,7 +75,7 @@ the scoring machinery would have been the story rather than India.
 ![Recall against objects emitted per chip](figures/recall_by_object_budget.png)
 
 Intervals on the two headline figures, resampling chips rather than parcels:
-India 2.72% with [1.71, 3.88], Slovenia 22.21% with [18.55, 25.87].
+India 2.72% with [1.71, 3.88], Slovenia 22.22% with [18.56, 25.88].
 
 ---
 
@@ -126,13 +126,13 @@ should be found at about the same rate in each if that reading is right.
 
 | ground width | method | India | Slovenia | ratio |
 |---|---|---:|---:|---:|
-| 20 to 30 m | FTW 3-class FULL | 0.41% | 7.81% | 19.1x |
+| 20 to 30 m | FTW 3-class FULL | 0.41% | 7.89% | 19.3x |
 | 30 to 50 m | FTW 3-class FULL | 0.58% | 23.62% | 41.0x |
 | 50 m up | FTW 3-class FULL | 7.11% | 58.80% | 8.3x |
-| 20 to 30 m | watershed | 4.90% | 20.91% | 4.3x |
+| 20 to 30 m | watershed | 4.90% | 21.32% | 4.4x |
 | 30 to 50 m | watershed | 22.49% | 47.64% | 2.1x |
 | 50 m up | watershed | 41.33% | 71.10% | 1.7x |
-| 20 to 30 m | SAM ViT-H true | 2.04% | 14.48% | 7.1x |
+| 20 to 30 m | SAM ViT-H true | 2.04% | 14.56% | 7.1x |
 | 30 to 50 m | SAM ViT-H true | 8.77% | 32.01% | 3.7x |
 | 50 m up | SAM ViT-H true | 33.78% | 64.39% | 1.9x |
 
@@ -144,7 +144,7 @@ Two further facts point the same way. The labelled Slovenian parcels are **about
 three quarters the width** of the labelled Indian ones, 30.4 m median against
 42.3 m, and the
 model saturates its boundary class on four of five Indian chips while doing
-nothing of the kind in Slovenia. The country with the smaller fields is the
+nothing of the kind in Slovenia. The country with the narrower fields is the
 country where the model works.
 
 The leading candidate for the difference is label geometry. India is
@@ -296,8 +296,9 @@ masks with the outer ring eroded away and this project gives it back, capped at
 three pixels. Every size figure depends on that constant and it has never been
 checked against an independently digitised parcel.
 
-**Boundary contrast is measured but unvalidated**, which is why the question of
-whether arid ground fails for lack of contrast rather than lack of resolution
+**Boundary contrast agrees only weakly with the eye.** A blind check against
+one analyst on 20 parcels gave a rank score of 0.655, p = 0.16, so the question
+of whether arid ground fails for lack of contrast or for lack of resolution
 stays open.
 
 ---

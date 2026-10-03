@@ -157,7 +157,7 @@ def main() -> None:
             sys.exit(f"unknown composite {c}, choose from {sorted(COMPOSITES)}")
 
     px_m = F.grid_pixel_m()
-    min_px = int(round(args.min_size_m2 / (px_m * px_m)))
+    min_px = int(round(args.min_size_m2 / F.grid_pixel_area_m2()))
     rng = np.random.default_rng(args.seed)
 
     print(RULE)
@@ -207,11 +207,11 @@ def main() -> None:
             n = C.object_count(seg)
             counts[comp].append(n)
             rows[comp].extend(
-                S.rows_for_chip(chip, full, seg, F.COUNTRY, px_m))
+                S.rows_for_chip(chip, full, seg, F.COUNTRY, px_m, px_xy=F.chip_pixel_xy_m(chip)))
             for _ in range(args.null_draws):
                 nulls[comp].extend(S.rows_for_chip(
                     chip, full, C.null_segments(seg.shape, n, rng),
-                    F.COUNTRY, px_m))
+                    F.COUNTRY, px_m, px_xy=F.chip_pixel_xy_m(chip)))
 
             print(f"  {i:>3}/{len(chips)}  {comp:<6} {dt:6.1f}s  "
                   f"{len(masks):>4} masks, {n:>4} after the size filter")

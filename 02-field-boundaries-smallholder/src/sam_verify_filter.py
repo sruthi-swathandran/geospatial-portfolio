@@ -85,7 +85,7 @@ def main() -> None:
     comps = [c.strip() for c in args.composites.split(",") if c.strip()]
 
     px_m = F.grid_pixel_m()
-    min_px = int(round(args.min_size_m2 / (px_m * px_m)))
+    min_px = int(round(args.min_size_m2 / F.grid_pixel_area_m2()))
 
     print(RULE)
     print(f"STRICT AGAINST LOOSE-THEN-FILTER, {args.model}, "

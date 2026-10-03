@@ -54,9 +54,38 @@ def parcel_width_px(mask: np.ndarray) -> float:
     return max(1.0, float(d.max()) * 2.0 - 1.0)
 
 
-def rows_for_chip(chip, full_labels, segments, country, px_m, native_m=10.0):
-    """One row per labelled parcel in this chip, in the FTW table schema."""
-    scale = px_m / native_m
+def width_m(mask: np.ndarray, x_m: float, y_m: float) -> float:
+    """Largest inscribed circle across a parcel, in metres, on rectangular pixels.
+
+    sampling gives distance_transform_edt the ground size of a step along each
+    axis. The 2d minus one convention of parcel_width_px is kept by subtracting
+    the smaller pixel size, so on square pixels the two agree exactly.
+    """
+    from scipy.ndimage import distance_transform_edt
+    if not mask.any():
+        return 0.0
+    d = distance_transform_edt(np.pad(mask, 1, constant_values=False),
+                               sampling=(y_m, x_m))
+    return max(min(x_m, y_m), float(d.max()) * 2.0 - min(x_m, y_m))
+
+
+def rows_for_chip(chip, full_labels, segments, country, px_m, native_m=10.0,
+                  px_xy=None):
+    """One row per labelled parcel in this chip, in the FTW table schema.
+
+    px_xy is the ground size of a pixel on this chip, east to west then north
+    to south, from ftw_common.chip_pixel_xy_m. Without it every pixel is taken
+    as px_m square, which is wrong wherever pixels are not square on the
+    ground (B-18), so leaving it out raises a warning.
+    """
+    if px_xy is None:
+        import warnings
+        warnings.warn("rows_for_chip without px_xy assumes square pixels",
+                      stacklevel=2)
+        x_m = y_m = px_m
+    else:
+        x_m, y_m = px_xy
+    area_m2 = x_m * y_m
     ious = parcel_scores(full_labels, segments)
     rows = []
     for pid, iou in ious.items():
@@ -67,11 +96,11 @@ def rows_for_chip(chip, full_labels, segments, country, px_m, native_m=10.0):
             "chip": chip,
             "parcel_id": pid,
             "full_px": px,
-            "hectares": round(px * px_m * px_m / 10000.0, 4),
-            "native_10m_px": round(px * scale * scale, 2),
+            "hectares": round(px * area_m2 / 10000.0, 4),
+            "native_10m_px": round(px * area_m2 / native_m ** 2, 2),
             "best_iou": round(iou, 4),
             "found": int(iou >= 0.5),
-            "width_native_px": round(parcel_width_px(mask) * scale, 3),
+            "width_native_px": round(width_m(mask, x_m, y_m) / native_m, 3),
         })
     return rows
 

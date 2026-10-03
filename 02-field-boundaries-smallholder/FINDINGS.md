@@ -39,9 +39,11 @@ control's.
 4. 43% of reference parcels are smaller than 5 by 5 native Sentinel-2 pixels.
    That figure is the conservative end of a range; the true share is probably
    higher.
-5. Slovenia, measured with the same code as a control, has **smaller** parcels
-   than India and complete labels. So field size alone cannot explain any
-   result India produces.
+5. Slovenia, measured with the same code as a control, has parcels of about
+   the same area as India's, narrower ones, twice the share under 3 by 3 native
+   pixels, and complete labels. So field size alone cannot explain any result
+   India produces. An earlier version said Slovenian parcels were smaller by
+   area, which came from a pixel size error; see B-21 in `COMPARISON.md`.
 
 ---
 
@@ -121,28 +123,29 @@ into pieces. Giving the ring back raises total parcel area by 45.4%.
 
 ### Parcel size against what Sentinel-2 resolves
 
-Reconstructed parcels, all 1,982 chips, converted at the measured 6.067 m
-pixel and expressed in native 10 m Sentinel-2 pixels:
+Reconstructed parcels, all 1,982 chips, converted at each chip's own measured
+pixel area, about 6.07 m on a side, and expressed in native 10 m Sentinel-2
+pixels:
 
 | | hectares | native 10 m px | pixels on a side |
 |---|---:|---:|---:|
 | p5 | 0.066 | 7 | 2.6 |
-| p25 | 0.151 | 15 | 3.9 |
-| **p50** | **0.302** | **30** | **5.5** |
-| p75 | 0.604 | 60 | 7.8 |
-| p95 | 1.598 | 160 | 12.6 |
-| mean | 0.503 | 50 | 7.1 |
+| p25 | 0.153 | 15 | 3.9 |
+| **p50** | **0.303** | **30** | **5.5** |
+| p75 | 0.607 | 61 | 7.8 |
+| p95 | 1.603 | 160 | 12.7 |
+| mean | 0.506 | 51 | 7.1 |
 
 Share of parcels below a given size, in native Sentinel-2 pixels:
 
 | smaller than | share |
 |---|---:|
-| 2 × 2 px (0.04 ha) | 0.94% |
-| 3 × 3 px (0.09 ha) | 10.56% |
-| 4 × 4 px (0.16 ha) | 26.53% |
-| **5 × 5 px (0.25 ha)** | **43.01%** |
-| 7 × 7 px (0.49 ha) | 68.36% |
-| 10 × 10 px (1.00 ha) | 87.87% |
+| 2 × 2 px (0.04 ha) | 0.95% |
+| 3 × 3 px (0.09 ha) | 10.46% |
+| 4 × 4 px (0.16 ha) | 26.40% |
+| **5 × 5 px (0.25 ha)** | **42.98%** |
+| 7 × 7 px (0.49 ha) | 68.04% |
+| 10 × 10 px (1.00 ha) | 87.71% |
 
 A parcel of 9 native pixels is 3 by 3. Its centre pixel is its only interior
 and everything else is edge. Whatever a model outputs there, it is not tracing
@@ -163,24 +166,30 @@ it better than expected.
 | parcels | 9,837 | 69,435 |
 | parcels touching a chip edge | 0 | 21,188 (30.5%) |
 | untruncated parcels | 9,837 | 48,247 |
-| grid pixel | 6.067 m | 4.139 m |
-| median parcel | 0.302 ha | **0.223 ha** |
-| median, native 10 m px | 30 | **22** |
-| under 5 × 5 native px | 43.01% | **53.56%** |
-| under 3 × 3 native px | 10.56% | **28.03%** |
+| grid pixel, ground | 6.07 by 6.07 m | 4.14 by 6.00 m |
+| median parcel | 0.303 ha | **0.325 ha** |
+| median, native 10 m px | 30 | **32** |
+| under 5 × 5 native px | 42.98% | **42.62%** |
+| under 3 × 3 native px | 10.46% | **20.26%** |
 | parcel interior, share of pixels | 0.71% | 9.77% |
 | boundary ring | 0.32% | 2.41% |
 | verified background | 0.00% | 87.82% |
 | unlabelled | 98.96% | 0.00% |
 | precision measurable | no | yes |
 
-Slovenian parcels are smaller, not larger. Three further points push the same
-way. Its imagery is upsampled harder, 10 m onto a 4.14 m grid against India's
-6.07 m, so it carries more interpolated pixels per real observation. Its
-parcels are rasterised on that finer grid, so they suffer less of the area
-inflation that makes India's 0.302 ha an upper bound, which widens the real
-size gap beyond what the table shows. And its ring is one pixel thick as well,
-97.60% at Euclidean distance 1.41 or less, so the same reconstruction applies
+By area the two are close at the median, and Slovenia carries twice India's
+share of parcels under 3 by 3 native pixels. By width Slovenian parcels are
+narrower, 30.4 m against 42.3 m (see `RESULTS.md`), so they are longer strips.
+This table said Slovenian parcels were smaller until B-21 in `COMPARISON.md`
+found that every Slovenian area had been converted with the east to west pixel
+size alone, which understated it by 1.450.
+
+Two further points push the same way. Its imagery is upsampled harder in one
+direction, 10 m onto 4.14 m east to west, so it carries more interpolated
+pixels per real observation. India's 0.303 ha is an upper bound for the reason
+in O-01, so the true Indian median may sit further below Slovenia's than the
+table shows. And Slovenia's ring is one pixel thick as well, 97.60% at
+Euclidean distance 1.41 or less, so the same reconstruction applies
 unchanged.
 
 Differences to carry forward rather than forget: India is 2016 imagery and
@@ -291,8 +300,8 @@ the honest one.
 
 ## Open, not resolved
 
-**O-01. 0.302 ha here against 0.24 ha in the source paper.** Wang, Waldner and
-Lobell report a 0.24 ha median for these labels. This project measures 0.302 ha
+**O-01. 0.303 ha here against 0.24 ha in the source paper.** Wang, Waldner and
+Lobell report a 0.24 ha median for these labels. This project measures 0.303 ha
 on the 6.07 m rasterisation FTW ships. The two are different quantities even
 if both are right, since the paper measures vector polygons.
 
@@ -303,7 +312,7 @@ perimeter near 36, a half-pixel outward bias would account for the difference.
 This is a plausible explanation and an unverified one. FTW's documentation and
 paper do not state how the masks were rasterised.
 
-Consequence: **0.302 ha is an upper bound on the true parcel.** Every
+Consequence: **0.303 ha is an upper bound on the true parcel.** Every
 "share smaller than" figure above is correspondingly a lower bound, so the real
 sub-resolution share is probably worse than the table says. The conservative
 number is the one quoted.

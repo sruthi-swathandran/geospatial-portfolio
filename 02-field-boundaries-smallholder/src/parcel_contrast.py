@@ -46,6 +46,15 @@ except Exception:                                             # noqa: BLE001
 
 RULE = "=" * 78
 
+# F-16. Written into every row so the file says how its number was made.
+# Contrast belongs to the labelled parcel and the imagery, so there is no
+# method column: no segmenter enters it. Superseded for the cross-country
+# comparison by edge_over_interior in label_registration.csv (B-15).
+CONTRAST_MEASURE = "edge_band_mean_over_chip_median"
+GRADIENT_BUILD = ("compare_segmenters.gradient: Sobel magnitude, mean over "
+                  "every band of both windows, each band stretched 2 to 98 "
+                  "percentile, gaussian sigma 1")
+
 WIDTH_EDGES = [0, 3, 5, 10, np.inf]
 WIDTH_LABELS = ["under 3", "3 to 5", "5 to 10", "10 and over"]
 
@@ -83,7 +92,7 @@ def measure(chips, px_m):
             continue
         grad = C.gradient(stack)
         chip_median = float(np.median(grad))
-        scale = px_m / 10.0
+        x_m, y_m = F.chip_pixel_xy_m(chip)
 
         for pid in np.unique(full[full > 0]):
             mask = full == pid
@@ -91,8 +100,10 @@ def measure(chips, px_m):
                 "country": F.COUNTRY,
                 "chip": chip,
                 "parcel_id": int(pid),
-                "width_native_px": round(S.parcel_width_px(mask) * scale, 3),
+                "width_native_px": round(S.width_m(mask, x_m, y_m) / 10.0, 3),
                 "contrast": round(boundary_contrast(mask, grad, chip_median), 4),
+                "contrast_measure": CONTRAST_MEASURE,
+                "gradient_build": GRADIENT_BUILD,
             })
 
         if i % 50 == 0 or i == len(chips):

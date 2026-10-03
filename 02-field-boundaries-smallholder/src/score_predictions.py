@@ -164,7 +164,7 @@ def score_country(country, iou_thr, classes, tag):
         hit_components = set()
         for pid, (iou, comp) in ious.items():
             fu_px = int((full == pid).sum())
-            ha = fu_px * ha_per_px
+            ha = fu_px * float(np.prod(F.chip_pixel_xy_m(name))) / 10_000.0
             native = ha * 10_000.0 / m2_native
             found = iou >= iou_thr
             if found:

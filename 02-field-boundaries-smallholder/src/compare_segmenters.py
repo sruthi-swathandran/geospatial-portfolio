@@ -197,7 +197,7 @@ def main() -> None:
             sys.exit(f"unknown method {m}, choose from {sorted(SWEEPS)}")
 
     px_m = F.grid_pixel_m()
-    min_px = int(round(args.min_size_m2 / (px_m * px_m)))
+    min_px = int(round(args.min_size_m2 / F.grid_pixel_area_m2()))
     suffix = f"_min{int(args.min_size_m2)}"
     rng = np.random.default_rng(args.seed)
 
@@ -239,11 +239,11 @@ def main() -> None:
             seg = drop_small(seg, min_px)
             n = object_count(seg)
             counts[key].append(n)
-            rows[key].extend(S.rows_for_chip(chip, full, seg, F.COUNTRY, px_m))
+            rows[key].extend(S.rows_for_chip(chip, full, seg, F.COUNTRY, px_m, px_xy=F.chip_pixel_xy_m(chip)))
             for _ in range(args.null_draws):
                 nseg = null_segments(shape, n, rng)
                 null_rows[key].extend(
-                    S.rows_for_chip(chip, full, nseg, F.COUNTRY, px_m))
+                    S.rows_for_chip(chip, full, nseg, F.COUNTRY, px_m, px_xy=F.chip_pixel_xy_m(chip)))
 
         if (i + 1) % 10 == 0 or i + 1 == len(chips):
             rate = (i + 1) / (time.time() - tic)

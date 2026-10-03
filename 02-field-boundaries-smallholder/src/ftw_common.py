@@ -47,6 +47,7 @@ boundary.
 
 from __future__ import annotations
 
+import functools
 import os
 from pathlib import Path
 
@@ -118,6 +119,37 @@ def grid_pixel_m(names=None, n=80):
             _, _, w_m = geod.inv(l, (b + t) / 2, r, (b + t) / 2)
             sizes.append(w_m / s.width)
     return float(np.mean(sizes))
+
+
+@functools.lru_cache(maxsize=None)
+def chip_pixel_xy_m(chip: str) -> tuple:
+    """Ground size of one pixel on this chip, east to west then north to south.
+
+    grid_pixel_m() reports the first alone, which is only the whole story where
+    pixels are square on the ground. They are in India and are not in Slovenia,
+    where a pixel is 4.138 m across and 6.002 m tall (B-18). Anything that
+    turns a pixel count into an area or a width needs both.
+    """
+    from pyproj import Geod
+    geod = Geod(ellps="WGS84")
+    with rasterio.open(INSTANCE / chip) as s:
+        l, b, r, t = s.bounds
+        midlat, midlon = (b + t) / 2, (l + r) / 2
+        _, _, w_m = geod.inv(l, midlat, r, midlat)
+        _, _, h_m = geod.inv(midlon, b, midlon, t)
+        return w_m / s.width, h_m / s.height
+
+
+def grid_pixel_area_m2(names=None, n=80) -> float:
+    """Ground area of one grid pixel, averaged over chips, in square metres.
+
+    Use this, and never grid_pixel_m() squared, to turn an area into a pixel
+    count. Squaring the east to west size understated a Slovenian pixel by
+    1.450 and made the 500 square metre filter act at 720 (B-20).
+    """
+    names = names or chip_names()
+    areas = [x * y for x, y in (chip_pixel_xy_m(nm) for nm in names[:n])]
+    return float(np.mean(areas))
 
 
 def full_fields(inst, c3, max_dist=MAX_RING_DIST, return_orphans=False):

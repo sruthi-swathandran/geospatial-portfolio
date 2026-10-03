@@ -79,45 +79,45 @@ SAM at threshold 0.50, classical methods at their best setting.
 
 | method | setting | objects/chip | median IoU | recall | null | gap |
 |---|---:|---:|---:|---:|---:|---:|
-| FTW 3-class FULL |  | 18 | 0.000 | 0.222 | 0.005 | +0.217 |
-| watershed | 0.005 | 706 | 0.302 | 0.202 | 0.025 | +0.177 |
-| watershed | 0.01 | 620 | 0.325 | 0.242 | 0.026 | +0.216 |
-| watershed | 0.02 | 492 | 0.355 | 0.292 | 0.025 | +0.267 |
-| watershed | 0.05 | 282 | 0.356 | 0.345 | 0.020 | +0.325 |
-| watershed | 0.08 | 180 | 0.303 | 0.328 | 0.018 | +0.310 |
-| watershed | 0.1 | 140 | 0.254 | 0.305 | 0.014 | +0.291 |
-| watershed | 0.13 | 101 | 0.191 | 0.257 | 0.011 | +0.245 |
-| watershed | 0.16 | 76 | 0.150 | 0.217 | 0.009 | +0.208 |
-| watershed | 0.2 | 54 | 0.103 | 0.170 | 0.009 | +0.161 |
+| FTW 3-class FULL |  | 20 | 0.000 | 0.222 | 0.007 | +0.215 |
+| watershed | 0.005 | 785 | 0.311 | 0.209 | 0.025 | +0.184 |
+| watershed | 0.01 | 672 | 0.333 | 0.248 | 0.025 | +0.223 |
+| watershed | 0.02 | 521 | 0.360 | 0.297 | 0.024 | +0.273 |
+| watershed | 0.05 | 291 | 0.360 | 0.348 | 0.020 | +0.328 |
+| watershed | 0.08 | 184 | 0.307 | 0.331 | 0.016 | +0.315 |
+| watershed | 0.1 | 143 | 0.258 | 0.307 | 0.015 | +0.292 |
+| watershed | 0.13 | 102 | 0.194 | 0.259 | 0.012 | +0.246 |
+| watershed | 0.16 | 77 | 0.151 | 0.219 | 0.009 | +0.210 |
+| watershed | 0.2 | 55 | 0.104 | 0.171 | 0.006 | +0.165 |
 | watershed | 0.3 | 26 | 0.031 | 0.081 | 0.003 | +0.078 |
-| felzenszwalb | 25 | 581 | 0.193 | 0.030 | 0.024 | +0.006 |
-| felzenszwalb | 50 | 567 | 0.284 | 0.110 | 0.024 | +0.086 |
-| felzenszwalb | 100 | 382 | 0.298 | 0.209 | 0.023 | +0.186 |
-| felzenszwalb | 150 | 268 | 0.238 | 0.201 | 0.022 | +0.180 |
-| felzenszwalb | 200 | 202 | 0.179 | 0.177 | 0.019 | +0.158 |
-| felzenszwalb | 300 | 135 | 0.107 | 0.128 | 0.015 | +0.112 |
-| felzenszwalb | 400 | 101 | 0.066 | 0.097 | 0.011 | +0.086 |
-| felzenszwalb | 800 | 54 | 0.016 | 0.035 | 0.005 | +0.030 |
-| SAM ViT-H true colour | 0.50/0.88 | 112 | 0.194 | 0.276 | 0.013 | +0.263 |
-| SAM ViT-H true colour | 0.60/0.88 | 112 | 0.193 | 0.275 | 0.013 | +0.263 |
-| SAM ViT-H true colour | 0.70/0.88 | 110 | 0.189 | 0.274 | 0.013 | +0.260 |
-| SAM ViT-H true colour | 0.80/0.88 | 105 | 0.172 | 0.264 | 0.014 | +0.250 |
-| SAM ViT-H true colour | 0.88/0.88 | 85 | 0.118 | 0.233 | 0.010 | +0.223 |
-| SAM ViT-H false colour | 0.50/0.88 | 112 | 0.154 | 0.248 | 0.012 | +0.236 |
-| SAM ViT-H false colour | 0.60/0.88 | 112 | 0.154 | 0.248 | 0.012 | +0.236 |
-| SAM ViT-H false colour | 0.70/0.88 | 110 | 0.151 | 0.246 | 0.013 | +0.233 |
-| SAM ViT-H false colour | 0.80/0.88 | 102 | 0.129 | 0.236 | 0.012 | +0.224 |
-| SAM ViT-H false colour | 0.88/0.88 | 82 | 0.084 | 0.206 | 0.011 | +0.196 |
+| felzenszwalb | 25 | 902 | 0.217 | 0.035 | 0.024 | +0.011 |
+| felzenszwalb | 50 | 762 | 0.295 | 0.116 | 0.025 | +0.091 |
+| felzenszwalb | 100 | 462 | 0.305 | 0.214 | 0.022 | +0.192 |
+| felzenszwalb | 150 | 314 | 0.243 | 0.203 | 0.024 | +0.180 |
+| felzenszwalb | 200 | 234 | 0.181 | 0.178 | 0.020 | +0.158 |
+| felzenszwalb | 300 | 156 | 0.109 | 0.129 | 0.015 | +0.114 |
+| felzenszwalb | 400 | 118 | 0.066 | 0.098 | 0.013 | +0.085 |
+| felzenszwalb | 800 | 65 | 0.017 | 0.037 | 0.006 | +0.030 |
+| SAM ViT-H true colour | 0.50/0.88 | 117 | 0.194 | 0.276 | 0.013 | +0.264 |
+| SAM ViT-H true colour | 0.60/0.88 | 117 | 0.194 | 0.276 | 0.014 | +0.262 |
+| SAM ViT-H true colour | 0.70/0.88 | 115 | 0.190 | 0.274 | 0.012 | +0.262 |
+| SAM ViT-H true colour | 0.80/0.88 | 109 | 0.173 | 0.264 | 0.012 | +0.252 |
+| SAM ViT-H true colour | 0.88/0.88 | 89 | 0.119 | 0.234 | 0.010 | +0.224 |
+| SAM ViT-H false colour | 0.50/0.88 | 116 | 0.155 | 0.249 | 0.014 | +0.235 |
+| SAM ViT-H false colour | 0.60/0.88 | 116 | 0.155 | 0.248 | 0.012 | +0.237 |
+| SAM ViT-H false colour | 0.70/0.88 | 114 | 0.151 | 0.246 | 0.013 | +0.234 |
+| SAM ViT-H false colour | 0.80/0.88 | 106 | 0.130 | 0.236 | 0.013 | +0.223 |
+| SAM ViT-H false colour | 0.88/0.88 | 85 | 0.085 | 0.206 | 0.010 | +0.196 |
 
 ## Slovenia, at FTW's object budget
 
-| method | recall at 18 objects/chip | null | gap | how |
+| method | recall at 20 objects/chip | null | gap | how |
 |---|---:|---:|---:|---|
-| FTW 3-class FULL | 0.222 | 0.005 | +0.217 | single setting |
+| FTW 3-class FULL | 0.222 | 0.007 | +0.215 | single setting |
 | watershed | 0.081 | 0.003 | +0.078 | clamped, sweep stops at 26 objects |
-| felzenszwalb | 0.035 | 0.005 | +0.030 | clamped, sweep stops at 54 objects |
-| SAM ViT-H true colour | 0.233 | 0.010 | +0.223 | clamped, sweep stops at 85 objects |
-| SAM ViT-H false colour | 0.206 | 0.011 | +0.196 | clamped, sweep stops at 82 objects |
+| felzenszwalb | 0.037 | 0.006 | +0.030 | clamped, sweep stops at 65 objects |
+| SAM ViT-H true colour | 0.234 | 0.010 | +0.224 | clamped, sweep stops at 89 objects |
+| SAM ViT-H false colour | 0.206 | 0.010 | +0.196 | clamped, sweep stops at 85 objects |
 
 ## Slovenia, recall by ground width
 
@@ -125,8 +125,8 @@ SAM at threshold 0.50, classical methods at their best setting.
 
 | ground width | parcels | FTW 3-class FULL | watershed | SAM ViT-H true colour | SAM ViT-H false colour |
 |---|---:|---:|---:|---:|---:|
-| under 20 m | 2,163 | 0.51% | 2.91% | 2.50% | 1.57% |
-| 20 to 30 m | 1,229 | 7.81% | 20.91% | 14.48% | 12.12% |
+| under 20 m | 2,163 | 0.51% | 3.74% | 2.64% | 1.62% |
+| 20 to 30 m | 1,229 | 7.89% | 21.32% | 14.56% | 12.12% |
 | 30 to 50 m | 1,740 | 23.62% | 47.64% | 32.01% | 27.76% |
 | 50 m up | 1,699 | 58.80% | 71.10% | 64.39% | 60.68% |
 
@@ -136,8 +136,8 @@ SAM at threshold 0.50, classical methods at their best setting.
 
 | width, native 10 m px | parcels | FTW 3-class FULL | watershed | SAM ViT-H true colour | SAM ViT-H false colour |
 |---|---:|---:|---:|---:|---:|
-| under 2 | 2,163 | 0.51% | 2.91% | 2.50% | 1.57% |
-| 2 to 3 | 1,229 | 7.81% | 20.91% | 14.48% | 12.12% |
+| under 2 | 2,163 | 0.51% | 3.74% | 2.64% | 1.62% |
+| 2 to 3 | 1,229 | 7.89% | 21.32% | 14.56% | 12.12% |
 | 3 to 4 | 1,193 | 18.86% | 42.92% | 27.75% | 24.14% |
 | 4 to 5 | 547 | 34.00% | 57.95% | 41.32% | 35.65% |
 | 5 to 7 | 827 | 48.49% | 68.80% | 55.86% | 50.67% |
@@ -151,15 +151,15 @@ Same sensor, same method, same physical parcel size.
 | ground width | method | India | Slovenia | ratio |
 |---|---|---:|---:|---:|
 | under 20 m | FTW 3-class FULL | 0/196, 0.00% | 11/2,163, 0.51% | not readable |
-| 20 to 30 m | FTW 3-class FULL | 1/245, 0.41% | 96/1,229, 7.81% | 19.1x |
+| 20 to 30 m | FTW 3-class FULL | 1/245, 0.41% | 97/1,229, 7.89% | 19.3x |
 | 30 to 50 m | FTW 3-class FULL | 5/867, 0.58% | 411/1,740, 23.62% | 41.0x |
 | 50 m up | FTW 3-class FULL | 48/675, 7.11% | 999/1,699, 58.80% | 8.3x |
-| under 20 m | watershed | 2/196, 1.02% | 63/2,163, 2.91% | 2.9x |
-| 20 to 30 m | watershed | 12/245, 4.90% | 257/1,229, 20.91% | 4.3x |
+| under 20 m | watershed | 2/196, 1.02% | 81/2,163, 3.74% | 3.7x |
+| 20 to 30 m | watershed | 12/245, 4.90% | 262/1,229, 21.32% | 4.4x |
 | 30 to 50 m | watershed | 195/867, 22.49% | 829/1,740, 47.64% | 2.1x |
 | 50 m up | watershed | 279/675, 41.33% | 1208/1,699, 71.10% | 1.7x |
-| under 20 m | SAM ViT-H true colour | 1/196, 0.51% | 54/2,163, 2.50% | 4.9x |
-| 20 to 30 m | SAM ViT-H true colour | 5/245, 2.04% | 178/1,229, 14.48% | 7.1x |
+| under 20 m | SAM ViT-H true colour | 1/196, 0.51% | 57/2,163, 2.64% | 5.2x |
+| 20 to 30 m | SAM ViT-H true colour | 5/245, 2.04% | 179/1,229, 14.56% | 7.1x |
 | 30 to 50 m | SAM ViT-H true colour | 76/867, 8.77% | 557/1,740, 32.01% | 3.7x |
 | 50 m up | SAM ViT-H true colour | 228/675, 33.78% | 1094/1,699, 64.39% | 1.9x |
 
@@ -184,17 +184,17 @@ Same sensor, same method, same physical parcel size.
 
 | method | objects/chip | no object | exactly one | 5 or more | matched share | parcels |
 |---|---:|---:|---:|---:|---:|---:|
-| FTW 3-class FULL | 18.3 | 55.3% | 38.2% | 0.1% | 44.91% | 6,831 |
-| watershed 0.05 | 281.9 | 0.1% | 13.0% | 27.8% | 4.52% | 6,831 |
+| FTW 3-class FULL | 19.5 | 53.3% | 39.4% | 0.1% | 42.06% | 6,831 |
+| watershed 0.05 | 290.7 | 0.0% | 12.3% | 28.5% | 4.43% | 6,831 |
 
 ## Slovenia, held-out setting choice
 
 | method | published | held out | optimism | setting |
 |---|---:|---:|---:|---|
-| watershed | 0.3450 | 0.3470 | -0.0020 | 0.05 in 100% of splits |
-| felzenszwalb | 0.2088 | 0.2082 | +0.0006 | 100.0 in 100% of splits |
-| sam_vit_h_true | 0.2757 | 0.2710 | +0.0047 | 0.5 in 100% of splits |
-| sam_vit_h_false | 0.2484 | 0.2420 | +0.0064 | 0.5 in 100% of splits |
+| watershed | 0.3484 | 0.3500 | -0.0016 | 0.05 in 100% of splits |
+| felzenszwalb | 0.2137 | 0.2136 | +0.0001 | 100.0 in 100% of splits |
+| sam_vit_h_true | 0.2762 | 0.2717 | +0.0045 | 0.5 in 100% of splits |
+| sam_vit_h_false | 0.2486 | 0.2420 | +0.0066 | 0.5 in 100% of splits |
 
 ## India, every method on the parcels the SAM subset covered
 
@@ -226,7 +226,7 @@ Same sensor, same method, same physical parcel size.
 | ground width | India offset | India recall | Slovenia offset | Slovenia recall |
 |---|---:|---:|---:|---:|
 | under 20 m | +9.92 m | 0.00% | +5.92 m | 0.51% |
-| 20 to 30 m | +6.64 m | 0.41% | +3.79 m | 7.81% |
+| 20 to 30 m | +6.64 m | 0.41% | +3.79 m | 7.89% |
 | 30 to 50 m | +3.91 m | 0.58% | +2.71 m | 23.62% |
 | 50 m up | +1.81 m | 7.11% | +2.23 m | 58.80% |
 

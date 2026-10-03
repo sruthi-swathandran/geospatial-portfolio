@@ -293,6 +293,9 @@ def field_sizes(root, n_chips, px_m):
         return
 
     print(f"\n  field size in PIXELS, fields fully inside a chip")
+    # east to west squared, which is right in India and 1.450 short of a
+    # Slovenian pixel (B-21). Exploration output only; nothing downstream
+    # reads it, and grid_pixel_area_m2() is the figure to use.
     ha_per_px = (px_m ** 2) / 10_000.0
 
     def row(label, v):

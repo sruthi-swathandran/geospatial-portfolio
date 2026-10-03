@@ -300,7 +300,7 @@ def main() -> None:
             sys.exit(f"unknown composite {c}, choose from {sorted(COMPOSITES)}")
 
     px_m = F.grid_pixel_m()
-    min_px = int(round(args.min_size_m2 / (px_m * px_m)))
+    min_px = int(round(args.min_size_m2 / F.grid_pixel_area_m2()))
     rng = np.random.default_rng(args.seed)
 
     already = done_pairs(raw_path)
@@ -367,7 +367,7 @@ def main() -> None:
                 n = C.object_count(seg)
                 line.append(f"{name} {n}")
 
-                for r in S.rows_for_chip(chip, full, seg, F.COUNTRY, px_m):
+                for r in S.rows_for_chip(chip, full, seg, F.COUNTRY, px_m, px_xy=F.chip_pixel_xy_m(chip)):
                     r.pop("country", None)
                     writer.writerow({**r, "composite": comp, "setting": name,
                                      "is_null": 0, "draw": 0,
@@ -375,7 +375,7 @@ def main() -> None:
                 for d in range(args.null_draws):
                     nseg = C.null_segments(seg.shape, n, rng)
                     for r in S.rows_for_chip(chip, full, nseg, F.COUNTRY,
-                                             px_m):
+                                             px_m, px_xy=F.chip_pixel_xy_m(chip)):
                         r.pop("country", None)
                         writer.writerow({**r, "composite": comp,
                                          "setting": name, "is_null": 1,
