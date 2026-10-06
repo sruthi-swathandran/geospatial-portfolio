@@ -53,19 +53,20 @@ private, client or internal source.
 **Every number traces to a generated file.** Tables in the write-ups are written
 by scripts from the result CSVs. In RS-02 a checker pulls every number out of
 every table and fails if one of them appears in no generated table, which exists
-because three numbers once drifted from their artefacts and a reviewer caught it
-rather than the workflow.
+because three numbers once drifted from their artefacts and the review caught
+it rather than the workflow.
 
-**Each project carries a written review of itself.** `REVIEW.md` reads the work
-twice over, once as a remote sensing scientist would read it before a programme
-board and once as a journal editor would read a submission. Findings are listed
-with severity and evidence, including the ones still open. The reviews are
-adversarial on purpose and neither project passed its own acceptance criteria on
-first reading.
+**Each project carries a written review of itself.** Both reviews were written
+with an AI assistant, Claude. They are not independent peer review.
+`REVIEW.md` reads the work twice over, once as a remote sensing scientist would
+read it before a programme board and once as a journal editor would read a
+submission. Findings are listed with severity and evidence, including the ones
+still open. The reviews are adversarial on purpose and neither project passed
+its own acceptance criteria on first reading.
 
 **Corrections are logged, not quietly fixed.** Every number that changed is
 recorded with its superseded value and the reason it was wrong. RS-01 keeps
-these in `CHANGELOG.md`, RS-02 as corrections B-01 to B-12 in `COMPARISON.md`.
+these in `CHANGELOG.md`, RS-02 as corrections B-01 to B-22 in `COMPARISON.md`.
 Among them: a control that rewarded methods for cutting a scene into more
 pieces, a scorer that measured two different objects and disagreed with itself
 by a factor of two, and a claim about resolution that the project's own data

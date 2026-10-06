@@ -16,7 +16,8 @@ reported with the decision that moves it and the amount it moves by.
 
 Interactive map: [three acquisitions and the recession between them](https://sruthi-swathandran.github.io/geospatial-portfolio/01-sentinel1-flood-extent/docs/)
 
-This repository has been through a methodological audit. `REVIEW.md` lists every
+This repository has been through a methodological review written with an AI
+assistant, Claude. It is not independent peer review. `REVIEW.md` lists every
 finding with its severity and evidence, including three that remain open.
 `CHANGELOG.md` records every number that changed as a result, with the
 superseded value and why it was wrong.

@@ -1,5 +1,7 @@
 # Technical review: RS-01 Sentinel-1 flood extent
 
+Written with an AI assistant, Claude. It is not independent peer review.
+
 Reviewed as (a) an operational EO product for methodological defensibility and
 (b) a submission for reproducibility and provenance. Findings below are against
 the repository at `01-sentinel1-flood-extent`, commit `fc951f1` plus 65
