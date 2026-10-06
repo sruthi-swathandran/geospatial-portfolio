@@ -1,0 +1,3305 @@
+{
+ "written_at": "2026-10-06T05:33:53+00:00",
+ "git": {
+  "commit": "b00f6403f851c40018e7466b66d88658b0f198ac",
+  "uncommitted_changes": true
+ },
+ "interpreter": {
+  "executable": "D:\\geospatial-portfolio\\02-field-boundaries-smallholder\\.venv\\Scripts\\python.exe",
+  "version": "3.11.9",
+  "implementation": "CPython",
+  "platform": "Windows-10-10.0.19045-SP0",
+  "in_project_venv": true
+ },
+ "packages": [
+  {
+   "name": "ftw-tools",
+   "pinned": "1.4.3",
+   "installed": "1.4.3",
+   "match": true
+  },
+  {
+   "name": "numpy",
+   "pinned": "2.4.6",
+   "installed": "2.4.6",
+   "match": true
+  },
+  {
+   "name": "scipy",
+   "pinned": "1.17.1",
+   "installed": "1.17.1",
+   "match": true
+  },
+  {
+   "name": "pandas",
+   "pinned": "3.0.5",
+   "installed": "3.0.5",
+   "match": true
+  },
+  {
+   "name": "rasterio",
+   "pinned": "1.4.4",
+   "installed": "1.4.4",
+   "match": true
+  },
+  {
+   "name": "pyproj",
+   "pinned": "3.7.2",
+   "installed": "3.7.2",
+   "match": true
+  },
+  {
+   "name": "geopandas",
+   "pinned": "1.1.4",
+   "installed": "1.1.4",
+   "match": true
+  },
+  {
+   "name": "shapely",
+   "pinned": "2.1.2",
+   "installed": "2.1.2",
+   "match": true
+  },
+  {
+   "name": "scikit-image",
+   "pinned": "0.26.0",
+   "installed": "0.26.0",
+   "match": true
+  },
+  {
+   "name": "segment-anything",
+   "pinned": "1.0",
+   "installed": "1.0",
+   "match": true
+  },
+  {
+   "name": "torch",
+   "pinned": "2.14.0",
+   "installed": "2.14.0+cpu",
+   "match": true
+  },
+  {
+   "name": "torchvision",
+   "pinned": "0.29.0",
+   "installed": "0.29.0+cpu",
+   "match": true
+  },
+  {
+   "name": "torchmetrics",
+   "pinned": "1.9.0",
+   "installed": "1.9.0",
+   "match": true
+  },
+  {
+   "name": "matplotlib",
+   "pinned": "3.11.2",
+   "installed": "3.11.2",
+   "match": true
+  },
+  {
+   "name": "requests",
+   "pinned": "2.34.2",
+   "installed": "2.34.2",
+   "match": true
+  }
+ ],
+ "checkpoints": [
+  {
+   "file": "2class_ccby.ckpt",
+   "bytes": 204468754,
+   "sha256": "805cc73e218195cdb32ccfdf5d04feb9d9f2098aa0180521de78357cc6319bfd"
+  },
+  {
+   "file": "3class_ccby.ckpt",
+   "bytes": 204471122,
+   "sha256": "d04671c498c181a2bca4b9c1a82fb8dcc93384eaf55841cb6672692f6fb21d3c"
+  },
+  {
+   "file": "3class_full.ckpt",
+   "bytes": 204471058,
+   "sha256": "22d9075e53c016532780c4d94b9cf3c1106754639ca0a1373506650590ca6ca8"
+  },
+  {
+   "file": "sam_vit_b_01ec64.pth",
+   "bytes": 375042383,
+   "sha256": "ec2df62732614e57411cdcf32a23ffdf28910380d03139ee0f4fcbe91eb8c912"
+  },
+  {
+   "file": "sam_vit_h_4b8939.pth",
+   "bytes": 2564550879,
+   "sha256": "a7bf3b02f3ebf1267aba913ff637d9a2d5c33d3173bb679e46d9f338c26f262e"
+  }
+ ],
+ "seeds": [
+  {
+   "script": "bootstrap_ci.py",
+   "line": 121,
+   "value": 20260922
+  },
+  {
+   "script": "compare_segmenters.py",
+   "line": 174,
+   "value": 20260916
+  },
+  {
+   "script": "contrast_panel.py",
+   "line": 148,
+   "value": 12345
+  },
+  {
+   "script": "contrast_panel.py",
+   "line": 334,
+   "value": 20260925
+  },
+  {
+   "script": "holdout.py",
+   "line": 93,
+   "value": 20260923
+  },
+  {
+   "script": "label_registration.py",
+   "line": 305,
+   "value": 11
+  },
+  {
+   "script": "null_strength.py",
+   "line": 97,
+   "value": 20260922
+  },
+  {
+   "script": "sam_probe.py",
+   "line": 127,
+   "value": 20260917
+  },
+  {
+   "script": "sam_run.py",
+   "line": 259,
+   "value": 20260917
+  }
+ ],
+ "outputs": {
+  "results/comparison_tables.md": {
+   "kind": "file",
+   "sha256": "2fb080f7ef314b03bad8eb4a41bf720e384489258393ecc3911eb7f9bd65da08"
+  },
+  "results/country_comparison.csv": {
+   "kind": "csv",
+   "rows": 2,
+   "columns": {
+    "country": "6ec75f56353e4a08a51b56648fc7e70b8a16c2ac6575d473f26843b5980aaf19",
+    "chips": "21fb3f11f93a45595aff8fdd2d59b619cacb6ca6f751db216ccfa14c09d877aa",
+    "pred_field_median": "59d2a2f81d4460878028f7ff5572adb606fc519dd62075766dfe4cec94e3565b",
+    "labelled_median": "299655a9fb0a16b6005ec944a236d3579bc203c66075795f36b3b492e1d85255",
+    "unlabelled_median": "dd2d16d2b436619bb4f7eb15a16702613149d2cda43cef53838bbf0566062178",
+    "chips_predicting_zero": "d3648f63204ae33ee15cf7879848273bd19fa7a64f59068a7ad45afdcee6558d"
+   }
+  },
+  "results/ftw_own_scoring_3class_full.csv": {
+   "kind": "csv",
+   "rows": 2,
+   "columns": {
+    "country": "6ec75f56353e4a08a51b56648fc7e70b8a16c2ac6575d473f26843b5980aaf19",
+    "chips": "21fb3f11f93a45595aff8fdd2d59b619cacb6ca6f751db216ccfa14c09d877aa",
+    "pixel_iou": "6d21e7142b37f0257427cdf1397214e21d2e1d907adf1334018039001478704e",
+    "pixel_precision": "15287a809f9284b78781aafb1968257c90f1371a6135cd1995796c7534b4ae65",
+    "pixel_recall": "0219c9bfeeefc7467611a07bd32de697e229bd4c2e97959340ad5aefb1cd3c07",
+    "object_tps": "3dacd3d72730ff3df573fdf9eb89d9432cc9c951b1008f060716c931ee9a712a",
+    "object_fps": "60517380593a0f41e0cb9456b99d5a3a65bcc2c67def9177e5b45f1c9d231966",
+    "object_fns": "b726b4249db287afa6e071ad21e1d8de52b88470347c043d06c3e5fe56812eaf",
+    "object_precision": "24ab3c8cb247d50bd1b91fa6f640e1359da297d6ca36a831b80555b3210bfd02",
+    "object_recall": "2b3f2faf73d7c2e079f0b40e0a2a62e81367784041f6a3445330c327cf1009f9"
+   }
+  },
+  "results/india/chip_district.csv": {
+   "kind": "csv",
+   "rows": 2002,
+   "columns": {
+    "aoi_id": "71955f73dbb62c621d4f720eea44cda5b8137896fdf810f4272c3ea148524767",
+    "district": "658b559b5eb31457e2f7846e1608e46ee4d05201b2a61e28eece7e7c31acc441",
+    "state": "9568f54641a38caac85e01c9157aa8883b7b5ac75c715762bf8ed92e406e7fd9",
+    "split": "40634a94def4aa4087448f71dd88d687199e54584c515fd24d4cc118aa991612"
+   }
+  },
+  "results/india/chips_by_district.csv": {
+   "kind": "csv",
+   "rows": 505,
+   "columns": {
+    "district": "46636f8762f5a8991f9cf02fe6a5679492639e783fba11116c2b78e8eb0de49f",
+    "state": "2795e3cb6295c45ccfc7360613099dc45a8ef21d49a489a5769d606685158d67",
+    "none": "1245874138698fac871fe2007394a9ebe5ff37c24d6b885caa5136ec7fea5c7b",
+    "test": "f8496e1b916e8d19e79c7752ca426f125f4fda0ed93a52959ae2302e419c3379",
+    "train": "e3d01b229260cea5dee2d72f81c4d89aec73a1dbb929a3b302ab45136fe0f8ea",
+    "val": "cfa2492ea9600394a50b6577382a72e08aa48a2f28542f1cbbef5a0826a5665b",
+    "total": "45673c63ec1af95075699e20bfc334b2387354b502af993dfbc5ef72b8fad1c3"
+   }
+  },
+  "results/india/contrast_panel_key.csv": {
+   "kind": "csv",
+   "rows": 20,
+   "columns": {
+    "panel_no": "b76ae83c50d6104039c80d312402af3027661e07066325526ad997daf6362bbc",
+    "seed": "3462ad0d0a826debf0d4cecbb0755c748f3c5f2298da7e716ae08efcd499ff98",
+    "chip": "97eb69f318f8c0dcc67fe25d024e056eb84010916d81f7cc668a8e19f8485eb7",
+    "parcel_id": "ec4d94bd5b41424c7e35198c6835f79f0d2762496360344d547efebdf42a5cb7",
+    "edge_over_interior": "8a2fc199f2ed40d3b2fb0f820ba76e4a2b4e95f9cdf3ec1c49147b09b6538725",
+    "drawn_contrast": "3cebb3c270bbc1ef6d539035aea4ecdb98c0e8c0e13082c86a928745b89d7b6e",
+    "width_native_px": "45d6c65a08308b5f93f8d910b3f6d6a319d8e9f0964fd076f59ef3c20a8ace9c"
+   }
+  },
+  "results/india/contrast_panel_key_spent_1.csv": {
+   "kind": "csv",
+   "rows": 20,
+   "columns": {
+    "panel_no": "b76ae83c50d6104039c80d312402af3027661e07066325526ad997daf6362bbc",
+    "chip": "ce30229553d75cccb3af416a2ffb644b538bff5a94c3c664ce3f37dd4c46248f",
+    "parcel_id": "bf4862dd3386dd83173c3f5e0c33529a5d011500b5ddd8dc4319a18d130fb8e1",
+    "edge_over_interior": "8b63cf2b607677f4f3740750957b425782025dc2fae0c8e6aef24638cc6b1d3e",
+    "drawn_contrast": "5e91a43bd3363dcb375b1414b5992fde4c72085b5cdfc5d16e321cfecb399a71",
+    "width_native_px": "700413e9bbb54b27fab65e28bf111a8e5f7ac20788b8a3dd31f65df7b8483939"
+   }
+  },
+  "results/india/contrast_panel_scores.csv": {
+   "kind": "csv",
+   "rows": 1,
+   "columns": {
+    "seed": "e723211f1db10d58aa635e0d00f5498d87a696d7fb621ac44c18275bd0d82552",
+    "country": "79a3f034e7d0680edc8192f79d99a3f7557e4ba63b0e37af4f30139d7433276e",
+    "n": "5378796307535df3ec8d8b15a2e2dc5641419c3d3060cfe32238c0fa973f7aa3",
+    "marked_visible": "06e9d52c1720fca412803e3b07c4b228ff113e303f4c7ab94665319d832bbfb7",
+    "marked_numbers": "9d1f800fe82e86aba96af295ad30810e33ac433a77f2b9cc6cd02a2c1d20712d",
+    "rank_score": "b15b9815853b9f70342de8d1e5e42c7f621452f58ee300123be0c4efe05c2ab5",
+    "permutation_p": "ed22ae99441979558195f3202426a1782391a36dd9aa052c73e538e67abfaad6",
+    "median_split_agree": "a1fb50e6c86fae1679ef3351296fd6713411a08cf8dd1790a4fd05fae8688164"
+   }
+  },
+  "results/india/district_profile.csv": {
+   "kind": "csv",
+   "rows": 133,
+   "columns": {
+    "district": "776ba588a7b102ca9d1ed7a441011a7cd93c6ac719871c4d8d71ff9862851230",
+    "state": "3ca0f0d1b5cc66b6973f987901e2c06033461477aeb49790923768a911d2f4ec",
+    "test_chips": "097c7af41fe7d533d1c70ee4a458455ed5e9d7ad87a7afb36aef6deed6c826c5",
+    "parcels": "10c44e0410d213c632c648435c87f36aff35d9428109b8bd4d920642395cb3f1",
+    "median_width_px": "2fe8a2a22170c27c41cfcba03434f8beae660fc38ca5dd4b56b4902ea3763d00",
+    "share_narrow": "016e4e6c9af24caed723ba6c03362fb8708d160bfe2d552fd21fb981cfb19a2c",
+    "median_area_px": "bad7db75b83dc466e9a2e5ca66e76b4feb3b3ff27acc760e2e4ea84f952e064f",
+    "median_iou": "11d3c1c93c9a2c37862ad6590817a231dd4baa955d6c19366ed5e9d693a862e5",
+    "recall": "54db9dfa633a54ab25e089e2271b613838c6190a12d38a352a01b648b92d6189"
+   }
+  },
+  "results/india/field_sizes.csv": {
+   "kind": "csv",
+   "rows": 9837,
+   "columns": {
+    "chip": "b7b46fbc7e17149e1e46bcac65396430aa6f0303f5e1064ee7f47e548893b2ff",
+    "parcel_id": "aa84a70d2b08d59d255510a2a00edc4df0e9d1d90325d965d1ad621ff590e4be",
+    "interior_px": "76fc8e1842920a92fc7e1c13cd434243d994b410f1c790d904ab2cff4dc7073b",
+    "full_px": "683ea1bd0f51146e9004a3871e0b3241ea003a7923c304b4f9694d4a9cfc943b",
+    "interior_ha": "83e2cad5e663983a9254c8cde961003007e2a245889f55a47a72c215493dbbdb",
+    "full_ha": "0e63285979a313afeb612bfb596099537fef194d77d160fd356777967b215d7c",
+    "full_native_px": "cad73291a98c9d17cd21a9d0d1dad57d2189f072dd0787dc26045e9b26be794d",
+    "bbox_h": "5440c0bdb0009ddf502190351e2f9f138ba87b5ac510b1ac43fc7d12766d092a",
+    "bbox_w": "b77e821a95edcd5f4c00041811cddf8f3760b30713a7cfaf745b7e96e50d70e0",
+    "row_min": "9eda3ae579049c053f0a56d50d0ac048a232de4a418d9ac345aa1447b1609504",
+    "col_min": "d4ff388bd833457fd27477e1b3929cab5d8245024bb9911860ab3b550b4b7763",
+    "touches_edge": "a5f30033c3da8b3d103c8daa01355690c772291591d517771d789a56bcdbef10"
+   }
+  },
+  "results/india/holdout_selection.csv": {
+   "kind": "csv",
+   "rows": 4,
+   "columns": {
+    "country": "fc54b58de4e71a90f54101b120d61d00e771a0cb419fcb620fbbf51e5fc44186",
+    "method": "6afb7ce52fb7c633fcf649bf9b50ddfab0ef25e51259662f1d9a9a48e015d900",
+    "published_setting": "1ba5ef55d78ca4e50ff8b106b517c46cfeac87481370e31df199fdf82bf7f4b5",
+    "published_recall": "7aae9af40f248b91f69aaa515c0a0212ffd6659bb53beae9e30ec01ed8c102c6",
+    "heldout_recall_median": "73f48d4ab364846cbf35696a86783b20ab39dded5ec82fda4574e4f69bf78efe",
+    "optimism": "c59308bb2bc1c3526afc6395a2faff8e122c830715f2501b937f39171a640b4f",
+    "modal_setting": "1ba5ef55d78ca4e50ff8b106b517c46cfeac87481370e31df199fdf82bf7f4b5",
+    "setting_stability": "7d739a7a5776e69fefbd1298fe07f56684ff0ba2cda8b4760747021330a94f10",
+    "splits": "07b830a787b2582d1c4b395a4a1c843ffd9503973f1e9c55fc6e68303572741c"
+   }
+  },
+  "results/india/inference_manifest.csv": {
+   "kind": "csv",
+   "rows": 399,
+   "columns": {
+    "chip": "31fc302de5bd3be1a2891350f8f0a77407cd6b9eacdd4d053422d6db2e9c9560",
+    "pred_field_px": "9da90768508f846e5fb065108f2dd1b58f760b63d7976f4a70dbb8bfe12fd84a",
+    "pred_boundary_px": "3ec7b443392937292b64e71b91533fde19abd2df4593c116fddc653f4323a7a0",
+    "seconds": "397ef1ee952cbba4ae821aab1657033c72130d602b0601714263d999911288ff"
+   }
+  },
+  "results/india/inference_manifest_3class_full.csv": {
+   "kind": "csv",
+   "rows": 399,
+   "columns": {
+    "chip": "31fc302de5bd3be1a2891350f8f0a77407cd6b9eacdd4d053422d6db2e9c9560",
+    "pred_field_px": "f14699a4f8bcf8dd36a54b806aa24dcee03ecfc4365bbfedbe1b30cfbabcac03",
+    "pred_boundary_px": "0aa6539149363d7b89cb19aee5ff9459ae4bd01a34445a7210ade7d7c4c0113f",
+    "seconds": "57d5da3ae9e12747f9bed6465446d4fd0e4adc3af883e13bb3b6963301048609"
+   }
+  },
+  "results/india/interpolation_check.csv": {
+   "kind": "csv",
+   "rows": 9,
+   "columns": {
+    "quantity": "579fe78de989c09f05b0f76c227249953b249019f9caf4327590b3af16f278e0",
+    "value": "f419ebb79cdec8785e5a2961e1619bb7484be090b392a3b257d044d90c42f54d"
+   }
+  },
+  "results/india/label_coverage.csv": {
+   "kind": "csv",
+   "rows": 1982,
+   "columns": {
+    "chip": "f769f1c9d141db95120f463d516ac38db2858dae686c63eeedf298be6369e2f0",
+    "pixels": "65bc808744d7ee3b1cf85a18eedd0f9b85eafee51e60db1298474de31fa2a590",
+    "interior_px": "25e4abaa45fcebf34459d7a313552f58b9beb8f6177069a3d5ef3c041a390c86",
+    "boundary_px": "bd0bc1ba7ed3abf42090a84a6b339ff44f357f0a4d9a970cb2dc6667fff5e710",
+    "background_px": "39761d133c595ee569dc93c01d0125165ae5177a71cfb30cd16e5bf43effec0c",
+    "unlabelled_px": "19b25684792a2a100b34db8b20372881edd8b6531fa759db2192f2adc3f2f6c5",
+    "n_parcels": "e0a3bab227bd1e1e2d979938879355842bc2c2044e45a1b0c66ffabbbf23b9e2"
+   }
+  },
+  "results/india/label_registration.csv": {
+   "kind": "csv",
+   "rows": 1983,
+   "columns": {
+    "country": "3374eb757b6dc554002bf256699f031f94c6ea32bb5126460a50ecea01bb3af2",
+    "chip": "3119c5c12138f5ddbf868a2530a1e67bef91bb9fc0301fb987687706c59dae82",
+    "parcel_id": "787b3fb54ac0b06c77b791ede2adb2916121428149bf719186217465cbf70348",
+    "px_x_m": "fb4583e287a78fe7031ddcc6fe043d4b5a9d85cfd9c9a08a16d9c7ed02656bb8",
+    "px_y_m": "099a9a48db4702a0299cf01b0e7d8c430e3961c3d33d114282f19edae81b9679",
+    "width_native_px": "39ab2cda1c8d548b05e0e9f362fe0697fea693f59e5cd18c7adcb169b702fad6",
+    "offset_m": "d88e33af37a5cbcb248f156c224600addeee7c470ab303f9468a2b68ed38da6e",
+    "drawn_contrast": "e22757d9c37602811367ba9d3a2ee10fa0ac66e68d2d35c860b2c2e045e9d2d2",
+    "peak_contrast": "c3e17096927432efbab6554d3885ddaddbb00b64a1fa5c140c0977f93cebea9f",
+    "gain": "934cb347044a07ab8675cf2726a9907fcc556662806e8a0d4cadaed0ac6e1f76",
+    "interior_contrast": "da3e2ba6c70126a8a72d249b93fe0e07b3983f2dced413f561a61976f78a2a10",
+    "edge_over_interior": "4f182a9091e92da6794a1e9bc17bce4667403aa30ca49779e5f2c494e1cb872c",
+    "ring_-18m": "bfc291b9c679e089e1b854a357ae16449e4ddc29ee4482166b5afe8bb55e7de9",
+    "ring_-12m": "c2e487cf7eb613864aabbc8a157afc86964cdbbbec0341d544f2d3fbcacfa188",
+    "ring_-6m": "ae5d8b957c7c3d29e9845361b3376e7ea269c823ed9aa3e4eca477ff458d7cd8",
+    "ring_+0m": "e22757d9c37602811367ba9d3a2ee10fa0ac66e68d2d35c860b2c2e045e9d2d2",
+    "ring_+6m": "08e302fa8474faf28258f5fadd8853044ff9a6a4c4922d8297c5860b70bff902",
+    "ring_+12m": "f49cc6a8198a50cb8617938b4fd212de7ee69d2f27f6faed3914306d9b1f4a0f",
+    "ring_+18m": "d52b8e1eb81c230f008ec160ef5e67277de9e5bb27f9732937f21ae7e7525ec1",
+    "null_offset_m": "328fffec270311169496be374921982d418c0225797fbe417fa5ad818c5932e1",
+    "null_gain": "dc3d69384a301359642455584581c4e7934fc8e06c644d90637c7e4a93fbd930"
+   }
+  },
+  "results/india/null_draws_ftw.csv": {
+   "kind": "csv",
+   "rows": 200,
+   "columns": {
+    "draw": "ea01ba3592e27c871b63b32e37d6532234edf7eee7077bdcc094061ee72922e6",
+    "null_recall": "8ea26b0dcace93a72583afe1e9a332af6abfbb02bf7316e4d732812e71e35f44",
+    "method_recall": "6c53a6c4ff6ec0b64f8bbf53d212c4834ba9de5ec166ca6e77bbfad9cc50d91f",
+    "seed": "66820a334b17196804d0b61e150245799bcdc429ee7f7f0a9e5f96b584eab889"
+   }
+  },
+  "results/india/parcel_contrast.csv": {
+   "kind": "csv",
+   "rows": 1983,
+   "columns": {
+    "country": "3374eb757b6dc554002bf256699f031f94c6ea32bb5126460a50ecea01bb3af2",
+    "chip": "3119c5c12138f5ddbf868a2530a1e67bef91bb9fc0301fb987687706c59dae82",
+    "parcel_id": "787b3fb54ac0b06c77b791ede2adb2916121428149bf719186217465cbf70348",
+    "width_native_px": "39ab2cda1c8d548b05e0e9f362fe0697fea693f59e5cd18c7adcb169b702fad6",
+    "contrast": "0e6097f35a8f7d4c6154f4f505d2f1ceac78360d8d79613a46af75a117833e03",
+    "width_native_px_published": "f3994809460df6c9ef2c5dfcd2c69d01a0a573cf941f123d3e63bac5ea249afc",
+    "contrast_measure": "869f84998043ae39b654153e221bbab90337c79ce8edb355b60c194aa4578759",
+    "gradient_build": "4ee3ad62a203a8d2c7811bbeaaf8d7cf1ab4b53d963ed3ddeecd89a11f9aaff7"
+   }
+  },
+  "results/india/parcel_width_3class_full.csv": {
+   "kind": "csv",
+   "rows": 1983,
+   "columns": {
+    "country": "3374eb757b6dc554002bf256699f031f94c6ea32bb5126460a50ecea01bb3af2",
+    "chip": "3119c5c12138f5ddbf868a2530a1e67bef91bb9fc0301fb987687706c59dae82",
+    "parcel_id": "787b3fb54ac0b06c77b791ede2adb2916121428149bf719186217465cbf70348",
+    "full_px": "293cd1066cbe87024be54b366bdfe589fe4c028919e7c8bd7c02a4348c902851",
+    "hectares": "b720507420b7762d068f4f7344d4e76003ad4f9557f1e0925ce9e2c418246106",
+    "native_10m_px": "b8dfb66d6f3af6f45372b94f546f080331bc6aacd2cc81e08d42cb03b985fd86",
+    "best_iou": "9b7245f573a0a4f1371976bfcb76c6b7a552dc9afb7c09033abc7cb7ca708d9e",
+    "found": "93ca5f6e5508023c465142e76a2f534d90befc9ce8d41f94a45c6392c1681d4f",
+    "width_native_px": "39ab2cda1c8d548b05e0e9f362fe0697fea693f59e5cd18c7adcb169b702fad6",
+    "width_native_px_published": "f3994809460df6c9ef2c5dfcd2c69d01a0a573cf941f123d3e63bac5ea249afc"
+   }
+  },
+  "results/india/parcel_width_ground.csv": {
+   "kind": "csv",
+   "rows": 1983,
+   "columns": {
+    "country": "3374eb757b6dc554002bf256699f031f94c6ea32bb5126460a50ecea01bb3af2",
+    "chip": "3119c5c12138f5ddbf868a2530a1e67bef91bb9fc0301fb987687706c59dae82",
+    "parcel_id": "787b3fb54ac0b06c77b791ede2adb2916121428149bf719186217465cbf70348",
+    "px_x_m": "fb4583e287a78fe7031ddcc6fe043d4b5a9d85cfd9c9a08a16d9c7ed02656bb8",
+    "px_y_m": "099a9a48db4702a0299cf01b0e7d8c430e3961c3d33d114282f19edae81b9679",
+    "width_published_m": "9d0af3ffabd4c4e7fcc30a575a1b9691b3b523f58cdb64c876b756dca6b77eac",
+    "width_ground_m": "ed93d79c44e316532262b3f03f98a378bac5a6efe971b61046c376ed4120c46b",
+    "ratio": "dd22bbef9d06cbfa4ea4350a06c7511d08f22b404e03196d3425156b0a74483b"
+   }
+  },
+  "results/india/parcel_width_seg_felzenszwalb_100_min500.csv": {
+   "kind": "csv",
+   "rows": 1983,
+   "columns": {
+    "country": "3374eb757b6dc554002bf256699f031f94c6ea32bb5126460a50ecea01bb3af2",
+    "chip": "3119c5c12138f5ddbf868a2530a1e67bef91bb9fc0301fb987687706c59dae82",
+    "parcel_id": "787b3fb54ac0b06c77b791ede2adb2916121428149bf719186217465cbf70348",
+    "full_px": "293cd1066cbe87024be54b366bdfe589fe4c028919e7c8bd7c02a4348c902851",
+    "hectares": "d3dc658b5571cd92cc78f0a1f626671857772dc1883350e892aac2bfb321d45b",
+    "native_10m_px": "366734447e93aac9567abaa68fd1ca1a7d81c500b99bcb5899bd165036581109",
+    "best_iou": "79f6a45e113a6c3a8ad1dfaee528244820002a0c8083f0dbf7f006d69f704f95",
+    "found": "d07f00f0da0d40898fa3a09a30dd99b0019554220e28e901190ee0ef1a28e724",
+    "width_native_px": "39ab2cda1c8d548b05e0e9f362fe0697fea693f59e5cd18c7adcb169b702fad6"
+   }
+  },
+  "results/india/parcel_width_seg_felzenszwalb_150_min500.csv": {
+   "kind": "csv",
+   "rows": 1983,
+   "columns": {
+    "country": "3374eb757b6dc554002bf256699f031f94c6ea32bb5126460a50ecea01bb3af2",
+    "chip": "3119c5c12138f5ddbf868a2530a1e67bef91bb9fc0301fb987687706c59dae82",
+    "parcel_id": "787b3fb54ac0b06c77b791ede2adb2916121428149bf719186217465cbf70348",
+    "full_px": "293cd1066cbe87024be54b366bdfe589fe4c028919e7c8bd7c02a4348c902851",
+    "hectares": "d3dc658b5571cd92cc78f0a1f626671857772dc1883350e892aac2bfb321d45b",
+    "native_10m_px": "366734447e93aac9567abaa68fd1ca1a7d81c500b99bcb5899bd165036581109",
+    "best_iou": "71ea08aaa3bdcfbdbc9fc946a2cc0a9bb12ec3bbbb1da389699486ae82f92502",
+    "found": "9203662dffd0355cb96f41a24f5e01831335f1949e83561f45f31ea8caca0341",
+    "width_native_px": "39ab2cda1c8d548b05e0e9f362fe0697fea693f59e5cd18c7adcb169b702fad6"
+   }
+  },
+  "results/india/parcel_width_seg_felzenszwalb_200_min500.csv": {
+   "kind": "csv",
+   "rows": 1983,
+   "columns": {
+    "country": "3374eb757b6dc554002bf256699f031f94c6ea32bb5126460a50ecea01bb3af2",
+    "chip": "3119c5c12138f5ddbf868a2530a1e67bef91bb9fc0301fb987687706c59dae82",
+    "parcel_id": "787b3fb54ac0b06c77b791ede2adb2916121428149bf719186217465cbf70348",
+    "full_px": "293cd1066cbe87024be54b366bdfe589fe4c028919e7c8bd7c02a4348c902851",
+    "hectares": "d3dc658b5571cd92cc78f0a1f626671857772dc1883350e892aac2bfb321d45b",
+    "native_10m_px": "366734447e93aac9567abaa68fd1ca1a7d81c500b99bcb5899bd165036581109",
+    "best_iou": "9d342ba91bd1371ef8ac9fb677b49e6c1ba5b6ceb9f9e90cfae0541b2de78148",
+    "found": "8da84e9bb9093a89f3639f2ff6744b691f9b74dea95cff1a229829654fedac02",
+    "width_native_px": "39ab2cda1c8d548b05e0e9f362fe0697fea693f59e5cd18c7adcb169b702fad6"
+   }
+  },
+  "results/india/parcel_width_seg_felzenszwalb_25_min500.csv": {
+   "kind": "csv",
+   "rows": 1983,
+   "columns": {
+    "country": "3374eb757b6dc554002bf256699f031f94c6ea32bb5126460a50ecea01bb3af2",
+    "chip": "3119c5c12138f5ddbf868a2530a1e67bef91bb9fc0301fb987687706c59dae82",
+    "parcel_id": "787b3fb54ac0b06c77b791ede2adb2916121428149bf719186217465cbf70348",
+    "full_px": "293cd1066cbe87024be54b366bdfe589fe4c028919e7c8bd7c02a4348c902851",
+    "hectares": "d3dc658b5571cd92cc78f0a1f626671857772dc1883350e892aac2bfb321d45b",
+    "native_10m_px": "366734447e93aac9567abaa68fd1ca1a7d81c500b99bcb5899bd165036581109",
+    "best_iou": "db2bab7f3bf4825a37fea27eb66e57ca07d69a92faae0866b5d0cf30496b6ff6",
+    "found": "a1f23f47210380c92f6ce5f124c9a39d96fd11fe613a51bea819dde5cc592b1e",
+    "width_native_px": "39ab2cda1c8d548b05e0e9f362fe0697fea693f59e5cd18c7adcb169b702fad6"
+   }
+  },
+  "results/india/parcel_width_seg_felzenszwalb_300_min500.csv": {
+   "kind": "csv",
+   "rows": 1983,
+   "columns": {
+    "country": "3374eb757b6dc554002bf256699f031f94c6ea32bb5126460a50ecea01bb3af2",
+    "chip": "3119c5c12138f5ddbf868a2530a1e67bef91bb9fc0301fb987687706c59dae82",
+    "parcel_id": "787b3fb54ac0b06c77b791ede2adb2916121428149bf719186217465cbf70348",
+    "full_px": "293cd1066cbe87024be54b366bdfe589fe4c028919e7c8bd7c02a4348c902851",
+    "hectares": "d3dc658b5571cd92cc78f0a1f626671857772dc1883350e892aac2bfb321d45b",
+    "native_10m_px": "366734447e93aac9567abaa68fd1ca1a7d81c500b99bcb5899bd165036581109",
+    "best_iou": "e30cfbf065dadfce277debd98e0168f8b52911958529b642a794b44b57a6ae64",
+    "found": "7074ee456fe8106dbdf4ffd3087b46b68c0a68be14bc5b28e1abdd6f510120eb",
+    "width_native_px": "39ab2cda1c8d548b05e0e9f362fe0697fea693f59e5cd18c7adcb169b702fad6"
+   }
+  },
+  "results/india/parcel_width_seg_felzenszwalb_400_min500.csv": {
+   "kind": "csv",
+   "rows": 1983,
+   "columns": {
+    "country": "3374eb757b6dc554002bf256699f031f94c6ea32bb5126460a50ecea01bb3af2",
+    "chip": "3119c5c12138f5ddbf868a2530a1e67bef91bb9fc0301fb987687706c59dae82",
+    "parcel_id": "787b3fb54ac0b06c77b791ede2adb2916121428149bf719186217465cbf70348",
+    "full_px": "293cd1066cbe87024be54b366bdfe589fe4c028919e7c8bd7c02a4348c902851",
+    "hectares": "d3dc658b5571cd92cc78f0a1f626671857772dc1883350e892aac2bfb321d45b",
+    "native_10m_px": "366734447e93aac9567abaa68fd1ca1a7d81c500b99bcb5899bd165036581109",
+    "best_iou": "ea1cce4e95f5c9e09a56fcba76f2057e5461398d77cb2f9f82d07cf6e40459c7",
+    "found": "1fd851a331ba2c0ae07a0f6a8d5bdfeb1149e9fde237785586c1dac5d78ede1a",
+    "width_native_px": "39ab2cda1c8d548b05e0e9f362fe0697fea693f59e5cd18c7adcb169b702fad6"
+   }
+  },
+  "results/india/parcel_width_seg_felzenszwalb_50_min500.csv": {
+   "kind": "csv",
+   "rows": 1983,
+   "columns": {
+    "country": "3374eb757b6dc554002bf256699f031f94c6ea32bb5126460a50ecea01bb3af2",
+    "chip": "3119c5c12138f5ddbf868a2530a1e67bef91bb9fc0301fb987687706c59dae82",
+    "parcel_id": "787b3fb54ac0b06c77b791ede2adb2916121428149bf719186217465cbf70348",
+    "full_px": "293cd1066cbe87024be54b366bdfe589fe4c028919e7c8bd7c02a4348c902851",
+    "hectares": "d3dc658b5571cd92cc78f0a1f626671857772dc1883350e892aac2bfb321d45b",
+    "native_10m_px": "366734447e93aac9567abaa68fd1ca1a7d81c500b99bcb5899bd165036581109",
+    "best_iou": "6184857c35662370cfc5f6915c9dcd8b0f379b89a4ebecd54c94d0ff2cf5807d",
+    "found": "15c85a1b92f2dabba3a9a36a0bd1a9f94a1f122921e1e9a05603e8a313cb2f42",
+    "width_native_px": "39ab2cda1c8d548b05e0e9f362fe0697fea693f59e5cd18c7adcb169b702fad6"
+   }
+  },
+  "results/india/parcel_width_seg_felzenszwalb_800_min500.csv": {
+   "kind": "csv",
+   "rows": 1983,
+   "columns": {
+    "country": "3374eb757b6dc554002bf256699f031f94c6ea32bb5126460a50ecea01bb3af2",
+    "chip": "3119c5c12138f5ddbf868a2530a1e67bef91bb9fc0301fb987687706c59dae82",
+    "parcel_id": "787b3fb54ac0b06c77b791ede2adb2916121428149bf719186217465cbf70348",
+    "full_px": "293cd1066cbe87024be54b366bdfe589fe4c028919e7c8bd7c02a4348c902851",
+    "hectares": "d3dc658b5571cd92cc78f0a1f626671857772dc1883350e892aac2bfb321d45b",
+    "native_10m_px": "366734447e93aac9567abaa68fd1ca1a7d81c500b99bcb5899bd165036581109",
+    "best_iou": "fd4abeae16db719f6b887030df118227280555b0ca17bd382ef18582d1852cef",
+    "found": "fcb05ecf15a552126dd724955547fa3860d14ac4cfef9b9b8d72316bd4175f7b",
+    "width_native_px": "39ab2cda1c8d548b05e0e9f362fe0697fea693f59e5cd18c7adcb169b702fad6"
+   }
+  },
+  "results/india/parcel_width_seg_felzenszwalb_min500.csv": {
+   "kind": "csv",
+   "rows": 1983,
+   "columns": {
+    "country": "3374eb757b6dc554002bf256699f031f94c6ea32bb5126460a50ecea01bb3af2",
+    "chip": "3119c5c12138f5ddbf868a2530a1e67bef91bb9fc0301fb987687706c59dae82",
+    "parcel_id": "787b3fb54ac0b06c77b791ede2adb2916121428149bf719186217465cbf70348",
+    "full_px": "293cd1066cbe87024be54b366bdfe589fe4c028919e7c8bd7c02a4348c902851",
+    "hectares": "d3dc658b5571cd92cc78f0a1f626671857772dc1883350e892aac2bfb321d45b",
+    "native_10m_px": "366734447e93aac9567abaa68fd1ca1a7d81c500b99bcb5899bd165036581109",
+    "best_iou": "79f6a45e113a6c3a8ad1dfaee528244820002a0c8083f0dbf7f006d69f704f95",
+    "found": "d07f00f0da0d40898fa3a09a30dd99b0019554220e28e901190ee0ef1a28e724",
+    "width_native_px": "39ab2cda1c8d548b05e0e9f362fe0697fea693f59e5cd18c7adcb169b702fad6"
+   }
+  },
+  "results/india/parcel_width_seg_ftw_min500.csv": {
+   "kind": "csv",
+   "rows": 1983,
+   "columns": {
+    "country": "3374eb757b6dc554002bf256699f031f94c6ea32bb5126460a50ecea01bb3af2",
+    "chip": "3119c5c12138f5ddbf868a2530a1e67bef91bb9fc0301fb987687706c59dae82",
+    "parcel_id": "787b3fb54ac0b06c77b791ede2adb2916121428149bf719186217465cbf70348",
+    "full_px": "293cd1066cbe87024be54b366bdfe589fe4c028919e7c8bd7c02a4348c902851",
+    "hectares": "d3dc658b5571cd92cc78f0a1f626671857772dc1883350e892aac2bfb321d45b",
+    "native_10m_px": "366734447e93aac9567abaa68fd1ca1a7d81c500b99bcb5899bd165036581109",
+    "best_iou": "3793d5115c22904c7fb161dca2749a52e7306382629ad62bf6106205b1931724",
+    "found": "93ca5f6e5508023c465142e76a2f534d90befc9ce8d41f94a45c6392c1681d4f",
+    "width_native_px": "39ab2cda1c8d548b05e0e9f362fe0697fea693f59e5cd18c7adcb169b702fad6"
+   }
+  },
+  "results/india/parcel_width_seg_sam_vit_h_false_0p50_min500.csv": {
+   "kind": "csv",
+   "rows": 1983,
+   "columns": {
+    "country": "3374eb757b6dc554002bf256699f031f94c6ea32bb5126460a50ecea01bb3af2",
+    "chip": "3119c5c12138f5ddbf868a2530a1e67bef91bb9fc0301fb987687706c59dae82",
+    "parcel_id": "787b3fb54ac0b06c77b791ede2adb2916121428149bf719186217465cbf70348",
+    "full_px": "293cd1066cbe87024be54b366bdfe589fe4c028919e7c8bd7c02a4348c902851",
+    "hectares": "0347f06ae4903706a2c9cc1f50505fe9490e166cc8dca01af1a8a33bcaf859af",
+    "native_10m_px": "b39c7825a149cd6597893f81d972d181ad2d13faf4d0267294ab75aa1b7062a2",
+    "best_iou": "e512f544cab351a0574cdbcc1a387ef5f1ba6ec7766f7248b7bc2944b9c7a3e7",
+    "found": "cf380343f90174eed0e00b297455a501ecd15f383918541c95157cf004321419",
+    "width_native_px": "39ab2cda1c8d548b05e0e9f362fe0697fea693f59e5cd18c7adcb169b702fad6",
+    "width_native_px_published": "f3994809460df6c9ef2c5dfcd2c69d01a0a573cf941f123d3e63bac5ea249afc"
+   }
+  },
+  "results/india/parcel_width_seg_sam_vit_h_false_0p60_min500.csv": {
+   "kind": "csv",
+   "rows": 1983,
+   "columns": {
+    "country": "3374eb757b6dc554002bf256699f031f94c6ea32bb5126460a50ecea01bb3af2",
+    "chip": "3119c5c12138f5ddbf868a2530a1e67bef91bb9fc0301fb987687706c59dae82",
+    "parcel_id": "787b3fb54ac0b06c77b791ede2adb2916121428149bf719186217465cbf70348",
+    "full_px": "293cd1066cbe87024be54b366bdfe589fe4c028919e7c8bd7c02a4348c902851",
+    "hectares": "0347f06ae4903706a2c9cc1f50505fe9490e166cc8dca01af1a8a33bcaf859af",
+    "native_10m_px": "b39c7825a149cd6597893f81d972d181ad2d13faf4d0267294ab75aa1b7062a2",
+    "best_iou": "d002fa988d5c353096973d34c4582fa4d9208deab0f8cd69e0e8e4826c28539b",
+    "found": "cf380343f90174eed0e00b297455a501ecd15f383918541c95157cf004321419",
+    "width_native_px": "39ab2cda1c8d548b05e0e9f362fe0697fea693f59e5cd18c7adcb169b702fad6",
+    "width_native_px_published": "f3994809460df6c9ef2c5dfcd2c69d01a0a573cf941f123d3e63bac5ea249afc"
+   }
+  },
+  "results/india/parcel_width_seg_sam_vit_h_false_0p70_min500.csv": {
+   "kind": "csv",
+   "rows": 1983,
+   "columns": {
+    "country": "3374eb757b6dc554002bf256699f031f94c6ea32bb5126460a50ecea01bb3af2",
+    "chip": "3119c5c12138f5ddbf868a2530a1e67bef91bb9fc0301fb987687706c59dae82",
+    "parcel_id": "787b3fb54ac0b06c77b791ede2adb2916121428149bf719186217465cbf70348",
+    "full_px": "293cd1066cbe87024be54b366bdfe589fe4c028919e7c8bd7c02a4348c902851",
+    "hectares": "0347f06ae4903706a2c9cc1f50505fe9490e166cc8dca01af1a8a33bcaf859af",
+    "native_10m_px": "b39c7825a149cd6597893f81d972d181ad2d13faf4d0267294ab75aa1b7062a2",
+    "best_iou": "d92fb107964b73c42b8364071fff86ffed803dbda60a5ff2534789b20cc1a130",
+    "found": "8b143656a29d88f85f4b82e26bb2e34119b774cc061e103b8f4a31e2ce929e88",
+    "width_native_px": "39ab2cda1c8d548b05e0e9f362fe0697fea693f59e5cd18c7adcb169b702fad6",
+    "width_native_px_published": "f3994809460df6c9ef2c5dfcd2c69d01a0a573cf941f123d3e63bac5ea249afc"
+   }
+  },
+  "results/india/parcel_width_seg_sam_vit_h_false_0p80_min500.csv": {
+   "kind": "csv",
+   "rows": 1983,
+   "columns": {
+    "country": "3374eb757b6dc554002bf256699f031f94c6ea32bb5126460a50ecea01bb3af2",
+    "chip": "3119c5c12138f5ddbf868a2530a1e67bef91bb9fc0301fb987687706c59dae82",
+    "parcel_id": "787b3fb54ac0b06c77b791ede2adb2916121428149bf719186217465cbf70348",
+    "full_px": "293cd1066cbe87024be54b366bdfe589fe4c028919e7c8bd7c02a4348c902851",
+    "hectares": "0347f06ae4903706a2c9cc1f50505fe9490e166cc8dca01af1a8a33bcaf859af",
+    "native_10m_px": "b39c7825a149cd6597893f81d972d181ad2d13faf4d0267294ab75aa1b7062a2",
+    "best_iou": "71c2fef4e679ab1b150c6ae266c4acd0fbaef81fff7ae551757eb5cc5d477f4f",
+    "found": "99c71d7f33eeef9c8f10b77fb580a3a41c9e5245d694c8e44cc3976692bf689f",
+    "width_native_px": "39ab2cda1c8d548b05e0e9f362fe0697fea693f59e5cd18c7adcb169b702fad6",
+    "width_native_px_published": "f3994809460df6c9ef2c5dfcd2c69d01a0a573cf941f123d3e63bac5ea249afc"
+   }
+  },
+  "results/india/parcel_width_seg_sam_vit_h_false_0p88_min500.csv": {
+   "kind": "csv",
+   "rows": 1983,
+   "columns": {
+    "country": "3374eb757b6dc554002bf256699f031f94c6ea32bb5126460a50ecea01bb3af2",
+    "chip": "3119c5c12138f5ddbf868a2530a1e67bef91bb9fc0301fb987687706c59dae82",
+    "parcel_id": "787b3fb54ac0b06c77b791ede2adb2916121428149bf719186217465cbf70348",
+    "full_px": "293cd1066cbe87024be54b366bdfe589fe4c028919e7c8bd7c02a4348c902851",
+    "hectares": "0347f06ae4903706a2c9cc1f50505fe9490e166cc8dca01af1a8a33bcaf859af",
+    "native_10m_px": "b39c7825a149cd6597893f81d972d181ad2d13faf4d0267294ab75aa1b7062a2",
+    "best_iou": "b7dc91b096c25a2038f7a3b41e0df76c43afe95b26edfa40d245a016f8611afb",
+    "found": "07cb8a0c2765de5917114f1ff78a5d0e6a10302ae38eac34f106ddd0dba566e1",
+    "width_native_px": "39ab2cda1c8d548b05e0e9f362fe0697fea693f59e5cd18c7adcb169b702fad6",
+    "width_native_px_published": "f3994809460df6c9ef2c5dfcd2c69d01a0a573cf941f123d3e63bac5ea249afc"
+   }
+  },
+  "results/india/parcel_width_seg_sam_vit_h_false_min500.csv": {
+   "kind": "csv",
+   "rows": 1983,
+   "columns": {
+    "country": "3374eb757b6dc554002bf256699f031f94c6ea32bb5126460a50ecea01bb3af2",
+    "chip": "3119c5c12138f5ddbf868a2530a1e67bef91bb9fc0301fb987687706c59dae82",
+    "parcel_id": "787b3fb54ac0b06c77b791ede2adb2916121428149bf719186217465cbf70348",
+    "full_px": "293cd1066cbe87024be54b366bdfe589fe4c028919e7c8bd7c02a4348c902851",
+    "hectares": "0347f06ae4903706a2c9cc1f50505fe9490e166cc8dca01af1a8a33bcaf859af",
+    "native_10m_px": "b39c7825a149cd6597893f81d972d181ad2d13faf4d0267294ab75aa1b7062a2",
+    "best_iou": "e512f544cab351a0574cdbcc1a387ef5f1ba6ec7766f7248b7bc2944b9c7a3e7",
+    "found": "cf380343f90174eed0e00b297455a501ecd15f383918541c95157cf004321419",
+    "width_native_px": "39ab2cda1c8d548b05e0e9f362fe0697fea693f59e5cd18c7adcb169b702fad6",
+    "width_native_px_published": "f3994809460df6c9ef2c5dfcd2c69d01a0a573cf941f123d3e63bac5ea249afc"
+   }
+  },
+  "results/india/parcel_width_seg_sam_vit_h_true_0p50_min500.csv": {
+   "kind": "csv",
+   "rows": 1983,
+   "columns": {
+    "country": "3374eb757b6dc554002bf256699f031f94c6ea32bb5126460a50ecea01bb3af2",
+    "chip": "3119c5c12138f5ddbf868a2530a1e67bef91bb9fc0301fb987687706c59dae82",
+    "parcel_id": "787b3fb54ac0b06c77b791ede2adb2916121428149bf719186217465cbf70348",
+    "full_px": "293cd1066cbe87024be54b366bdfe589fe4c028919e7c8bd7c02a4348c902851",
+    "hectares": "0347f06ae4903706a2c9cc1f50505fe9490e166cc8dca01af1a8a33bcaf859af",
+    "native_10m_px": "b39c7825a149cd6597893f81d972d181ad2d13faf4d0267294ab75aa1b7062a2",
+    "best_iou": "808a8452b8d78f0dc459bfec2f4131f2afa3bfc7839e0e7c849d3e32e99104a9",
+    "found": "5dc67062c37586c0ca8f11628595a2249e21f81d5caccdad972329ed3c4aeeee",
+    "width_native_px": "39ab2cda1c8d548b05e0e9f362fe0697fea693f59e5cd18c7adcb169b702fad6",
+    "width_native_px_published": "f3994809460df6c9ef2c5dfcd2c69d01a0a573cf941f123d3e63bac5ea249afc"
+   }
+  },
+  "results/india/parcel_width_seg_sam_vit_h_true_0p60_min500.csv": {
+   "kind": "csv",
+   "rows": 1983,
+   "columns": {
+    "country": "3374eb757b6dc554002bf256699f031f94c6ea32bb5126460a50ecea01bb3af2",
+    "chip": "3119c5c12138f5ddbf868a2530a1e67bef91bb9fc0301fb987687706c59dae82",
+    "parcel_id": "787b3fb54ac0b06c77b791ede2adb2916121428149bf719186217465cbf70348",
+    "full_px": "293cd1066cbe87024be54b366bdfe589fe4c028919e7c8bd7c02a4348c902851",
+    "hectares": "0347f06ae4903706a2c9cc1f50505fe9490e166cc8dca01af1a8a33bcaf859af",
+    "native_10m_px": "b39c7825a149cd6597893f81d972d181ad2d13faf4d0267294ab75aa1b7062a2",
+    "best_iou": "120326cbb2ebfe2172aaa0b3aed4aea237421747a523aafb11afbae3dbd964af",
+    "found": "e9ac6033b3bb6ca61787176b0e77f4d98a47f611cbcea75631b43af6bffb4cf6",
+    "width_native_px": "39ab2cda1c8d548b05e0e9f362fe0697fea693f59e5cd18c7adcb169b702fad6",
+    "width_native_px_published": "f3994809460df6c9ef2c5dfcd2c69d01a0a573cf941f123d3e63bac5ea249afc"
+   }
+  },
+  "results/india/parcel_width_seg_sam_vit_h_true_0p70_min500.csv": {
+   "kind": "csv",
+   "rows": 1983,
+   "columns": {
+    "country": "3374eb757b6dc554002bf256699f031f94c6ea32bb5126460a50ecea01bb3af2",
+    "chip": "3119c5c12138f5ddbf868a2530a1e67bef91bb9fc0301fb987687706c59dae82",
+    "parcel_id": "787b3fb54ac0b06c77b791ede2adb2916121428149bf719186217465cbf70348",
+    "full_px": "293cd1066cbe87024be54b366bdfe589fe4c028919e7c8bd7c02a4348c902851",
+    "hectares": "0347f06ae4903706a2c9cc1f50505fe9490e166cc8dca01af1a8a33bcaf859af",
+    "native_10m_px": "b39c7825a149cd6597893f81d972d181ad2d13faf4d0267294ab75aa1b7062a2",
+    "best_iou": "c7f19bf9bdb13762d98fa427b54aded11d9fc08957bc22b05624e9bbb3e3a5ae",
+    "found": "7702fb7af490c5690c300dca35640ae7d5a7b5364da39395074b3ef52cdde512",
+    "width_native_px": "39ab2cda1c8d548b05e0e9f362fe0697fea693f59e5cd18c7adcb169b702fad6",
+    "width_native_px_published": "f3994809460df6c9ef2c5dfcd2c69d01a0a573cf941f123d3e63bac5ea249afc"
+   }
+  },
+  "results/india/parcel_width_seg_sam_vit_h_true_0p80_min500.csv": {
+   "kind": "csv",
+   "rows": 1983,
+   "columns": {
+    "country": "3374eb757b6dc554002bf256699f031f94c6ea32bb5126460a50ecea01bb3af2",
+    "chip": "3119c5c12138f5ddbf868a2530a1e67bef91bb9fc0301fb987687706c59dae82",
+    "parcel_id": "787b3fb54ac0b06c77b791ede2adb2916121428149bf719186217465cbf70348",
+    "full_px": "293cd1066cbe87024be54b366bdfe589fe4c028919e7c8bd7c02a4348c902851",
+    "hectares": "0347f06ae4903706a2c9cc1f50505fe9490e166cc8dca01af1a8a33bcaf859af",
+    "native_10m_px": "b39c7825a149cd6597893f81d972d181ad2d13faf4d0267294ab75aa1b7062a2",
+    "best_iou": "ac8c5c405cb053a94c8a2a2272f1cbd27992f19cec510b0b0a61cd25a3b793e1",
+    "found": "7846b6e345d1ed80d346a49662df6f76ed22ad459bfdd5af4af1c32da7c4c43e",
+    "width_native_px": "39ab2cda1c8d548b05e0e9f362fe0697fea693f59e5cd18c7adcb169b702fad6",
+    "width_native_px_published": "f3994809460df6c9ef2c5dfcd2c69d01a0a573cf941f123d3e63bac5ea249afc"
+   }
+  },
+  "results/india/parcel_width_seg_sam_vit_h_true_0p88_min500.csv": {
+   "kind": "csv",
+   "rows": 1983,
+   "columns": {
+    "country": "3374eb757b6dc554002bf256699f031f94c6ea32bb5126460a50ecea01bb3af2",
+    "chip": "3119c5c12138f5ddbf868a2530a1e67bef91bb9fc0301fb987687706c59dae82",
+    "parcel_id": "787b3fb54ac0b06c77b791ede2adb2916121428149bf719186217465cbf70348",
+    "full_px": "293cd1066cbe87024be54b366bdfe589fe4c028919e7c8bd7c02a4348c902851",
+    "hectares": "0347f06ae4903706a2c9cc1f50505fe9490e166cc8dca01af1a8a33bcaf859af",
+    "native_10m_px": "b39c7825a149cd6597893f81d972d181ad2d13faf4d0267294ab75aa1b7062a2",
+    "best_iou": "a9c8d08fb32a9e49303f2f1fdc9837431cba8513eeced76366513a520861d646",
+    "found": "ea834092d49a68b276e5270fb38908f373ecfe9e8d4d9231d5561e89cab96d22",
+    "width_native_px": "39ab2cda1c8d548b05e0e9f362fe0697fea693f59e5cd18c7adcb169b702fad6",
+    "width_native_px_published": "f3994809460df6c9ef2c5dfcd2c69d01a0a573cf941f123d3e63bac5ea249afc"
+   }
+  },
+  "results/india/parcel_width_seg_watershed_0p005_min500.csv": {
+   "kind": "csv",
+   "rows": 1983,
+   "columns": {
+    "country": "3374eb757b6dc554002bf256699f031f94c6ea32bb5126460a50ecea01bb3af2",
+    "chip": "3119c5c12138f5ddbf868a2530a1e67bef91bb9fc0301fb987687706c59dae82",
+    "parcel_id": "787b3fb54ac0b06c77b791ede2adb2916121428149bf719186217465cbf70348",
+    "full_px": "293cd1066cbe87024be54b366bdfe589fe4c028919e7c8bd7c02a4348c902851",
+    "hectares": "d3dc658b5571cd92cc78f0a1f626671857772dc1883350e892aac2bfb321d45b",
+    "native_10m_px": "366734447e93aac9567abaa68fd1ca1a7d81c500b99bcb5899bd165036581109",
+    "best_iou": "4ca6aefe85db1734a843a41cef955d56dc8ba301515b33d431d277b3c8572690",
+    "found": "95733e2bd248ee7ea4aeab1aa1416081c93bd749c2271e44628c0e7a1a51b3f5",
+    "width_native_px": "39ab2cda1c8d548b05e0e9f362fe0697fea693f59e5cd18c7adcb169b702fad6"
+   }
+  },
+  "results/india/parcel_width_seg_watershed_0p01_min500.csv": {
+   "kind": "csv",
+   "rows": 1983,
+   "columns": {
+    "country": "3374eb757b6dc554002bf256699f031f94c6ea32bb5126460a50ecea01bb3af2",
+    "chip": "3119c5c12138f5ddbf868a2530a1e67bef91bb9fc0301fb987687706c59dae82",
+    "parcel_id": "787b3fb54ac0b06c77b791ede2adb2916121428149bf719186217465cbf70348",
+    "full_px": "293cd1066cbe87024be54b366bdfe589fe4c028919e7c8bd7c02a4348c902851",
+    "hectares": "d3dc658b5571cd92cc78f0a1f626671857772dc1883350e892aac2bfb321d45b",
+    "native_10m_px": "366734447e93aac9567abaa68fd1ca1a7d81c500b99bcb5899bd165036581109",
+    "best_iou": "5c6ff907c1f0c249d1b33d1652d3b20f5f1aa492aa749311be1ea2929eff46a9",
+    "found": "f906992ddf13f0b7af19e4a018570a96cdcb2a8fa75eb47676ba04115eb42184",
+    "width_native_px": "39ab2cda1c8d548b05e0e9f362fe0697fea693f59e5cd18c7adcb169b702fad6"
+   }
+  },
+  "results/india/parcel_width_seg_watershed_0p02_min500.csv": {
+   "kind": "csv",
+   "rows": 1983,
+   "columns": {
+    "country": "3374eb757b6dc554002bf256699f031f94c6ea32bb5126460a50ecea01bb3af2",
+    "chip": "3119c5c12138f5ddbf868a2530a1e67bef91bb9fc0301fb987687706c59dae82",
+    "parcel_id": "787b3fb54ac0b06c77b791ede2adb2916121428149bf719186217465cbf70348",
+    "full_px": "293cd1066cbe87024be54b366bdfe589fe4c028919e7c8bd7c02a4348c902851",
+    "hectares": "d3dc658b5571cd92cc78f0a1f626671857772dc1883350e892aac2bfb321d45b",
+    "native_10m_px": "366734447e93aac9567abaa68fd1ca1a7d81c500b99bcb5899bd165036581109",
+    "best_iou": "0feb836b18fb2c9d1559e094dce6b5489b0299c6559e277c97764eccc32fea68",
+    "found": "baba86216c7bb7aa86229659b937cc353efaf4cb56ab1d11cada8bbc9c584cbe",
+    "width_native_px": "39ab2cda1c8d548b05e0e9f362fe0697fea693f59e5cd18c7adcb169b702fad6"
+   }
+  },
+  "results/india/parcel_width_seg_watershed_0p05_min500.csv": {
+   "kind": "csv",
+   "rows": 1983,
+   "columns": {
+    "country": "3374eb757b6dc554002bf256699f031f94c6ea32bb5126460a50ecea01bb3af2",
+    "chip": "3119c5c12138f5ddbf868a2530a1e67bef91bb9fc0301fb987687706c59dae82",
+    "parcel_id": "787b3fb54ac0b06c77b791ede2adb2916121428149bf719186217465cbf70348",
+    "full_px": "293cd1066cbe87024be54b366bdfe589fe4c028919e7c8bd7c02a4348c902851",
+    "hectares": "d3dc658b5571cd92cc78f0a1f626671857772dc1883350e892aac2bfb321d45b",
+    "native_10m_px": "366734447e93aac9567abaa68fd1ca1a7d81c500b99bcb5899bd165036581109",
+    "best_iou": "8583757d6b7e0f46ea2ca5ba7e0d153e17f21c13d76fb7dcd8a6a34468826a8e",
+    "found": "927234b189ff96426000b505500ab0f44de2776540a6962dd43e1066041e6b12",
+    "width_native_px": "39ab2cda1c8d548b05e0e9f362fe0697fea693f59e5cd18c7adcb169b702fad6"
+   }
+  },
+  "results/india/parcel_width_seg_watershed_0p08_min500.csv": {
+   "kind": "csv",
+   "rows": 1983,
+   "columns": {
+    "country": "3374eb757b6dc554002bf256699f031f94c6ea32bb5126460a50ecea01bb3af2",
+    "chip": "3119c5c12138f5ddbf868a2530a1e67bef91bb9fc0301fb987687706c59dae82",
+    "parcel_id": "787b3fb54ac0b06c77b791ede2adb2916121428149bf719186217465cbf70348",
+    "full_px": "293cd1066cbe87024be54b366bdfe589fe4c028919e7c8bd7c02a4348c902851",
+    "hectares": "d3dc658b5571cd92cc78f0a1f626671857772dc1883350e892aac2bfb321d45b",
+    "native_10m_px": "366734447e93aac9567abaa68fd1ca1a7d81c500b99bcb5899bd165036581109",
+    "best_iou": "20659fda867f8cc9e249c6ff416ca5624172434e93ac9f317271e9e8ba961d68",
+    "found": "715c9f91143a65d73c0374eae86566aa846d6c06d42b0aa727c5f335713ba50c",
+    "width_native_px": "39ab2cda1c8d548b05e0e9f362fe0697fea693f59e5cd18c7adcb169b702fad6"
+   }
+  },
+  "results/india/parcel_width_seg_watershed_0p13_min500.csv": {
+   "kind": "csv",
+   "rows": 1983,
+   "columns": {
+    "country": "3374eb757b6dc554002bf256699f031f94c6ea32bb5126460a50ecea01bb3af2",
+    "chip": "3119c5c12138f5ddbf868a2530a1e67bef91bb9fc0301fb987687706c59dae82",
+    "parcel_id": "787b3fb54ac0b06c77b791ede2adb2916121428149bf719186217465cbf70348",
+    "full_px": "293cd1066cbe87024be54b366bdfe589fe4c028919e7c8bd7c02a4348c902851",
+    "hectares": "d3dc658b5571cd92cc78f0a1f626671857772dc1883350e892aac2bfb321d45b",
+    "native_10m_px": "366734447e93aac9567abaa68fd1ca1a7d81c500b99bcb5899bd165036581109",
+    "best_iou": "483b6bd1ce04b33d643765c85434a34129407ce4d4edde60069c6000afb78d27",
+    "found": "75bb9cb613333bf72f224a404d0b5bb586eeeace7eec5fbee0bd837aaaf9aa84",
+    "width_native_px": "39ab2cda1c8d548b05e0e9f362fe0697fea693f59e5cd18c7adcb169b702fad6"
+   }
+  },
+  "results/india/parcel_width_seg_watershed_0p16_min500.csv": {
+   "kind": "csv",
+   "rows": 1983,
+   "columns": {
+    "country": "3374eb757b6dc554002bf256699f031f94c6ea32bb5126460a50ecea01bb3af2",
+    "chip": "3119c5c12138f5ddbf868a2530a1e67bef91bb9fc0301fb987687706c59dae82",
+    "parcel_id": "787b3fb54ac0b06c77b791ede2adb2916121428149bf719186217465cbf70348",
+    "full_px": "293cd1066cbe87024be54b366bdfe589fe4c028919e7c8bd7c02a4348c902851",
+    "hectares": "d3dc658b5571cd92cc78f0a1f626671857772dc1883350e892aac2bfb321d45b",
+    "native_10m_px": "366734447e93aac9567abaa68fd1ca1a7d81c500b99bcb5899bd165036581109",
+    "best_iou": "98dd6c4c1b288929ddc909c1ed7f97e782280707c604a2d05c8c967fe6d588b1",
+    "found": "b210f89f689c26760e8bf9d658bd26070e7b2fe066b25c1a0842ab8f4283d24f",
+    "width_native_px": "39ab2cda1c8d548b05e0e9f362fe0697fea693f59e5cd18c7adcb169b702fad6"
+   }
+  },
+  "results/india/parcel_width_seg_watershed_0p1_min500.csv": {
+   "kind": "csv",
+   "rows": 1983,
+   "columns": {
+    "country": "3374eb757b6dc554002bf256699f031f94c6ea32bb5126460a50ecea01bb3af2",
+    "chip": "3119c5c12138f5ddbf868a2530a1e67bef91bb9fc0301fb987687706c59dae82",
+    "parcel_id": "787b3fb54ac0b06c77b791ede2adb2916121428149bf719186217465cbf70348",
+    "full_px": "293cd1066cbe87024be54b366bdfe589fe4c028919e7c8bd7c02a4348c902851",
+    "hectares": "d3dc658b5571cd92cc78f0a1f626671857772dc1883350e892aac2bfb321d45b",
+    "native_10m_px": "366734447e93aac9567abaa68fd1ca1a7d81c500b99bcb5899bd165036581109",
+    "best_iou": "b7801c815e9dd6fed04ee2b5f061b7dbd49f164d567c3ac5ab317e8979d3ba43",
+    "found": "792fc2e009b094c5dbbfff92de159378c8f629df25bff23ca1b5f0d40e29d423",
+    "width_native_px": "39ab2cda1c8d548b05e0e9f362fe0697fea693f59e5cd18c7adcb169b702fad6"
+   }
+  },
+  "results/india/parcel_width_seg_watershed_0p2_min500.csv": {
+   "kind": "csv",
+   "rows": 1983,
+   "columns": {
+    "country": "3374eb757b6dc554002bf256699f031f94c6ea32bb5126460a50ecea01bb3af2",
+    "chip": "3119c5c12138f5ddbf868a2530a1e67bef91bb9fc0301fb987687706c59dae82",
+    "parcel_id": "787b3fb54ac0b06c77b791ede2adb2916121428149bf719186217465cbf70348",
+    "full_px": "293cd1066cbe87024be54b366bdfe589fe4c028919e7c8bd7c02a4348c902851",
+    "hectares": "d3dc658b5571cd92cc78f0a1f626671857772dc1883350e892aac2bfb321d45b",
+    "native_10m_px": "366734447e93aac9567abaa68fd1ca1a7d81c500b99bcb5899bd165036581109",
+    "best_iou": "ff902ca49f4082823ceca97914e3a2ae944a3335e1af3860b336562ce49711f1",
+    "found": "8a47510c2a4d39882b6a49aae0f0990dffa46cdc69a9d0beb900cfeeb7adede1",
+    "width_native_px": "39ab2cda1c8d548b05e0e9f362fe0697fea693f59e5cd18c7adcb169b702fad6"
+   }
+  },
+  "results/india/parcel_width_seg_watershed_0p3_min500.csv": {
+   "kind": "csv",
+   "rows": 1983,
+   "columns": {
+    "country": "3374eb757b6dc554002bf256699f031f94c6ea32bb5126460a50ecea01bb3af2",
+    "chip": "3119c5c12138f5ddbf868a2530a1e67bef91bb9fc0301fb987687706c59dae82",
+    "parcel_id": "787b3fb54ac0b06c77b791ede2adb2916121428149bf719186217465cbf70348",
+    "full_px": "293cd1066cbe87024be54b366bdfe589fe4c028919e7c8bd7c02a4348c902851",
+    "hectares": "d3dc658b5571cd92cc78f0a1f626671857772dc1883350e892aac2bfb321d45b",
+    "native_10m_px": "366734447e93aac9567abaa68fd1ca1a7d81c500b99bcb5899bd165036581109",
+    "best_iou": "db853ba17b74fd175ed7a67936d817ecdbc15c25a8798687dc234d539458d103",
+    "found": "6eca1893a1006b79d01a61f17d5a0ddf487192405a444870f51e11830ac060e5",
+    "width_native_px": "39ab2cda1c8d548b05e0e9f362fe0697fea693f59e5cd18c7adcb169b702fad6"
+   }
+  },
+  "results/india/parcel_width_seg_watershed_min500.csv": {
+   "kind": "csv",
+   "rows": 1983,
+   "columns": {
+    "country": "3374eb757b6dc554002bf256699f031f94c6ea32bb5126460a50ecea01bb3af2",
+    "chip": "3119c5c12138f5ddbf868a2530a1e67bef91bb9fc0301fb987687706c59dae82",
+    "parcel_id": "787b3fb54ac0b06c77b791ede2adb2916121428149bf719186217465cbf70348",
+    "full_px": "293cd1066cbe87024be54b366bdfe589fe4c028919e7c8bd7c02a4348c902851",
+    "hectares": "d3dc658b5571cd92cc78f0a1f626671857772dc1883350e892aac2bfb321d45b",
+    "native_10m_px": "366734447e93aac9567abaa68fd1ca1a7d81c500b99bcb5899bd165036581109",
+    "best_iou": "0feb836b18fb2c9d1559e094dce6b5489b0299c6559e277c97764eccc32fea68",
+    "found": "baba86216c7bb7aa86229659b937cc353efaf4cb56ab1d11cada8bbc9c584cbe",
+    "width_native_px": "39ab2cda1c8d548b05e0e9f362fe0697fea693f59e5cd18c7adcb169b702fad6"
+   }
+  },
+  "results/india/precision_ftw_min0.csv": {
+   "kind": "csv",
+   "rows": 1983,
+   "columns": {
+    "parcel_id": "787b3fb54ac0b06c77b791ede2adb2916121428149bf719186217465cbf70348",
+    "objects_over": "b4e6d24609789c1227d1348efcecd47ebf60c4fd3a933766ee50b9035e8e5a7f",
+    "best_iou": "da562cf20368abc9b788d9f8e19937c00f549c035e54687982566019d598be26",
+    "chip": "3119c5c12138f5ddbf868a2530a1e67bef91bb9fc0301fb987687706c59dae82"
+   }
+  },
+  "results/india/precision_ftw_min500.csv": {
+   "kind": "csv",
+   "rows": 1983,
+   "columns": {
+    "parcel_id": "787b3fb54ac0b06c77b791ede2adb2916121428149bf719186217465cbf70348",
+    "objects_over": "b4081046a4df859cad95e732cbe7eb2dc1fdb8c76d723046a649e7b13a69c7aa",
+    "best_iou": "20b09977abc91f1056a0e6f74a1b84641127696026f4d92579ff930119cbf375",
+    "chip": "3119c5c12138f5ddbf868a2530a1e67bef91bb9fc0301fb987687706c59dae82"
+   }
+  },
+  "results/india/precision_sam_vit_h_false_0p5_min500.csv": {
+   "kind": "csv",
+   "rows": 494,
+   "columns": {
+    "parcel_id": "1b9c4ecb2ed9a4616d8ddc60b706583bdcac1c6f321da875d28dac78a105366f",
+    "objects_over": "6707dc5c140ff2bdecfbed52341fe9243a1f44926493c7bc631a426748348136",
+    "best_iou": "fa99e1304472eca7614a146be6349b4c280772e2f16f0beb06292e9223aa7e11",
+    "chip": "bc1c952cc8e0b1fc2d67e128a85ae4ec0aed57fffbef9963c43ef29955a1fa08"
+   }
+  },
+  "results/india/precision_summary.csv": {
+   "kind": "csv",
+   "rows": 3,
+   "columns": {
+    "method": "4d82404a423c1add5427d7eea15a6be2861e1aea36e174dfb570f5874a851251",
+    "min_size_m2": "cc8869de65fca7fd0d3bcf36825e5e6c26733281604c0680808bfb67e6e3dbfd",
+    "chips": "6c4e5e2bc74b3128ec04f8c8585e9ce6d0483e7e71fba1aa8df10752735c520a",
+    "parcels": "573ff27ae90019f3dc0f165dd2329c6ffe3c0e8b0fa1c89902f2d31d3a5be6ec",
+    "objects": "45d4a1979ef5dd75c2c456fcbc6ea7235242614dcb673401761aafa4e78c8366",
+    "objects_per_chip": "fe3c8fb42c9ea362000cde2c38dd75f7deedc2a0789695427edbf413c5812d9f",
+    "matched_objects": "c18842fdb99c4fa4c5e976440ea89afa04d96b90898af98a1f98357e3951e8dc",
+    "matched_share": "16e7bad7ceaf10aae5e5fbf64a51795b999891ae03caea8c28fa75eca31a3cd2",
+    "no_object_pct": "dab91ba96147b9620a0230ff8ec52cba5f6d4bb55f8290abcf14cd970e8c719f",
+    "exactly_one_pct": "6fd1f3a5907273a6c5ade819f3e8457f7e747cb3bbd478e8644d2bd7ce0b72f0",
+    "five_or_more_pct": "cfa24bdbe96e6045135bc9c8f6e29530bf28db17ed7ef85a96ea3f782e3f3ae2",
+    "median_objects_over": "1a2e8523dc7de04bde664b7136b794d94224dedb27e23def8c3a66c69fe8474a",
+    "subset": "94b7d638e51aa51633f03e2b4b3d31f95e72ab25586124df5e67902e5032c8ce"
+   }
+  },
+  "results/india/precision_watershed_0.02_min500.csv": {
+   "kind": "csv",
+   "rows": 1983,
+   "columns": {
+    "parcel_id": "787b3fb54ac0b06c77b791ede2adb2916121428149bf719186217465cbf70348",
+    "objects_over": "b90094a40f379e4b1c865ef8d07288d4ff246cf2efb55ab8199e629710a5ddec",
+    "best_iou": "522e96293fd275c2df7b5a4347e3b468ec6a02e279cf234fef262ec074a178cb",
+    "chip": "3119c5c12138f5ddbf868a2530a1e67bef91bb9fc0301fb987687706c59dae82"
+   }
+  },
+  "results/india/probe/parcel_width_seg_sam_vit_b_false_min500.csv": {
+   "kind": "csv",
+   "rows": 10,
+   "columns": {
+    "country": "f5c30535ae96c88322f83342eb26526d09eb7628693d5c22b11d7b37392c8c88",
+    "chip": "993878973feb38ad5c8b8294dc95647588325721dace26b54bfc9d4e72a629d4",
+    "parcel_id": "8c638f61c79ec6e8fe7cb41cbd687b1a1e1443a482362ae75d53d62c6ee1f86d",
+    "full_px": "c7b8ba5b15863e085913ae54d4f35e1c8bc9310e435dbd36da814a6bf8d76dc5",
+    "hectares": "562f40d0f47a7cd39f98906d65ef7690d8729199de240803725f79ad5bb8a999",
+    "native_10m_px": "eb6b03a3f80df14d4f9ec1ece4f35fbe851f4533e816a445c83037dc8381bafc",
+    "best_iou": "4634f26849e04d28db769bb59e217d4e3d44ddfd6f348b957fcee76e4b75261b",
+    "found": "bb1ad350d4a9708d010c2b31d96f014921895bb63f6ebb9a3378d985cafe7e64",
+    "width_native_px": "af1d9da320bad383881fac481678f3828ce976028cd1bb667693a96654169087"
+   }
+  },
+  "results/india/probe/sam_comparison_vit_b_min500.csv": {
+   "kind": "csv",
+   "rows": 10,
+   "columns": {
+    "composite": "591bc68953d50d684ea37e3c6c8f13f990dd0643dfc169f002a7c7b0ca214a64",
+    "setting": "9be04c18a36f28fc250dd6995cd86b38baa4ee02e1822b3231482f54330c1d34",
+    "objects_per_chip": "2febad74a9b4436bb995d732c93c22a41be28bc0897c915389a677971c78ddc4",
+    "parcels": "170a4099d016c581d1bdd26af46317c567e1b4dd7f82d96384b71232e3293126",
+    "median_iou": "2aca93f002f4c6bf9c0ec46f9d9844ec6e5f981213232e57029c839f7e073754",
+    "recall": "df70ce07d1103cf89b9acecfb8283cafed30e236b21bc45be3ecdec4be7d5f79",
+    "null_recall": "df70ce07d1103cf89b9acecfb8283cafed30e236b21bc45be3ecdec4be7d5f79",
+    "gap": "df70ce07d1103cf89b9acecfb8283cafed30e236b21bc45be3ecdec4be7d5f79"
+   }
+  },
+  "results/india/probe/sam_raw_vit_b_p32_min500.csv": {
+   "kind": "csv",
+   "rows": 400,
+   "columns": {
+    "composite": "2f72937b3525d470e67bc5fc99be88364277322f12acf0ff92ab7f350e832afd",
+    "setting": "de4c051dfdab8631c70cbcc0ff78d7e739b0f235f37a4080ab6ef37daef5d34c",
+    "chip": "19c4d0ed8546c2ea3a72fc5d9b8552f00df33039dd4a22085bba813da7007844",
+    "parcel_id": "bd6df68846bf55ecbe7c75fc550bb561b8c5c248ea8afc083a142d56eaa46235",
+    "full_px": "19e5de52a62b392893f0f3b811d6d6003ef7edcf80dc139e4c4fcb9137c05945",
+    "hectares": "6a0c70aa08e82395b9525312ff0279a11a198f13fdf98bbc1bac943a93c4d76b",
+    "native_10m_px": "81faf7ee68966e1536c73ba2fc330de2dbdef62486e02fe798258ce687430e5d",
+    "best_iou": "8f7153fd8f1fb7519afeec10a48ab80b8d3039385698e0957c56521a6b5fecc9",
+    "found": "dfa2e7dc3ae0dc380277f907975a52ecd804539d3de28519f5466b96f4fb8067",
+    "width_native_px": "972cbbaf8ff02568421e26ac807d1da53a7baae5ae99ffbc12fa15e3ec4f17c0",
+    "is_null": "146d7703c8d5425283fe64f7ec1c6db6ef9655cc63b150bea2332a93b4479ac8",
+    "draw": "3a180ba12fd3920f8900c6bfbd442dfdb07e7e09e5e98cd73b5f29b6fd60ad9f",
+    "objects": "2e227c10770ae168abd7f103d3433d438e2856482b447b48657c9e769070da8d",
+    "seconds": "822d0e8530f8c35c6c5cc70ff6975462fadc39c4a55f5f3644b51e5fd21eb070"
+   }
+  },
+  "results/india/probe/score_parcels_seg_sam_vit_b_false_min500.csv": {
+   "kind": "csv",
+   "rows": 10,
+   "columns": {
+    "country": "f5c30535ae96c88322f83342eb26526d09eb7628693d5c22b11d7b37392c8c88",
+    "chip": "993878973feb38ad5c8b8294dc95647588325721dace26b54bfc9d4e72a629d4",
+    "parcel_id": "8c638f61c79ec6e8fe7cb41cbd687b1a1e1443a482362ae75d53d62c6ee1f86d",
+    "full_px": "c7b8ba5b15863e085913ae54d4f35e1c8bc9310e435dbd36da814a6bf8d76dc5",
+    "hectares": "562f40d0f47a7cd39f98906d65ef7690d8729199de240803725f79ad5bb8a999",
+    "native_10m_px": "eb6b03a3f80df14d4f9ec1ece4f35fbe851f4533e816a445c83037dc8381bafc",
+    "best_iou": "4634f26849e04d28db769bb59e217d4e3d44ddfd6f348b957fcee76e4b75261b",
+    "found": "bb1ad350d4a9708d010c2b31d96f014921895bb63f6ebb9a3378d985cafe7e64",
+    "width_native_px": "af1d9da320bad383881fac481678f3828ce976028cd1bb667693a96654169087"
+   }
+  },
+  "results/india/ring_check.csv": {
+   "kind": "csv",
+   "rows": 3,
+   "columns": {
+    "dilation_px": "14c5e74c4b96ccef41cd94db73a9ec3348038ac094feca4fd897cecffa07cdae",
+    "ring_pixels": "e063a0daf29a232ebc7e75618ce6a06073b7fe90c3cd6ed8c1ace10b1c4c9531",
+    "within_dilation": "bc0222bbe12efcb6525264c0d844e5ad5a1d9963c70ae15a11b9290ff5760f3e",
+    "share": "3791d1aead339c54b9bcbfbdb1fd4c559948160af9dc1520f694ad6e407e8a56"
+   }
+  },
+  "results/india/ring_sensitivity.csv": {
+   "kind": "csv",
+   "rows": 12,
+   "columns": {
+    "country": "e1c4f34946940603202a48d207ab078230248b433841c560aeed262546f71c53",
+    "cap": "a4d06886518a455600d7c8a242ceb21b5207ecbc8657c6f2d33c1d6ae496a472",
+    "method": "6edfff1b7b6c473a68f0b4281b8764c47606c6a96c28870857aaf6d0bf44e4a2",
+    "chips": "702d0fbdd6137e4f268e921e42ae708de884af213c344b9d174b2894beb27b6a",
+    "parcels": "4f5e2e289dff16fe5ddb5d7c0ebc116670de382c3dc7e113bc03a1bfaa2cbf29",
+    "found": "eba16f3848f4b783a27fc459aae74cbdf3dddcf1e6f5fb6e0dbfa572063a9cab",
+    "recall": "54768d74cc3bb96d3b43fb927b3c5f0bb66b065ce8f20301770e6f4dcd800ac2"
+   }
+  },
+  "results/india/ring_sensitivity_bands.csv": {
+   "kind": "csv",
+   "rows": 48,
+   "columns": {
+    "country": "2dcb9ebcb9f98333e21bec7e9c34e7daf8fedf4f678a9bed8b0d2a26f9ddd570",
+    "cap": "5408b199e18154af563524648bfed2262410fc59b3279b2a3e5f531c1ded9b56",
+    "method": "96bde566d4eb9ad7da6d14e05bb059b2fc97d64a7e974f6d9e1fe0fad5632b3f",
+    "band": "40a1f2bcc63a772e22ebb6ae4cb26b37ca7f48a051c7abd533d3cf7d442d00c0",
+    "parcels": "a619a4a3bc677a1bfff92df43673ad6bd94a6e7dbb2094f5081a146d236aaf05",
+    "found": "e89f34a937b1a7f0f2045ba850529449d134073f8edf0818458dc63a28d236cb"
+   }
+  },
+  "results/india/ring_sensitivity_bands_sam.csv": {
+   "kind": "csv",
+   "rows": 16,
+   "columns": {
+    "country": "0e74e96b0da45dbcb271d3704d61b1c8a65ae1b79bc915a6804b4bfa41617bcb",
+    "cap": "3f005e03ff02360eb7059c0ae058244d07d9ca8331a6ffc7800957f180841be1",
+    "method": "c476e508098c61c8209e6d6faef402acc505b36b75ae7c84f402a6a20cc178c0",
+    "band": "47b2642429c81827fd8b746c1176b6b5ac71a82598cb35ca8f1500a2eb5ffe15",
+    "parcels": "feedc839ae6219d5167645729a0e19a59fea2e7b0d0edd95a33594be0a19c008",
+    "found": "629b8a086b97d331d17335415c6bc27e9bd232489c81206ff984248ab50cfaeb"
+   }
+  },
+  "results/india/ring_sensitivity_sam.csv": {
+   "kind": "csv",
+   "rows": 4,
+   "columns": {
+    "country": "fc54b58de4e71a90f54101b120d61d00e771a0cb419fcb620fbbf51e5fc44186",
+    "cap": "9c7c7023b785b4beb9874aaf5841db5753c408573190096a74f0fbf34f2ac2ed",
+    "method": "8f4a59e691a60b372cbfcdd9602651b580c85694f7aa89a6bea7279744bd336b",
+    "chips": "c299233cd00c874e79f3ad8cb2e386a4d62bec54d79229ec4b1d4464718db00e",
+    "parcels": "d84d00e0815d8d112b2166eaf1aefe87ca389d767f5adf130a053215752db5f4",
+    "found": "9366ed3c5f672916266e92b1cbebea3ab6536175fbf69e2c58d68a5c19d6a6ec",
+    "recall": "e3f161aa088971420266df853d5cc0841f2d2aa5e2bec89b500dcf99647c8e9c"
+   }
+  },
+  "results/india/ring_sensitivity_truth.csv": {
+   "kind": "csv",
+   "rows": 4,
+   "columns": {
+    "country": "fc54b58de4e71a90f54101b120d61d00e771a0cb419fcb620fbbf51e5fc44186",
+    "cap": "9c7c7023b785b4beb9874aaf5841db5753c408573190096a74f0fbf34f2ac2ed",
+    "cap_m": "7e5105d87e9512fee72fbd204942c552bf0e708d9623f2e5bf4ad6a5306c94b4",
+    "chips": "62ac0786518ad151aa3a872f7113e1fea87bee30535ad141e7a2ee2ef4945d4e",
+    "parcels": "b1d4fecd38ef5f6fc0f6df3cb60d35cc1c1c0d19479b1145276fe2524a42d063",
+    "ring_px": "beb6e80c8f143d6926059bbbe1764a84cca6c380126eee497180ec8d652af68f",
+    "orphan_px": "014c22a8dfbbbeb3973efb9c82f89cd5cfca8739fb471e1a8a1a3580f96e7c89",
+    "orphan_share": "414429dac80d2087b5179071f7de2b8303a31e39ca1b11aaccc90ca304c5f3ee",
+    "median_area_ha": "4f7da615e3e9e90d72da9eabf4462cbd152a9f9d83b3284857334d3cc451f75f",
+    "median_width_m": "811f0244a3be8fd94fe45c5a1f77839963940fb0c7dc3e3d90af561b706df3be",
+    "share_under_30m": "b9b458f8c339bebe71f11e9dd49762c1f0a55f25243dad12ecce429bde357d49"
+   }
+  },
+  "results/india/ring_sensitivity_truth_sam.csv": {
+   "kind": "csv",
+   "rows": 4,
+   "columns": {
+    "country": "fc54b58de4e71a90f54101b120d61d00e771a0cb419fcb620fbbf51e5fc44186",
+    "cap": "9c7c7023b785b4beb9874aaf5841db5753c408573190096a74f0fbf34f2ac2ed",
+    "cap_m": "7e5105d87e9512fee72fbd204942c552bf0e708d9623f2e5bf4ad6a5306c94b4",
+    "chips": "c299233cd00c874e79f3ad8cb2e386a4d62bec54d79229ec4b1d4464718db00e",
+    "parcels": "d84d00e0815d8d112b2166eaf1aefe87ca389d767f5adf130a053215752db5f4",
+    "ring_px": "c69ad4c01fdad6cd0fbbf6b30486a2dbac481660511d8426bf7f0772df0ddbd0",
+    "orphan_px": "5fb2383409bbb7efd7f20903bd8cef357b6c55ae59a52fd9d9f3781c12b46c27",
+    "orphan_share": "30d67b2ab201389d06a4078119095bf7381f13364b57dffa16fc8db205a0517d",
+    "median_area_ha": "29739b3f44ce9e34c7ce03a168fa6eb9f7f279f3f88af144c266ae1ff10950c6",
+    "median_width_m": "874f5f7c51b01d6eab40e0a424d47310f4049fc3f5043f337c1a06bccc85cc19",
+    "share_under_30m": "37c4cd782cd5273af093086e8fdbd9338defe198e09d5cc0928d46b9598df2c9"
+   }
+  },
+  "results/india/ring_thickness.csv": {
+   "kind": "csv",
+   "rows": 9,
+   "columns": {
+    "distance_px": "f114006ee47a8711105485baeb2082b5b872fdbecb0c1dd73d65f2a9a72f035e",
+    "pixels": "c97eaa83246f40d7d8a37edd9756ae7d886315b66166e6f1d97643c85c00f1dd",
+    "share": "aac1b5540b1e253ad3554f95f1abf7de144c8c2c472be8093bdaab9e96facfee"
+   }
+  },
+  "results/india/sam_comparison_vit_h_min500.csv": {
+   "kind": "csv",
+   "rows": 10,
+   "columns": {
+    "composite": "591bc68953d50d684ea37e3c6c8f13f990dd0643dfc169f002a7c7b0ca214a64",
+    "setting": "9be04c18a36f28fc250dd6995cd86b38baa4ee02e1822b3231482f54330c1d34",
+    "objects_per_chip": "6586b71cd4a88eca14413dc15e607b606f174b748c8d6a8f0b8712a280603f15",
+    "parcels": "3d79a724020c56b4a26bc38adb43c5f5a3e6421ccd03cbce7caf36f403b7ecd7",
+    "median_iou": "a00876a69aeba49412513f4249d6a0f363752d9595159c59173a4cabe170b0e6",
+    "recall": "9b82b4a906493533f36c7c87abd2d21e2883ef7cf8a211787c4bff339cb97377",
+    "null_recall": "29356be6b57c1248deab382237fae8307b2d181d00340b28989fc30994e1d041",
+    "gap": "4136f1d027d8d21df5c58e028e70037800fa3abc4c4843457e9f5c2e03fda112"
+   }
+  },
+  "results/india/sam_raw_vit_h_p32_min500.csv": {
+   "kind": "csv",
+   "rows": 79320,
+   "columns": {
+    "composite": "b55aa42437e7d07d01e0c7c55cff19a77bf5885ba3463c7429b3e170f8656767",
+    "setting": "c62849ed4fa9fdef6fccdf2d58f302fadef6cfbe2078b55fb2d42b43da615ac1",
+    "chip": "502a9e9d792b45148394ecdec554fbb4d11d4f338e6c5f2a43b9854279c0d8b7",
+    "parcel_id": "13010975c1fb496e14f35c2254e7b3f6df556f69ff03162b7bfc7a0d53d0c235",
+    "full_px": "784785e9c55f782311576e9620f388d3240037f393056a71106ded3cd96ee230",
+    "hectares": "70763eeb9df32e254e854feebeb14889be1c5053b0381bfa82e29e173956892e",
+    "native_10m_px": "ae8a1b0b33bd6b75cbe1891f71c54239cce680437b0ab4edb171ee2e437ff8f0",
+    "best_iou": "34f82372d17a28213254c7be41e13f1f8710d07db40238051bc0dcc8c09619c4",
+    "found": "f4874ad0a59e8bb0091d78f64e6ca63102772307aba7d4d824645e6b81517c90",
+    "width_native_px": "28f2f68065363e7005c423292e64175f9cdd3a3de8e25fc4aacbabdecf448355",
+    "is_null": "022ccd0db1eb4410f022ab5afecfe488fb732fc123b5a34afc1b85881504f30a",
+    "draw": "5b91c5f9000e5c21f86f95b676d819c5e1b410059d1b8df5057b7cee177e4ad6",
+    "objects": "812144a030a3b1c511a07db389e1a966d4df4e84e8ea9ff71b09b72893305fb4",
+    "seconds": "fa949f6fd84f5837e71e6bb00f9f9f0290bd57cc63947b64e1bdf9fe2e8d7b1a",
+    "width_native_px_published": "6fccc695d1862d4e3dc58ac033e132353b888e8690a95a24ab163407f5ff395b"
+   }
+  },
+  "results/india/score_bins_2class.csv": {
+   "kind": "csv",
+   "rows": 8,
+   "columns": {
+    "country": "5eef4427bc3d5450a6de8d29ccdb9b0f4d43521414fda45c7059a23023b71d85",
+    "bin": "8817d1059072d75d36d41eb1b6d5ddf8418a94454e48c5a7fa2a9a53f9015281",
+    "lo_native_px": "619d7483a831ef159788ecdb19b1e570ae6228e596ddc73fa9017855b9b4aec3",
+    "hi_native_px": "b9c55c9267e1f67ed0325e6a5601578d419ba9425858b50c43a4c8c70db82c3c",
+    "parcels": "90c3cffc2d80e295898888392b87a510e78fe7ccf672f4644bc8b869b84f3b17",
+    "object_recall": "81f12dd1055b5d5f32a1f33756647ed63a33f3f13a87901613366bcb0595d947",
+    "median_best_iou": "a3c73941ad39f48a58073b61d9a69922119be0fedfeee33bfeb119cb09e72347"
+   }
+  },
+  "results/india/score_bins_3class.csv": {
+   "kind": "csv",
+   "rows": 8,
+   "columns": {
+    "country": "5eef4427bc3d5450a6de8d29ccdb9b0f4d43521414fda45c7059a23023b71d85",
+    "bin": "8817d1059072d75d36d41eb1b6d5ddf8418a94454e48c5a7fa2a9a53f9015281",
+    "lo_native_px": "619d7483a831ef159788ecdb19b1e570ae6228e596ddc73fa9017855b9b4aec3",
+    "hi_native_px": "b9c55c9267e1f67ed0325e6a5601578d419ba9425858b50c43a4c8c70db82c3c",
+    "parcels": "90c3cffc2d80e295898888392b87a510e78fe7ccf672f4644bc8b869b84f3b17",
+    "object_recall": "5e594fa20ca234309a7669ea830790c08f1b94c69ec0c35fadb13a827dcf0460",
+    "median_best_iou": "2301f5dc1b9034a8a4fc077cab68d163802484d6fa3d730e186f3f50339e59a9"
+   }
+  },
+  "results/india/score_bins_3class_full.csv": {
+   "kind": "csv",
+   "rows": 8,
+   "columns": {
+    "country": "5eef4427bc3d5450a6de8d29ccdb9b0f4d43521414fda45c7059a23023b71d85",
+    "bin": "8817d1059072d75d36d41eb1b6d5ddf8418a94454e48c5a7fa2a9a53f9015281",
+    "lo_native_px": "619d7483a831ef159788ecdb19b1e570ae6228e596ddc73fa9017855b9b4aec3",
+    "hi_native_px": "b9c55c9267e1f67ed0325e6a5601578d419ba9425858b50c43a4c8c70db82c3c",
+    "parcels": "90c3cffc2d80e295898888392b87a510e78fe7ccf672f4644bc8b869b84f3b17",
+    "object_recall": "0b5c925aff268a847e8a58fceefacf0ecf49bff2c17ff66a1932885881c6f4b3",
+    "median_best_iou": "05d025d114a6751b266508a5d2bb941bcafe5da9436a3fe07c0fa86ea8d6de5d"
+   }
+  },
+  "results/india/score_parcels_2class.csv": {
+   "kind": "csv",
+   "rows": 1983,
+   "columns": {
+    "country": "3374eb757b6dc554002bf256699f031f94c6ea32bb5126460a50ecea01bb3af2",
+    "chip": "3119c5c12138f5ddbf868a2530a1e67bef91bb9fc0301fb987687706c59dae82",
+    "parcel_id": "787b3fb54ac0b06c77b791ede2adb2916121428149bf719186217465cbf70348",
+    "full_px": "293cd1066cbe87024be54b366bdfe589fe4c028919e7c8bd7c02a4348c902851",
+    "hectares": "b720507420b7762d068f4f7344d4e76003ad4f9557f1e0925ce9e2c418246106",
+    "native_10m_px": "b8dfb66d6f3af6f45372b94f546f080331bc6aacd2cc81e08d42cb03b985fd86",
+    "best_iou": "0f80381b9403f3fe228fd2e932eb09f7ee53e99282eba85c252cc260e73e71f4",
+    "found": "2f037d30c81502ab4729a931a9f87accf4086a7414617ab74acadfa5af473622"
+   }
+  },
+  "results/india/score_parcels_3class.csv": {
+   "kind": "csv",
+   "rows": 1983,
+   "columns": {
+    "country": "3374eb757b6dc554002bf256699f031f94c6ea32bb5126460a50ecea01bb3af2",
+    "chip": "3119c5c12138f5ddbf868a2530a1e67bef91bb9fc0301fb987687706c59dae82",
+    "parcel_id": "787b3fb54ac0b06c77b791ede2adb2916121428149bf719186217465cbf70348",
+    "full_px": "293cd1066cbe87024be54b366bdfe589fe4c028919e7c8bd7c02a4348c902851",
+    "hectares": "b720507420b7762d068f4f7344d4e76003ad4f9557f1e0925ce9e2c418246106",
+    "native_10m_px": "b8dfb66d6f3af6f45372b94f546f080331bc6aacd2cc81e08d42cb03b985fd86",
+    "best_iou": "40f814779a94d1ea861badf6a00f9ea2fe45ebe8683c83da87c0797338ebaf6a",
+    "found": "888c8af86368e7c286b2ea082f3c1ad97d7bfd577a7214a24fa1f44e1a44641b"
+   }
+  },
+  "results/india/score_parcels_3class_full.csv": {
+   "kind": "csv",
+   "rows": 1983,
+   "columns": {
+    "country": "3374eb757b6dc554002bf256699f031f94c6ea32bb5126460a50ecea01bb3af2",
+    "chip": "3119c5c12138f5ddbf868a2530a1e67bef91bb9fc0301fb987687706c59dae82",
+    "parcel_id": "787b3fb54ac0b06c77b791ede2adb2916121428149bf719186217465cbf70348",
+    "full_px": "293cd1066cbe87024be54b366bdfe589fe4c028919e7c8bd7c02a4348c902851",
+    "hectares": "b720507420b7762d068f4f7344d4e76003ad4f9557f1e0925ce9e2c418246106",
+    "native_10m_px": "b8dfb66d6f3af6f45372b94f546f080331bc6aacd2cc81e08d42cb03b985fd86",
+    "best_iou": "9b7245f573a0a4f1371976bfcb76c6b7a552dc9afb7c09033abc7cb7ca708d9e",
+    "found": "93ca5f6e5508023c465142e76a2f534d90befc9ce8d41f94a45c6392c1681d4f"
+   }
+  },
+  "results/india/score_parcels_seg_felzenszwalb_100_min500.csv": {
+   "kind": "csv",
+   "rows": 1983,
+   "columns": {
+    "country": "3374eb757b6dc554002bf256699f031f94c6ea32bb5126460a50ecea01bb3af2",
+    "chip": "3119c5c12138f5ddbf868a2530a1e67bef91bb9fc0301fb987687706c59dae82",
+    "parcel_id": "787b3fb54ac0b06c77b791ede2adb2916121428149bf719186217465cbf70348",
+    "full_px": "293cd1066cbe87024be54b366bdfe589fe4c028919e7c8bd7c02a4348c902851",
+    "hectares": "d3dc658b5571cd92cc78f0a1f626671857772dc1883350e892aac2bfb321d45b",
+    "native_10m_px": "366734447e93aac9567abaa68fd1ca1a7d81c500b99bcb5899bd165036581109",
+    "best_iou": "79f6a45e113a6c3a8ad1dfaee528244820002a0c8083f0dbf7f006d69f704f95",
+    "found": "d07f00f0da0d40898fa3a09a30dd99b0019554220e28e901190ee0ef1a28e724",
+    "width_native_px": "39ab2cda1c8d548b05e0e9f362fe0697fea693f59e5cd18c7adcb169b702fad6"
+   }
+  },
+  "results/india/score_parcels_seg_felzenszwalb_150_min500.csv": {
+   "kind": "csv",
+   "rows": 1983,
+   "columns": {
+    "country": "3374eb757b6dc554002bf256699f031f94c6ea32bb5126460a50ecea01bb3af2",
+    "chip": "3119c5c12138f5ddbf868a2530a1e67bef91bb9fc0301fb987687706c59dae82",
+    "parcel_id": "787b3fb54ac0b06c77b791ede2adb2916121428149bf719186217465cbf70348",
+    "full_px": "293cd1066cbe87024be54b366bdfe589fe4c028919e7c8bd7c02a4348c902851",
+    "hectares": "d3dc658b5571cd92cc78f0a1f626671857772dc1883350e892aac2bfb321d45b",
+    "native_10m_px": "366734447e93aac9567abaa68fd1ca1a7d81c500b99bcb5899bd165036581109",
+    "best_iou": "71ea08aaa3bdcfbdbc9fc946a2cc0a9bb12ec3bbbb1da389699486ae82f92502",
+    "found": "9203662dffd0355cb96f41a24f5e01831335f1949e83561f45f31ea8caca0341",
+    "width_native_px": "39ab2cda1c8d548b05e0e9f362fe0697fea693f59e5cd18c7adcb169b702fad6"
+   }
+  },
+  "results/india/score_parcels_seg_felzenszwalb_200_min500.csv": {
+   "kind": "csv",
+   "rows": 1983,
+   "columns": {
+    "country": "3374eb757b6dc554002bf256699f031f94c6ea32bb5126460a50ecea01bb3af2",
+    "chip": "3119c5c12138f5ddbf868a2530a1e67bef91bb9fc0301fb987687706c59dae82",
+    "parcel_id": "787b3fb54ac0b06c77b791ede2adb2916121428149bf719186217465cbf70348",
+    "full_px": "293cd1066cbe87024be54b366bdfe589fe4c028919e7c8bd7c02a4348c902851",
+    "hectares": "d3dc658b5571cd92cc78f0a1f626671857772dc1883350e892aac2bfb321d45b",
+    "native_10m_px": "366734447e93aac9567abaa68fd1ca1a7d81c500b99bcb5899bd165036581109",
+    "best_iou": "9d342ba91bd1371ef8ac9fb677b49e6c1ba5b6ceb9f9e90cfae0541b2de78148",
+    "found": "8da84e9bb9093a89f3639f2ff6744b691f9b74dea95cff1a229829654fedac02",
+    "width_native_px": "39ab2cda1c8d548b05e0e9f362fe0697fea693f59e5cd18c7adcb169b702fad6"
+   }
+  },
+  "results/india/score_parcels_seg_felzenszwalb_25_min500.csv": {
+   "kind": "csv",
+   "rows": 1983,
+   "columns": {
+    "country": "3374eb757b6dc554002bf256699f031f94c6ea32bb5126460a50ecea01bb3af2",
+    "chip": "3119c5c12138f5ddbf868a2530a1e67bef91bb9fc0301fb987687706c59dae82",
+    "parcel_id": "787b3fb54ac0b06c77b791ede2adb2916121428149bf719186217465cbf70348",
+    "full_px": "293cd1066cbe87024be54b366bdfe589fe4c028919e7c8bd7c02a4348c902851",
+    "hectares": "d3dc658b5571cd92cc78f0a1f626671857772dc1883350e892aac2bfb321d45b",
+    "native_10m_px": "366734447e93aac9567abaa68fd1ca1a7d81c500b99bcb5899bd165036581109",
+    "best_iou": "db2bab7f3bf4825a37fea27eb66e57ca07d69a92faae0866b5d0cf30496b6ff6",
+    "found": "a1f23f47210380c92f6ce5f124c9a39d96fd11fe613a51bea819dde5cc592b1e",
+    "width_native_px": "39ab2cda1c8d548b05e0e9f362fe0697fea693f59e5cd18c7adcb169b702fad6"
+   }
+  },
+  "results/india/score_parcels_seg_felzenszwalb_300_min500.csv": {
+   "kind": "csv",
+   "rows": 1983,
+   "columns": {
+    "country": "3374eb757b6dc554002bf256699f031f94c6ea32bb5126460a50ecea01bb3af2",
+    "chip": "3119c5c12138f5ddbf868a2530a1e67bef91bb9fc0301fb987687706c59dae82",
+    "parcel_id": "787b3fb54ac0b06c77b791ede2adb2916121428149bf719186217465cbf70348",
+    "full_px": "293cd1066cbe87024be54b366bdfe589fe4c028919e7c8bd7c02a4348c902851",
+    "hectares": "d3dc658b5571cd92cc78f0a1f626671857772dc1883350e892aac2bfb321d45b",
+    "native_10m_px": "366734447e93aac9567abaa68fd1ca1a7d81c500b99bcb5899bd165036581109",
+    "best_iou": "e30cfbf065dadfce277debd98e0168f8b52911958529b642a794b44b57a6ae64",
+    "found": "7074ee456fe8106dbdf4ffd3087b46b68c0a68be14bc5b28e1abdd6f510120eb",
+    "width_native_px": "39ab2cda1c8d548b05e0e9f362fe0697fea693f59e5cd18c7adcb169b702fad6"
+   }
+  },
+  "results/india/score_parcels_seg_felzenszwalb_400_min500.csv": {
+   "kind": "csv",
+   "rows": 1983,
+   "columns": {
+    "country": "3374eb757b6dc554002bf256699f031f94c6ea32bb5126460a50ecea01bb3af2",
+    "chip": "3119c5c12138f5ddbf868a2530a1e67bef91bb9fc0301fb987687706c59dae82",
+    "parcel_id": "787b3fb54ac0b06c77b791ede2adb2916121428149bf719186217465cbf70348",
+    "full_px": "293cd1066cbe87024be54b366bdfe589fe4c028919e7c8bd7c02a4348c902851",
+    "hectares": "d3dc658b5571cd92cc78f0a1f626671857772dc1883350e892aac2bfb321d45b",
+    "native_10m_px": "366734447e93aac9567abaa68fd1ca1a7d81c500b99bcb5899bd165036581109",
+    "best_iou": "ea1cce4e95f5c9e09a56fcba76f2057e5461398d77cb2f9f82d07cf6e40459c7",
+    "found": "1fd851a331ba2c0ae07a0f6a8d5bdfeb1149e9fde237785586c1dac5d78ede1a",
+    "width_native_px": "39ab2cda1c8d548b05e0e9f362fe0697fea693f59e5cd18c7adcb169b702fad6"
+   }
+  },
+  "results/india/score_parcels_seg_felzenszwalb_50_min500.csv": {
+   "kind": "csv",
+   "rows": 1983,
+   "columns": {
+    "country": "3374eb757b6dc554002bf256699f031f94c6ea32bb5126460a50ecea01bb3af2",
+    "chip": "3119c5c12138f5ddbf868a2530a1e67bef91bb9fc0301fb987687706c59dae82",
+    "parcel_id": "787b3fb54ac0b06c77b791ede2adb2916121428149bf719186217465cbf70348",
+    "full_px": "293cd1066cbe87024be54b366bdfe589fe4c028919e7c8bd7c02a4348c902851",
+    "hectares": "d3dc658b5571cd92cc78f0a1f626671857772dc1883350e892aac2bfb321d45b",
+    "native_10m_px": "366734447e93aac9567abaa68fd1ca1a7d81c500b99bcb5899bd165036581109",
+    "best_iou": "6184857c35662370cfc5f6915c9dcd8b0f379b89a4ebecd54c94d0ff2cf5807d",
+    "found": "15c85a1b92f2dabba3a9a36a0bd1a9f94a1f122921e1e9a05603e8a313cb2f42",
+    "width_native_px": "39ab2cda1c8d548b05e0e9f362fe0697fea693f59e5cd18c7adcb169b702fad6"
+   }
+  },
+  "results/india/score_parcels_seg_felzenszwalb_800_min500.csv": {
+   "kind": "csv",
+   "rows": 1983,
+   "columns": {
+    "country": "3374eb757b6dc554002bf256699f031f94c6ea32bb5126460a50ecea01bb3af2",
+    "chip": "3119c5c12138f5ddbf868a2530a1e67bef91bb9fc0301fb987687706c59dae82",
+    "parcel_id": "787b3fb54ac0b06c77b791ede2adb2916121428149bf719186217465cbf70348",
+    "full_px": "293cd1066cbe87024be54b366bdfe589fe4c028919e7c8bd7c02a4348c902851",
+    "hectares": "d3dc658b5571cd92cc78f0a1f626671857772dc1883350e892aac2bfb321d45b",
+    "native_10m_px": "366734447e93aac9567abaa68fd1ca1a7d81c500b99bcb5899bd165036581109",
+    "best_iou": "fd4abeae16db719f6b887030df118227280555b0ca17bd382ef18582d1852cef",
+    "found": "fcb05ecf15a552126dd724955547fa3860d14ac4cfef9b9b8d72316bd4175f7b",
+    "width_native_px": "39ab2cda1c8d548b05e0e9f362fe0697fea693f59e5cd18c7adcb169b702fad6"
+   }
+  },
+  "results/india/score_parcels_seg_felzenszwalb_min500.csv": {
+   "kind": "csv",
+   "rows": 1983,
+   "columns": {
+    "country": "3374eb757b6dc554002bf256699f031f94c6ea32bb5126460a50ecea01bb3af2",
+    "chip": "3119c5c12138f5ddbf868a2530a1e67bef91bb9fc0301fb987687706c59dae82",
+    "parcel_id": "787b3fb54ac0b06c77b791ede2adb2916121428149bf719186217465cbf70348",
+    "full_px": "293cd1066cbe87024be54b366bdfe589fe4c028919e7c8bd7c02a4348c902851",
+    "hectares": "d3dc658b5571cd92cc78f0a1f626671857772dc1883350e892aac2bfb321d45b",
+    "native_10m_px": "366734447e93aac9567abaa68fd1ca1a7d81c500b99bcb5899bd165036581109",
+    "best_iou": "79f6a45e113a6c3a8ad1dfaee528244820002a0c8083f0dbf7f006d69f704f95",
+    "found": "d07f00f0da0d40898fa3a09a30dd99b0019554220e28e901190ee0ef1a28e724",
+    "width_native_px": "39ab2cda1c8d548b05e0e9f362fe0697fea693f59e5cd18c7adcb169b702fad6"
+   }
+  },
+  "results/india/score_parcels_seg_ftw_min500.csv": {
+   "kind": "csv",
+   "rows": 1983,
+   "columns": {
+    "country": "3374eb757b6dc554002bf256699f031f94c6ea32bb5126460a50ecea01bb3af2",
+    "chip": "3119c5c12138f5ddbf868a2530a1e67bef91bb9fc0301fb987687706c59dae82",
+    "parcel_id": "787b3fb54ac0b06c77b791ede2adb2916121428149bf719186217465cbf70348",
+    "full_px": "293cd1066cbe87024be54b366bdfe589fe4c028919e7c8bd7c02a4348c902851",
+    "hectares": "d3dc658b5571cd92cc78f0a1f626671857772dc1883350e892aac2bfb321d45b",
+    "native_10m_px": "366734447e93aac9567abaa68fd1ca1a7d81c500b99bcb5899bd165036581109",
+    "best_iou": "3793d5115c22904c7fb161dca2749a52e7306382629ad62bf6106205b1931724",
+    "found": "93ca5f6e5508023c465142e76a2f534d90befc9ce8d41f94a45c6392c1681d4f",
+    "width_native_px": "39ab2cda1c8d548b05e0e9f362fe0697fea693f59e5cd18c7adcb169b702fad6"
+   }
+  },
+  "results/india/score_parcels_seg_sam_vit_h_false_0p50_min500.csv": {
+   "kind": "csv",
+   "rows": 1983,
+   "columns": {
+    "country": "3374eb757b6dc554002bf256699f031f94c6ea32bb5126460a50ecea01bb3af2",
+    "chip": "3119c5c12138f5ddbf868a2530a1e67bef91bb9fc0301fb987687706c59dae82",
+    "parcel_id": "787b3fb54ac0b06c77b791ede2adb2916121428149bf719186217465cbf70348",
+    "full_px": "293cd1066cbe87024be54b366bdfe589fe4c028919e7c8bd7c02a4348c902851",
+    "hectares": "0347f06ae4903706a2c9cc1f50505fe9490e166cc8dca01af1a8a33bcaf859af",
+    "native_10m_px": "b39c7825a149cd6597893f81d972d181ad2d13faf4d0267294ab75aa1b7062a2",
+    "best_iou": "e512f544cab351a0574cdbcc1a387ef5f1ba6ec7766f7248b7bc2944b9c7a3e7",
+    "found": "cf380343f90174eed0e00b297455a501ecd15f383918541c95157cf004321419",
+    "width_native_px": "39ab2cda1c8d548b05e0e9f362fe0697fea693f59e5cd18c7adcb169b702fad6",
+    "width_native_px_published": "f3994809460df6c9ef2c5dfcd2c69d01a0a573cf941f123d3e63bac5ea249afc"
+   }
+  },
+  "results/india/score_parcels_seg_sam_vit_h_false_0p60_min500.csv": {
+   "kind": "csv",
+   "rows": 1983,
+   "columns": {
+    "country": "3374eb757b6dc554002bf256699f031f94c6ea32bb5126460a50ecea01bb3af2",
+    "chip": "3119c5c12138f5ddbf868a2530a1e67bef91bb9fc0301fb987687706c59dae82",
+    "parcel_id": "787b3fb54ac0b06c77b791ede2adb2916121428149bf719186217465cbf70348",
+    "full_px": "293cd1066cbe87024be54b366bdfe589fe4c028919e7c8bd7c02a4348c902851",
+    "hectares": "0347f06ae4903706a2c9cc1f50505fe9490e166cc8dca01af1a8a33bcaf859af",
+    "native_10m_px": "b39c7825a149cd6597893f81d972d181ad2d13faf4d0267294ab75aa1b7062a2",
+    "best_iou": "d002fa988d5c353096973d34c4582fa4d9208deab0f8cd69e0e8e4826c28539b",
+    "found": "cf380343f90174eed0e00b297455a501ecd15f383918541c95157cf004321419",
+    "width_native_px": "39ab2cda1c8d548b05e0e9f362fe0697fea693f59e5cd18c7adcb169b702fad6",
+    "width_native_px_published": "f3994809460df6c9ef2c5dfcd2c69d01a0a573cf941f123d3e63bac5ea249afc"
+   }
+  },
+  "results/india/score_parcels_seg_sam_vit_h_false_0p70_min500.csv": {
+   "kind": "csv",
+   "rows": 1983,
+   "columns": {
+    "country": "3374eb757b6dc554002bf256699f031f94c6ea32bb5126460a50ecea01bb3af2",
+    "chip": "3119c5c12138f5ddbf868a2530a1e67bef91bb9fc0301fb987687706c59dae82",
+    "parcel_id": "787b3fb54ac0b06c77b791ede2adb2916121428149bf719186217465cbf70348",
+    "full_px": "293cd1066cbe87024be54b366bdfe589fe4c028919e7c8bd7c02a4348c902851",
+    "hectares": "0347f06ae4903706a2c9cc1f50505fe9490e166cc8dca01af1a8a33bcaf859af",
+    "native_10m_px": "b39c7825a149cd6597893f81d972d181ad2d13faf4d0267294ab75aa1b7062a2",
+    "best_iou": "d92fb107964b73c42b8364071fff86ffed803dbda60a5ff2534789b20cc1a130",
+    "found": "8b143656a29d88f85f4b82e26bb2e34119b774cc061e103b8f4a31e2ce929e88",
+    "width_native_px": "39ab2cda1c8d548b05e0e9f362fe0697fea693f59e5cd18c7adcb169b702fad6",
+    "width_native_px_published": "f3994809460df6c9ef2c5dfcd2c69d01a0a573cf941f123d3e63bac5ea249afc"
+   }
+  },
+  "results/india/score_parcels_seg_sam_vit_h_false_0p80_min500.csv": {
+   "kind": "csv",
+   "rows": 1983,
+   "columns": {
+    "country": "3374eb757b6dc554002bf256699f031f94c6ea32bb5126460a50ecea01bb3af2",
+    "chip": "3119c5c12138f5ddbf868a2530a1e67bef91bb9fc0301fb987687706c59dae82",
+    "parcel_id": "787b3fb54ac0b06c77b791ede2adb2916121428149bf719186217465cbf70348",
+    "full_px": "293cd1066cbe87024be54b366bdfe589fe4c028919e7c8bd7c02a4348c902851",
+    "hectares": "0347f06ae4903706a2c9cc1f50505fe9490e166cc8dca01af1a8a33bcaf859af",
+    "native_10m_px": "b39c7825a149cd6597893f81d972d181ad2d13faf4d0267294ab75aa1b7062a2",
+    "best_iou": "71c2fef4e679ab1b150c6ae266c4acd0fbaef81fff7ae551757eb5cc5d477f4f",
+    "found": "99c71d7f33eeef9c8f10b77fb580a3a41c9e5245d694c8e44cc3976692bf689f",
+    "width_native_px": "39ab2cda1c8d548b05e0e9f362fe0697fea693f59e5cd18c7adcb169b702fad6",
+    "width_native_px_published": "f3994809460df6c9ef2c5dfcd2c69d01a0a573cf941f123d3e63bac5ea249afc"
+   }
+  },
+  "results/india/score_parcels_seg_sam_vit_h_false_0p88_min500.csv": {
+   "kind": "csv",
+   "rows": 1983,
+   "columns": {
+    "country": "3374eb757b6dc554002bf256699f031f94c6ea32bb5126460a50ecea01bb3af2",
+    "chip": "3119c5c12138f5ddbf868a2530a1e67bef91bb9fc0301fb987687706c59dae82",
+    "parcel_id": "787b3fb54ac0b06c77b791ede2adb2916121428149bf719186217465cbf70348",
+    "full_px": "293cd1066cbe87024be54b366bdfe589fe4c028919e7c8bd7c02a4348c902851",
+    "hectares": "0347f06ae4903706a2c9cc1f50505fe9490e166cc8dca01af1a8a33bcaf859af",
+    "native_10m_px": "b39c7825a149cd6597893f81d972d181ad2d13faf4d0267294ab75aa1b7062a2",
+    "best_iou": "b7dc91b096c25a2038f7a3b41e0df76c43afe95b26edfa40d245a016f8611afb",
+    "found": "07cb8a0c2765de5917114f1ff78a5d0e6a10302ae38eac34f106ddd0dba566e1",
+    "width_native_px": "39ab2cda1c8d548b05e0e9f362fe0697fea693f59e5cd18c7adcb169b702fad6",
+    "width_native_px_published": "f3994809460df6c9ef2c5dfcd2c69d01a0a573cf941f123d3e63bac5ea249afc"
+   }
+  },
+  "results/india/score_parcels_seg_sam_vit_h_false_min500.csv": {
+   "kind": "csv",
+   "rows": 1983,
+   "columns": {
+    "country": "3374eb757b6dc554002bf256699f031f94c6ea32bb5126460a50ecea01bb3af2",
+    "chip": "3119c5c12138f5ddbf868a2530a1e67bef91bb9fc0301fb987687706c59dae82",
+    "parcel_id": "787b3fb54ac0b06c77b791ede2adb2916121428149bf719186217465cbf70348",
+    "full_px": "293cd1066cbe87024be54b366bdfe589fe4c028919e7c8bd7c02a4348c902851",
+    "hectares": "0347f06ae4903706a2c9cc1f50505fe9490e166cc8dca01af1a8a33bcaf859af",
+    "native_10m_px": "b39c7825a149cd6597893f81d972d181ad2d13faf4d0267294ab75aa1b7062a2",
+    "best_iou": "e512f544cab351a0574cdbcc1a387ef5f1ba6ec7766f7248b7bc2944b9c7a3e7",
+    "found": "cf380343f90174eed0e00b297455a501ecd15f383918541c95157cf004321419",
+    "width_native_px": "39ab2cda1c8d548b05e0e9f362fe0697fea693f59e5cd18c7adcb169b702fad6",
+    "width_native_px_published": "f3994809460df6c9ef2c5dfcd2c69d01a0a573cf941f123d3e63bac5ea249afc"
+   }
+  },
+  "results/india/score_parcels_seg_sam_vit_h_true_0p50_min500.csv": {
+   "kind": "csv",
+   "rows": 1983,
+   "columns": {
+    "country": "3374eb757b6dc554002bf256699f031f94c6ea32bb5126460a50ecea01bb3af2",
+    "chip": "3119c5c12138f5ddbf868a2530a1e67bef91bb9fc0301fb987687706c59dae82",
+    "parcel_id": "787b3fb54ac0b06c77b791ede2adb2916121428149bf719186217465cbf70348",
+    "full_px": "293cd1066cbe87024be54b366bdfe589fe4c028919e7c8bd7c02a4348c902851",
+    "hectares": "0347f06ae4903706a2c9cc1f50505fe9490e166cc8dca01af1a8a33bcaf859af",
+    "native_10m_px": "b39c7825a149cd6597893f81d972d181ad2d13faf4d0267294ab75aa1b7062a2",
+    "best_iou": "808a8452b8d78f0dc459bfec2f4131f2afa3bfc7839e0e7c849d3e32e99104a9",
+    "found": "5dc67062c37586c0ca8f11628595a2249e21f81d5caccdad972329ed3c4aeeee",
+    "width_native_px": "39ab2cda1c8d548b05e0e9f362fe0697fea693f59e5cd18c7adcb169b702fad6",
+    "width_native_px_published": "f3994809460df6c9ef2c5dfcd2c69d01a0a573cf941f123d3e63bac5ea249afc"
+   }
+  },
+  "results/india/score_parcels_seg_sam_vit_h_true_0p60_min500.csv": {
+   "kind": "csv",
+   "rows": 1983,
+   "columns": {
+    "country": "3374eb757b6dc554002bf256699f031f94c6ea32bb5126460a50ecea01bb3af2",
+    "chip": "3119c5c12138f5ddbf868a2530a1e67bef91bb9fc0301fb987687706c59dae82",
+    "parcel_id": "787b3fb54ac0b06c77b791ede2adb2916121428149bf719186217465cbf70348",
+    "full_px": "293cd1066cbe87024be54b366bdfe589fe4c028919e7c8bd7c02a4348c902851",
+    "hectares": "0347f06ae4903706a2c9cc1f50505fe9490e166cc8dca01af1a8a33bcaf859af",
+    "native_10m_px": "b39c7825a149cd6597893f81d972d181ad2d13faf4d0267294ab75aa1b7062a2",
+    "best_iou": "120326cbb2ebfe2172aaa0b3aed4aea237421747a523aafb11afbae3dbd964af",
+    "found": "e9ac6033b3bb6ca61787176b0e77f4d98a47f611cbcea75631b43af6bffb4cf6",
+    "width_native_px": "39ab2cda1c8d548b05e0e9f362fe0697fea693f59e5cd18c7adcb169b702fad6",
+    "width_native_px_published": "f3994809460df6c9ef2c5dfcd2c69d01a0a573cf941f123d3e63bac5ea249afc"
+   }
+  },
+  "results/india/score_parcels_seg_sam_vit_h_true_0p70_min500.csv": {
+   "kind": "csv",
+   "rows": 1983,
+   "columns": {
+    "country": "3374eb757b6dc554002bf256699f031f94c6ea32bb5126460a50ecea01bb3af2",
+    "chip": "3119c5c12138f5ddbf868a2530a1e67bef91bb9fc0301fb987687706c59dae82",
+    "parcel_id": "787b3fb54ac0b06c77b791ede2adb2916121428149bf719186217465cbf70348",
+    "full_px": "293cd1066cbe87024be54b366bdfe589fe4c028919e7c8bd7c02a4348c902851",
+    "hectares": "0347f06ae4903706a2c9cc1f50505fe9490e166cc8dca01af1a8a33bcaf859af",
+    "native_10m_px": "b39c7825a149cd6597893f81d972d181ad2d13faf4d0267294ab75aa1b7062a2",
+    "best_iou": "c7f19bf9bdb13762d98fa427b54aded11d9fc08957bc22b05624e9bbb3e3a5ae",
+    "found": "7702fb7af490c5690c300dca35640ae7d5a7b5364da39395074b3ef52cdde512",
+    "width_native_px": "39ab2cda1c8d548b05e0e9f362fe0697fea693f59e5cd18c7adcb169b702fad6",
+    "width_native_px_published": "f3994809460df6c9ef2c5dfcd2c69d01a0a573cf941f123d3e63bac5ea249afc"
+   }
+  },
+  "results/india/score_parcels_seg_sam_vit_h_true_0p80_min500.csv": {
+   "kind": "csv",
+   "rows": 1983,
+   "columns": {
+    "country": "3374eb757b6dc554002bf256699f031f94c6ea32bb5126460a50ecea01bb3af2",
+    "chip": "3119c5c12138f5ddbf868a2530a1e67bef91bb9fc0301fb987687706c59dae82",
+    "parcel_id": "787b3fb54ac0b06c77b791ede2adb2916121428149bf719186217465cbf70348",
+    "full_px": "293cd1066cbe87024be54b366bdfe589fe4c028919e7c8bd7c02a4348c902851",
+    "hectares": "0347f06ae4903706a2c9cc1f50505fe9490e166cc8dca01af1a8a33bcaf859af",
+    "native_10m_px": "b39c7825a149cd6597893f81d972d181ad2d13faf4d0267294ab75aa1b7062a2",
+    "best_iou": "ac8c5c405cb053a94c8a2a2272f1cbd27992f19cec510b0b0a61cd25a3b793e1",
+    "found": "7846b6e345d1ed80d346a49662df6f76ed22ad459bfdd5af4af1c32da7c4c43e",
+    "width_native_px": "39ab2cda1c8d548b05e0e9f362fe0697fea693f59e5cd18c7adcb169b702fad6",
+    "width_native_px_published": "f3994809460df6c9ef2c5dfcd2c69d01a0a573cf941f123d3e63bac5ea249afc"
+   }
+  },
+  "results/india/score_parcels_seg_sam_vit_h_true_0p88_min500.csv": {
+   "kind": "csv",
+   "rows": 1983,
+   "columns": {
+    "country": "3374eb757b6dc554002bf256699f031f94c6ea32bb5126460a50ecea01bb3af2",
+    "chip": "3119c5c12138f5ddbf868a2530a1e67bef91bb9fc0301fb987687706c59dae82",
+    "parcel_id": "787b3fb54ac0b06c77b791ede2adb2916121428149bf719186217465cbf70348",
+    "full_px": "293cd1066cbe87024be54b366bdfe589fe4c028919e7c8bd7c02a4348c902851",
+    "hectares": "0347f06ae4903706a2c9cc1f50505fe9490e166cc8dca01af1a8a33bcaf859af",
+    "native_10m_px": "b39c7825a149cd6597893f81d972d181ad2d13faf4d0267294ab75aa1b7062a2",
+    "best_iou": "a9c8d08fb32a9e49303f2f1fdc9837431cba8513eeced76366513a520861d646",
+    "found": "ea834092d49a68b276e5270fb38908f373ecfe9e8d4d9231d5561e89cab96d22",
+    "width_native_px": "39ab2cda1c8d548b05e0e9f362fe0697fea693f59e5cd18c7adcb169b702fad6",
+    "width_native_px_published": "f3994809460df6c9ef2c5dfcd2c69d01a0a573cf941f123d3e63bac5ea249afc"
+   }
+  },
+  "results/india/score_parcels_seg_watershed_0p005_min500.csv": {
+   "kind": "csv",
+   "rows": 1983,
+   "columns": {
+    "country": "3374eb757b6dc554002bf256699f031f94c6ea32bb5126460a50ecea01bb3af2",
+    "chip": "3119c5c12138f5ddbf868a2530a1e67bef91bb9fc0301fb987687706c59dae82",
+    "parcel_id": "787b3fb54ac0b06c77b791ede2adb2916121428149bf719186217465cbf70348",
+    "full_px": "293cd1066cbe87024be54b366bdfe589fe4c028919e7c8bd7c02a4348c902851",
+    "hectares": "d3dc658b5571cd92cc78f0a1f626671857772dc1883350e892aac2bfb321d45b",
+    "native_10m_px": "366734447e93aac9567abaa68fd1ca1a7d81c500b99bcb5899bd165036581109",
+    "best_iou": "4ca6aefe85db1734a843a41cef955d56dc8ba301515b33d431d277b3c8572690",
+    "found": "95733e2bd248ee7ea4aeab1aa1416081c93bd749c2271e44628c0e7a1a51b3f5",
+    "width_native_px": "39ab2cda1c8d548b05e0e9f362fe0697fea693f59e5cd18c7adcb169b702fad6"
+   }
+  },
+  "results/india/score_parcels_seg_watershed_0p01_min500.csv": {
+   "kind": "csv",
+   "rows": 1983,
+   "columns": {
+    "country": "3374eb757b6dc554002bf256699f031f94c6ea32bb5126460a50ecea01bb3af2",
+    "chip": "3119c5c12138f5ddbf868a2530a1e67bef91bb9fc0301fb987687706c59dae82",
+    "parcel_id": "787b3fb54ac0b06c77b791ede2adb2916121428149bf719186217465cbf70348",
+    "full_px": "293cd1066cbe87024be54b366bdfe589fe4c028919e7c8bd7c02a4348c902851",
+    "hectares": "d3dc658b5571cd92cc78f0a1f626671857772dc1883350e892aac2bfb321d45b",
+    "native_10m_px": "366734447e93aac9567abaa68fd1ca1a7d81c500b99bcb5899bd165036581109",
+    "best_iou": "5c6ff907c1f0c249d1b33d1652d3b20f5f1aa492aa749311be1ea2929eff46a9",
+    "found": "f906992ddf13f0b7af19e4a018570a96cdcb2a8fa75eb47676ba04115eb42184",
+    "width_native_px": "39ab2cda1c8d548b05e0e9f362fe0697fea693f59e5cd18c7adcb169b702fad6"
+   }
+  },
+  "results/india/score_parcels_seg_watershed_0p02_min500.csv": {
+   "kind": "csv",
+   "rows": 1983,
+   "columns": {
+    "country": "3374eb757b6dc554002bf256699f031f94c6ea32bb5126460a50ecea01bb3af2",
+    "chip": "3119c5c12138f5ddbf868a2530a1e67bef91bb9fc0301fb987687706c59dae82",
+    "parcel_id": "787b3fb54ac0b06c77b791ede2adb2916121428149bf719186217465cbf70348",
+    "full_px": "293cd1066cbe87024be54b366bdfe589fe4c028919e7c8bd7c02a4348c902851",
+    "hectares": "d3dc658b5571cd92cc78f0a1f626671857772dc1883350e892aac2bfb321d45b",
+    "native_10m_px": "366734447e93aac9567abaa68fd1ca1a7d81c500b99bcb5899bd165036581109",
+    "best_iou": "0feb836b18fb2c9d1559e094dce6b5489b0299c6559e277c97764eccc32fea68",
+    "found": "baba86216c7bb7aa86229659b937cc353efaf4cb56ab1d11cada8bbc9c584cbe",
+    "width_native_px": "39ab2cda1c8d548b05e0e9f362fe0697fea693f59e5cd18c7adcb169b702fad6"
+   }
+  },
+  "results/india/score_parcels_seg_watershed_0p05_min500.csv": {
+   "kind": "csv",
+   "rows": 1983,
+   "columns": {
+    "country": "3374eb757b6dc554002bf256699f031f94c6ea32bb5126460a50ecea01bb3af2",
+    "chip": "3119c5c12138f5ddbf868a2530a1e67bef91bb9fc0301fb987687706c59dae82",
+    "parcel_id": "787b3fb54ac0b06c77b791ede2adb2916121428149bf719186217465cbf70348",
+    "full_px": "293cd1066cbe87024be54b366bdfe589fe4c028919e7c8bd7c02a4348c902851",
+    "hectares": "d3dc658b5571cd92cc78f0a1f626671857772dc1883350e892aac2bfb321d45b",
+    "native_10m_px": "366734447e93aac9567abaa68fd1ca1a7d81c500b99bcb5899bd165036581109",
+    "best_iou": "8583757d6b7e0f46ea2ca5ba7e0d153e17f21c13d76fb7dcd8a6a34468826a8e",
+    "found": "927234b189ff96426000b505500ab0f44de2776540a6962dd43e1066041e6b12",
+    "width_native_px": "39ab2cda1c8d548b05e0e9f362fe0697fea693f59e5cd18c7adcb169b702fad6"
+   }
+  },
+  "results/india/score_parcels_seg_watershed_0p08_min500.csv": {
+   "kind": "csv",
+   "rows": 1983,
+   "columns": {
+    "country": "3374eb757b6dc554002bf256699f031f94c6ea32bb5126460a50ecea01bb3af2",
+    "chip": "3119c5c12138f5ddbf868a2530a1e67bef91bb9fc0301fb987687706c59dae82",
+    "parcel_id": "787b3fb54ac0b06c77b791ede2adb2916121428149bf719186217465cbf70348",
+    "full_px": "293cd1066cbe87024be54b366bdfe589fe4c028919e7c8bd7c02a4348c902851",
+    "hectares": "d3dc658b5571cd92cc78f0a1f626671857772dc1883350e892aac2bfb321d45b",
+    "native_10m_px": "366734447e93aac9567abaa68fd1ca1a7d81c500b99bcb5899bd165036581109",
+    "best_iou": "20659fda867f8cc9e249c6ff416ca5624172434e93ac9f317271e9e8ba961d68",
+    "found": "715c9f91143a65d73c0374eae86566aa846d6c06d42b0aa727c5f335713ba50c",
+    "width_native_px": "39ab2cda1c8d548b05e0e9f362fe0697fea693f59e5cd18c7adcb169b702fad6"
+   }
+  },
+  "results/india/score_parcels_seg_watershed_0p13_min500.csv": {
+   "kind": "csv",
+   "rows": 1983,
+   "columns": {
+    "country": "3374eb757b6dc554002bf256699f031f94c6ea32bb5126460a50ecea01bb3af2",
+    "chip": "3119c5c12138f5ddbf868a2530a1e67bef91bb9fc0301fb987687706c59dae82",
+    "parcel_id": "787b3fb54ac0b06c77b791ede2adb2916121428149bf719186217465cbf70348",
+    "full_px": "293cd1066cbe87024be54b366bdfe589fe4c028919e7c8bd7c02a4348c902851",
+    "hectares": "d3dc658b5571cd92cc78f0a1f626671857772dc1883350e892aac2bfb321d45b",
+    "native_10m_px": "366734447e93aac9567abaa68fd1ca1a7d81c500b99bcb5899bd165036581109",
+    "best_iou": "483b6bd1ce04b33d643765c85434a34129407ce4d4edde60069c6000afb78d27",
+    "found": "75bb9cb613333bf72f224a404d0b5bb586eeeace7eec5fbee0bd837aaaf9aa84",
+    "width_native_px": "39ab2cda1c8d548b05e0e9f362fe0697fea693f59e5cd18c7adcb169b702fad6"
+   }
+  },
+  "results/india/score_parcels_seg_watershed_0p16_min500.csv": {
+   "kind": "csv",
+   "rows": 1983,
+   "columns": {
+    "country": "3374eb757b6dc554002bf256699f031f94c6ea32bb5126460a50ecea01bb3af2",
+    "chip": "3119c5c12138f5ddbf868a2530a1e67bef91bb9fc0301fb987687706c59dae82",
+    "parcel_id": "787b3fb54ac0b06c77b791ede2adb2916121428149bf719186217465cbf70348",
+    "full_px": "293cd1066cbe87024be54b366bdfe589fe4c028919e7c8bd7c02a4348c902851",
+    "hectares": "d3dc658b5571cd92cc78f0a1f626671857772dc1883350e892aac2bfb321d45b",
+    "native_10m_px": "366734447e93aac9567abaa68fd1ca1a7d81c500b99bcb5899bd165036581109",
+    "best_iou": "98dd6c4c1b288929ddc909c1ed7f97e782280707c604a2d05c8c967fe6d588b1",
+    "found": "b210f89f689c26760e8bf9d658bd26070e7b2fe066b25c1a0842ab8f4283d24f",
+    "width_native_px": "39ab2cda1c8d548b05e0e9f362fe0697fea693f59e5cd18c7adcb169b702fad6"
+   }
+  },
+  "results/india/score_parcels_seg_watershed_0p1_min500.csv": {
+   "kind": "csv",
+   "rows": 1983,
+   "columns": {
+    "country": "3374eb757b6dc554002bf256699f031f94c6ea32bb5126460a50ecea01bb3af2",
+    "chip": "3119c5c12138f5ddbf868a2530a1e67bef91bb9fc0301fb987687706c59dae82",
+    "parcel_id": "787b3fb54ac0b06c77b791ede2adb2916121428149bf719186217465cbf70348",
+    "full_px": "293cd1066cbe87024be54b366bdfe589fe4c028919e7c8bd7c02a4348c902851",
+    "hectares": "d3dc658b5571cd92cc78f0a1f626671857772dc1883350e892aac2bfb321d45b",
+    "native_10m_px": "366734447e93aac9567abaa68fd1ca1a7d81c500b99bcb5899bd165036581109",
+    "best_iou": "b7801c815e9dd6fed04ee2b5f061b7dbd49f164d567c3ac5ab317e8979d3ba43",
+    "found": "792fc2e009b094c5dbbfff92de159378c8f629df25bff23ca1b5f0d40e29d423",
+    "width_native_px": "39ab2cda1c8d548b05e0e9f362fe0697fea693f59e5cd18c7adcb169b702fad6"
+   }
+  },
+  "results/india/score_parcels_seg_watershed_0p2_min500.csv": {
+   "kind": "csv",
+   "rows": 1983,
+   "columns": {
+    "country": "3374eb757b6dc554002bf256699f031f94c6ea32bb5126460a50ecea01bb3af2",
+    "chip": "3119c5c12138f5ddbf868a2530a1e67bef91bb9fc0301fb987687706c59dae82",
+    "parcel_id": "787b3fb54ac0b06c77b791ede2adb2916121428149bf719186217465cbf70348",
+    "full_px": "293cd1066cbe87024be54b366bdfe589fe4c028919e7c8bd7c02a4348c902851",
+    "hectares": "d3dc658b5571cd92cc78f0a1f626671857772dc1883350e892aac2bfb321d45b",
+    "native_10m_px": "366734447e93aac9567abaa68fd1ca1a7d81c500b99bcb5899bd165036581109",
+    "best_iou": "ff902ca49f4082823ceca97914e3a2ae944a3335e1af3860b336562ce49711f1",
+    "found": "8a47510c2a4d39882b6a49aae0f0990dffa46cdc69a9d0beb900cfeeb7adede1",
+    "width_native_px": "39ab2cda1c8d548b05e0e9f362fe0697fea693f59e5cd18c7adcb169b702fad6"
+   }
+  },
+  "results/india/score_parcels_seg_watershed_0p3_min500.csv": {
+   "kind": "csv",
+   "rows": 1983,
+   "columns": {
+    "country": "3374eb757b6dc554002bf256699f031f94c6ea32bb5126460a50ecea01bb3af2",
+    "chip": "3119c5c12138f5ddbf868a2530a1e67bef91bb9fc0301fb987687706c59dae82",
+    "parcel_id": "787b3fb54ac0b06c77b791ede2adb2916121428149bf719186217465cbf70348",
+    "full_px": "293cd1066cbe87024be54b366bdfe589fe4c028919e7c8bd7c02a4348c902851",
+    "hectares": "d3dc658b5571cd92cc78f0a1f626671857772dc1883350e892aac2bfb321d45b",
+    "native_10m_px": "366734447e93aac9567abaa68fd1ca1a7d81c500b99bcb5899bd165036581109",
+    "best_iou": "db853ba17b74fd175ed7a67936d817ecdbc15c25a8798687dc234d539458d103",
+    "found": "6eca1893a1006b79d01a61f17d5a0ddf487192405a444870f51e11830ac060e5",
+    "width_native_px": "39ab2cda1c8d548b05e0e9f362fe0697fea693f59e5cd18c7adcb169b702fad6"
+   }
+  },
+  "results/india/score_parcels_seg_watershed_min500.csv": {
+   "kind": "csv",
+   "rows": 1983,
+   "columns": {
+    "country": "3374eb757b6dc554002bf256699f031f94c6ea32bb5126460a50ecea01bb3af2",
+    "chip": "3119c5c12138f5ddbf868a2530a1e67bef91bb9fc0301fb987687706c59dae82",
+    "parcel_id": "787b3fb54ac0b06c77b791ede2adb2916121428149bf719186217465cbf70348",
+    "full_px": "293cd1066cbe87024be54b366bdfe589fe4c028919e7c8bd7c02a4348c902851",
+    "hectares": "d3dc658b5571cd92cc78f0a1f626671857772dc1883350e892aac2bfb321d45b",
+    "native_10m_px": "366734447e93aac9567abaa68fd1ca1a7d81c500b99bcb5899bd165036581109",
+    "best_iou": "0feb836b18fb2c9d1559e094dce6b5489b0299c6559e277c97764eccc32fea68",
+    "found": "baba86216c7bb7aa86229659b937cc353efaf4cb56ab1d11cada8bbc9c584cbe",
+    "width_native_px": "39ab2cda1c8d548b05e0e9f362fe0697fea693f59e5cd18c7adcb169b702fad6"
+   }
+  },
+  "results/india/scorer_reconciliation.csv": {
+   "kind": "csv",
+   "rows": 4,
+   "columns": {
+    "combination": "132dae2a8409ff1bca5c714bbb914fc2bd1288ae9695e10aea7538854e8b1966",
+    "found": "744e0e2c0f36fcec944b55f081d2a46d717c4a4eac04bbf296cc673678409cc0",
+    "parcels": "b1d4fecd38ef5f6fc0f6df3cb60d35cc1c1c0d19479b1145276fe2524a42d063",
+    "pooled": "3a2f09a5587a268bf3b129165ed768fbf59675d3d4cdd44f9cf9f1d54ffe5a79",
+    "per_chip": "9155d4e5039627ace5c7e6e3985c12efa62405dad6d28d21ed663a0ade5a780e"
+   }
+  },
+  "results/india/segmenter_comparison_min500.csv": {
+   "kind": "csv",
+   "rows": 19,
+   "columns": {
+    "method": "bf9df21d3d36d6d1af199d0196252a5789dbd633640a3584dfe0260c418a0349",
+    "setting": "d9483af29823e6cf49d6fe3c9d2ebb4323390ac9ffee4a71d13edb03395e67d0",
+    "parcels": "931930b5678fedc993789bcc6ce523ea428bc56cbd86a5320da829c505aabacb",
+    "objects_per_chip": "451d1888e200247298186e9490b4aed19d484b85753143121387ba71c97adc69",
+    "median_iou": "d8e9c91d0f7ed4f1972eda7309f4f2426686308bcb936a361b11d9c13d6c6894",
+    "recall": "254ef985da3bc333a0f007616e633cd8bb1364d2a5502fd4b8218c1e7387d50f",
+    "null_recall": "43105b461b32be875319a05ce9d47b7c98664b5419d7a8508c499955c7b6d788",
+    "gap": "8f791e97b5eaa49b87d2a1b09fd78f4f7221140e1968d9a4089855935a9de7f7",
+    "recall_at_ftw_budget": "8424ec48f091748ccd02aa17145ef7447f521074a26b2c3a034c5ec69f471634"
+   }
+  },
+  "results/saturation_3class_full.csv": {
+   "kind": "csv",
+   "rows": 2,
+   "columns": {
+    "country": "6ec75f56353e4a08a51b56648fc7e70b8a16c2ac6575d473f26843b5980aaf19",
+    "chips": "21fb3f11f93a45595aff8fdd2d59b619cacb6ca6f751db216ccfa14c09d877aa",
+    "median_boundary_share": "65136502c9f22ab2506a808f78c61b8ff21fa52e2f035a22a454320c3f849c19",
+    "median_field_share": "0062edb61491291766586870e3d2af023fd62451279f5b7317f8e69728ca7acc",
+    "chips_over_half_boundary": "7a65af947cead06cd18b10f9d3417923067805d9ab621c99972f7ecc9ac2cabc",
+    "chips_no_field_at_all": "5da908076e75b60fca3c70c1ce118f627196d16446c40310d8823a8e80064e50"
+   }
+  },
+  "results/score_summary_2class.csv": {
+   "kind": "csv",
+   "rows": 2,
+   "columns": {
+    "country": "6ec75f56353e4a08a51b56648fc7e70b8a16c2ac6575d473f26843b5980aaf19",
+    "classes": "8d58f634a5b5051db5ee0bb9d005779b382be410e8ebd5144590f2f0429f9220",
+    "tag": "c6a69bcee92fdf34eb007f01fb8d0b23a62dfe66332406abccd3f34df15ba2cb",
+    "chips": "21fb3f11f93a45595aff8fdd2d59b619cacb6ca6f751db216ccfa14c09d877aa",
+    "parcels": "00a04fea6defa27a88914a098b15cae223044525ca4ad83ce06a5e0d9fe5f7b3",
+    "complete_labels": "82c1315e6c757f33c4a77ca58b2a184f5a88614470c05ec77f3d28918db6b8ae",
+    "grid_pixel_m": "3d60cc78cb68814d50c07eaf19a0ee1ae1a0d031de9d404c4399b3bd4a209760",
+    "scored_pixels": "c3ac091d76e3847cc262d8163ca81ea33ca73451c03ca5bde2d50eb2791906a2",
+    "pixel_recall": "6b0642a981319e36c8877f0f48e8ced1c9fa21c1b0172f83231ff4d99dbc88e5",
+    "pixel_precision": "bc163c5f5ac33cd42413b7615e4f194386c8a26989030c864435953a6bb3834c",
+    "pixel_iou": "a436aa04471cd03a337b90f8716c7a92a4d098e0917576d696b67105ce5292fd",
+    "object_recall": "31a609b59e13e87514545a43fa51500680b2d6ed54a2a5d3d385d41585c26b77",
+    "object_precision": "6a8dfe3229f26ec92d3412d08c6a58f6baa24258b3fe49224c40f1b3c6205887",
+    "median_best_iou": "d176fa32abf327c28e2001fc6b2684362da4e94f01d1674d87e624b163eda285",
+    "iou_threshold": "1145e448ac954f4073d290b5b3295b06f447fe04ec959c4f2724683a6cf14cde",
+    "predicted_objects": "b0ee417aee73f315e6ab6da4a51e368b758e452fc7dc023285becab9b0cc5604"
+   }
+  },
+  "results/score_summary_3class.csv": {
+   "kind": "csv",
+   "rows": 2,
+   "columns": {
+    "country": "6ec75f56353e4a08a51b56648fc7e70b8a16c2ac6575d473f26843b5980aaf19",
+    "classes": "9422b95a5e9325e99b4848aa8d911c6ddf0745dea8d00a54dc8915fa23de5d2f",
+    "tag": "c6a69bcee92fdf34eb007f01fb8d0b23a62dfe66332406abccd3f34df15ba2cb",
+    "chips": "21fb3f11f93a45595aff8fdd2d59b619cacb6ca6f751db216ccfa14c09d877aa",
+    "parcels": "00a04fea6defa27a88914a098b15cae223044525ca4ad83ce06a5e0d9fe5f7b3",
+    "complete_labels": "82c1315e6c757f33c4a77ca58b2a184f5a88614470c05ec77f3d28918db6b8ae",
+    "grid_pixel_m": "3d60cc78cb68814d50c07eaf19a0ee1ae1a0d031de9d404c4399b3bd4a209760",
+    "scored_pixels": "c3ac091d76e3847cc262d8163ca81ea33ca73451c03ca5bde2d50eb2791906a2",
+    "pixel_recall": "2b9270ecd43045dc842966ff37a879eeddc00e55719a46690d3ddb95f06b0240",
+    "pixel_precision": "fd066ff331695319cd6ca9ee4d5af01e10ff523f0c748df33bce95a10a516acd",
+    "pixel_iou": "b19a7a3f383148184f34e599417d7d29295780835a678721b3cc64f3baf93eb9",
+    "object_recall": "35bcf9b1ac30a6dc0a0aac541d672ae3909ff70b770f823cd3d037e15707a5a9",
+    "object_precision": "c137342d94d31a0cb8c4347cd273b48b88c97783a2d680104473b1de5113dfc4",
+    "median_best_iou": "fafd583532c84e6697fdb2b6d49a06c6d4dd54df08f8cf8caade8328fab070e2",
+    "iou_threshold": "1145e448ac954f4073d290b5b3295b06f447fe04ec959c4f2724683a6cf14cde",
+    "predicted_objects": "12bc0b65a552c0a65807772e26acd5b3b934e6a2f7be22773547bb24c51d1fca"
+   }
+  },
+  "results/score_summary_3class_full.csv": {
+   "kind": "csv",
+   "rows": 1,
+   "columns": {
+    "country": "f82afec8aa22575ea4b2872c2094e7769ee480ac25c9e95debc0f74f88c12c05",
+    "classes": "1121cfccd5913f0a63fec40a6ffd44ea64f9dc135c66634ba001d10bcf4302a2",
+    "tag": "792eda743ad5cd85c76a6544174ba6a708e6e525517479a4832cea1f2b95a041",
+    "chips": "c942bc47f4c98e6bda9666c229c1dced88eec8ee73383d7c75de3dc21a3941f4",
+    "parcels": "00b978a77ce2390db147afb804c1f4dfe5e605e216f37fa0b95d93172be5df53",
+    "complete_labels": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865",
+    "grid_pixel_m": "0e8f61e84d8617ad94617b929c7060b3cb805239420ab55ebb363982c8790a2d",
+    "scored_pixels": "7ab5204a4f0524d6354f5dfdaa598618f0eb06ec00e173cdafb006c8d2bf8a1a",
+    "pixel_recall": "98e3eff29a8ca4573fc47fe5fed05e619e8877dcb10a61787542e6d3b9343742",
+    "pixel_precision": "0827710482de95d2f5b0edaa7399f6f43863d218a82d10999e97655c90395091",
+    "pixel_iou": "41be7c37c2e51701596ea583c64061416534ea2c14f9b6aa5f641996c3070a3e",
+    "object_recall": "1cec176abd1a732966d2c80ec3aa292e3e137b070fcf66b134de2360703b0683",
+    "object_precision": "900e4dc1fac3c90332e7a4d2f86a2b6627a932f3028f540abfa7c419b23bad25",
+    "median_best_iou": "95d020e1024da4b79092a4cd784eb0e765f045e43c0ca38d1430cf227994358f",
+    "iou_threshold": "8d5c1b5a87c51f970807fc0c2057b3ab3aaf11638ab667dc5956edc8f5bcf138",
+    "predicted_objects": "e9a46ef37f9b26e53a170fcd7e061ede6375c6523a1340d4af314e0d1fd9acdf"
+   }
+  },
+  "results/slovenia/chips_by_district.csv": {
+   "kind": "csv",
+   "rows": 66,
+   "columns": {
+    "district": "a5176ccc9403373d604b72b55f07a3e0ebc9565db67f0d79d2e2b9322577c187",
+    "state": "870b3cb7d7f795450982018bb86510f33f8f63125a96fe668059825cdbb52cc5",
+    "test": "28fc1a68d42ce2f3494ee23a0ecf145b7bb4e1c880acf3e53299f764b6b5423a",
+    "train": "73a6d24e87e7272589039ab430bdcd5749521269696e805c50aa85e1ba0a1522",
+    "val": "83c16ea1b0e65a737e3b01fd163e1e682be014d2802bf24e0f1e66dde32441d1",
+    "total": "c3d2206744cd75ccd239d9aefa775b26551cb4764bc26d0e5a04cd5ad0ee1fa7"
+   }
+  },
+  "results/slovenia/field_sizes.csv": {
+   "kind": "csv",
+   "rows": 69435,
+   "columns": {
+    "chip": "878f91992f6e3a6b64e735c878c59e110267b1efc1f5d83b0a7591a96b75a685",
+    "parcel_id": "cc8129e61856e5091d236c484b5645d74216c27aa1ba22f8762796865ab3b542",
+    "interior_px": "bb33a21d913f4c509bb62ed25413156b7b922651c7c8bcf234c8d626f8daf2e6",
+    "full_px": "8cc03197ee992d6158150f2a1fc987861a7d3ac233d4b5f8306218ab1bf685f7",
+    "interior_ha": "e3adac392d7f7553b25be08d115800e530b23b33c984d13c7367a23568744de5",
+    "full_ha": "27ea9830cdcc353cdfde6cdd5bc215eb56a0011461f461610eaa89ac46f9b5a9",
+    "full_native_px": "bef1e791e92c4b819890f1b94895b2a571777ea219608802dc3fdf2cf5ba6389",
+    "bbox_h": "ce81b3fc91a725b475cc7d7275c8c9be980d385a3a9ea0ced803d5a0595fab4a",
+    "bbox_w": "b7532e4e669d7439e3d87f305e6e3057bfab1a11302276e1f9dcce37b4c6b056",
+    "row_min": "821e4b5b66deb6159439135c521c7062b281edeeea5a80b89bc317189a8021dc",
+    "col_min": "ceb4914da1be0a72233493984776998a2584cfd92cdea7a7679349fae1924919",
+    "touches_edge": "31c3c6c1ffc05344d79fef8338ce1e80b5d39b2aef373d681118fe39308ce23f"
+   }
+  },
+  "results/slovenia/holdout_selection.csv": {
+   "kind": "csv",
+   "rows": 4,
+   "columns": {
+    "country": "bdcdef2c053c044eb15ab8da5c3111d74e46a6603b62b6f745e73647ef9e4cde",
+    "method": "6afb7ce52fb7c633fcf649bf9b50ddfab0ef25e51259662f1d9a9a48e015d900",
+    "published_setting": "9142ab533573722aea8892b237d0c02960ee6c9dff38eb9fa2118b5a1f466316",
+    "published_recall": "0c2d635433c93940c75a3a10bb73858db02e65a1e5246059d28640a78c58905c",
+    "heldout_recall_median": "b49045ebbba7ee0a5e6934291a50dbf2adbd2bc0236b1c4c56eaa58a0c148f74",
+    "optimism": "d1d3873e9e2ad507c809abbbbe689ae8565ddb351fc99b701f5eb2e8ea831807",
+    "modal_setting": "9142ab533573722aea8892b237d0c02960ee6c9dff38eb9fa2118b5a1f466316",
+    "setting_stability": "9319ec68b1786a0051648ce0c2d8edf0db4f6078402403fa05aaca4fd10b9c08",
+    "splits": "07b830a787b2582d1c4b395a4a1c843ffd9503973f1e9c55fc6e68303572741c"
+   }
+  },
+  "results/slovenia/inference_manifest.csv": {
+   "kind": "csv",
+   "rows": 228,
+   "columns": {
+    "chip": "1d6e28c6d7e4a3b2d4b13eb1ef5567b9bb211f327f28bd7255b139af5ee6236b",
+    "pred_field_px": "1e8c2a5397c0f70c483049f72b44b6ab0664cc94ca57b23001f9a44ffa1bfb06",
+    "pred_boundary_px": "16335172584d06a417cf662cabea400d3d7554a83a34bd2d34c2bcb2f4f404e1",
+    "seconds": "c168c266b46f00e7108b109fa86b43e70fb4c7a7c263df51ca2182d600100c76"
+   }
+  },
+  "results/slovenia/inference_manifest_3class_full.csv": {
+   "kind": "csv",
+   "rows": 228,
+   "columns": {
+    "chip": "1d6e28c6d7e4a3b2d4b13eb1ef5567b9bb211f327f28bd7255b139af5ee6236b",
+    "pred_field_px": "2e9534a50347d58e0194775f80385078987797c75ff6e1bc3e29d664f6f26be1",
+    "pred_boundary_px": "d1e8d062f3f453d93497dfde3df37251cc4b26622d4a59913752e3b5a1737d9c",
+    "seconds": "4a894d1109dcf9cda6dc5d603ca69a63b0813c02915eed9ed15fcd1d5dfdbc6a"
+   }
+  },
+  "results/slovenia/interpolation_check.csv": {
+   "kind": "csv",
+   "rows": 9,
+   "columns": {
+    "quantity": "579fe78de989c09f05b0f76c227249953b249019f9caf4327590b3af16f278e0",
+    "value": "3ed71a7e26cd0c3aeabfc89ac8d418d436146eb43adacaa5171a0862b8aed99d"
+   }
+  },
+  "results/slovenia/label_coverage.csv": {
+   "kind": "csv",
+   "rows": 2177,
+   "columns": {
+    "chip": "5fde76b8dbbf7423c3ac04353ca488dc7ec4ce22d5e51cb80ad33f4c779492eb",
+    "pixels": "784f12558f894ed291b9706312fd9451a3233603f73984ad9f11213ffa0f8843",
+    "interior_px": "7ec471f28396fa9eac5b420543ffef8410a4ed991f01a05cb7cd8fd91abba3b5",
+    "boundary_px": "34520f16bde4bcd56fbc430f6719444ed5509cd47a48b009e194a1ee0e7461e1",
+    "background_px": "adaf907040ec93ff6a91f31933046e0e32ecbf6e4d91217ffc58255e43f47fb8",
+    "unlabelled_px": "98478ff620fc317dae6a43f5f2ba69c66727a72960a3a5d1ac3e5323a1aba9a0",
+    "n_parcels": "a3a49155fbf6d1b9c5a982a0e628de389127f482ad7d19ec6ed63d421af361dd"
+   }
+  },
+  "results/slovenia/label_registration.csv": {
+   "kind": "csv",
+   "rows": 6823,
+   "columns": {
+    "country": "eb2cdc761ff8f172c2cd7ec80f24d1f80b34f1e468e6b4811103dc4aa8c4c235",
+    "chip": "2b636adffd76b403a528ce7597efc61c8b7288fe072608840bf9f6d330380e37",
+    "parcel_id": "54cd482d4abc175e542c3540b0a338f9daf942d50cb23c66dd5593bf4e100c66",
+    "px_x_m": "9bec94ea0256e613149592ea53085391705b6b6b6421f88455bf0da9807252fe",
+    "px_y_m": "3cd32aac8d1c39896e77e0b791ae629492f4f9099678d360111049d34cdeae28",
+    "width_native_px": "474fc0a254c3049b3c01da91597e1ee259a56c3fa4d3f9c49533927385752118",
+    "offset_m": "68ea8167bd45a5a3ed26a5ac70bfe4f77fff1b82a57146b959998e1a577b0b82",
+    "drawn_contrast": "73dc7e0441b1a97f9a316e40349ad394c47dc7fc12e6600cb9364b6528bef1ef",
+    "peak_contrast": "16afdedac80fd4da69119ce59e3486c433e699133f9561e51ddd66babd222436",
+    "gain": "c25ab8649cbb60d32cf75e5b45f6fb962063331b13a2fc94fc40439e1e3a6a72",
+    "interior_contrast": "34a08c44b20acadff06d7cc9a79ebe9890426b937c3454dffeb670b97e22cd64",
+    "edge_over_interior": "86b7115863eec6c6e6ad35ec8e0465c95939fd9245d28183acabc28eda71681d",
+    "ring_-18m": "56b479292fbfd46d479b720448f7441bff3cb0f5c199b8a01c5c8dcb2111fe0f",
+    "ring_-12m": "fbad7541e2ec2a420ba88ec68c3c1bfa9fc1935df5803e8ff6226a7dc9ec2e46",
+    "ring_-6m": "a683ab52d6b97e1c8e412b45c46398083c5eda0a7c539a3516dc164219894619",
+    "ring_+0m": "73dc7e0441b1a97f9a316e40349ad394c47dc7fc12e6600cb9364b6528bef1ef",
+    "ring_+6m": "c50c86ec03f19b5aedd0468a1fef9cec3fcedd5ae60ac494799229a64f569a2e",
+    "ring_+12m": "a8d12229d9bbbda2f467657607493c331359f8c831938913435c094790c5d6d7",
+    "ring_+18m": "d52e191524c731416392133628dccf17a49623c1a48c671f9656a76fd2e80fc5",
+    "null_offset_m": "3d7d47e2ec0c537b37dccbe62594e1c81c8441da82860472dc217519eb5cf5b4",
+    "null_gain": "856f5b4a2084c3db17380727a559d2abfd0d977d5a89ddcbe1fa4e3f5e1dfd6c"
+   }
+  },
+  "results/slovenia/parcel_contrast.csv": {
+   "kind": "csv",
+   "rows": 6831,
+   "columns": {
+    "country": "77ab88420706138673d1acbac1052fae982e4a91fd3677c283ebce985943b3d6",
+    "chip": "c6808718a8f6ae73655cff3b1c14d898e273194d33b0ba49a016d071e98d5e85",
+    "parcel_id": "399217032dd48ae87fb39025da79fa8c1bcfb16f3479b2f0debe4e836e54edb5",
+    "width_native_px": "cdbd93a13cabe7eb4bfd5c7af910b5daa15c957195e7466952f9c866b1386cad",
+    "contrast": "3354a23ecec01a8a3e33d5268fdb6c40232a14f9527b08e5e415b596caa7b48a",
+    "width_native_px_published": "2f887dbcdc74d3025ac10c6255c92d34ac00b91ae646f532bb1a9437cc2537ef",
+    "contrast_measure": "4d021be0acff5b1c0b20113a208f72c6e6bba11baaa83b127f12c93298bac8ce",
+    "gradient_build": "85cd18b85993923f7a41c078c3a52abfa9da3bcc106ccb08a99a309e02230f8f"
+   }
+  },
+  "results/slovenia/parcel_width_3class_full.csv": {
+   "kind": "csv",
+   "rows": 6831,
+   "columns": {
+    "country": "77ab88420706138673d1acbac1052fae982e4a91fd3677c283ebce985943b3d6",
+    "chip": "c6808718a8f6ae73655cff3b1c14d898e273194d33b0ba49a016d071e98d5e85",
+    "parcel_id": "399217032dd48ae87fb39025da79fa8c1bcfb16f3479b2f0debe4e836e54edb5",
+    "full_px": "d3ba00c956b0f0121ee06726670d63f4acfa315fc8ce0f567844fba06dee8acf",
+    "hectares": "fca510478f91be2c80a8a36542bac8d6dbdfef11c529c5ffff3a00ebf0a5c610",
+    "native_10m_px": "3af15b09f1b0dedadddeaa6c089e680852828af3b9a7ecc983d566862d3230f8",
+    "best_iou": "2bcc9563cf5ae7cc6a451bb3cc0a883eeaa26201a048aaad4caf25284095c1d2",
+    "found": "f2d6088dbe1e778ac4ca3347468cc44f067c7371477fd89e25c336bdc9480e73",
+    "width_native_px": "cdbd93a13cabe7eb4bfd5c7af910b5daa15c957195e7466952f9c866b1386cad",
+    "width_native_px_published": "2f887dbcdc74d3025ac10c6255c92d34ac00b91ae646f532bb1a9437cc2537ef"
+   }
+  },
+  "results/slovenia/parcel_width_ground.csv": {
+   "kind": "csv",
+   "rows": 6831,
+   "columns": {
+    "country": "77ab88420706138673d1acbac1052fae982e4a91fd3677c283ebce985943b3d6",
+    "chip": "c6808718a8f6ae73655cff3b1c14d898e273194d33b0ba49a016d071e98d5e85",
+    "parcel_id": "399217032dd48ae87fb39025da79fa8c1bcfb16f3479b2f0debe4e836e54edb5",
+    "px_x_m": "394d438b556f9f93e6858292aaf3c69292c5d7a2b2f68112b74ee2f8a696e7d8",
+    "px_y_m": "6614a6024fbd962e1a1a034c6c6abf1a5aaf5eeb0395dba68f753a0888fdeb67",
+    "width_published_m": "5a0652af46cc0b22532d3819fb3dd62f1deae771d8f553894374d0c8551880ef",
+    "width_ground_m": "efbf38d6a938689221d2e7aa1ce40db209e2f337401f5dda6a72cabb22b6f7c1",
+    "ratio": "9c21ef7a87d5913717e38d6e0c53b40d2922b437e248a64d4bc3eb7cd1e22974"
+   }
+  },
+  "results/slovenia/parcel_width_seg_felzenszwalb_100_min500.csv": {
+   "kind": "csv",
+   "rows": 6831,
+   "columns": {
+    "country": "77ab88420706138673d1acbac1052fae982e4a91fd3677c283ebce985943b3d6",
+    "chip": "c6808718a8f6ae73655cff3b1c14d898e273194d33b0ba49a016d071e98d5e85",
+    "parcel_id": "399217032dd48ae87fb39025da79fa8c1bcfb16f3479b2f0debe4e836e54edb5",
+    "full_px": "d3ba00c956b0f0121ee06726670d63f4acfa315fc8ce0f567844fba06dee8acf",
+    "hectares": "cca67cb0ea183b160b83367597a5a009b3e47fbfe68bb51b5b5adf27c58de930",
+    "native_10m_px": "630d6b64ec1b4f15cb162d6ec64354e85614abdf85cb0636eac6f99c5ba9d584",
+    "best_iou": "ba1f7bed2ad1e8f8f734df2c24fe7385acc51fa6615e4a89c24b910a91330b2e",
+    "found": "efc1514a48360e591ab23515152f6137d0b4c85875f1cef05f33732c12a14418",
+    "width_native_px": "cdbd93a13cabe7eb4bfd5c7af910b5daa15c957195e7466952f9c866b1386cad"
+   }
+  },
+  "results/slovenia/parcel_width_seg_felzenszwalb_150_min500.csv": {
+   "kind": "csv",
+   "rows": 6831,
+   "columns": {
+    "country": "77ab88420706138673d1acbac1052fae982e4a91fd3677c283ebce985943b3d6",
+    "chip": "c6808718a8f6ae73655cff3b1c14d898e273194d33b0ba49a016d071e98d5e85",
+    "parcel_id": "399217032dd48ae87fb39025da79fa8c1bcfb16f3479b2f0debe4e836e54edb5",
+    "full_px": "d3ba00c956b0f0121ee06726670d63f4acfa315fc8ce0f567844fba06dee8acf",
+    "hectares": "cca67cb0ea183b160b83367597a5a009b3e47fbfe68bb51b5b5adf27c58de930",
+    "native_10m_px": "630d6b64ec1b4f15cb162d6ec64354e85614abdf85cb0636eac6f99c5ba9d584",
+    "best_iou": "defa29a70178e509cdbda50b98594607db109f719e959d903ec174773b5361f2",
+    "found": "85c6c9acc8638bffd81fff4aa2e1445e91cafff1998f0608128c9c68a05bd203",
+    "width_native_px": "cdbd93a13cabe7eb4bfd5c7af910b5daa15c957195e7466952f9c866b1386cad"
+   }
+  },
+  "results/slovenia/parcel_width_seg_felzenszwalb_200_min500.csv": {
+   "kind": "csv",
+   "rows": 6831,
+   "columns": {
+    "country": "77ab88420706138673d1acbac1052fae982e4a91fd3677c283ebce985943b3d6",
+    "chip": "c6808718a8f6ae73655cff3b1c14d898e273194d33b0ba49a016d071e98d5e85",
+    "parcel_id": "399217032dd48ae87fb39025da79fa8c1bcfb16f3479b2f0debe4e836e54edb5",
+    "full_px": "d3ba00c956b0f0121ee06726670d63f4acfa315fc8ce0f567844fba06dee8acf",
+    "hectares": "cca67cb0ea183b160b83367597a5a009b3e47fbfe68bb51b5b5adf27c58de930",
+    "native_10m_px": "630d6b64ec1b4f15cb162d6ec64354e85614abdf85cb0636eac6f99c5ba9d584",
+    "best_iou": "c553459a67187d8ba74addd5c695f15a9d90d041d091f29299260d922f05c140",
+    "found": "d2c40374dd4890ea2e6686f7b9f7550c98d68be7fecccc2cf543fa04bc9d2d5c",
+    "width_native_px": "cdbd93a13cabe7eb4bfd5c7af910b5daa15c957195e7466952f9c866b1386cad"
+   }
+  },
+  "results/slovenia/parcel_width_seg_felzenszwalb_25_min500.csv": {
+   "kind": "csv",
+   "rows": 6831,
+   "columns": {
+    "country": "77ab88420706138673d1acbac1052fae982e4a91fd3677c283ebce985943b3d6",
+    "chip": "c6808718a8f6ae73655cff3b1c14d898e273194d33b0ba49a016d071e98d5e85",
+    "parcel_id": "399217032dd48ae87fb39025da79fa8c1bcfb16f3479b2f0debe4e836e54edb5",
+    "full_px": "d3ba00c956b0f0121ee06726670d63f4acfa315fc8ce0f567844fba06dee8acf",
+    "hectares": "cca67cb0ea183b160b83367597a5a009b3e47fbfe68bb51b5b5adf27c58de930",
+    "native_10m_px": "630d6b64ec1b4f15cb162d6ec64354e85614abdf85cb0636eac6f99c5ba9d584",
+    "best_iou": "6b322ed0833e29545f296d64947df8757005975334e7d9dfc54eef98dd69ce06",
+    "found": "3b31e91c679984e5265acaf8da554a1100c6dd2a53aba4a26ac4c23dc5e5c0e2",
+    "width_native_px": "cdbd93a13cabe7eb4bfd5c7af910b5daa15c957195e7466952f9c866b1386cad"
+   }
+  },
+  "results/slovenia/parcel_width_seg_felzenszwalb_300_min500.csv": {
+   "kind": "csv",
+   "rows": 6831,
+   "columns": {
+    "country": "77ab88420706138673d1acbac1052fae982e4a91fd3677c283ebce985943b3d6",
+    "chip": "c6808718a8f6ae73655cff3b1c14d898e273194d33b0ba49a016d071e98d5e85",
+    "parcel_id": "399217032dd48ae87fb39025da79fa8c1bcfb16f3479b2f0debe4e836e54edb5",
+    "full_px": "d3ba00c956b0f0121ee06726670d63f4acfa315fc8ce0f567844fba06dee8acf",
+    "hectares": "cca67cb0ea183b160b83367597a5a009b3e47fbfe68bb51b5b5adf27c58de930",
+    "native_10m_px": "630d6b64ec1b4f15cb162d6ec64354e85614abdf85cb0636eac6f99c5ba9d584",
+    "best_iou": "03c098075df0a91015f0837cf37461a7bd490ec8903c31f2db13ff477d9dd3f1",
+    "found": "1668c023e4147ccd39918ccb8d8d55ba7b8dfae53eb03efd46b0551b75be3adb",
+    "width_native_px": "cdbd93a13cabe7eb4bfd5c7af910b5daa15c957195e7466952f9c866b1386cad"
+   }
+  },
+  "results/slovenia/parcel_width_seg_felzenszwalb_400_min500.csv": {
+   "kind": "csv",
+   "rows": 6831,
+   "columns": {
+    "country": "77ab88420706138673d1acbac1052fae982e4a91fd3677c283ebce985943b3d6",
+    "chip": "c6808718a8f6ae73655cff3b1c14d898e273194d33b0ba49a016d071e98d5e85",
+    "parcel_id": "399217032dd48ae87fb39025da79fa8c1bcfb16f3479b2f0debe4e836e54edb5",
+    "full_px": "d3ba00c956b0f0121ee06726670d63f4acfa315fc8ce0f567844fba06dee8acf",
+    "hectares": "cca67cb0ea183b160b83367597a5a009b3e47fbfe68bb51b5b5adf27c58de930",
+    "native_10m_px": "630d6b64ec1b4f15cb162d6ec64354e85614abdf85cb0636eac6f99c5ba9d584",
+    "best_iou": "64dc906995b78b96e1b1465a8e0de0cb671417f13721cb5c82027a14b72e7c16",
+    "found": "0130ae10a6039a70523cc70b456c55e67775d7ed99e210a8294854d81eb43192",
+    "width_native_px": "cdbd93a13cabe7eb4bfd5c7af910b5daa15c957195e7466952f9c866b1386cad"
+   }
+  },
+  "results/slovenia/parcel_width_seg_felzenszwalb_50_min500.csv": {
+   "kind": "csv",
+   "rows": 6831,
+   "columns": {
+    "country": "77ab88420706138673d1acbac1052fae982e4a91fd3677c283ebce985943b3d6",
+    "chip": "c6808718a8f6ae73655cff3b1c14d898e273194d33b0ba49a016d071e98d5e85",
+    "parcel_id": "399217032dd48ae87fb39025da79fa8c1bcfb16f3479b2f0debe4e836e54edb5",
+    "full_px": "d3ba00c956b0f0121ee06726670d63f4acfa315fc8ce0f567844fba06dee8acf",
+    "hectares": "cca67cb0ea183b160b83367597a5a009b3e47fbfe68bb51b5b5adf27c58de930",
+    "native_10m_px": "630d6b64ec1b4f15cb162d6ec64354e85614abdf85cb0636eac6f99c5ba9d584",
+    "best_iou": "653db8ba2eb9f955c54654c666488b6dbfff9707ca7f899236ea42dc42618d33",
+    "found": "54a90f0b5cff3e453b7077b48edaad648c45c8be4ea654fd3b2cf2437ebf5bb8",
+    "width_native_px": "cdbd93a13cabe7eb4bfd5c7af910b5daa15c957195e7466952f9c866b1386cad"
+   }
+  },
+  "results/slovenia/parcel_width_seg_felzenszwalb_800_min500.csv": {
+   "kind": "csv",
+   "rows": 6831,
+   "columns": {
+    "country": "77ab88420706138673d1acbac1052fae982e4a91fd3677c283ebce985943b3d6",
+    "chip": "c6808718a8f6ae73655cff3b1c14d898e273194d33b0ba49a016d071e98d5e85",
+    "parcel_id": "399217032dd48ae87fb39025da79fa8c1bcfb16f3479b2f0debe4e836e54edb5",
+    "full_px": "d3ba00c956b0f0121ee06726670d63f4acfa315fc8ce0f567844fba06dee8acf",
+    "hectares": "cca67cb0ea183b160b83367597a5a009b3e47fbfe68bb51b5b5adf27c58de930",
+    "native_10m_px": "630d6b64ec1b4f15cb162d6ec64354e85614abdf85cb0636eac6f99c5ba9d584",
+    "best_iou": "c1ee2c840d498c506b7803068a1b563192bfd6a4e8a72a3fa1ef5e1d2cb0f1aa",
+    "found": "79aaeaf60bbed7d107f4de702e671334dbe394f61a05843590e95651bef5db30",
+    "width_native_px": "cdbd93a13cabe7eb4bfd5c7af910b5daa15c957195e7466952f9c866b1386cad"
+   }
+  },
+  "results/slovenia/parcel_width_seg_felzenszwalb_min500.csv": {
+   "kind": "csv",
+   "rows": 6831,
+   "columns": {
+    "country": "77ab88420706138673d1acbac1052fae982e4a91fd3677c283ebce985943b3d6",
+    "chip": "c6808718a8f6ae73655cff3b1c14d898e273194d33b0ba49a016d071e98d5e85",
+    "parcel_id": "399217032dd48ae87fb39025da79fa8c1bcfb16f3479b2f0debe4e836e54edb5",
+    "full_px": "d3ba00c956b0f0121ee06726670d63f4acfa315fc8ce0f567844fba06dee8acf",
+    "hectares": "cca67cb0ea183b160b83367597a5a009b3e47fbfe68bb51b5b5adf27c58de930",
+    "native_10m_px": "630d6b64ec1b4f15cb162d6ec64354e85614abdf85cb0636eac6f99c5ba9d584",
+    "best_iou": "ba1f7bed2ad1e8f8f734df2c24fe7385acc51fa6615e4a89c24b910a91330b2e",
+    "found": "efc1514a48360e591ab23515152f6137d0b4c85875f1cef05f33732c12a14418",
+    "width_native_px": "cdbd93a13cabe7eb4bfd5c7af910b5daa15c957195e7466952f9c866b1386cad"
+   }
+  },
+  "results/slovenia/parcel_width_seg_ftw_min500.csv": {
+   "kind": "csv",
+   "rows": 6831,
+   "columns": {
+    "country": "77ab88420706138673d1acbac1052fae982e4a91fd3677c283ebce985943b3d6",
+    "chip": "c6808718a8f6ae73655cff3b1c14d898e273194d33b0ba49a016d071e98d5e85",
+    "parcel_id": "399217032dd48ae87fb39025da79fa8c1bcfb16f3479b2f0debe4e836e54edb5",
+    "full_px": "d3ba00c956b0f0121ee06726670d63f4acfa315fc8ce0f567844fba06dee8acf",
+    "hectares": "cca67cb0ea183b160b83367597a5a009b3e47fbfe68bb51b5b5adf27c58de930",
+    "native_10m_px": "630d6b64ec1b4f15cb162d6ec64354e85614abdf85cb0636eac6f99c5ba9d584",
+    "best_iou": "2443bf89ee09b3e88d5fdf7dc9d8a01c97754d83524482476744bf3fbc24ec51",
+    "found": "f2d6088dbe1e778ac4ca3347468cc44f067c7371477fd89e25c336bdc9480e73",
+    "width_native_px": "cdbd93a13cabe7eb4bfd5c7af910b5daa15c957195e7466952f9c866b1386cad"
+   }
+  },
+  "results/slovenia/parcel_width_seg_sam_vit_h_false_0p50_min500.csv": {
+   "kind": "csv",
+   "rows": 6831,
+   "columns": {
+    "country": "77ab88420706138673d1acbac1052fae982e4a91fd3677c283ebce985943b3d6",
+    "chip": "c6808718a8f6ae73655cff3b1c14d898e273194d33b0ba49a016d071e98d5e85",
+    "parcel_id": "399217032dd48ae87fb39025da79fa8c1bcfb16f3479b2f0debe4e836e54edb5",
+    "full_px": "d3ba00c956b0f0121ee06726670d63f4acfa315fc8ce0f567844fba06dee8acf",
+    "hectares": "cca67cb0ea183b160b83367597a5a009b3e47fbfe68bb51b5b5adf27c58de930",
+    "native_10m_px": "630d6b64ec1b4f15cb162d6ec64354e85614abdf85cb0636eac6f99c5ba9d584",
+    "best_iou": "58936e52222024e47f18a62773840e02d7e2c8944571b4fb7885d26cb1121613",
+    "found": "f76b9823ea227115d6fedc8ccdb1d9b223e802acd5eeb3108eef80d6ddf83e2d",
+    "width_native_px": "cdbd93a13cabe7eb4bfd5c7af910b5daa15c957195e7466952f9c866b1386cad"
+   }
+  },
+  "results/slovenia/parcel_width_seg_sam_vit_h_false_0p60_min500.csv": {
+   "kind": "csv",
+   "rows": 6831,
+   "columns": {
+    "country": "77ab88420706138673d1acbac1052fae982e4a91fd3677c283ebce985943b3d6",
+    "chip": "c6808718a8f6ae73655cff3b1c14d898e273194d33b0ba49a016d071e98d5e85",
+    "parcel_id": "399217032dd48ae87fb39025da79fa8c1bcfb16f3479b2f0debe4e836e54edb5",
+    "full_px": "d3ba00c956b0f0121ee06726670d63f4acfa315fc8ce0f567844fba06dee8acf",
+    "hectares": "cca67cb0ea183b160b83367597a5a009b3e47fbfe68bb51b5b5adf27c58de930",
+    "native_10m_px": "630d6b64ec1b4f15cb162d6ec64354e85614abdf85cb0636eac6f99c5ba9d584",
+    "best_iou": "726a600d7bd73f8cd8ed5b2921b211f7184d02a8d766e968417151ccfc424f7a",
+    "found": "863e45dbd19ba21411c6b66eb7bc98821ac25ae1732968732ca1aac282a86193",
+    "width_native_px": "cdbd93a13cabe7eb4bfd5c7af910b5daa15c957195e7466952f9c866b1386cad"
+   }
+  },
+  "results/slovenia/parcel_width_seg_sam_vit_h_false_0p70_min500.csv": {
+   "kind": "csv",
+   "rows": 6831,
+   "columns": {
+    "country": "77ab88420706138673d1acbac1052fae982e4a91fd3677c283ebce985943b3d6",
+    "chip": "c6808718a8f6ae73655cff3b1c14d898e273194d33b0ba49a016d071e98d5e85",
+    "parcel_id": "399217032dd48ae87fb39025da79fa8c1bcfb16f3479b2f0debe4e836e54edb5",
+    "full_px": "d3ba00c956b0f0121ee06726670d63f4acfa315fc8ce0f567844fba06dee8acf",
+    "hectares": "cca67cb0ea183b160b83367597a5a009b3e47fbfe68bb51b5b5adf27c58de930",
+    "native_10m_px": "630d6b64ec1b4f15cb162d6ec64354e85614abdf85cb0636eac6f99c5ba9d584",
+    "best_iou": "e260e02c4316a000001cf8ff7c4c830be68cbb619adcfe0fcd142221e95c7dc2",
+    "found": "571f8cf1f63417ec97c7307d46f1b18cc23a1463bd416f9d5c8ee40fdf8e61bc",
+    "width_native_px": "cdbd93a13cabe7eb4bfd5c7af910b5daa15c957195e7466952f9c866b1386cad"
+   }
+  },
+  "results/slovenia/parcel_width_seg_sam_vit_h_false_0p80_min500.csv": {
+   "kind": "csv",
+   "rows": 6831,
+   "columns": {
+    "country": "77ab88420706138673d1acbac1052fae982e4a91fd3677c283ebce985943b3d6",
+    "chip": "c6808718a8f6ae73655cff3b1c14d898e273194d33b0ba49a016d071e98d5e85",
+    "parcel_id": "399217032dd48ae87fb39025da79fa8c1bcfb16f3479b2f0debe4e836e54edb5",
+    "full_px": "d3ba00c956b0f0121ee06726670d63f4acfa315fc8ce0f567844fba06dee8acf",
+    "hectares": "cca67cb0ea183b160b83367597a5a009b3e47fbfe68bb51b5b5adf27c58de930",
+    "native_10m_px": "630d6b64ec1b4f15cb162d6ec64354e85614abdf85cb0636eac6f99c5ba9d584",
+    "best_iou": "ed6481e870ac5742553d02c5c940c2fd9eded8c9f5c79137a4f1bd2b31e66680",
+    "found": "e46973dec731fb6d17e04dc87cca46ccaf88c0378818c3ddecea3f7e942f462f",
+    "width_native_px": "cdbd93a13cabe7eb4bfd5c7af910b5daa15c957195e7466952f9c866b1386cad"
+   }
+  },
+  "results/slovenia/parcel_width_seg_sam_vit_h_false_0p88_min500.csv": {
+   "kind": "csv",
+   "rows": 6831,
+   "columns": {
+    "country": "77ab88420706138673d1acbac1052fae982e4a91fd3677c283ebce985943b3d6",
+    "chip": "c6808718a8f6ae73655cff3b1c14d898e273194d33b0ba49a016d071e98d5e85",
+    "parcel_id": "399217032dd48ae87fb39025da79fa8c1bcfb16f3479b2f0debe4e836e54edb5",
+    "full_px": "d3ba00c956b0f0121ee06726670d63f4acfa315fc8ce0f567844fba06dee8acf",
+    "hectares": "cca67cb0ea183b160b83367597a5a009b3e47fbfe68bb51b5b5adf27c58de930",
+    "native_10m_px": "630d6b64ec1b4f15cb162d6ec64354e85614abdf85cb0636eac6f99c5ba9d584",
+    "best_iou": "b1d487bb06d266d027393a906f842be54a484d16f4df5891d31b048a2323eff0",
+    "found": "d7650e7fe8e82f06e3fc005131ee76933b7ded9754965c3418697d2f75ba2acb",
+    "width_native_px": "cdbd93a13cabe7eb4bfd5c7af910b5daa15c957195e7466952f9c866b1386cad"
+   }
+  },
+  "results/slovenia/parcel_width_seg_sam_vit_h_true_0p50_min500.csv": {
+   "kind": "csv",
+   "rows": 6831,
+   "columns": {
+    "country": "77ab88420706138673d1acbac1052fae982e4a91fd3677c283ebce985943b3d6",
+    "chip": "c6808718a8f6ae73655cff3b1c14d898e273194d33b0ba49a016d071e98d5e85",
+    "parcel_id": "399217032dd48ae87fb39025da79fa8c1bcfb16f3479b2f0debe4e836e54edb5",
+    "full_px": "d3ba00c956b0f0121ee06726670d63f4acfa315fc8ce0f567844fba06dee8acf",
+    "hectares": "cca67cb0ea183b160b83367597a5a009b3e47fbfe68bb51b5b5adf27c58de930",
+    "native_10m_px": "630d6b64ec1b4f15cb162d6ec64354e85614abdf85cb0636eac6f99c5ba9d584",
+    "best_iou": "52055b32c531536b5fbdbfcf0bed8b30536cba739e70377f5e808a04020fa372",
+    "found": "78161b27b230caca1f8bb9a90f9efdd53619af2924637ede203e2825e9ebc06a",
+    "width_native_px": "cdbd93a13cabe7eb4bfd5c7af910b5daa15c957195e7466952f9c866b1386cad"
+   }
+  },
+  "results/slovenia/parcel_width_seg_sam_vit_h_true_0p60_min500.csv": {
+   "kind": "csv",
+   "rows": 6831,
+   "columns": {
+    "country": "77ab88420706138673d1acbac1052fae982e4a91fd3677c283ebce985943b3d6",
+    "chip": "c6808718a8f6ae73655cff3b1c14d898e273194d33b0ba49a016d071e98d5e85",
+    "parcel_id": "399217032dd48ae87fb39025da79fa8c1bcfb16f3479b2f0debe4e836e54edb5",
+    "full_px": "d3ba00c956b0f0121ee06726670d63f4acfa315fc8ce0f567844fba06dee8acf",
+    "hectares": "cca67cb0ea183b160b83367597a5a009b3e47fbfe68bb51b5b5adf27c58de930",
+    "native_10m_px": "630d6b64ec1b4f15cb162d6ec64354e85614abdf85cb0636eac6f99c5ba9d584",
+    "best_iou": "afa4deca0a13d3d89a6f6b10c5e1c2d4574dcc2b07980be5b6ed28642ee166fe",
+    "found": "aa42b358a228e989aaaf6e71d6411339d6c8ea96b8613fac6f8ed48a11016ab6",
+    "width_native_px": "cdbd93a13cabe7eb4bfd5c7af910b5daa15c957195e7466952f9c866b1386cad"
+   }
+  },
+  "results/slovenia/parcel_width_seg_sam_vit_h_true_0p70_min500.csv": {
+   "kind": "csv",
+   "rows": 6831,
+   "columns": {
+    "country": "77ab88420706138673d1acbac1052fae982e4a91fd3677c283ebce985943b3d6",
+    "chip": "c6808718a8f6ae73655cff3b1c14d898e273194d33b0ba49a016d071e98d5e85",
+    "parcel_id": "399217032dd48ae87fb39025da79fa8c1bcfb16f3479b2f0debe4e836e54edb5",
+    "full_px": "d3ba00c956b0f0121ee06726670d63f4acfa315fc8ce0f567844fba06dee8acf",
+    "hectares": "cca67cb0ea183b160b83367597a5a009b3e47fbfe68bb51b5b5adf27c58de930",
+    "native_10m_px": "630d6b64ec1b4f15cb162d6ec64354e85614abdf85cb0636eac6f99c5ba9d584",
+    "best_iou": "451f2f2ad5f76e96e25cf4b460faa89cf4d9c865628a99558ec041fee265c3e9",
+    "found": "2b13a3dd5f1a68ff758462ed0cb614b96445d97515a82da4632313e8d25459fa",
+    "width_native_px": "cdbd93a13cabe7eb4bfd5c7af910b5daa15c957195e7466952f9c866b1386cad"
+   }
+  },
+  "results/slovenia/parcel_width_seg_sam_vit_h_true_0p80_min500.csv": {
+   "kind": "csv",
+   "rows": 6831,
+   "columns": {
+    "country": "77ab88420706138673d1acbac1052fae982e4a91fd3677c283ebce985943b3d6",
+    "chip": "c6808718a8f6ae73655cff3b1c14d898e273194d33b0ba49a016d071e98d5e85",
+    "parcel_id": "399217032dd48ae87fb39025da79fa8c1bcfb16f3479b2f0debe4e836e54edb5",
+    "full_px": "d3ba00c956b0f0121ee06726670d63f4acfa315fc8ce0f567844fba06dee8acf",
+    "hectares": "cca67cb0ea183b160b83367597a5a009b3e47fbfe68bb51b5b5adf27c58de930",
+    "native_10m_px": "630d6b64ec1b4f15cb162d6ec64354e85614abdf85cb0636eac6f99c5ba9d584",
+    "best_iou": "0e8290ddb848d0096a93076bc8136d6032725614dfd0eeb1c1545a1b07f5d235",
+    "found": "824aea5cf307c9d170028e8c2c7e1ed00e5cea35ba20e2e927018d2c6be48022",
+    "width_native_px": "cdbd93a13cabe7eb4bfd5c7af910b5daa15c957195e7466952f9c866b1386cad"
+   }
+  },
+  "results/slovenia/parcel_width_seg_sam_vit_h_true_0p88_min500.csv": {
+   "kind": "csv",
+   "rows": 6831,
+   "columns": {
+    "country": "77ab88420706138673d1acbac1052fae982e4a91fd3677c283ebce985943b3d6",
+    "chip": "c6808718a8f6ae73655cff3b1c14d898e273194d33b0ba49a016d071e98d5e85",
+    "parcel_id": "399217032dd48ae87fb39025da79fa8c1bcfb16f3479b2f0debe4e836e54edb5",
+    "full_px": "d3ba00c956b0f0121ee06726670d63f4acfa315fc8ce0f567844fba06dee8acf",
+    "hectares": "cca67cb0ea183b160b83367597a5a009b3e47fbfe68bb51b5b5adf27c58de930",
+    "native_10m_px": "630d6b64ec1b4f15cb162d6ec64354e85614abdf85cb0636eac6f99c5ba9d584",
+    "best_iou": "e743b031975bc3640bc63746113411daee9623e847741c6df5a0465812fd2d52",
+    "found": "7767522a11e50f799f62f1719bd34787010f97cce60239a9e62ba8d15bf4e9d8",
+    "width_native_px": "cdbd93a13cabe7eb4bfd5c7af910b5daa15c957195e7466952f9c866b1386cad"
+   }
+  },
+  "results/slovenia/parcel_width_seg_sam_vit_h_true_min500.csv": {
+   "kind": "csv",
+   "rows": 6831,
+   "columns": {
+    "country": "77ab88420706138673d1acbac1052fae982e4a91fd3677c283ebce985943b3d6",
+    "chip": "c6808718a8f6ae73655cff3b1c14d898e273194d33b0ba49a016d071e98d5e85",
+    "parcel_id": "399217032dd48ae87fb39025da79fa8c1bcfb16f3479b2f0debe4e836e54edb5",
+    "full_px": "d3ba00c956b0f0121ee06726670d63f4acfa315fc8ce0f567844fba06dee8acf",
+    "hectares": "cca67cb0ea183b160b83367597a5a009b3e47fbfe68bb51b5b5adf27c58de930",
+    "native_10m_px": "630d6b64ec1b4f15cb162d6ec64354e85614abdf85cb0636eac6f99c5ba9d584",
+    "best_iou": "52055b32c531536b5fbdbfcf0bed8b30536cba739e70377f5e808a04020fa372",
+    "found": "78161b27b230caca1f8bb9a90f9efdd53619af2924637ede203e2825e9ebc06a",
+    "width_native_px": "cdbd93a13cabe7eb4bfd5c7af910b5daa15c957195e7466952f9c866b1386cad"
+   }
+  },
+  "results/slovenia/parcel_width_seg_watershed_0p005_min500.csv": {
+   "kind": "csv",
+   "rows": 6831,
+   "columns": {
+    "country": "77ab88420706138673d1acbac1052fae982e4a91fd3677c283ebce985943b3d6",
+    "chip": "c6808718a8f6ae73655cff3b1c14d898e273194d33b0ba49a016d071e98d5e85",
+    "parcel_id": "399217032dd48ae87fb39025da79fa8c1bcfb16f3479b2f0debe4e836e54edb5",
+    "full_px": "d3ba00c956b0f0121ee06726670d63f4acfa315fc8ce0f567844fba06dee8acf",
+    "hectares": "cca67cb0ea183b160b83367597a5a009b3e47fbfe68bb51b5b5adf27c58de930",
+    "native_10m_px": "630d6b64ec1b4f15cb162d6ec64354e85614abdf85cb0636eac6f99c5ba9d584",
+    "best_iou": "e4fd7a3deb7f27dec96475c5056f0c20a5f1c818652bf029b82c95148e3b6431",
+    "found": "99373b41d69792692e9e564906277752728f7abecfc1d391ff7e67d321ee2ea2",
+    "width_native_px": "cdbd93a13cabe7eb4bfd5c7af910b5daa15c957195e7466952f9c866b1386cad"
+   }
+  },
+  "results/slovenia/parcel_width_seg_watershed_0p01_min500.csv": {
+   "kind": "csv",
+   "rows": 6831,
+   "columns": {
+    "country": "77ab88420706138673d1acbac1052fae982e4a91fd3677c283ebce985943b3d6",
+    "chip": "c6808718a8f6ae73655cff3b1c14d898e273194d33b0ba49a016d071e98d5e85",
+    "parcel_id": "399217032dd48ae87fb39025da79fa8c1bcfb16f3479b2f0debe4e836e54edb5",
+    "full_px": "d3ba00c956b0f0121ee06726670d63f4acfa315fc8ce0f567844fba06dee8acf",
+    "hectares": "cca67cb0ea183b160b83367597a5a009b3e47fbfe68bb51b5b5adf27c58de930",
+    "native_10m_px": "630d6b64ec1b4f15cb162d6ec64354e85614abdf85cb0636eac6f99c5ba9d584",
+    "best_iou": "ac25af164254aca634ccc6ccc6aef823ba02f1fca72bfcb2cef19c45cbad0ccf",
+    "found": "b6e79f0719f5f8424288e8d01e4b3cc000a4347f657e68bc9cdbd8c3483d0f93",
+    "width_native_px": "cdbd93a13cabe7eb4bfd5c7af910b5daa15c957195e7466952f9c866b1386cad"
+   }
+  },
+  "results/slovenia/parcel_width_seg_watershed_0p02_min500.csv": {
+   "kind": "csv",
+   "rows": 6831,
+   "columns": {
+    "country": "77ab88420706138673d1acbac1052fae982e4a91fd3677c283ebce985943b3d6",
+    "chip": "c6808718a8f6ae73655cff3b1c14d898e273194d33b0ba49a016d071e98d5e85",
+    "parcel_id": "399217032dd48ae87fb39025da79fa8c1bcfb16f3479b2f0debe4e836e54edb5",
+    "full_px": "d3ba00c956b0f0121ee06726670d63f4acfa315fc8ce0f567844fba06dee8acf",
+    "hectares": "cca67cb0ea183b160b83367597a5a009b3e47fbfe68bb51b5b5adf27c58de930",
+    "native_10m_px": "630d6b64ec1b4f15cb162d6ec64354e85614abdf85cb0636eac6f99c5ba9d584",
+    "best_iou": "a5427cee10811e6754439a08fb9e0cb4ea521e1dc08ff8ea655e1269c628a946",
+    "found": "7eee8083d4a7f2cf82562560c00a3058858b7cbd3e15467af13c3fe31ba5e6f3",
+    "width_native_px": "cdbd93a13cabe7eb4bfd5c7af910b5daa15c957195e7466952f9c866b1386cad"
+   }
+  },
+  "results/slovenia/parcel_width_seg_watershed_0p05_min500.csv": {
+   "kind": "csv",
+   "rows": 6831,
+   "columns": {
+    "country": "77ab88420706138673d1acbac1052fae982e4a91fd3677c283ebce985943b3d6",
+    "chip": "c6808718a8f6ae73655cff3b1c14d898e273194d33b0ba49a016d071e98d5e85",
+    "parcel_id": "399217032dd48ae87fb39025da79fa8c1bcfb16f3479b2f0debe4e836e54edb5",
+    "full_px": "d3ba00c956b0f0121ee06726670d63f4acfa315fc8ce0f567844fba06dee8acf",
+    "hectares": "cca67cb0ea183b160b83367597a5a009b3e47fbfe68bb51b5b5adf27c58de930",
+    "native_10m_px": "630d6b64ec1b4f15cb162d6ec64354e85614abdf85cb0636eac6f99c5ba9d584",
+    "best_iou": "3bc0990356c0a1edf7e600b1c6592df620e56c320326ceec6b4e235c75c7d76d",
+    "found": "60a876a8fee179e7a767bf48a76cee0a97a0bedf27a06c00d17fd10d63c95a59",
+    "width_native_px": "cdbd93a13cabe7eb4bfd5c7af910b5daa15c957195e7466952f9c866b1386cad"
+   }
+  },
+  "results/slovenia/parcel_width_seg_watershed_0p08_min500.csv": {
+   "kind": "csv",
+   "rows": 6831,
+   "columns": {
+    "country": "77ab88420706138673d1acbac1052fae982e4a91fd3677c283ebce985943b3d6",
+    "chip": "c6808718a8f6ae73655cff3b1c14d898e273194d33b0ba49a016d071e98d5e85",
+    "parcel_id": "399217032dd48ae87fb39025da79fa8c1bcfb16f3479b2f0debe4e836e54edb5",
+    "full_px": "d3ba00c956b0f0121ee06726670d63f4acfa315fc8ce0f567844fba06dee8acf",
+    "hectares": "cca67cb0ea183b160b83367597a5a009b3e47fbfe68bb51b5b5adf27c58de930",
+    "native_10m_px": "630d6b64ec1b4f15cb162d6ec64354e85614abdf85cb0636eac6f99c5ba9d584",
+    "best_iou": "cb771ddd19adf738cde21167520c348cc19e13126dab8c25e60d63e37eac7e6c",
+    "found": "ab096c5af758844152a87885e0216c477c71bb18021b9370411ca71de27c9430",
+    "width_native_px": "cdbd93a13cabe7eb4bfd5c7af910b5daa15c957195e7466952f9c866b1386cad"
+   }
+  },
+  "results/slovenia/parcel_width_seg_watershed_0p13_min500.csv": {
+   "kind": "csv",
+   "rows": 6831,
+   "columns": {
+    "country": "77ab88420706138673d1acbac1052fae982e4a91fd3677c283ebce985943b3d6",
+    "chip": "c6808718a8f6ae73655cff3b1c14d898e273194d33b0ba49a016d071e98d5e85",
+    "parcel_id": "399217032dd48ae87fb39025da79fa8c1bcfb16f3479b2f0debe4e836e54edb5",
+    "full_px": "d3ba00c956b0f0121ee06726670d63f4acfa315fc8ce0f567844fba06dee8acf",
+    "hectares": "cca67cb0ea183b160b83367597a5a009b3e47fbfe68bb51b5b5adf27c58de930",
+    "native_10m_px": "630d6b64ec1b4f15cb162d6ec64354e85614abdf85cb0636eac6f99c5ba9d584",
+    "best_iou": "7aa0d877eadff6405bf4ae638a2a84d7028ba2655bbdf2e0248a7953fbe5384f",
+    "found": "35127623cb0e1b573c3d019f7b7dcae4298f21401d62235d0aa9d1ddf6aa3b8b",
+    "width_native_px": "cdbd93a13cabe7eb4bfd5c7af910b5daa15c957195e7466952f9c866b1386cad"
+   }
+  },
+  "results/slovenia/parcel_width_seg_watershed_0p16_min500.csv": {
+   "kind": "csv",
+   "rows": 6831,
+   "columns": {
+    "country": "77ab88420706138673d1acbac1052fae982e4a91fd3677c283ebce985943b3d6",
+    "chip": "c6808718a8f6ae73655cff3b1c14d898e273194d33b0ba49a016d071e98d5e85",
+    "parcel_id": "399217032dd48ae87fb39025da79fa8c1bcfb16f3479b2f0debe4e836e54edb5",
+    "full_px": "d3ba00c956b0f0121ee06726670d63f4acfa315fc8ce0f567844fba06dee8acf",
+    "hectares": "cca67cb0ea183b160b83367597a5a009b3e47fbfe68bb51b5b5adf27c58de930",
+    "native_10m_px": "630d6b64ec1b4f15cb162d6ec64354e85614abdf85cb0636eac6f99c5ba9d584",
+    "best_iou": "647a1c194a8d5e6f4a154a3c267d076586142d311b6f4636321498dc8949cc9e",
+    "found": "01ef5d6a05c49c701ada57779b495f7bbe8a65a47eca2883eae7926ce11b820a",
+    "width_native_px": "cdbd93a13cabe7eb4bfd5c7af910b5daa15c957195e7466952f9c866b1386cad"
+   }
+  },
+  "results/slovenia/parcel_width_seg_watershed_0p1_min500.csv": {
+   "kind": "csv",
+   "rows": 6831,
+   "columns": {
+    "country": "77ab88420706138673d1acbac1052fae982e4a91fd3677c283ebce985943b3d6",
+    "chip": "c6808718a8f6ae73655cff3b1c14d898e273194d33b0ba49a016d071e98d5e85",
+    "parcel_id": "399217032dd48ae87fb39025da79fa8c1bcfb16f3479b2f0debe4e836e54edb5",
+    "full_px": "d3ba00c956b0f0121ee06726670d63f4acfa315fc8ce0f567844fba06dee8acf",
+    "hectares": "cca67cb0ea183b160b83367597a5a009b3e47fbfe68bb51b5b5adf27c58de930",
+    "native_10m_px": "630d6b64ec1b4f15cb162d6ec64354e85614abdf85cb0636eac6f99c5ba9d584",
+    "best_iou": "ffe51d3c138cd1e075636f5699958634ce6ea86f663709f6d71990a57da57649",
+    "found": "91d2662bcb3fe4cd9f08b5278a06ecda30c842eae563b20935eae3189abe9daa",
+    "width_native_px": "cdbd93a13cabe7eb4bfd5c7af910b5daa15c957195e7466952f9c866b1386cad"
+   }
+  },
+  "results/slovenia/parcel_width_seg_watershed_0p2_min500.csv": {
+   "kind": "csv",
+   "rows": 6831,
+   "columns": {
+    "country": "77ab88420706138673d1acbac1052fae982e4a91fd3677c283ebce985943b3d6",
+    "chip": "c6808718a8f6ae73655cff3b1c14d898e273194d33b0ba49a016d071e98d5e85",
+    "parcel_id": "399217032dd48ae87fb39025da79fa8c1bcfb16f3479b2f0debe4e836e54edb5",
+    "full_px": "d3ba00c956b0f0121ee06726670d63f4acfa315fc8ce0f567844fba06dee8acf",
+    "hectares": "cca67cb0ea183b160b83367597a5a009b3e47fbfe68bb51b5b5adf27c58de930",
+    "native_10m_px": "630d6b64ec1b4f15cb162d6ec64354e85614abdf85cb0636eac6f99c5ba9d584",
+    "best_iou": "cedbaa96caa8aba0ca7ad0a1320fad7df905988a084bf0ebfa6195aa7ff6075d",
+    "found": "a7edcceb90a9cc28a881ba34171757631e4c06a71198cb0045c45d0c10e03741",
+    "width_native_px": "cdbd93a13cabe7eb4bfd5c7af910b5daa15c957195e7466952f9c866b1386cad"
+   }
+  },
+  "results/slovenia/parcel_width_seg_watershed_0p3_min500.csv": {
+   "kind": "csv",
+   "rows": 6831,
+   "columns": {
+    "country": "77ab88420706138673d1acbac1052fae982e4a91fd3677c283ebce985943b3d6",
+    "chip": "c6808718a8f6ae73655cff3b1c14d898e273194d33b0ba49a016d071e98d5e85",
+    "parcel_id": "399217032dd48ae87fb39025da79fa8c1bcfb16f3479b2f0debe4e836e54edb5",
+    "full_px": "d3ba00c956b0f0121ee06726670d63f4acfa315fc8ce0f567844fba06dee8acf",
+    "hectares": "cca67cb0ea183b160b83367597a5a009b3e47fbfe68bb51b5b5adf27c58de930",
+    "native_10m_px": "630d6b64ec1b4f15cb162d6ec64354e85614abdf85cb0636eac6f99c5ba9d584",
+    "best_iou": "23d4324862bbf4aeb34ded948cea9383c48cd9cd90de5b5385e93cad36911ca3",
+    "found": "91af2058c154a1955cff907d8abd08872b26b00332d22cf808ac37dc72edabc5",
+    "width_native_px": "cdbd93a13cabe7eb4bfd5c7af910b5daa15c957195e7466952f9c866b1386cad"
+   }
+  },
+  "results/slovenia/parcel_width_seg_watershed_min500.csv": {
+   "kind": "csv",
+   "rows": 6831,
+   "columns": {
+    "country": "77ab88420706138673d1acbac1052fae982e4a91fd3677c283ebce985943b3d6",
+    "chip": "c6808718a8f6ae73655cff3b1c14d898e273194d33b0ba49a016d071e98d5e85",
+    "parcel_id": "399217032dd48ae87fb39025da79fa8c1bcfb16f3479b2f0debe4e836e54edb5",
+    "full_px": "d3ba00c956b0f0121ee06726670d63f4acfa315fc8ce0f567844fba06dee8acf",
+    "hectares": "cca67cb0ea183b160b83367597a5a009b3e47fbfe68bb51b5b5adf27c58de930",
+    "native_10m_px": "630d6b64ec1b4f15cb162d6ec64354e85614abdf85cb0636eac6f99c5ba9d584",
+    "best_iou": "3bc0990356c0a1edf7e600b1c6592df620e56c320326ceec6b4e235c75c7d76d",
+    "found": "60a876a8fee179e7a767bf48a76cee0a97a0bedf27a06c00d17fd10d63c95a59",
+    "width_native_px": "cdbd93a13cabe7eb4bfd5c7af910b5daa15c957195e7466952f9c866b1386cad"
+   }
+  },
+  "results/slovenia/precision_ftw_min500.csv": {
+   "kind": "csv",
+   "rows": 6831,
+   "columns": {
+    "parcel_id": "399217032dd48ae87fb39025da79fa8c1bcfb16f3479b2f0debe4e836e54edb5",
+    "objects_over": "ae0d65a1db24e78b3d1b1077b7d8358598b08bcb37d757b45a8837839d79a10d",
+    "best_iou": "ea6b5a0113e1dc68e07cf9b68a1c0f1e23da16917136bab3499683e0fb41b481",
+    "chip": "c6808718a8f6ae73655cff3b1c14d898e273194d33b0ba49a016d071e98d5e85"
+   }
+  },
+  "results/slovenia/precision_summary.csv": {
+   "kind": "csv",
+   "rows": 2,
+   "columns": {
+    "method": "dee3ad2eca35657170812ceeec3e382f2e9369fefc8e6462fd7dcd75e5f4ad50",
+    "min_size_m2": "d3a8b400663f6d95bda450f03bf89da092b2b5bfe1474e348d3c9f25fbb430f0",
+    "chips": "996d0c73721739e774213676d97e9a2a9612ff8d72dfde57173110bdda41b726",
+    "parcels": "128ac21ca8e24982a30adf3d18229e3e09331556372e7cad74d07c89d856dd55",
+    "objects": "ab57f53613fa0788a0f0d890b7ac20e6f3b4059c0833c2ac999987228ef7389f",
+    "objects_per_chip": "e9d3a962508f0283d535f87759b37bd3848912a29f95a06c3529bd0e5e66b234",
+    "matched_objects": "d13690fcf9ea73ed49b64a34d48fa5a8a5f62d3fe375a61f29cceb05d05ff932",
+    "matched_share": "0c2dff15726e066fa5b948026e7c3cb64ce26f59c32f09bbc72f508521b15b41",
+    "no_object_pct": "8803641ef571e4f9a49b56ea10e05e74cd45b348174513e64f056a5fa4e9c22c",
+    "exactly_one_pct": "5ba4be7904a73fc20b16a33b422b35fcc78382072921fd56029f1426f08af328",
+    "five_or_more_pct": "83c8f43be3a80d206941ff6ab5699e9db2d4b60cfe07e49f864ce73a07f7718d",
+    "median_objects_over": "b9490968067ba44d92202e000cd93ac898897cd1744b8a89f02f0108d659b95a",
+    "subset": "6610d3d9d7e326f3941a1a9e130da0f795dd6b7ce5492eae3f8c848136387306"
+   }
+  },
+  "results/slovenia/precision_watershed_0.05_min500.csv": {
+   "kind": "csv",
+   "rows": 6831,
+   "columns": {
+    "parcel_id": "399217032dd48ae87fb39025da79fa8c1bcfb16f3479b2f0debe4e836e54edb5",
+    "objects_over": "e56dab4bd7a2301c9cb4772cab5823dcc3da7df5f30b36e52719828db0ee736c",
+    "best_iou": "8cadb2627c7f27c4d070f24048d02107cb77aff490acbc243b366b260f10e984",
+    "chip": "c6808718a8f6ae73655cff3b1c14d898e273194d33b0ba49a016d071e98d5e85"
+   }
+  },
+  "results/slovenia/ring_check.csv": {
+   "kind": "csv",
+   "rows": 3,
+   "columns": {
+    "dilation_px": "14c5e74c4b96ccef41cd94db73a9ec3348038ac094feca4fd897cecffa07cdae",
+    "ring_pixels": "f8bdbb168b6dbe360471d7a41d562ccfa804573d035b1bd40fd11fb2d9ec9f71",
+    "within_dilation": "c3c3ae88d3e237588e0b8a1fb60390ad6e3e3f7c2b89606def22feb1ef0b6823",
+    "share": "7ea25aa6f29790d122261c70f98126a5ac747bb148b6d62d8bedda2d03e2b5e8"
+   }
+  },
+  "results/slovenia/ring_sensitivity.csv": {
+   "kind": "csv",
+   "rows": 12,
+   "columns": {
+    "country": "7e06ebfb4076fd69b1bda9a4b696dd047ee00c8e835549b34dc5af84843a064d",
+    "cap": "a4d06886518a455600d7c8a242ceb21b5207ecbc8657c6f2d33c1d6ae496a472",
+    "method": "6edfff1b7b6c473a68f0b4281b8764c47606c6a96c28870857aaf6d0bf44e4a2",
+    "chips": "a4b0b587454120340d911a76339eb91812d9ee7ae8b5a7731ab216085069d9ed",
+    "parcels": "dd0f6c0de1ae1ba8c7b2390c58db8a4ee02cab7b630b98db7bdd6c55fdf2ce3d",
+    "found": "b0316ee872f25611b5f105e015b63c9f71a07b893fdf43225f4df3b699321a61",
+    "recall": "32415ec453022bcbd4e5ad07bafd588bc98950a694cb25b967d3045b416982ff"
+   }
+  },
+  "results/slovenia/ring_sensitivity_bands.csv": {
+   "kind": "csv",
+   "rows": 48,
+   "columns": {
+    "country": "11ed753df3550a260d7ab1271d87dae0e74017c97b5a448fe644dba7a72f7796",
+    "cap": "5408b199e18154af563524648bfed2262410fc59b3279b2a3e5f531c1ded9b56",
+    "method": "96bde566d4eb9ad7da6d14e05bb059b2fc97d64a7e974f6d9e1fe0fad5632b3f",
+    "band": "40a1f2bcc63a772e22ebb6ae4cb26b37ca7f48a051c7abd533d3cf7d442d00c0",
+    "parcels": "d46339b61540ea2885b1e9e56850f231fab954444b9db258e0636016fc72c5f0",
+    "found": "0b2f43807d683dbf838d0f27a327632ebac947ccb9b6bb798fbe8fc688e684e1"
+   }
+  },
+  "results/slovenia/ring_sensitivity_truth.csv": {
+   "kind": "csv",
+   "rows": 4,
+   "columns": {
+    "country": "bdcdef2c053c044eb15ab8da5c3111d74e46a6603b62b6f745e73647ef9e4cde",
+    "cap": "9c7c7023b785b4beb9874aaf5841db5753c408573190096a74f0fbf34f2ac2ed",
+    "cap_m": "7e5105d87e9512fee72fbd204942c552bf0e708d9623f2e5bf4ad6a5306c94b4",
+    "chips": "79b0ea5c1cacf3d8c8e2689136ead15c8b76049dcbbc145eaa6e7796e4f0fbdc",
+    "parcels": "3cc48151e7f067edec535f7d8619ee3953f898aa7dbfbbf61a0f7307488cb7ea",
+    "ring_px": "0a55c74660f35090c56ebb921395a7867f4e3c525d7fd2948c9f1a9c12a561d6",
+    "orphan_px": "256fd364394aeab38ca313cee93aceeab87c50ce1d1e0388807ec96d6290c260",
+    "orphan_share": "b8c5839f0ee58e2cfe97adbb6fca06c007da81eb715bf8eae25565bfbc9ab3f8",
+    "median_area_ha": "523bdf872abd4062d8a83c1017b68b5eb7ed03573f446360ba86ee2c7661f6bf",
+    "median_width_m": "08ff883bde56b9ada2f136359dfa6859d9ceb7e1cd9f572d53204a37e52d9919",
+    "share_under_30m": "d98befe506a6c8d995e3dfb4ff890e72a77b96cacf7de80b0f6a249d935a057c"
+   }
+  },
+  "results/slovenia/ring_thickness.csv": {
+   "kind": "csv",
+   "rows": 9,
+   "columns": {
+    "distance_px": "f114006ee47a8711105485baeb2082b5b872fdbecb0c1dd73d65f2a9a72f035e",
+    "pixels": "6914f9c45ce9c1cb2f30d8f36209475ce523135bec9b9dbd6c78c9bf2dd8f6ec",
+    "share": "3a8cf2ad2e61a9ebe93283a6a6b6ebbcf3de251c8ae477842f7b355d5eb9f590"
+   }
+  },
+  "results/slovenia/sam_comparison_vit_h_min500.csv": {
+   "kind": "csv",
+   "rows": 10,
+   "columns": {
+    "composite": "591bc68953d50d684ea37e3c6c8f13f990dd0643dfc169f002a7c7b0ca214a64",
+    "setting": "9be04c18a36f28fc250dd6995cd86b38baa4ee02e1822b3231482f54330c1d34",
+    "objects_per_chip": "2760ed5bced71f0199bcaab3823955c55c0048644ee32a22e36d960f0c01bd9f",
+    "parcels": "b95e958c97a8a1debc15d3d006c9449fa75adefda498e2fdf2563ffd6efa0d24",
+    "median_iou": "9b84e608b0dcb2cdebfb866052f782a9a88049e313ae0fccf0a6eeec93ba08d2",
+    "recall": "d1170a9d9c0e8540a090eb8bcedb50574deb30d6164714266ad893b3676d7f88",
+    "null_recall": "d0e1c21da510e05283bd38b243f5008fb219fdbd219079acec81ef3248526438",
+    "gap": "dfbe905ebe43d5b3b6f2b4e64c0e748ac361353477daf9c8dccaa70cbd3527f4"
+   }
+  },
+  "results/slovenia/sam_raw_vit_h_p32_min500.csv": {
+   "kind": "csv",
+   "rows": 273240,
+   "columns": {
+    "composite": "cf35872125a0fb199f5fd66f56b77949cee9c37871688dd6726401f297965bbf",
+    "setting": "8038909f61b5c9a1f34f721af4827fb561c9416dee62791f8c07b1fe7048449e",
+    "chip": "fdf06753f1d3a06d99a300df198904f262303b674c69a3676d0f91949973ea93",
+    "parcel_id": "2f5bc7d2c9d6a9b0e68196b1182e6eea7082e64b92ed09a668107eb0ff299ef5",
+    "full_px": "f5b7f34b3513f6bf3dab93113a6fb76c451d739f9c3281deee28aeff7c60790f",
+    "hectares": "181aaa819f4029be983b9462acb94c0c23f7ff908a48a1a0ec116ed942638463",
+    "native_10m_px": "1da58a5c2b5e412605cb5160000d7f246d39f683099717438b8572a32f8a568d",
+    "best_iou": "8fac41eea9478ef728b35def5c4da0d0ad5ac072e51b0e08f5a13537134db481",
+    "found": "67dfa26f8a3fdc3f6a6a9c0c583aaab46f03a80a09ab00160834ceaefb1574da",
+    "width_native_px": "00213219f6a98df47082a92379fdb244475f2cd3db35c07a3102efb5379d9c33",
+    "is_null": "1b9f7de423abf389fd71d42ae3879cd177bc00e2970b670c6a22597f2d109275",
+    "draw": "fb5a28439a2a81d10d92ece96d58d74b8e2cff7773491d40f77c22b3b986c86d",
+    "objects": "ab6092c24bdc4ed19ea8c7102cbe52024d4a1943e3bdf07f507c304d4f8e5b14",
+    "seconds": "b02cd2a4066198c7606641adb4c86afeb95a6123d2c7ebca1d961ad456441305"
+   }
+  },
+  "results/slovenia/sam_raw_vit_h_p32_min500_at720m2.csv": {
+   "kind": "csv",
+   "rows": 273240,
+   "columns": {
+    "composite": "634d8e9109a4a1042c2736c6595ff9f184dc4d5356d217f1d39466fc6095ca73",
+    "setting": "8038909f61b5c9a1f34f721af4827fb561c9416dee62791f8c07b1fe7048449e",
+    "chip": "fdf06753f1d3a06d99a300df198904f262303b674c69a3676d0f91949973ea93",
+    "parcel_id": "2f5bc7d2c9d6a9b0e68196b1182e6eea7082e64b92ed09a668107eb0ff299ef5",
+    "full_px": "f5b7f34b3513f6bf3dab93113a6fb76c451d739f9c3281deee28aeff7c60790f",
+    "hectares": "5687c339222d61d148c524d004472c955961386e704f8e47f9dbf8914e017c6f",
+    "native_10m_px": "aa4d17616cc3c28167555a722162a9bac16291a49c89d91f34ea9570d272619f",
+    "best_iou": "fc4c246d664a39da094e1961b44e24bd6874f57c9027ea4b23350553c146ac99",
+    "found": "4da8b167798a5632cc142ff11829ef4ccd3003c5ec035d87018cb1f16853c060",
+    "width_native_px": "00213219f6a98df47082a92379fdb244475f2cd3db35c07a3102efb5379d9c33",
+    "is_null": "1b9f7de423abf389fd71d42ae3879cd177bc00e2970b670c6a22597f2d109275",
+    "draw": "fb5a28439a2a81d10d92ece96d58d74b8e2cff7773491d40f77c22b3b986c86d",
+    "objects": "30cf0e794858b9e9ca29bedebe69504b2c9327657b44ead7cf75bd8ca98f8ebc",
+    "seconds": "d71f06d3f8ff38ecf4ff4a6b07d6e848a941c496c259c12472382a62d859ea9b",
+    "width_native_px_published": "2c8ffd183a6f2a8bdd33f4096a888e79443596fb984d5e06999214c805c0573b"
+   }
+  },
+  "results/slovenia/score_bins_2class.csv": {
+   "kind": "csv",
+   "rows": 8,
+   "columns": {
+    "country": "13f3b4237e941e4df48aef1ed27198c8722cdf6b9a7c07c31f3ffae6ae50020b",
+    "bin": "8817d1059072d75d36d41eb1b6d5ddf8418a94454e48c5a7fa2a9a53f9015281",
+    "lo_native_px": "619d7483a831ef159788ecdb19b1e570ae6228e596ddc73fa9017855b9b4aec3",
+    "hi_native_px": "b9c55c9267e1f67ed0325e6a5601578d419ba9425858b50c43a4c8c70db82c3c",
+    "parcels": "c1859063cf37eee5fbf5241437f001ba1ea4eaa74cbb91a865f710e2898c7c3c",
+    "object_recall": "1244ed2268458aecb64f6d5d6ba87f962579ce386097908210db0be88537521c",
+    "median_best_iou": "10a26311c667a33e1e6ff2a132335f71c0abfdaeca94d2f93376669e50589178"
+   }
+  },
+  "results/slovenia/score_bins_3class.csv": {
+   "kind": "csv",
+   "rows": 8,
+   "columns": {
+    "country": "13f3b4237e941e4df48aef1ed27198c8722cdf6b9a7c07c31f3ffae6ae50020b",
+    "bin": "8817d1059072d75d36d41eb1b6d5ddf8418a94454e48c5a7fa2a9a53f9015281",
+    "lo_native_px": "619d7483a831ef159788ecdb19b1e570ae6228e596ddc73fa9017855b9b4aec3",
+    "hi_native_px": "b9c55c9267e1f67ed0325e6a5601578d419ba9425858b50c43a4c8c70db82c3c",
+    "parcels": "c1859063cf37eee5fbf5241437f001ba1ea4eaa74cbb91a865f710e2898c7c3c",
+    "object_recall": "ae573dd3a3bd46f3c65e6030cc8dc9983f2c1e9574fbf3d1ae5e19b9debf3aee",
+    "median_best_iou": "d4c69eece87c6f0a2288221917efe5bc080bf9662aafb7d1a076f10e2be45b89"
+   }
+  },
+  "results/slovenia/score_bins_3class_full.csv": {
+   "kind": "csv",
+   "rows": 8,
+   "columns": {
+    "country": "13f3b4237e941e4df48aef1ed27198c8722cdf6b9a7c07c31f3ffae6ae50020b",
+    "bin": "8817d1059072d75d36d41eb1b6d5ddf8418a94454e48c5a7fa2a9a53f9015281",
+    "lo_native_px": "619d7483a831ef159788ecdb19b1e570ae6228e596ddc73fa9017855b9b4aec3",
+    "hi_native_px": "b9c55c9267e1f67ed0325e6a5601578d419ba9425858b50c43a4c8c70db82c3c",
+    "parcels": "fbbddfbbaefe14485bac729adc839d973252b1cfa92bae7cd8723ddf2c351b36",
+    "object_recall": "b51360f6d076b7a063250c3adb8134df2a6d7fe694d19b75d24476df222a178c",
+    "median_best_iou": "692e3c3a47dde2988766979c45fda37280e89299da5fa7ece76afddedc5be594"
+   }
+  },
+  "results/slovenia/score_parcels_2class.csv": {
+   "kind": "csv",
+   "rows": 6831,
+   "columns": {
+    "country": "77ab88420706138673d1acbac1052fae982e4a91fd3677c283ebce985943b3d6",
+    "chip": "c6808718a8f6ae73655cff3b1c14d898e273194d33b0ba49a016d071e98d5e85",
+    "parcel_id": "399217032dd48ae87fb39025da79fa8c1bcfb16f3479b2f0debe4e836e54edb5",
+    "full_px": "d3ba00c956b0f0121ee06726670d63f4acfa315fc8ce0f567844fba06dee8acf",
+    "hectares": "fca510478f91be2c80a8a36542bac8d6dbdfef11c529c5ffff3a00ebf0a5c610",
+    "native_10m_px": "3af15b09f1b0dedadddeaa6c089e680852828af3b9a7ecc983d566862d3230f8",
+    "best_iou": "480c8c47192de1aff4b4b7146d2fcc7ccb0ba453258bbce1a97606d54c33c329",
+    "found": "293de3f0f9a0fc4ad5635f5bb8c17af3c0657869739ae8387f17055399ff1643"
+   }
+  },
+  "results/slovenia/score_parcels_3class.csv": {
+   "kind": "csv",
+   "rows": 6831,
+   "columns": {
+    "country": "77ab88420706138673d1acbac1052fae982e4a91fd3677c283ebce985943b3d6",
+    "chip": "c6808718a8f6ae73655cff3b1c14d898e273194d33b0ba49a016d071e98d5e85",
+    "parcel_id": "399217032dd48ae87fb39025da79fa8c1bcfb16f3479b2f0debe4e836e54edb5",
+    "full_px": "d3ba00c956b0f0121ee06726670d63f4acfa315fc8ce0f567844fba06dee8acf",
+    "hectares": "fca510478f91be2c80a8a36542bac8d6dbdfef11c529c5ffff3a00ebf0a5c610",
+    "native_10m_px": "3af15b09f1b0dedadddeaa6c089e680852828af3b9a7ecc983d566862d3230f8",
+    "best_iou": "84efccb4f395b859e2c27f433099dac902b20f5d7de2e7021d2c7a85f7c0ce69",
+    "found": "8b7b71dc806547809a00ea0631769c4a4dc78ebd2d17b9f373ad512475752d97"
+   }
+  },
+  "results/slovenia/score_parcels_3class_full.csv": {
+   "kind": "csv",
+   "rows": 6831,
+   "columns": {
+    "country": "77ab88420706138673d1acbac1052fae982e4a91fd3677c283ebce985943b3d6",
+    "chip": "c6808718a8f6ae73655cff3b1c14d898e273194d33b0ba49a016d071e98d5e85",
+    "parcel_id": "399217032dd48ae87fb39025da79fa8c1bcfb16f3479b2f0debe4e836e54edb5",
+    "full_px": "d3ba00c956b0f0121ee06726670d63f4acfa315fc8ce0f567844fba06dee8acf",
+    "hectares": "2e09929d0218c3fcc5a7223347a21d624e6b934409b30b653b8a7afb86f17041",
+    "native_10m_px": "630d6b64ec1b4f15cb162d6ec64354e85614abdf85cb0636eac6f99c5ba9d584",
+    "best_iou": "2bcc9563cf5ae7cc6a451bb3cc0a883eeaa26201a048aaad4caf25284095c1d2",
+    "found": "f2d6088dbe1e778ac4ca3347468cc44f067c7371477fd89e25c336bdc9480e73"
+   }
+  },
+  "results/slovenia/score_parcels_seg_felzenszwalb_100_min500.csv": {
+   "kind": "csv",
+   "rows": 6831,
+   "columns": {
+    "country": "77ab88420706138673d1acbac1052fae982e4a91fd3677c283ebce985943b3d6",
+    "chip": "c6808718a8f6ae73655cff3b1c14d898e273194d33b0ba49a016d071e98d5e85",
+    "parcel_id": "399217032dd48ae87fb39025da79fa8c1bcfb16f3479b2f0debe4e836e54edb5",
+    "full_px": "d3ba00c956b0f0121ee06726670d63f4acfa315fc8ce0f567844fba06dee8acf",
+    "hectares": "cca67cb0ea183b160b83367597a5a009b3e47fbfe68bb51b5b5adf27c58de930",
+    "native_10m_px": "630d6b64ec1b4f15cb162d6ec64354e85614abdf85cb0636eac6f99c5ba9d584",
+    "best_iou": "ba1f7bed2ad1e8f8f734df2c24fe7385acc51fa6615e4a89c24b910a91330b2e",
+    "found": "efc1514a48360e591ab23515152f6137d0b4c85875f1cef05f33732c12a14418",
+    "width_native_px": "cdbd93a13cabe7eb4bfd5c7af910b5daa15c957195e7466952f9c866b1386cad"
+   }
+  },
+  "results/slovenia/score_parcels_seg_felzenszwalb_150_min500.csv": {
+   "kind": "csv",
+   "rows": 6831,
+   "columns": {
+    "country": "77ab88420706138673d1acbac1052fae982e4a91fd3677c283ebce985943b3d6",
+    "chip": "c6808718a8f6ae73655cff3b1c14d898e273194d33b0ba49a016d071e98d5e85",
+    "parcel_id": "399217032dd48ae87fb39025da79fa8c1bcfb16f3479b2f0debe4e836e54edb5",
+    "full_px": "d3ba00c956b0f0121ee06726670d63f4acfa315fc8ce0f567844fba06dee8acf",
+    "hectares": "cca67cb0ea183b160b83367597a5a009b3e47fbfe68bb51b5b5adf27c58de930",
+    "native_10m_px": "630d6b64ec1b4f15cb162d6ec64354e85614abdf85cb0636eac6f99c5ba9d584",
+    "best_iou": "defa29a70178e509cdbda50b98594607db109f719e959d903ec174773b5361f2",
+    "found": "85c6c9acc8638bffd81fff4aa2e1445e91cafff1998f0608128c9c68a05bd203",
+    "width_native_px": "cdbd93a13cabe7eb4bfd5c7af910b5daa15c957195e7466952f9c866b1386cad"
+   }
+  },
+  "results/slovenia/score_parcels_seg_felzenszwalb_200_min500.csv": {
+   "kind": "csv",
+   "rows": 6831,
+   "columns": {
+    "country": "77ab88420706138673d1acbac1052fae982e4a91fd3677c283ebce985943b3d6",
+    "chip": "c6808718a8f6ae73655cff3b1c14d898e273194d33b0ba49a016d071e98d5e85",
+    "parcel_id": "399217032dd48ae87fb39025da79fa8c1bcfb16f3479b2f0debe4e836e54edb5",
+    "full_px": "d3ba00c956b0f0121ee06726670d63f4acfa315fc8ce0f567844fba06dee8acf",
+    "hectares": "cca67cb0ea183b160b83367597a5a009b3e47fbfe68bb51b5b5adf27c58de930",
+    "native_10m_px": "630d6b64ec1b4f15cb162d6ec64354e85614abdf85cb0636eac6f99c5ba9d584",
+    "best_iou": "c553459a67187d8ba74addd5c695f15a9d90d041d091f29299260d922f05c140",
+    "found": "d2c40374dd4890ea2e6686f7b9f7550c98d68be7fecccc2cf543fa04bc9d2d5c",
+    "width_native_px": "cdbd93a13cabe7eb4bfd5c7af910b5daa15c957195e7466952f9c866b1386cad"
+   }
+  },
+  "results/slovenia/score_parcels_seg_felzenszwalb_25_min500.csv": {
+   "kind": "csv",
+   "rows": 6831,
+   "columns": {
+    "country": "77ab88420706138673d1acbac1052fae982e4a91fd3677c283ebce985943b3d6",
+    "chip": "c6808718a8f6ae73655cff3b1c14d898e273194d33b0ba49a016d071e98d5e85",
+    "parcel_id": "399217032dd48ae87fb39025da79fa8c1bcfb16f3479b2f0debe4e836e54edb5",
+    "full_px": "d3ba00c956b0f0121ee06726670d63f4acfa315fc8ce0f567844fba06dee8acf",
+    "hectares": "cca67cb0ea183b160b83367597a5a009b3e47fbfe68bb51b5b5adf27c58de930",
+    "native_10m_px": "630d6b64ec1b4f15cb162d6ec64354e85614abdf85cb0636eac6f99c5ba9d584",
+    "best_iou": "6b322ed0833e29545f296d64947df8757005975334e7d9dfc54eef98dd69ce06",
+    "found": "3b31e91c679984e5265acaf8da554a1100c6dd2a53aba4a26ac4c23dc5e5c0e2",
+    "width_native_px": "cdbd93a13cabe7eb4bfd5c7af910b5daa15c957195e7466952f9c866b1386cad"
+   }
+  },
+  "results/slovenia/score_parcels_seg_felzenszwalb_300_min500.csv": {
+   "kind": "csv",
+   "rows": 6831,
+   "columns": {
+    "country": "77ab88420706138673d1acbac1052fae982e4a91fd3677c283ebce985943b3d6",
+    "chip": "c6808718a8f6ae73655cff3b1c14d898e273194d33b0ba49a016d071e98d5e85",
+    "parcel_id": "399217032dd48ae87fb39025da79fa8c1bcfb16f3479b2f0debe4e836e54edb5",
+    "full_px": "d3ba00c956b0f0121ee06726670d63f4acfa315fc8ce0f567844fba06dee8acf",
+    "hectares": "cca67cb0ea183b160b83367597a5a009b3e47fbfe68bb51b5b5adf27c58de930",
+    "native_10m_px": "630d6b64ec1b4f15cb162d6ec64354e85614abdf85cb0636eac6f99c5ba9d584",
+    "best_iou": "03c098075df0a91015f0837cf37461a7bd490ec8903c31f2db13ff477d9dd3f1",
+    "found": "1668c023e4147ccd39918ccb8d8d55ba7b8dfae53eb03efd46b0551b75be3adb",
+    "width_native_px": "cdbd93a13cabe7eb4bfd5c7af910b5daa15c957195e7466952f9c866b1386cad"
+   }
+  },
+  "results/slovenia/score_parcels_seg_felzenszwalb_400_min500.csv": {
+   "kind": "csv",
+   "rows": 6831,
+   "columns": {
+    "country": "77ab88420706138673d1acbac1052fae982e4a91fd3677c283ebce985943b3d6",
+    "chip": "c6808718a8f6ae73655cff3b1c14d898e273194d33b0ba49a016d071e98d5e85",
+    "parcel_id": "399217032dd48ae87fb39025da79fa8c1bcfb16f3479b2f0debe4e836e54edb5",
+    "full_px": "d3ba00c956b0f0121ee06726670d63f4acfa315fc8ce0f567844fba06dee8acf",
+    "hectares": "cca67cb0ea183b160b83367597a5a009b3e47fbfe68bb51b5b5adf27c58de930",
+    "native_10m_px": "630d6b64ec1b4f15cb162d6ec64354e85614abdf85cb0636eac6f99c5ba9d584",
+    "best_iou": "64dc906995b78b96e1b1465a8e0de0cb671417f13721cb5c82027a14b72e7c16",
+    "found": "0130ae10a6039a70523cc70b456c55e67775d7ed99e210a8294854d81eb43192",
+    "width_native_px": "cdbd93a13cabe7eb4bfd5c7af910b5daa15c957195e7466952f9c866b1386cad"
+   }
+  },
+  "results/slovenia/score_parcels_seg_felzenszwalb_50_min500.csv": {
+   "kind": "csv",
+   "rows": 6831,
+   "columns": {
+    "country": "77ab88420706138673d1acbac1052fae982e4a91fd3677c283ebce985943b3d6",
+    "chip": "c6808718a8f6ae73655cff3b1c14d898e273194d33b0ba49a016d071e98d5e85",
+    "parcel_id": "399217032dd48ae87fb39025da79fa8c1bcfb16f3479b2f0debe4e836e54edb5",
+    "full_px": "d3ba00c956b0f0121ee06726670d63f4acfa315fc8ce0f567844fba06dee8acf",
+    "hectares": "cca67cb0ea183b160b83367597a5a009b3e47fbfe68bb51b5b5adf27c58de930",
+    "native_10m_px": "630d6b64ec1b4f15cb162d6ec64354e85614abdf85cb0636eac6f99c5ba9d584",
+    "best_iou": "653db8ba2eb9f955c54654c666488b6dbfff9707ca7f899236ea42dc42618d33",
+    "found": "54a90f0b5cff3e453b7077b48edaad648c45c8be4ea654fd3b2cf2437ebf5bb8",
+    "width_native_px": "cdbd93a13cabe7eb4bfd5c7af910b5daa15c957195e7466952f9c866b1386cad"
+   }
+  },
+  "results/slovenia/score_parcels_seg_felzenszwalb_800_min500.csv": {
+   "kind": "csv",
+   "rows": 6831,
+   "columns": {
+    "country": "77ab88420706138673d1acbac1052fae982e4a91fd3677c283ebce985943b3d6",
+    "chip": "c6808718a8f6ae73655cff3b1c14d898e273194d33b0ba49a016d071e98d5e85",
+    "parcel_id": "399217032dd48ae87fb39025da79fa8c1bcfb16f3479b2f0debe4e836e54edb5",
+    "full_px": "d3ba00c956b0f0121ee06726670d63f4acfa315fc8ce0f567844fba06dee8acf",
+    "hectares": "cca67cb0ea183b160b83367597a5a009b3e47fbfe68bb51b5b5adf27c58de930",
+    "native_10m_px": "630d6b64ec1b4f15cb162d6ec64354e85614abdf85cb0636eac6f99c5ba9d584",
+    "best_iou": "c1ee2c840d498c506b7803068a1b563192bfd6a4e8a72a3fa1ef5e1d2cb0f1aa",
+    "found": "79aaeaf60bbed7d107f4de702e671334dbe394f61a05843590e95651bef5db30",
+    "width_native_px": "cdbd93a13cabe7eb4bfd5c7af910b5daa15c957195e7466952f9c866b1386cad"
+   }
+  },
+  "results/slovenia/score_parcels_seg_felzenszwalb_min500.csv": {
+   "kind": "csv",
+   "rows": 6831,
+   "columns": {
+    "country": "77ab88420706138673d1acbac1052fae982e4a91fd3677c283ebce985943b3d6",
+    "chip": "c6808718a8f6ae73655cff3b1c14d898e273194d33b0ba49a016d071e98d5e85",
+    "parcel_id": "399217032dd48ae87fb39025da79fa8c1bcfb16f3479b2f0debe4e836e54edb5",
+    "full_px": "d3ba00c956b0f0121ee06726670d63f4acfa315fc8ce0f567844fba06dee8acf",
+    "hectares": "cca67cb0ea183b160b83367597a5a009b3e47fbfe68bb51b5b5adf27c58de930",
+    "native_10m_px": "630d6b64ec1b4f15cb162d6ec64354e85614abdf85cb0636eac6f99c5ba9d584",
+    "best_iou": "ba1f7bed2ad1e8f8f734df2c24fe7385acc51fa6615e4a89c24b910a91330b2e",
+    "found": "efc1514a48360e591ab23515152f6137d0b4c85875f1cef05f33732c12a14418",
+    "width_native_px": "cdbd93a13cabe7eb4bfd5c7af910b5daa15c957195e7466952f9c866b1386cad"
+   }
+  },
+  "results/slovenia/score_parcels_seg_ftw_min500.csv": {
+   "kind": "csv",
+   "rows": 6831,
+   "columns": {
+    "country": "77ab88420706138673d1acbac1052fae982e4a91fd3677c283ebce985943b3d6",
+    "chip": "c6808718a8f6ae73655cff3b1c14d898e273194d33b0ba49a016d071e98d5e85",
+    "parcel_id": "399217032dd48ae87fb39025da79fa8c1bcfb16f3479b2f0debe4e836e54edb5",
+    "full_px": "d3ba00c956b0f0121ee06726670d63f4acfa315fc8ce0f567844fba06dee8acf",
+    "hectares": "cca67cb0ea183b160b83367597a5a009b3e47fbfe68bb51b5b5adf27c58de930",
+    "native_10m_px": "630d6b64ec1b4f15cb162d6ec64354e85614abdf85cb0636eac6f99c5ba9d584",
+    "best_iou": "2443bf89ee09b3e88d5fdf7dc9d8a01c97754d83524482476744bf3fbc24ec51",
+    "found": "f2d6088dbe1e778ac4ca3347468cc44f067c7371477fd89e25c336bdc9480e73",
+    "width_native_px": "cdbd93a13cabe7eb4bfd5c7af910b5daa15c957195e7466952f9c866b1386cad"
+   }
+  },
+  "results/slovenia/score_parcels_seg_sam_vit_h_false_0p50_min500.csv": {
+   "kind": "csv",
+   "rows": 6831,
+   "columns": {
+    "country": "77ab88420706138673d1acbac1052fae982e4a91fd3677c283ebce985943b3d6",
+    "chip": "c6808718a8f6ae73655cff3b1c14d898e273194d33b0ba49a016d071e98d5e85",
+    "parcel_id": "399217032dd48ae87fb39025da79fa8c1bcfb16f3479b2f0debe4e836e54edb5",
+    "full_px": "d3ba00c956b0f0121ee06726670d63f4acfa315fc8ce0f567844fba06dee8acf",
+    "hectares": "cca67cb0ea183b160b83367597a5a009b3e47fbfe68bb51b5b5adf27c58de930",
+    "native_10m_px": "630d6b64ec1b4f15cb162d6ec64354e85614abdf85cb0636eac6f99c5ba9d584",
+    "best_iou": "58936e52222024e47f18a62773840e02d7e2c8944571b4fb7885d26cb1121613",
+    "found": "f76b9823ea227115d6fedc8ccdb1d9b223e802acd5eeb3108eef80d6ddf83e2d",
+    "width_native_px": "cdbd93a13cabe7eb4bfd5c7af910b5daa15c957195e7466952f9c866b1386cad"
+   }
+  },
+  "results/slovenia/score_parcels_seg_sam_vit_h_false_0p60_min500.csv": {
+   "kind": "csv",
+   "rows": 6831,
+   "columns": {
+    "country": "77ab88420706138673d1acbac1052fae982e4a91fd3677c283ebce985943b3d6",
+    "chip": "c6808718a8f6ae73655cff3b1c14d898e273194d33b0ba49a016d071e98d5e85",
+    "parcel_id": "399217032dd48ae87fb39025da79fa8c1bcfb16f3479b2f0debe4e836e54edb5",
+    "full_px": "d3ba00c956b0f0121ee06726670d63f4acfa315fc8ce0f567844fba06dee8acf",
+    "hectares": "cca67cb0ea183b160b83367597a5a009b3e47fbfe68bb51b5b5adf27c58de930",
+    "native_10m_px": "630d6b64ec1b4f15cb162d6ec64354e85614abdf85cb0636eac6f99c5ba9d584",
+    "best_iou": "726a600d7bd73f8cd8ed5b2921b211f7184d02a8d766e968417151ccfc424f7a",
+    "found": "863e45dbd19ba21411c6b66eb7bc98821ac25ae1732968732ca1aac282a86193",
+    "width_native_px": "cdbd93a13cabe7eb4bfd5c7af910b5daa15c957195e7466952f9c866b1386cad"
+   }
+  },
+  "results/slovenia/score_parcels_seg_sam_vit_h_false_0p70_min500.csv": {
+   "kind": "csv",
+   "rows": 6831,
+   "columns": {
+    "country": "77ab88420706138673d1acbac1052fae982e4a91fd3677c283ebce985943b3d6",
+    "chip": "c6808718a8f6ae73655cff3b1c14d898e273194d33b0ba49a016d071e98d5e85",
+    "parcel_id": "399217032dd48ae87fb39025da79fa8c1bcfb16f3479b2f0debe4e836e54edb5",
+    "full_px": "d3ba00c956b0f0121ee06726670d63f4acfa315fc8ce0f567844fba06dee8acf",
+    "hectares": "cca67cb0ea183b160b83367597a5a009b3e47fbfe68bb51b5b5adf27c58de930",
+    "native_10m_px": "630d6b64ec1b4f15cb162d6ec64354e85614abdf85cb0636eac6f99c5ba9d584",
+    "best_iou": "e260e02c4316a000001cf8ff7c4c830be68cbb619adcfe0fcd142221e95c7dc2",
+    "found": "571f8cf1f63417ec97c7307d46f1b18cc23a1463bd416f9d5c8ee40fdf8e61bc",
+    "width_native_px": "cdbd93a13cabe7eb4bfd5c7af910b5daa15c957195e7466952f9c866b1386cad"
+   }
+  },
+  "results/slovenia/score_parcels_seg_sam_vit_h_false_0p80_min500.csv": {
+   "kind": "csv",
+   "rows": 6831,
+   "columns": {
+    "country": "77ab88420706138673d1acbac1052fae982e4a91fd3677c283ebce985943b3d6",
+    "chip": "c6808718a8f6ae73655cff3b1c14d898e273194d33b0ba49a016d071e98d5e85",
+    "parcel_id": "399217032dd48ae87fb39025da79fa8c1bcfb16f3479b2f0debe4e836e54edb5",
+    "full_px": "d3ba00c956b0f0121ee06726670d63f4acfa315fc8ce0f567844fba06dee8acf",
+    "hectares": "cca67cb0ea183b160b83367597a5a009b3e47fbfe68bb51b5b5adf27c58de930",
+    "native_10m_px": "630d6b64ec1b4f15cb162d6ec64354e85614abdf85cb0636eac6f99c5ba9d584",
+    "best_iou": "ed6481e870ac5742553d02c5c940c2fd9eded8c9f5c79137a4f1bd2b31e66680",
+    "found": "e46973dec731fb6d17e04dc87cca46ccaf88c0378818c3ddecea3f7e942f462f",
+    "width_native_px": "cdbd93a13cabe7eb4bfd5c7af910b5daa15c957195e7466952f9c866b1386cad"
+   }
+  },
+  "results/slovenia/score_parcels_seg_sam_vit_h_false_0p88_min500.csv": {
+   "kind": "csv",
+   "rows": 6831,
+   "columns": {
+    "country": "77ab88420706138673d1acbac1052fae982e4a91fd3677c283ebce985943b3d6",
+    "chip": "c6808718a8f6ae73655cff3b1c14d898e273194d33b0ba49a016d071e98d5e85",
+    "parcel_id": "399217032dd48ae87fb39025da79fa8c1bcfb16f3479b2f0debe4e836e54edb5",
+    "full_px": "d3ba00c956b0f0121ee06726670d63f4acfa315fc8ce0f567844fba06dee8acf",
+    "hectares": "cca67cb0ea183b160b83367597a5a009b3e47fbfe68bb51b5b5adf27c58de930",
+    "native_10m_px": "630d6b64ec1b4f15cb162d6ec64354e85614abdf85cb0636eac6f99c5ba9d584",
+    "best_iou": "b1d487bb06d266d027393a906f842be54a484d16f4df5891d31b048a2323eff0",
+    "found": "d7650e7fe8e82f06e3fc005131ee76933b7ded9754965c3418697d2f75ba2acb",
+    "width_native_px": "cdbd93a13cabe7eb4bfd5c7af910b5daa15c957195e7466952f9c866b1386cad"
+   }
+  },
+  "results/slovenia/score_parcels_seg_sam_vit_h_true_0p50_min500.csv": {
+   "kind": "csv",
+   "rows": 6831,
+   "columns": {
+    "country": "77ab88420706138673d1acbac1052fae982e4a91fd3677c283ebce985943b3d6",
+    "chip": "c6808718a8f6ae73655cff3b1c14d898e273194d33b0ba49a016d071e98d5e85",
+    "parcel_id": "399217032dd48ae87fb39025da79fa8c1bcfb16f3479b2f0debe4e836e54edb5",
+    "full_px": "d3ba00c956b0f0121ee06726670d63f4acfa315fc8ce0f567844fba06dee8acf",
+    "hectares": "cca67cb0ea183b160b83367597a5a009b3e47fbfe68bb51b5b5adf27c58de930",
+    "native_10m_px": "630d6b64ec1b4f15cb162d6ec64354e85614abdf85cb0636eac6f99c5ba9d584",
+    "best_iou": "52055b32c531536b5fbdbfcf0bed8b30536cba739e70377f5e808a04020fa372",
+    "found": "78161b27b230caca1f8bb9a90f9efdd53619af2924637ede203e2825e9ebc06a",
+    "width_native_px": "cdbd93a13cabe7eb4bfd5c7af910b5daa15c957195e7466952f9c866b1386cad"
+   }
+  },
+  "results/slovenia/score_parcels_seg_sam_vit_h_true_0p60_min500.csv": {
+   "kind": "csv",
+   "rows": 6831,
+   "columns": {
+    "country": "77ab88420706138673d1acbac1052fae982e4a91fd3677c283ebce985943b3d6",
+    "chip": "c6808718a8f6ae73655cff3b1c14d898e273194d33b0ba49a016d071e98d5e85",
+    "parcel_id": "399217032dd48ae87fb39025da79fa8c1bcfb16f3479b2f0debe4e836e54edb5",
+    "full_px": "d3ba00c956b0f0121ee06726670d63f4acfa315fc8ce0f567844fba06dee8acf",
+    "hectares": "cca67cb0ea183b160b83367597a5a009b3e47fbfe68bb51b5b5adf27c58de930",
+    "native_10m_px": "630d6b64ec1b4f15cb162d6ec64354e85614abdf85cb0636eac6f99c5ba9d584",
+    "best_iou": "afa4deca0a13d3d89a6f6b10c5e1c2d4574dcc2b07980be5b6ed28642ee166fe",
+    "found": "aa42b358a228e989aaaf6e71d6411339d6c8ea96b8613fac6f8ed48a11016ab6",
+    "width_native_px": "cdbd93a13cabe7eb4bfd5c7af910b5daa15c957195e7466952f9c866b1386cad"
+   }
+  },
+  "results/slovenia/score_parcels_seg_sam_vit_h_true_0p70_min500.csv": {
+   "kind": "csv",
+   "rows": 6831,
+   "columns": {
+    "country": "77ab88420706138673d1acbac1052fae982e4a91fd3677c283ebce985943b3d6",
+    "chip": "c6808718a8f6ae73655cff3b1c14d898e273194d33b0ba49a016d071e98d5e85",
+    "parcel_id": "399217032dd48ae87fb39025da79fa8c1bcfb16f3479b2f0debe4e836e54edb5",
+    "full_px": "d3ba00c956b0f0121ee06726670d63f4acfa315fc8ce0f567844fba06dee8acf",
+    "hectares": "cca67cb0ea183b160b83367597a5a009b3e47fbfe68bb51b5b5adf27c58de930",
+    "native_10m_px": "630d6b64ec1b4f15cb162d6ec64354e85614abdf85cb0636eac6f99c5ba9d584",
+    "best_iou": "451f2f2ad5f76e96e25cf4b460faa89cf4d9c865628a99558ec041fee265c3e9",
+    "found": "2b13a3dd5f1a68ff758462ed0cb614b96445d97515a82da4632313e8d25459fa",
+    "width_native_px": "cdbd93a13cabe7eb4bfd5c7af910b5daa15c957195e7466952f9c866b1386cad"
+   }
+  },
+  "results/slovenia/score_parcels_seg_sam_vit_h_true_0p80_min500.csv": {
+   "kind": "csv",
+   "rows": 6831,
+   "columns": {
+    "country": "77ab88420706138673d1acbac1052fae982e4a91fd3677c283ebce985943b3d6",
+    "chip": "c6808718a8f6ae73655cff3b1c14d898e273194d33b0ba49a016d071e98d5e85",
+    "parcel_id": "399217032dd48ae87fb39025da79fa8c1bcfb16f3479b2f0debe4e836e54edb5",
+    "full_px": "d3ba00c956b0f0121ee06726670d63f4acfa315fc8ce0f567844fba06dee8acf",
+    "hectares": "cca67cb0ea183b160b83367597a5a009b3e47fbfe68bb51b5b5adf27c58de930",
+    "native_10m_px": "630d6b64ec1b4f15cb162d6ec64354e85614abdf85cb0636eac6f99c5ba9d584",
+    "best_iou": "0e8290ddb848d0096a93076bc8136d6032725614dfd0eeb1c1545a1b07f5d235",
+    "found": "824aea5cf307c9d170028e8c2c7e1ed00e5cea35ba20e2e927018d2c6be48022",
+    "width_native_px": "cdbd93a13cabe7eb4bfd5c7af910b5daa15c957195e7466952f9c866b1386cad"
+   }
+  },
+  "results/slovenia/score_parcels_seg_sam_vit_h_true_0p88_min500.csv": {
+   "kind": "csv",
+   "rows": 6831,
+   "columns": {
+    "country": "77ab88420706138673d1acbac1052fae982e4a91fd3677c283ebce985943b3d6",
+    "chip": "c6808718a8f6ae73655cff3b1c14d898e273194d33b0ba49a016d071e98d5e85",
+    "parcel_id": "399217032dd48ae87fb39025da79fa8c1bcfb16f3479b2f0debe4e836e54edb5",
+    "full_px": "d3ba00c956b0f0121ee06726670d63f4acfa315fc8ce0f567844fba06dee8acf",
+    "hectares": "cca67cb0ea183b160b83367597a5a009b3e47fbfe68bb51b5b5adf27c58de930",
+    "native_10m_px": "630d6b64ec1b4f15cb162d6ec64354e85614abdf85cb0636eac6f99c5ba9d584",
+    "best_iou": "e743b031975bc3640bc63746113411daee9623e847741c6df5a0465812fd2d52",
+    "found": "7767522a11e50f799f62f1719bd34787010f97cce60239a9e62ba8d15bf4e9d8",
+    "width_native_px": "cdbd93a13cabe7eb4bfd5c7af910b5daa15c957195e7466952f9c866b1386cad"
+   }
+  },
+  "results/slovenia/score_parcels_seg_sam_vit_h_true_min500.csv": {
+   "kind": "csv",
+   "rows": 6831,
+   "columns": {
+    "country": "77ab88420706138673d1acbac1052fae982e4a91fd3677c283ebce985943b3d6",
+    "chip": "c6808718a8f6ae73655cff3b1c14d898e273194d33b0ba49a016d071e98d5e85",
+    "parcel_id": "399217032dd48ae87fb39025da79fa8c1bcfb16f3479b2f0debe4e836e54edb5",
+    "full_px": "d3ba00c956b0f0121ee06726670d63f4acfa315fc8ce0f567844fba06dee8acf",
+    "hectares": "cca67cb0ea183b160b83367597a5a009b3e47fbfe68bb51b5b5adf27c58de930",
+    "native_10m_px": "630d6b64ec1b4f15cb162d6ec64354e85614abdf85cb0636eac6f99c5ba9d584",
+    "best_iou": "52055b32c531536b5fbdbfcf0bed8b30536cba739e70377f5e808a04020fa372",
+    "found": "78161b27b230caca1f8bb9a90f9efdd53619af2924637ede203e2825e9ebc06a",
+    "width_native_px": "cdbd93a13cabe7eb4bfd5c7af910b5daa15c957195e7466952f9c866b1386cad"
+   }
+  },
+  "results/slovenia/score_parcels_seg_watershed_0p005_min500.csv": {
+   "kind": "csv",
+   "rows": 6831,
+   "columns": {
+    "country": "77ab88420706138673d1acbac1052fae982e4a91fd3677c283ebce985943b3d6",
+    "chip": "c6808718a8f6ae73655cff3b1c14d898e273194d33b0ba49a016d071e98d5e85",
+    "parcel_id": "399217032dd48ae87fb39025da79fa8c1bcfb16f3479b2f0debe4e836e54edb5",
+    "full_px": "d3ba00c956b0f0121ee06726670d63f4acfa315fc8ce0f567844fba06dee8acf",
+    "hectares": "cca67cb0ea183b160b83367597a5a009b3e47fbfe68bb51b5b5adf27c58de930",
+    "native_10m_px": "630d6b64ec1b4f15cb162d6ec64354e85614abdf85cb0636eac6f99c5ba9d584",
+    "best_iou": "e4fd7a3deb7f27dec96475c5056f0c20a5f1c818652bf029b82c95148e3b6431",
+    "found": "99373b41d69792692e9e564906277752728f7abecfc1d391ff7e67d321ee2ea2",
+    "width_native_px": "cdbd93a13cabe7eb4bfd5c7af910b5daa15c957195e7466952f9c866b1386cad"
+   }
+  },
+  "results/slovenia/score_parcels_seg_watershed_0p01_min500.csv": {
+   "kind": "csv",
+   "rows": 6831,
+   "columns": {
+    "country": "77ab88420706138673d1acbac1052fae982e4a91fd3677c283ebce985943b3d6",
+    "chip": "c6808718a8f6ae73655cff3b1c14d898e273194d33b0ba49a016d071e98d5e85",
+    "parcel_id": "399217032dd48ae87fb39025da79fa8c1bcfb16f3479b2f0debe4e836e54edb5",
+    "full_px": "d3ba00c956b0f0121ee06726670d63f4acfa315fc8ce0f567844fba06dee8acf",
+    "hectares": "cca67cb0ea183b160b83367597a5a009b3e47fbfe68bb51b5b5adf27c58de930",
+    "native_10m_px": "630d6b64ec1b4f15cb162d6ec64354e85614abdf85cb0636eac6f99c5ba9d584",
+    "best_iou": "ac25af164254aca634ccc6ccc6aef823ba02f1fca72bfcb2cef19c45cbad0ccf",
+    "found": "b6e79f0719f5f8424288e8d01e4b3cc000a4347f657e68bc9cdbd8c3483d0f93",
+    "width_native_px": "cdbd93a13cabe7eb4bfd5c7af910b5daa15c957195e7466952f9c866b1386cad"
+   }
+  },
+  "results/slovenia/score_parcels_seg_watershed_0p02_min500.csv": {
+   "kind": "csv",
+   "rows": 6831,
+   "columns": {
+    "country": "77ab88420706138673d1acbac1052fae982e4a91fd3677c283ebce985943b3d6",
+    "chip": "c6808718a8f6ae73655cff3b1c14d898e273194d33b0ba49a016d071e98d5e85",
+    "parcel_id": "399217032dd48ae87fb39025da79fa8c1bcfb16f3479b2f0debe4e836e54edb5",
+    "full_px": "d3ba00c956b0f0121ee06726670d63f4acfa315fc8ce0f567844fba06dee8acf",
+    "hectares": "cca67cb0ea183b160b83367597a5a009b3e47fbfe68bb51b5b5adf27c58de930",
+    "native_10m_px": "630d6b64ec1b4f15cb162d6ec64354e85614abdf85cb0636eac6f99c5ba9d584",
+    "best_iou": "a5427cee10811e6754439a08fb9e0cb4ea521e1dc08ff8ea655e1269c628a946",
+    "found": "7eee8083d4a7f2cf82562560c00a3058858b7cbd3e15467af13c3fe31ba5e6f3",
+    "width_native_px": "cdbd93a13cabe7eb4bfd5c7af910b5daa15c957195e7466952f9c866b1386cad"
+   }
+  },
+  "results/slovenia/score_parcels_seg_watershed_0p05_min500.csv": {
+   "kind": "csv",
+   "rows": 6831,
+   "columns": {
+    "country": "77ab88420706138673d1acbac1052fae982e4a91fd3677c283ebce985943b3d6",
+    "chip": "c6808718a8f6ae73655cff3b1c14d898e273194d33b0ba49a016d071e98d5e85",
+    "parcel_id": "399217032dd48ae87fb39025da79fa8c1bcfb16f3479b2f0debe4e836e54edb5",
+    "full_px": "d3ba00c956b0f0121ee06726670d63f4acfa315fc8ce0f567844fba06dee8acf",
+    "hectares": "cca67cb0ea183b160b83367597a5a009b3e47fbfe68bb51b5b5adf27c58de930",
+    "native_10m_px": "630d6b64ec1b4f15cb162d6ec64354e85614abdf85cb0636eac6f99c5ba9d584",
+    "best_iou": "3bc0990356c0a1edf7e600b1c6592df620e56c320326ceec6b4e235c75c7d76d",
+    "found": "60a876a8fee179e7a767bf48a76cee0a97a0bedf27a06c00d17fd10d63c95a59",
+    "width_native_px": "cdbd93a13cabe7eb4bfd5c7af910b5daa15c957195e7466952f9c866b1386cad"
+   }
+  },
+  "results/slovenia/score_parcels_seg_watershed_0p08_min500.csv": {
+   "kind": "csv",
+   "rows": 6831,
+   "columns": {
+    "country": "77ab88420706138673d1acbac1052fae982e4a91fd3677c283ebce985943b3d6",
+    "chip": "c6808718a8f6ae73655cff3b1c14d898e273194d33b0ba49a016d071e98d5e85",
+    "parcel_id": "399217032dd48ae87fb39025da79fa8c1bcfb16f3479b2f0debe4e836e54edb5",
+    "full_px": "d3ba00c956b0f0121ee06726670d63f4acfa315fc8ce0f567844fba06dee8acf",
+    "hectares": "cca67cb0ea183b160b83367597a5a009b3e47fbfe68bb51b5b5adf27c58de930",
+    "native_10m_px": "630d6b64ec1b4f15cb162d6ec64354e85614abdf85cb0636eac6f99c5ba9d584",
+    "best_iou": "cb771ddd19adf738cde21167520c348cc19e13126dab8c25e60d63e37eac7e6c",
+    "found": "ab096c5af758844152a87885e0216c477c71bb18021b9370411ca71de27c9430",
+    "width_native_px": "cdbd93a13cabe7eb4bfd5c7af910b5daa15c957195e7466952f9c866b1386cad"
+   }
+  },
+  "results/slovenia/score_parcels_seg_watershed_0p13_min500.csv": {
+   "kind": "csv",
+   "rows": 6831,
+   "columns": {
+    "country": "77ab88420706138673d1acbac1052fae982e4a91fd3677c283ebce985943b3d6",
+    "chip": "c6808718a8f6ae73655cff3b1c14d898e273194d33b0ba49a016d071e98d5e85",
+    "parcel_id": "399217032dd48ae87fb39025da79fa8c1bcfb16f3479b2f0debe4e836e54edb5",
+    "full_px": "d3ba00c956b0f0121ee06726670d63f4acfa315fc8ce0f567844fba06dee8acf",
+    "hectares": "cca67cb0ea183b160b83367597a5a009b3e47fbfe68bb51b5b5adf27c58de930",
+    "native_10m_px": "630d6b64ec1b4f15cb162d6ec64354e85614abdf85cb0636eac6f99c5ba9d584",
+    "best_iou": "7aa0d877eadff6405bf4ae638a2a84d7028ba2655bbdf2e0248a7953fbe5384f",
+    "found": "35127623cb0e1b573c3d019f7b7dcae4298f21401d62235d0aa9d1ddf6aa3b8b",
+    "width_native_px": "cdbd93a13cabe7eb4bfd5c7af910b5daa15c957195e7466952f9c866b1386cad"
+   }
+  },
+  "results/slovenia/score_parcels_seg_watershed_0p16_min500.csv": {
+   "kind": "csv",
+   "rows": 6831,
+   "columns": {
+    "country": "77ab88420706138673d1acbac1052fae982e4a91fd3677c283ebce985943b3d6",
+    "chip": "c6808718a8f6ae73655cff3b1c14d898e273194d33b0ba49a016d071e98d5e85",
+    "parcel_id": "399217032dd48ae87fb39025da79fa8c1bcfb16f3479b2f0debe4e836e54edb5",
+    "full_px": "d3ba00c956b0f0121ee06726670d63f4acfa315fc8ce0f567844fba06dee8acf",
+    "hectares": "cca67cb0ea183b160b83367597a5a009b3e47fbfe68bb51b5b5adf27c58de930",
+    "native_10m_px": "630d6b64ec1b4f15cb162d6ec64354e85614abdf85cb0636eac6f99c5ba9d584",
+    "best_iou": "647a1c194a8d5e6f4a154a3c267d076586142d311b6f4636321498dc8949cc9e",
+    "found": "01ef5d6a05c49c701ada57779b495f7bbe8a65a47eca2883eae7926ce11b820a",
+    "width_native_px": "cdbd93a13cabe7eb4bfd5c7af910b5daa15c957195e7466952f9c866b1386cad"
+   }
+  },
+  "results/slovenia/score_parcels_seg_watershed_0p1_min500.csv": {
+   "kind": "csv",
+   "rows": 6831,
+   "columns": {
+    "country": "77ab88420706138673d1acbac1052fae982e4a91fd3677c283ebce985943b3d6",
+    "chip": "c6808718a8f6ae73655cff3b1c14d898e273194d33b0ba49a016d071e98d5e85",
+    "parcel_id": "399217032dd48ae87fb39025da79fa8c1bcfb16f3479b2f0debe4e836e54edb5",
+    "full_px": "d3ba00c956b0f0121ee06726670d63f4acfa315fc8ce0f567844fba06dee8acf",
+    "hectares": "cca67cb0ea183b160b83367597a5a009b3e47fbfe68bb51b5b5adf27c58de930",
+    "native_10m_px": "630d6b64ec1b4f15cb162d6ec64354e85614abdf85cb0636eac6f99c5ba9d584",
+    "best_iou": "ffe51d3c138cd1e075636f5699958634ce6ea86f663709f6d71990a57da57649",
+    "found": "91d2662bcb3fe4cd9f08b5278a06ecda30c842eae563b20935eae3189abe9daa",
+    "width_native_px": "cdbd93a13cabe7eb4bfd5c7af910b5daa15c957195e7466952f9c866b1386cad"
+   }
+  },
+  "results/slovenia/score_parcels_seg_watershed_0p2_min500.csv": {
+   "kind": "csv",
+   "rows": 6831,
+   "columns": {
+    "country": "77ab88420706138673d1acbac1052fae982e4a91fd3677c283ebce985943b3d6",
+    "chip": "c6808718a8f6ae73655cff3b1c14d898e273194d33b0ba49a016d071e98d5e85",
+    "parcel_id": "399217032dd48ae87fb39025da79fa8c1bcfb16f3479b2f0debe4e836e54edb5",
+    "full_px": "d3ba00c956b0f0121ee06726670d63f4acfa315fc8ce0f567844fba06dee8acf",
+    "hectares": "cca67cb0ea183b160b83367597a5a009b3e47fbfe68bb51b5b5adf27c58de930",
+    "native_10m_px": "630d6b64ec1b4f15cb162d6ec64354e85614abdf85cb0636eac6f99c5ba9d584",
+    "best_iou": "cedbaa96caa8aba0ca7ad0a1320fad7df905988a084bf0ebfa6195aa7ff6075d",
+    "found": "a7edcceb90a9cc28a881ba34171757631e4c06a71198cb0045c45d0c10e03741",
+    "width_native_px": "cdbd93a13cabe7eb4bfd5c7af910b5daa15c957195e7466952f9c866b1386cad"
+   }
+  },
+  "results/slovenia/score_parcels_seg_watershed_0p3_min500.csv": {
+   "kind": "csv",
+   "rows": 6831,
+   "columns": {
+    "country": "77ab88420706138673d1acbac1052fae982e4a91fd3677c283ebce985943b3d6",
+    "chip": "c6808718a8f6ae73655cff3b1c14d898e273194d33b0ba49a016d071e98d5e85",
+    "parcel_id": "399217032dd48ae87fb39025da79fa8c1bcfb16f3479b2f0debe4e836e54edb5",
+    "full_px": "d3ba00c956b0f0121ee06726670d63f4acfa315fc8ce0f567844fba06dee8acf",
+    "hectares": "cca67cb0ea183b160b83367597a5a009b3e47fbfe68bb51b5b5adf27c58de930",
+    "native_10m_px": "630d6b64ec1b4f15cb162d6ec64354e85614abdf85cb0636eac6f99c5ba9d584",
+    "best_iou": "23d4324862bbf4aeb34ded948cea9383c48cd9cd90de5b5385e93cad36911ca3",
+    "found": "91af2058c154a1955cff907d8abd08872b26b00332d22cf808ac37dc72edabc5",
+    "width_native_px": "cdbd93a13cabe7eb4bfd5c7af910b5daa15c957195e7466952f9c866b1386cad"
+   }
+  },
+  "results/slovenia/score_parcels_seg_watershed_min500.csv": {
+   "kind": "csv",
+   "rows": 6831,
+   "columns": {
+    "country": "77ab88420706138673d1acbac1052fae982e4a91fd3677c283ebce985943b3d6",
+    "chip": "c6808718a8f6ae73655cff3b1c14d898e273194d33b0ba49a016d071e98d5e85",
+    "parcel_id": "399217032dd48ae87fb39025da79fa8c1bcfb16f3479b2f0debe4e836e54edb5",
+    "full_px": "d3ba00c956b0f0121ee06726670d63f4acfa315fc8ce0f567844fba06dee8acf",
+    "hectares": "cca67cb0ea183b160b83367597a5a009b3e47fbfe68bb51b5b5adf27c58de930",
+    "native_10m_px": "630d6b64ec1b4f15cb162d6ec64354e85614abdf85cb0636eac6f99c5ba9d584",
+    "best_iou": "3bc0990356c0a1edf7e600b1c6592df620e56c320326ceec6b4e235c75c7d76d",
+    "found": "60a876a8fee179e7a767bf48a76cee0a97a0bedf27a06c00d17fd10d63c95a59",
+    "width_native_px": "cdbd93a13cabe7eb4bfd5c7af910b5daa15c957195e7466952f9c866b1386cad"
+   }
+  },
+  "results/slovenia/scorer_reconciliation.csv": {
+   "kind": "csv",
+   "rows": 4,
+   "columns": {
+    "combination": "132dae2a8409ff1bca5c714bbb914fc2bd1288ae9695e10aea7538854e8b1966",
+    "found": "7a24aa917a1c5b19e345f8b58aa91c3089290e9ecaebd354acb8f3139cf8dca5",
+    "parcels": "3cc48151e7f067edec535f7d8619ee3953f898aa7dbfbbf61a0f7307488cb7ea",
+    "pooled": "b7f3b82c06efed1aae1eef9448d0e6919552d853d8dc50420b7d32b6b2ab447a",
+    "per_chip": "e3f9e7874c4e91e18f3a142efb9505c7fbdec6f306e61f532adc93455e343df4"
+   }
+  },
+  "results/slovenia/segmenter_comparison_min500.csv": {
+   "kind": "csv",
+   "rows": 19,
+   "columns": {
+    "method": "bf9df21d3d36d6d1af199d0196252a5789dbd633640a3584dfe0260c418a0349",
+    "setting": "d9483af29823e6cf49d6fe3c9d2ebb4323390ac9ffee4a71d13edb03395e67d0",
+    "parcels": "68b8884d6c4adb439401f2d7717079e505c794ca327375d00380ac302c048413",
+    "objects_per_chip": "b8fd846029693d14cbae71334a2e37840422a75b31bd26cc89a0100f8ec03892",
+    "median_iou": "5402cfde3f854feefb666b30f8c1d0d888f259c4b212ede4c00c59894485e5d5",
+    "recall": "e389ffc234520bf1642d6cb9084b3057330a86c5d8b5aab836acbb25de560172",
+    "null_recall": "24c154cec3e7b5af46b243f7ae95e9e88f610fccd0bb441317d0a7db61ca8c57",
+    "gap": "fec88136939c358b06e798602597a8d40d103fec9a39d655ded1aed21182529e",
+    "recall_at_ftw_budget": "77914488a82ea620499387fe1ee4bdf8a19bef583b7b1abbaad8267fcd1255da"
+   }
+  },
+  "figures/contrast_panel_india.png": {
+   "kind": "file",
+   "sha256": "e10e651902bcc93a669b1bbd1f2e0f85746530700883552884c92a05514569cc"
+  },
+  "figures/india/chip_sparsity.png": {
+   "kind": "file",
+   "sha256": "e0527220127c4256c45b84df8524448e2c11d0629dbb97495b99ebe3f00d412f"
+  },
+  "figures/india/field_scale.png": {
+   "kind": "file",
+   "sha256": "76d98645a7513ebbbb62a5763a99212dd2dacb859f5e693417bf5f28a5d6dfcb"
+  },
+  "figures/india/predictions_3class_full.png": {
+   "kind": "file",
+   "sha256": "e08c2ad2b2c725ebe4f7367ba8b4827c94d173df138222a5dcac8f9ab6e2f5af"
+  },
+  "figures/input_comparison.png": {
+   "kind": "file",
+   "sha256": "91abe6ff7788d433012e5a31a5abeaa8fe44c5d6814bfa0afba38bd459ef7e8e"
+  },
+  "figures/recall_by_object_budget.png": {
+   "kind": "file",
+   "sha256": "c45462cd7ff7cc6bd005af95a9ca15b685e30fd9804e3c6a4363270647881434"
+  },
+  "figures/recall_by_size_2class.png": {
+   "kind": "file",
+   "sha256": "889a3c1c9dc37548e8c62b2885d91b5d46a15e6db63de8ff69b048b6f0680834"
+  },
+  "figures/recall_by_size_3class.png": {
+   "kind": "file",
+   "sha256": "66aa1d393a93d9a5c8928667832c4f958324670254468bfe5c0f03b7aae4ec37"
+  },
+  "figures/recall_by_size_3class_full.png": {
+   "kind": "file",
+   "sha256": "a985961e0be84365d911e42bd662eff6eb70dba24e3e0d8fdd7b38919599180f"
+  },
+  "figures/recall_by_width_3class_full.png": {
+   "kind": "file",
+   "sha256": "5a631454e7bc850a3a84aa05be561a64a45f0f4065fadc13ec98cb11efab5cba"
+  },
+  "figures/slovenia/chip_sparsity.png": {
+   "kind": "file",
+   "sha256": "7c026c91affe1440074331a020e838ffa4836b819cf15be928eac4714911f623"
+  },
+  "figures/slovenia/field_scale.png": {
+   "kind": "file",
+   "sha256": "30dcb18afd1df80f5a94e22717b61cce518edd1ac2a9baeea1b4d4820ebd408e"
+  },
+  "figures/slovenia/predictions_3class_full.png": {
+   "kind": "file",
+   "sha256": "0ffe4326b1dd52b920d147afac45a3db91e36f513d82ee49d974467d9d46cf91"
+  }
+ }
+}

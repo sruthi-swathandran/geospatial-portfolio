@@ -996,16 +996,43 @@ comparison, which is the claim the cap could most plausibly have bent:
 | 24 m | 50 m up | 48/675, 7.11% | 996/1,695, 58.76% | 8.3x |
 
 The ratios sit between 18.1 and 19.4 times, 41.0 and 41.5 times, and at 8.3
-times in every case.
+times in every case. The Indian counts behind them are small, 1 and 5 parcels
+found in the two narrower bands, and that is true at every cap, so the cap is
+not what makes them fragile.
 
 SAM keeps no segmentations, so it was regenerated for the sweep on the 100
 Indian chips `precision.py` used, false colour at 0.50. At the published cap
 it reproduces the main run on those chips exactly, 80 of 494 parcels and a
 recall of 0.1619, which also shows the regeneration is deterministic. At 12 m
-it finds one parcel more, 0.1640, and at 18 and 24 m it is back at 0.1619. The Indian counts behind them are small, 1 and 5 parcels
-found in the two narrower bands, and that is true at every cap, so the cap is
-not what makes them fragile. This bounds the reconstruction. Validating it
-still needs parcels digitised independently of FTW.
+it finds one parcel more, 0.1640, and at 18 and 24 m it is back at 0.1619.
+
+This bounds the reconstruction. Validating it still needs parcels digitised
+independently of FTW.
+
+**What produced these numbers, now recorded.** `src\run_manifest.py` writes
+`results/run_manifest.json`: the git commit, the interpreter, every package
+pinned in `requirements.txt` against its installed version, the SHA-256 of each
+checkpoint in `models/`, every seed set in `src/` with its line, and a hash of
+every output, column by column for a CSV. In the project's `.venv`, Python
+3.11.9, all 15 pins match. The seeds that drive runs are date-style constants
+set when each script was written, so the two the review flagged differ because
+their scripts were written a day apart. Two small fixed seeds sit outside that
+pattern: 11 for the label registration self-test, and 12345 for the contrast
+panel's permutation test, which is where the p = 0.16 in F-14 comes from.
+
+The compiled-module cache showed both the system Python 3.14 and the `.venv`'s
+3.11 loading this code between 21 and 23 September, so outputs written in those
+days could have come from either. Every script that wrote outputs then was
+rerun under the `.venv` and compared with a manifest taken beforehand: the
+Indian sweep at every setting, Indian precision and held-out selection, ground
+widths and label registration in both countries, and the 200-draw null. Of 222
+recorded outputs, 179 came back byte for byte identical. In the 42 Indian sweep
+tables every IoU, recall and width column is identical, and only `hectares` and
+`native_10m_px` moved, by the per-chip pixel area B-21 introduced.
+`precision_summary.csv` came back with the same three rows in a different
+order, because `precision.py` appended the row it rewrote; it now sorts. The
+Indian SAM run was not repeated at 16 hours, but the F-12 subset reproduced it
+exactly on 100 chips. No reported number depends on which interpreter wrote it.
 
 ---
 
@@ -1047,6 +1074,7 @@ python src\figure_budget.py
 python src\threshold_check.py --country india --width-file parcel_width_seg_watershed_min500.csv
 python src\threshold_check.py --country india --width-file parcel_width_seg_ftw_min500.csv
 python src\reconcile_ftw.py --country india
+python src\run_manifest.py
 ```
 
 The nulls are seeded, so the comparison runs reproduce to the digit. Runtime on

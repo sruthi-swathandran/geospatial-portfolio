@@ -240,6 +240,11 @@ pip install -r requirements.txt
 published numbers came from. It is a Windows freeze, so audit against it rather
 than installing from it. No GPU is used anywhere here.
 
+`results/run_manifest.json` records the interpreter, package versions,
+checkpoint hashes, seeds and a hash of every output behind the committed
+results. `python src\run_manifest.py --compare` against it says whether a rerun
+reproduced them.
+
 ```
 python src\ftw_download.py --country india
 python src\run_inference.py --country india --tag 3class_full

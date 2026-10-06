@@ -236,8 +236,10 @@ def main() -> None:
             else pd.DataFrame(columns=list(summary)))
     prev = prev[~((prev["method"] == tag)
                   & (prev["min_size_m2"] == summary["min_size_m2"]))]
-    pd.concat([prev, pd.DataFrame([summary])], ignore_index=True).to_csv(
-        spath, index=False)
+    # sorted, so rewriting one method's row leaves the file byte for byte
+    # the same when its numbers have not changed
+    (pd.concat([prev, pd.DataFrame([summary])], ignore_index=True)
+     .sort_values(["method", "min_size_m2"]).to_csv(spath, index=False))
     print(f"  wrote {spath.relative_to(F.PROJECT)}")
 
     over = df["objects_over"]

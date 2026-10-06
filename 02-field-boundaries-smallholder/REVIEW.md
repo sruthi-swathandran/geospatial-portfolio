@@ -23,7 +23,7 @@ contradicted by the project's own data and has to be withdrawn or scoped.
 
 ---
 
-## Status, updated 24 September 2026
+## Status, updated 6 October 2026
 
 Work done since this review was written. Everything else below still stands.
 
@@ -48,6 +48,7 @@ Work done since this review was written. Everything else below still stands.
 | F-16 | Closed | `parcel_contrast.csv` now carries `contrast_measure` and `gradient_build` in every row, and `parcel_contrast.py` writes them. No method column, since no segmenter enters the measure. The file map marks it superseded by `label_registration.csv` |
 | F-18 | Closed | `COMPARISON.md` defines an object and objects per chip where the object budget is introduced, including why `object_count` counts labels present |
 | F-12 | Scoped | Bounded by `ring_sensitivity.py`. With the cap at 12, 18 and 24 m of ground, no FTW or classical recall moves by more than 0.0017, SAM on its 100-chip subset moves by one parcel in 494, and the FTW cross-country ratios stay between 18.1 and 41.5 times. The published cap reproduces the published recall exactly. Validation against independently digitised parcels remains open |
+| F-15 | Closed | `run_manifest.py` writes `results/run_manifest.json` with the commit, interpreter, pinned and installed package versions, checkpoint SHA-256s, every seed and a per-column hash of every output. The run seeds are dates set when each script was written; the other two, 11 and 12345, fix a self-test and the contrast panel's permutation test. Everything written while two interpreters were in use was rerun under the `.venv` and compared: no IoU, recall or width value changed |
 | F-14 | Scoped | Checked blind against one analyst on 20 parcels, with bars set before scoring. Rank score 0.655, p = 0.16, which is weak. `COMPARISON.md` now reads the measure as a difference in edge sharpness between countries and no longer as visibility per parcel. Marks in `results/india/contrast_panel_scores.csv` |
 
 One finding was raised by the work rather than the review. **B-08**: four of the
@@ -55,7 +56,7 @@ five figures at Slovenia's object budget are clamped, because no competing
 method was run coarse enough to reach 20 objects per chip. FTW's Slovenian win
 is wider than any table can currently state.
 
-Still open: **F-15**, a provenance detail.
+Nothing in the review is still open. Three items are scoped rather than closed, F-01, F-12 and F-14, for the reasons in their rows.
 
 One finding was raised by the work rather than by the review, and it is the
 largest error the project has found in itself: **B-18**, that the benchmark
