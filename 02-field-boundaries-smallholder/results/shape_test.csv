@@ -1,4 +1,4 @@
 method,india,slovenia,slovenia_width,slovenia_width_shape,slovenia_width_shape6,coverage,ratio_width,ratio_width_lo,ratio_width_hi,ratio_width_shape,ratio_width_shape_lo,ratio_width_shape_hi,share_from_shape,share_lo,share_hi,share_six_band
 FTW 3-class FULL,0.0272,0.2222,0.3137,0.2903,0.2878,1.0,11.519,7.988,17.72,10.66,7.51,16.594,0.032,0.01,0.052,0.035
 watershed,0.2461,0.3484,0.4804,0.4934,0.4948,1.0,1.952,1.769,2.161,2.005,1.815,2.226,-0.04,-0.078,-0.006,-0.044
-SAM ViT-H true colour,0.1563,0.2762,0.3797,0.3969,0.3995,1.0,2.429,2.131,2.783,2.539,2.229,2.906,-0.05,-0.094,-0.008,-0.057
+"SAM ViT-H, blue-green-red",0.1563,0.2762,0.3797,0.3969,0.3995,1.0,2.429,2.131,2.783,2.539,2.229,2.906,-0.05,-0.094,-0.008,-0.057

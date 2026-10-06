@@ -68,8 +68,13 @@ PRETTY = {
     "ftw": "FTW 3-class FULL",
     "watershed": "watershed",
     "felzenszwalb": "felzenszwalb",
-    "sam_true": "SAM ViT-H true colour",
-    "sam_false": "SAM ViT-H false colour",
+    # The first SAM run's composites, named by what SAM was actually given.
+    # Their keys stay true and false because the files carry those names
+    # (B-23).
+    "sam_true": "SAM ViT-H, blue-green-red",
+    "sam_false": "SAM ViT-H, NIR-blue-green",
+    "sam_rgb": "SAM ViT-H natural colour",
+    "sam_cir": "SAM ViT-H colour infrared",
 }
 
 
@@ -146,7 +151,8 @@ def sweep_table(country: str, sweeps: dict) -> list:
         "| method | setting | objects/chip | median IoU | recall | null | gap |",
         "|---|---:|---:|---:|---:|---:|---:|",
     ]
-    order = ["ftw", "watershed", "felzenszwalb", "sam_true", "sam_false"]
+    order = ["ftw", "watershed", "felzenszwalb", "sam_true", "sam_false",
+             "sam_rgb", "sam_cir"]
     for key in order:
         if key not in sweeps:
             continue
@@ -168,7 +174,8 @@ def budget_table(country: str, sweeps: dict) -> tuple:
         "|---|---:|---:|---:|---|",
     ]
     vals = {}
-    for key in ["ftw", "watershed", "felzenszwalb", "sam_true", "sam_false"]:
+    for key in ["ftw", "watershed", "felzenszwalb", "sam_true", "sam_false",
+                "sam_rgb", "sam_cir"]:
         if key not in sweeps:
             continue
         rec, nul, note = at_budget(sweeps[key], budget)
@@ -309,7 +316,7 @@ PRECISION_NAMES = {
     "ftw": "FTW 3-class FULL",
     "watershed_0.02": "watershed 0.02",
     "watershed_0.05": "watershed 0.05",
-    "sam_vit_h_false_0p5": "SAM ViT-H false 0.50",
+    "sam_vit_h_false_0p5": "SAM ViT-H NIR-blue-green 0.50",
 }
 
 
@@ -386,6 +393,11 @@ def matched_parcel_table(country: str, subset_method: str) -> list:
     return lines
 
 
+# holdout.py writes the SAM composites by their file keys (B-23)
+HOLDOUT_NAMES = {"sam_vit_h_true": "SAM ViT-H blue-green-red",
+                 "sam_vit_h_false": "SAM ViT-H NIR-blue-green"}
+
+
 def holdout_table(country: str) -> list:
     path = results_dir(country) / "holdout_selection.csv"
     if not path.exists():
@@ -394,8 +406,9 @@ def holdout_table(country: str) -> list:
     lines = ["| method | published | held out | optimism | setting |",
              "|---|---:|---:|---:|---|"]
     for _, r in d.iterrows():
+        name = HOLDOUT_NAMES.get(str(r["method"]), r["method"])
         lines.append(
-            f"| {r['method']} | {r['published_recall']:.4f} | "
+            f"| {name} | {r['published_recall']:.4f} | "
             f"{r['heldout_recall_median']:.4f} | {r['optimism']:+.4f} | "
             f"{r['modal_setting']} in "
             f"{r['setting_stability'] * 100:.0f}% of splits |")
@@ -645,9 +658,9 @@ def season_tables(iou: float) -> list:
                     f"Run `python src\\season_test.py --country {c}`.\n"]
 
     out.append("### What each window shows\n")
-    out.append("| country | window | dates | blue band, median "
-               "| blue band, 95th percentile | edge strength |")
-    out.append("|---|---|---|---:|---:|---:|")
+    out.append("| country | window | dates | red, median | blue, median "
+               "| blue, 95th percentile | NDVI, median | edge strength |")
+    out.append("|---|---|---|---:|---:|---:|---:|---:|")
     for c in COUNTRIES:
         dates = season_dates(c)
         w = pd.read_csv(results_dir(c) / "season_windows.csv")
@@ -655,7 +668,8 @@ def season_tables(iou: float) -> list:
         for win in ("window_a", "window_b"):
             r = med.loc[win]
             out.append(f"| {c.capitalize()} | {win} | {dates.get(win, '')} "
-                       f"| {r['blue_median']:.0f} | {r['blue_p95']:.0f} "
+                       f"| {r['red_median']:.0f} | {r['blue_median']:.0f} "
+                       f"| {r['blue_p95']:.0f} | {r['ndvi_median']:.2f} "
                        f"| {r['edge_mean']:.3f} |")
 
     out.append("\n### FTW with its two windows rearranged\n")
@@ -774,7 +788,8 @@ def main() -> None:
         out.append(f"\n## {country.capitalize()}, at FTW's object budget\n")
         out += blines
 
-        methods = ["ftw", "watershed", "sam_true", "sam_false"]
+        methods = ["ftw", "watershed", "sam_true", "sam_false"] + [
+            k for k in ("sam_rgb", "sam_cir") if k in sweeps]
         caption = (f"SAM at threshold {args.sam_setting.replace('p', '.')}, "
                    f"classical methods at their best setting.\n")
 

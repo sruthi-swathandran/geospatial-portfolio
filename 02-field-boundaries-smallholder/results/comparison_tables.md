@@ -27,16 +27,16 @@ Rebuild with `python src\build_comparison.py`. Do not edit by hand.
 | felzenszwalb | 300 | 213 | 0.047 | 0.042 | 0.022 | +0.020 |
 | felzenszwalb | 400 | 163 | 0.019 | 0.027 | 0.014 | +0.013 |
 | felzenszwalb | 800 | 96 | 0.004 | 0.012 | 0.006 | +0.006 |
-| SAM ViT-H true colour | 0.50/0.88 | 185 | 0.051 | 0.156 | 0.019 | +0.137 |
-| SAM ViT-H true colour | 0.60/0.88 | 184 | 0.051 | 0.156 | 0.022 | +0.134 |
-| SAM ViT-H true colour | 0.70/0.88 | 181 | 0.043 | 0.155 | 0.018 | +0.136 |
-| SAM ViT-H true colour | 0.80/0.88 | 167 | 0.023 | 0.146 | 0.015 | +0.131 |
-| SAM ViT-H true colour | 0.88/0.88 | 129 | 0.008 | 0.121 | 0.012 | +0.110 |
-| SAM ViT-H false colour | 0.50/0.88 | 213 | 0.127 | 0.172 | 0.021 | +0.151 |
-| SAM ViT-H false colour | 0.60/0.88 | 212 | 0.127 | 0.172 | 0.025 | +0.147 |
-| SAM ViT-H false colour | 0.70/0.88 | 208 | 0.118 | 0.170 | 0.023 | +0.147 |
-| SAM ViT-H false colour | 0.80/0.88 | 192 | 0.103 | 0.162 | 0.021 | +0.142 |
-| SAM ViT-H false colour | 0.88/0.88 | 147 | 0.038 | 0.139 | 0.015 | +0.123 |
+| SAM ViT-H, blue-green-red | 0.50/0.88 | 185 | 0.051 | 0.156 | 0.019 | +0.137 |
+| SAM ViT-H, blue-green-red | 0.60/0.88 | 184 | 0.051 | 0.156 | 0.022 | +0.134 |
+| SAM ViT-H, blue-green-red | 0.70/0.88 | 181 | 0.043 | 0.155 | 0.018 | +0.136 |
+| SAM ViT-H, blue-green-red | 0.80/0.88 | 167 | 0.023 | 0.146 | 0.015 | +0.131 |
+| SAM ViT-H, blue-green-red | 0.88/0.88 | 129 | 0.008 | 0.121 | 0.012 | +0.110 |
+| SAM ViT-H, NIR-blue-green | 0.50/0.88 | 213 | 0.127 | 0.172 | 0.021 | +0.151 |
+| SAM ViT-H, NIR-blue-green | 0.60/0.88 | 212 | 0.127 | 0.172 | 0.025 | +0.147 |
+| SAM ViT-H, NIR-blue-green | 0.70/0.88 | 208 | 0.118 | 0.170 | 0.023 | +0.147 |
+| SAM ViT-H, NIR-blue-green | 0.80/0.88 | 192 | 0.103 | 0.162 | 0.021 | +0.142 |
+| SAM ViT-H, NIR-blue-green | 0.88/0.88 | 147 | 0.038 | 0.139 | 0.015 | +0.123 |
 
 ## India, at FTW's object budget
 
@@ -45,14 +45,14 @@ Rebuild with `python src\build_comparison.py`. Do not edit by hand.
 | FTW 3-class FULL | 0.027 | 0.022 | +0.005 | single setting |
 | watershed | 0.107 | 0.017 | +0.091 | interpolated |
 | felzenszwalb | 0.031 | 0.016 | +0.015 | interpolated |
-| SAM ViT-H true colour | 0.151 | 0.017 | +0.134 | interpolated |
-| SAM ViT-H false colour | 0.153 | 0.019 | +0.135 | interpolated |
+| SAM ViT-H, blue-green-red | 0.151 | 0.017 | +0.134 | interpolated |
+| SAM ViT-H, NIR-blue-green | 0.153 | 0.019 | +0.135 | interpolated |
 
 ## India, recall by ground width
 
 SAM at threshold 0.50, classical methods at their best setting.
 
-| ground width | parcels | FTW 3-class FULL | watershed | SAM ViT-H true colour | SAM ViT-H false colour |
+| ground width | parcels | FTW 3-class FULL | watershed | SAM ViT-H, blue-green-red | SAM ViT-H, NIR-blue-green |
 |---|---:|---:|---:|---:|---:|
 | under 20 m | 196 | 0.00% | 1.02% | 0.51% | 1.02% |
 | 20 to 30 m | 245 | 0.41% | 4.90% | 2.04% | 0.82% |
@@ -63,7 +63,7 @@ SAM at threshold 0.50, classical methods at their best setting.
 
 SAM at threshold 0.50, classical methods at their best setting.
 
-| width, native 10 m px | parcels | FTW 3-class FULL | watershed | SAM ViT-H true colour | SAM ViT-H false colour |
+| width, native 10 m px | parcels | FTW 3-class FULL | watershed | SAM ViT-H, blue-green-red | SAM ViT-H, NIR-blue-green |
 |---|---:|---:|---:|---:|---:|
 | under 2 | 196 | 0.00% | 1.02% | 0.51% | 1.02% |
 | 2 to 3 | 245 | 0.41% | 4.90% | 2.04% | 0.82% |
@@ -98,16 +98,16 @@ SAM at threshold 0.50, classical methods at their best setting.
 | felzenszwalb | 300 | 156 | 0.109 | 0.129 | 0.015 | +0.114 |
 | felzenszwalb | 400 | 118 | 0.066 | 0.098 | 0.013 | +0.085 |
 | felzenszwalb | 800 | 65 | 0.017 | 0.037 | 0.006 | +0.030 |
-| SAM ViT-H true colour | 0.50/0.88 | 117 | 0.194 | 0.276 | 0.013 | +0.264 |
-| SAM ViT-H true colour | 0.60/0.88 | 117 | 0.194 | 0.276 | 0.014 | +0.262 |
-| SAM ViT-H true colour | 0.70/0.88 | 115 | 0.190 | 0.274 | 0.012 | +0.262 |
-| SAM ViT-H true colour | 0.80/0.88 | 109 | 0.173 | 0.264 | 0.012 | +0.252 |
-| SAM ViT-H true colour | 0.88/0.88 | 89 | 0.119 | 0.234 | 0.010 | +0.224 |
-| SAM ViT-H false colour | 0.50/0.88 | 116 | 0.155 | 0.249 | 0.014 | +0.235 |
-| SAM ViT-H false colour | 0.60/0.88 | 116 | 0.155 | 0.248 | 0.012 | +0.237 |
-| SAM ViT-H false colour | 0.70/0.88 | 114 | 0.151 | 0.246 | 0.013 | +0.234 |
-| SAM ViT-H false colour | 0.80/0.88 | 106 | 0.130 | 0.236 | 0.013 | +0.223 |
-| SAM ViT-H false colour | 0.88/0.88 | 85 | 0.085 | 0.206 | 0.010 | +0.196 |
+| SAM ViT-H, blue-green-red | 0.50/0.88 | 117 | 0.194 | 0.276 | 0.013 | +0.264 |
+| SAM ViT-H, blue-green-red | 0.60/0.88 | 117 | 0.194 | 0.276 | 0.014 | +0.262 |
+| SAM ViT-H, blue-green-red | 0.70/0.88 | 115 | 0.190 | 0.274 | 0.012 | +0.262 |
+| SAM ViT-H, blue-green-red | 0.80/0.88 | 109 | 0.173 | 0.264 | 0.012 | +0.252 |
+| SAM ViT-H, blue-green-red | 0.88/0.88 | 89 | 0.119 | 0.234 | 0.010 | +0.224 |
+| SAM ViT-H, NIR-blue-green | 0.50/0.88 | 116 | 0.155 | 0.249 | 0.014 | +0.235 |
+| SAM ViT-H, NIR-blue-green | 0.60/0.88 | 116 | 0.155 | 0.248 | 0.012 | +0.237 |
+| SAM ViT-H, NIR-blue-green | 0.70/0.88 | 114 | 0.151 | 0.246 | 0.013 | +0.234 |
+| SAM ViT-H, NIR-blue-green | 0.80/0.88 | 106 | 0.130 | 0.236 | 0.013 | +0.223 |
+| SAM ViT-H, NIR-blue-green | 0.88/0.88 | 85 | 0.085 | 0.206 | 0.010 | +0.196 |
 
 ## Slovenia, at FTW's object budget
 
@@ -116,14 +116,14 @@ SAM at threshold 0.50, classical methods at their best setting.
 | FTW 3-class FULL | 0.222 | 0.007 | +0.215 | single setting |
 | watershed | 0.081 | 0.003 | +0.078 | clamped, sweep stops at 26 objects |
 | felzenszwalb | 0.037 | 0.006 | +0.030 | clamped, sweep stops at 65 objects |
-| SAM ViT-H true colour | 0.234 | 0.010 | +0.224 | clamped, sweep stops at 89 objects |
-| SAM ViT-H false colour | 0.206 | 0.010 | +0.196 | clamped, sweep stops at 85 objects |
+| SAM ViT-H, blue-green-red | 0.234 | 0.010 | +0.224 | clamped, sweep stops at 89 objects |
+| SAM ViT-H, NIR-blue-green | 0.206 | 0.010 | +0.196 | clamped, sweep stops at 85 objects |
 
 ## Slovenia, recall by ground width
 
 SAM at threshold 0.50, classical methods at their best setting.
 
-| ground width | parcels | FTW 3-class FULL | watershed | SAM ViT-H true colour | SAM ViT-H false colour |
+| ground width | parcels | FTW 3-class FULL | watershed | SAM ViT-H, blue-green-red | SAM ViT-H, NIR-blue-green |
 |---|---:|---:|---:|---:|---:|
 | under 20 m | 2,163 | 0.51% | 3.74% | 2.64% | 1.62% |
 | 20 to 30 m | 1,229 | 7.89% | 21.32% | 14.56% | 12.12% |
@@ -134,7 +134,7 @@ SAM at threshold 0.50, classical methods at their best setting.
 
 SAM at threshold 0.50, classical methods at their best setting.
 
-| width, native 10 m px | parcels | FTW 3-class FULL | watershed | SAM ViT-H true colour | SAM ViT-H false colour |
+| width, native 10 m px | parcels | FTW 3-class FULL | watershed | SAM ViT-H, blue-green-red | SAM ViT-H, NIR-blue-green |
 |---|---:|---:|---:|---:|---:|
 | under 2 | 2,163 | 0.51% | 3.74% | 2.64% | 1.62% |
 | 2 to 3 | 1,229 | 7.89% | 21.32% | 14.56% | 12.12% |
@@ -158,17 +158,17 @@ Same sensor, same method, same physical parcel size.
 | 20 to 30 m | watershed | 12/245, 4.90% | 262/1,229, 21.32% | 4.4x |
 | 30 to 50 m | watershed | 195/867, 22.49% | 829/1,740, 47.64% | 2.1x |
 | 50 m up | watershed | 279/675, 41.33% | 1208/1,699, 71.10% | 1.7x |
-| under 20 m | SAM ViT-H true colour | 1/196, 0.51% | 57/2,163, 2.64% | 5.2x |
-| 20 to 30 m | SAM ViT-H true colour | 5/245, 2.04% | 179/1,229, 14.56% | 7.1x |
-| 30 to 50 m | SAM ViT-H true colour | 76/867, 8.77% | 557/1,740, 32.01% | 3.7x |
-| 50 m up | SAM ViT-H true colour | 228/675, 33.78% | 1094/1,699, 64.39% | 1.9x |
+| under 20 m | SAM ViT-H, blue-green-red | 1/196, 0.51% | 57/2,163, 2.64% | 5.2x |
+| 20 to 30 m | SAM ViT-H, blue-green-red | 5/245, 2.04% | 179/1,229, 14.56% | 7.1x |
+| 30 to 50 m | SAM ViT-H, blue-green-red | 76/867, 8.77% | 557/1,740, 32.01% | 3.7x |
+| 50 m up | SAM ViT-H, blue-green-red | 228/675, 33.78% | 1094/1,699, 64.39% | 1.9x |
 
 ## India, what the methods emit
 
 | method | objects/chip | no object | exactly one | 5 or more | matched share | parcels |
 |---|---:|---:|---:|---:|---:|---:|
 | FTW 3-class FULL | 175.0 | 74.4% | 18.9% | 0.3% | 0.08% | 1,983 |
-| SAM ViT-H false 0.50 (subset) | 190.4 | 8.7% | 33.0% | 8.5% | 0.42% | 494 |
+| SAM ViT-H NIR-blue-green 0.50 (subset) | 190.4 | 8.7% | 33.0% | 8.5% | 0.42% | 494 |
 | watershed 0.02 | 675.9 | 0.0% | 7.2% | 38.2% | 0.18% | 1,983 |
 
 ## India, held-out setting choice
@@ -177,8 +177,8 @@ Same sensor, same method, same physical parcel size.
 |---|---:|---:|---:|---|
 | watershed | 0.2461 | 0.2444 | +0.0016 | 0.02 in 62% of splits |
 | felzenszwalb | 0.0842 | 0.0848 | -0.0005 | 100.0 in 100% of splits |
-| sam_vit_h_true | 0.1563 | 0.1574 | -0.0011 | 0.5 in 100% of splits |
-| sam_vit_h_false | 0.1725 | 0.1736 | -0.0012 | 0.5 in 100% of splits |
+| SAM ViT-H blue-green-red | 0.1563 | 0.1574 | -0.0011 | 0.5 in 100% of splits |
+| SAM ViT-H NIR-blue-green | 0.1725 | 0.1736 | -0.0012 | 0.5 in 100% of splits |
 
 ## Slovenia, what the methods emit
 
@@ -193,15 +193,15 @@ Same sensor, same method, same physical parcel size.
 |---|---:|---:|---:|---|
 | watershed | 0.3484 | 0.3500 | -0.0016 | 0.05 in 100% of splits |
 | felzenszwalb | 0.2137 | 0.2136 | +0.0001 | 100.0 in 100% of splits |
-| sam_vit_h_true | 0.2762 | 0.2717 | +0.0045 | 0.5 in 100% of splits |
-| sam_vit_h_false | 0.2486 | 0.2420 | +0.0066 | 0.5 in 100% of splits |
+| SAM ViT-H blue-green-red | 0.2762 | 0.2717 | +0.0045 | 0.5 in 100% of splits |
+| SAM ViT-H NIR-blue-green | 0.2486 | 0.2420 | +0.0066 | 0.5 in 100% of splits |
 
 ## India, every method on the parcels the SAM subset covered
 
 | method | parcels | objects/chip | no object | exactly one | 5 or more |
 |---|---:|---:|---:|---:|---:|
 | FTW 3-class FULL | 494 | 175.0 | 75.3% | 18.2% | 0.0% |
-| SAM ViT-H false 0.50 | 494 | 190.4 | 8.7% | 33.0% | 8.5% |
+| SAM ViT-H NIR-blue-green 0.50 | 494 | 190.4 | 8.7% | 33.0% | 8.5% |
 | watershed 0.02 | 494 | 675.9 | 0.0% | 7.1% | 30.8% |
 
 ## Label registration
@@ -285,7 +285,7 @@ Same sensor, same method, same physical parcel size.
 |---|---:|---:|---:|---:|---:|---:|---:|---:|
 | FTW 3-class FULL | 2.72% | 22.22% | 31.37% | 29.03% | 11.52x | 10.66x | +0.03 [+0.01, +0.05] | +0.04 |
 | watershed | 24.61% | 34.84% | 48.04% | 49.34% | 1.95x | 2.00x | -0.04 [-0.08, -0.01] | -0.04 |
-| SAM ViT-H true colour | 15.63% | 27.62% | 37.97% | 39.69% | 2.43x | 2.54x | -0.05 [-0.09, -0.01] | -0.06 |
+| SAM ViT-H, blue-green-red | 15.63% | 27.62% | 37.97% | 39.69% | 2.43x | 2.54x | -0.05 [-0.09, -0.01] | -0.06 |
 
 ### Within each width band, Slovenia given India's shapes
 
@@ -299,21 +299,21 @@ Same sensor, same method, same physical parcel size.
 | watershed | 20 to 30 m | 12/245, 4.90% | 21.32% | 19.59% | 4.4x | 4.0x |
 | watershed | 30 to 50 m | 195/867, 22.49% | 47.64% | 48.85% | 2.1x | 2.2x |
 | watershed | 50 m up | 279/675, 41.33% | 71.10% | 74.15% | 1.7x | 1.8x |
-| SAM ViT-H true colour | under 20 m | 1/196, 0.51% | 2.64% | 1.94% | 5.2x | 3.8x |
-| SAM ViT-H true colour | 20 to 30 m | 5/245, 2.04% | 14.56% | 13.55% | 7.1x | 6.6x |
-| SAM ViT-H true colour | 30 to 50 m | 76/867, 8.77% | 32.01% | 32.55% | 3.7x | 3.7x |
-| SAM ViT-H true colour | 50 m up | 228/675, 33.78% | 64.39% | 69.30% | 1.9x | 2.1x |
+| SAM ViT-H, blue-green-red | under 20 m | 1/196, 0.51% | 2.64% | 1.94% | 5.2x | 3.8x |
+| SAM ViT-H, blue-green-red | 20 to 30 m | 5/245, 2.04% | 14.56% | 13.55% | 7.1x | 6.6x |
+| SAM ViT-H, blue-green-red | 30 to 50 m | 76/867, 8.77% | 32.01% | 32.55% | 3.7x | 3.7x |
+| SAM ViT-H, blue-green-red | 50 m up | 228/675, 33.78% | 64.39% | 69.30% | 1.9x | 2.1x |
 
 ## The two seasonal windows
 
 ### What each window shows
 
-| country | window | dates | blue band, median | blue band, 95th percentile | edge strength |
-|---|---|---|---:|---:|---:|
-| India | window_a | July to November 2016 | 1058 | 1565 | 0.424 |
-| India | window_b | March to June 2016 | 1652 | 2210 | 0.401 |
-| Slovenia | window_a | May to August 2021 | 351 | 1072 | 0.323 |
-| Slovenia | window_b | September to October 2021 | 258 | 805 | 0.332 |
+| country | window | dates | red, median | blue, median | blue, 95th percentile | NDVI, median | edge strength |
+|---|---|---|---:|---:|---:|---:|---:|
+| India | window_a | July to November 2016 | 1058 | 609 | 837 | 0.35 | 0.424 |
+| India | window_b | March to June 2016 | 1652 | 901 | 1187 | 0.17 | 0.401 |
+| Slovenia | window_a | May to August 2021 | 351 | 312 | 666 | 0.82 | 0.328 |
+| Slovenia | window_b | September to October 2021 | 258 | 282 | 583 | 0.83 | 0.338 |
 
 ### FTW with its two windows rearranged
 

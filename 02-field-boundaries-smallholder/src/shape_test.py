@@ -58,7 +58,7 @@ test. A second cut into six bands at the pooled sextiles is printed as a check
 that the answer does not depend on where those edges fall.
 
 Methods and files are those of the cross-country table in COMPARISON.md: FTW,
-watershed at its best setting, SAM ViT-H true colour at 0.50.
+watershed at its best setting, SAM ViT-H blue-green-red at 0.50 (B-23).
 
     python src\\shape_test.py
 """
@@ -89,7 +89,7 @@ ELONG_LABELS = ["under 1.5", "1.5 to 2.5", "2.5 to 4", "4 up"]
 METHODS = {
     "ftw": ("FTW 3-class FULL", "parcel_width_seg_ftw_min500.csv"),
     "watershed": ("watershed", "parcel_width_seg_watershed_min500.csv"),
-    "sam_true": ("SAM ViT-H true colour",
+    "sam_true": ("SAM ViT-H, blue-green-red",
                  "parcel_width_seg_sam_vit_h_true_0p50_min500.csv"),
 }
 

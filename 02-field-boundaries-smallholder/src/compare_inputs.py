@@ -44,6 +44,9 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt                               # noqa: E402
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from ftw_common import band_index                             # noqa: E402
+
 try:
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 except Exception:                                             # noqa: BLE001
@@ -183,7 +186,7 @@ def stretch(a, lo=2, hi=98):
     return np.transpose(out, (1, 2, 0))
 
 
-def section_d(cs, names_by, per_country=3, bands=(4, 3, 2)):
+def section_d(cs, names_by, per_country=3, bands=("B08", "B04", "B03")):
     print("\n" + RULE)
     print("D. LOOKING AT IT")
     print(RULE)
@@ -202,7 +205,7 @@ def section_d(cs, names_by, per_country=3, bands=(4, 3, 2)):
 
     for r, (c, name) in enumerate(picks):
         with rasterio.open(c.img_a / name) as s:
-            arr = s.read(list(bands)).astype(np.float32)
+            arr = s.read(band_index(c.img_a / name, bands)).astype(np.float32)
         with rasterio.open(c.c3 / name) as s:
             c3 = s.read(1)
         with rasterio.open(c.pred / name) as s:
@@ -227,7 +230,7 @@ def section_d(cs, names_by, per_country=3, bands=(4, 3, 2)):
             axes[r, k].set_xticks([])
             axes[r, k].set_yticks([])
 
-    for k, t in enumerate(["window_a, false colour", "label",
+    for k, t in enumerate(["window_a, colour infrared", "label",
                            "prediction"]):
         axes[0, k].set_title(t, fontsize=9)
 

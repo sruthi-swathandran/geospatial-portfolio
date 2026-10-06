@@ -51,7 +51,7 @@ DEST = PROJECT / "docs" / "index.html"
 BOUNDARIES = {"india": ("IND_ADM1.geojson", 0.02),
               "slovenia": ("SVN_ADM1.geojson", 0.002)}
 METHODS = {"ftw": "FTW 3-class checkpoint",
-           "sam": "SAM ViT-H, false colour",
+           "sam": "SAM ViT-H, NIR-blue-green",
            "watershed": "watershed"}
 
 

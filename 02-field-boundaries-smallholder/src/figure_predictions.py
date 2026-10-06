@@ -14,7 +14,7 @@ can.
 Each row is one labelled parcel, cropped to its neighbourhood rather than the
 whole chip, showing:
 
-    window_a false colour   the growing season the model saw
+    window_a colour infrared   the growing season the model saw
     label                   parcel interior, its boundary ring, other parcels
     prediction              all predicted classes, kept distinct
     overlap                 where prediction and label agree and disagree
@@ -118,7 +118,8 @@ def main() -> None:
     ap.add_argument("--classes", type=int, default=3)
     ap.add_argument("--tag", default="_full")
     ap.add_argument("--rows", type=int, default=6)
-    ap.add_argument("--bands", default="4,3,2")
+    ap.add_argument("--bands", default="B08,B04,B03",
+                    help="Sentinel-2 band names for red, green and blue")
     args = ap.parse_args()
 
     if args.country:
@@ -127,7 +128,7 @@ def main() -> None:
         os.environ["FTW_COUNTRY"] = args.country
         importlib.reload(F)
 
-    bands = [int(x) for x in args.bands.split(",")]
+    names = [x.strip() for x in args.bands.split(",")]
     rows = load_scores(args.classes, args.tag)
     rows = [r for r in rows if r["country"] == F.COUNTRY]
     if not rows:
@@ -153,7 +154,8 @@ def main() -> None:
         win = crop_for(full_f, pid, min(side, h, w), h, w)
 
         with rasterio.open(F.IMG_A / chip) as s:
-            img = s.read(bands, window=win).astype(np.float32)
+            img = s.read(F.band_index(F.IMG_A / chip, names),
+                         window=win).astype(np.float32)
         inst, c2, c3, full = F.load_labels(chip, window=win)
         with rasterio.open(pred_dir / chip) as s:
             pred = s.read(1, window=win)
@@ -194,7 +196,7 @@ def main() -> None:
             f"IoU {rec['best_iou']:.3f}\n{cover * 100:.0f}% covered",
             fontsize=8, linespacing=1.5)
 
-    for k, t in enumerate(["window_a, false colour", "label", "prediction",
+    for k, t in enumerate(["window_a, colour infrared", "label", "prediction",
                            "overlap"]):
         axes[0, k].set_title(t, fontsize=9)
 

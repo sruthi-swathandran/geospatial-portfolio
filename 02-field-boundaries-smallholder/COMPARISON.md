@@ -23,7 +23,8 @@ should be read are listed under Known gaps below.
 
 1. On India, three methods that were never trained on anything beat the trained
    checkpoint at a matched object budget. SAM reaches 0.153, watershed 0.107,
-   felzenszwalb 0.031, against FTW's 0.027.
+   felzenszwalb 0.031, against FTW's 0.027. SAM was given near infrared, blue
+   and green, which is not the false colour it was meant to get; see B-23.
 2. On Slovenia the checkpoint wins and wins economically. It reaches 0.222 from
    20 objects per chip. Watershed, rerun coarse enough to be read at that
    budget, reaches 0.059. The other three were not, so their figures there are
@@ -128,10 +129,15 @@ parameter plays the same role as `h`.
 seen a field boundary or a satellite image in training. It takes three 8-bit
 channels where FTW's model sees eight bands across two seasons, so it enters
 handicapped and that handicap has to be read alongside every number it
-produces. Two composites are run rather than one, because choosing whichever
-three bands flattered the argument would stack the deck: true colour is what a
-person would look at, false colour puts the near infrared where vegetation
-contrast lives. The checkpoint is Apache 2.0.
+produces. Two composites were meant to be run, because choosing whichever
+three bands flattered the argument would stack the deck: true colour, which is
+what a person would look at, and false colour, which puts the near infrared
+where vegetation contrast lives. Neither is what SAM received. FTW stores each
+window as red, green, blue and near infrared, and the code assumed blue came
+first. The run called true colour gave SAM blue, green and red in its red,
+green and blue channels, and the run called false colour gave it near infrared,
+blue and green. Every SAM figure below is labelled by what SAM was given, and
+the intended composites are being run; see B-23. The checkpoint is Apache 2.0.
 
 Both classical methods and SAM see no labels, no fine-tuning and no
 pre-training on anything related. The classical pair sees the full eight-band
@@ -224,16 +230,16 @@ grid.
 | felzenszwalb | 300 | 213 | 0.047 | 0.042 | 0.022 | +0.020 |
 | felzenszwalb | 400 | 163 | 0.019 | 0.027 | 0.014 | +0.013 |
 | felzenszwalb | 800 | 96 | 0.004 | 0.012 | 0.006 | +0.006 |
-| SAM ViT-H true colour | 0.50/0.88 | 185 | 0.051 | 0.156 | 0.019 | +0.137 |
-| SAM ViT-H true colour | 0.60/0.88 | 184 | 0.051 | 0.156 | 0.022 | +0.134 |
-| SAM ViT-H true colour | 0.70/0.88 | 181 | 0.043 | 0.155 | 0.018 | +0.136 |
-| SAM ViT-H true colour | 0.80/0.88 | 167 | 0.023 | 0.146 | 0.015 | +0.131 |
-| SAM ViT-H true colour | 0.88/0.88 | 129 | 0.008 | 0.121 | 0.012 | +0.110 |
-| SAM ViT-H false colour | 0.50/0.88 | 213 | 0.127 | 0.172 | 0.021 | +0.151 |
-| SAM ViT-H false colour | 0.60/0.88 | 212 | 0.127 | 0.172 | 0.025 | +0.147 |
-| SAM ViT-H false colour | 0.70/0.88 | 208 | 0.118 | 0.170 | 0.023 | +0.147 |
-| SAM ViT-H false colour | 0.80/0.88 | 192 | 0.103 | 0.162 | 0.021 | +0.142 |
-| SAM ViT-H false colour | 0.88/0.88 | 147 | 0.038 | 0.139 | 0.015 | +0.123 |
+| SAM ViT-H, blue-green-red | 0.50/0.88 | 185 | 0.051 | 0.156 | 0.019 | +0.137 |
+| SAM ViT-H, blue-green-red | 0.60/0.88 | 184 | 0.051 | 0.156 | 0.022 | +0.134 |
+| SAM ViT-H, blue-green-red | 0.70/0.88 | 181 | 0.043 | 0.155 | 0.018 | +0.136 |
+| SAM ViT-H, blue-green-red | 0.80/0.88 | 167 | 0.023 | 0.146 | 0.015 | +0.131 |
+| SAM ViT-H, blue-green-red | 0.88/0.88 | 129 | 0.008 | 0.121 | 0.012 | +0.110 |
+| SAM ViT-H, NIR-blue-green | 0.50/0.88 | 213 | 0.127 | 0.172 | 0.021 | +0.151 |
+| SAM ViT-H, NIR-blue-green | 0.60/0.88 | 212 | 0.127 | 0.172 | 0.025 | +0.147 |
+| SAM ViT-H, NIR-blue-green | 0.70/0.88 | 208 | 0.118 | 0.170 | 0.023 | +0.147 |
+| SAM ViT-H, NIR-blue-green | 0.80/0.88 | 192 | 0.103 | 0.162 | 0.021 | +0.142 |
+| SAM ViT-H, NIR-blue-green | 0.88/0.88 | 147 | 0.038 | 0.139 | 0.015 | +0.123 |
 
 At FTW's budget of 175 objects per chip:
 
@@ -242,8 +248,8 @@ At FTW's budget of 175 objects per chip:
 | FTW 3-class FULL | 0.027 | 0.022 | +0.005 | single setting |
 | watershed | 0.107 | 0.017 | +0.091 | interpolated |
 | felzenszwalb | 0.031 | 0.016 | +0.015 | interpolated |
-| SAM ViT-H true colour | 0.151 | 0.017 | +0.134 | interpolated |
-| SAM ViT-H false colour | 0.153 | 0.019 | +0.135 | interpolated |
+| SAM ViT-H, blue-green-red | 0.151 | 0.017 | +0.134 | interpolated |
+| SAM ViT-H, NIR-blue-green | 0.153 | 0.019 | +0.135 | interpolated |
 
 Every figure in that table sits inside its method's measured sweep, so the
 Indian comparison is a measurement throughout.
@@ -289,16 +295,16 @@ similar. 6,831 parcels, 4.139 m grid, about 37 parcels per chip.
 | felzenszwalb | 300 | 156 | 0.109 | 0.129 | 0.015 | +0.114 |
 | felzenszwalb | 400 | 118 | 0.066 | 0.098 | 0.013 | +0.085 |
 | felzenszwalb | 800 | 65 | 0.017 | 0.037 | 0.006 | +0.030 |
-| SAM ViT-H true colour | 0.50/0.88 | 117 | 0.194 | 0.276 | 0.013 | +0.264 |
-| SAM ViT-H true colour | 0.60/0.88 | 117 | 0.194 | 0.276 | 0.014 | +0.262 |
-| SAM ViT-H true colour | 0.70/0.88 | 115 | 0.190 | 0.274 | 0.012 | +0.262 |
-| SAM ViT-H true colour | 0.80/0.88 | 109 | 0.173 | 0.264 | 0.012 | +0.252 |
-| SAM ViT-H true colour | 0.88/0.88 | 89 | 0.119 | 0.234 | 0.010 | +0.224 |
-| SAM ViT-H false colour | 0.50/0.88 | 116 | 0.155 | 0.249 | 0.014 | +0.235 |
-| SAM ViT-H false colour | 0.60/0.88 | 116 | 0.155 | 0.248 | 0.012 | +0.237 |
-| SAM ViT-H false colour | 0.70/0.88 | 114 | 0.151 | 0.246 | 0.013 | +0.234 |
-| SAM ViT-H false colour | 0.80/0.88 | 106 | 0.130 | 0.236 | 0.013 | +0.223 |
-| SAM ViT-H false colour | 0.88/0.88 | 85 | 0.085 | 0.206 | 0.010 | +0.196 |
+| SAM ViT-H, blue-green-red | 0.50/0.88 | 117 | 0.194 | 0.276 | 0.013 | +0.264 |
+| SAM ViT-H, blue-green-red | 0.60/0.88 | 117 | 0.194 | 0.276 | 0.014 | +0.262 |
+| SAM ViT-H, blue-green-red | 0.70/0.88 | 115 | 0.190 | 0.274 | 0.012 | +0.262 |
+| SAM ViT-H, blue-green-red | 0.80/0.88 | 109 | 0.173 | 0.264 | 0.012 | +0.252 |
+| SAM ViT-H, blue-green-red | 0.88/0.88 | 89 | 0.119 | 0.234 | 0.010 | +0.224 |
+| SAM ViT-H, NIR-blue-green | 0.50/0.88 | 116 | 0.155 | 0.249 | 0.014 | +0.235 |
+| SAM ViT-H, NIR-blue-green | 0.60/0.88 | 116 | 0.155 | 0.248 | 0.012 | +0.237 |
+| SAM ViT-H, NIR-blue-green | 0.70/0.88 | 114 | 0.151 | 0.246 | 0.013 | +0.234 |
+| SAM ViT-H, NIR-blue-green | 0.80/0.88 | 106 | 0.130 | 0.236 | 0.013 | +0.223 |
+| SAM ViT-H, NIR-blue-green | 0.88/0.88 | 85 | 0.085 | 0.206 | 0.010 | +0.196 |
 
 At FTW's budget of 20 objects per chip:
 
@@ -307,8 +313,8 @@ At FTW's budget of 20 objects per chip:
 | FTW 3-class FULL | 0.222 | 0.007 | +0.215 | single setting |
 | watershed | 0.081 | 0.003 | +0.078 | clamped, sweep stops at 26 objects |
 | felzenszwalb | 0.037 | 0.006 | +0.030 | clamped, sweep stops at 65 objects |
-| SAM ViT-H true colour | 0.234 | 0.010 | +0.224 | clamped, sweep stops at 89 objects |
-| SAM ViT-H false colour | 0.206 | 0.010 | +0.196 | clamped, sweep stops at 85 objects |
+| SAM ViT-H, blue-green-red | 0.234 | 0.010 | +0.224 | clamped, sweep stops at 89 objects |
+| SAM ViT-H, NIR-blue-green | 0.206 | 0.010 | +0.196 | clamped, sweep stops at 85 objects |
 
 Four of those five are clamped, so read them as ceilings. Each one is the value
 at the coarsest setting that method was actually run at, and every method's
@@ -350,7 +356,7 @@ Read at matched budget, the two countries invert:
 | | Slovenia, 20 objects | India, 175 objects |
 |---|---:|---:|
 | FTW 3-class FULL | 0.222 | 0.027 |
-| SAM ViT-H false colour | at most 0.206 | 0.153 |
+| SAM ViT-H, NIR-blue-green | at most 0.206 | 0.153 |
 | watershed | 0.059 | 0.107 |
 | felzenszwalb | at most 0.037 | 0.031 |
 
@@ -445,7 +451,7 @@ above.
 | on the same 494 parcels | objects/chip | parcels with no object | covered by exactly one | cut into 5 or more |
 |---|---:|---:|---:|---:|
 | FTW 3-class FULL | 175.0 | 75.3% | 18.2% | 0.0% |
-| **SAM ViT-H false 0.50** | **190.4** | **8.7%** | **33.0%** | **8.5%** |
+| **SAM ViT-H NIR-blue-green 0.50** | **190.4** | **8.7%** | **33.0%** | **8.5%** |
 | watershed 0.02 | 675.9 | 0.0% | 7.1% | 30.8% |
 
 That middle row is the most useful thing in this section. SAM spends
@@ -480,7 +486,7 @@ only junk.
 | method | India, floor | Slovenia, precision |
 |---|---:|---:|
 | FTW 3-class FULL | 0.08% | **42.06%** |
-| SAM ViT-H false 0.50 | 0.42% | not measured |
+| SAM ViT-H NIR-blue-green 0.50 | 0.42% | not measured |
 | watershed | 0.18% | 4.43% |
 
 Read the Slovenian column. The checkpoint is right about 42% of the time while
@@ -513,8 +519,8 @@ setting is chosen on one half and read on the other, forty times per country.
 |---|---:|---|---:|---|
 | watershed | +0.0016 | 0.02 in 62% of splits | -0.0016 | 0.05 in 100% |
 | felzenszwalb | -0.0005 | 100 in 100% | +0.0001 | 100 in 100% |
-| SAM ViT-H true | -0.0011 | 0.50 in 100% | +0.0045 | 0.50 in 100% |
-| SAM ViT-H false | -0.0012 | 0.50 in 100% | +0.0066 | 0.50 in 100% |
+| SAM ViT-H blue-green-red | -0.0011 | 0.50 in 100% | +0.0045 | 0.50 in 100% |
+| SAM ViT-H NIR-blue-green | -0.0012 | 0.50 in 100% | +0.0066 | 0.50 in 100% |
 
 The largest optimism anywhere is +0.0066 on a recall of 0.249, about 2.7%
 relative, and every figure in the table sits well inside the chip-level
@@ -550,10 +556,10 @@ rate in each if that is true. It is not.
 | 20 to 30 m | watershed | 12/245, 4.90% | 262/1,229, 21.32% | 4.4x |
 | 30 to 50 m | watershed | 195/867, 22.49% | 829/1,740, 47.64% | 2.1x |
 | 50 m up | watershed | 279/675, 41.33% | 1208/1,699, 71.10% | 1.7x |
-| under 20 m | SAM ViT-H true colour | 1/196, 0.51% | 57/2,163, 2.64% | 5.2x |
-| 20 to 30 m | SAM ViT-H true colour | 5/245, 2.04% | 179/1,229, 14.56% | 7.1x |
-| 30 to 50 m | SAM ViT-H true colour | 76/867, 8.77% | 557/1,740, 32.01% | 3.7x |
-| 50 m up | SAM ViT-H true colour | 228/675, 33.78% | 1094/1,699, 64.39% | 1.9x |
+| under 20 m | SAM ViT-H, blue-green-red | 1/196, 0.51% | 57/2,163, 2.64% | 5.2x |
+| 20 to 30 m | SAM ViT-H, blue-green-red | 5/245, 2.04% | 179/1,229, 14.56% | 7.1x |
+| 30 to 50 m | SAM ViT-H, blue-green-red | 76/867, 8.77% | 557/1,740, 32.01% | 3.7x |
+| 50 m up | SAM ViT-H, blue-green-red | 228/675, 33.78% | 1094/1,699, 64.39% | 1.9x |
 
 Widths are in metres here rather than native pixels, because the two countries
 sit on grids of different fineness. India's chips measure 6.067 m per grid
@@ -659,6 +665,10 @@ inside and outside differ clearly with no sharp step at the line. That is the
 likely gap between the two readings. The measure responds to how sharp the edge
 is, and the eye also responds to a plain difference in brightness.
 
+The crops were drawn with red and blue swapped (B-23). Whether a boundary is
+visible depends more on where brightness changes than on its hue, so the marks
+should stand, but the panel was never seen in natural colour.
+
 An earlier panel was spent without a valid score, when the example numbers in
 the instructions were scored in place of real judgements. Its 20 parcels were
 kept out of this one. One person and 20 parcels cannot separate weak agreement
@@ -685,7 +695,7 @@ scale, a part if a fifth or more, and little below that.
 |---|---:|---:|---:|---:|---:|---:|---:|---:|
 | FTW 3-class FULL | 2.72% | 22.22% | 31.37% | 29.03% | 11.52x | 10.66x | +0.03 [+0.01, +0.05] | +0.04 |
 | watershed | 24.61% | 34.84% | 48.04% | 49.34% | 1.95x | 2.00x | -0.04 [-0.08, -0.01] | -0.04 |
-| SAM ViT-H true colour | 15.63% | 27.62% | 37.97% | 39.69% | 2.43x | 2.54x | -0.05 [-0.09, -0.01] | -0.06 |
+| SAM ViT-H, blue-green-red | 15.63% | 27.62% | 37.97% | 39.69% | 2.43x | 2.54x | -0.05 [-0.09, -0.01] | -0.06 |
 
 Shape explains 3% of FTW's gap, with an interval from 1% to 5%. For watershed
 and SAM the share is negative, meaning India's compact parcels are the easier
@@ -704,10 +714,10 @@ the cross-country table.
 | watershed | 20 to 30 m | 12/245, 4.90% | 21.32% | 19.59% | 4.4x | 4.0x |
 | watershed | 30 to 50 m | 195/867, 22.49% | 47.64% | 48.85% | 2.1x | 2.2x |
 | watershed | 50 m up | 279/675, 41.33% | 71.10% | 74.15% | 1.7x | 1.8x |
-| SAM ViT-H true colour | under 20 m | 1/196, 0.51% | 2.64% | 1.94% | 5.2x | 3.8x |
-| SAM ViT-H true colour | 20 to 30 m | 5/245, 2.04% | 14.56% | 13.55% | 7.1x | 6.6x |
-| SAM ViT-H true colour | 30 to 50 m | 76/867, 8.77% | 32.01% | 32.55% | 3.7x | 3.7x |
-| SAM ViT-H true colour | 50 m up | 228/675, 33.78% | 64.39% | 69.30% | 1.9x | 2.1x |
+| SAM ViT-H, blue-green-red | under 20 m | 1/196, 0.51% | 2.64% | 1.94% | 5.2x | 3.8x |
+| SAM ViT-H, blue-green-red | 20 to 30 m | 5/245, 2.04% | 14.56% | 13.55% | 7.1x | 6.6x |
+| SAM ViT-H, blue-green-red | 30 to 50 m | 76/867, 8.77% | 32.01% | 32.55% | 3.7x | 3.7x |
+| SAM ViT-H, blue-green-red | 50 m up | 228/675, 33.78% | 64.39% | 69.30% | 1.9x | 2.1x |
 
 Within the narrow bands, shape does matter to FTW on the Slovenian side. Given
 India's shapes, its Slovenian recall at 20 to 30 m falls from 7.89% to 4.38%,
@@ -724,16 +734,19 @@ first: March to June 2016, the dry months after the rabi harvest, then July to
 November 2016 for kharif. Neither covers December to February, when rabi crops
 are standing.
 
-| country | window | dates | blue band, median | blue band, 95th percentile | edge strength |
-|---|---|---|---:|---:|---:|
-| India | window_a | July to November 2016 | 1058 | 1565 | 0.424 |
-| India | window_b | March to June 2016 | 1652 | 2210 | 0.401 |
-| Slovenia | window_a | May to August 2021 | 351 | 1072 | 0.323 |
-| Slovenia | window_b | September to October 2021 | 258 | 805 | 0.332 |
+| country | window | dates | red, median | blue, median | blue, 95th percentile | NDVI, median | edge strength |
+|---|---|---|---:|---:|---:|---:|---:|
+| India | window_a | July to November 2016 | 1058 | 609 | 837 | 0.35 | 0.424 |
+| India | window_b | March to June 2016 | 1652 | 901 | 1187 | 0.17 | 0.401 |
+| Slovenia | window_a | May to August 2021 | 351 | 312 | 666 | 0.82 | 0.328 |
+| Slovenia | window_b | September to October 2021 | 258 | 282 | 583 | 0.83 | 0.338 |
 
-India's window_b is much brighter in the blue band, which fits bare
-dry-season ground. This table cannot tell soil from haze. Edge strength is
-computed on each chip's own stretch, so it compares windows only loosely.
+India's window_b is brighter in red and in blue and carries half the NDVI of
+window_a, 0.17 against 0.35, so most of what it shows is bare ground after the
+harvest. Slovenia's two windows are about equally green, 0.82 and 0.83, partly
+because many of its test chips are forest. Edge strength is computed on each
+chip's own stretch, so it compares windows only loosely. An earlier version of
+this table read band 1 as blue, and band 1 is red (B-23).
 
 `src\season_test.py` runs the released checkpoint four ways over every test
 chip: as shipped, with the windows swapped, and with each window given twice.
@@ -836,8 +849,9 @@ two apart either.
 
 **That SAM is doing field boundary delineation.** It is segmenting an image into
 regions, some of which happen to coincide with fields. It sees three 8-bit
-channels of one season against FTW's eight bands across two, and it has never
-been shown a field. Its Indian result says something about how much structure
+channels of one season against FTW's eight bands across two, in the run
+reported here not the three it was meant to see (B-23), and it has never been
+shown a field. Its Indian result says something about how much structure
 the imagery carries, rather than something about foundation models for
 agriculture. Published work exists on SAM for field boundaries from Sentinel-2,
 including FieldSeg at 10 m and a Canadian prairies dataset built this way, none
@@ -1071,6 +1085,34 @@ are standing. The statement was written without checking
 `data_config_india.json` and was found when `season_test.py` printed the dates.
 The test it called for has since run; see What this says.
 
+**B-23. SAM was never given true or false colour.** FTW stores each window's
+bands as red, green, blue and near infrared. The files name them `B04`, `B03`,
+`B02` and `B08`, FTW's own downloader asks for them in that order, and on
+India's dry-season chips band 1 is the brightest of the three visible bands,
+as red is over bare soil. `sam_run.py` assumed blue came first. The composite
+it called true colour therefore put blue in SAM's red channel and red in its
+blue channel, and the one it called false colour gave SAM near infrared, blue
+and green, where colour infrared is near infrared, red and green. Every SAM
+figure in this document came from those two inputs. They are real measurements
+of SAM on those inputs and are now labelled that way, as SAM ViT-H
+blue-green-red and SAM ViT-H NIR-blue-green. Whether SAM does better or worse
+on the composites that were intended is not known yet. Both are being run.
+
+The same assumption reached three other places. The 20 crops on the contrast
+panel were drawn with red and blue swapped, so the analyst judged them in
+those colours, and `contrast_panel.py` keeps drawing them that way so the panel
+can be reproduced. The figures from `figure_predictions.py`,
+`figure_field_scale.py` and `compare_inputs.py` used bands 4, 3 and 2 as
+colour infrared and so showed near infrared, blue and green; they are redrawn.
+And the window table added for B-22 read band 1 as blue when it is red. It now
+carries red, blue and NDVI, each read by name.
+
+FTW, watershed, felzenszwalb, label registration and the edge contrast measure
+are untouched, since each reads every band in file order. Every script now
+looks bands up by their names in the file, through `ftw_common.band_index`.
+Found while checking how a December to February image could be matched to
+FTW's chips.
+
 ---
 
 ## Known gaps
@@ -1122,6 +1164,12 @@ assumption that one number describes a pixel. Slovenia's are 1.450 times taller
 than wide. See B-18 and B-19. What is still not checked is the north to south
 figure against anything FTW publishes, since the reconciliation here is against
 the chips rather than against a specification.
+
+**SAM on the intended composites, running.** Every SAM figure here comes from
+near infrared, blue and green, or from blue, green and red in the wrong order
+(B-23). Natural colour and colour infrared are being run on India and then
+Slovenia, about 26 hours of CPU in all. Until then the SAM figures stand as
+measurements of the inputs SAM was actually given.
 
 **Parcel shape and the seasonal windows, now tested.** Shape explains 3% of
 FTW's country gap and none of the other methods'. India's dry-season window
@@ -1186,7 +1234,7 @@ found in the two narrower bands, and that is true at every cap, so the cap is
 not what makes them fragile.
 
 SAM keeps no segmentations, so it was regenerated for the sweep on the 100
-Indian chips `precision.py` used, false colour at 0.50. At the published cap
+Indian chips `precision.py` used, near infrared, blue and green at 0.50. At the published cap
 it reproduces the main run on those chips exactly, 80 of 494 parcels and a
 recall of 0.1619, which also shows the regeneration is deterministic. At 12 m
 it finds one parcel more, 0.1640, and at 18 and 24 m it is back at 0.1619.
@@ -1230,8 +1278,8 @@ Apache 2.0. District polygons from geoBoundaries under CC BY 4.0.
 ```
 python src\compare_segmenters.py --country india
 python src\compare_segmenters.py --country slovenia
-python src\sam_run.py --country india --model vit_h
-python src\sam_run.py --country slovenia --model vit_h
+python src\sam_run.py --country india --model vit_h --composites true,false
+python src\sam_run.py --country slovenia --model vit_h --composites true,false
 python src\grid_check.py --country india
 python src\grid_check.py --country slovenia
 python src\width_ground.py --country india
@@ -1299,7 +1347,7 @@ Outputs land in `results/<country>/`:
 | `season_ftw_parcels.csv` | per-parcel IoU for each arrangement |
 | `season_watershed.csv` | watershed on each window, every setting to h 0.6 |
 | `season_watershed_budget.csv` | the same, read at FTW's object count |
-| `season_windows.csv` | per chip and window, blue band and edge strength |
+| `season_windows.csv` | per chip and window, red, blue, NDVI and edge strength |
 | `probe/` | the 5-chip ViT-B timing probe that chose ViT-H |
 
 `shape_test.csv` and `shape_test_bands.csv` sit in `results/` itself, since

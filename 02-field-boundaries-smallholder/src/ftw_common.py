@@ -80,6 +80,13 @@ C2_NOT_FIELD = 0
 C2_INTERIOR = 1
 C2_UNLABELLED = 3
 
+# FTW writes each window as four bands, red, green, blue, near infrared, and
+# names them in the file. Its own downloader asks for them in this order
+# (ftw_cli/cfg.py, BANDS_OF_INTEREST). Read bands by name with band_index()
+# and never by position: this project once assumed blue came first, which
+# put red and blue the wrong way round in every SAM input (B-23).
+FTW_BANDS = ("B04", "B03", "B02", "B08")
+
 NATIVE_M = 10.0         # Sentinel-2's finest bands
 MAX_RING_DIST = 3.0     # pixels; a ring further out than this is orphaned
 
@@ -101,6 +108,22 @@ def chip_names():
 def read_band(path, band=1, window=None):
     with rasterio.open(path) as s:
         return s.read(band, window=window)
+
+
+def band_index(path, names) -> list:
+    """1-based band numbers for Sentinel-2 band names, read from the file.
+
+    Falls back to FTW_BANDS only when the file carries no band names.
+    """
+    with rasterio.open(path) as s:
+        desc = list(s.descriptions)
+    if not all(desc):
+        desc = list(FTW_BANDS[:len(desc)])
+    missing = [n for n in names if n not in desc]
+    if missing:
+        raise ValueError(f"{Path(path).name} has bands {desc}, "
+                         f"not {missing}")
+    return [desc.index(n) + 1 for n in names]
 
 
 def grid_pixel_m(names=None, n=80):

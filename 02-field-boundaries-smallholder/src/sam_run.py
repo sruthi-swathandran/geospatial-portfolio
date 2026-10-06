@@ -18,6 +18,15 @@ Two composites are run rather than one. SAM takes three 8-bit channels while
 FTW's model sees eight bands across two seasons, and picking whichever three
 flatter the argument would stack the deck.
 
+The composites are now named by the bands that go into them. The first run
+used two called "true" and "false", built on the assumption that FTW stores
+blue first. It stores red first, so "true" gave SAM blue, green and red in the
+red, green and blue channels, and "false" gave it near infrared, blue and
+green. Those names are kept for the files they produced. "rgb" and "cir" are
+the natural colour and colour infrared composites that were intended (B-23).
+
+    python src\\sam_run.py --country india --model vit_h --composites rgb,cir
+
 Every chip's parcels are appended to disk as they finish, and a rerun skips
 what is already there, so a two-hour run can be stopped and resumed.
 
@@ -62,9 +71,14 @@ CKPTS = {
     "vit_h": "sam_vit_h_4b8939.pth",
 }
 
-# rasterio bands are 1-indexed. FTW ships B2, B3, B4, B8 per window, so
-# 1 is blue, 2 green, 3 red, 4 near infrared.
-COMPOSITES = {"true": (3, 2, 1), "false": (4, 3, 2)}
+# Three Sentinel-2 bands by name, in the order they go into SAM's red, green
+# and blue channels. ftw_common.band_index looks each name up in the file.
+COMPOSITES = {
+    "true": ("B02", "B03", "B04"),   # first run: red and blue swapped
+    "false": ("B08", "B02", "B03"),  # first run: near infrared, blue, green
+    "rgb": ("B04", "B03", "B02"),    # natural colour
+    "cir": ("B08", "B04", "B03"),    # colour infrared, the usual false colour
+}
 
 # Generation thresholds, permissive enough that filtering afterwards can
 # reproduce SAM's own defaults and everything looser.
@@ -105,10 +119,11 @@ def fetch(url: str, dest: Path) -> Path:
     return dest
 
 
-def rgb8(chip: str, bands) -> np.ndarray:
+def rgb8(chip: str, names) -> np.ndarray:
     """One window as 8-bit RGB, percentile stretched per band, HWC for SAM."""
-    with rasterio.open(F.IMG_A / chip) as s:
-        arr = s.read(list(bands)).astype(np.float32)
+    path = F.IMG_A / chip
+    with rasterio.open(path) as s:
+        arr = s.read(F.band_index(path, names)).astype(np.float32)
     out = np.empty(arr.shape, np.uint8)
     for i in range(arr.shape[0]):
         lo, hi = np.percentile(arr[i], (2, 98))
@@ -247,7 +262,7 @@ def main() -> None:
     ap.add_argument("--country", default="india")
     ap.add_argument("--model", default="vit_b", choices=sorted(CKPTS))
     ap.add_argument("--points", type=int, default=32)
-    ap.add_argument("--composites", default="true,false")
+    ap.add_argument("--composites", default="rgb,cir")
     ap.add_argument("--ref-tag", default="3class_full")
     ap.add_argument("--limit", type=int, default=0,
                     help="0 means every chip")
@@ -321,7 +336,8 @@ def main() -> None:
     print(f"  {len(already):,} chip and composite pairs already done, "
           f"{len(todo):,} to go")
     if not todo:
-        aggregate(raw_path, args.iou, F.COUNTRY, args.min_size_m2)
+        aggregate(raw_path, args.iou, F.COUNTRY, args.min_size_m2,
+                  args.model)
         return
 
     ckpt = fetch(BASE + CKPTS[args.model],

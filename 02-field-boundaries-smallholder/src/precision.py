@@ -156,7 +156,7 @@ def main() -> None:
             min_mask_region_area=0)
         print(f"  {args.model} loaded, torch threads "
               f"{torch.get_num_threads()}")
-        print(f"  {args.composite} colour at predicted IoU "
+        print(f"  composite {args.composite} at predicted IoU "
               f"{args.sam_threshold:.2f} over stability "
               f"{S2.GEN_STABILITY:.2f}")
         print(f"  about {args.points ** 2:,} prompts per chip, so roughly "

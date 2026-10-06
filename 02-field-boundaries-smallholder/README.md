@@ -21,10 +21,14 @@ on a field boundary do better:
 
 | method, India, at 175 objects per chip | recall |
 |---|---:|
-| SAM ViT-H, false colour | 0.153 |
+| SAM ViT-H, NIR-blue-green | 0.153 |
 | watershed | 0.107 |
 | felzenszwalb | 0.031 |
 | FTW 3-class checkpoint | 0.027 |
+
+SAM was meant to get standard false colour and got near infrared, blue and
+green, because the code took FTW's band order to start with blue. It is being
+rerun on the composites that were intended (B-23).
 
 The checkpoint barely clears chance. Random Voronoi cells at the same count,
 which never see the imagery, average 0.0209 over 200 draws, and 3 of those 200
@@ -47,8 +51,8 @@ width would be found about as often in each. It is not:
 | 50 m up | FTW | 7.11% | 58.80% | 8.3x |
 | 30 to 50 m | watershed | 22.49% | 47.64% | 2.1x |
 | 50 m up | watershed | 41.33% | 71.10% | 1.7x |
-| 30 to 50 m | SAM ViT-H true | 8.77% | 32.01% | 3.7x |
-| 50 m up | SAM ViT-H true | 33.78% | 64.39% | 1.9x |
+| 30 to 50 m | SAM ViT-H, blue-green-red | 8.77% | 32.01% | 3.7x |
+| 50 m up | SAM ViT-H, blue-green-red | 33.78% | 64.39% | 1.9x |
 
 Slovenia wins every band by every method, 1.7 to 41.0 times. Its labelled
 parcels are also narrower than India's, 30.4 m against 42.3 m at the median.
@@ -106,6 +110,8 @@ is applied to every method. `COMPARISON.md` explains each control.
   parcel's edge and this project gives it back. Varying that step moves no
   recall by more than 0.0017, but it has never been checked against
   independently digitised parcels.
+- **SAM has not yet been run on standard composites.** Its figures are for
+  the inputs it was actually given (B-23).
 - **The contrast measure rests on one analyst's eye** and 20 parcels.
 - **Settings were chosen on the data they are reported from.** Measured on 40
   held-out splits, that is worth at most 0.0066 of recall.
@@ -121,7 +127,7 @@ is applied to every method. `COMPARISON.md` explains each control.
 assistant, Claude. It is not independent peer review. It lists 21 findings,
 and every one is now closed or scoped with the reason stated.
 
-`COMPARISON.md` carries 22 corrections, B-01 to B-22, each with the published
+`COMPARISON.md` carries 23 corrections, B-01 to B-23, each with the published
 value, the corrected one and why the first was wrong. The largest: FTW ships Slovenia on pixels 4.14 m across and 6.00 m
 tall, and treating them as square had overstated the cross-country gap by up to
 forty per cent. The conclusion survived the correction.

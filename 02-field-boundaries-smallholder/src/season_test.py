@@ -44,9 +44,14 @@ segmenter_comparison_min500.csv, and the script says whether it does.
 The random-cell null depends on object count only, never on the image, so it
 is not rerun. Its value at FTW's count is in COMPARISON.md.
 
-A short description of each window is also written: per chip, the median and
-95th percentile of the blue band, a rough sign of haze or cloud, and the mean
-edge strength the watershed sees.
+PART windows
+------------
+A short description of each window, per chip: the median red and blue
+reflectance, the 95th percentile of blue as a rough sign of haze or cloud, the
+median NDVI as a sign of how much is growing, and the mean edge strength the
+watershed sees. Bands are read by name. An earlier version read band 1 as blue
+when FTW stores red there (B-23), so this part was split out to be rerun on
+its own in a few seconds per country.
 
 HOW IT WILL BE READ, SET BEFORE RUNNING
 ---------------------------------------
@@ -71,6 +76,7 @@ better. Neither window has one, and finding out needs new imagery.
     python src\\season_test.py --country india
     python src\\season_test.py --country slovenia
     python src\\season_test.py --country india --part watershed
+    python src\\season_test.py --country india --part windows
     python src\\season_test.py --country india --limit 10
 """
 
@@ -338,12 +344,45 @@ def window_stack(F, C, chip: str, variant: str) -> np.ndarray:
     return np.stack([C.stretch(b) for b in arr])
 
 
-def describe_window(F, chip: str, folder) -> dict:
+def describe_window(F, C, chip: str, folder) -> dict:
+    """Red, blue, NDVI and edge strength for one window of one chip."""
     import rasterio
-    with rasterio.open(folder / chip) as s:
-        blue = s.read(1).astype(np.float32)
-    return {"blue_median": float(np.median(blue)),
-            "blue_p95": float(np.percentile(blue, 95))}
+    path = folder / chip
+    with rasterio.open(path) as s:
+        red, blue, nir = s.read(F.band_index(path, ("B04", "B02", "B08"))
+                                ).astype(np.float32)
+        every = s.read()
+    with np.errstate(divide="ignore", invalid="ignore"):
+        ndvi = (nir - red) / (nir + red)
+    stack = np.stack([C.stretch(b) for b in every])
+    return {"red_median": float(np.median(red)),
+            "blue_median": float(np.median(blue)),
+            "blue_p95": float(np.percentile(blue, 95)),
+            "ndvi_median": float(np.nanmedian(ndvi)),
+            "edge_mean": float(C.gradient(stack).mean())}
+
+
+def run_windows(F, C, args) -> None:
+    chips = chips_for(F, args.limit)
+    print(RULE)
+    print(f"WHAT EACH WINDOW SHOWS, {F.COUNTRY.upper()}, {len(chips)} chips")
+    print(RULE)
+    print_windows(F)
+    rows = []
+    for chip in chips:
+        for w, folder in (("window_a", F.IMG_A), ("window_b", F.IMG_B)):
+            rows.append({"window": w, "chip": chip,
+                         **describe_window(F, C, chip, folder)})
+    cols = ["red_median", "blue_median", "blue_p95", "ndvi_median",
+            "edge_mean"]
+    print("  median over every test chip")
+    print(f"  {'window':<10}" + "".join(f"{c:>13}" for c in cols))
+    for w in ("window_a", "window_b"):
+        sel = [r for r in rows if r["window"] == w]
+        print(f"  {w:<10}" + "".join(
+            f"{np.median([r[c] for r in sel]):>13.3f}" for c in cols))
+    write_csv(F.RESULTS / "season_windows.csv", rows)
+    print(f"\n  wrote results\\{F.COUNTRY}\\season_windows.csv")
 
 
 def at_budget(objs: np.ndarray, rec: np.ndarray, budget: float) -> float:
@@ -383,23 +422,16 @@ def run_watershed(F, C, S, args, rng) -> None:
     objs = {v: np.zeros(shape) for v in WS_VARIANTS}
     n = np.zeros(len(chips))
     keep = np.zeros(len(chips), bool)
-    win_rows = []
     tic = time.time()
 
     for i, chip in enumerate(chips):
         _, _, _, full = F.load_labels(chip)
-        for w, folder in (("window_a", F.IMG_A), ("window_b", F.IMG_B)):
-            d = describe_window(F, chip, folder)
-            win_rows.append({"window": w, "chip": chip, **d})
         if full.max() == 0:
             continue
         keep[i] = True
         for v in WS_VARIANTS:
             stack = window_stack(F, C, chip, v)
             grad = C.gradient(stack)
-            if v != "both":
-                win_rows[-2 if v == "window_a" else -1]["edge_mean"] = \
-                    float(grad.mean())
             for j, h in enumerate(settings):
                 seg = C.drop_small(C.segment(stack, grad, "watershed", h),
                                    min_px)
@@ -465,26 +497,16 @@ def run_watershed(F, C, S, args, rng) -> None:
                             "lo": round(float(lo), 4),
                             "hi": round(float(hi), 4), "clamped": clamped})
 
-    print("\n  what each window looks like, median over chips")
-    print(f"  {'window':<10}{'blue median':>13}{'blue p95':>11}{'edge mean':>11}")
-    for w in ("window_a", "window_b"):
-        rows = [r for r in win_rows if r["window"] == w]
-        edges = [r["edge_mean"] for r in rows if "edge_mean" in r]
-        print(f"  {w:<10}{np.median([r['blue_median'] for r in rows]):>13.0f}"
-              f"{np.median([r['blue_p95'] for r in rows]):>11.0f}"
-              f"{(np.median(edges) if edges else float('nan')):>11.4f}")
-
     write_csv(F.RESULTS / "season_watershed.csv", sweep_rows)
     write_csv(F.RESULTS / "season_watershed_budget.csv", budget_rows)
-    write_csv(F.RESULTS / "season_windows.csv", win_rows)
-    print(f"\n  wrote results\\{F.COUNTRY}\\season_watershed.csv, "
-          f"season_watershed_budget.csv and season_windows.csv")
+    print(f"\n  wrote results\\{F.COUNTRY}\\season_watershed.csv and "
+          f"season_watershed_budget.csv")
 
 
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--country", default="india")
-    ap.add_argument("--part", default="all", choices=["all", "ftw", "watershed"])
+    ap.add_argument("--part", default="all", choices=["all", "ftw", "watershed", "windows"])
     ap.add_argument("--ckpt", default="",
                     help="default models\\3class_full.ckpt")
     ap.add_argument("--batch", type=int, default=4)
@@ -510,6 +532,9 @@ def main() -> None:
         print()
     if args.part in ("all", "watershed"):
         run_watershed(F, C, S, args, rng)
+        print()
+    if args.part in ("all", "windows"):
+        run_windows(F, C, args)
     print(RULE)
 
 

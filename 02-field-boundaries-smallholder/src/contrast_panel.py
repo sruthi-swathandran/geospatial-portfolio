@@ -64,21 +64,26 @@ except Exception:                                             # noqa: BLE001
 RULE = "=" * 78
 PAD_M = 40.0          # context around the parcel, in metres
 N_PER_QUARTILE = 5
-TRUE_COLOUR = (3, 2, 1)
+# The panel was drawn, and judged, with blue, green and red in the red, green
+# and blue channels, because the code then assumed FTW stores blue first. It
+# stores red first (B-23). Kept as it was so --redraw reproduces the crops the
+# marks were made on. A new panel should use ("B04", "B03", "B02").
+PANEL_BANDS = ("B02", "B03", "B04")
 N_PERMUTATIONS = 20000
 TRACKS_AUC, TRACKS_P, WEAK_AUC = 0.75, 0.05, 0.60
 
 
 def crop(chip, mask, pad_px):
-    """A true-colour window around one parcel, stretched for looking at."""
+    """A window around one parcel in PANEL_BANDS, stretched for looking at."""
     import rasterio
     ys, xs = np.nonzero(mask)
     y0 = max(0, ys.min() - pad_px)
     y1 = min(mask.shape[0], ys.max() + pad_px + 1)
     x0 = max(0, xs.min() - pad_px)
     x1 = min(mask.shape[1], xs.max() + pad_px + 1)
-    with rasterio.open(F.IMG_A / chip) as s:
-        arr = s.read(list(TRUE_COLOUR),
+    path = F.IMG_A / chip
+    with rasterio.open(path) as s:
+        arr = s.read(F.band_index(path, PANEL_BANDS),
                      window=((y0, y1), (x0, x1))).astype(np.float32)
     out = np.empty(arr.shape, np.float32)
     for i in range(arr.shape[0]):

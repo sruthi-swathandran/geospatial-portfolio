@@ -92,7 +92,7 @@ def full_fields_m(inst, c3, cap_m, x_m, y_m):
 
 
 def sam_generator(points):
-    """SAM ViT-H false colour at 0.50, the setting precision.py measured."""
+    """SAM ViT-H near infrared, blue and green at 0.50, as precision.py ran it."""
     import sam_run as S2
     from segment_anything import SamAutomaticMaskGenerator, sam_model_registry
     ckpt = S2.fetch(S2.BASE + S2.CKPTS["vit_h"],

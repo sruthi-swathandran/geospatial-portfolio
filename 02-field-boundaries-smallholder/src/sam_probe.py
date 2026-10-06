@@ -64,9 +64,15 @@ CKPTS = {
     "vit_h": "sam_vit_h_4b8939.pth",
 }
 
-# rasterio bands are 1-indexed. FTW ships B2, B3, B4, B8 per window, so
-# 1 is blue, 2 green, 3 red, 4 near infrared.
-COMPOSITES = {"true": (3, 2, 1), "false": (4, 3, 2)}
+# Band names in the order they go into SAM's channels; see sam_run.py. The
+# probe ran with "true" and "false", which assumed blue came first in FTW's
+# files when red does, so they are kept here as the inputs it actually used.
+COMPOSITES = {
+    "true": ("B02", "B03", "B04"),
+    "false": ("B08", "B02", "B03"),
+    "rgb": ("B04", "B03", "B02"),
+    "cir": ("B08", "B04", "B03"),
+}
 
 
 def fetch(url: str, dest: Path) -> Path:
@@ -82,10 +88,11 @@ def fetch(url: str, dest: Path) -> Path:
     return dest
 
 
-def rgb8(chip: str, bands) -> np.ndarray:
+def rgb8(chip: str, names) -> np.ndarray:
     """One window as 8-bit RGB, percentile stretched per band, HWC for SAM."""
-    with rasterio.open(F.IMG_A / chip) as s:
-        arr = s.read(list(bands)).astype(np.float32)
+    path = F.IMG_A / chip
+    with rasterio.open(path) as s:
+        arr = s.read(F.band_index(path, names)).astype(np.float32)
     out = np.empty(arr.shape, np.uint8)
     for i in range(arr.shape[0]):
         lo, hi = np.percentile(arr[i], (2, 98))

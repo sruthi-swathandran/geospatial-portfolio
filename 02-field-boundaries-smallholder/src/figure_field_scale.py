@@ -23,14 +23,15 @@ what that looks like to Sentinel-2. This draws it.
 Outlines are the reconstructed parcel, interior plus its eroded boundary ring,
 which is the real extent. The instance mask alone is about a third smaller.
 
-Bands are taken as blue, green, red, near infrared, which is what the band
-statistics suggest. The default rendering is 4, 3, 2, so healthy vegetation
-comes out red. If it does not, the band order is wrong and --bands fixes it.
+Bands are read by their Sentinel-2 names from each file. The default is
+colour infrared, near infrared, red and green, so healthy vegetation comes out
+red. An earlier version took the bands as blue, green, red, near infrared from
+their statistics, which was wrong: FTW stores red first (B-23).
 
 Reads results/field_sizes.csv, so run measure_fields.py first.
 
     python src\\figure_field_scale.py
-    python src\\figure_field_scale.py --bands 3,2,1
+    python src\\figure_field_scale.py --bands B04,B03,B02
 """
 
 from __future__ import annotations
@@ -161,7 +162,7 @@ def field_scale_figure(rows, bands, px_m):
         win = crop_window(r, min(side, h, w), h, w)
 
         with rasterio.open(img) as s:
-            arr = s.read(bands, window=win)
+            arr = s.read(F.band_index(img, bands), window=win)
         inst, c2, c3, full = F.load_labels(r["chip"], window=win)
 
         rgb = stretch(arr)
@@ -248,7 +249,7 @@ def sparsity_figure(rows, bands, px_m, n_chips=3):
 
     for ax, chip in zip(axes, picks):
         with rasterio.open(F.IMG_A / chip) as s:
-            arr = s.read(bands)
+            arr = s.read(F.band_index(F.IMG_A / chip, bands))
             w = s.width
         inst, c2, c3, full = F.load_labels(chip)
         ax.imshow(stretch(arr))
@@ -298,12 +299,13 @@ def sparsity_figure(rows, bands, px_m, n_chips=3):
 
 def main() -> None:
     ap = argparse.ArgumentParser()
-    ap.add_argument("--bands", default="4,3,2")
+    ap.add_argument("--bands", default="B08,B04,B03",
+                    help="Sentinel-2 band names for red, green and blue")
     ap.add_argument("--pixel", type=float, default=0.0,
                     help="override the measured grid pixel, metres")
     args = ap.parse_args()
 
-    bands = [int(x) for x in args.bands.split(",")]
+    bands = [x.strip() for x in args.bands.split(",")]
     rows = load_fields()
     px_m = args.pixel or F.grid_pixel_m()
     print(f"Drawing from {len(rows):,} measured parcels, "
