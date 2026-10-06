@@ -1,0 +1,17 @@
+country,cap,method,band,parcels,found
+india,"3 px, published",sam,under 20 m,54,0
+india,"3 px, published",sam,20 to 30 m,70,0
+india,"3 px, published",sam,30 to 50 m,229,19
+india,"3 px, published",sam,50 m up,141,61
+india,12 m,sam,under 20 m,57,0
+india,12 m,sam,20 to 30 m,67,0
+india,12 m,sam,30 to 50 m,229,20
+india,12 m,sam,50 m up,141,61
+india,18 m,sam,under 20 m,54,0
+india,18 m,sam,20 to 30 m,70,0
+india,18 m,sam,30 to 50 m,229,19
+india,18 m,sam,50 m up,141,61
+india,24 m,sam,under 20 m,54,0
+india,24 m,sam,20 to 30 m,70,0
+india,24 m,sam,30 to 50 m,229,19
+india,24 m,sam,50 m up,141,61

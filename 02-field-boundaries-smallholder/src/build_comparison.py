@@ -482,6 +482,57 @@ def registration_tables(iou: float) -> list:
     return out
 
 
+def ring_tables() -> list:
+    """F-12: every headline at each ring distance cap, from ring_sensitivity.py."""
+    out = []
+    data = {}
+    for country in COUNTRIES:
+        rd = results_dir(country)
+        paths = [rd / f"ring_sensitivity{s}.csv"
+                 for s in ("_truth", "", "_bands")]
+        if not all(p.exists() for p in paths):
+            out.append(f"\n{country.capitalize()}: run ring_sensitivity.py.\n")
+            continue
+        truth, rec, bands = (pd.read_csv(p) for p in paths)
+        data[country] = bands
+        out.append(f"\n### {country.capitalize()}\n")
+        methods = [m for m in ("ftw", "watershed", "felzenszwalb")
+                   if m in set(rec.method)]
+        head = ("| cap | ring left out | median area | median width "
+                "| under 30 m | " + " | ".join(
+                    f"{PRETTY.get(m, m)} recall" for m in methods) + " |")
+        out.append(head)
+        out.append("|---|" + "---:|" * (4 + len(methods)))
+        for _, r in truth.iterrows():
+            cells = [r["cap"], f"{r['orphan_share'] * 100:.2f}%",
+                     f"{r['median_area_ha']:.3f} ha",
+                     f"{r['median_width_m']:.1f} m",
+                     f"{r['share_under_30m'] * 100:.2f}%"]
+            for m in methods:
+                v = rec[(rec.cap == r["cap"]) & (rec.method == m)].recall
+                cells.append(f"{float(v.iloc[0]):.4f}")
+            out.append("| " + " | ".join(cells) + " |")
+
+    if len(data) == 2:
+        a, b = data["india"], data["slovenia"]
+        out.append("\n### FTW at matched ground width, every cap\n")
+        out.append("| cap | ground width | India | Slovenia | ratio |")
+        out.append("|---|---|---:|---:|---:|")
+        for cap in a.cap.unique():
+            for band in WIDTH_LABELS_M[1:]:
+                ra = a[(a.cap == cap) & (a.method == "ftw") & (a.band == band)]
+                rb = b[(b.cap == cap) & (b.method == "ftw") & (b.band == band)]
+                if ra.empty or rb.empty:
+                    continue
+                fa, na = int(ra.found.iloc[0]), int(ra.parcels.iloc[0])
+                fb, nb = int(rb.found.iloc[0]), int(rb.parcels.iloc[0])
+                pa, pb = fa / max(na, 1), fb / max(nb, 1)
+                ratio = f"{pb / pa:.1f}x" if pa > 0 else "not readable"
+                out.append(f"| {cap} | {band} | {fa}/{na:,}, {pa * 100:.2f}% "
+                           f"| {fb}/{nb:,}, {pb * 100:.2f}% | {ratio} |")
+    return out
+
+
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--sam-setting", default="0p50",
@@ -544,6 +595,9 @@ def main() -> None:
 
     out.append("\n## Label registration\n")
     out += registration_tables(args.iou)
+
+    out.append("\n## Ring distance sensitivity\n")
+    out += ring_tables()
 
     dest = F.PROJECT / "results" / "comparison_tables.md"
     dest.parent.mkdir(parents=True, exist_ok=True)

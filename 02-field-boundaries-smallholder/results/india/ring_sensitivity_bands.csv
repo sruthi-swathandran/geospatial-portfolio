@@ -1,0 +1,49 @@
+country,cap,method,band,parcels,found
+india,"3 px, published",ftw,under 20 m,196,0
+india,"3 px, published",ftw,20 to 30 m,245,1
+india,"3 px, published",ftw,30 to 50 m,867,5
+india,"3 px, published",ftw,50 m up,675,48
+india,"3 px, published",watershed,under 20 m,196,2
+india,"3 px, published",watershed,20 to 30 m,245,12
+india,"3 px, published",watershed,30 to 50 m,867,195
+india,"3 px, published",watershed,50 m up,675,279
+india,"3 px, published",felzenszwalb,under 20 m,196,0
+india,"3 px, published",felzenszwalb,20 to 30 m,245,5
+india,"3 px, published",felzenszwalb,30 to 50 m,867,54
+india,"3 px, published",felzenszwalb,50 m up,675,108
+india,12 m,ftw,under 20 m,214,0
+india,12 m,ftw,20 to 30 m,228,1
+india,12 m,ftw,30 to 50 m,867,5
+india,12 m,ftw,50 m up,674,48
+india,12 m,watershed,under 20 m,214,2
+india,12 m,watershed,20 to 30 m,228,13
+india,12 m,watershed,30 to 50 m,867,193
+india,12 m,watershed,50 m up,674,282
+india,12 m,felzenszwalb,under 20 m,214,0
+india,12 m,felzenszwalb,20 to 30 m,228,4
+india,12 m,felzenszwalb,30 to 50 m,867,53
+india,12 m,felzenszwalb,50 m up,674,109
+india,18 m,ftw,under 20 m,197,0
+india,18 m,ftw,20 to 30 m,244,1
+india,18 m,ftw,30 to 50 m,867,5
+india,18 m,ftw,50 m up,675,48
+india,18 m,watershed,under 20 m,197,2
+india,18 m,watershed,20 to 30 m,244,13
+india,18 m,watershed,30 to 50 m,867,195
+india,18 m,watershed,50 m up,675,278
+india,18 m,felzenszwalb,under 20 m,197,0
+india,18 m,felzenszwalb,20 to 30 m,244,4
+india,18 m,felzenszwalb,30 to 50 m,867,54
+india,18 m,felzenszwalb,50 m up,675,108
+india,24 m,ftw,under 20 m,196,0
+india,24 m,ftw,20 to 30 m,245,1
+india,24 m,ftw,30 to 50 m,867,5
+india,24 m,ftw,50 m up,675,48
+india,24 m,watershed,under 20 m,196,2
+india,24 m,watershed,20 to 30 m,245,13
+india,24 m,watershed,30 to 50 m,867,195
+india,24 m,watershed,50 m up,675,278
+india,24 m,felzenszwalb,under 20 m,196,0
+india,24 m,felzenszwalb,20 to 30 m,245,4
+india,24 m,felzenszwalb,30 to 50 m,867,54
+india,24 m,felzenszwalb,50 m up,675,108

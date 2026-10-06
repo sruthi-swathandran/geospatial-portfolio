@@ -291,10 +291,13 @@ specification.** 6.067 m and 4.139 m are measured geodesically from the chips.
 If that measurement is wrong then every normalised width in these documents is
 wrong with it.
 
-**Parcel reconstruction is validated synthetically only.** FTW ships instance
+**Parcel reconstruction is bounded but not validated.** FTW ships instance
 masks with the outer ring eroded away and this project gives it back, capped at
-three pixels. Every size figure depends on that constant and it has never been
-checked against an independently digitised parcel.
+three pixels. Rebuilding the parcels with the cap at 12, 18 and 24 m moves no
+recall by more than one parcel in 494 for SAM and 0.0017 for every other
+method, and leaves the cross-country ratios between 18.1 and 41.5 times, so no headline here depends on the cap. Whether the
+reconstruction matches the real field still needs independently digitised
+parcels.
 
 **Boundary contrast agrees only weakly with the eye.** A blind check against
 one analyst on 20 parcels gave a rank score of 0.655, p = 0.16, so the question

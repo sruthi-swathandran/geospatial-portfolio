@@ -1,0 +1,13 @@
+country,cap,method,chips,parcels,found,recall
+slovenia,"3 px, published",ftw,185,6831,1518,0.2222
+slovenia,"3 px, published",watershed,185,6831,2380,0.3484
+slovenia,"3 px, published",felzenszwalb,185,6831,1460,0.2137
+slovenia,12 m,ftw,185,6831,1521,0.2227
+slovenia,12 m,watershed,185,6831,2368,0.3467
+slovenia,12 m,felzenszwalb,185,6831,1459,0.2136
+slovenia,18 m,ftw,185,6831,1518,0.2222
+slovenia,18 m,watershed,185,6831,2373,0.3474
+slovenia,18 m,felzenszwalb,185,6831,1460,0.2137
+slovenia,24 m,ftw,185,6831,1518,0.2222
+slovenia,24 m,watershed,185,6831,2373,0.3474
+slovenia,24 m,felzenszwalb,185,6831,1460,0.2137

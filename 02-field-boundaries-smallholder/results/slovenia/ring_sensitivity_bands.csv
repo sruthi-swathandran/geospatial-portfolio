@@ -1,0 +1,49 @@
+country,cap,method,band,parcels,found
+slovenia,"3 px, published",ftw,under 20 m,2163,11
+slovenia,"3 px, published",ftw,20 to 30 m,1229,97
+slovenia,"3 px, published",ftw,30 to 50 m,1740,411
+slovenia,"3 px, published",ftw,50 m up,1699,999
+slovenia,"3 px, published",watershed,under 20 m,2163,81
+slovenia,"3 px, published",watershed,20 to 30 m,1229,262
+slovenia,"3 px, published",watershed,30 to 50 m,1740,829
+slovenia,"3 px, published",watershed,50 m up,1699,1208
+slovenia,"3 px, published",felzenszwalb,under 20 m,2163,81
+slovenia,"3 px, published",felzenszwalb,20 to 30 m,1229,180
+slovenia,"3 px, published",felzenszwalb,30 to 50 m,1740,450
+slovenia,"3 px, published",felzenszwalb,50 m up,1699,749
+slovenia,12 m,ftw,under 20 m,2178,10
+slovenia,12 m,ftw,20 to 30 m,1221,97
+slovenia,12 m,ftw,30 to 50 m,1737,416
+slovenia,12 m,ftw,50 m up,1695,998
+slovenia,12 m,watershed,under 20 m,2178,81
+slovenia,12 m,watershed,20 to 30 m,1221,255
+slovenia,12 m,watershed,30 to 50 m,1737,825
+slovenia,12 m,watershed,50 m up,1695,1207
+slovenia,12 m,felzenszwalb,under 20 m,2178,79
+slovenia,12 m,felzenszwalb,20 to 30 m,1221,183
+slovenia,12 m,felzenszwalb,30 to 50 m,1737,451
+slovenia,12 m,felzenszwalb,50 m up,1695,746
+slovenia,18 m,ftw,under 20 m,2167,10
+slovenia,18 m,ftw,20 to 30 m,1224,97
+slovenia,18 m,ftw,30 to 50 m,1745,415
+slovenia,18 m,ftw,50 m up,1695,996
+slovenia,18 m,watershed,under 20 m,2167,79
+slovenia,18 m,watershed,20 to 30 m,1224,258
+slovenia,18 m,watershed,30 to 50 m,1745,829
+slovenia,18 m,watershed,50 m up,1695,1207
+slovenia,18 m,felzenszwalb,under 20 m,2167,80
+slovenia,18 m,felzenszwalb,20 to 30 m,1224,183
+slovenia,18 m,felzenszwalb,30 to 50 m,1745,451
+slovenia,18 m,felzenszwalb,50 m up,1695,746
+slovenia,24 m,ftw,under 20 m,2166,10
+slovenia,24 m,ftw,20 to 30 m,1223,97
+slovenia,24 m,ftw,30 to 50 m,1747,415
+slovenia,24 m,ftw,50 m up,1695,996
+slovenia,24 m,watershed,under 20 m,2166,79
+slovenia,24 m,watershed,20 to 30 m,1223,258
+slovenia,24 m,watershed,30 to 50 m,1747,829
+slovenia,24 m,watershed,50 m up,1695,1207
+slovenia,24 m,felzenszwalb,under 20 m,2166,80
+slovenia,24 m,felzenszwalb,20 to 30 m,1223,182
+slovenia,24 m,felzenszwalb,30 to 50 m,1747,452
+slovenia,24 m,felzenszwalb,50 m up,1695,746

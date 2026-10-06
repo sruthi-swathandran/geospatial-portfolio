@@ -945,6 +945,68 @@ than wide. See B-18 and B-19. What is still not checked is the north to south
 figure against anything FTW publishes, since the reconciliation here is against
 the chips rather than against a specification.
 
+**The parcel reconstruction, now bounded.** FTW ships each parcel as an eroded
+interior and a separate boundary class, and `ftw_common.full_fields` gives each
+boundary pixel back to the nearest interior if one sits within three grid
+pixels. Every area, width and recall figure here is measured against parcels
+rebuilt that way, and the cap had only been checked on synthetic parcels.
+Three grid pixels is about 18 m in India and, after B-18, between 12 m and
+18 m in Slovenia depending on direction. `src\ring_sensitivity.py` rebuilds the
+parcels with the cap at 12, 18 and 24 m of ground on each chip's own pixel
+size, scores the same segmentations against every version, and checks that
+the published cap reproduces the published recall to the fourth decimal. It
+does, for every method in both countries.
+
+India, 1,983 test parcels:
+
+| cap | ring left out | median area | median width | under 30 m | FTW 3-class FULL recall | watershed recall | felzenszwalb recall |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| 3 px, published | 0.17% | 0.323 ha | 42.3 m | 22.24% | 0.0272 | 0.2461 | 0.0842 |
+| 12 m | 4.03% | 0.314 ha | 42.3 m | 22.29% | 0.0272 | 0.2471 | 0.0837 |
+| 18 m | 0.21% | 0.323 ha | 42.3 m | 22.24% | 0.0272 | 0.2461 | 0.0837 |
+| 24 m | 0.13% | 0.323 ha | 42.3 m | 22.24% | 0.0272 | 0.2461 | 0.0837 |
+
+Slovenia, 6,831 parcels:
+
+| cap | ring left out | median area | median width | under 30 m | FTW 3-class FULL recall | watershed recall | felzenszwalb recall |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| 3 px, published | 1.07% | 0.315 ha | 30.4 m | 49.66% | 0.2222 | 0.3484 | 0.2137 |
+| 12 m | 1.83% | 0.315 ha | 30.4 m | 49.76% | 0.2227 | 0.3467 | 0.2136 |
+| 18 m | 0.89% | 0.317 ha | 30.4 m | 49.64% | 0.2222 | 0.3474 | 0.2137 |
+| 24 m | 0.68% | 0.317 ha | 30.4 m | 49.61% | 0.2222 | 0.3474 | 0.2137 |
+
+No recall moves by more than 0.0017 across the caps, and no median width by
+more than 0.1 m. The one visible effect is India at 12 m, where 4.03% of the
+ring goes unassigned and the median area falls by about 3%. The cross-country
+comparison, which is the claim the cap could most plausibly have bent:
+
+| cap | ground width | India | Slovenia | ratio |
+|---|---|---:|---:|---:|
+| 3 px, published | 20 to 30 m | 1/245, 0.41% | 97/1,229, 7.89% | 19.3x |
+| 3 px, published | 30 to 50 m | 5/867, 0.58% | 411/1,740, 23.62% | 41.0x |
+| 3 px, published | 50 m up | 48/675, 7.11% | 999/1,699, 58.80% | 8.3x |
+| 12 m | 20 to 30 m | 1/228, 0.44% | 97/1,221, 7.94% | 18.1x |
+| 12 m | 30 to 50 m | 5/867, 0.58% | 416/1,737, 23.95% | 41.5x |
+| 12 m | 50 m up | 48/674, 7.12% | 998/1,695, 58.88% | 8.3x |
+| 18 m | 20 to 30 m | 1/244, 0.41% | 97/1,224, 7.92% | 19.3x |
+| 18 m | 30 to 50 m | 5/867, 0.58% | 415/1,745, 23.78% | 41.2x |
+| 18 m | 50 m up | 48/675, 7.11% | 996/1,695, 58.76% | 8.3x |
+| 24 m | 20 to 30 m | 1/245, 0.41% | 97/1,223, 7.93% | 19.4x |
+| 24 m | 30 to 50 m | 5/867, 0.58% | 415/1,747, 23.76% | 41.2x |
+| 24 m | 50 m up | 48/675, 7.11% | 996/1,695, 58.76% | 8.3x |
+
+The ratios sit between 18.1 and 19.4 times, 41.0 and 41.5 times, and at 8.3
+times in every case.
+
+SAM keeps no segmentations, so it was regenerated for the sweep on the 100
+Indian chips `precision.py` used, false colour at 0.50. At the published cap
+it reproduces the main run on those chips exactly, 80 of 494 parcels and a
+recall of 0.1619, which also shows the regeneration is deterministic. At 12 m
+it finds one parcel more, 0.1640, and at 18 and 24 m it is back at 0.1619. The Indian counts behind them are small, 1 and 5 parcels
+found in the two narrower bands, and that is true at every cap, so the cap is
+not what makes them fragile. This bounds the reconstruction. Validating it
+still needs parcels digitised independently of FTW.
+
 ---
 
 ## Reproducing
@@ -970,6 +1032,8 @@ python src\label_registration.py --self-test
 python src\label_registration.py --country india
 python src\label_registration.py --country slovenia
 python src\contrast_panel.py --country india --redraw
+python src\ring_sensitivity.py --country india
+python src\ring_sensitivity.py --country slovenia
 python src\precision.py --country india --method ftw
 python src\precision.py --country india --method watershed --setting 0.02
 python src\precision.py --country slovenia --method ftw
@@ -1007,6 +1071,9 @@ Outputs land in `results/<country>/`:
 | `contrast_panel_key.csv` | the 20 parcels on the blind panel, with their values |
 | `contrast_panel_key_spent_1.csv` | the earlier panel, spent without a valid score |
 | `contrast_panel_scores.csv` | the analyst's marks and the rank score |
+| `ring_sensitivity_truth.csv` | parcel area, width and unassigned ring at each reconstruction cap |
+| `ring_sensitivity.csv` | recall by method at each cap |
+| `ring_sensitivity_bands.csv` | recall by method and ground width band at each cap |
 | `precision_<method>_min500.csv` | per-parcel fragmentation, and object counts |
 | `holdout_selection.csv` | what choosing a setting on the reporting data cost |
 | `parcel_width_ground.csv` | parcel width in metres on rectangular pixels |

@@ -1,0 +1,13 @@
+country,cap,method,chips,parcels,found,recall
+india,"3 px, published",ftw,398,1983,54,0.0272
+india,"3 px, published",watershed,398,1983,488,0.2461
+india,"3 px, published",felzenszwalb,398,1983,167,0.0842
+india,12 m,ftw,398,1983,54,0.0272
+india,12 m,watershed,398,1983,490,0.2471
+india,12 m,felzenszwalb,398,1983,166,0.0837
+india,18 m,ftw,398,1983,54,0.0272
+india,18 m,watershed,398,1983,488,0.2461
+india,18 m,felzenszwalb,398,1983,166,0.0837
+india,24 m,ftw,398,1983,54,0.0272
+india,24 m,watershed,398,1983,488,0.2461
+india,24 m,felzenszwalb,398,1983,166,0.0837
