@@ -36,6 +36,8 @@ the imagery never opened, beat the trained model outright. The failure belongs
 to the method rather than to a shortage of signal, and the project also shows
 that the remaining failure below three native pixels is not explained by parcel
 width either.
+There is an [interactive map](https://sruthi-swathandran.github.io/geospatial-portfolio/02-field-boundaries-smallholder/docs/) of every test chip and what each method
+recovered on it.
 
 ---
 
