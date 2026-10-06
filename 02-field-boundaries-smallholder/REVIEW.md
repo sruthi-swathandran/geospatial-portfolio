@@ -1,5 +1,7 @@
 # Technical review: RS-02 field boundaries for smallholdings
 
+Written with an AI assistant, Claude. It is not independent peer review.
+
 Reviewed twice over. Once as a senior remote sensing scientist would read an
 internal method study before it goes to a programme board, and once as a
 journal editor would read a submission. Findings are against
