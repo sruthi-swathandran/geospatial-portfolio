@@ -56,7 +56,8 @@ Work done since this review was written. Everything else below still stands.
 One finding was raised by the work rather than the review. **B-08**: four of the
 five figures at Slovenia's object budget are clamped, because no competing
 method was run coarse enough to reach 20 objects per chip. FTW's Slovenian win
-is wider than any table can currently state.
+is wider than any table can currently state. Watershed has since been measured
+there, at 0.059 against FTW's 0.222, so three figures remain bounds.
 
 Nothing in the review is still open. Three items are scoped rather than closed, F-01, F-12 and F-14, for the reasons in their rows.
 
@@ -73,6 +74,12 @@ size squared and acted at 720 m² in Slovenia; rerun, recall moves by at most
 0.006 and FTW's Slovenian precision goes from 44.91% to 42.06%. **B-21**: every
 Slovenian area was understated by 1.450, which reverses the stage 1 statement
 that Slovenian parcels are smaller than Indian ones. No Indian recall moves.
+
+Raised after this status was first written: **B-22**, a statement that FTW's
+windows follow a European calendar, which FTW's own configuration contradicts.
+The tests it pointed to have run. Parcel shape explains 3% of FTW's country
+gap, and India's dry-season window costs FTW about two points of recall. See
+`COMPARISON.md`.
 
 ---
 

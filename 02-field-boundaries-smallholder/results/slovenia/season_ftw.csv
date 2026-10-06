@@ -1,0 +1,5 @@
+country,variant,chips,parcels,objects_per_chip,recall,lo,hi,null_recall,pixels_differing_from_published
+slovenia,shipped,185,6831,19.5,0.2222,0.1852,0.2597,0.0052,3
+slovenia,swapped,185,6831,21.5,0.2142,0.1798,0.2477,0.0055,
+slovenia,a twice,185,6831,16.6,0.1521,0.1195,0.1887,0.0051,
+slovenia,b twice,185,6831,8.9,0.106,0.0769,0.1359,0.0026,

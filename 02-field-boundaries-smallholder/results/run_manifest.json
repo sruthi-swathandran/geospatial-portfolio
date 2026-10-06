@@ -1,7 +1,7 @@
 {
- "written_at": "2026-10-06T05:33:53+00:00",
+ "written_at": "2026-10-06T08:35:58+00:00",
  "git": {
-  "commit": "b00f6403f851c40018e7466b66d88658b0f198ac",
+  "commit": "09d1be9fc102ac92f21d97904c4a02ca056caee1",
   "uncommitted_changes": true
  },
  "interpreter": {
@@ -137,6 +137,11 @@
    "value": 20260922
   },
   {
+   "script": "build_comparison.py",
+   "line": 690,
+   "value": 20261008
+  },
+  {
    "script": "compare_segmenters.py",
    "line": 174,
    "value": 20260916
@@ -175,12 +180,22 @@
    "script": "sam_run.py",
    "line": 259,
    "value": 20260917
+  },
+  {
+   "script": "season_test.py",
+   "line": 497,
+   "value": 20261007
+  },
+  {
+   "script": "shape_test.py",
+   "line": 243,
+   "value": 20261006
   }
  ],
  "outputs": {
   "results/comparison_tables.md": {
    "kind": "file",
-   "sha256": "2fb080f7ef314b03bad8eb4a41bf720e384489258393ecc3911eb7f9bd65da08"
+   "sha256": "e2a657c9b81b32577e4be15e2885347626813ea18f7487ef09f2138bdc690f41"
   },
   "results/country_comparison.csv": {
    "kind": "csv",
@@ -1777,6 +1792,69 @@
     "per_chip": "9155d4e5039627ace5c7e6e3985c12efa62405dad6d28d21ed663a0ade5a780e"
    }
   },
+  "results/india/season_ftw.csv": {
+   "kind": "csv",
+   "rows": 4,
+   "columns": {
+    "country": "fc54b58de4e71a90f54101b120d61d00e771a0cb419fcb620fbbf51e5fc44186",
+    "variant": "cb046f49c75d5adc959127c3437f7f3b610b6602987ca3c953f77e39b8650941",
+    "chips": "62ac0786518ad151aa3a872f7113e1fea87bee30535ad141e7a2ee2ef4945d4e",
+    "parcels": "b1d4fecd38ef5f6fc0f6df3cb60d35cc1c1c0d19479b1145276fe2524a42d063",
+    "objects_per_chip": "1df72d3e4cfded713ff3b83fde8edd38ae17af17065151e1d7ad196960b70741",
+    "recall": "e050fa4a79e884985d365049a2a3501e8123701789cf4393c80060fcc6e632ee",
+    "lo": "51135de6b8dd359c6681d528789020b9f0492d845fc1d3f6ed09a77987e9fa72",
+    "hi": "7d0324539eb1466bed5016faece14df6355dd7cfeeea3a903b9a99ea0bb57e38",
+    "null_recall": "259b2600db46c9544e29627f5b539134c7f7f00f3ac333953886dd5306af1d99",
+    "pixels_differing_from_published": "6fa9206d5383095139e1dbd4ec09309613f406f16eb5809b067bd43cdd43978c"
+   }
+  },
+  "results/india/season_ftw_parcels.csv": {
+   "kind": "csv",
+   "rows": 7932,
+   "columns": {
+    "variant": "604fb30336728d0168904ce5a33e9fb52f58305ca1549842850e707173d7e310",
+    "chip": "86c2e7d5df4cc815a2ade91493d50ef049560b75369e9a9fd78d09392817f0f5",
+    "parcel_id": "7b4851d0f4c19b5525a65da3ad72c4cf7d8a84627896abd3d5f7e477ec6dfcef",
+    "width_m": "fa88eac0a61f573c1e27c0a1875e52d187de91128c538f2cdd26f1244273e2a8",
+    "best_iou": "95c25e31a6ad94d008c5becc855e7cba703488112bd96d585b846eabb9ce3bf0",
+    "found": "65f6aeb708e1b171769ab62a82c266bbce6669a5bf21debc83d34fed4bdb71b1"
+   }
+  },
+  "results/india/season_watershed.csv": {
+   "kind": "csv",
+   "rows": 39,
+   "columns": {
+    "country": "026abb20d892f723d94e05c981c5aa2de3fae5959d8e458f762e9718eef5a120",
+    "variant": "f07b70095e938da9ed9fcc1f494ddc77e1e2476a6f1d647457f9aca9f9e4c162",
+    "setting": "00c2e1fb101937db0b1fa9563671e1b695aa709ac639762defa3e0787c8ed9e0",
+    "objects_per_chip": "09eac3ba72c3b8e6c24f34be5bb263f69bfc168996580328114f2f4b74781ef0",
+    "recall": "e06f73b87e7515ca4bf66e8f777c5a59799aca82d8f4644155bd083801945707"
+   }
+  },
+  "results/india/season_watershed_budget.csv": {
+   "kind": "csv",
+   "rows": 3,
+   "columns": {
+    "country": "4068db586fae55457378080b7aba36977e41a77f8e52eaa9cc9af9478c399415",
+    "variant": "9ac44be730dbd5faa4910f2b5cb2647480413d0c5dcd7e68743ca97f846bb1bd",
+    "budget": "1a74dc138fe6bdada4a389a88c88321704d74970ff3662366431260aad91d851",
+    "recall": "db0807aaa5009d92a32156c80924fe26e65da7da65cb36c12f032a6d35759f7a",
+    "lo": "fb2683db3687c638a229f5beb5f369d829a5b924e214e1058c1f1aa6223acce0",
+    "hi": "2624c2a0a0a91d90e21e962d541d0f5533513a2f994ef32d967e7ad7e063ddf4",
+    "clamped": "6afe5a7d7747dea451cb6183143a150876a4dd7cf2b96bd3cecb10dd9f8da6fd"
+   }
+  },
+  "results/india/season_windows.csv": {
+   "kind": "csv",
+   "rows": 798,
+   "columns": {
+    "window": "f917cc9bb63cb7ed659551a6a94166b2e29f41969dd9c3a986e54a1b0760a75c",
+    "chip": "84adde0962d8b20ed1cf32d601d089ad019392e58d56f2eb0b6344e8e1ad75db",
+    "blue_median": "cd664ff0b60e3fa2106d4e71c0750d1b76e3f8d7847a7b84ebbf143f64d05c82",
+    "blue_p95": "5a6d7bf2a04b1ea4d522e46aaf7fc478142ba5d3238874dbfb7cd3cc24ee25bb",
+    "edge_mean": "8eae8845f17541a9b71b826c20a3a55333993247169af807a164370398f5be5b"
+   }
+  },
   "results/india/segmenter_comparison_min500.csv": {
    "kind": "csv",
    "rows": 19,
@@ -1868,6 +1946,45 @@
     "median_best_iou": "95d020e1024da4b79092a4cd784eb0e765f045e43c0ca38d1430cf227994358f",
     "iou_threshold": "8d5c1b5a87c51f970807fc0c2057b3ab3aaf11638ab667dc5956edc8f5bcf138",
     "predicted_objects": "e9a46ef37f9b26e53a170fcd7e061ede6375c6523a1340d4af314e0d1fd9acdf"
+   }
+  },
+  "results/shape_test.csv": {
+   "kind": "csv",
+   "rows": 3,
+   "columns": {
+    "method": "eedc94722416a74acad71be694e98eadf26dab8a8582a51ea1544e74147d786e",
+    "india": "79781eba366cb0049b94a87bfe5e5ad9857329d61828e6b5e12853e705ba00af",
+    "slovenia": "340e969d0e7ed66c73d07be14d1743fc31340f65c8625f6821aaec1cefcd8a2f",
+    "slovenia_width": "0e44822b4d3b81ed2733b9b664fab860bc8178254a45b25441331c216ff31230",
+    "slovenia_width_shape": "822371aa7f55a55c47bad10782ec3d06fa1d5ddb027fbc9e8ba4016d4f5bc7cc",
+    "slovenia_width_shape6": "73c7612f56aa907ee217901f03e041462a3595c8d7736455eb7b124bfc942368",
+    "coverage": "308df623eabf492339c57d7239da969ceee1e3bcdec2231f40593bebbf50a7b6",
+    "ratio_width": "cf43319f2287ab82e8c2fae3019f8a86ab87b865235e3daa3d0c8b7af2720ec7",
+    "ratio_width_lo": "11efb3a7dbac249f50b8c9e7e4fb44a64a3604dd1393b953dd7ab73de8de8cf5",
+    "ratio_width_hi": "57f7770d1f1ad8f16807db3f93f1e1553f18176a9fee186382bf2e83876b8518",
+    "ratio_width_shape": "caf2b0365d1b3d65767e107da3700e6be3f5bfc8965f83611c42d19ac4aa8703",
+    "ratio_width_shape_lo": "e1bd8b4bd54c549cb4147e3ba498b0a0dda8032b152123b23eac829683951cce",
+    "ratio_width_shape_hi": "c7c7d189e47ae33d6d573fdb6407c2c48d068c7c85041cb463154469494e7bb9",
+    "share_from_shape": "10dd5dd526fc091a6fa6682ce2f53ed91d27635031d4a01df62831105a3ff720",
+    "share_lo": "0e1e984acd928381c0ccf32a174afb4107ffddc895dfdaa8055068505b418ba2",
+    "share_hi": "9493d9aba17f7512222bab2f956044b0294109fbd0e821dd590f34916ac08764",
+    "share_six_band": "9fb99a18e01b46c4665feb3d23920edd0b709e3faf91eb0585df00c5048bf128"
+   }
+  },
+  "results/shape_test_bands.csv": {
+   "kind": "csv",
+   "rows": 12,
+   "columns": {
+    "method": "1da6e912b84ff3d92d8b88c8e6448919fda6ee775020b61fc05e30be15fdc957",
+    "width_band": "dab8866099d08936c58df49427f47874a01c70aed8704296314f3779934d33fd",
+    "india_parcels": "89cd77a20f07c1e1dd5985ae30e8ebf80b2e83b52bc637fbbd94f6ba008515d5",
+    "slovenia_parcels": "31857519335a82cb4c4df91a9b7d57d8f03edb61eb1279686fad46bd53b65faf",
+    "india_found": "462a64d7a33e379f5ceab6d95156dab99fa8f23c4438fba895eeede011300da3",
+    "slovenia_found": "069d195df227a50caa04df55131244b414e1a6543419c06f23a1d89d6e0a0550",
+    "india_recall": "83d77627e30b6e299a6635720078fbc52cbf40f1bf93814df750c174f7710572",
+    "slovenia_recall": "c2245bf96c7a6bbf1db6d2f0cc731c342bc61c95781f35c21c10d653565f8250",
+    "slovenia_reweighted": "d211c165d5296eca03a7d987c36c48dfba5cb8ad4facc7758ae55c3c8f894117",
+    "coverage": "cb2967f5e07d3d8d7da5d8b1cacd4a98faa2313acfd0b595dfa3864f64069178"
    }
   },
   "results/slovenia/chips_by_district.csv": {
@@ -3232,6 +3349,69 @@
     "parcels": "3cc48151e7f067edec535f7d8619ee3953f898aa7dbfbbf61a0f7307488cb7ea",
     "pooled": "b7f3b82c06efed1aae1eef9448d0e6919552d853d8dc50420b7d32b6b2ab447a",
     "per_chip": "e3f9e7874c4e91e18f3a142efb9505c7fbdec6f306e61f532adc93455e343df4"
+   }
+  },
+  "results/slovenia/season_ftw.csv": {
+   "kind": "csv",
+   "rows": 4,
+   "columns": {
+    "country": "bdcdef2c053c044eb15ab8da5c3111d74e46a6603b62b6f745e73647ef9e4cde",
+    "variant": "cb046f49c75d5adc959127c3437f7f3b610b6602987ca3c953f77e39b8650941",
+    "chips": "79b0ea5c1cacf3d8c8e2689136ead15c8b76049dcbbc145eaa6e7796e4f0fbdc",
+    "parcels": "3cc48151e7f067edec535f7d8619ee3953f898aa7dbfbbf61a0f7307488cb7ea",
+    "objects_per_chip": "fc78a388ab3d3fa49d0866bb7b9e506ddeac68631e442e5fd0350658189de16c",
+    "recall": "f46d17c48a474a5f8976366b377e54ae57d864aebbcd5cc5868614762ea04672",
+    "lo": "bc32e14eb71c76dc0df38b3472d7bb52b8b3074e97baf9253c5adf44e5b15aa5",
+    "hi": "17e9f66cffaef432ab72cd810d023a38c3c09d1802395a0ee064fa1c59aed58e",
+    "null_recall": "a996269b0a8b656c1f49c1c51db1fdf760c7446e829d8eff33a3ab4a3fc6d812",
+    "pixels_differing_from_published": "a6ab52cc0d7619553437fd5b3d01f11a17c0602e7998f01485edcd01db07952f"
+   }
+  },
+  "results/slovenia/season_ftw_parcels.csv": {
+   "kind": "csv",
+   "rows": 27324,
+   "columns": {
+    "variant": "6812bb339a5fff5ea357796cc65786905ae2cd63000c73da79c281061db7c196",
+    "chip": "4741c988d09a57dab01f51d4978f131ac43e07fa164bbec7d252fa190aefaae1",
+    "parcel_id": "89bb450ef94cf76d305fbcbd8818277c37a88fc0eff6722aed45d66c34edc473",
+    "width_m": "b5c8d9690cd41b6c905ee81f027c89539b1c4a72cf0977fa2ccc96c919d72df2",
+    "best_iou": "48ed234f9169ee8aef460690342b7eb0e5479637b28ec8b270dcb6a782467f13",
+    "found": "a3680c6952e510afae1a21260207da6aca02155b0bb4394edb8d34bd5cf990ec"
+   }
+  },
+  "results/slovenia/season_watershed.csv": {
+   "kind": "csv",
+   "rows": 39,
+   "columns": {
+    "country": "b31315a918bd8b3771b237c296a19356989164053c771a52049baf541aef6272",
+    "variant": "f07b70095e938da9ed9fcc1f494ddc77e1e2476a6f1d647457f9aca9f9e4c162",
+    "setting": "00c2e1fb101937db0b1fa9563671e1b695aa709ac639762defa3e0787c8ed9e0",
+    "objects_per_chip": "738a8e62bc6c7efdabda2fba041eec2fe9f737b6d1b3bc51e814a8d76362de86",
+    "recall": "f97e9a6fb5de239e2a49fa66548c221a7cd5fa6837960e3350ede9ec371510ac"
+   }
+  },
+  "results/slovenia/season_watershed_budget.csv": {
+   "kind": "csv",
+   "rows": 3,
+   "columns": {
+    "country": "da2550661bf1c5f73e099ed671daa754bc4378e4b645b51522bb5e61e751a788",
+    "variant": "9ac44be730dbd5faa4910f2b5cb2647480413d0c5dcd7e68743ca97f846bb1bd",
+    "budget": "ad0027eefcbfbd44e8108e002003a30cccf57a4b4b519d7d69082b344524a0ef",
+    "recall": "a2312f6a3d98051d8596b9e2694f910ca92a3f5c850449b562896515f9df0c6b",
+    "lo": "cfd283f27ff8b3c5f096dcba029a43ea0cce147eb327326d662eb5b9a4947afb",
+    "hi": "91130eac33721b58324e500fd8fdf31b8f005558497f5a3d891dd0b1d4b97745",
+    "clamped": "6afe5a7d7747dea451cb6183143a150876a4dd7cf2b96bd3cecb10dd9f8da6fd"
+   }
+  },
+  "results/slovenia/season_windows.csv": {
+   "kind": "csv",
+   "rows": 456,
+   "columns": {
+    "window": "cce0b70164c212c370c81df7726aeb71314edf0a3d4e4cd63de6a463de3c6d81",
+    "chip": "f546e0870b87b0a91b7ebdb1b34ad6cd2cd2e4eeef4965f860a6bbc25bef723a",
+    "blue_median": "b7690c5dbc7feedc1d9f25222182ba45e1318eb5d5e6bf71511064ca35066fc3",
+    "blue_p95": "d6bec4f6f106f877bd9a18dd6e1f93f4619ea86cc9ea22d5d6dd14e8394c3d16",
+    "edge_mean": "4139e0afd44c9679ee546c8c4b54c67de7b9e8fd5caf01177812fb03793c6a32"
    }
   },
   "results/slovenia/segmenter_comparison_min500.csv": {

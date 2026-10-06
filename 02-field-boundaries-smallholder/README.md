@@ -33,7 +33,8 @@ draws beat it.
 **2. On Slovenia the same checkpoint works.** It recovers 22.2% of parcels from
 20 objects per chip, and 42.1% of the objects it emits match a real parcel,
 against 4.4% for watershed. Slovenia has a complete cadastre, so that is
-precision. FTW is a good model failing on India.
+precision. Read at the same 20 objects per chip, watershed recovers 5.9%. FTW
+is a good model failing on India.
 
 **3. Resolution does not explain the Indian failure.** Both countries are the
 same 10 m Sentinel-2. If the imagery set the limit, a parcel of a given ground
@@ -63,11 +64,20 @@ labelled parcels where FTW reaches 24.7%. On the largest Indian fields, over
 about 100 m across, SAM recovers 50.8% against FTW's 17.5%, the one result here
 close to practical use.
 
-**What is still open** is why India fails. The labelled Indian boundaries carry
-a weaker image gradient than Slovenia's, 1.297 times their interior against
-1.588, but a blind check against one analyst agreed with that measure only
-weakly. FTW's two seasonal windows were set for a European calendar rather
-than kharif and rabi, and that has not been tested.
+**6. Nor does parcel shape.** Slovenian parcels are more strip-like than
+India's. Given India's mix of widths and shapes, Slovenia is still found 10.7
+times as often by FTW, against 11.5 times when only widths are matched.
+
+**What is still open** is why India fails, though fewer candidates are left.
+The labelled Indian boundaries carry a weaker image gradient than Slovenia's,
+1.297 times their interior against 1.588, but a blind check against one
+analyst agreed with that measure only weakly. FTW's second image for India is
+from March to June, the dry months after the rabi harvest, and it works
+against the checkpoint. Given the kharif image twice instead, FTW finds 4.79%
+of Indian parcels against 2.72%, and given only the dry-season image it falls
+to chance. That is a measured part of the gap and a small one, since 4.79% is
+still 4.6 times below Slovenia. No image from December to February, when rabi
+crops are standing, has been tested.
 
 ![Recall against objects emitted per chip](figures/recall_by_object_budget.png)
 
@@ -89,8 +99,9 @@ is applied to every method. `COMPARISON.md` explains each control.
 - **Indian labels are presence-only.** Five parcels per chip are drawn and
   98.96% of each chip carries no label, so India gives recall and only a floor
   on precision.
-- **Four of the five Slovenian figures at the budget are bounds.** No method
-  other than FTW was run coarse enough to reach 20 objects per chip.
+- **Three of the five Slovenian figures at the budget are bounds.** Watershed
+  has been measured there. Felzenszwalb and the two SAM composites were not run
+  coarse enough to reach 20 objects per chip.
 - **The parcel reconstruction is bounded, not validated.** FTW erodes each
   parcel's edge and this project gives it back. Varying that step moves no
   recall by more than 0.0017, but it has never been checked against
@@ -110,7 +121,7 @@ is applied to every method. `COMPARISON.md` explains each control.
 assistant, Claude. It is not independent peer review. It lists 21 findings,
 and every one is now closed or scoped with the reason stated.
 
-`COMPARISON.md` carries 21 corrections, B-01 to B-21, each with the published
+`COMPARISON.md` carries 22 corrections, B-01 to B-22, each with the published
 value, the corrected one and why the first was wrong. The largest: FTW ships Slovenia on pixels 4.14 m across and 6.00 m
 tall, and treating them as square had overstated the cross-country gap by up to
 forty per cent. The conclusion survived the correction.

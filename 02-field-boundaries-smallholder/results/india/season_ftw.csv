@@ -1,0 +1,5 @@
+country,variant,chips,parcels,objects_per_chip,recall,lo,hi,null_recall,pixels_differing_from_published
+india,shipped,398,1983,175.0,0.0272,0.0172,0.0389,0.0193,1
+india,swapped,398,1983,186.8,0.0368,0.0248,0.0501,0.0222,
+india,a twice,398,1983,169.4,0.0479,0.0339,0.0634,0.0195,
+india,b twice,398,1983,116.9,0.0101,0.005,0.0157,0.0121,

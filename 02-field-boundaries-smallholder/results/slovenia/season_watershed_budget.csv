@@ -1,0 +1,4 @@
+country,variant,budget,recall,lo,hi,clamped
+slovenia,both,19.5,0.0593,0.05,0.0692,False
+slovenia,window_a,19.5,0.0435,0.0364,0.0507,False
+slovenia,window_b,19.5,0.0583,0.0499,0.0668,False

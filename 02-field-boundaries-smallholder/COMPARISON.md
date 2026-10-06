@@ -25,9 +25,9 @@ should be read are listed under Known gaps below.
    checkpoint at a matched object budget. SAM reaches 0.153, watershed 0.107,
    felzenszwalb 0.031, against FTW's 0.027.
 2. On Slovenia the checkpoint wins and wins economically. It reaches 0.222 from
-   20 objects per chip. No competing method was run coarse enough to be read at
-   that budget, so their figures there are upper bounds rather than
-   measurements. See B-08.
+   20 objects per chip. Watershed, rerun coarse enough to be read at that
+   budget, reaches 0.059. The other three were not, so their figures there are
+   upper bounds rather than measurements. See B-08.
 3. FTW's Indian output barely clears its own null, measured properly. At 200
    draws rather than three, random Voronoi cells of the same count average
    0.0209 against the checkpoint's 0.0272. Three draws in 200 beat it outright
@@ -90,6 +90,18 @@ should be read are listed under Known gaps below.
     and reading on the other moves recall by between -0.002 and +0.007, and
     seven of the eight method and country pairs choose the same setting in
     every split.
+15. Parcel shape does not explain the country gap. Slovenian parcels are more
+    strip-like than Indian ones, but giving Slovenia India's mix of widths and
+    shapes moves FTW's ratio only from 11.52 to 10.66 times, 3% of the gap on a
+    log scale. For watershed and SAM India's compact parcels are the easier
+    mix. See What this says.
+16. The seasonal windows are a part of the Indian failure, and a small part.
+    FTW's second Indian image is from March to June, the dry months after the
+    rabi harvest. Given the kharif image twice in its place, the checkpoint
+    finds 4.79% of Indian parcels against 2.72%; given only the dry-season
+    image, 1.01%, no better than chance. In Slovenia every change to the
+    windows costs recall. The best arrangement still leaves India 4.6 times
+    below Slovenia. See What this says.
 
 ---
 
@@ -307,6 +319,18 @@ to 0.081 at 26. FTW's win on Slovenia is therefore wider than this table can
 say, and how much wider is not measurable without rerunning the other three
 methods at coarser settings. That is B-08.
 
+Watershed has since been run coarse enough. `src\season_test.py` extends its
+sweep to h 0.6, which comes down to 2.5 objects per chip, and on the way it
+reproduces all ten published settings exactly. Read at FTW's budget:
+
+| method | recall at 20 objects/chip | how |
+|---|---:|---|
+| watershed | 0.059 | interpolated, sweep extended to h 0.6 in `season_test.py` |
+
+That is a measurement where the table above has a ceiling of 0.081, and it
+puts FTW 3.7 times ahead of watershed in Slovenia at the same object count.
+Felzenszwalb and the two SAM composites remain ceilings.
+
 This is the control. FTW was trained on Slovenia with complete labels, and on
 Slovenia it beats every untrained method at a fraction of the object budget.
 Had it not, the scoring machinery would be the story rather than India.
@@ -327,7 +351,7 @@ Read at matched budget, the two countries invert:
 |---|---:|---:|
 | FTW 3-class FULL | 0.222 | 0.027 |
 | SAM ViT-H false colour | at most 0.206 | 0.153 |
-| watershed | at most 0.081 | 0.107 |
+| watershed | 0.059 | 0.107 |
 | felzenszwalb | at most 0.037 | 0.031 |
 
 The checkpoint beats everything on the country it trained on with complete
@@ -610,10 +634,10 @@ measured, 1,467 of 1,983 in India and 4,307 of 6,827 in Slovenia, so this is
 silent about the narrowest band in each country.
 
 A 1.2x deficit in edge gradient is a contributor of measured size and cannot
-by itself explain a 6 to 29 times recall gap. Parcel shape and the cropping
-calendar behind FTW's two seasonal windows remain untested, and the windows in
-particular were chosen for a European calendar rather than a kharif and rabi
-one.
+by itself explain a 6 to 29 times recall gap. Parcel shape and FTW's two
+seasonal windows were the candidates left, and both are tested below. An
+earlier version of this paragraph said the windows were set for a European
+calendar, which FTW's own configuration contradicts; see B-22.
 
 *Source: `label_registration.csv` in each country.*
 
@@ -642,6 +666,148 @@ from moderate, and no further panel was drawn to try for a pass.
 
 *Source: `results/india/contrast_panel_scores.csv` and
 `contrast_panel_key.csv`, `figures/contrast_panel_india.png`.*
+
+**Parcel shape is ruled out.** Slovenian parcels are more strip-like than Indian
+ones. Taking a parcel's area over the square of its width, which is 1 for a
+square and the length over the width for a rectangle, the median Slovenian
+parcel scores 2.98 and the median Indian one 1.83. Among parcels 20 to 30 m
+wide, 46% of Slovenia's score 4 or more against 9% of India's. If strips are
+easier to recover than blocks of the same width, that alone could open a gap
+at matched width.
+
+`src\shape_test.py` puts each parcel in a cell by width band and elongation
+band and recomputes Slovenia's recall with each cell weighted by India's share
+of parcels in it. The bars were written into the script before it ran: shape
+accounts for a large part of the gap if it explains half or more of it on a log
+scale, a part if a fifth or more, and little below that.
+
+| method | India | Slovenia | Slovenia, India's widths | Slovenia, India's widths and shapes | ratio, widths | ratio, widths and shapes | share from shape | six-band check |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| FTW 3-class FULL | 2.72% | 22.22% | 31.37% | 29.03% | 11.52x | 10.66x | +0.03 [+0.01, +0.05] | +0.04 |
+| watershed | 24.61% | 34.84% | 48.04% | 49.34% | 1.95x | 2.00x | -0.04 [-0.08, -0.01] | -0.04 |
+| SAM ViT-H true colour | 15.63% | 27.62% | 37.97% | 39.69% | 2.43x | 2.54x | -0.05 [-0.09, -0.01] | -0.06 |
+
+Shape explains 3% of FTW's gap, with an interval from 1% to 5%. For watershed
+and SAM the share is negative, meaning India's compact parcels are the easier
+mix for them and matching on shape widens the gap a little. Cutting elongation
+into six bands at the pooled sextiles gives the same answer. Watershed here is
+at its best setting, h 0.02 in India and 0.05 in Slovenia, the same files as
+the cross-country table.
+
+| method | ground width | India | Slovenia | Slovenia, India's shapes | ratio | ratio after |
+|---|---|---:|---:|---:|---:|---:|
+| FTW 3-class FULL | under 20 m | 0/196, 0.00% | 0.51% | 0.18% | not readable | not readable |
+| FTW 3-class FULL | 20 to 30 m | 1/245, 0.41% | 7.89% | 4.38% | 19.3x | 10.7x |
+| FTW 3-class FULL | 30 to 50 m | 5/867, 0.58% | 23.62% | 18.41% | 41.0x | 31.9x |
+| FTW 3-class FULL | 50 m up | 48/675, 7.11% | 58.80% | 60.00% | 8.3x | 8.4x |
+| watershed | under 20 m | 2/196, 1.02% | 3.74% | 3.24% | 3.7x | 3.2x |
+| watershed | 20 to 30 m | 12/245, 4.90% | 21.32% | 19.59% | 4.4x | 4.0x |
+| watershed | 30 to 50 m | 195/867, 22.49% | 47.64% | 48.85% | 2.1x | 2.2x |
+| watershed | 50 m up | 279/675, 41.33% | 71.10% | 74.15% | 1.7x | 1.8x |
+| SAM ViT-H true colour | under 20 m | 1/196, 0.51% | 2.64% | 1.94% | 5.2x | 3.8x |
+| SAM ViT-H true colour | 20 to 30 m | 5/245, 2.04% | 14.56% | 13.55% | 7.1x | 6.6x |
+| SAM ViT-H true colour | 30 to 50 m | 76/867, 8.77% | 32.01% | 32.55% | 3.7x | 3.7x |
+| SAM ViT-H true colour | 50 m up | 228/675, 33.78% | 64.39% | 69.30% | 1.9x | 2.1x |
+
+Within the narrow bands, shape does matter to FTW on the Slovenian side. Given
+India's shapes, its Slovenian recall at 20 to 30 m falls from 7.89% to 4.38%,
+measured on 1,229 parcels. The Indian side of those ratios is 1 and 5 parcels
+found, and even halved the gap there is ten times or more. Most of FTW's Indian
+hits are over 50 m, where shape changes nothing.
+
+*Source: `results/shape_test.csv` and `shape_test_bands.csv`.*
+
+**The seasonal windows are a part of it, and a small part.** FTW gives each chip
+two images, from date ranges it sets per country in `data_config_<country>.json`.
+In Slovenia window_b follows window_a in the same season. In India it comes
+first: March to June 2016, the dry months after the rabi harvest, then July to
+November 2016 for kharif. Neither covers December to February, when rabi crops
+are standing.
+
+| country | window | dates | blue band, median | blue band, 95th percentile | edge strength |
+|---|---|---|---:|---:|---:|
+| India | window_a | July to November 2016 | 1058 | 1565 | 0.424 |
+| India | window_b | March to June 2016 | 1652 | 2210 | 0.401 |
+| Slovenia | window_a | May to August 2021 | 351 | 1072 | 0.323 |
+| Slovenia | window_b | September to October 2021 | 258 | 805 | 0.332 |
+
+India's window_b is much brighter in the blue band, which fits bare
+dry-season ground. This table cannot tell soil from haze. Edge strength is
+computed on each chip's own stretch, so it compares windows only loosely.
+
+`src\season_test.py` runs the released checkpoint four ways over every test
+chip: as shipped, with the windows swapped, and with each window given twice.
+The shipped run matches the published predictions to within 1 pixel of 26
+million in India and 3 of 15 million in Slovenia, which is thread-count
+noise, and every published recall comes back exactly. The reading was set in
+the script before it ran: FTW leans on a window if feeding it that window twice
+moves recall outside the shipped run's interval.
+
+| what the model was given | India objects/chip | India recall | India null | Slovenia objects/chip | Slovenia recall | Slovenia null |
+|---|---:|---:|---:|---:|---:|---:|
+| shipped | 175.0 | 2.72% [1.72, 3.89] | 1.93% | 19.5 | 22.22% [18.52, 25.97] | 0.52% |
+| swapped | 186.8 | 3.68% [2.48, 5.01] | 2.22% | 21.5 | 21.42% [17.98, 24.77] | 0.55% |
+| a twice | 169.4 | 4.79% [3.39, 6.34] | 1.95% | 16.6 | 15.21% [11.95, 18.87] | 0.51% |
+| b twice | 116.9 | 1.01% [0.50, 1.57] | 1.21% | 8.9 | 10.60% [7.69, 13.59] | 0.26% |
+
+| what the model was given | India parcels gained | India parcels lost | India change | Slovenia parcels gained | Slovenia parcels lost | Slovenia change |
+|---|---:|---:|---:|---:|---:|---:|
+| swapped | 40 | 21 | +0.96 [+0.05, +1.92] | 285 | 340 | -0.81 [-1.97, +0.29] |
+| a twice | 64 | 23 | +2.07 [+0.91, +3.27] | 207 | 686 | -7.01 [-8.51, -5.51] |
+| b twice | 17 | 51 | -1.71 [-2.83, -0.61] | 98 | 892 | -11.62 [-13.60, -9.75] |
+
+In Slovenia the model uses both images. Given window_a twice it loses about a
+third of what it found, and given window_b twice about half. In India the second image works
+against it. Given the kharif image twice, FTW finds 95 parcels where it found
+54, a change of +2.07 points [+0.91, +3.27] with whole chips resampled in
+pairs. Given the dry-season image twice, it falls to 1.01% at 117 objects per
+chip, no better than the 1.21% that random cells reach at that count.
+
+The rule set before the run also asked whether swapping the order moves recall
+outside the shipped interval, and in neither country does it. The chip by chip
+comparison, added after the run, finds a small gain from swapping in India,
++0.96 points [+0.05, +1.92], and none in Slovenia. It sits at the edge of its
+interval and the reading does not rest on it.
+
+| country | what the model was given | under 20 m | 20 to 30 m | 30 to 50 m | 50 m up |
+|---|---|---:|---:|---:|---:|
+| India | shipped | 0/196, 0.00% | 1/245, 0.41% | 5/867, 0.58% | 48/675, 7.11% |
+| India | swapped | 0/196, 0.00% | 2/245, 0.82% | 6/867, 0.69% | 65/675, 9.63% |
+| India | a twice | 0/196, 0.00% | 3/245, 1.22% | 16/867, 1.85% | 76/675, 11.26% |
+| India | b twice | 0/196, 0.00% | 1/245, 0.41% | 5/867, 0.58% | 14/675, 2.07% |
+| Slovenia | shipped | 11/2,163, 0.51% | 97/1,229, 7.89% | 411/1,740, 23.62% | 999/1,699, 58.80% |
+| Slovenia | swapped | 13/2,163, 0.60% | 98/1,229, 7.97% | 403/1,740, 23.16% | 949/1,699, 55.86% |
+| Slovenia | a twice | 7/2,163, 0.32% | 56/1,229, 4.56% | 266/1,740, 15.29% | 710/1,699, 41.79% |
+| Slovenia | b twice | 4/2,163, 0.18% | 67/1,229, 5.45% | 227/1,740, 13.05% | 426/1,699, 25.07% |
+
+The gain from dropping the dry-season image is largest on the widest Indian
+parcels, 11.26% against 7.11% over 50 m.
+
+Watershed, run on each window's gradient alone and read at FTW's object count:
+
+| gradient from | India, at 175 objects/chip | Slovenia, at 20 objects/chip |
+|---|---:|---:|
+| both windows stacked | 10.74% [8.98, 12.57] | 5.93% [5.00, 6.92] |
+| window_a alone | 9.56% [7.97, 11.24] | 4.35% [3.64, 5.07] |
+| window_b alone | 6.04% [4.76, 7.35] | 5.83% [4.99, 6.68] |
+
+In India the kharif image carries clearly more of the boundaries than the
+dry-season one, with intervals that do not overlap. In Slovenia neither window
+clearly wins. Stacking the two does not dilute the signal in either country.
+
+By the rule set before the run, season is a candidate cause of the India gap:
+one window carries clearly less of the boundaries in India and not in
+Slovenia. Its size is limited. The best arrangement leaves FTW at 4.79% in
+India against 22.22% in Slovenia, 4.6 times lower, and at 11.26% against
+58.80% over 50 m. Taking the dry-season image away helps the checkpoint
+without making it work. What this cannot test is an image from December to
+February, which neither window has.
+
+SAM was not rerun on window_b. It already reads window_a alone, the better of
+the two, and watershed has answered the question that rerun would ask.
+
+*Source: `season_ftw.csv`, `season_ftw_parcels.csv`,
+`season_watershed_budget.csv` and `season_windows.csv` in each country.*
 
 **Above the floor, the method is the lever.** Between three and ten native
 pixels an untrained watershed finds between five and thirteen times as many
@@ -684,8 +850,9 @@ written off as an anecdote until contrast was measured at national scale, and
 it now reads as the first sighting of the effect in What this says rather than
 as a curiosity.
 
-**That the Slovenian margin is quantified.** Four of the five figures at
-Slovenia's object budget are clamped. See B-08.
+**That the Slovenian margin is quantified.** Three of the five figures at
+Slovenia's object budget are clamped. Watershed has been measured there;
+felzenszwalb and the two SAM composites have not. See B-08.
 
 ---
 
@@ -739,7 +906,8 @@ measurement.** No competing method was run coarse enough to reach 20 objects per
 chip. The clamped figures are each method's value at its own coarsest setting,
 which is above 20 in every case, so each overstates that method. FTW's Slovenian
 win is wider than the table shows and the margin is not measurable from what has
-been run.
+been run. Watershed has since been measured there at 0.059, with its sweep
+extended in `season_test.py`. The other three remain bounds.
 
 **B-09. Cross-country width bands were cut in grid pixels.** India's grid is
 6.067 m and Slovenia's 4.139 m, so a band of five grid pixels means 30.3 m in
@@ -893,6 +1061,16 @@ match `width_ground.py` on all 6,831 parcels to floating point precision, so
 the scoring code now writes ground widths directly and `apply_width_fix.py` is
 not needed for new runs.
 
+**B-22. FTW's windows were said to follow a European calendar.** This document
+and the README said the two seasonal windows were chosen for a European
+calendar rather than a kharif and rabi one. FTW's own configuration for India
+sets them at March to June and July to November 2016, so window_a does cover
+kharif. The real problem is narrower: India's window_b is the dry season after
+the rabi harvest, and no window covers December to February, when rabi crops
+are standing. The statement was written without checking
+`data_config_india.json` and was found when `season_test.py` printed the dates.
+The test it called for has since run; see What this says.
+
 ---
 
 ## Known gaps
@@ -944,6 +1122,13 @@ assumption that one number describes a pixel. Slovenia's are 1.450 times taller
 than wide. See B-18 and B-19. What is still not checked is the north to south
 figure against anything FTW publishes, since the reconciliation here is against
 the chips rather than against a specification.
+
+**Parcel shape and the seasonal windows, now tested.** Shape explains 3% of
+FTW's country gap and none of the other methods'. India's dry-season window
+costs FTW about two points of recall, a real effect and a small one. Two things
+remain untested: an image from December to February, which needs imagery FTW
+does not ship, and SAM on window_b, which was skipped because watershed
+answers the same question.
 
 **The parcel reconstruction, now bounded.** FTW ships each parcel as an eroded
 interior and a separate boundary class, and `ftw_common.full_fields` gives each
@@ -1061,6 +1246,9 @@ python src\label_registration.py --country slovenia
 python src\contrast_panel.py --country india --redraw
 python src\ring_sensitivity.py --country india
 python src\ring_sensitivity.py --country slovenia
+python src\shape_test.py
+python src\season_test.py --country india
+python src\season_test.py --country slovenia
 python src\precision.py --country india --method ftw
 python src\precision.py --country india --method watershed --setting 0.02
 python src\precision.py --country slovenia --method ftw
@@ -1081,7 +1269,8 @@ The nulls are seeded, so the comparison runs reproduce to the digit. Runtime on
 a CPU-only machine is about 27 minutes for India and 25 for Slovenia on the
 classical sweep. SAM is about 16 hours for India and 10 for Slovenia across both
 composites, at roughly 75 seconds per chip per composite, and `sam_run.py`
-appends as it goes so an interrupted run resumes. `build_comparison.py` takes
+appends as it goes so an interrupted run resumes. `season_test.py` takes about
+ten minutes per country. `build_comparison.py` takes
 seconds and reads only the CSVs.
 
 Outputs land in `results/<country>/`:
@@ -1106,7 +1295,15 @@ Outputs land in `results/<country>/`:
 | `holdout_selection.csv` | what choosing a setting on the reporting data cost |
 | `parcel_width_ground.csv` | parcel width in metres on rectangular pixels |
 | `scorer_reconciliation.csv` | truth and prediction combinations, for S-08 |
+| `season_ftw.csv` | FTW recall with its two windows rearranged four ways |
+| `season_ftw_parcels.csv` | per-parcel IoU for each arrangement |
+| `season_watershed.csv` | watershed on each window, every setting to h 0.6 |
+| `season_watershed_budget.csv` | the same, read at FTW's object count |
+| `season_windows.csv` | per chip and window, blue band and edge strength |
 | `probe/` | the 5-chip ViT-B timing probe that chose ViT-H |
+
+`shape_test.csv` and `shape_test_bands.csv` sit in `results/` itself, since
+they compare the two countries.
 
 Filenames carrying a setting, such as `parcel_width_seg_watershed_0p02_min500.csv`,
 are the ones to cite. The short forms without a setting hold whichever setting

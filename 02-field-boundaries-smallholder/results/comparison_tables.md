@@ -278,3 +278,87 @@ Same sensor, same method, same physical parcel size.
 | 24 m | 20 to 30 m | 1/245, 0.41% | 97/1,223, 7.93% | 19.4x |
 | 24 m | 30 to 50 m | 5/867, 0.58% | 415/1,747, 23.76% | 41.2x |
 | 24 m | 50 m up | 48/675, 7.11% | 996/1,695, 58.76% | 8.3x |
+
+## Parcel shape
+
+| method | India | Slovenia | Slovenia, India's widths | Slovenia, India's widths and shapes | ratio, widths | ratio, widths and shapes | share from shape | six-band check |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| FTW 3-class FULL | 2.72% | 22.22% | 31.37% | 29.03% | 11.52x | 10.66x | +0.03 [+0.01, +0.05] | +0.04 |
+| watershed | 24.61% | 34.84% | 48.04% | 49.34% | 1.95x | 2.00x | -0.04 [-0.08, -0.01] | -0.04 |
+| SAM ViT-H true colour | 15.63% | 27.62% | 37.97% | 39.69% | 2.43x | 2.54x | -0.05 [-0.09, -0.01] | -0.06 |
+
+### Within each width band, Slovenia given India's shapes
+
+| method | ground width | India | Slovenia | Slovenia, India's shapes | ratio | ratio after |
+|---|---|---:|---:|---:|---:|---:|
+| FTW 3-class FULL | under 20 m | 0/196, 0.00% | 0.51% | 0.18% | not readable | not readable |
+| FTW 3-class FULL | 20 to 30 m | 1/245, 0.41% | 7.89% | 4.38% | 19.3x | 10.7x |
+| FTW 3-class FULL | 30 to 50 m | 5/867, 0.58% | 23.62% | 18.41% | 41.0x | 31.9x |
+| FTW 3-class FULL | 50 m up | 48/675, 7.11% | 58.80% | 60.00% | 8.3x | 8.4x |
+| watershed | under 20 m | 2/196, 1.02% | 3.74% | 3.24% | 3.7x | 3.2x |
+| watershed | 20 to 30 m | 12/245, 4.90% | 21.32% | 19.59% | 4.4x | 4.0x |
+| watershed | 30 to 50 m | 195/867, 22.49% | 47.64% | 48.85% | 2.1x | 2.2x |
+| watershed | 50 m up | 279/675, 41.33% | 71.10% | 74.15% | 1.7x | 1.8x |
+| SAM ViT-H true colour | under 20 m | 1/196, 0.51% | 2.64% | 1.94% | 5.2x | 3.8x |
+| SAM ViT-H true colour | 20 to 30 m | 5/245, 2.04% | 14.56% | 13.55% | 7.1x | 6.6x |
+| SAM ViT-H true colour | 30 to 50 m | 76/867, 8.77% | 32.01% | 32.55% | 3.7x | 3.7x |
+| SAM ViT-H true colour | 50 m up | 228/675, 33.78% | 64.39% | 69.30% | 1.9x | 2.1x |
+
+## The two seasonal windows
+
+### What each window shows
+
+| country | window | dates | blue band, median | blue band, 95th percentile | edge strength |
+|---|---|---|---:|---:|---:|
+| India | window_a | July to November 2016 | 1058 | 1565 | 0.424 |
+| India | window_b | March to June 2016 | 1652 | 2210 | 0.401 |
+| Slovenia | window_a | May to August 2021 | 351 | 1072 | 0.323 |
+| Slovenia | window_b | September to October 2021 | 258 | 805 | 0.332 |
+
+### FTW with its two windows rearranged
+
+| what the model was given | India objects/chip | India recall | India null | Slovenia objects/chip | Slovenia recall | Slovenia null |
+|---|---:|---:|---:|---:|---:|---:|
+| shipped | 175.0 | 2.72% [1.72, 3.89] | 1.93% | 19.5 | 22.22% [18.52, 25.97] | 0.52% |
+| swapped | 186.8 | 3.68% [2.48, 5.01] | 2.22% | 21.5 | 21.42% [17.98, 24.77] | 0.55% |
+| a twice | 169.4 | 4.79% [3.39, 6.34] | 1.95% | 16.6 | 15.21% [11.95, 18.87] | 0.51% |
+| b twice | 116.9 | 1.01% [0.50, 1.57] | 1.21% | 8.9 | 10.60% [7.69, 13.59] | 0.26% |
+
+India: the shipped run differs from `pred_3class_full` on 1 pixel(s).
+
+Slovenia: the shipped run differs from `pred_3class_full` on 3 pixel(s).
+
+### The same, as a change from the shipped run, chip by chip
+
+| what the model was given | India parcels gained | India parcels lost | India change | Slovenia parcels gained | Slovenia parcels lost | Slovenia change |
+|---|---:|---:|---:|---:|---:|---:|
+| swapped | 40 | 21 | +0.96 [+0.05, +1.92] | 285 | 340 | -0.81 [-1.97, +0.29] |
+| a twice | 64 | 23 | +2.07 [+0.91, +3.27] | 207 | 686 | -7.01 [-8.51, -5.51] |
+| b twice | 17 | 51 | -1.71 [-2.83, -0.61] | 98 | 892 | -11.62 [-13.60, -9.75] |
+
+### FTW by ground width, each arrangement
+
+| country | what the model was given | under 20 m | 20 to 30 m | 30 to 50 m | 50 m up |
+|---|---|---:|---:|---:|---:|
+| India | shipped | 0/196, 0.00% | 1/245, 0.41% | 5/867, 0.58% | 48/675, 7.11% |
+| India | swapped | 0/196, 0.00% | 2/245, 0.82% | 6/867, 0.69% | 65/675, 9.63% |
+| India | a twice | 0/196, 0.00% | 3/245, 1.22% | 16/867, 1.85% | 76/675, 11.26% |
+| India | b twice | 0/196, 0.00% | 1/245, 0.41% | 5/867, 0.58% | 14/675, 2.07% |
+| Slovenia | shipped | 11/2,163, 0.51% | 97/1,229, 7.89% | 411/1,740, 23.62% | 999/1,699, 58.80% |
+| Slovenia | swapped | 13/2,163, 0.60% | 98/1,229, 7.97% | 403/1,740, 23.16% | 949/1,699, 55.86% |
+| Slovenia | a twice | 7/2,163, 0.32% | 56/1,229, 4.56% | 266/1,740, 15.29% | 710/1,699, 41.79% |
+| Slovenia | b twice | 4/2,163, 0.18% | 67/1,229, 5.45% | 227/1,740, 13.05% | 426/1,699, 25.07% |
+
+### Watershed on each window, at FTW's object count
+
+| gradient from | India, at 175 objects/chip | Slovenia, at 20 objects/chip |
+|---|---:|---:|
+| both windows stacked | 10.74% [8.98, 12.57] | 5.93% [5.00, 6.92] |
+| window_a alone | 9.56% [7.97, 11.24] | 4.35% [3.64, 5.07] |
+| window_b alone | 6.04% [4.76, 7.35] | 5.83% [4.99, 6.68] |
+
+### Slovenia at FTW's budget, watershed measured
+
+| method | recall at 20 objects/chip | how |
+|---|---:|---|
+| watershed | 0.059 | interpolated, sweep extended to h 0.6 in `season_test.py` |

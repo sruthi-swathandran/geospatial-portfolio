@@ -533,6 +533,216 @@ def ring_tables() -> list:
     return out
 
 
+
+SEASON_FTW = ["shipped", "swapped", "a twice", "b twice"]
+SEASON_WS = ["both", "window_a", "window_b"]
+WS_NAMES = {"both": "both windows stacked", "window_a": "window_a alone",
+            "window_b": "window_b alone"}
+MONTHS = ["January", "February", "March", "April", "May", "June", "July",
+          "August", "September", "October", "November", "December"]
+
+
+def shape_tables() -> list:
+    """Parcel shape against the country gap, from shape_test.py."""
+    path = F.PROJECT / "results" / "shape_test.csv"
+    bands = F.PROJECT / "results" / "shape_test_bands.csv"
+    if not (path.exists() and bands.exists()):
+        return ["\nRun `python src\\shape_test.py`.\n"]
+    s = pd.read_csv(path)
+    out = [
+        "| method | India | Slovenia | Slovenia, India's widths "
+        "| Slovenia, India's widths and shapes | ratio, widths "
+        "| ratio, widths and shapes | share from shape | six-band check |",
+        "|---|---:|---:|---:|---:|---:|---:|---:|---:|",
+    ]
+    for _, r in s.iterrows():
+        # the ratios come from shape_test.py, which has the unrounded rates
+        rw, rs = r["ratio_width"], r["ratio_width_shape"]
+        out.append(
+            f"| {r['method']} | {r['india'] * 100:.2f}% "
+            f"| {r['slovenia'] * 100:.2f}% "
+            f"| {r['slovenia_width'] * 100:.2f}% "
+            f"| {r['slovenia_width_shape'] * 100:.2f}% "
+            f"| {rw:.2f}x | {rs:.2f}x "
+            f"| {r['share_from_shape']:+.2f} "
+            f"[{r['share_lo']:+.2f}, {r['share_hi']:+.2f}] "
+            f"| {r['share_six_band']:+.2f} |")
+
+    b = pd.read_csv(bands)
+    out.append("\n### Within each width band, Slovenia given India's "
+               "shapes\n")
+    out.append("| method | ground width | India | Slovenia "
+               "| Slovenia, India's shapes | ratio | ratio after |")
+    out.append("|---|---|---:|---:|---:|---:|---:|")
+    for _, r in b.iterrows():
+        n_found = int(r["india_found"])
+        r_i = n_found / r["india_parcels"]
+        r_s = r["slovenia_found"] / r["slovenia_parcels"]
+        if n_found:
+            before = f"{r_s / r_i:.1f}x"
+            after = f"{r['slovenia_reweighted'] / r_i:.1f}x"
+        else:
+            before = after = "not readable"
+        out.append(
+            f"| {r['method']} | {r['width_band']} "
+            f"| {n_found}/{int(r['india_parcels']):,}, "
+            f"{r['india_recall'] * 100:.2f}% "
+            f"| {r['slovenia_recall'] * 100:.2f}% "
+            f"| {r['slovenia_reweighted'] * 100:.2f}% "
+            f"| {before} | {after} |")
+    return out
+
+
+def season_dates(country: str) -> dict:
+    """Each window's date range as words, from FTW's data config."""
+    import json
+    path = F.PROJECT / "data" / "ftw" / country / f"data_config_{country}.json"
+    if not path.exists():
+        return {}
+    seasons = json.loads(path.read_text(encoding="utf-8")).get("seasons", {})
+    out = {}
+    for w, d in seasons.items():
+        y0, m0 = int(d["start"][:4]), int(d["start"][5:7])
+        y1, m1 = int(d["end"][:4]), int(d["end"][5:7])
+        span = (f"{MONTHS[m0 - 1]} to {MONTHS[m1 - 1]} {y1}" if y0 == y1
+                else f"{MONTHS[m0 - 1]} {y0} to {MONTHS[m1 - 1]} {y1}")
+        out[w] = span
+    return out
+
+
+def paired_change(parcels: pd.DataFrame, variant: str, boots: int,
+                  rng) -> tuple:
+    """Recall change from the shipped run, with whole chips resampled.
+
+    Both runs score the same parcels, so the change is read chip by chip.
+    That is tighter than comparing two separate intervals, and it keeps
+    parcels in one chip together, which B-12 showed matters.
+    """
+    g = parcels.groupby(["chip", "variant"])["found"].agg(["sum", "count"])
+    hits = g["sum"].unstack("variant")
+    n = g["count"].unstack("variant")["shipped"].to_numpy()
+    a = hits[variant].to_numpy()
+    s = hits["shipped"].to_numpy()
+    point = (a.sum() - s.sum()) / n.sum()
+    k = len(n)
+    draws = np.empty(boots)
+    for i in range(boots):
+        idx = rng.integers(0, k, k)
+        draws[i] = (a[idx].sum() - s[idx].sum()) / n[idx].sum()
+    lo, hi = np.percentile(draws, (2.5, 97.5))
+    return point, float(lo), float(hi)
+
+
+def season_tables(iou: float) -> list:
+    """The two seasonal windows, from season_test.py."""
+    out = []
+    need = ["season_ftw.csv", "season_ftw_parcels.csv",
+            "season_watershed_budget.csv", "season_windows.csv"]
+    for c in COUNTRIES:
+        missing = [n for n in need if not (results_dir(c) / n).exists()]
+        if missing:
+            return [f"\n{c.capitalize()} is missing {', '.join(missing)}. "
+                    f"Run `python src\\season_test.py --country {c}`.\n"]
+
+    out.append("### What each window shows\n")
+    out.append("| country | window | dates | blue band, median "
+               "| blue band, 95th percentile | edge strength |")
+    out.append("|---|---|---|---:|---:|---:|")
+    for c in COUNTRIES:
+        dates = season_dates(c)
+        w = pd.read_csv(results_dir(c) / "season_windows.csv")
+        med = w.groupby("window").median(numeric_only=True)
+        for win in ("window_a", "window_b"):
+            r = med.loc[win]
+            out.append(f"| {c.capitalize()} | {win} | {dates.get(win, '')} "
+                       f"| {r['blue_median']:.0f} | {r['blue_p95']:.0f} "
+                       f"| {r['edge_mean']:.3f} |")
+
+    out.append("\n### FTW with its two windows rearranged\n")
+    out.append("| what the model was given | India objects/chip | India recall "
+               "| India null | Slovenia objects/chip | Slovenia recall "
+               "| Slovenia null |")
+    out.append("|---|---:|---:|---:|---:|---:|---:|")
+    ftw = {c: pd.read_csv(results_dir(c) / "season_ftw.csv").set_index(
+        "variant") for c in COUNTRIES}
+    for v in SEASON_FTW:
+        cells = [v]
+        for c in COUNTRIES:
+            r = ftw[c].loc[v]
+            cells += [f"{r['objects_per_chip']:.1f}",
+                      f"{r['recall'] * 100:.2f}% [{r['lo'] * 100:.2f}, "
+                      f"{r['hi'] * 100:.2f}]",
+                      f"{r['null_recall'] * 100:.2f}%"]
+        out.append("| " + " | ".join(cells) + " |")
+    for c in COUNTRIES:
+        px = ftw[c].loc["shipped", "pixels_differing_from_published"]
+        out.append(f"\n{c.capitalize()}: the shipped run differs from "
+                   f"`pred_3class_full` on {int(px)} pixel(s).")
+
+    out.append("\n### The same, as a change from the shipped run, "
+               "chip by chip\n")
+    out.append("| what the model was given | India parcels gained "
+               "| India parcels lost | India change "
+               "| Slovenia parcels gained | Slovenia parcels lost "
+               "| Slovenia change |")
+    out.append("|---|---:|---:|---:|---:|---:|---:|")
+    # fixed so the paired intervals come out the same on every rebuild
+    rng = np.random.default_rng(20261008)
+    parcels = {c: pd.read_csv(results_dir(c) / "season_ftw_parcels.csv")
+               for c in COUNTRIES}
+    for v in SEASON_FTW[1:]:
+        cells = [v]
+        for c in COUNTRIES:
+            p = parcels[c].pivot_table(index=["chip", "parcel_id"],
+                                       columns="variant", values="found")
+            gained = int(((p[v] == 1) & (p["shipped"] == 0)).sum())
+            lost = int(((p[v] == 0) & (p["shipped"] == 1)).sum())
+            pt, lo, hi = paired_change(parcels[c], v, 4000, rng)
+            cells += [f"{gained:,}", f"{lost:,}",
+                      f"{pt * 100:+.2f} [{lo * 100:+.2f}, {hi * 100:+.2f}]"]
+        out.append("| " + " | ".join(cells) + " |")
+
+    out.append("\n### FTW by ground width, each arrangement\n")
+    out.append("| country | what the model was given | " +
+               " | ".join(WIDTH_LABELS_M) + " |")
+    out.append("|---|---|" + "---:|" * len(WIDTH_LABELS_M))
+    for c in COUNTRIES:
+        d = parcels[c].copy()
+        d["band"] = pd.cut(d["width_m"], WIDTH_EDGES_M,
+                           labels=WIDTH_LABELS_M, right=False)
+        for v in SEASON_FTW:
+            cells = [c.capitalize(), v]
+            for lab in WIDTH_LABELS_M:
+                s = d[(d["variant"] == v) & (d["band"] == lab)]
+                cells.append(f"{int(s['found'].sum())}/{len(s):,}, "
+                             f"{s['found'].mean() * 100:.2f}%"
+                             if len(s) else "")
+            out.append("| " + " | ".join(cells) + " |")
+
+    out.append("\n### Watershed on each window, at FTW's object count\n")
+    out.append("| gradient from | India, at 175 objects/chip "
+               "| Slovenia, at 20 objects/chip |")
+    out.append("|---|---:|---:|")
+    ws = {c: pd.read_csv(results_dir(c) / "season_watershed_budget.csv")
+          .set_index("variant") for c in COUNTRIES}
+    for v in SEASON_WS:
+        cells = [WS_NAMES[v]]
+        for c in COUNTRIES:
+            r = ws[c].loc[v]
+            note = ", clamped" if str(r["clamped"]).lower() == "true" else ""
+            cells.append(f"{r['recall'] * 100:.2f}% [{r['lo'] * 100:.2f}, "
+                         f"{r['hi'] * 100:.2f}]{note}")
+        out.append("| " + " | ".join(cells) + " |")
+
+    r = ws["slovenia"].loc["both"]
+    out.append("\n### Slovenia at FTW's budget, watershed measured\n")
+    out.append("| method | recall at 20 objects/chip | how |")
+    out.append("|---|---:|---|")
+    out.append(f"| watershed | {r['recall']:.3f} | interpolated, sweep "
+               f"extended to h 0.6 in `season_test.py` |")
+    return out
+
+
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--sam-setting", default="0p50",
@@ -598,6 +808,12 @@ def main() -> None:
 
     out.append("\n## Ring distance sensitivity\n")
     out += ring_tables()
+
+    out.append("\n## Parcel shape\n")
+    out += shape_tables()
+
+    out.append("\n## The two seasonal windows\n")
+    out += season_tables(args.iou)
 
     dest = F.PROJECT / "results" / "comparison_tables.md"
     dest.parent.mkdir(parents=True, exist_ok=True)
