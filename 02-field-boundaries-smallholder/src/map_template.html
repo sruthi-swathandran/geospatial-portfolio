@@ -1,0 +1,640 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Where the checkpoint finds fields</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  color-scheme:light;
+  --ground:#f3f3f1; --surface:#fcfcfb; --surface-2:#f6f6f4;
+  --ink:#0b0b0b; --muted:#52514e; --line:#dddcd7; --line-soft:#ebeae6;
+  --land:#ecebe7; --border:#c9c8c2; --none:#8f8e88;
+  --q1:#86b6ef; --q2:#3987e5; --q3:#1c5cab; --q4:#0d366b;
+  --accent:#2a78d6; --ring:#fcfcfb;
+  --sans:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --cond:"IBM Plex Sans Condensed",var(--sans);
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --ground:#121211; --surface:#1a1a19; --surface-2:#20201f;
+    --ink:#ffffff; --muted:#c3c2b7; --line:#33332f; --line-soft:#2a2a27;
+    --land:#232321; --border:#45453f; --none:#8c8b84;
+    --q1:#184f95; --q2:#2a78d6; --q3:#6da7ec; --q4:#b7d3f6;
+    --accent:#3987e5; --ring:#1a1a19;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --ground:#121211; --surface:#1a1a19; --surface-2:#20201f;
+  --ink:#ffffff; --muted:#c3c2b7; --line:#33332f; --line-soft:#2a2a27;
+  --land:#232321; --border:#45453f; --none:#8c8b84;
+  --q1:#184f95; --q2:#2a78d6; --q3:#6da7ec; --q4:#b7d3f6;
+  --accent:#3987e5; --ring:#1a1a19;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--ground);color:var(--ink);font-family:var(--sans);
+  font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1280px;margin:0 auto;padding:28px 22px 56px}
+@media (max-width:600px){.wrap{padding:20px 16px 40px}}
+
+header.top{display:flex;flex-wrap:wrap;align-items:flex-end;gap:12px 24px;
+  padding-bottom:16px;border-bottom:1px solid var(--line)}
+h1{font-family:var(--cond);font-weight:700;font-size:clamp(26px,3.4vw,38px);
+  margin:0;line-height:1.1;text-wrap:balance}
+.sub{font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--muted);margin:6px 0 0}
+.prov{margin-left:auto;font-family:var(--mono);font-size:11px;
+  color:var(--muted);text-align:right;line-height:1.7}
+.prov a{color:inherit}
+@media (max-width:700px){.prov{margin-left:0;text-align:left}}
+
+.lede{max-width:78ch;margin:18px 0 0;color:var(--ink)}
+.figs{display:flex;flex-wrap:wrap;margin:18px 0 22px;
+  border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft)}
+.fig{flex:1 1 170px;padding:13px 18px 12px;border-right:1px solid var(--line-soft)}
+.fig:last-child{border-right:0}
+.fig .k{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--muted);display:block;margin-bottom:4px}
+.fig .v{font-family:var(--cond);font-weight:600;font-size:27px;
+  font-variant-numeric:tabular-nums;line-height:1.1}
+.fig .v small{font-family:var(--mono);font-size:12px;font-weight:400;
+  color:var(--muted);margin-left:5px}
+.fig .r{font-family:var(--mono);font-size:10.5px;color:var(--muted);margin-top:3px}
+
+.controls{display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px;
+  margin:0 0 12px}
+.controls .lbl{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--muted)}
+.seg{display:flex;gap:6px;flex-wrap:wrap}
+button{font-family:var(--mono);font-size:11px;letter-spacing:.04em;
+  color:var(--ink);background:var(--surface);border:1px solid var(--line);
+  border-radius:3px;padding:6px 10px;cursor:pointer}
+button:hover{border-color:var(--accent)}
+button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);
+  color:#fff}
+button:focus-visible,.row:focus-visible{outline:2px solid var(--accent);
+  outline-offset:2px}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-family:var(--mono);
+  font-size:10.5px;color:var(--muted);align-items:center}
+.legend .it{display:inline-flex;align-items:center;gap:6px}
+.dot{width:11px;height:11px;border-radius:50%;display:inline-block}
+.dot.zero{border:1.5px solid var(--muted);background:transparent}
+.dot.nolab{border:1.5px dashed var(--none);background:transparent;opacity:.8}
+.right{margin-left:auto;display:flex;gap:6px;flex-wrap:wrap}
+
+.grid{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(300px,1fr);
+  gap:20px;align-items:start}
+@media (max-width:920px){.grid{grid-template-columns:1fr}}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:4px;
+  overflow:hidden}
+.cardhead{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;
+  padding:9px 13px;border-bottom:1px solid var(--line-soft);
+  background:var(--surface-2)}
+.cardhead h2{font-family:var(--cond);font-weight:600;font-size:14px;
+  letter-spacing:.08em;text-transform:uppercase;margin:0}
+.cardhead .meta{font-family:var(--mono);font-size:10.5px;color:var(--muted)}
+.stage{position:relative}
+.lmap{height:560px;background:var(--land)}
+.lmap.small{height:320px}
+@media (max-width:600px){.lmap{height:420px}.lmap.small{height:260px}}
+.leaflet-container{font-family:var(--sans);background:var(--land)}
+.leaflet-control-attribution{font-family:var(--mono);font-size:9.5px}
+.leaflet-bar a,.leaflet-bar a:hover{background:var(--surface);color:var(--ink);
+  border-bottom-color:var(--line)}
+.leaflet-bar a.leaflet-disabled{background:var(--surface-2);color:var(--muted)}
+.leaflet-interactive:focus{outline:none}
+.key{background:var(--surface);color:var(--ink);border:1px solid var(--line);
+  border-radius:4px;padding:7px 10px 8px;font-family:var(--mono);font-size:10.5px;
+  line-height:1.5;box-shadow:0 2px 10px rgba(0,0,0,.18);max-width:250px}
+.key summary{cursor:pointer;font-family:var(--cond);font-weight:600;font-size:12px;
+  letter-spacing:.06em;text-transform:uppercase;color:var(--muted);list-style:none}
+.key summary::-webkit-details-marker{display:none}
+.key summary::after{content:" \25BE";font-size:10px}
+.key details:not([open]) summary::after{content:" \25B8"}
+.key .kr{display:flex;align-items:center;gap:7px;margin-top:3px}
+.key .kr svg{flex:none}
+.key .kn{margin-top:6px;padding-top:5px;border-top:1px solid var(--line-soft);
+  color:var(--muted);white-space:normal}
+.caveat{font-family:var(--mono);font-size:10.5px;color:var(--muted);
+  padding:8px 13px 10px;border-top:1px solid var(--line-soft);line-height:1.6}
+
+#tip{position:fixed;pointer-events:none;z-index:10;opacity:0;
+  transition:opacity .1s;background:var(--surface);color:var(--ink);
+  border:1px solid var(--line);border-radius:3px;padding:7px 10px;
+  font-family:var(--mono);font-size:11px;line-height:1.55;
+  box-shadow:0 4px 16px rgba(0,0,0,.14);min-width:190px}
+#tip b{font-family:var(--cond);font-size:13.5px;font-weight:600}
+#tip .tr{display:flex;justify-content:space-between;gap:14px}
+#tip .tr.sel{font-weight:500}
+#tip .tr span:last-child{font-variant-numeric:tabular-nums}
+
+.detail{padding:12px 13px;min-height:132px}
+.detail .empty{color:var(--muted);font-size:13.5px}
+.detail h3{font-family:var(--cond);font-weight:600;font-size:18px;margin:0}
+.detail .where{font-family:var(--mono);font-size:11px;color:var(--muted);
+  margin:2px 0 10px}
+.bars{display:flex;flex-direction:column;gap:7px}
+.bar{display:grid;grid-template-columns:150px 1fr 54px;gap:8px;align-items:center;
+  font-size:12.5px}
+.bar .track{height:8px;background:var(--line-soft);border-radius:4px;
+  overflow:hidden}
+.bar .fill{height:100%;background:var(--accent);border-radius:4px}
+.bar .num{font-family:var(--mono);font-size:11.5px;text-align:right;
+  font-variant-numeric:tabular-nums}
+.bar.sel .lab{font-weight:600}
+
+.tablewrap{max-height:430px;overflow:auto}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{position:sticky;top:0;background:var(--surface-2);font-family:var(--mono);
+  font-size:10px;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--muted);font-weight:500;text-align:right;padding:7px 10px;
+  border-bottom:1px solid var(--line);cursor:pointer;white-space:nowrap}
+th:first-child,td:first-child{text-align:left}
+td{padding:6px 10px;border-bottom:1px solid var(--line-soft);text-align:right;
+  font-variant-numeric:tabular-nums}
+td .st{display:block;font-family:var(--mono);font-size:10px;color:var(--muted)}
+tr.row{cursor:pointer}
+tr.row:hover td{background:var(--surface-2)}
+tr.row[aria-selected="true"] td{background:var(--surface-2);
+  box-shadow:inset 0 0 0 0 transparent}
+tr.row[aria-selected="true"] td:first-child{box-shadow:inset 3px 0 0 var(--accent)}
+td.sel,th.sel{color:var(--ink);font-weight:600}
+td .pc{color:var(--muted)}
+@media (max-width:600px){th[data-k="chips"],td.ch{display:none}
+  th,td{padding:6px 7px}}
+
+.notes{margin-top:26px;display:grid;grid-template-columns:repeat(auto-fit,
+  minmax(260px,1fr));gap:18px 28px;font-size:14px;color:var(--ink)}
+.notes h2{font-family:var(--cond);font-weight:600;font-size:13px;
+  letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin:0 0 6px}
+.notes p{margin:0 0 8px}
+.notes a{color:var(--accent)}
+footer{margin-top:28px;padding-top:14px;border-top:1px solid var(--line);
+  font-family:var(--mono);font-size:10.5px;color:var(--muted);line-height:1.7}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="top">
+  <div>
+    <h1>Where the checkpoint finds fields</h1>
+    <p class="sub">RS-02 &middot; Fields of The World test chips &middot; India and Slovenia</p>
+  </div>
+  <div class="prov">Sentinel-2, 10 m, two seasonal windows<br>
+    object recall at IoU 0.5<br>
+    <a href="https://github.com/sruthi-swathandran/geospatial-portfolio/tree/main/02-field-boundaries-smallholder">project summary</a> &middot; <a href="https://github.com/sruthi-swathandran/geospatial-portfolio/blob/main/02-field-boundaries-smallholder/COMPARISON.md">full method</a></div>
+</header>
+
+<p class="lede">Each marker is one test chip, about 1.5 km across, coloured by the
+share of its hand-labelled parcels a method recovered. Pick a method above the
+map, and zoom in to a chip to see its labelled parcels, filled where the method
+found them and outlined in orange where it missed. In India the released checkpoint leaves almost every chip empty, while the
+same imagery gives other methods something to find. In Slovenia, where the
+checkpoint was trained on a complete cadastre, it works.</p>
+
+<div class="figs" id="figs"></div>
+
+<div class="controls">
+  <span class="lbl">Method</span>
+  <div class="seg" id="methods" role="group" aria-label="Method"></div>
+  <div class="right">
+    <div class="seg" id="bases" role="group" aria-label="Background">
+      <button type="button" data-b="sat" aria-pressed="true">Satellite</button>
+      <button type="button" data-b="plain" aria-pressed="false">Plain</button>
+    </div>
+    <button id="theme" type="button" aria-label="Switch colour theme">Theme</button>
+  </div>
+</div>
+
+<div class="grid">
+  <div class="card">
+    <div class="cardhead"><h2>India</h2><span class="meta" id="meta-india"></span></div>
+    <div class="lmap" id="map-india" role="region" aria-label="Map of Indian test chips"></div>
+    <div class="caveat" id="cav-india"></div>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:20px">
+    <div class="card">
+      <div class="cardhead"><h2>Slovenia</h2><span class="meta" id="meta-slovenia"></span></div>
+      <div class="lmap small" id="map-slovenia" role="region" aria-label="Map of Slovenian test chips"></div>
+      <div class="caveat" id="cav-slovenia"></div>
+    </div>
+    <div class="card">
+      <div class="cardhead"><h2>Chip</h2><span class="meta">click a marker to pin it</span></div>
+      <div class="detail" id="detail"><p class="empty">Hover or click a chip to see what each method found there.</p></div>
+    </div>
+  </div>
+</div>
+
+<div class="card" style="margin-top:20px">
+  <div class="cardhead"><h2>Indian districts</h2>
+    <span class="meta">labelled parcels found, by method &middot; click a row to show its chips &middot; click a heading to sort</span></div>
+  <div class="tablewrap"><table id="tbl"><thead></thead><tbody></tbody></table></div>
+</div>
+
+<div class="notes">
+  <div><h2>How to read it</h2>
+    <p>Indian chips carry about five hand-drawn parcels each and nothing else is
+    labelled, so a chip's colour is the share of those five a method recovered.
+    Slovenian chips carry a complete cadastre, about 37 parcels each.</p>
+    <p>Dashed rings are test chips with no labelled parcel, mostly forest in
+    Slovenia.</p></div>
+  <div><h2>Settings</h2>
+    <p>Each method is shown at the one setting whose objects per chip sit nearest
+    the checkpoint's own count, so the methods spend a similar budget. The
+    headline figures in the project write-up are interpolated to the exact count
+    and differ a little from the totals here.</p></div>
+  <div><h2>What it does not show</h2>
+    <p>Chip outcomes are a handful of parcels each, so a single chip is a weak
+    signal. Read the pattern, and the district totals, rather than any one
+    marker. The causes of the gap between the countries are discussed in the
+    <a href="https://github.com/sruthi-swathandran/geospatial-portfolio/blob/main/02-field-boundaries-smallholder/COMPARISON.md">full write-up</a>.</p></div>
+</div>
+
+<footer>Data: Fields of The World (CC-BY-4.0), Copernicus Sentinel-2,
+geoBoundaries state outlines (CC BY 4.0). Background: Sentinel-2 cloudless 2020
+by EOX IT Services GmbH, contains modified Copernicus Sentinel data 2020
+(CC BY-NC-SA 4.0). It is a natural-colour, cloud-free composite for orientation,
+not the imagery the methods were run on: the Indian labels were drawn on 2016
+imagery and the Slovenian on 2021, so a field may have changed since, and SAM
+was given false colour. Parcel outlines are simplified to within one pixel for
+drawing. Map library: Leaflet. Built by
+src/build_map.py from the project's result files.</footer>
+</div>
+<div id="tip" role="tooltip"></div>
+
+<script>
+const DATA = __MAP_DATA__;
+const ORDER = ["ftw", "sam", "watershed"];
+const BINS = [[0.25, "q1"], [0.5, "q2"], [0.75, "q3"], [1.01, "q4"]];
+let method = "ftw", pinned = null, district = null;
+
+function pct(a, b) { return b ? (100 * a / b) : 0; }
+function fmt(v, d = 1) { return v.toFixed(d) + "%"; }
+function binOf(found, n) {
+  if (!n) return "nolab";
+  if (!found) return "zero";
+  const r = found / n;
+  for (const [hi, cls] of BINS) if (r < hi) return cls;
+  return "q4";
+}
+
+/* ---------- stat strip ---------- */
+function figs() {
+  const el = document.getElementById("figs");
+  const tile = (k, country, m, note) => {
+    const v = DATA[country].methods[m];
+    return `<div class="fig"><span class="k">${k}</span>
+      <div class="v">${fmt(pct(v.found, v.parcels))}<small>${v.found}/${v.parcels.toLocaleString()}</small></div>
+      <div class="r">${note}</div></div>`;
+  };
+  const i = DATA.india.methods, s = DATA.slovenia.methods;
+  el.innerHTML =
+    tile("India, FTW checkpoint", "india", "ftw", `${i.ftw.objects} objects per chip`) +
+    tile("India, SAM", "india", "sam", `${i.sam.objects} objects per chip`) +
+    tile("India, watershed", "india", "watershed", `${i.watershed.objects} objects per chip`) +
+    tile("Slovenia, FTW checkpoint", "slovenia", "ftw", `${s.ftw.objects} objects per chip`);
+}
+
+/* ---------- controls ---------- */
+function controls() {
+  const box = document.getElementById("methods");
+  box.innerHTML = ORDER.map(m =>
+    `<button type="button" data-m="${m}" aria-pressed="${m === method}">${DATA.india.methods[m].label}</button>`
+  ).join("");
+  box.addEventListener("click", e => {
+    const b = e.target.closest("button"); if (!b) return;
+    method = b.dataset.m;
+    box.querySelectorAll("button").forEach(x =>
+      x.setAttribute("aria-pressed", x.dataset.m === method));
+    redraw();
+  });
+  const t = document.getElementById("theme");
+  t.addEventListener("click", () => {
+    const root = document.documentElement;
+    const dark = root.dataset.theme
+      ? root.dataset.theme === "dark"
+      : matchMedia("(prefers-color-scheme: dark)").matches;
+    root.dataset.theme = dark ? "light" : "dark";
+  });
+}
+
+/* ---------- maps ---------- */
+const MAPS = {}, MARKS = {india: {}, slovenia: {}}, BOXES = {india: [], slovenia: []};
+const SAT = "https://tiles.maps.eox.at/wmts/1.0.0/s2cloudless-2020_3857/default/g/{z}/{y}/{x}.jpg";
+const SAT_ATTR = '<a href="https://s2maps.eu">Sentinel-2 cloudless 2020</a> by EOX, CC BY-NC-SA 4.0';
+let base = "sat";
+function css(name) { return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
+function drawMap(country) {
+  const d = DATA[country];
+  const map = L.map("map-" + country, { zoomSnap: 0.25, preferCanvas: false,
+    scrollWheelZoom: false, worldCopyJump: false, attributionControl: true });
+  map.attributionControl.setPrefix('<a href="https://leafletjs.com">Leaflet</a>');
+  const sat = L.tileLayer(SAT, { maxNativeZoom: 15, maxZoom: 16, attribution: SAT_ATTR });
+  const outline = L.polygon(d.outline.map(r => r.map(([x, y]) => [y, x])),
+    { interactive: false, weight: 1, fillOpacity: 0 });
+  const land = L.polygon(d.outline.map(r => r.map(([x, y]) => [y, x])),
+    { interactive: false, stroke: false, fillOpacity: 1 });
+  MAPS[country] = { map, sat, outline, land };
+  const pts = d.chips.map(c => [c.lat, c.lon]);
+  map.fitBounds(L.latLngBounds(pts).pad(0.08));
+  // chip footprints, shown once the map is zoomed in far enough to see them
+  for (const c of d.chips) {
+    const [w, s, e, n] = c.b;
+    BOXES[country].push(L.rectangle([[s, w], [n, e]],
+      { interactive: false, weight: 1.2, fill: false, color: "#ffffff", opacity: 0.9 }));
+  }
+  const order = [...d.chips].sort((a, b) => (a.n > 0) - (b.n > 0));
+  for (const c of order) {
+    const m = L.circleMarker([c.lat, c.lon], { radius: country === "india" ? 5.5 : 6.5, weight: 1.5 });
+    m.on("mouseover", ev => showTip(ev.originalEvent, country, c.id));
+    m.on("mousemove", ev => showTip(ev.originalEvent, country, c.id));
+    m.on("mouseout", hideTip);
+    m.on("click", () => { pinned = { country, id: c.id }; paintChips(); showDetail(); });
+    m.addTo(map);
+    MARKS[country][c.id] = m;
+  }
+  map.on("zoomend moveend", () => footprints(country));
+  if (country === "india") addKey(map);
+  map.on("click", e => { if (!e.originalEvent.target.classList.contains("leaflet-interactive")) { pinned = null; paintChips(); showDetail(); } });
+  map.getContainer().addEventListener("focus", () => map.scrollWheelZoom.enable());
+  map.getContainer().addEventListener("blur", () => map.scrollWheelZoom.disable());
+}
+const PARCELS = { india: {}, slovenia: {} };
+const FOUND = "#2a78d6", MISSED = "#eb6834";
+function parcelLatLngs(c, ring) {
+  const [w, s, e, n] = c.b, [H, W] = c.sz, out = [];
+  for (let i = 0; i < ring.length; i += 2)
+    out.push([n - ring[i + 1] / H * (n - s), w + ring[i] / W * (e - w)]);
+  return out;
+}
+function parcelStyle(p) {
+  const slot = DATA.india.methods[method].slot;
+  const hit = p[2][slot] >= 0.5;
+  return hit ? { color: "#ffffff", weight: 1.2, fillColor: FOUND, fillOpacity: 0.55, opacity: 0.9 }
+             : { color: MISSED, weight: 2, fillColor: MISSED, fillOpacity: 0.08, opacity: 1, dashArray: null };
+}
+function parcelLayer(country, c) {
+  if (PARCELS[country][c.id]) return PARCELS[country][c.id];
+  const g = L.layerGroup();
+  for (const p of c.p) {
+    const poly = L.polygon(p[1].map(r => parcelLatLngs(c, r)), parcelStyle(p));
+    poly.on("mouseover mousemove", ev => showParcelTip(ev.originalEvent, country, c, p));
+    poly.on("mouseout", hideTip);
+    poly.on("click", () => { pinned = { country, id: c.id }; paintChips(); showDetail(); });
+    poly._p = p;
+    g.addLayer(poly);
+  }
+  return PARCELS[country][c.id] = g;
+}
+function restyleParcels() {
+  for (const country of ["india", "slovenia"])
+    for (const g of Object.values(PARCELS[country]))
+      g.eachLayer(l => l.setStyle(parcelStyle(l._p)));
+}
+function footprints(country) {
+  const { map } = MAPS[country];
+  const z = map.getZoom();
+  const show = z >= 11, near = z >= 12, view = map.getBounds().pad(0.3);
+  for (const r of BOXES[country]) {
+    if (show && !map.hasLayer(r)) r.addTo(map);
+    if (!show && map.hasLayer(r)) r.remove();
+  }
+  // labelled parcels for the chips in view, once they are big enough to see;
+  // markers step aside so they do not cover them
+  for (const c of DATA[country].chips) {
+    if (!c.p || !c.p.length) continue;
+    const inView = near && view.intersects(L.latLngBounds([[c.b[1], c.b[0]], [c.b[3], c.b[2]]]));
+    const g = PARCELS[country][c.id];
+    if (inView) { const l = parcelLayer(country, c); if (!map.hasLayer(l)) l.addTo(map); }
+    else if (g && map.hasLayer(g)) g.remove();
+  }
+  const m = MARKS[country];
+  for (const id in m) {
+    if (z >= 13 && map.hasLayer(m[id])) m[id].remove();
+    if (z < 13 && !map.hasLayer(m[id])) m[id].addTo(map);
+  }
+}
+function setBase(b) {
+  base = b;
+  document.querySelectorAll("#bases button").forEach(x => x.setAttribute("aria-pressed", x.dataset.b === b));
+  for (const country of ["india", "slovenia"]) {
+    const { map, sat, outline, land } = MAPS[country];
+    if (b === "sat") { land.remove(); sat.addTo(map); }
+    else { sat.remove(); land.addTo(map); land.bringToBack(); }
+    outline.addTo(map);
+    outline.setStyle({ color: b === "sat" ? "#ffffff" : css("--border"), opacity: b === "sat" ? 0.55 : 1 });
+    land.setStyle({ fillColor: css("--land") });
+    map.getContainer().style.background = b === "sat" ? "#0d1a12" : css("--land");
+  }
+  paintChips(); renderKey();
+}
+function chipOf(country, id) { return DATA[country].chips.find(c => c.id === id); }
+// one definition of what each kind of chip looks like, used by the map and
+// by the key, so the two cannot drift apart
+function styleFor(bin) {
+  const onSat = base === "sat";
+  if (bin === "nolab") return { color: onSat ? "#ffffff" : css("--none"), weight: 1.2,
+    dashArray: "2 2", fill: false, fillOpacity: 0, opacity: 0.8 };
+  if (bin === "zero") return { color: onSat ? "#ffffff" : css("--muted"), weight: 1.5,
+    dashArray: null, fill: true, fillColor: onSat ? "#111111" : css("--surface"),
+    fillOpacity: onSat ? 0.45 : 1, opacity: 1 };
+  return { color: onSat ? "#ffffff" : css("--ring"), weight: 1.5, dashArray: null,
+    fill: true, fillColor: css("--" + bin), fillOpacity: 1, opacity: 1 };
+}
+function swatch(st, r = 6) {
+  const s = 2 * r + 6;
+  // on the satellite view each swatch sits on a patch of imagery-dark ground,
+  // as the markers do, so white rings stay visible in the key
+  const bg = base === "sat" ? `<rect width="${s}" height="${s}" rx="3" fill="#4a4a36"/>` : "";
+  return `<svg width="${s}" height="${s}" aria-hidden="true">${bg}<circle cx="${s / 2}" cy="${s / 2}" r="${r}"
+    fill="${st.fill ? st.fillColor : "none"}" fill-opacity="${st.fillOpacity ?? 1}"
+    stroke="${st.color}" stroke-width="${st.weight}" stroke-opacity="${st.opacity}"
+    ${st.dashArray ? `stroke-dasharray="${st.dashArray}"` : ""}/></svg>`;
+}
+const KEY_ROWS = [["zero", "none of them found"], ["q1", "under 25% found"],
+  ["q2", "25 to 50%"], ["q3", "50 to 75%"], ["q4", "75% or more"],
+  ["nolab", "no labelled parcel"]];
+let keyBox = null;
+function renderKey() {
+  if (!keyBox) return;
+  const open = keyBox.querySelector("details") ? keyBox.querySelector("details").open : true;
+  const ring = { color: base === "sat" ? "#ffde3b" : css("--ink"), weight: 2.6, fill: false,
+    fillOpacity: 0, opacity: 1, dashArray: null };
+  keyBox.innerHTML = `<details${open ? " open" : ""}><summary>Labelled parcels found</summary>` +
+    KEY_ROWS.map(([bin, label]) => `<div class="kr">${swatch(styleFor(bin))}<span>${label}</span></div>`).join("") +
+    `<div class="kr">${swatch(ring)}<span>pinned chip or chosen district</span></div>` +
+    `<div class="kn" style="border:0;padding:0;margin-top:5px">Zoomed in to a chip:</div>` +
+    `<div class="kr"><svg width="18" height="14" aria-hidden="true"><rect x="1" y="1" width="16" height="12" rx="2" fill="${FOUND}" fill-opacity=".55" stroke="#ffffff" stroke-width="1.2"/></svg><span>labelled parcel the method found</span></div>` +
+    `<div class="kr"><svg width="18" height="14" aria-hidden="true"><rect x="1" y="1" width="16" height="12" rx="2" fill="${MISSED}" fill-opacity=".08" stroke="${MISSED}" stroke-width="2"/></svg><span>labelled parcel it missed</span></div>` +
+    `<div class="kn">By the method chosen above. Same key for Slovenia.</div></details>`;
+}
+function addKey(map) {
+  const Key = L.Control.extend({ options: { position: "bottomleft" },
+    onAdd() { const d = L.DomUtil.create("div", "key"); L.DomEvent.disableClickPropagation(d);
+      L.DomEvent.disableScrollPropagation(d); keyBox = d; return d; } });
+  new Key().addTo(map);
+}
+function paintChips() {
+  const onSat = base === "sat";
+  for (const country of ["india", "slovenia"]) {
+    const front = [];
+    for (const c of DATA[country].chips) {
+      const m = MARKS[country][c.id];
+      const bin = binOf(c.f[method], c.n);
+      const isPin = pinned && pinned.country === country && pinned.id === c.id;
+      const inD = district && country === "india" ? c.d === district : null;
+      const st = styleFor(bin);
+      if (/^q/.test(bin)) front.push(m);
+      if (isPin) { st.color = onSat ? "#ffde3b" : css("--ink"); st.weight = 3; }
+      if (inD === true) { st.color = onSat ? "#ffde3b" : css("--ink"); st.weight = 2.5; }
+      if (inD === false) { st.opacity = 0.25; st.fillOpacity = (st.fillOpacity || 0) * 0.25; }
+      m.setStyle(st);
+    }
+    // chips where something was found go on top, so empty chips cannot hide them
+    front.forEach(m => m.bringToFront());
+    if (pinned && pinned.country === country) MARKS[country][pinned.id].bringToFront();
+  }
+}
+function zoomTo(country, ids) {
+  const { map } = MAPS[country];
+  const cs = DATA[country].chips.filter(c => ids.includes(c.id));
+  if (!cs.length) return;
+  const b = L.latLngBounds(cs.flatMap(c => [[c.b[1], c.b[0]], [c.b[3], c.b[2]]]));
+  map.flyToBounds(b.pad(cs.length > 1 ? 0.25 : 0.15), { maxZoom: 15, duration: 0.8 });
+}
+function caveats() {
+  for (const country of ["india", "slovenia"]) {
+    const v = DATA[country].methods[method];
+    const ftw = DATA[country].methods.ftw;
+    document.getElementById("meta-" + country).textContent =
+      `${DATA[country].chips.length} chips · ${fmt(pct(v.found, v.parcels))} of ${v.parcels.toLocaleString()} parcels found`;
+    let txt = method === "ftw"
+      ? `FTW's released 3-class checkpoint as shipped, ${ftw.objects} objects per chip.`
+      : `${v.label} at ${v.setting}, ${v.objects} objects per chip against FTW's ${ftw.objects}.`;
+    if (v.clamped) txt += " Clamped: no setting of this method was run coarse enough to match FTW here, so it spends far more objects and this layer flatters it.";
+    document.getElementById("cav-" + country).textContent = txt;
+  }
+}
+
+/* ---------- tooltip and detail ---------- */
+const tip = document.getElementById("tip");
+function rowsFor(country, c, cls) {
+  return ORDER.map(m => {
+    const v = c.f[m];
+    return `<div class="tr${m === method ? " sel" : ""}"><span>${DATA[country].methods[m].label}</span><span>${v} of ${c.n}</span></div>`;
+  }).join("");
+}
+function where(country, c) {
+  return country === "india" ? (c.d ? `${c.d}, ${c.s}` : "India") : "Slovenia";
+}
+function showTip(e, country, id) {
+  const c = chipOf(country, id);
+  tip.innerHTML = `<b>${where(country, c)}</b><div style="color:var(--muted)">${c.id}</div>` +
+    (c.n ? rowsFor(country, c) : `<div>no labelled parcel</div>`);
+  tip.style.opacity = 1;
+  const pad = 14, w = tip.offsetWidth, h = tip.offsetHeight;
+  let x = e.clientX + pad, y = e.clientY + pad;
+  if (x + w > innerWidth - 8) x = e.clientX - w - pad;
+  if (y + h > innerHeight - 8) y = e.clientY - h - pad;
+  tip.style.left = x + "px"; tip.style.top = y + "px";
+}
+function hideTip() { tip.style.opacity = 0; }
+function showParcelTip(e, country, c, p) {
+  tip.innerHTML = `<b>Labelled parcel</b><div style="color:var(--muted)">${where(country, c)} · ${c.id}</div>` +
+    ORDER.map(m => {
+      const v = p[2][DATA[country].methods[m].slot];
+      return `<div class="tr${m === method ? " sel" : ""}"><span>${DATA[country].methods[m].label}</span><span>${v >= 0.5 ? "found" : "missed"}, IoU ${v.toFixed(2)}</span></div>`;
+    }).join("") + `<div style="color:var(--muted);margin-top:3px">found means one object overlaps it at IoU 0.5 or more</div>`;
+  tip.style.opacity = 1;
+  const pad = 14, w = tip.offsetWidth, h = tip.offsetHeight;
+  let x = e.clientX + pad, y = e.clientY + pad;
+  if (x + w > innerWidth - 8) x = e.clientX - w - pad;
+  if (y + h > innerHeight - 8) y = e.clientY - h - pad;
+  tip.style.left = x + "px"; tip.style.top = y + "px";
+}
+function showDetail() {
+  const el = document.getElementById("detail");
+  if (!pinned) { el.innerHTML = `<p class="empty">Hover or click a chip to see what each method found there.</p>`; return; }
+  const c = chipOf(pinned.country, pinned.id);
+  if (!c.n) { el.innerHTML = `<h3>${where(pinned.country, c)}</h3><p class="where">${c.id}</p><p class="empty">No labelled parcel on this chip.</p>`; return; }
+  el.innerHTML = `<h3>${where(pinned.country, c)}</h3><p class="where">${c.id} · ${c.n} labelled parcels
+    · <button type="button" id="zoomchip">zoom to chip</button></p>
+    <div class="bars">` + ORDER.map(m => {
+      const v = c.f[m], w = pct(v, c.n);
+      return `<div class="bar${m === method ? " sel" : ""}"><span class="lab">${DATA[pinned.country].methods[m].label}</span>
+        <span class="track"><span class="fill" style="width:${w}%;display:block"></span></span>
+        <span class="num">${v}/${c.n}</span></div>`;
+    }).join("") + `</div>`;
+  document.getElementById("zoomchip").onclick = () => zoomTo(pinned.country, [pinned.id]);
+}
+
+/* ---------- district table ---------- */
+let sortKey = "n", sortDir = -1;
+function districtRows() {
+  const by = {};
+  for (const c of DATA.india.chips) {
+    if (!c.n || !c.d) continue;
+    const k = c.d;
+    const r = by[k] || (by[k] = { d: c.d, s: c.s, chips: 0, n: 0, ftw: 0, sam: 0, watershed: 0 });
+    r.chips++; r.n += c.n;
+    for (const m of ORDER) r[m] += c.f[m];
+  }
+  return Object.values(by);
+}
+function table() {
+  const cols = [["d", "district"], ["chips", "chips"], ["n", "parcels"],
+    ["ftw", "FTW"], ["sam", "SAM"], ["watershed", "watershed"]];
+  const thead = document.querySelector("#tbl thead");
+  thead.innerHTML = "<tr>" + cols.map(([k, l]) =>
+    `<th data-k="${k}" class="${k === method ? "sel" : ""}" aria-sort="${k === sortKey ? (sortDir < 0 ? "descending" : "ascending") : "none"}">${l}</th>`).join("") + "</tr>";
+  const rows = districtRows().sort((a, b) => {
+    const av = sortKey in a && ORDER.includes(sortKey) ? a[sortKey] / a.n : a[sortKey];
+    const bv = sortKey in b && ORDER.includes(sortKey) ? b[sortKey] / b.n : b[sortKey];
+    return (av > bv ? 1 : av < bv ? -1 : 0) * sortDir;
+  });
+  document.querySelector("#tbl tbody").innerHTML = rows.map(r =>
+    `<tr class="row" tabindex="0" data-d="${r.d}" aria-selected="${r.d === district}">
+      <td>${r.d}<span class="st">${r.s}</span></td><td class="ch">${r.chips}</td><td>${r.n}</td>` +
+    ORDER.map(m => `<td class="${m === method ? "sel" : ""}">${r[m]} <span class="pc">(${fmt(pct(r[m], r.n), 0)})</span></td>`).join("") +
+    `</tr>`).join("");
+}
+function tableEvents() {
+  document.querySelector("#tbl thead").addEventListener("click", e => {
+    const th = e.target.closest("th"); if (!th) return;
+    const k = th.dataset.k;
+    sortDir = k === sortKey ? -sortDir : (k === "d" ? 1 : -1); sortKey = k;
+    table();
+  });
+  const pick = tr => {
+    district = district === tr.dataset.d ? null : tr.dataset.d;
+    table(); paintChips();
+    if (district) zoomTo("india", DATA.india.chips.filter(c => c.d === district).map(c => c.id));
+    else MAPS.india.map.flyToBounds(L.latLngBounds(DATA.india.chips.map(c => [c.lat, c.lon])).pad(0.08), { duration: 0.8 });
+  };
+  const body = document.querySelector("#tbl tbody");
+  body.addEventListener("click", e => { const tr = e.target.closest("tr.row"); if (tr) pick(tr); });
+  body.addEventListener("keydown", e => {
+    if (e.key === "Enter" || e.key === " ") { const tr = e.target.closest("tr.row"); if (tr) { e.preventDefault(); pick(tr); } }
+  });
+}
+
+function redraw() { paintChips(); restyleParcels(); caveats(); table(); showDetail(); renderKey(); }
+figs(); controls(); drawMap("india"); drawMap("slovenia"); tableEvents();
+document.getElementById("bases").addEventListener("click", e => {
+  const b = e.target.closest("button"); if (b) setBase(b.dataset.b);
+});
+new MutationObserver(() => setBase(base)).observe(document.documentElement,
+  { attributes: true, attributeFilter: ["data-theme"] });
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => setBase(base));
+setBase("sat"); redraw();
+</script>
+</body>
+</html>
