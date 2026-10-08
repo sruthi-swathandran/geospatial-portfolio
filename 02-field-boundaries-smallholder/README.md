@@ -21,14 +21,14 @@ on a field boundary do better:
 
 | method, India, at 175 objects per chip | recall |
 |---|---:|
-| SAM ViT-H, NIR-blue-green | 0.153 |
+| SAM ViT-H, colour infrared | 0.158 |
 | watershed | 0.107 |
 | felzenszwalb | 0.031 |
 | FTW 3-class checkpoint | 0.027 |
 
-SAM was meant to get standard false colour and got near infrared, blue and
-green, because the code took FTW's band order to start with blue. It is being
-rerun on the composites that were intended (B-23).
+SAM on natural colour reaches 0.152. Its first run was given the wrong bands,
+because the code took FTW's band order to start with blue, and reached 0.153
+and 0.151. Rerun on the composites intended, the result barely moved (B-23).
 
 The checkpoint barely clears chance. Random Voronoi cells at the same count,
 which never see the imagery, average 0.0209 over 200 draws, and 3 of those 200
@@ -51,8 +51,8 @@ width would be found about as often in each. It is not:
 | 50 m up | FTW | 7.11% | 58.80% | 8.3x |
 | 30 to 50 m | watershed | 22.49% | 47.64% | 2.1x |
 | 50 m up | watershed | 41.33% | 71.10% | 1.7x |
-| 30 to 50 m | SAM ViT-H, blue-green-red | 8.77% | 32.01% | 3.7x |
-| 50 m up | SAM ViT-H, blue-green-red | 33.78% | 64.39% | 1.9x |
+| 30 to 50 m | SAM ViT-H natural colour | 9.23% | 34.48% | 3.7x |
+| 50 m up | SAM ViT-H natural colour | 36.44% | 68.57% | 1.9x |
 
 Slovenia wins every band by every method, 1.7 to 41.0 times. Its labelled
 parcels are also narrower than India's, 30.4 m against 42.3 m at the median.
@@ -64,9 +64,9 @@ India is still found 8.3 times less often.
 
 **5. The checkpoint misses Indian parcels.** It puts no object at all on 74.4%
 of them. SAM, spending a similar budget on 100 test chips, reaches 91.3% of
-labelled parcels where FTW reaches 24.7%. On the largest Indian fields, over
-about 100 m across, SAM recovers 50.8% against FTW's 17.5%, the one result here
-close to practical use.
+labelled parcels where FTW reaches 24.7%, measured on its first run's inputs.
+On the largest Indian fields, over about 100 m across, SAM recovers 50.8%
+against FTW's 17.5%, the one result here close to practical use.
 
 **6. Nor does parcel shape.** Slovenian parcels are more strip-like than
 India's. Given India's mix of widths and shapes, Slovenia is still found 10.7
@@ -103,15 +103,15 @@ is applied to every method. `COMPARISON.md` explains each control.
 - **Indian labels are presence-only.** Five parcels per chip are drawn and
   98.96% of each chip carries no label, so India gives recall and only a floor
   on precision.
-- **Three of the five Slovenian figures at the budget are bounds.** Watershed
-  has been measured there. Felzenszwalb and the two SAM composites were not run
-  coarse enough to reach 20 objects per chip.
+- **Most Slovenian figures at the budget are bounds.** Watershed has been
+  measured there. Felzenszwalb and SAM were not run coarse enough to reach 20
+  objects per chip.
 - **The parcel reconstruction is bounded, not validated.** FTW erodes each
   parcel's edge and this project gives it back. Varying that step moves no
   recall by more than 0.0017, but it has never been checked against
   independently digitised parcels.
-- **SAM has not yet been run on standard composites.** Its figures are for
-  the inputs it was actually given (B-23).
+- **A few SAM figures rest on its first run.** Precision on 100 chips and the
+  reconstruction sweep used near infrared, blue and green (B-23).
 - **The contrast measure rests on one analyst's eye** and 20 parcels.
 - **Settings were chosen on the data they are reported from.** Measured on 40
   held-out splits, that is worth at most 0.0066 of recall.

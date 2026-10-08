@@ -151,8 +151,8 @@ def sweep_table(country: str, sweeps: dict) -> list:
         "| method | setting | objects/chip | median IoU | recall | null | gap |",
         "|---|---:|---:|---:|---:|---:|---:|",
     ]
-    order = ["ftw", "watershed", "felzenszwalb", "sam_true", "sam_false",
-             "sam_rgb", "sam_cir"]
+    order = ["ftw", "watershed", "felzenszwalb", "sam_rgb", "sam_cir",
+             "sam_true", "sam_false"]
     for key in order:
         if key not in sweeps:
             continue
@@ -174,8 +174,8 @@ def budget_table(country: str, sweeps: dict) -> tuple:
         "|---|---:|---:|---:|---|",
     ]
     vals = {}
-    for key in ["ftw", "watershed", "felzenszwalb", "sam_true", "sam_false",
-                "sam_rgb", "sam_cir"]:
+    for key in ["ftw", "watershed", "felzenszwalb", "sam_rgb", "sam_cir",
+                "sam_true", "sam_false"]:
         if key not in sweeps:
             continue
         rec, nul, note = at_budget(sweeps[key], budget)
@@ -395,7 +395,9 @@ def matched_parcel_table(country: str, subset_method: str) -> list:
 
 # holdout.py writes the SAM composites by their file keys (B-23)
 HOLDOUT_NAMES = {"sam_vit_h_true": "SAM ViT-H blue-green-red",
-                 "sam_vit_h_false": "SAM ViT-H NIR-blue-green"}
+                 "sam_vit_h_false": "SAM ViT-H NIR-blue-green",
+                 "sam_vit_h_rgb": "SAM ViT-H natural colour",
+                 "sam_vit_h_cir": "SAM ViT-H colour infrared"}
 
 
 def holdout_table(country: str) -> list:
@@ -788,8 +790,9 @@ def main() -> None:
         out.append(f"\n## {country.capitalize()}, at FTW's object budget\n")
         out += blines
 
-        methods = ["ftw", "watershed", "sam_true", "sam_false"] + [
-            k for k in ("sam_rgb", "sam_cir") if k in sweeps]
+        methods = ["ftw", "watershed"] + [
+            k for k in ("sam_rgb", "sam_cir") if k in sweeps] + [
+            "sam_true", "sam_false"]
         caption = (f"SAM at threshold {args.sam_setting.replace('p', '.')}, "
                    f"classical methods at their best setting.\n")
 
@@ -805,7 +808,12 @@ def main() -> None:
 
     out.append("\n## The same width band in both countries\n")
     out.append("Same sensor, same method, same physical parcel size.\n")
-    out += cross_country_table(["ftw", "watershed", "sam_true"],
+    # natural colour since B-23; the first run's blue-green-red stands in
+    # only if the rerun is missing
+    sam_key = "sam_rgb" if all(
+        width_file(c, "sam_rgb", args.sam_setting).exists()
+        for c in COUNTRIES) else "sam_true"
+    out += cross_country_table(["ftw", "watershed", sam_key],
                                args.sam_setting, args.iou)
 
     for country in COUNTRIES:

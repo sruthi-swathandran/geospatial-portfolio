@@ -51,7 +51,7 @@ DEST = PROJECT / "docs" / "index.html"
 BOUNDARIES = {"india": ("IND_ADM1.geojson", 0.02),
               "slovenia": ("SVN_ADM1.geojson", 0.002)}
 METHODS = {"ftw": "FTW 3-class checkpoint",
-           "sam": "SAM ViT-H, NIR-blue-green",
+           "sam": "SAM ViT-H, colour infrared",
            "watershed": "watershed"}
 
 
@@ -81,11 +81,11 @@ def nearest_settings(country: str) -> dict:
         "objects": float(best["objects_per_chip"])}
 
     sam = [r for r in read_csv(rd / "sam_comparison_vit_h_min500.csv")
-           if r["composite"].lower() == "false"]
+           if r["composite"].lower() == "cir"]
     best = min(sam, key=lambda r: abs(float(r["objects_per_chip"]) - ftw_objs))
     thr = best["setting"].split("/")[0]
     out["sam"] = {
-        "tag": "sam_vit_h_false_" + thr.replace(".", "p"),
+        "tag": "sam_vit_h_cir_" + thr.replace(".", "p"),
         "setting": f"predicted IoU {thr}",
         "objects": float(best["objects_per_chip"])}
 

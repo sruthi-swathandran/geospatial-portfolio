@@ -11,3 +11,7 @@ watershed,50 m up,675,1699,279,1208,0.4133,0.711,0.7415,1.0
 "SAM ViT-H, blue-green-red",20 to 30 m,245,1229,5,179,0.0204,0.1456,0.1355,1.0
 "SAM ViT-H, blue-green-red",30 to 50 m,867,1740,76,557,0.0877,0.3201,0.3255,1.0
 "SAM ViT-H, blue-green-red",50 m up,675,1699,228,1094,0.3378,0.6439,0.693,1.0
+SAM ViT-H natural colour,under 20 m,196,2163,1,61,0.0051,0.0282,0.0199,1.0
+SAM ViT-H natural colour,20 to 30 m,245,1229,4,192,0.0163,0.1562,0.1392,1.0
+SAM ViT-H natural colour,30 to 50 m,867,1740,80,600,0.0923,0.3448,0.3512,1.0
+SAM ViT-H natural colour,50 m up,675,1699,246,1165,0.3644,0.6857,0.7278,1.0

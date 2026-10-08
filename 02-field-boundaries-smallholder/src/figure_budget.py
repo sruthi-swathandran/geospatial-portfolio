@@ -15,10 +15,9 @@ The Slovenian curves stop well right of the budget line. That gap is B-08: no
 competing method was run coarse enough to be read at 18 objects per chip, so
 their figures there are ceilings and the drawing says so by not extending them.
 
-SAM is drawn from its first run's blue-green-red composite, which was meant as
-true colour and had red and blue swapped (B-23). It matches the cross-country
-table in COMPARISON.md. The near infrared, blue and green composite runs within
-0.01 of it on India and about 0.03 below on Slovenia.
+SAM is drawn on natural colour, matching the cross-country table in
+COMPARISON.md. Its first run used blue, green and red in the wrong order
+(B-23); those figures are in the tables and not drawn here.
 
 Numbers come from the same CSVs as every table, so the figure cannot drift from
 the text. Colours are the four leading slots of a categorical palette validated
@@ -65,7 +64,7 @@ SERIES = [
     ("ftw", "FTW 3-class FULL", "FTW", "#2a78d6", "o", "point"),
     ("watershed", "watershed", "watershed", "#eb6834", "s", "right"),
     ("felzenszwalb", "felzenszwalb", "felzenszwalb", "#1baf7a", "^", "right"),
-    ("sam_true", "SAM ViT-H", "SAM ViT-H", "#eda100", "D", "left"),
+    ("sam_rgb", "SAM ViT-H", "SAM ViT-H", "#eda100", "D", "left"),
 ]
 
 # FTW is one dot rather than a curve, so its label has no line to sit beside.

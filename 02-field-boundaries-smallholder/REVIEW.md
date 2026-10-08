@@ -83,9 +83,10 @@ gap, and India's dry-season window costs FTW about two points of recall. See
 
 Then **B-23**: FTW stores red first and the SAM code assumed blue first, so
 neither SAM composite was the true or false colour it was named for. The SAM
-figures are relabelled by what SAM was given, the contrast panel is noted as
-drawn with red and blue swapped, and SAM is being rerun on the intended
-composites.
+figures are relabelled by what SAM was given and the contrast panel is noted
+as drawn with red and blue swapped. SAM has since been rerun on the intended
+composites: on India at FTW's object count, colour infrared reaches 0.158 and
+natural colour 0.152, against 0.153 and 0.151 for the first run.
 
 ---
 

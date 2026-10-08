@@ -174,6 +174,9 @@ def aggregate(path: Path, iou_cut: float, country: str, min_size: float,
         sys.exit("no rows to aggregate")
 
     for r in raw:
+        # some rows of the Indian log were rewritten at some point with the
+        # first composites as True and False; one spelling keeps one table
+        r["composite"] = r["composite"].strip().lower()
         r["best_iou"] = float(r["best_iou"])
         r["objects"] = float(r["objects"])
         r["seconds"] = float(r["seconds"])

@@ -50,6 +50,10 @@ SWEEPS = {
     "felzenszwalb": ["25", "50", "100", "150", "200", "300", "400", "800"],
     "sam_vit_h_true": ["0p50", "0p60", "0p70", "0p80", "0p88"],
     "sam_vit_h_false": ["0p50", "0p60", "0p70", "0p80", "0p88"],
+    # the composites the first two were meant to be (B-23). Added last so
+    # the splits drawn for the methods above stay the same.
+    "sam_vit_h_rgb": ["0p50", "0p60", "0p70", "0p80", "0p88"],
+    "sam_vit_h_cir": ["0p50", "0p60", "0p70", "0p80", "0p88"],
 }
 
 

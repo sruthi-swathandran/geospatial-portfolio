@@ -3,3 +3,5 @@ slovenia,watershed,0.05,0.3484,0.35,-0.0016,0.05,1.0,40
 slovenia,felzenszwalb,100,0.2137,0.2136,0.0001,100,1.0,40
 slovenia,sam_vit_h_true,0.50,0.2762,0.2717,0.0045,0.50,1.0,40
 slovenia,sam_vit_h_false,0.50,0.2486,0.242,0.0066,0.50,1.0,40
+slovenia,sam_vit_h_rgb,0.50,0.2954,0.2934,0.002,0.50,1.0,40
+slovenia,sam_vit_h_cir,0.50,0.2593,0.2612,-0.0019,0.50,1.0,40

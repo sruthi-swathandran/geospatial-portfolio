@@ -30,7 +30,7 @@ of the three acquisitions and the recession between them.
 **RS-02, field boundaries for Indian smallholdings.** The released state of the
 art recovers 2.7% of Indian smallholdings and 22.2% of Slovenian parcels. Read
 at the same object budget that model spends, a foundation model which has never
-seen a field boundary recovers 15.3% of the Indian parcels and an untrained
+seen a field boundary recovers 15.8% of the Indian parcels and an untrained
 watershed recovers 10.7%. Three draws in 200 of randomly scattered cells, with
 the imagery never opened, beat the trained model outright. The failure belongs
 to the method rather than to a shortage of signal, and the project also shows

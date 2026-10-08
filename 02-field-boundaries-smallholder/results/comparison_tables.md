@@ -27,6 +27,16 @@ Rebuild with `python src\build_comparison.py`. Do not edit by hand.
 | felzenszwalb | 300 | 213 | 0.047 | 0.042 | 0.022 | +0.020 |
 | felzenszwalb | 400 | 163 | 0.019 | 0.027 | 0.014 | +0.013 |
 | felzenszwalb | 800 | 96 | 0.004 | 0.012 | 0.006 | +0.006 |
+| SAM ViT-H natural colour | 0.50/0.88 | 195 | 0.089 | 0.167 | 0.020 | +0.147 |
+| SAM ViT-H natural colour | 0.60/0.88 | 194 | 0.089 | 0.166 | 0.021 | +0.145 |
+| SAM ViT-H natural colour | 0.70/0.88 | 191 | 0.085 | 0.164 | 0.018 | +0.146 |
+| SAM ViT-H natural colour | 0.80/0.88 | 176 | 0.056 | 0.152 | 0.018 | +0.135 |
+| SAM ViT-H natural colour | 0.88/0.88 | 136 | 0.010 | 0.130 | 0.012 | +0.117 |
+| SAM ViT-H colour infrared | 0.50/0.88 | 223 | 0.149 | 0.183 | 0.028 | +0.155 |
+| SAM ViT-H colour infrared | 0.60/0.88 | 222 | 0.148 | 0.183 | 0.026 | +0.157 |
+| SAM ViT-H colour infrared | 0.70/0.88 | 218 | 0.144 | 0.181 | 0.019 | +0.162 |
+| SAM ViT-H colour infrared | 0.80/0.88 | 202 | 0.123 | 0.174 | 0.022 | +0.152 |
+| SAM ViT-H colour infrared | 0.88/0.88 | 156 | 0.055 | 0.145 | 0.017 | +0.128 |
 | SAM ViT-H, blue-green-red | 0.50/0.88 | 185 | 0.051 | 0.156 | 0.019 | +0.137 |
 | SAM ViT-H, blue-green-red | 0.60/0.88 | 184 | 0.051 | 0.156 | 0.022 | +0.134 |
 | SAM ViT-H, blue-green-red | 0.70/0.88 | 181 | 0.043 | 0.155 | 0.018 | +0.136 |
@@ -45,6 +55,8 @@ Rebuild with `python src\build_comparison.py`. Do not edit by hand.
 | FTW 3-class FULL | 0.027 | 0.022 | +0.005 | single setting |
 | watershed | 0.107 | 0.017 | +0.091 | interpolated |
 | felzenszwalb | 0.031 | 0.016 | +0.015 | interpolated |
+| SAM ViT-H natural colour | 0.152 | 0.017 | +0.134 | interpolated |
+| SAM ViT-H colour infrared | 0.158 | 0.019 | +0.138 | interpolated |
 | SAM ViT-H, blue-green-red | 0.151 | 0.017 | +0.134 | interpolated |
 | SAM ViT-H, NIR-blue-green | 0.153 | 0.019 | +0.135 | interpolated |
 
@@ -52,26 +64,26 @@ Rebuild with `python src\build_comparison.py`. Do not edit by hand.
 
 SAM at threshold 0.50, classical methods at their best setting.
 
-| ground width | parcels | FTW 3-class FULL | watershed | SAM ViT-H, blue-green-red | SAM ViT-H, NIR-blue-green |
-|---|---:|---:|---:|---:|---:|
-| under 20 m | 196 | 0.00% | 1.02% | 0.51% | 1.02% |
-| 20 to 30 m | 245 | 0.41% | 4.90% | 2.04% | 0.82% |
-| 30 to 50 m | 867 | 0.58% | 22.49% | 8.77% | 10.61% |
-| 50 m up | 675 | 7.11% | 41.33% | 33.78% | 36.44% |
+| ground width | parcels | FTW 3-class FULL | watershed | SAM ViT-H natural colour | SAM ViT-H colour infrared | SAM ViT-H, blue-green-red | SAM ViT-H, NIR-blue-green |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| under 20 m | 196 | 0.00% | 1.02% | 0.51% | 1.02% | 0.51% | 1.02% |
+| 20 to 30 m | 245 | 0.41% | 4.90% | 1.63% | 1.63% | 2.04% | 0.82% |
+| 30 to 50 m | 867 | 0.58% | 22.49% | 9.23% | 10.96% | 8.77% | 10.61% |
+| 50 m up | 675 | 7.11% | 41.33% | 36.44% | 38.81% | 33.78% | 36.44% |
 
 ## India, the same widths cut finer
 
 SAM at threshold 0.50, classical methods at their best setting.
 
-| width, native 10 m px | parcels | FTW 3-class FULL | watershed | SAM ViT-H, blue-green-red | SAM ViT-H, NIR-blue-green |
-|---|---:|---:|---:|---:|---:|
-| under 2 | 196 | 0.00% | 1.02% | 0.51% | 1.02% |
-| 2 to 3 | 245 | 0.41% | 4.90% | 2.04% | 0.82% |
-| 3 to 4 | 503 | 0.20% | 17.10% | 6.56% | 7.16% |
-| 4 to 5 | 364 | 1.10% | 29.95% | 11.81% | 15.38% |
-| 5 to 7 | 347 | 3.75% | 48.41% | 25.07% | 26.80% |
-| 7 to 10 | 202 | 6.44% | 40.59% | 38.12% | 44.06% |
-| 10 and over | 126 | 17.46% | 23.02% | 50.79% | 50.79% |
+| width, native 10 m px | parcels | FTW 3-class FULL | watershed | SAM ViT-H natural colour | SAM ViT-H colour infrared | SAM ViT-H, blue-green-red | SAM ViT-H, NIR-blue-green |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| under 2 | 196 | 0.00% | 1.02% | 0.51% | 1.02% | 0.51% | 1.02% |
+| 2 to 3 | 245 | 0.41% | 4.90% | 1.63% | 1.63% | 2.04% | 0.82% |
+| 3 to 4 | 503 | 0.20% | 17.10% | 6.96% | 7.75% | 6.56% | 7.16% |
+| 4 to 5 | 364 | 1.10% | 29.95% | 12.36% | 15.38% | 11.81% | 15.38% |
+| 5 to 7 | 347 | 3.75% | 48.41% | 27.38% | 29.39% | 25.07% | 26.80% |
+| 7 to 10 | 202 | 6.44% | 40.59% | 43.07% | 46.53% | 38.12% | 44.06% |
+| 10 and over | 126 | 17.46% | 23.02% | 50.79% | 52.38% | 50.79% | 50.79% |
 
 ## Slovenia, every setting
 
@@ -98,6 +110,16 @@ SAM at threshold 0.50, classical methods at their best setting.
 | felzenszwalb | 300 | 156 | 0.109 | 0.129 | 0.015 | +0.114 |
 | felzenszwalb | 400 | 118 | 0.066 | 0.098 | 0.013 | +0.085 |
 | felzenszwalb | 800 | 65 | 0.017 | 0.037 | 0.006 | +0.030 |
+| SAM ViT-H natural colour | 0.50/0.88 | 131 | 0.233 | 0.295 | 0.013 | +0.282 |
+| SAM ViT-H natural colour | 0.60/0.88 | 130 | 0.232 | 0.295 | 0.014 | +0.281 |
+| SAM ViT-H natural colour | 0.70/0.88 | 129 | 0.231 | 0.295 | 0.015 | +0.280 |
+| SAM ViT-H natural colour | 0.80/0.88 | 122 | 0.209 | 0.286 | 0.013 | +0.272 |
+| SAM ViT-H natural colour | 0.88/0.88 | 99 | 0.157 | 0.257 | 0.013 | +0.244 |
+| SAM ViT-H colour infrared | 0.50/0.88 | 119 | 0.170 | 0.259 | 0.012 | +0.247 |
+| SAM ViT-H colour infrared | 0.60/0.88 | 118 | 0.169 | 0.259 | 0.013 | +0.246 |
+| SAM ViT-H colour infrared | 0.70/0.88 | 116 | 0.166 | 0.257 | 0.012 | +0.245 |
+| SAM ViT-H colour infrared | 0.80/0.88 | 108 | 0.143 | 0.248 | 0.012 | +0.236 |
+| SAM ViT-H colour infrared | 0.88/0.88 | 87 | 0.097 | 0.212 | 0.011 | +0.201 |
 | SAM ViT-H, blue-green-red | 0.50/0.88 | 117 | 0.194 | 0.276 | 0.013 | +0.264 |
 | SAM ViT-H, blue-green-red | 0.60/0.88 | 117 | 0.194 | 0.276 | 0.014 | +0.262 |
 | SAM ViT-H, blue-green-red | 0.70/0.88 | 115 | 0.190 | 0.274 | 0.012 | +0.262 |
@@ -116,6 +138,8 @@ SAM at threshold 0.50, classical methods at their best setting.
 | FTW 3-class FULL | 0.222 | 0.007 | +0.215 | single setting |
 | watershed | 0.081 | 0.003 | +0.078 | clamped, sweep stops at 26 objects |
 | felzenszwalb | 0.037 | 0.006 | +0.030 | clamped, sweep stops at 65 objects |
+| SAM ViT-H natural colour | 0.257 | 0.013 | +0.244 | clamped, sweep stops at 99 objects |
+| SAM ViT-H colour infrared | 0.212 | 0.011 | +0.201 | clamped, sweep stops at 87 objects |
 | SAM ViT-H, blue-green-red | 0.234 | 0.010 | +0.224 | clamped, sweep stops at 89 objects |
 | SAM ViT-H, NIR-blue-green | 0.206 | 0.010 | +0.196 | clamped, sweep stops at 85 objects |
 
@@ -123,26 +147,26 @@ SAM at threshold 0.50, classical methods at their best setting.
 
 SAM at threshold 0.50, classical methods at their best setting.
 
-| ground width | parcels | FTW 3-class FULL | watershed | SAM ViT-H, blue-green-red | SAM ViT-H, NIR-blue-green |
-|---|---:|---:|---:|---:|---:|
-| under 20 m | 2,163 | 0.51% | 3.74% | 2.64% | 1.62% |
-| 20 to 30 m | 1,229 | 7.89% | 21.32% | 14.56% | 12.12% |
-| 30 to 50 m | 1,740 | 23.62% | 47.64% | 32.01% | 27.76% |
-| 50 m up | 1,699 | 58.80% | 71.10% | 64.39% | 60.68% |
+| ground width | parcels | FTW 3-class FULL | watershed | SAM ViT-H natural colour | SAM ViT-H colour infrared | SAM ViT-H, blue-green-red | SAM ViT-H, NIR-blue-green |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| under 20 m | 2,163 | 0.51% | 3.74% | 2.82% | 1.90% | 2.64% | 1.62% |
+| 20 to 30 m | 1,229 | 7.89% | 21.32% | 15.62% | 11.96% | 14.56% | 12.12% |
+| 30 to 50 m | 1,740 | 23.62% | 47.64% | 34.48% | 29.60% | 32.01% | 27.76% |
+| 50 m up | 1,699 | 58.80% | 71.10% | 68.57% | 62.86% | 64.39% | 60.68% |
 
 ## Slovenia, the same widths cut finer
 
 SAM at threshold 0.50, classical methods at their best setting.
 
-| width, native 10 m px | parcels | FTW 3-class FULL | watershed | SAM ViT-H, blue-green-red | SAM ViT-H, NIR-blue-green |
-|---|---:|---:|---:|---:|---:|
-| under 2 | 2,163 | 0.51% | 3.74% | 2.64% | 1.62% |
-| 2 to 3 | 1,229 | 7.89% | 21.32% | 14.56% | 12.12% |
-| 3 to 4 | 1,193 | 18.86% | 42.92% | 27.75% | 24.14% |
-| 4 to 5 | 547 | 34.00% | 57.95% | 41.32% | 35.65% |
-| 5 to 7 | 827 | 48.49% | 68.80% | 55.86% | 50.67% |
-| 7 to 10 | 553 | 66.18% | 75.23% | 69.80% | 67.09% |
-| 10 and over | 319 | 72.73% | 69.91% | 77.12% | 75.55% |
+| width, native 10 m px | parcels | FTW 3-class FULL | watershed | SAM ViT-H natural colour | SAM ViT-H colour infrared | SAM ViT-H, blue-green-red | SAM ViT-H, NIR-blue-green |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| under 2 | 2,163 | 0.51% | 3.74% | 2.82% | 1.90% | 2.64% | 1.62% |
+| 2 to 3 | 1,229 | 7.89% | 21.32% | 15.62% | 11.96% | 14.56% | 12.12% |
+| 3 to 4 | 1,193 | 18.86% | 42.92% | 29.76% | 25.31% | 27.75% | 24.14% |
+| 4 to 5 | 547 | 34.00% | 57.95% | 44.79% | 38.94% | 41.32% | 35.65% |
+| 5 to 7 | 827 | 48.49% | 68.80% | 59.73% | 52.24% | 55.86% | 50.67% |
+| 7 to 10 | 553 | 66.18% | 75.23% | 74.86% | 70.71% | 69.80% | 67.09% |
+| 10 and over | 319 | 72.73% | 69.91% | 80.56% | 76.80% | 77.12% | 75.55% |
 
 ## The same width band in both countries
 
@@ -158,10 +182,10 @@ Same sensor, same method, same physical parcel size.
 | 20 to 30 m | watershed | 12/245, 4.90% | 262/1,229, 21.32% | 4.4x |
 | 30 to 50 m | watershed | 195/867, 22.49% | 829/1,740, 47.64% | 2.1x |
 | 50 m up | watershed | 279/675, 41.33% | 1208/1,699, 71.10% | 1.7x |
-| under 20 m | SAM ViT-H, blue-green-red | 1/196, 0.51% | 57/2,163, 2.64% | 5.2x |
-| 20 to 30 m | SAM ViT-H, blue-green-red | 5/245, 2.04% | 179/1,229, 14.56% | 7.1x |
-| 30 to 50 m | SAM ViT-H, blue-green-red | 76/867, 8.77% | 557/1,740, 32.01% | 3.7x |
-| 50 m up | SAM ViT-H, blue-green-red | 228/675, 33.78% | 1094/1,699, 64.39% | 1.9x |
+| under 20 m | SAM ViT-H natural colour | 1/196, 0.51% | 61/2,163, 2.82% | 5.5x |
+| 20 to 30 m | SAM ViT-H natural colour | 4/245, 1.63% | 192/1,229, 15.62% | 9.6x |
+| 30 to 50 m | SAM ViT-H natural colour | 80/867, 9.23% | 600/1,740, 34.48% | 3.7x |
+| 50 m up | SAM ViT-H natural colour | 246/675, 36.44% | 1165/1,699, 68.57% | 1.9x |
 
 ## India, what the methods emit
 
@@ -179,6 +203,8 @@ Same sensor, same method, same physical parcel size.
 | felzenszwalb | 0.0842 | 0.0848 | -0.0005 | 100.0 in 100% of splits |
 | SAM ViT-H blue-green-red | 0.1563 | 0.1574 | -0.0011 | 0.5 in 100% of splits |
 | SAM ViT-H NIR-blue-green | 0.1725 | 0.1736 | -0.0012 | 0.5 in 100% of splits |
+| SAM ViT-H natural colour | 0.1669 | 0.1665 | +0.0004 | 0.5 in 100% of splits |
+| SAM ViT-H colour infrared | 0.1831 | 0.1846 | -0.0015 | 0.5 in 100% of splits |
 
 ## Slovenia, what the methods emit
 
@@ -195,6 +221,8 @@ Same sensor, same method, same physical parcel size.
 | felzenszwalb | 0.2137 | 0.2136 | +0.0001 | 100.0 in 100% of splits |
 | SAM ViT-H blue-green-red | 0.2762 | 0.2717 | +0.0045 | 0.5 in 100% of splits |
 | SAM ViT-H NIR-blue-green | 0.2486 | 0.2420 | +0.0066 | 0.5 in 100% of splits |
+| SAM ViT-H natural colour | 0.2954 | 0.2934 | +0.0020 | 0.5 in 100% of splits |
+| SAM ViT-H colour infrared | 0.2593 | 0.2612 | -0.0019 | 0.5 in 100% of splits |
 
 ## India, every method on the parcels the SAM subset covered
 
@@ -286,6 +314,7 @@ Same sensor, same method, same physical parcel size.
 | FTW 3-class FULL | 2.72% | 22.22% | 31.37% | 29.03% | 11.52x | 10.66x | +0.03 [+0.01, +0.05] | +0.04 |
 | watershed | 24.61% | 34.84% | 48.04% | 49.34% | 1.95x | 2.00x | -0.04 [-0.08, -0.01] | -0.04 |
 | SAM ViT-H, blue-green-red | 15.63% | 27.62% | 37.97% | 39.69% | 2.43x | 2.54x | -0.05 [-0.09, -0.01] | -0.06 |
+| SAM ViT-H natural colour | 16.69% | 29.54% | 40.63% | 42.05% | 2.43x | 2.52x | -0.04 [-0.08, -0.00] | -0.04 |
 
 ### Within each width band, Slovenia given India's shapes
 
@@ -303,6 +332,10 @@ Same sensor, same method, same physical parcel size.
 | SAM ViT-H, blue-green-red | 20 to 30 m | 5/245, 2.04% | 14.56% | 13.55% | 7.1x | 6.6x |
 | SAM ViT-H, blue-green-red | 30 to 50 m | 76/867, 8.77% | 32.01% | 32.55% | 3.7x | 3.7x |
 | SAM ViT-H, blue-green-red | 50 m up | 228/675, 33.78% | 64.39% | 69.30% | 1.9x | 2.1x |
+| SAM ViT-H natural colour | under 20 m | 1/196, 0.51% | 2.82% | 1.99% | 5.5x | 3.9x |
+| SAM ViT-H natural colour | 20 to 30 m | 4/245, 1.63% | 15.62% | 13.92% | 9.6x | 8.5x |
+| SAM ViT-H natural colour | 30 to 50 m | 80/867, 9.23% | 34.48% | 35.12% | 3.7x | 3.8x |
+| SAM ViT-H natural colour | 50 m up | 246/675, 36.44% | 68.57% | 72.78% | 1.9x | 2.0x |
 
 ## The two seasonal windows
 
