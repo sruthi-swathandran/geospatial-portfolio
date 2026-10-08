@@ -72,16 +72,24 @@ against FTW's 17.5%, the one result here close to practical use.
 India's. Given India's mix of widths and shapes, Slovenia is still found 10.7
 times as often by FTW, against 11.5 times when only widths are matched.
 
-**What is still open** is why India fails, though fewer candidates are left.
-The labelled Indian boundaries carry a weaker image gradient than Slovenia's,
-1.297 times their interior against 1.588, but a blind check against one
-analyst agreed with that measure only weakly. FTW's second image for India is
-from March to June, the dry months after the rabi harvest, and it works
+**7. Nor does the season, beyond a small part.** FTW's second image for India
+is from March to June, the dry months after the rabi harvest, and it works
 against the checkpoint. Given the kharif image twice instead, FTW finds 4.79%
-of Indian parcels against 2.72%, and given only the dry-season image it falls
-to chance. That is a measured part of the gap and a small one, since 4.79% is
-still 4.6 times below Slovenia. No image from December to February, when rabi
-crops are standing, has been tested.
+of Indian parcels against 2.72%. An image from December to February, when
+rabi crops are standing, helps by the same amount and no more, in both rabi
+seasons tested. The best arrangement still leaves India about four times
+below Slovenia.
+
+**What is still open** is why the checkpoint does not read Indian field edges.
+Width, shape, label placement and season are each measured and none explains
+the gap. The labelled Indian boundaries carry a weaker image gradient than
+Slovenia's, 1.297 times their interior against 1.588, but a blind check
+against one analyst agreed with that measure only weakly. Given the rabi image
+alone, FTW does no better than as shipped while watershed finds about as many
+boundaries in it as in kharif, so the edges are in the imagery and the model
+does not use them. India was in the checkpoint's training data, which makes
+that harder to explain, and retraining on Indian chips is the test not yet
+run.
 
 ![Recall against objects emitted per chip](figures/recall_by_object_budget.png)
 
@@ -148,6 +156,7 @@ Open data only. Nothing here comes from any private, client or internal source.
 |---|---|---|
 | [Fields of The World](https://source.coop/kerner-lab/fields-of-the-world) | chips, labels, released checkpoints | CC-BY-4.0 |
 | Copernicus Sentinel-2 | the imagery behind the chips | Copernicus / ESA terms |
+| Copernicus Sentinel-2 L2A via [Microsoft Planetary Computer](https://planetarycomputer.microsoft.com/) | the December to February images | Copernicus / ESA terms |
 | [Segment Anything](https://github.com/facebookresearch/segment-anything) | SAM ViT-H checkpoint | Apache 2.0 |
 | [geoBoundaries](https://www.geoboundaries.org/) | district polygons | CC BY 4.0 |
 | [Sentinel-2 cloudless 2020](https://s2maps.eu) by EOX | background of the interactive map only | CC BY-NC-SA 4.0 |

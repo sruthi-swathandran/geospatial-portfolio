@@ -88,6 +88,12 @@ as drawn with red and blue swapped. SAM has since been rerun on the intended
 composites: on India at FTW's object count, colour infrared reaches 0.158 and
 natural colour 0.152, against 0.153 and 0.151 for the first run.
 
+Last, the season question B-22 left open was tested directly. An image from
+December to February, built for every Indian test chip in two rabi seasons
+with FTW's own download recipe, helps the checkpoint only as much as a second
+kharif image does. F-01's cause is narrowed to the checkpoint itself; see
+finding 17 in `COMPARISON.md`.
+
 ---
 
 ## Phase 1. Inventory

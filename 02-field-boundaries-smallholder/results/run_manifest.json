@@ -1,7 +1,7 @@
 {
- "written_at": "2026-10-08T05:42:42+00:00",
+ "written_at": "2026-10-08T11:07:32+00:00",
  "git": {
-  "commit": "b4932bf5d75ca444f6e87764666c9bea45eed0f1",
+  "commit": "c4f34c32e87f1ebeb3f91618e752788e0fdf6bc5",
   "uncommitted_changes": true
  },
  "interpreter": {
@@ -172,6 +172,11 @@
    "value": 20260922
   },
   {
+   "script": "rabi_test.py",
+   "line": 344,
+   "value": 20261009
+  },
+  {
    "script": "sam_probe.py",
    "line": 134,
    "value": 20260917
@@ -195,7 +200,7 @@
  "outputs": {
   "results/comparison_tables.md": {
    "kind": "file",
-   "sha256": "923fc18c57d7862cf1c11bcd50f7b4e562d29263e3602c2f3fb0f61110f7ed73"
+   "sha256": "91f4fb65e6a72630cf8e4fa6f745eb49bfa23470821e561857f2df8c0fc2be89"
   },
   "results/country_comparison.csv": {
    "kind": "csv",
@@ -1224,6 +1229,152 @@
     "best_iou": "4634f26849e04d28db769bb59e217d4e3d44ddfd6f348b957fcee76e4b75261b",
     "found": "bb1ad350d4a9708d010c2b31d96f014921895bb63f6ebb9a3378d985cafe7e64",
     "width_native_px": "af1d9da320bad383881fac481678f3828ce976028cd1bb667693a96654169087"
+   }
+  },
+  "results/india/rabi_availability.csv": {
+   "kind": "csv",
+   "rows": 399,
+   "columns": {
+    "chip": "6f136833b4ef7f2698106b8896e6badf908aabb5773d97e4c1d5fb5b018a03f1",
+    "2015-16_scenes": "180479ca6d96c06d141c319fe11162ee753c474fdff38fd9f4dfa2da57c078b4",
+    "2015-16_under10": "30668063d61d7d8ad98083cce3c3d6c9450cec6cc525c5097292b9a18da13b93",
+    "2015-16_best_cloud": "1e76f9813d8ca1c58e6e88caab0fb7ad6f6970e4ce4410cfaa11957b6fb72df4",
+    "2015-16_best_date": "925c39972c0928abf271aa5824641423e55782c130257f3970aac4dfb1414416",
+    "2015-16_best_baseline": "742121d2c6b951127fac0fd4b1f50506da58454bbd08ef21ea509363259030cd",
+    "2016-17_scenes": "cba671ba2ccd4a7e4534cacb8863829977c30924bb8e989389ab1de28aa8fee7",
+    "2016-17_under10": "1fe1b5d0f8eb43b786db296f86db53968cd65ba9e423725d715197e3f4173417",
+    "2016-17_best_cloud": "099dc0436a7aa45e462cf34c15af46cce83269e0da8dd62078f2e3067b27c020",
+    "2016-17_best_date": "7507ffbf1468a5fa13b23a77bd7f7ab1f9b242c45f7051ca4e1d784a4e70e10d",
+    "2016-17_best_baseline": "fbc6a2d5de937a72e04594c2a4b933e458adc6fdab45713f7a34b30025a769af"
+   }
+  },
+  "results/india/rabi_match.csv": {
+   "kind": "csv",
+   "rows": 57,
+   "columns": {
+    "chip": "c3241b2acd0f071196ac87665f6b46cd9b2321d7bb84b42fedeef3ff0824e369",
+    "window": "8389778d905976cab3bcc3c5870cc7a8825d58f251464028925e2e2cb97053a2",
+    "scene": "8c4d95ab0a22e9ce531ab8876dddd7f5dceb240f56e2d7bdef3afba3b652c354",
+    "date": "127a8443602319949dbe40cb2f79e52515f7706ba070f8c9de9cfb77639ce909",
+    "baseline": "6f743fb45921f254a2626a1ac1b0136f9fb4d30e4faf67779d709439c3a4a33b",
+    "tile_cloud": "04f474069979dec7daf6955025da4a0ad602edb8f9907157422356759c2b9849",
+    "r_min": "b00dea544cd85c70cfe3a17fb435ca84973b4011792cda49145ac1ea33e73d9a",
+    "rel_max": "9b86c7e66ae00e4ff0a5f30aaee6c19d193b21d20c3393360297b332a0b8eb37"
+   }
+  },
+  "results/india/rabi_scenes.csv": {
+   "kind": "csv",
+   "rows": 798,
+   "columns": {
+    "chip": "4412648ee95b6f669691888be31966792a0594bc895369db9ab2414e3a96013b",
+    "season": "7e8c3612162314145c1f550e425aab859d01b7f66ac9f0e90e854c90b3c14861",
+    "scene": "b31a205f857597d617139c6c9ae610bfefb5360174edcead98aac23346281497",
+    "date": "ffb57c5487032ef98e1a60372c2eddf6fd1f67f29f4268ebf89c941b9f371e61",
+    "baseline": "7061d995a38962b2f055e697f5a98827726cdd1705aa7e8745cebb943bbd6d26",
+    "tile_cloud": "00921439bc6aca88f53a8855bb519ad291e63fe3ae653feb4d2151d41b6314a7",
+    "chip_cloud": "756c7c93adb835709ca24d4498e1a1be4261d7d133a4edef2c75c619451b0b8c",
+    "tried": "c06daa67c8101b8584022ac053b29281f227cf6d4948b5c5064efcb3da134609",
+    "file": "ab1b1b4073289504ecfb846f4ef044f55df9240348a04b0931118bfd6bd33b0e"
+   }
+  },
+  "results/india/rabi_test_2015-16_changes.csv": {
+   "kind": "csv",
+   "rows": 8,
+   "columns": {
+    "season": "dd7307a40fe09915a2aefc41af24a2665f642f5bc03e2bd03f0ef5264830271b",
+    "method": "4e638f8abedda3c16bfa67521ea8baad84a94c850df696a7a88108f690891a65",
+    "x": "b0a5e2be56f942f177d039f36e06352d673b17f600b36bcd9ce680721f5d3f94",
+    "y": "5e6fa564f111dd9e10929df0af14cf61a38ad68bd679556841aa2965c699ac24",
+    "change": "fce8b470b741de4a68e0598ebe9d1d8d97b9ea8cf10a6e2803d853c71cf72483",
+    "lo": "1ca62aa436741f2824fb21d89a4ad9d1883e5bde199ba20c181cb850c9ffab00",
+    "hi": "b876270f404e26e724fd3135b3035eeb677a9594192b05df4a14390e8cc4b953"
+   }
+  },
+  "results/india/rabi_test_2015-16_ftw.csv": {
+   "kind": "csv",
+   "rows": 5,
+   "columns": {
+    "season": "d809342ddbb9a949decabe597c465160fd3cb14b339b9cb5d722037ab39aa2a2",
+    "arrangement": "16d0f5472ac2dab54c2b3316bf19cffb14de0e98af6f0b6cb7346d02800c41b3",
+    "chips": "f3171284e2c65522662395ff3c1abee35ebf5003163e4e295bf9eb807882454e",
+    "parcels": "33082b986460ca3cde06dd37182ce62ecc9ae27b604aecd8a9633e91ed29ec38",
+    "objects_per_chip": "8df486f8bf804dc5440cee10a79d3ec6031a55ece6451a71858b9dd147537d7b",
+    "recall": "9efd7a0fd2f7df78df4380404dae7dc65bccbbb1193bde6c6949af4aec4c2df5",
+    "null_recall": "2ef1c1fe9e980e6fc466b466a765adf05fce1303d4150f58d10c75614b4343c5",
+    "pixels_differing_from_published": "01ba390dbbeb9982ea02f7e6e5eed025ecf3921b60f633b538917bfc2b4bed7d"
+   }
+  },
+  "results/india/rabi_test_2015-16_ftw_parcels.csv": {
+   "kind": "csv",
+   "rows": 8690,
+   "columns": {
+    "season": "4a834194f9dab8fb538cbb4f8ea6d0211a06d8eddfa738471af09e5748dbbbad",
+    "arrangement": "37f7f171c56a71ab60323ff0f30a44e56e1c283f74a061e1d3dffab989969733",
+    "chip": "62d4a56ddd53b834b669b7d63ccee718cdc5fdd7036521344abbd8127c52f940",
+    "parcel_id": "a716f897a5636bf0d6da15609a4e7806b31111c2c1266a95839f9a4118af059e",
+    "width_m": "1bb157b01be159879ea85bc9bfd7e34e06e7a01167b9d0f3d6973ebe1539a1a9",
+    "best_iou": "5b4018d988f194c4190f0658f4e8382946c74b3811324b8549b0b1363f7d428d",
+    "found": "5e30b62474a4099f3edd97216f54c7aaf03523fecb4dbd904c41fe264f314b4c"
+   }
+  },
+  "results/india/rabi_test_2015-16_watershed.csv": {
+   "kind": "csv",
+   "rows": 4,
+   "columns": {
+    "season": "978326567f8f6f42c799ebe88e5fbf3b8cf7936223023241b99bfba7aa27d1a9",
+    "arrangement": "2f1678580def6bc78cf36656cd32543f281ec5a72bc3f0ff33161289a0710c97",
+    "recall_at_budget": "6a0821a576b9ba52c5b38156e373a80e369b3e58aa8517cf72499eb6e35720fd",
+    "clamped": "d5c35fb6e10b0f4a001f69a48514fe1f004504733e950e8df38259ffbf940c99"
+   }
+  },
+  "results/india/rabi_test_2016-17_changes.csv": {
+   "kind": "csv",
+   "rows": 8,
+   "columns": {
+    "season": "6a0a37b186217497e9cbb94238681fa7422d2c5e12e42716b812900e903f3ac2",
+    "method": "4e638f8abedda3c16bfa67521ea8baad84a94c850df696a7a88108f690891a65",
+    "x": "b0a5e2be56f942f177d039f36e06352d673b17f600b36bcd9ce680721f5d3f94",
+    "y": "5e6fa564f111dd9e10929df0af14cf61a38ad68bd679556841aa2965c699ac24",
+    "change": "aedbad7698381c5dac73c7ea44126a3f69581159013c34b515b151e67d84b339",
+    "lo": "100af02c9026f21b03b70d404759818b4487ec43b803d75f23c5a570d8d873a3",
+    "hi": "1afefa262b4e99f99a2851f117cf22e5a694610ecddb51fc654556faf4144df5"
+   }
+  },
+  "results/india/rabi_test_2016-17_ftw.csv": {
+   "kind": "csv",
+   "rows": 5,
+   "columns": {
+    "season": "fdddb3b52ce59b0111f455044204625445fec967490841caedf47cc86a68d301",
+    "arrangement": "16d0f5472ac2dab54c2b3316bf19cffb14de0e98af6f0b6cb7346d02800c41b3",
+    "chips": "603f23fb08f97b8c93b1b03055b16fb75204924f27f465bc76c573d682a1d093",
+    "parcels": "012cae2267f171768374b4adb27f98110e14325a1e652ced6e46970704e29033",
+    "objects_per_chip": "4b704090b8db769576f5226ccd210580103684203d7984fd4f59dc12ea3b3818",
+    "recall": "1407b0b8027f692408573030fac5cff43e5a8659aa91da611856bd13f7f3927b",
+    "null_recall": "83522cc05537bf4b8d81a4fd13cd0fe399e1fd5cc61068548c7a4b22e4806e0f",
+    "pixels_differing_from_published": "01ba390dbbeb9982ea02f7e6e5eed025ecf3921b60f633b538917bfc2b4bed7d"
+   }
+  },
+  "results/india/rabi_test_2016-17_ftw_parcels.csv": {
+   "kind": "csv",
+   "rows": 9915,
+   "columns": {
+    "season": "c98eda43d3accad31470eceedaab7257495e14ddd8590d3431e8c963bab9e5bf",
+    "arrangement": "3744c6c5709aa651bff30dd944f78498c1731891dc3de55c73e2bc3036b6a1bf",
+    "chip": "7e73e994b85db3f91c4bc69ba8a9c6071c09f2e04df2f2aeded3bb6c10a83d08",
+    "parcel_id": "86723d44ca116de77ce325715a440caef7b8585356e5ffb8135493632118fa26",
+    "width_m": "3f727852d8c8be1cecefaaa67df733955e10d565ca7d86361a5077ac415805d5",
+    "best_iou": "d4894daaef5bdd97128c8b4d7ba032bad0dbe9942336e1f8e935dfa30bcba4c3",
+    "found": "0de497e500e70dea85d6d4f53383c69ea02bc90284e384e886de5a41c744c35f"
+   }
+  },
+  "results/india/rabi_test_2016-17_watershed.csv": {
+   "kind": "csv",
+   "rows": 4,
+   "columns": {
+    "season": "240a530408196ba3c9c62596fcdd432d5b7774a3194abe1c4b894ff817608d3c",
+    "arrangement": "2f1678580def6bc78cf36656cd32543f281ec5a72bc3f0ff33161289a0710c97",
+    "recall_at_budget": "d3d2fa8861310f44cb42a9b0505b5062de5fa0e73460ae59c8d1a06968b226fe",
+    "clamped": "d5c35fb6e10b0f4a001f69a48514fe1f004504733e950e8df38259ffbf940c99"
    }
   },
   "results/india/ring_check.csv": {

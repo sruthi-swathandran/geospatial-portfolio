@@ -395,3 +395,58 @@ Slovenia: the shipped run differs from `pred_3class_full` on 3 pixel(s).
 | method | recall at 20 objects/chip | how |
 |---|---:|---|
 | watershed | 0.059 | interpolated, sweep extended to h 0.6 in `season_test.py` |
+
+## A December to February image
+
+### FTW's own chips rebuilt from the archive
+
+| chip | window | scene date | lowest band correlation | largest median difference |
+|---|---|---|---:|---:|
+| g0_0030 | window_a | 2016-11-25 | 0.9921 | 0.04% |
+| g0_0030 | window_b | 2016-04-29 | 0.9945 | 0.07% |
+| g0_0073 | window_a | 2016-07-15 | 0.9977 | 0.06% |
+| g0_0073 | window_b | 2016-03-27 | 0.9976 | 0.00% |
+| g0_0091 | window_a | 2016-11-12 | 0.9969 | 0.04% |
+| g0_0091 | window_b | 2016-04-26 | 0.9975 | 0.11% |
+
+### The December to February images
+
+| season | chips | at or under 10% chip cloud | December | January | February |
+|---|---:|---:|---:|---:|---:|
+| 2016-17 | 399 | 399 | 177 | 40 | 182 |
+| 2015-16 | 399 | 350 | 97 | 148 | 105 |
+
+### FTW given the rabi image
+
+| what the model was given | 2016-17 objects/chip | 2016-17 recall | 2016-17 null | 2015-16 objects/chip | 2015-16 recall | 2015-16 null |
+|---|---:|---:|---:|---:|---:|---:|
+| shipped, b then a | 175.0 | 2.72% | 1.98% | 175.9 | 2.70% | 2.05% |
+| a twice | 169.4 | 4.79% | 2.03% | 175.0 | 5.35% | 2.09% |
+| rabi for b, r then a | 197.9 | 4.74% | 2.39% | 197.5 | 4.03% | 2.22% |
+| a then rabi | 209.9 | 5.50% | 2.59% | 214.4 | 4.66% | 2.44% |
+| rabi twice | 117.8 | 2.27% | 1.48% | 114.9 | 1.09% | 1.19% |
+
+2016-17: 398 labelled chips, 1,983 parcels.
+2015-16: 349 labelled chips, 1,738 parcels.
+
+### Watershed on the rabi image, at 175 objects per chip
+
+| gradient from | 2016-17 | 2015-16 |
+|---|---:|---:|
+| b and a, as published | 10.74% | 11.23% |
+| a alone | 9.56% | 10.14% |
+| r alone | 10.08% | 9.81% |
+| a and r | 11.19% | 13.07% |
+
+### The changes, chip by chip
+
+| method | comparison | 2016-17 | 2015-16 |
+|---|---|---:|---:|
+| FTW | rabi for b against shipped | +2.02 [+1.06, +2.98] | +1.32 [+0.40, +2.30] |
+| FTW | rabi for b against a twice | -0.05 [-1.32, +1.21] | -1.32 [-2.76, +0.12] |
+| FTW | a then rabi against shipped | +2.77 [+1.61, +3.93] | +1.96 [+1.03, +3.00] |
+| FTW | rabi twice against shipped | -0.45 [-1.56, +0.65] | -1.61 [-2.81, -0.46] |
+| FTW | a twice against shipped | +2.07 [+0.91, +3.27] | +2.65 [+1.50, +3.90] |
+| watershed | r alone against a alone | +0.52 [-0.98, +1.96] | -0.33 [-2.25, +1.61] |
+| watershed | a and r against b and a | +0.45 [-1.11, +1.93] | +1.84 [+0.20, +3.50] |
+| watershed | a and r against a alone | +1.62 [+0.39, +2.89] | +2.93 [+1.35, +4.57] |

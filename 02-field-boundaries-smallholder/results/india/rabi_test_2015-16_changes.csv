@@ -1,0 +1,9 @@
+season,method,x,y,change,lo,hi
+2015-16,ftw,rabi for b,shipped,0.0132,0.004,0.023
+2015-16,ftw,rabi for b,a twice,-0.0132,-0.0276,0.0012
+2015-16,ftw,a then rabi,shipped,0.0196,0.0103,0.03
+2015-16,ftw,rabi twice,shipped,-0.0161,-0.0281,-0.0046
+2015-16,ftw,a twice,shipped,0.0265,0.015,0.039
+2015-16,watershed,r alone,a alone,-0.0033,-0.0225,0.0161
+2015-16,watershed,a and r,b and a,0.0184,0.002,0.035
+2015-16,watershed,a and r,a alone,0.0293,0.0135,0.0457

@@ -107,6 +107,13 @@ should be read are listed under Known gaps below.
     image, 1.01%, no better than chance. In Slovenia every change to the
     windows costs recall. The best arrangement still leaves India 4.6 times
     below Slovenia. See What this says.
+17. An image from December to February, when rabi crops stand, does not
+    rescue the checkpoint. Put in place of the dry-season image it helps by
+    about as much as a second copy of the kharif image does, and no more, in
+    both rabi seasons tested. Given the rabi image alone, FTW does no better
+    than as shipped, while watershed finds about as many boundaries in it as in
+    the kharif image. The best arrangement leaves FTW about four times below
+    Slovenia. See What this says.
 
 ---
 
@@ -851,14 +858,113 @@ one window carries clearly less of the boundaries in India and not in
 Slovenia. Its size is limited. The best arrangement leaves FTW at 4.79% in
 India against 22.22% in Slovenia, 4.6 times lower, and at 11.26% against
 58.80% over 50 m. Taking the dry-season image away helps the checkpoint
-without making it work. What this cannot test is an image from December to
-February, which neither window has.
+without making it work. Neither window shows December to February, when rabi
+crops are standing; that is tested next.
 
 SAM was not rerun on window_b. It already reads window_a alone, the better of
 the two, and watershed has answered the question that rerun would ask.
 
 *Source: `season_ftw.csv`, `season_ftw_parcels.csv`,
 `season_watershed_budget.csv` and `season_windows.csv` in each country.*
+
+**An image from December to February does not rescue the checkpoint.** Both
+rabi seasons around FTW's year were built for every Indian test chip: December
+2015 to February 2016, whose harvest window_b shows, and December 2016 to
+February 2017, after the kharif window_a shows. `src\rabi_probe.py` first
+checked that FTW's own chips could be rebuilt from the Planetary Computer
+archive with FTW's download recipe. On three chips, every window reproduces,
+well inside a bar of 0.98 correlation and 2% median difference set before
+running:
+
+| chip | window | scene date | lowest band correlation | largest median difference |
+|---|---|---|---:|---:|
+| g0_0030 | window_a | 2016-11-25 | 0.9921 | 0.04% |
+| g0_0030 | window_b | 2016-04-29 | 0.9945 | 0.07% |
+| g0_0073 | window_a | 2016-07-15 | 0.9977 | 0.06% |
+| g0_0073 | window_b | 2016-03-27 | 0.9976 | 0.00% |
+| g0_0091 | window_a | 2016-11-12 | 0.9969 | 0.04% |
+| g0_0091 | window_b | 2016-04-26 | 0.9975 | 0.11% |
+
+That also shows which scenes FTW used. On one of the three chips its July to
+November image is from mid-July, when kharif crops are just sown. On the other
+two it is from late November, after the kharif harvest. Three chips cannot say
+how often each happens.
+
+`src\rabi_download.py` then built one image per chip and season, taking the
+first scene whose own scene classification put under 5% of the chip under
+cloud, shadow or no data. Chips over 10% were left out by a rule set in
+`src\rabi_test.py` before any image was scored. That removed 49 chips in
+2015-16, among them one where the archive listed a scene over the chip that
+held no data there.
+
+| season | chips | at or under 10% chip cloud | December | January | February |
+|---|---:|---:|---:|---:|---:|
+| 2016-17 | 399 | 399 | 177 | 40 | 182 |
+| 2015-16 | 399 | 350 | 97 | 148 | 105 |
+
+`src\rabi_test.py` gives FTW the rabi image, r, in four arrangements beside
+the shipped run, all on the same chips, and runs watershed on its gradient.
+Its readings were committed before the test ran.
+
+| what the model was given | 2016-17 objects/chip | 2016-17 recall | 2016-17 null | 2015-16 objects/chip | 2015-16 recall | 2015-16 null |
+|---|---:|---:|---:|---:|---:|---:|
+| shipped, b then a | 175.0 | 2.72% | 1.98% | 175.9 | 2.70% | 2.05% |
+| a twice | 169.4 | 4.79% | 2.03% | 175.0 | 5.35% | 2.09% |
+| rabi for b, r then a | 197.9 | 4.74% | 2.39% | 197.5 | 4.03% | 2.22% |
+| a then rabi | 209.9 | 5.50% | 2.59% | 214.4 | 4.66% | 2.44% |
+| rabi twice | 117.8 | 2.27% | 1.48% | 114.9 | 1.09% | 1.19% |
+
+| gradient from | 2016-17 | 2015-16 |
+|---|---:|---:|
+| b and a, as published | 10.74% | 11.23% |
+| a alone | 9.56% | 10.14% |
+| r alone | 10.08% | 9.81% |
+| a and r | 11.19% | 13.07% |
+
+| method | comparison | 2016-17 | 2015-16 |
+|---|---|---:|---:|
+| FTW | rabi for b against shipped | +2.02 [+1.06, +2.98] | +1.32 [+0.40, +2.30] |
+| FTW | rabi for b against a twice | -0.05 [-1.32, +1.21] | -1.32 [-2.76, +0.12] |
+| FTW | a then rabi against shipped | +2.77 [+1.61, +3.93] | +1.96 [+1.03, +3.00] |
+| FTW | rabi twice against shipped | -0.45 [-1.56, +0.65] | -1.61 [-2.81, -0.46] |
+| FTW | a twice against shipped | +2.07 [+0.91, +3.27] | +2.65 [+1.50, +3.90] |
+| watershed | r alone against a alone | +0.52 [-0.98, +1.96] | -0.33 [-2.25, +1.61] |
+| watershed | a and r against b and a | +0.45 [-1.11, +1.93] | +1.84 [+0.20, +3.50] |
+| watershed | a and r against a alone | +1.62 [+0.39, +2.89] | +2.93 [+1.35, +4.57] |
+
+Read against those rules, in both seasons:
+
+- **A rabi image helps the checkpoint**, by +2.02 and +1.32 points over the
+  shipped run, intervals above zero.
+- **It does not help beyond dropping the dry-season image.** Against a second
+  copy of the kharif image it changes recall by -0.05 and -1.32 points, and
+  neither interval is above zero. The gain comes from removing March to June.
+  The rabi crops add nothing to it.
+- **The rabi image does not carry more of the visible boundaries than
+  kharif.** Watershed on each alone differs by +0.52 and -0.33 points, the
+  seasons disagreeing in sign. Adding rabi to the published stack helps
+  watershed in 2015-16, +1.84, and not clearly in 2016-17, +0.45, so by the
+  rule that both seasons must agree it is unresolved.
+- **Season is at most a minor cause of the India gap.** The best arrangement
+  reaches 5.50% and 5.35%, under the third of Slovenia's 22.22% the rule set
+  as the bar.
+
+Given the rabi image twice, FTW does no better than as shipped in 2016-17 and
+worse in 2015-16, level with its null. Watershed on the same image does about
+as well as on kharif. The boundaries are in the rabi image and the checkpoint
+does not read them, which is the same pattern as the rest of this study.
+
+Two caveats. The arrangements with a rabi image in them emit 197.5 to 214.4
+objects per chip against the shipped 175, and their null rises by 0.2 to 0.6
+points with that, so a little of their gain is object count; the comparison
+with a second kharif copy, at 169 to 175 objects, does not carry it. And two
+comparisons the script printed were not among the readings set beforehand:
+"a then rabi" is the best arrangement in 2016-17, and watershed on kharif and
+rabi stacked beats kharif alone in both seasons. They are reported and not
+relied on.
+
+*Source: `rabi_match.csv`, `rabi_scenes.csv` and `rabi_test_<season>_*.csv`
+in `results/india`. The images themselves are rebuilt from the scene list.*
 
 **Above the floor, the method is the lever.** Between three and ten native
 pixels an untrained watershed finds between five and thirteen times as many
@@ -1223,10 +1329,10 @@ stay on the first run's near infrared, blue and green.
 
 **Parcel shape and the seasonal windows, now tested.** Shape explains 3% of
 FTW's country gap and none of the other methods'. India's dry-season window
-costs FTW about two points of recall, a real effect and a small one. Two things
-remain untested: an image from December to February, which needs imagery FTW
-does not ship, and SAM on window_b, which was skipped because watershed
-answers the same question.
+costs FTW about two points of recall, a real effect and a small one. An image
+from December to February was built for every chip in two seasons and does no
+better than a second kharif image (finding 17). SAM on window_b was skipped
+because watershed answers the same question.
 
 **The parcel reconstruction, now bounded.** FTW ships each parcel as an eroded
 interior and a separate boundary class, and `ftw_common.full_fields` gives each
@@ -1323,7 +1429,9 @@ exactly on 100 chips. No reported number depends on which interpreter wrote it.
 
 Open data throughout. Field labels and imagery from Fields of The World under
 CC BY 4.0, the FTW released checkpoints, and the Meta SAM checkpoint under
-Apache 2.0. District polygons from geoBoundaries under CC BY 4.0.
+Apache 2.0. District polygons from geoBoundaries under CC BY 4.0. The
+December to February images are Copernicus Sentinel-2 L2A scenes read from
+Microsoft's Planetary Computer, listed scene by scene in `rabi_scenes.csv`.
 
 ```
 python src\compare_segmenters.py --country india
@@ -1349,6 +1457,12 @@ python src\ring_sensitivity.py --country slovenia
 python src\shape_test.py
 python src\season_test.py --country india
 python src\season_test.py --country slovenia
+python src\rabi_probe.py --part availability
+python src\rabi_probe.py --part match --chips 3
+python src\rabi_download.py --season 2016-17
+python src\rabi_download.py --season 2015-16
+python src\rabi_test.py --season 2016-17
+python src\rabi_test.py --season 2015-16
 python src\precision.py --country india --method ftw
 python src\precision.py --country india --method watershed --setting 0.02
 python src\precision.py --country slovenia --method ftw
@@ -1370,7 +1484,8 @@ a CPU-only machine is about 27 minutes for India and 25 for Slovenia on the
 classical sweep. SAM is about 16 hours for India and 10 for Slovenia across both
 composites, at roughly 75 seconds per chip per composite, and `sam_run.py`
 appends as it goes so an interrupted run resumes. `season_test.py` takes about
-ten minutes per country. `build_comparison.py` takes
+ten minutes per country, `rabi_download.py` 30 to 60 minutes a season and
+`rabi_test.py` about 15. `build_comparison.py` takes
 seconds and reads only the CSVs.
 
 Outputs land in `results/<country>/`:
@@ -1400,6 +1515,10 @@ Outputs land in `results/<country>/`:
 | `season_watershed.csv` | watershed on each window, every setting to h 0.6 |
 | `season_watershed_budget.csv` | the same, read at FTW's object count |
 | `season_windows.csv` | per chip and window, red, blue, NDVI and edge strength |
+| `rabi_availability.csv` | India only: December to February scenes per chip, both seasons |
+| `rabi_match.csv` | India only: FTW's chips rebuilt from every archive scene tried |
+| `rabi_scenes.csv` | India only: the rabi scene used per chip, with its chip cloud |
+| `rabi_test_<season>_*.csv` | India only: FTW and watershed given the rabi image |
 | `probe/` | the 5-chip ViT-B timing probe that chose ViT-H |
 
 `shape_test.csv` and `shape_test_bands.csv` sit in `results/` itself, since

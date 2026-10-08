@@ -759,6 +759,103 @@ def season_tables(iou: float) -> list:
     return out
 
 
+
+RABI_SEASONS = ["2016-17", "2015-16"]
+RABI_FTW = {"shipped": "shipped, b then a", "a twice": "a twice",
+            "rabi for b": "rabi for b, r then a",
+            "a then rabi": "a then rabi", "rabi twice": "rabi twice"}
+RABI_WS = {"b and a": "b and a, as published", "a alone": "a alone",
+           "r alone": "r alone", "a and r": "a and r"}
+
+
+def rabi_tables() -> list:
+    """The December to February image, from rabi_probe, rabi_download and
+    rabi_test."""
+    rd = results_dir("india")
+    need = ["rabi_match.csv", "rabi_scenes.csv"] + [
+        f"rabi_test_{s}_{k}.csv" for s in RABI_SEASONS
+        for k in ("ftw", "changes", "watershed")]
+    missing = [n for n in need if not (rd / n).exists()]
+    if missing:
+        return [f"\nMissing {', '.join(missing)}. Run the rabi scripts.\n"]
+    out = []
+
+    m = pd.read_csv(rd / "rabi_match.csv")
+    m = m.sort_values("r_min", ascending=False).groupby(
+        ["chip", "window"], as_index=False).first()
+    out.append("### FTW's own chips rebuilt from the archive\n")
+    out.append("| chip | window | scene date | lowest band correlation "
+               "| largest median difference |")
+    out.append("|---|---|---|---:|---:|")
+    for _, r in m.sort_values(["chip", "window"]).iterrows():
+        out.append(f"| {r['chip'].replace('.tif', '')} | {r['window']} "
+                   f"| {r['date']} | {r['r_min']:.4f} "
+                   f"| {r['rel_max'] * 100:.2f}% |")
+
+    sc = pd.read_csv(rd / "rabi_scenes.csv")
+    out.append("\n### The December to February images\n")
+    out.append("| season | chips | at or under 10% chip cloud | December "
+               "| January | February |")
+    out.append("|---|---:|---:|---:|---:|---:|")
+    for season in RABI_SEASONS:
+        g = sc[sc["season"] == season]
+        ok = g[g["chip_cloud"] <= 0.10]
+        months = pd.to_datetime(ok["date"]).dt.month.value_counts()
+        out.append(f"| {season} | {len(g)} | {len(ok)} "
+                   f"| {int(months.get(12, 0))} | {int(months.get(1, 0))} "
+                   f"| {int(months.get(2, 0))} |")
+
+    ftw = {s: pd.read_csv(rd / f"rabi_test_{s}_ftw.csv").set_index(
+        "arrangement") for s in RABI_SEASONS}
+    out.append("\n### FTW given the rabi image\n")
+    head = "| what the model was given |"
+    for s in RABI_SEASONS:
+        head += f" {s} objects/chip | {s} recall | {s} null |"
+    out.append(head)
+    out.append("|---|" + "---:|" * 3 * len(RABI_SEASONS))
+    for key, name in RABI_FTW.items():
+        cells = [name]
+        for s in RABI_SEASONS:
+            r = ftw[s].loc[key]
+            cells += [f"{r['objects_per_chip']:.1f}",
+                      f"{r['recall'] * 100:.2f}%",
+                      f"{r['null_recall'] * 100:.2f}%"]
+        out.append("| " + " | ".join(cells) + " |")
+    out.append("")
+    for s in RABI_SEASONS:
+        r = ftw[s].loc["shipped"]
+        out.append(f"{s}: {int(r['chips'])} labelled chips, "
+                   f"{int(r['parcels']):,} parcels.")
+
+    ws = {s: pd.read_csv(rd / f"rabi_test_{s}_watershed.csv").set_index(
+        "arrangement") for s in RABI_SEASONS}
+    out.append("\n### Watershed on the rabi image, at 175 objects per chip\n")
+    out.append("| gradient from | " + " | ".join(RABI_SEASONS) + " |")
+    out.append("|---|" + "---:|" * len(RABI_SEASONS))
+    for key, name in RABI_WS.items():
+        out.append(f"| {name} | " + " | ".join(
+            f"{ws[s].loc[key, 'recall_at_budget'] * 100:.2f}%"
+            for s in RABI_SEASONS) + " |")
+
+    ch = {s: pd.read_csv(rd / f"rabi_test_{s}_changes.csv")
+          for s in RABI_SEASONS}
+    out.append("\n### The changes, chip by chip\n")
+    out.append("| method | comparison | " + " | ".join(RABI_SEASONS) + " |")
+    out.append("|---|---|" + "---:|" * len(RABI_SEASONS))
+    base = ch[RABI_SEASONS[0]]
+    for _, r in base.iterrows():
+        cells = []
+        for s in RABI_SEASONS:
+            q = ch[s][(ch[s]["method"] == r["method"]) & (ch[s]["x"] == r["x"])
+                      & (ch[s]["y"] == r["y"])].iloc[0]
+            cells.append(f"{q['change'] * 100:+.2f} [{q['lo'] * 100:+.2f}, "
+                         f"{q['hi'] * 100:+.2f}]")
+        name = "FTW" if r["method"] == "ftw" else "watershed"
+        out.append(f"| {name} | {r['x']} against {r['y']} | "
+                   + " | ".join(cells) + " |")
+    return out
+
+
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--sam-setting", default="0p50",
@@ -837,6 +934,9 @@ def main() -> None:
 
     out.append("\n## The two seasonal windows\n")
     out += season_tables(args.iou)
+
+    out.append("\n## A December to February image\n")
+    out += rabi_tables()
 
     dest = F.PROJECT / "results" / "comparison_tables.md"
     dest.parent.mkdir(parents=True, exist_ok=True)

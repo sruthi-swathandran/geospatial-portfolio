@@ -1,0 +1,5 @@
+season,arrangement,recall_at_budget,clamped
+2016-17,b and a,0.1074,False
+2016-17,a alone,0.0956,False
+2016-17,r alone,0.1008,False
+2016-17,a and r,0.1119,False
