@@ -29,17 +29,17 @@ Rebuild with `python src\build_comparison.py`. Do not edit by hand.
 | felzenszwalb | 800 | 96 | 0.004 | 0.012 | 0.006 | +0.006 |
 | SAM ViT-H natural colour | 0.50/0.88 | 195 | 0.089 | 0.167 | 0.020 | +0.147 |
 | SAM ViT-H natural colour | 0.60/0.88 | 194 | 0.089 | 0.166 | 0.021 | +0.145 |
-| SAM ViT-H natural colour | 0.70/0.88 | 191 | 0.085 | 0.164 | 0.018 | +0.146 |
+| SAM ViT-H natural colour | 0.70/0.88 | 190 | 0.085 | 0.164 | 0.018 | +0.146 |
 | SAM ViT-H natural colour | 0.80/0.88 | 176 | 0.056 | 0.152 | 0.018 | +0.135 |
-| SAM ViT-H natural colour | 0.88/0.88 | 136 | 0.010 | 0.130 | 0.012 | +0.117 |
-| SAM ViT-H colour infrared | 0.50/0.88 | 223 | 0.149 | 0.183 | 0.028 | +0.155 |
+| SAM ViT-H natural colour | 0.88/0.88 | 135 | 0.010 | 0.130 | 0.012 | +0.117 |
+| SAM ViT-H colour infrared | 0.50/0.88 | 222 | 0.149 | 0.183 | 0.028 | +0.155 |
 | SAM ViT-H colour infrared | 0.60/0.88 | 222 | 0.148 | 0.183 | 0.026 | +0.157 |
 | SAM ViT-H colour infrared | 0.70/0.88 | 218 | 0.144 | 0.181 | 0.019 | +0.162 |
-| SAM ViT-H colour infrared | 0.80/0.88 | 202 | 0.123 | 0.174 | 0.022 | +0.152 |
-| SAM ViT-H colour infrared | 0.88/0.88 | 156 | 0.055 | 0.145 | 0.017 | +0.128 |
-| SAM ViT-H, blue-green-red | 0.50/0.88 | 185 | 0.051 | 0.156 | 0.019 | +0.137 |
+| SAM ViT-H colour infrared | 0.80/0.88 | 201 | 0.123 | 0.174 | 0.022 | +0.152 |
+| SAM ViT-H colour infrared | 0.88/0.88 | 155 | 0.055 | 0.145 | 0.017 | +0.128 |
+| SAM ViT-H, blue-green-red | 0.50/0.88 | 184 | 0.051 | 0.156 | 0.019 | +0.137 |
 | SAM ViT-H, blue-green-red | 0.60/0.88 | 184 | 0.051 | 0.156 | 0.022 | +0.134 |
-| SAM ViT-H, blue-green-red | 0.70/0.88 | 181 | 0.043 | 0.155 | 0.018 | +0.136 |
+| SAM ViT-H, blue-green-red | 0.70/0.88 | 180 | 0.043 | 0.155 | 0.018 | +0.136 |
 | SAM ViT-H, blue-green-red | 0.80/0.88 | 167 | 0.023 | 0.146 | 0.015 | +0.131 |
 | SAM ViT-H, blue-green-red | 0.88/0.88 | 129 | 0.008 | 0.121 | 0.012 | +0.110 |
 | SAM ViT-H, NIR-blue-green | 0.50/0.88 | 213 | 0.127 | 0.172 | 0.021 | +0.151 |
@@ -110,26 +110,26 @@ SAM at threshold 0.50, classical methods at their best setting.
 | felzenszwalb | 300 | 156 | 0.109 | 0.129 | 0.015 | +0.114 |
 | felzenszwalb | 400 | 118 | 0.066 | 0.098 | 0.013 | +0.085 |
 | felzenszwalb | 800 | 65 | 0.017 | 0.037 | 0.006 | +0.030 |
-| SAM ViT-H natural colour | 0.50/0.88 | 131 | 0.233 | 0.295 | 0.013 | +0.282 |
-| SAM ViT-H natural colour | 0.60/0.88 | 130 | 0.232 | 0.295 | 0.014 | +0.281 |
-| SAM ViT-H natural colour | 0.70/0.88 | 129 | 0.231 | 0.295 | 0.015 | +0.280 |
-| SAM ViT-H natural colour | 0.80/0.88 | 122 | 0.209 | 0.286 | 0.013 | +0.272 |
-| SAM ViT-H natural colour | 0.88/0.88 | 99 | 0.157 | 0.257 | 0.013 | +0.244 |
-| SAM ViT-H colour infrared | 0.50/0.88 | 119 | 0.170 | 0.259 | 0.012 | +0.247 |
-| SAM ViT-H colour infrared | 0.60/0.88 | 118 | 0.169 | 0.259 | 0.013 | +0.246 |
-| SAM ViT-H colour infrared | 0.70/0.88 | 116 | 0.166 | 0.257 | 0.012 | +0.245 |
-| SAM ViT-H colour infrared | 0.80/0.88 | 108 | 0.143 | 0.248 | 0.012 | +0.236 |
-| SAM ViT-H colour infrared | 0.88/0.88 | 87 | 0.097 | 0.212 | 0.011 | +0.201 |
-| SAM ViT-H, blue-green-red | 0.50/0.88 | 117 | 0.194 | 0.276 | 0.013 | +0.264 |
-| SAM ViT-H, blue-green-red | 0.60/0.88 | 117 | 0.194 | 0.276 | 0.014 | +0.262 |
-| SAM ViT-H, blue-green-red | 0.70/0.88 | 115 | 0.190 | 0.274 | 0.012 | +0.262 |
-| SAM ViT-H, blue-green-red | 0.80/0.88 | 109 | 0.173 | 0.264 | 0.012 | +0.252 |
-| SAM ViT-H, blue-green-red | 0.88/0.88 | 89 | 0.119 | 0.234 | 0.010 | +0.224 |
-| SAM ViT-H, NIR-blue-green | 0.50/0.88 | 116 | 0.155 | 0.249 | 0.014 | +0.235 |
-| SAM ViT-H, NIR-blue-green | 0.60/0.88 | 116 | 0.155 | 0.248 | 0.012 | +0.237 |
-| SAM ViT-H, NIR-blue-green | 0.70/0.88 | 114 | 0.151 | 0.246 | 0.013 | +0.234 |
-| SAM ViT-H, NIR-blue-green | 0.80/0.88 | 106 | 0.130 | 0.236 | 0.013 | +0.223 |
-| SAM ViT-H, NIR-blue-green | 0.88/0.88 | 85 | 0.085 | 0.206 | 0.010 | +0.196 |
+| SAM ViT-H natural colour | 0.50/0.88 | 113 | 0.233 | 0.295 | 0.013 | +0.282 |
+| SAM ViT-H natural colour | 0.60/0.88 | 113 | 0.232 | 0.295 | 0.014 | +0.281 |
+| SAM ViT-H natural colour | 0.70/0.88 | 112 | 0.231 | 0.295 | 0.015 | +0.280 |
+| SAM ViT-H natural colour | 0.80/0.88 | 106 | 0.209 | 0.286 | 0.013 | +0.272 |
+| SAM ViT-H natural colour | 0.88/0.88 | 86 | 0.157 | 0.257 | 0.013 | +0.244 |
+| SAM ViT-H colour infrared | 0.50/0.88 | 102 | 0.170 | 0.259 | 0.012 | +0.247 |
+| SAM ViT-H colour infrared | 0.60/0.88 | 101 | 0.169 | 0.259 | 0.013 | +0.246 |
+| SAM ViT-H colour infrared | 0.70/0.88 | 99 | 0.166 | 0.257 | 0.012 | +0.245 |
+| SAM ViT-H colour infrared | 0.80/0.88 | 92 | 0.143 | 0.248 | 0.012 | +0.236 |
+| SAM ViT-H colour infrared | 0.88/0.88 | 74 | 0.097 | 0.212 | 0.011 | +0.201 |
+| SAM ViT-H, blue-green-red | 0.50/0.88 | 103 | 0.194 | 0.276 | 0.013 | +0.264 |
+| SAM ViT-H, blue-green-red | 0.60/0.88 | 103 | 0.194 | 0.276 | 0.014 | +0.262 |
+| SAM ViT-H, blue-green-red | 0.70/0.88 | 102 | 0.190 | 0.274 | 0.012 | +0.262 |
+| SAM ViT-H, blue-green-red | 0.80/0.88 | 96 | 0.173 | 0.264 | 0.012 | +0.252 |
+| SAM ViT-H, blue-green-red | 0.88/0.88 | 79 | 0.119 | 0.234 | 0.010 | +0.224 |
+| SAM ViT-H, NIR-blue-green | 0.50/0.88 | 101 | 0.155 | 0.249 | 0.014 | +0.235 |
+| SAM ViT-H, NIR-blue-green | 0.60/0.88 | 100 | 0.155 | 0.248 | 0.012 | +0.237 |
+| SAM ViT-H, NIR-blue-green | 0.70/0.88 | 99 | 0.151 | 0.246 | 0.013 | +0.234 |
+| SAM ViT-H, NIR-blue-green | 0.80/0.88 | 92 | 0.130 | 0.236 | 0.013 | +0.223 |
+| SAM ViT-H, NIR-blue-green | 0.88/0.88 | 73 | 0.085 | 0.206 | 0.010 | +0.196 |
 
 ## Slovenia, at FTW's object budget
 
@@ -138,10 +138,10 @@ SAM at threshold 0.50, classical methods at their best setting.
 | FTW 3-class FULL | 0.222 | 0.007 | +0.215 | single setting |
 | watershed | 0.081 | 0.003 | +0.078 | clamped, sweep stops at 26 objects |
 | felzenszwalb | 0.037 | 0.006 | +0.030 | clamped, sweep stops at 65 objects |
-| SAM ViT-H natural colour | 0.257 | 0.013 | +0.244 | clamped, sweep stops at 99 objects |
-| SAM ViT-H colour infrared | 0.212 | 0.011 | +0.201 | clamped, sweep stops at 87 objects |
-| SAM ViT-H, blue-green-red | 0.234 | 0.010 | +0.224 | clamped, sweep stops at 89 objects |
-| SAM ViT-H, NIR-blue-green | 0.206 | 0.010 | +0.196 | clamped, sweep stops at 85 objects |
+| SAM ViT-H natural colour | 0.257 | 0.013 | +0.244 | clamped, sweep stops at 86 objects |
+| SAM ViT-H colour infrared | 0.212 | 0.011 | +0.201 | clamped, sweep stops at 74 objects |
+| SAM ViT-H, blue-green-red | 0.234 | 0.010 | +0.224 | clamped, sweep stops at 79 objects |
+| SAM ViT-H, NIR-blue-green | 0.206 | 0.010 | +0.196 | clamped, sweep stops at 73 objects |
 
 ## Slovenia, recall by ground width
 

@@ -1,7 +1,7 @@
 {
- "written_at": "2026-10-09T10:28:41+00:00",
+ "written_at": "2026-10-09T10:48:18+00:00",
  "git": {
-  "commit": "7aa11291e64f9c6406547bdcf2d4f38427378255",
+  "commit": "0a5bd734b9d7beb9fa8daf96e1abf441fb94c6ef",
   "uncommitted_changes": true
  },
  "interpreter": {
@@ -218,7 +218,7 @@
   },
   {
    "script": "sam_run.py",
-   "line": 277,
+   "line": 281,
    "value": 20260917
   },
   {
@@ -254,7 +254,7 @@
   },
   "results/comparison_tables.md": {
    "kind": "file",
-   "sha256": "b3a60bb7747afb60257601fa949e82cd95827183faf1d6214a8409c6f08f1d49"
+   "sha256": "d3078bd3124ebacff0d0c97c244fbcc454593af54ae7939490a375ab5bbdab82"
   },
   "results/country_comparison.csv": {
    "kind": "csv",
@@ -1708,7 +1708,7 @@
    "columns": {
     "composite": "7e14dd792d2daf0ed62978a67750ad0f219b4f5b37fd66da72eea934d84e872c",
     "setting": "36e19e16a9b1edfe1b5e3aa65dfbe6700670405d5387dfe7fa83bddbb9e97041",
-    "objects_per_chip": "6e33949eb98413ec0329d6a6002cba0e19c323e5fa07bee8e3f5920f1e6fc710",
+    "objects_per_chip": "5742289e41ed05737c9b299566d5a2b7eb40548bdf6407a2bd2b2039efa9630c",
     "parcels": "eb3d4939b472e70ebb9143b35931a1203be39ffa23d3a66f5fdf69af15b33f31",
     "median_iou": "b43c9f5dfebb7961f90f1140c6d817e84cbdf3b03ce422d7db889fe014c5c168",
     "recall": "68642613801a4f47cf936e3db4552772b23fc26b2b44bafcb14f655b38bbb28f",
@@ -3820,7 +3820,7 @@
    "columns": {
     "composite": "7e14dd792d2daf0ed62978a67750ad0f219b4f5b37fd66da72eea934d84e872c",
     "setting": "36e19e16a9b1edfe1b5e3aa65dfbe6700670405d5387dfe7fa83bddbb9e97041",
-    "objects_per_chip": "c54d8408fa6d18316d432211ff4877010b9a8b43a7539d002edcb78ef2081239",
+    "objects_per_chip": "418c35836229110ef1a2cf932a4456869d2c45009ac5d9964d11ed6e1897c98b",
     "parcels": "fd624b9c1b8f0609a27f4c62eea6ad26097d5a3d84588eca37f78798bf6c60fb",
     "median_iou": "43fc344eb30e797494beb7616f3f1c832818dcc00f8c830f7667700704ace773",
     "recall": "6c2709a7bb8b0862e9b5b3e75ab6f100e2d882008b3f387411790ac6857762e3",
@@ -4719,7 +4719,7 @@
   },
   "figures/recall_by_object_budget.png": {
    "kind": "file",
-   "sha256": "cebcdfab75d307a4366f4d3df6facaa9049861353b3dc6c79823cd00610b4d5d"
+   "sha256": "37f59cd80ffc6307e2ab7900c590d5e1d3305166191fcd11529d7ad6ccc01f4d"
   },
   "figures/recall_by_size_2class.png": {
    "kind": "file",

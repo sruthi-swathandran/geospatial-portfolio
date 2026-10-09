@@ -205,7 +205,11 @@ def aggregate(path: Path, iou_cut: float, country: str, min_size: float,
                      else np.array([0.0]))
             rec = float((ious >= iou_cut).mean())
             nrec = float((nious >= iou_cut).mean())
-            objs = float(np.mean([r["objects"] for r in real]))
+            # one value per chip, as every other method is counted. This
+            # first averaged over parcel rows, which weights each chip by
+            # how many parcels it holds (B-26)
+            objs = float(np.mean(list(
+                {r["chip"]: r["objects"] for r in real}.values())))
             gap = rec - nrec
             print(f"  {comp:>10} {name:>12} {objs:>8.0f} {len(ious):>8,} "
                   f"{np.median(ious):>8.3f} {rec:>7.3f} {nrec:>7.3f} "

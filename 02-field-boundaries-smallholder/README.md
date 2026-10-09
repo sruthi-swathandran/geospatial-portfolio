@@ -127,8 +127,8 @@ is applied to every method. `COMPARISON.md` explains each control.
   has been measured there. Felzenszwalb and SAM were not run coarse enough to
   reach 20 objects per chip. Against v3, SAM loses while drawing more objects,
   so that comparison stands.
-- **The figures, the interactive map and most tables show FTW v1.** The later
-  checkpoints are in findings 18 and 19 of `COMPARISON.md`.
+- **Most tables show FTW v1.** The later checkpoints are in findings 18 and
+  19 of `COMPARISON.md`. The figure below and the interactive map show both.
 - **FTW's FULL checkpoints carry noncommercial terms** from some of their
   training labels. v3.1 is the CC-BY version, and it probably did not see
   Slovenia, which flatters its India to Slovenia ratio.
@@ -154,7 +154,7 @@ is applied to every method. `COMPARISON.md` explains each control.
 assistant, Claude. It is not independent peer review. It lists 21 findings,
 and every one is now closed or scoped with the reason stated.
 
-`COMPARISON.md` carries 25 corrections, B-01 to B-25, each with the published
+`COMPARISON.md` carries 26 corrections, B-01 to B-26, each with the published
 value, the corrected one and why the first was wrong. The largest: FTW ships Slovenia on pixels 4.14 m across and 6.00 m
 tall, and treating them as square had overstated the cross-country gap by up to
 forty per cent. The conclusion survived the correction.

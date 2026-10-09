@@ -66,7 +66,7 @@ its own acceptance criteria on first reading.
 
 **Corrections are logged, not quietly fixed.** Every number that changed is
 recorded with its superseded value and the reason it was wrong. RS-01 keeps
-these in `CHANGELOG.md`, RS-02 as corrections B-01 to B-25 in `COMPARISON.md`.
+these in `CHANGELOG.md`, RS-02 as corrections B-01 to B-26 in `COMPARISON.md`.
 Among them: a control that rewarded methods for cutting a scene into more
 pieces, a scorer that measured two different objects and disagreed with itself
 by a factor of two, and a claim about resolution that the project's own data

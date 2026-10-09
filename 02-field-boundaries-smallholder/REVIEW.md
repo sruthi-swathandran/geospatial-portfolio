@@ -103,7 +103,10 @@ on India at its object count, by 1.92 and 5.40 points, and v3 beats SAM on
 Slovenia. The checkpoint version is the largest single change this project has
 measured; see findings 18 and 19 in `COMPARISON.md`. **B-25** corrects this
 review's statement below that every FTW input is CC-BY-4.0: FTW lists a
-licence per country, and Slovenia's labels are CC-BY-SA-4.0.
+licence per country, and Slovenia's labels are CC-BY-SA-4.0. **B-26**, found
+while drawing v3 on the budget figure: SAM's objects per chip were averaged over
+parcels, which overstated its Slovenian counts by 15 to 18% and changed no
+recall.
 
 ---
 

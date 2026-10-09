@@ -196,9 +196,11 @@ footer{margin-top:28px;padding-top:14px;border-top:1px solid var(--line);
 <p class="lede">Each marker is one test chip, about 1.5 km across, coloured by the
 share of its hand-labelled parcels a method recovered. Pick a method above the
 map, and zoom in to a chip to see its labelled parcels, filled where the method
-found them and outlined in orange where it missed. In India the released checkpoint leaves almost every chip empty, while the
-same imagery gives other methods something to find. In Slovenia, where the
-checkpoint was trained on a complete cadastre, it works.</p>
+found them and outlined in orange where it missed. FTW is shown twice: its v3
+checkpoint, the best public release, and the v1 checkpoint this project first
+tested. In India v1 leaves almost every chip empty and v3 finds a good deal
+more, while the same imagery still gives untrained methods more to find. In Slovenia,
+where FTW was trained on a complete cadastre, it works.</p>
 
 <div class="figs" id="figs"></div>
 
@@ -247,8 +249,9 @@ checkpoint was trained on a complete cadastre, it works.</p>
     <p>Dashed rings are test chips with no labelled parcel, mostly forest in
     Slovenia.</p></div>
   <div><h2>Settings</h2>
-    <p>Each method is shown at the one setting whose objects per chip sit nearest
-    the checkpoint's own count, so the methods spend a similar budget. The
+    <p>Each untrained method is shown at the one setting whose objects per chip
+    sit nearest FTW v3's count, so the methods spend a similar budget. SAM cannot
+    draw as many objects as v3 in India, so it is shown with fewer. The
     headline figures in the project write-up are interpolated to the exact count
     and differ a little from the totals here.</p></div>
   <div><h2>What it does not show</h2>
@@ -258,7 +261,7 @@ checkpoint was trained on a complete cadastre, it works.</p>
     <a href="https://github.com/sruthi-swathandran/geospatial-portfolio/blob/main/02-field-boundaries-smallholder/COMPARISON.md">full write-up</a>.</p></div>
 </div>
 
-<footer>Data: Fields of The World (CC-BY-4.0), Copernicus Sentinel-2,
+<footer>Data: Fields of The World (licence listed per country), Copernicus Sentinel-2,
 geoBoundaries state outlines (CC BY 4.0). Background: Sentinel-2 cloudless 2020
 by EOX IT Services GmbH, contains modified Copernicus Sentinel data 2020
 (CC BY-NC-SA 4.0). It is a natural-colour, cloud-free composite for orientation,
@@ -272,9 +275,9 @@ src/build_map.py from the project's result files.</footer>
 
 <script>
 const DATA = __MAP_DATA__;
-const ORDER = ["ftw", "sam", "watershed"];
+const ORDER = ["ftw3", "ftw", "sam", "watershed"];
 const BINS = [[0.25, "q1"], [0.5, "q2"], [0.75, "q3"], [1.01, "q4"]];
-let method = "ftw", pinned = null, district = null;
+let method = "ftw3", pinned = null, district = null;
 
 function pct(a, b) { return b ? (100 * a / b) : 0; }
 function fmt(v, d = 1) { return v.toFixed(d) + "%"; }
@@ -297,10 +300,11 @@ function figs() {
   };
   const i = DATA.india.methods, s = DATA.slovenia.methods;
   el.innerHTML =
-    tile("India, FTW checkpoint", "india", "ftw", `${i.ftw.objects} objects per chip`) +
+    tile("India, FTW v3", "india", "ftw3", `${i.ftw3.objects} objects per chip`) +
+    tile("India, FTW v1", "india", "ftw", `${i.ftw.objects} objects per chip`) +
     tile("India, SAM", "india", "sam", `${i.sam.objects} objects per chip`) +
     tile("India, watershed", "india", "watershed", `${i.watershed.objects} objects per chip`) +
-    tile("Slovenia, FTW checkpoint", "slovenia", "ftw", `${s.ftw.objects} objects per chip`);
+    tile("Slovenia, FTW v3", "slovenia", "ftw3", `${s.ftw3.objects} objects per chip`);
 }
 
 /* ---------- controls ---------- */
@@ -513,12 +517,14 @@ function zoomTo(country, ids) {
 function caveats() {
   for (const country of ["india", "slovenia"]) {
     const v = DATA[country].methods[method];
-    const ftw = DATA[country].methods.ftw;
+    const ftw = DATA[country].methods.ftw3;
     document.getElementById("meta-" + country).textContent =
       `${DATA[country].chips.length} chips · ${fmt(pct(v.found, v.parcels))} of ${v.parcels.toLocaleString()} parcels found`;
-    let txt = method === "ftw"
-      ? `FTW's released 3-class checkpoint as shipped, ${ftw.objects} objects per chip.`
-      : `${v.label} at ${v.setting}, ${v.objects} objects per chip against FTW's ${ftw.objects}.`;
+    let txt = method === "ftw3"
+      ? `FTW's v3 checkpoint, EfficientNet-B7, as released, ${ftw.objects} objects per chip.`
+      : method === "ftw"
+      ? `FTW's v1 3-class checkpoint as shipped, ${v.objects} objects per chip against v3's ${ftw.objects}.`
+      : `${v.label} at ${v.setting}, ${v.objects} objects per chip against FTW v3's ${ftw.objects}.`;
     if (v.clamped) txt += " Clamped: no setting of this method was run coarse enough to match FTW here, so it spends far more objects and this layer flatters it.";
     document.getElementById("cav-" + country).textContent = txt;
   }
@@ -583,7 +589,7 @@ function districtRows() {
   for (const c of DATA.india.chips) {
     if (!c.n || !c.d) continue;
     const k = c.d;
-    const r = by[k] || (by[k] = { d: c.d, s: c.s, chips: 0, n: 0, ftw: 0, sam: 0, watershed: 0 });
+    const r = by[k] || (by[k] = { d: c.d, s: c.s, chips: 0, n: 0, ftw3: 0, ftw: 0, sam: 0, watershed: 0 });
     r.chips++; r.n += c.n;
     for (const m of ORDER) r[m] += c.f[m];
   }
@@ -591,7 +597,7 @@ function districtRows() {
 }
 function table() {
   const cols = [["d", "district"], ["chips", "chips"], ["n", "parcels"],
-    ["ftw", "FTW"], ["sam", "SAM"], ["watershed", "watershed"]];
+    ["ftw3", "FTW v3"], ["ftw", "FTW v1"], ["sam", "SAM"], ["watershed", "watershed"]];
   const thead = document.querySelector("#tbl thead");
   thead.innerHTML = "<tr>" + cols.map(([k, l]) =>
     `<th data-k="${k}" class="${k === method ? "sel" : ""}" aria-sort="${k === sortKey ? (sortDir < 0 ? "descending" : "ascending") : "none"}">${l}</th>`).join("") + "</tr>";

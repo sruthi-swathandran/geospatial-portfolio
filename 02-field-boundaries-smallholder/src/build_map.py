@@ -6,9 +6,12 @@ back on the ground: one marker per test chip in India and Slovenia, coloured by
 the share of its labelled parcels a method recovered, with the Indian chips
 listed by district beside the map.
 
-The methods are read at one setting each, the one whose object count per chip
-sits nearest FTW's own, so the map compares like with like as far as a single
-setting allows. The headline figures in COMPARISON.md are interpolated to FTW's
+FTW is shown twice: its v3 checkpoint with an EfficientNet-B7 encoder, the best
+public release, and the v1 checkpoint most of the project measured (B-24). The
+v3 layer comes from results/<country>/newer_ckpt/, written by
+newer_checkpoints.py. The other methods are read at one setting each, the one
+whose object count per chip sits nearest FTW v3's, so the map compares like
+with like as far as a single setting allows. The headline figures in COMPARISON.md are interpolated to FTW's
 exact count and will differ a little from the totals shown here; the page says
 which setting each method is at and what it emits. In Slovenia no method other
 than FTW was run coarse enough to come near FTW's count (B-08), so the page
@@ -50,9 +53,11 @@ TEMPLATE = PROJECT / "src" / "map_template.html"
 DEST = PROJECT / "docs" / "index.html"
 BOUNDARIES = {"india": ("IND_ADM1.geojson", 0.02),
               "slovenia": ("SVN_ADM1.geojson", 0.002)}
-METHODS = {"ftw": "FTW 3-class checkpoint",
+METHODS = {"ftw3": "FTW v3, EfficientNet-B7",
+           "ftw": "FTW v1",
            "sam": "SAM ViT-H, colour infrared",
            "watershed": "watershed"}
+V3_KEY = "v3_full_b7"
 
 
 def use_country(country: str) -> None:
@@ -65,13 +70,23 @@ def read_csv(path: Path) -> list:
         return list(csv.DictReader(f))
 
 
+def v3_objects(country: str) -> float:
+    """FTW v3 B7's objects per labelled chip, as newer_checkpoints.py counts."""
+    rows = read_csv(PROJECT / "results" / country / "newer_ckpt" /
+                    f"{V3_KEY}_chips.csv")
+    objs = [float(r["objects"]) for r in rows if float(r["parcels"]) > 0]
+    return float(np.mean(objs))
+
+
 def nearest_settings(country: str) -> dict:
-    """The setting per method whose objects per chip sit nearest FTW's."""
+    """The setting per method whose objects per chip sit nearest FTW v3's."""
     rd = PROJECT / "results" / country
     sweep = read_csv(rd / "segmenter_comparison_min500.csv")
-    ftw_objs = float(next(r for r in sweep if r["method"] == "ftw")
-                     ["objects_per_chip"])
-    out = {"ftw": {"tag": "ftw", "setting": "", "objects": ftw_objs}}
+    v1_objs = float(next(r for r in sweep if r["method"] == "ftw")
+                    ["objects_per_chip"])
+    ftw_objs = v3_objects(country)
+    out = {"ftw3": {"tag": None, "setting": "", "objects": ftw_objs},
+           "ftw": {"tag": "ftw", "setting": "", "objects": v1_objs}}
 
     ws = [r for r in sweep if r["method"] == "watershed"]
     best = min(ws, key=lambda r: abs(float(r["objects_per_chip"]) - ftw_objs))
@@ -94,13 +109,15 @@ def nearest_settings(country: str) -> dict:
     for m in ("watershed", "sam"):
         # clamped when even the coarsest setting emits half again FTW's count
         out[m]["clamped"] = lowest[m] > ftw_objs * 1.5
-    out["ftw"]["clamped"] = False
+    out["ftw"]["clamped"] = out["ftw3"]["clamped"] = False
     return out
 
 
-def per_chip(country: str, tag: str) -> tuple:
+def per_chip(country: str, tag) -> tuple:
     """{chip: [parcels, found]} and {(chip, parcel): best IoU} for one method."""
-    path = PROJECT / "results" / country / f"score_parcels_seg_{tag}_min500.csv"
+    rd = PROJECT / "results" / country
+    path = (rd / "newer_ckpt" / f"{V3_KEY}_parcels.csv" if tag is None
+            else rd / f"score_parcels_seg_{tag}_min500.csv")
     counts, ious = {}, {}
     for r in read_csv(path):
         c = counts.setdefault(r["chip"], [0, 0])

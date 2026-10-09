@@ -6,18 +6,21 @@ table, because the reader has to hold two numbers per method and compare them
 against a third. As a curve it is one glance: recall against how many objects a
 method emitted, with a line marking where FTW sits.
 
-India shows the checkpoint at the bottom of its own budget line. Slovenia shows
-it alone on the left, reaching higher recall from a fifth of the objects any
-other method needed, which is the shape of a method that is economical rather
-than merely accurate.
+FTW is drawn twice. The hollow dot is the v1 checkpoint most of this project
+measured, the filled one FTW's v3 checkpoint with an EfficientNet-B7 encoder,
+the best public release (findings 18 and 19, B-24). The dashed line marks the
+objects v3 emits and the dotted one v1's. On India v3 sits well above v1 and
+still below watershed and SAM at its own line. On Slovenia it sits alone on the
+left, above every other method.
 
-The Slovenian curves stop well right of the budget line. That gap is B-08: no
-competing method was run coarse enough to be read at 18 objects per chip, so
-their figures there are ceilings and the drawing says so by not extending them.
+Watershed includes h 0.4 from season_test.py, the setting coarse enough to
+reach FTW's Slovenian count, so that curve now crosses the line. SAM's
+Slovenian curve stops right of it (B-08), so its values there are ceilings,
+and the drawing says so by not extending it.
 
-SAM is drawn on natural colour, matching the cross-country table in
-COMPARISON.md. Its first run used blue, green and red in the wrong order
-(B-23); those figures are in the tables and not drawn here.
+SAM is drawn on colour infrared, the composite the README's headline quotes.
+Natural colour, which carries the cross-country table, and the first run's
+inputs (B-23) are in the tables and not drawn here.
 
 Numbers come from the same CSVs as every table, so the figure cannot drift from
 the text. Colours are the four leading slots of a categorical palette validated
@@ -64,13 +67,25 @@ SERIES = [
     ("ftw", "FTW 3-class FULL", "FTW", "#2a78d6", "o", "point"),
     ("watershed", "watershed", "watershed", "#eb6834", "s", "right"),
     ("felzenszwalb", "felzenszwalb", "felzenszwalb", "#1baf7a", "^", "right"),
-    ("sam_rgb", "SAM ViT-H", "SAM ViT-H", "#eda100", "D", "left"),
+    ("sam_cir", "SAM ViT-H, colour infrared", "SAM ViT-H", "#eda100", "D",
+     "left"),
 ]
 
 # FTW is one dot rather than a curve, so its label has no line to sit beside.
 # Which side is clear differs by panel: on India another curve passes just
 # above the dot, on Slovenia just below it.
 FTW_LABEL = {"india": (13, 0), "slovenia": (10, 13)}
+FTW_COLOUR = "#2a78d6"
+# v1 and v3 B7 from newer_checkpoints.py, which reproduces v1's published run.
+FTW_POINTS = [("v1 full", "FTW v1", "FTW v1", False),
+              ("v3 full b7", "FTW v3, EfficientNet-B7", "FTW v3", True)]
+FTW_OFFSET = {("india", "v1 full"): (12, 0), ("india", "v3 full b7"): (12, -2),
+              ("slovenia", "v1 full"): (12, -1),
+              ("slovenia", "v3 full b7"): (12, 0)}
+# Coarser watershed settings run by season_test.py, kept above this many
+# objects per chip so the x axis does not stretch for points far off the
+# panel's subject.
+WS_EXTRA_MIN_OBJECTS = 8.0
 
 
 def load(country: str) -> dict:
@@ -84,6 +99,28 @@ def load(country: str) -> dict:
         out[str(method)] = (g["objects_per_chip"].to_numpy(),
                             g["recall"].to_numpy())
 
+    extra = rd / "season_watershed.csv"
+    if extra.exists() and "watershed" in out:
+        e = pd.read_csv(extra)
+        e = e[(e["variant"] == "both")
+              & (e["objects_per_chip"] >= WS_EXTRA_MIN_OBJECTS)]
+        xs, ys = out["watershed"]
+        known = set(np.round(xs, 1))
+        add = e[~e["objects_per_chip"].round(1).isin(known)]
+        xs = np.concatenate([xs, add["objects_per_chip"].to_numpy()])
+        ys = np.concatenate([ys, add["recall"].to_numpy()])
+        order = np.argsort(xs)
+        out["watershed"] = (xs[order], ys[order])
+
+    ck = F.PROJECT / "results" / "newer_checkpoints.csv"
+    if ck.exists():
+        c = pd.read_csv(ck)
+        c = c[c["country"] == country].set_index("checkpoint")
+        for key, *_ in FTW_POINTS:
+            if key in c.index:
+                out[key] = (float(c.loc[key, "objects_per_chip"]),
+                            float(c.loc[key, "recall"]))
+
     sam_path = rd / "sam_comparison_vit_h_min500.csv"
     if sam_path.exists():
         sam = pd.read_csv(sam_path, dtype={"composite": str})
@@ -95,16 +132,41 @@ def load(country: str) -> dict:
 
 
 def draw_panel(ax, country: str, data: dict, show_legend: bool) -> None:
-    budget = float(data["ftw"][0][0])
+    v3 = data.get("v3 full b7")
+    budget = v3[0] if v3 else float(data["ftw"][0][0])
+    v1_budget = float(data["ftw"][0][0])
 
+    if v3:
+        ax.axvline(v1_budget, color=INK_SOFT, lw=1.0, ls=(0, (1, 2.5)),
+                   zorder=1)
     ax.axvline(budget, color=INK_SOFT, lw=1.2, ls=(0, (4, 3)), zorder=1)
-    ax.annotate(f"FTW emits {budget:.0f}", xy=(budget, 0.385),
-                xytext=(4, 0), textcoords="offset points",
+    # On Slovenia the v3 dot and its label sit just right of the line, so
+    # the line's own label goes on its left there.
+    left = country == "slovenia"
+    ax.annotate(f"FTW v3 emits {budget:.0f}" if v3 else
+                f"FTW emits {budget:.0f}", xy=(budget, 0.385),
+                xytext=(-4 if left else 4, 0), textcoords="offset points",
                 color=INK_SOFT, fontsize=8.5, rotation=90,
-                va="top", ha="left")
+                va="top", ha="right" if left else "left")
+
+    if v3:
+        x1, y1 = data["v1 full"]
+        ax.annotate("", xy=v3, xytext=(x1, y1),
+                    arrowprops=dict(arrowstyle="-|>", color=FTW_COLOUR,
+                                    lw=1.0, alpha=0.45,
+                                    shrinkA=7, shrinkB=8), zorder=3)
+        for key, _full, label, filled in FTW_POINTS:
+            x, y = data[key]
+            ax.plot([x], [y], marker="o", ms=11, ls="none", zorder=5,
+                    color=FTW_COLOUR if filled else SURFACE,
+                    mec=FTW_COLOUR if not filled else SURFACE,
+                    mew=2)
+            ax.annotate(label, xy=(x, y), xytext=FTW_OFFSET[(country, key)],
+                        textcoords="offset points", color=FTW_COLOUR,
+                        fontsize=9, va="center", ha="left", zorder=6)
 
     for key, _full, label, colour, marker, anchor in SERIES:
-        if key not in data:
+        if key not in data or (key == "ftw" and v3):
             continue
         xs, ys = data[key]
         if len(xs) == 1:
@@ -126,10 +188,11 @@ def draw_panel(ax, country: str, data: dict, show_legend: bool) -> None:
                     color=colour, fontsize=9, va="center", ha=ha, zorder=6)
 
     ax.set_xscale("log")
-    ax.set_xlim(15, 4000)
+    ax.set_xlim(8, 4000)
     ax.set_ylim(0, 0.40)
-    ax.set_xticks([20, 50, 100, 200, 500, 1000, 2000])
-    ax.set_xticklabels(["20", "50", "100", "200", "500", "1,000", "2,000"])
+    ax.set_xticks([10, 20, 50, 100, 200, 500, 1000, 2000])
+    ax.set_xticklabels(["10", "20", "50", "100", "200", "500", "1,000",
+                        "2,000"])
     ax.set_xlabel("objects emitted per chip", color=INK_SOFT, fontsize=9.5)
     if show_legend:
         ax.set_ylabel("share of parcels found at IoU 0.5",
@@ -149,8 +212,15 @@ def draw_panel(ax, country: str, data: dict, show_legend: bool) -> None:
     if show_legend:
         handles = []
         import matplotlib.lines as mlines
+        if "v3 full b7" in data:
+            for _key, full, _short, filled in reversed(FTW_POINTS):
+                handles.append(mlines.Line2D(
+                    [], [], ls="none", marker="o", ms=8,
+                    color=FTW_COLOUR if filled else SURFACE,
+                    mec=FTW_COLOUR if not filled else SURFACE, mew=1.6,
+                    label=full))
         for key, full, _short, colour, marker, _anchor in SERIES:
-            if key in data:
+            if key in data and not (key == "ftw" and "v3 full b7" in data):
                 handles.append(mlines.Line2D(
                     [], [], color=colour, lw=2, marker=marker, ms=6,
                     mec=SURFACE, mew=1.2, label=full))
@@ -185,9 +255,9 @@ def main() -> None:
     fig.suptitle("What each method recovers, against how many objects it emits",
                  color=INK, fontsize=13.5, x=0.045, ha="left", y=0.985)
     fig.text(0.045, 0.925,
-             "Read each panel at the dashed line. Slovenian curves stop right "
-             "of it because no method was run that coarse, so their values "
-             "there are ceilings.",
+             "Read each panel at the dashed line, where FTW v3 sits; the dotted "
+             "line is v1. SAM's Slovenian curve stops right of it, so its "
+             "values there are ceilings.",
              color=INK_SOFT, fontsize=9.5, ha="left")
     fig.subplots_adjust(left=0.062, right=0.985, top=0.80, bottom=0.11,
                         wspace=0.09)
@@ -202,14 +272,23 @@ def main() -> None:
     print(RULE)
     for country in COUNTRIES:
         budget = float(data[country]["ftw"][0][0])
-        print(f"  {country:>9}  FTW at {budget:>5.0f} objects/chip, "
+        print(f"  {country:>9}  FTW v1 at {budget:>5.0f} objects/chip, "
               f"recall {data[country]['ftw'][1][0]:.3f}")
+        if "v3 full b7" in data[country]:
+            x, y = data[country]["v3 full b7"]
+            print(f"             FTW v3 B7 at {x:>5.0f} objects/chip, "
+                  f"recall {y:.3f}")
+            budget = x
         for key, label, _s, _c, _m, _a in SERIES[1:]:
             if key not in data[country]:
                 continue
             xs, ys = data[country][key]
-            edge = "reaches it" if min(xs) <= budget else \
-                   f"stops at {min(xs):.0f}"
+            if min(xs) > budget:
+                edge = f"stops at {min(xs):.0f}"
+            elif max(xs) < budget:
+                edge = f"stops at {max(xs):.0f}"
+            else:
+                edge = "reaches it"
             print(f"             {label:<16} sweep {min(xs):.0f} to "
                   f"{max(xs):.0f} objects, {edge}")
     print(f"\n  wrote {dest.relative_to(F.PROJECT)}")
