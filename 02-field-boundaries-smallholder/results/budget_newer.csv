@@ -1,0 +1,51 @@
+country,checkpoint,budget,ftw_recall,method,objects_used,clamped,recall_at_budget,minus_ftw,lo,hi,reading,headline
+india,v1 full,175.0,0.0272,watershed,175.0,False,0.1074,0.0801,0.0628,0.0978,method ahead,False
+india,v1 full,175.0,0.0272,SAM colour infrared,175.0,False,0.1578,0.1305,0.1099,0.1526,method ahead,False
+india,v1 full,175.0,0.0272,SAM NIR-blue-green,175.0,False,0.1534,0.1262,0.1056,0.1466,method ahead,False
+india,v1 full,175.0,0.0272,SAM natural colour,175.0,False,0.1517,0.1244,0.104,0.1457,method ahead,False
+india,v1 full,175.0,0.0272,SAM blue-green-red,175.0,False,0.1511,0.1239,0.1047,0.1448,method ahead,False
+india,v3 full b3,223.3,0.1029,watershed,223.3,False,0.1371,0.0343,0.0183,0.0498,method ahead,False
+india,v3 full b3,223.3,0.1029,SAM colour infrared,222.4,True,0.1831,0.0802,0.0603,0.0985,"method ahead, stands under P2",False
+india,v3 full b3,223.3,0.1029,SAM NIR-blue-green,212.6,True,0.1725,0.0696,0.051,0.0886,"method ahead, stands under P2",False
+india,v3 full b3,223.3,0.1029,SAM natural colour,194.6,True,0.1669,0.064,0.0453,0.0827,"method ahead, stands under P2",False
+india,v3 full b3,223.3,0.1029,SAM blue-green-red,184.5,True,0.1563,0.0535,0.0353,0.0722,"method ahead, stands under P2",False
+india,v3 full b7,245.3,0.1291,watershed,245.3,False,0.1483,0.0192,0.0021,0.0359,method ahead,True
+india,v3 full b7,245.3,0.1291,SAM colour infrared,222.4,True,0.1831,0.054,0.0338,0.0723,"method ahead, stands under P2",True
+india,v3 full b7,245.3,0.1291,SAM NIR-blue-green,212.6,True,0.1725,0.0434,0.0242,0.062,"method ahead, stands under P2",True
+india,v3 full b7,245.3,0.1291,SAM natural colour,194.6,True,0.1669,0.0378,0.0197,0.057,"method ahead, stands under P2",True
+india,v3 full b7,245.3,0.1291,SAM blue-green-red,184.5,True,0.1563,0.0272,0.0081,0.0459,"method ahead, stands under P2",True
+india,v3.1 cc-by b3,154.7,0.0822,watershed,154.7,False,0.0919,0.0098,-0.0064,0.0266,level,False
+india,v3.1 cc-by b3,154.7,0.0822,SAM colour infrared,155.3,True,0.1452,0.063,0.046,0.0826,unresolved under P2,False
+india,v3.1 cc-by b3,154.7,0.0822,SAM NIR-blue-green,154.7,False,0.1428,0.0606,0.0426,0.0774,method ahead,False
+india,v3.1 cc-by b3,154.7,0.0822,SAM natural colour,154.7,False,0.1403,0.0581,0.0403,0.075,method ahead,False
+india,v3.1 cc-by b3,154.7,0.0822,SAM blue-green-red,154.7,False,0.1379,0.0557,0.0373,0.0742,method ahead,False
+india,v3.1 cc-by b7,224.6,0.114,watershed,224.6,False,0.1378,0.0239,0.0075,0.0398,method ahead,True
+india,v3.1 cc-by b7,224.6,0.114,SAM colour infrared,222.4,True,0.1831,0.0691,0.0509,0.0882,"method ahead, stands under P2",True
+india,v3.1 cc-by b7,224.6,0.114,SAM NIR-blue-green,212.6,True,0.1725,0.0585,0.0395,0.0777,"method ahead, stands under P2",True
+india,v3.1 cc-by b7,224.6,0.114,SAM natural colour,194.6,True,0.1669,0.053,0.0343,0.072,"method ahead, stands under P2",True
+india,v3.1 cc-by b7,224.6,0.114,SAM blue-green-red,184.5,True,0.1563,0.0424,0.0232,0.0616,"method ahead, stands under P2",True
+slovenia,v1 full,19.5,0.2222,watershed,19.5,False,0.0593,-0.1629,-0.1932,-0.1316,FTW ahead,False
+slovenia,v1 full,19.5,0.2222,SAM colour infrared,73.8,True,0.2121,-0.0101,-0.0358,0.015,level,False
+slovenia,v1 full,19.5,0.2222,SAM NIR-blue-green,72.7,True,0.2063,-0.016,-0.0408,0.0083,level,False
+slovenia,v1 full,19.5,0.2222,SAM natural colour,85.9,True,0.2572,0.035,0.011,0.0593,unresolved under P2,False
+slovenia,v1 full,19.5,0.2222,SAM blue-green-red,78.8,True,0.2338,0.0116,-0.0131,0.037,level,False
+slovenia,v3 full b3,19.3,0.2878,watershed,19.3,False,0.0586,-0.2292,-0.2633,-0.196,FTW ahead,False
+slovenia,v3 full b3,19.3,0.2878,SAM colour infrared,73.8,True,0.2121,-0.0757,-0.1017,-0.0492,"FTW ahead, stands under P2",False
+slovenia,v3 full b3,19.3,0.2878,SAM NIR-blue-green,72.7,True,0.2063,-0.0815,-0.1072,-0.0558,"FTW ahead, stands under P2",False
+slovenia,v3 full b3,19.3,0.2878,SAM natural colour,85.9,True,0.2572,-0.0306,-0.054,-0.0064,"FTW ahead, stands under P2",False
+slovenia,v3 full b3,19.3,0.2878,SAM blue-green-red,78.8,True,0.2338,-0.054,-0.0796,-0.029,"FTW ahead, stands under P2",False
+slovenia,v3 full b7,20.5,0.3306,watershed,20.5,False,0.0627,-0.2678,-0.3017,-0.2322,FTW ahead,True
+slovenia,v3 full b7,20.5,0.3306,SAM colour infrared,73.8,True,0.2121,-0.1184,-0.1451,-0.0915,"FTW ahead, stands under P2",True
+slovenia,v3 full b7,20.5,0.3306,SAM NIR-blue-green,72.7,True,0.2063,-0.1243,-0.1509,-0.0977,"FTW ahead, stands under P2",True
+slovenia,v3 full b7,20.5,0.3306,SAM natural colour,85.9,True,0.2572,-0.0733,-0.0993,-0.0472,"FTW ahead, stands under P2",True
+slovenia,v3 full b7,20.5,0.3306,SAM blue-green-red,78.8,True,0.2338,-0.0968,-0.1238,-0.068,"FTW ahead, stands under P2",True
+slovenia,v3.1 cc-by b3,12.1,0.1681,watershed,12.1,False,0.0344,-0.1337,-0.1657,-0.1008,FTW ahead,False
+slovenia,v3.1 cc-by b3,12.1,0.1681,SAM colour infrared,73.8,True,0.2121,0.0441,0.0148,0.0766,unresolved under P2,False
+slovenia,v3.1 cc-by b3,12.1,0.1681,SAM NIR-blue-green,72.7,True,0.2063,0.0382,0.0097,0.0664,unresolved under P2,False
+slovenia,v3.1 cc-by b3,12.1,0.1681,SAM natural colour,85.9,True,0.2572,0.0892,0.0631,0.1186,unresolved under P2,False
+slovenia,v3.1 cc-by b3,12.1,0.1681,SAM blue-green-red,78.8,True,0.2338,0.0657,0.038,0.0973,unresolved under P2,False
+slovenia,v3.1 cc-by b7,15.2,0.2244,watershed,15.2,False,0.0449,-0.1795,-0.2128,-0.143,FTW ahead,True
+slovenia,v3.1 cc-by b7,15.2,0.2244,SAM colour infrared,73.8,True,0.2121,-0.0123,-0.0403,0.0189,level,True
+slovenia,v3.1 cc-by b7,15.2,0.2244,SAM NIR-blue-green,72.7,True,0.2063,-0.0182,-0.0463,0.0096,level,True
+slovenia,v3.1 cc-by b7,15.2,0.2244,SAM natural colour,85.9,True,0.2572,0.0328,0.004,0.06,unresolved under P2,True
+slovenia,v3.1 cc-by b7,15.2,0.2244,SAM blue-green-red,78.8,True,0.2338,0.0094,-0.0188,0.0402,level,True
