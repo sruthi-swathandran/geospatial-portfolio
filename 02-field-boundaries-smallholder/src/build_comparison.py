@@ -856,6 +856,101 @@ def rabi_tables() -> list:
     return out
 
 
+CKPT_ORDER = ["v1 full", "v1 cc-by", "v2 full", "v3 full b3", "v3 full b7",
+              "v3.1 cc-by b3", "v3.1 cc-by b7"]
+CKPT_LICENCE = {"mixed, includes noncommercial": "mixed",
+                "CC-BY-4.0": "CC-BY"}
+
+
+def checkpoint_tables() -> list:
+    """FTW's later releases, from newer_checkpoints.py."""
+    root = F.PROJECT / "results"
+    need = ["newer_checkpoints.csv", "newer_checkpoints_changes.csv",
+            "newer_checkpoints_gap.csv", "newer_checkpoints_widths.csv"]
+    missing = [n for n in need if not (root / n).exists()]
+    if missing:
+        return [f"\nMissing {', '.join(missing)}. Run newer_checkpoints.py.\n"]
+    s = pd.read_csv(root / "newer_checkpoints.csv").set_index(
+        ["country", "checkpoint"])
+    g = pd.read_csv(root / "newer_checkpoints_gap.csv").set_index(
+        "checkpoint")
+    out = ["### Every checkpoint on both countries\n"]
+    out.append("| checkpoint | licence | India objects/chip | India recall "
+               "| India null | Slovenia objects/chip | Slovenia recall "
+               "| Slovenia null | India over Slovenia |")
+    out.append("|---|---|---:|---:|---:|---:|---:|---:|---:|")
+    for k in CKPT_ORDER:
+        i, sl = s.loc[("india", k)], s.loc[("slovenia", k)]
+        r = g.loc[k]
+        out.append(
+            f"| {k} | {CKPT_LICENCE.get(i['licence'], i['licence'])} "
+            f"| {i['objects_per_chip']:.1f} "
+            f"| {i['recall'] * 100:.2f}% [{i['lo'] * 100:.2f}, "
+            f"{i['hi'] * 100:.2f}] | {i['null_recall'] * 100:.2f}% "
+            f"| {sl['objects_per_chip']:.1f} "
+            f"| {sl['recall'] * 100:.2f}% [{sl['lo'] * 100:.2f}, "
+            f"{sl['hi'] * 100:.2f}] | {sl['null_recall'] * 100:.2f}% "
+            f"| {r['ratio']:.3f} [{r['lo']:.3f}, {r['hi']:.3f}] |")
+    i = s.loc[("india", "v1 full")]
+    sl = s.loc[("slovenia", "v1 full")]
+    out.append(f"\n{int(i['chips'])} labelled Indian chips and "
+               f"{int(sl['chips'])} Slovenian, {int(i['parcels']):,} and "
+               f"{int(sl['parcels']):,} parcels.")
+
+    c = pd.read_csv(root / "newer_checkpoints_changes.csv")
+    out.append("\n### Changes against a reference, chip by chip\n")
+    out.append("| country | checkpoint | against | recall change "
+               "| change above null |")
+    out.append("|---|---|---|---:|---:|")
+    for _, r in c.iterrows():
+        out.append(
+            f"| {r['country'].capitalize()} | {r['x']} | {r['y']} "
+            f"| {r['recall_change'] * 100:+.2f} [{r['recall_lo'] * 100:+.2f}, "
+            f"{r['recall_hi'] * 100:+.2f}] "
+            f"| {r['above_null_change'] * 100:+.2f} "
+            f"[{r['above_null_lo'] * 100:+.2f}, "
+            f"{r['above_null_hi'] * 100:+.2f}] |")
+
+    w = pd.read_csv(root / "newer_checkpoints_widths.csv").set_index(
+        ["country", "checkpoint"])
+    for country in COUNTRIES:
+        out.append(f"\n### {country.capitalize()}, recall by ground width\n")
+        out.append("| checkpoint | " + " | ".join(WIDTH_LABELS_M) + " |")
+        out.append("|---|" + "---:|" * len(WIDTH_LABELS_M))
+        for k in CKPT_ORDER:
+            r = w.loc[(country, k)]
+            out.append(f"| {k} | " + " | ".join(
+                f"{r[b] * 100:.2f}%" for b in WIDTH_LABELS_M) + " |")
+        r = w.loc[(country, "v1 full")]
+        out.append("\nParcels per band: " + ", ".join(
+            f"{b} {int(r[b + ' parcels']):,}" for b in WIDTH_LABELS_M) + ".")
+    return out
+
+
+def budget_newer_tables() -> list:
+    """Watershed and SAM at each checkpoint's budget, from budget_newer.py."""
+    path = F.PROJECT / "results" / "budget_newer.csv"
+    if not path.exists():
+        return ["\nMissing budget_newer.csv. Run budget_newer.py.\n"]
+    b = pd.read_csv(path)
+    out = []
+    for country in COUNTRIES:
+        d = b[b["country"] == country]
+        out.append(f"\n### {country.capitalize()}\n")
+        out.append("| checkpoint | objects/chip | FTW recall | method "
+                   "| read at | recall | minus FTW | reading |")
+        out.append("|---|---:|---:|---|---:|---:|---:|---|")
+        for _, r in d.iterrows():
+            out.append(
+                f"| {r['checkpoint']} | {r['budget']:.1f} "
+                f"| {r['ftw_recall'] * 100:.2f}% | {r['method']} "
+                f"| {r['objects_used']:.1f} "
+                f"| {r['recall_at_budget'] * 100:.2f}% "
+                f"| {r['minus_ftw'] * 100:+.2f} [{r['lo'] * 100:+.2f}, "
+                f"{r['hi'] * 100:+.2f}] | {r['reading']} |")
+    return out
+
+
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--sam-setting", default="0p50",
@@ -937,6 +1032,12 @@ def main() -> None:
 
     out.append("\n## A December to February image\n")
     out += rabi_tables()
+
+    out.append("\n## FTW's later checkpoints\n")
+    out += checkpoint_tables()
+
+    out.append("\n## Watershed and SAM at the later checkpoints' budgets\n")
+    out += budget_newer_tables()
 
     dest = F.PROJECT / "results" / "comparison_tables.md"
     dest.parent.mkdir(parents=True, exist_ok=True)

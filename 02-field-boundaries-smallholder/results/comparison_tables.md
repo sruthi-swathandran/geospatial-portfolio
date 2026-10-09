@@ -450,3 +450,129 @@ Slovenia: the shipped run differs from `pred_3class_full` on 3 pixel(s).
 | watershed | r alone against a alone | +0.52 [-0.98, +1.96] | -0.33 [-2.25, +1.61] |
 | watershed | a and r against b and a | +0.45 [-1.11, +1.93] | +1.84 [+0.20, +3.50] |
 | watershed | a and r against a alone | +1.62 [+0.39, +2.89] | +2.93 [+1.35, +4.57] |
+
+## FTW's later checkpoints
+
+### Every checkpoint on both countries
+
+| checkpoint | licence | India objects/chip | India recall | India null | Slovenia objects/chip | Slovenia recall | Slovenia null | India over Slovenia |
+|---|---|---:|---:|---:|---:|---:|---:|---:|
+| v1 full | mixed | 175.0 | 2.72% [1.76, 3.88] | 2.15% | 19.5 | 22.22% [18.62, 25.99] | 0.56% | 0.122 [0.077, 0.178] |
+| v1 cc-by | CC-BY | 84.0 | 2.98% [1.97, 4.10] | 0.72% | 13.4 | 14.46% [11.26, 17.41] | 0.37% | 0.206 [0.132, 0.305] |
+| v2 full | mixed | 76.3 | 1.71% [1.06, 2.58] | 0.71% | 18.2 | 19.27% [16.03, 22.35] | 0.60% | 0.089 [0.053, 0.139] |
+| v3 full b3 | mixed | 223.3 | 10.29% [8.51, 12.30] | 2.69% | 19.3 | 28.78% [24.98, 32.42] | 0.63% | 0.357 [0.285, 0.454] |
+| v3 full b7 | mixed | 245.3 | 12.91% [10.66, 15.08] | 2.50% | 20.5 | 33.06% [29.00, 36.73] | 0.58% | 0.391 [0.316, 0.478] |
+| v3.1 cc-by b3 | CC-BY | 154.7 | 8.22% [6.60, 9.92] | 1.34% | 12.1 | 16.81% [13.36, 20.10] | 0.32% | 0.489 [0.369, 0.656] |
+| v3.1 cc-by b7 | CC-BY | 224.6 | 11.40% [9.38, 13.41] | 2.17% | 15.2 | 22.44% [18.55, 26.12] | 0.39% | 0.508 [0.397, 0.651] |
+
+398 labelled Indian chips and 185 Slovenian, 1,983 and 6,831 parcels.
+
+### Changes against a reference, chip by chip
+
+| country | checkpoint | against | recall change | change above null |
+|---|---|---|---:|---:|
+| India | v1 cc-by | v1 full | +0.25 [-0.91, +1.41] | +1.68 [+0.52, +2.85] |
+| India | v2 full | v1 full | -1.01 [-1.91, -0.15] | +0.44 [-0.62, +1.39] |
+| India | v3 full b3 | v1 full | +7.56 [+5.94, +9.23] | +7.03 [+5.41, +8.73] |
+| India | v3 full b7 | v1 full | +10.19 [+8.37, +12.15] | +9.83 [+7.93, +11.75] |
+| India | v3.1 cc-by b3 | v1 full | +5.50 [+4.03, +7.12] | +6.30 [+4.79, +7.95] |
+| India | v3.1 cc-by b7 | v1 full | +8.67 [+6.92, +10.54] | +8.66 [+6.76, +10.65] |
+| India | v3.1 cc-by b3 | v1 cc-by | +5.24 [+3.93, +6.64] | +4.62 [+3.19, +6.11] |
+| Slovenia | v1 cc-by | v1 full | -7.76 [-9.21, -6.28] | -7.57 [-9.15, -6.05] |
+| Slovenia | v2 full | v1 full | -2.96 [-4.50, -1.35] | -3.00 [-4.58, -1.43] |
+| Slovenia | v3 full b3 | v1 full | +6.56 [+4.73, +8.31] | +6.48 [+4.73, +8.12] |
+| Slovenia | v3 full b7 | v1 full | +10.83 [+8.90, +12.56] | +10.81 [+8.91, +12.52] |
+| Slovenia | v3.1 cc-by b3 | v1 full | -5.42 [-7.98, -2.93] | -5.18 [-7.94, -2.68] |
+| Slovenia | v3.1 cc-by b7 | v1 full | +0.22 [-1.96, +2.11] | +0.39 [-1.80, +2.28] |
+| Slovenia | v3.1 cc-by b3 | v1 cc-by | +2.34 [+0.13, +4.32] | +2.39 [+0.21, +4.30] |
+
+### India, recall by ground width
+
+| checkpoint | under 20 m | 20 to 30 m | 30 to 50 m | 50 m up |
+|---|---:|---:|---:|---:|
+| v1 full | 0.00% | 0.41% | 0.58% | 7.11% |
+| v1 cc-by | 0.00% | 0.00% | 0.46% | 8.15% |
+| v2 full | 0.00% | 0.00% | 0.23% | 4.74% |
+| v3 full b3 | 1.02% | 0.82% | 3.34% | 25.33% |
+| v3 full b7 | 0.00% | 1.22% | 4.96% | 31.11% |
+| v3.1 cc-by b3 | 1.02% | 0.41% | 1.85% | 21.33% |
+| v3.1 cc-by b7 | 0.00% | 0.82% | 3.92% | 28.15% |
+
+Parcels per band: under 20 m 196, 20 to 30 m 245, 30 to 50 m 867, 50 m up 675.
+
+### Slovenia, recall by ground width
+
+| checkpoint | under 20 m | 20 to 30 m | 30 to 50 m | 50 m up |
+|---|---:|---:|---:|---:|
+| v1 full | 0.51% | 7.89% | 23.62% | 58.80% |
+| v1 cc-by | 0.46% | 4.96% | 15.63% | 37.96% |
+| v2 full | 0.23% | 4.48% | 18.79% | 54.68% |
+| v3 full b3 | 2.27% | 14.48% | 34.48% | 67.04% |
+| v3 full b7 | 3.61% | 20.26% | 40.98% | 71.69% |
+| v3.1 cc-by b3 | 1.34% | 6.43% | 20.63% | 40.08% |
+| v3.1 cc-by b7 | 2.13% | 13.51% | 27.13% | 49.97% |
+
+Parcels per band: under 20 m 2,163, 20 to 30 m 1,229, 30 to 50 m 1,740, 50 m up 1,699.
+
+## Watershed and SAM at the later checkpoints' budgets
+
+
+### India
+
+| checkpoint | objects/chip | FTW recall | method | read at | recall | minus FTW | reading |
+|---|---:|---:|---|---:|---:|---:|---|
+| v1 full | 175.0 | 2.72% | watershed | 175.0 | 10.74% | +8.01 [+6.28, +9.78] | method ahead |
+| v1 full | 175.0 | 2.72% | SAM colour infrared | 175.0 | 15.78% | +13.05 [+10.99, +15.26] | method ahead |
+| v1 full | 175.0 | 2.72% | SAM NIR-blue-green | 175.0 | 15.34% | +12.62 [+10.56, +14.66] | method ahead |
+| v1 full | 175.0 | 2.72% | SAM natural colour | 175.0 | 15.17% | +12.44 [+10.40, +14.57] | method ahead |
+| v1 full | 175.0 | 2.72% | SAM blue-green-red | 175.0 | 15.11% | +12.39 [+10.47, +14.48] | method ahead |
+| v3 full b3 | 223.3 | 10.29% | watershed | 223.3 | 13.71% | +3.43 [+1.83, +4.98] | method ahead |
+| v3 full b3 | 223.3 | 10.29% | SAM colour infrared | 222.4 | 18.31% | +8.02 [+6.03, +9.85] | method ahead, stands under P2 |
+| v3 full b3 | 223.3 | 10.29% | SAM NIR-blue-green | 212.6 | 17.25% | +6.96 [+5.10, +8.86] | method ahead, stands under P2 |
+| v3 full b3 | 223.3 | 10.29% | SAM natural colour | 194.6 | 16.69% | +6.40 [+4.53, +8.27] | method ahead, stands under P2 |
+| v3 full b3 | 223.3 | 10.29% | SAM blue-green-red | 184.5 | 15.63% | +5.35 [+3.53, +7.22] | method ahead, stands under P2 |
+| v3 full b7 | 245.3 | 12.91% | watershed | 245.3 | 14.83% | +1.92 [+0.21, +3.59] | method ahead |
+| v3 full b7 | 245.3 | 12.91% | SAM colour infrared | 222.4 | 18.31% | +5.40 [+3.38, +7.23] | method ahead, stands under P2 |
+| v3 full b7 | 245.3 | 12.91% | SAM NIR-blue-green | 212.6 | 17.25% | +4.34 [+2.42, +6.20] | method ahead, stands under P2 |
+| v3 full b7 | 245.3 | 12.91% | SAM natural colour | 194.6 | 16.69% | +3.78 [+1.97, +5.70] | method ahead, stands under P2 |
+| v3 full b7 | 245.3 | 12.91% | SAM blue-green-red | 184.5 | 15.63% | +2.72 [+0.81, +4.59] | method ahead, stands under P2 |
+| v3.1 cc-by b3 | 154.7 | 8.22% | watershed | 154.7 | 9.19% | +0.98 [-0.64, +2.66] | level |
+| v3.1 cc-by b3 | 154.7 | 8.22% | SAM colour infrared | 155.3 | 14.52% | +6.30 [+4.60, +8.26] | unresolved under P2 |
+| v3.1 cc-by b3 | 154.7 | 8.22% | SAM NIR-blue-green | 154.7 | 14.28% | +6.06 [+4.26, +7.74] | method ahead |
+| v3.1 cc-by b3 | 154.7 | 8.22% | SAM natural colour | 154.7 | 14.03% | +5.81 [+4.03, +7.50] | method ahead |
+| v3.1 cc-by b3 | 154.7 | 8.22% | SAM blue-green-red | 154.7 | 13.79% | +5.57 [+3.73, +7.42] | method ahead |
+| v3.1 cc-by b7 | 224.6 | 11.40% | watershed | 224.6 | 13.78% | +2.39 [+0.75, +3.98] | method ahead |
+| v3.1 cc-by b7 | 224.6 | 11.40% | SAM colour infrared | 222.4 | 18.31% | +6.91 [+5.09, +8.82] | method ahead, stands under P2 |
+| v3.1 cc-by b7 | 224.6 | 11.40% | SAM NIR-blue-green | 212.6 | 17.25% | +5.85 [+3.95, +7.77] | method ahead, stands under P2 |
+| v3.1 cc-by b7 | 224.6 | 11.40% | SAM natural colour | 194.6 | 16.69% | +5.30 [+3.43, +7.20] | method ahead, stands under P2 |
+| v3.1 cc-by b7 | 224.6 | 11.40% | SAM blue-green-red | 184.5 | 15.63% | +4.24 [+2.32, +6.16] | method ahead, stands under P2 |
+
+### Slovenia
+
+| checkpoint | objects/chip | FTW recall | method | read at | recall | minus FTW | reading |
+|---|---:|---:|---|---:|---:|---:|---|
+| v1 full | 19.5 | 22.22% | watershed | 19.5 | 5.93% | -16.29 [-19.32, -13.16] | FTW ahead |
+| v1 full | 19.5 | 22.22% | SAM colour infrared | 73.8 | 21.21% | -1.01 [-3.58, +1.50] | level |
+| v1 full | 19.5 | 22.22% | SAM NIR-blue-green | 72.7 | 20.63% | -1.60 [-4.08, +0.83] | level |
+| v1 full | 19.5 | 22.22% | SAM natural colour | 85.9 | 25.72% | +3.50 [+1.10, +5.93] | unresolved under P2 |
+| v1 full | 19.5 | 22.22% | SAM blue-green-red | 78.8 | 23.38% | +1.16 [-1.31, +3.70] | level |
+| v3 full b3 | 19.3 | 28.78% | watershed | 19.3 | 5.86% | -22.92 [-26.33, -19.60] | FTW ahead |
+| v3 full b3 | 19.3 | 28.78% | SAM colour infrared | 73.8 | 21.21% | -7.57 [-10.17, -4.92] | FTW ahead, stands under P2 |
+| v3 full b3 | 19.3 | 28.78% | SAM NIR-blue-green | 72.7 | 20.63% | -8.15 [-10.72, -5.58] | FTW ahead, stands under P2 |
+| v3 full b3 | 19.3 | 28.78% | SAM natural colour | 85.9 | 25.72% | -3.06 [-5.40, -0.64] | FTW ahead, stands under P2 |
+| v3 full b3 | 19.3 | 28.78% | SAM blue-green-red | 78.8 | 23.38% | -5.40 [-7.96, -2.90] | FTW ahead, stands under P2 |
+| v3 full b7 | 20.5 | 33.06% | watershed | 20.5 | 6.27% | -26.78 [-30.17, -23.22] | FTW ahead |
+| v3 full b7 | 20.5 | 33.06% | SAM colour infrared | 73.8 | 21.21% | -11.84 [-14.51, -9.15] | FTW ahead, stands under P2 |
+| v3 full b7 | 20.5 | 33.06% | SAM NIR-blue-green | 72.7 | 20.63% | -12.43 [-15.09, -9.77] | FTW ahead, stands under P2 |
+| v3 full b7 | 20.5 | 33.06% | SAM natural colour | 85.9 | 25.72% | -7.33 [-9.93, -4.72] | FTW ahead, stands under P2 |
+| v3 full b7 | 20.5 | 33.06% | SAM blue-green-red | 78.8 | 23.38% | -9.68 [-12.38, -6.80] | FTW ahead, stands under P2 |
+| v3.1 cc-by b3 | 12.1 | 16.81% | watershed | 12.1 | 3.44% | -13.37 [-16.57, -10.08] | FTW ahead |
+| v3.1 cc-by b3 | 12.1 | 16.81% | SAM colour infrared | 73.8 | 21.21% | +4.41 [+1.48, +7.66] | unresolved under P2 |
+| v3.1 cc-by b3 | 12.1 | 16.81% | SAM NIR-blue-green | 72.7 | 20.63% | +3.82 [+0.97, +6.64] | unresolved under P2 |
+| v3.1 cc-by b3 | 12.1 | 16.81% | SAM natural colour | 85.9 | 25.72% | +8.92 [+6.31, +11.86] | unresolved under P2 |
+| v3.1 cc-by b3 | 12.1 | 16.81% | SAM blue-green-red | 78.8 | 23.38% | +6.57 [+3.80, +9.73] | unresolved under P2 |
+| v3.1 cc-by b7 | 15.2 | 22.44% | watershed | 15.2 | 4.49% | -17.95 [-21.28, -14.30] | FTW ahead |
+| v3.1 cc-by b7 | 15.2 | 22.44% | SAM colour infrared | 73.8 | 21.21% | -1.23 [-4.03, +1.89] | level |
+| v3.1 cc-by b7 | 15.2 | 22.44% | SAM NIR-blue-green | 72.7 | 20.63% | -1.82 [-4.63, +0.96] | level |
+| v3.1 cc-by b7 | 15.2 | 22.44% | SAM natural colour | 85.9 | 25.72% | +3.28 [+0.40, +6.00] | unresolved under P2 |
+| v3.1 cc-by b7 | 15.2 | 22.44% | SAM blue-green-red | 78.8 | 23.38% | +0.94 [-1.88, +4.02] | level |

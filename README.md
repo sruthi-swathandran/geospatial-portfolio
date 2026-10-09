@@ -27,15 +27,15 @@ it and the amount it moves by. There is an
 [interactive map](https://sruthi-swathandran.github.io/geospatial-portfolio/01-sentinel1-flood-extent/docs/)
 of the three acquisitions and the recession between them.
 
-**RS-02, field boundaries for Indian smallholdings.** The released state of the
-art recovers 2.7% of Indian smallholdings and 22.2% of Slovenian parcels. Read
-at the same object budget that model spends, a foundation model which has never
-seen a field boundary recovers 15.8% of the Indian parcels and an untrained
-watershed recovers 10.7%. Three draws in 200 of randomly scattered cells, with
-the imagery never opened, beat the trained model outright. The failure belongs
-to the method rather than to a shortage of signal, and the project also shows
-that the remaining failure below three native pixels is not explained by parcel
-width either.
+**RS-02, field boundaries for Indian smallholdings.** The best public checkpoint
+of Fields of The World, a global field-boundary model, recovers 12.9% of
+labelled Indian parcels and 33.1% of Slovenian ones. Read at the same object
+budget that model spends, an untrained watershed recovers 14.8% of the Indian
+parcels and a foundation model that has never seen a field boundary 18.3%. On
+Slovenia the trained model beats both. The project first tested FTW's older v1
+checkpoint, at 2.7% in India, and logged that as a correction when it found the
+later release. Parcel width, shape, label placement and season each explain
+little of the gap between the two countries.
 There is an [interactive map](https://sruthi-swathandran.github.io/geospatial-portfolio/02-field-boundaries-smallholder/docs/) of every test chip and what each method
 recovered on it.
 
@@ -66,7 +66,7 @@ its own acceptance criteria on first reading.
 
 **Corrections are logged, not quietly fixed.** Every number that changed is
 recorded with its superseded value and the reason it was wrong. RS-01 keeps
-these in `CHANGELOG.md`, RS-02 as corrections B-01 to B-22 in `COMPARISON.md`.
+these in `CHANGELOG.md`, RS-02 as corrections B-01 to B-25 in `COMPARISON.md`.
 Among them: a control that rewarded methods for cutting a scene into more
 pieces, a scorer that measured two different objects and disagreed with itself
 by a factor of two, and a claim about resolution that the project's own data

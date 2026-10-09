@@ -17,6 +17,11 @@ Stage 1 is in `FINDINGS.md` and stage 2 in `RESULTS.md`. A technical review of
 all three is in `REVIEW.md`, and the gaps it found that change how these numbers
 should be read are listed under Known gaps below.
 
+Every FTW figure up to finding 17 is for FTW's v1 checkpoint of October 2024,
+the one stage 2 ran. FTW has released three more since then, and v3 does much
+better on India. Findings 18 and 19 run the later releases and read watershed
+and SAM against them, and the README's headline now uses v3 (B-24).
+
 ---
 
 ## Findings
@@ -114,6 +119,21 @@ should be read are listed under Known gaps below.
     than as shipped, while watershed finds about as many boundaries in it as in
     the kharif image. The best arrangement leaves FTW about four times below
     Slovenia. See What this says.
+18. FTW's later checkpoints do much better on India, and the gap to Slovenia
+    narrows without closing. v3, released in November 2025 with a new loss,
+    new class weights and more augmentation, finds 12.91% of Indian parcels
+    with an EfficientNet-B7 encoder and 10.29% with B3, against v1's 2.72%.
+    Nearly all of the gain is above its null, so it comes from better placed
+    boundaries. It does better on Slovenia too, 33.06% against 22.22%, and
+    India rises from 0.12 to 0.39 of Slovenia with the same checkpoint. The
+    gain is on parcels 30 m and wider; below that every checkpoint stays near
+    1%. v2 is worse than v1 in both countries. See What this says.
+19. Watershed and SAM still beat FTW on India at its own object count, by
+    less. Against v3 B7 at 245 objects per chip, watershed reaches 14.83%, 1.92
+    points ahead, and SAM on colour infrared 18.31% from 222 objects, 5.40
+    ahead. Against v1 the margins were 8.01 and 13.05. On Slovenia v3 B7 beats
+    every SAM composite while drawing about a quarter of their objects, where
+    v1 was level with SAM. See What this says.
 
 ---
 
@@ -966,16 +986,199 @@ relied on.
 *Source: `rabi_match.csv`, `rabi_scenes.csv` and `rabi_test_<season>_*.csv`
 in `results/india`. The images themselves are rebuilt from the scene list.*
 
+**FTW's later checkpoints change the size of the Indian failure.** Everything
+above used FTW's v1 checkpoint, which this project called the released state
+of the art. FTW had released three more by the time this work began: v2 in
+September 2025, trained with the two windows in random order, v3 "PRUE" in
+November 2025, with a log-cosh Dice loss, new class weights and more
+augmentation, and v3.1 in December 2025, the same recipe trained only on CC-BY
+and CC0 data (B-24). None was trained without India.
+
+`src\newer_checkpoints.py` runs seven checkpoints from those releases over the
+same chips and scores them the same way, with its readings committed before it
+ran. Each is a U-Net with an EfficientNet encoder taking the same eight
+channels, divided by 3000 with window_b first, as FTW's own test command does
+for every release. ftw-tools 1.4.3 cannot load the v3 checkpoints, so the
+script builds the network directly. Checked on v1 first, its predictions
+differ from the published ones in 1 pixel of 26.1 million in India and 3 of
+14.9 million in Slovenia.
+
+| checkpoint | licence | India objects/chip | India recall | India null | Slovenia objects/chip | Slovenia recall | Slovenia null | India over Slovenia |
+|---|---|---:|---:|---:|---:|---:|---:|---:|
+| v1 full | mixed | 175.0 | 2.72% [1.76, 3.88] | 2.15% | 19.5 | 22.22% [18.62, 25.99] | 0.56% | 0.122 [0.077, 0.178] |
+| v1 cc-by | CC-BY | 84.0 | 2.98% [1.97, 4.10] | 0.72% | 13.4 | 14.46% [11.26, 17.41] | 0.37% | 0.206 [0.132, 0.305] |
+| v2 full | mixed | 76.3 | 1.71% [1.06, 2.58] | 0.71% | 18.2 | 19.27% [16.03, 22.35] | 0.60% | 0.089 [0.053, 0.139] |
+| v3 full b3 | mixed | 223.3 | 10.29% [8.51, 12.30] | 2.69% | 19.3 | 28.78% [24.98, 32.42] | 0.63% | 0.357 [0.285, 0.454] |
+| v3 full b7 | mixed | 245.3 | 12.91% [10.66, 15.08] | 2.50% | 20.5 | 33.06% [29.00, 36.73] | 0.58% | 0.391 [0.316, 0.478] |
+| v3.1 cc-by b3 | CC-BY | 154.7 | 8.22% [6.60, 9.92] | 1.34% | 12.1 | 16.81% [13.36, 20.10] | 0.32% | 0.489 [0.369, 0.656] |
+| v3.1 cc-by b7 | CC-BY | 224.6 | 11.40% [9.38, 13.41] | 2.17% | 15.2 | 22.44% [18.55, 26.12] | 0.39% | 0.508 [0.397, 0.651] |
+
+398 labelled Indian chips and 185 Slovenian, 1,983 and 6,831 parcels.
+
+| country | checkpoint | against | recall change | change above null |
+|---|---|---|---:|---:|
+| India | v1 cc-by | v1 full | +0.25 [-0.91, +1.41] | +1.68 [+0.52, +2.85] |
+| India | v2 full | v1 full | -1.01 [-1.91, -0.15] | +0.44 [-0.62, +1.39] |
+| India | v3 full b3 | v1 full | +7.56 [+5.94, +9.23] | +7.03 [+5.41, +8.73] |
+| India | v3 full b7 | v1 full | +10.19 [+8.37, +12.15] | +9.83 [+7.93, +11.75] |
+| India | v3.1 cc-by b3 | v1 full | +5.50 [+4.03, +7.12] | +6.30 [+4.79, +7.95] |
+| India | v3.1 cc-by b7 | v1 full | +8.67 [+6.92, +10.54] | +8.66 [+6.76, +10.65] |
+| India | v3.1 cc-by b3 | v1 cc-by | +5.24 [+3.93, +6.64] | +4.62 [+3.19, +6.11] |
+| Slovenia | v1 cc-by | v1 full | -7.76 [-9.21, -6.28] | -7.57 [-9.15, -6.05] |
+| Slovenia | v2 full | v1 full | -2.96 [-4.50, -1.35] | -3.00 [-4.58, -1.43] |
+| Slovenia | v3 full b3 | v1 full | +6.56 [+4.73, +8.31] | +6.48 [+4.73, +8.12] |
+| Slovenia | v3 full b7 | v1 full | +10.83 [+8.90, +12.56] | +10.81 [+8.91, +12.52] |
+| Slovenia | v3.1 cc-by b3 | v1 full | -5.42 [-7.98, -2.93] | -5.18 [-7.94, -2.68] |
+| Slovenia | v3.1 cc-by b7 | v1 full | +0.22 [-1.96, +2.11] | +0.39 [-1.80, +2.28] |
+| Slovenia | v3.1 cc-by b3 | v1 cc-by | +2.34 [+0.13, +4.32] | +2.39 [+0.21, +4.30] |
+
+Read against the rules in the script's docstring:
+
+- **v3 does better on India, from better placed boundaries.** Every v3 and
+  v3.1 checkpoint beats v1 with an interval above zero, and its gain above its
+  own null is nearly as large, so object count, 155 to 245 per chip against
+  v1's 175, explains little of it.
+- **The gap to Slovenia narrows and stays under the bar.** With v3 full, India
+  stands at 0.357 and 0.391 of Slovenia against v1's 0.122. The rule asked for
+  a lower end of one third, and the lower ends are 0.285 and 0.316. The two
+  v3.1 checkpoints pass it, at 0.489 and 0.508, for a reason the rule was not
+  written to catch: they lose more on Slovenia than on India. FTW describes
+  them as trained only on CC-BY or CC0 data and lists Slovenia's labels as
+  CC-BY-SA-4.0, so Slovenia was probably left out of their training. That has
+  not been confirmed. The fair comparison across countries is the v3 full
+  pair, where both countries were in training.
+- **v2 is worse than v1** in both countries, by 1.01 points in India and 2.96
+  in Slovenia. Shuffling the window order in training did not help on its own.
+
+By ground width, India first and Slovenia second:
+
+| checkpoint | under 20 m | 20 to 30 m | 30 to 50 m | 50 m up |
+|---|---:|---:|---:|---:|
+| v1 full | 0.00% | 0.41% | 0.58% | 7.11% |
+| v1 cc-by | 0.00% | 0.00% | 0.46% | 8.15% |
+| v2 full | 0.00% | 0.00% | 0.23% | 4.74% |
+| v3 full b3 | 1.02% | 0.82% | 3.34% | 25.33% |
+| v3 full b7 | 0.00% | 1.22% | 4.96% | 31.11% |
+| v3.1 cc-by b3 | 1.02% | 0.41% | 1.85% | 21.33% |
+| v3.1 cc-by b7 | 0.00% | 0.82% | 3.92% | 28.15% |
+
+Parcels per band: under 20 m 196, 20 to 30 m 245, 30 to 50 m 867, 50 m up 675.
+
+| checkpoint | under 20 m | 20 to 30 m | 30 to 50 m | 50 m up |
+|---|---:|---:|---:|---:|
+| v1 full | 0.51% | 7.89% | 23.62% | 58.80% |
+| v1 cc-by | 0.46% | 4.96% | 15.63% | 37.96% |
+| v2 full | 0.23% | 4.48% | 18.79% | 54.68% |
+| v3 full b3 | 2.27% | 14.48% | 34.48% | 67.04% |
+| v3 full b7 | 3.61% | 20.26% | 40.98% | 71.69% |
+| v3.1 cc-by b3 | 1.34% | 6.43% | 20.63% | 40.08% |
+| v3.1 cc-by b7 | 2.13% | 13.51% | 27.13% | 49.97% |
+
+Parcels per band: under 20 m 2,163, 20 to 30 m 1,229, 30 to 50 m 1,740, 50 m up 1,699.
+
+The gain is on wider parcels. With B7, parcels 50 m and wider go from 7.11% to
+31.11% in India and those 30 to 50 m across from 0.58% to 4.96%. Under 30 m no
+checkpoint passes 1.22%. At equal width the countries still differ: 50 m and
+up, v3 B7 finds 31.11% in India and 71.69% in Slovenia.
+
+**Watershed and SAM still beat it on India, by less.** Every matched-budget
+comparison above was made at v1's object count. `src\budget_newer.py` reads
+watershed and SAM again at each later checkpoint's count. It was written after
+the checkpoint results were seen, and its own rules were committed before it
+ran. It first reproduced every published watershed and SAM figure to four
+places in both countries. SAM draws at most 222 objects per Indian chip and at
+least 72 per Slovenian one, so it often cannot reach the budget. It is then
+read at its nearest setting, and a verdict stands only when it favours the side
+drawing fewer objects. India first, then Slovenia:
+
+| checkpoint | objects/chip | FTW recall | method | read at | recall | minus FTW | reading |
+|---|---:|---:|---|---:|---:|---:|---|
+| v1 full | 175.0 | 2.72% | watershed | 175.0 | 10.74% | +8.01 [+6.28, +9.78] | method ahead |
+| v1 full | 175.0 | 2.72% | SAM colour infrared | 175.0 | 15.78% | +13.05 [+10.99, +15.26] | method ahead |
+| v1 full | 175.0 | 2.72% | SAM NIR-blue-green | 175.0 | 15.34% | +12.62 [+10.56, +14.66] | method ahead |
+| v1 full | 175.0 | 2.72% | SAM natural colour | 175.0 | 15.17% | +12.44 [+10.40, +14.57] | method ahead |
+| v1 full | 175.0 | 2.72% | SAM blue-green-red | 175.0 | 15.11% | +12.39 [+10.47, +14.48] | method ahead |
+| v3 full b3 | 223.3 | 10.29% | watershed | 223.3 | 13.71% | +3.43 [+1.83, +4.98] | method ahead |
+| v3 full b3 | 223.3 | 10.29% | SAM colour infrared | 222.4 | 18.31% | +8.02 [+6.03, +9.85] | method ahead, stands under P2 |
+| v3 full b3 | 223.3 | 10.29% | SAM NIR-blue-green | 212.6 | 17.25% | +6.96 [+5.10, +8.86] | method ahead, stands under P2 |
+| v3 full b3 | 223.3 | 10.29% | SAM natural colour | 194.6 | 16.69% | +6.40 [+4.53, +8.27] | method ahead, stands under P2 |
+| v3 full b3 | 223.3 | 10.29% | SAM blue-green-red | 184.5 | 15.63% | +5.35 [+3.53, +7.22] | method ahead, stands under P2 |
+| v3 full b7 | 245.3 | 12.91% | watershed | 245.3 | 14.83% | +1.92 [+0.21, +3.59] | method ahead |
+| v3 full b7 | 245.3 | 12.91% | SAM colour infrared | 222.4 | 18.31% | +5.40 [+3.38, +7.23] | method ahead, stands under P2 |
+| v3 full b7 | 245.3 | 12.91% | SAM NIR-blue-green | 212.6 | 17.25% | +4.34 [+2.42, +6.20] | method ahead, stands under P2 |
+| v3 full b7 | 245.3 | 12.91% | SAM natural colour | 194.6 | 16.69% | +3.78 [+1.97, +5.70] | method ahead, stands under P2 |
+| v3 full b7 | 245.3 | 12.91% | SAM blue-green-red | 184.5 | 15.63% | +2.72 [+0.81, +4.59] | method ahead, stands under P2 |
+| v3.1 cc-by b3 | 154.7 | 8.22% | watershed | 154.7 | 9.19% | +0.98 [-0.64, +2.66] | level |
+| v3.1 cc-by b3 | 154.7 | 8.22% | SAM colour infrared | 155.3 | 14.52% | +6.30 [+4.60, +8.26] | unresolved under P2 |
+| v3.1 cc-by b3 | 154.7 | 8.22% | SAM NIR-blue-green | 154.7 | 14.28% | +6.06 [+4.26, +7.74] | method ahead |
+| v3.1 cc-by b3 | 154.7 | 8.22% | SAM natural colour | 154.7 | 14.03% | +5.81 [+4.03, +7.50] | method ahead |
+| v3.1 cc-by b3 | 154.7 | 8.22% | SAM blue-green-red | 154.7 | 13.79% | +5.57 [+3.73, +7.42] | method ahead |
+| v3.1 cc-by b7 | 224.6 | 11.40% | watershed | 224.6 | 13.78% | +2.39 [+0.75, +3.98] | method ahead |
+| v3.1 cc-by b7 | 224.6 | 11.40% | SAM colour infrared | 222.4 | 18.31% | +6.91 [+5.09, +8.82] | method ahead, stands under P2 |
+| v3.1 cc-by b7 | 224.6 | 11.40% | SAM NIR-blue-green | 212.6 | 17.25% | +5.85 [+3.95, +7.77] | method ahead, stands under P2 |
+| v3.1 cc-by b7 | 224.6 | 11.40% | SAM natural colour | 194.6 | 16.69% | +5.30 [+3.43, +7.20] | method ahead, stands under P2 |
+| v3.1 cc-by b7 | 224.6 | 11.40% | SAM blue-green-red | 184.5 | 15.63% | +4.24 [+2.32, +6.16] | method ahead, stands under P2 |
+
+| checkpoint | objects/chip | FTW recall | method | read at | recall | minus FTW | reading |
+|---|---:|---:|---|---:|---:|---:|---|
+| v1 full | 19.5 | 22.22% | watershed | 19.5 | 5.93% | -16.29 [-19.32, -13.16] | FTW ahead |
+| v1 full | 19.5 | 22.22% | SAM colour infrared | 73.8 | 21.21% | -1.01 [-3.58, +1.50] | level |
+| v1 full | 19.5 | 22.22% | SAM NIR-blue-green | 72.7 | 20.63% | -1.60 [-4.08, +0.83] | level |
+| v1 full | 19.5 | 22.22% | SAM natural colour | 85.9 | 25.72% | +3.50 [+1.10, +5.93] | unresolved under P2 |
+| v1 full | 19.5 | 22.22% | SAM blue-green-red | 78.8 | 23.38% | +1.16 [-1.31, +3.70] | level |
+| v3 full b3 | 19.3 | 28.78% | watershed | 19.3 | 5.86% | -22.92 [-26.33, -19.60] | FTW ahead |
+| v3 full b3 | 19.3 | 28.78% | SAM colour infrared | 73.8 | 21.21% | -7.57 [-10.17, -4.92] | FTW ahead, stands under P2 |
+| v3 full b3 | 19.3 | 28.78% | SAM NIR-blue-green | 72.7 | 20.63% | -8.15 [-10.72, -5.58] | FTW ahead, stands under P2 |
+| v3 full b3 | 19.3 | 28.78% | SAM natural colour | 85.9 | 25.72% | -3.06 [-5.40, -0.64] | FTW ahead, stands under P2 |
+| v3 full b3 | 19.3 | 28.78% | SAM blue-green-red | 78.8 | 23.38% | -5.40 [-7.96, -2.90] | FTW ahead, stands under P2 |
+| v3 full b7 | 20.5 | 33.06% | watershed | 20.5 | 6.27% | -26.78 [-30.17, -23.22] | FTW ahead |
+| v3 full b7 | 20.5 | 33.06% | SAM colour infrared | 73.8 | 21.21% | -11.84 [-14.51, -9.15] | FTW ahead, stands under P2 |
+| v3 full b7 | 20.5 | 33.06% | SAM NIR-blue-green | 72.7 | 20.63% | -12.43 [-15.09, -9.77] | FTW ahead, stands under P2 |
+| v3 full b7 | 20.5 | 33.06% | SAM natural colour | 85.9 | 25.72% | -7.33 [-9.93, -4.72] | FTW ahead, stands under P2 |
+| v3 full b7 | 20.5 | 33.06% | SAM blue-green-red | 78.8 | 23.38% | -9.68 [-12.38, -6.80] | FTW ahead, stands under P2 |
+| v3.1 cc-by b3 | 12.1 | 16.81% | watershed | 12.1 | 3.44% | -13.37 [-16.57, -10.08] | FTW ahead |
+| v3.1 cc-by b3 | 12.1 | 16.81% | SAM colour infrared | 73.8 | 21.21% | +4.41 [+1.48, +7.66] | unresolved under P2 |
+| v3.1 cc-by b3 | 12.1 | 16.81% | SAM NIR-blue-green | 72.7 | 20.63% | +3.82 [+0.97, +6.64] | unresolved under P2 |
+| v3.1 cc-by b3 | 12.1 | 16.81% | SAM natural colour | 85.9 | 25.72% | +8.92 [+6.31, +11.86] | unresolved under P2 |
+| v3.1 cc-by b3 | 12.1 | 16.81% | SAM blue-green-red | 78.8 | 23.38% | +6.57 [+3.80, +9.73] | unresolved under P2 |
+| v3.1 cc-by b7 | 15.2 | 22.44% | watershed | 15.2 | 4.49% | -17.95 [-21.28, -14.30] | FTW ahead |
+| v3.1 cc-by b7 | 15.2 | 22.44% | SAM colour infrared | 73.8 | 21.21% | -1.23 [-4.03, +1.89] | level |
+| v3.1 cc-by b7 | 15.2 | 22.44% | SAM NIR-blue-green | 72.7 | 20.63% | -1.82 [-4.63, +0.96] | level |
+| v3.1 cc-by b7 | 15.2 | 22.44% | SAM natural colour | 85.9 | 25.72% | +3.28 [+0.40, +6.00] | unresolved under P2 |
+| v3.1 cc-by b7 | 15.2 | 22.44% | SAM blue-green-red | 78.8 | 23.38% | +0.94 [-1.88, +4.02] | level |
+
+- **India.** At v3 B7's 245 objects per chip, watershed is ahead by 1.92
+  points, interval +0.21 to +3.59, and SAM on colour infrared by 5.40 from 222
+  objects. Against v1 the same margins were 8.01 and 13.05. Against v3.1 cc-by
+  B3 watershed is level. SAM on colour infrared is unresolved there, since its
+  nearest setting draws 155.3 objects against FTW's 154.7.
+- **Slovenia.** v3 B7 beats watershed by 26.78 points and every SAM composite
+  by 7.33 to 12.43, drawing 20.5 objects per chip against SAM's 72.7 to 85.9,
+  so that verdict stands. Against v1, SAM was level there or unresolved. v3.1
+  cc-by B7, which probably did not see Slovenia, is level with three SAM
+  composites and unresolved against the fourth.
+
+So the pattern this study describes holds with the best public checkpoint. On
+India an untrained method beats the trained model at the same object count,
+and on Slovenia it loses. What changed is the size: the trained model's Indian
+deficit is now a few points where it was a factor of five, and the country gap
+is a factor of about two and a half where it was eight.
+
+*Source: `newer_checkpoints*.csv` and `budget_newer.csv` in `results/`, with
+the per-chip files in `results/<country>/newer_ckpt/` and
+`results/<country>/watershed_chips_min500.csv`.*
+
 **Above the floor, the method is the lever.** Between three and ten native
 pixels an untrained watershed finds between five and thirteen times as many
-Indian parcels as the released checkpoint, and above ten pixels SAM finds three
-times as many. Whatever is stopping FTW there is not a lack of signal.
+Indian parcels as the v1 checkpoint, and above ten pixels SAM finds three
+times as many. Whatever is stopping FTW there is not a lack of signal, and its
+v3 checkpoint recovers part of that ground (finding 18).
 
 **The advice that follows differs by parcel size.** For Indian ground where
 fields are under about 30 m across, nothing in this study recovers them at a
 usable rate and the honest answer is that the problem is open. For ground above
-that, the model is the lever and the released checkpoint is leaving a great deal
-on the table. For large fields specifically, SAM at 50.79% is the first result
+that, the model is the lever: the v1 checkpoint left a great deal on the table
+and v3 recovers part of it. For large fields specifically, SAM at 50.79% is the first result
 in this project that a product could be built on.
 
 ---
@@ -1009,7 +1212,11 @@ as a curiosity.
 
 **That the Slovenian margin is quantified.** Three of the five figures at
 Slovenia's object budget are clamped. Watershed has been measured there;
-felzenszwalb and SAM have not. See B-08.
+felzenszwalb and SAM have not. See B-08. Against v3, SAM loses while drawing
+more objects, so v3's margin over SAM there does stand (finding 19).
+
+**That v3 is the best FTW can do.** Only its B3 and B7 encoders were run. B5
+and the standard-weight variants were not, and nothing here was fine-tuned.
 
 ---
 
@@ -1269,6 +1476,22 @@ looks bands up by their names in the file, through `ftw_common.band_index`.
 Found while checking how a December to February image could be matched to
 FTW's chips.
 
+**B-24. The checkpoint tested was called the released state of the art after
+FTW had replaced it.** Every FTW figure in stages 2 and 2b came from the v1
+release of October 2024. FTW published v2 in September 2025 and v3 in November
+2025, before this work began, and its own tools now list v1 as legacy.
+`RESULTS.md` called v1 the current open state of the art, and the README and
+its citation called it the released state of the art. On India v3 finds 12.91%
+against v1's 2.72%. The comparison and its controls stand, and the headline is
+now stated against v3 (findings 18 and 19). Found while checking what FTW
+reports for India with and without fine-tuning.
+
+**B-25. The data licence was given as CC BY 4.0 for all of FTW.** FTW's dataset
+page lists a licence for each country's source labels, and FTW's README for the
+Slovenian labels gives CC-BY-SA-4.0. The FULL checkpoints also carry the terms
+of the noncommercial datasets they were trained on. The README's data table
+and Reproducing below now say so. No number changes.
+
 ---
 
 ## Known gaps
@@ -1333,6 +1556,13 @@ costs FTW about two points of recall, a real effect and a small one. An image
 from December to February was built for every chip in two seasons and does no
 better than a second kharif image (finding 17). SAM on window_b was skipped
 because watershed answers the same question.
+
+**FTW's later checkpoints, now tested.** Seven checkpoints from v1 to v3.1
+were run on every test chip, and watershed and SAM were read again at their
+object counts (findings 18 and 19). v3 B5 and the standard-weight variants were
+not run. No checkpoint was fine-tuned on India. FTW's own Table 5 reports a
+model trained without India moving from 0.14 to 0.19 object recall when
+fine-tuned on it, in FTW's scoring.
 
 **The parcel reconstruction, now bounded.** FTW ships each parcel as an eroded
 interior and a separate boundary class, and `ftw_common.full_fields` gives each
@@ -1427,9 +1657,9 @@ exactly on 100 chips. No reported number depends on which interpreter wrote it.
 
 ## Reproducing
 
-Open data throughout. Field labels and imagery from Fields of The World under
-CC BY 4.0, the FTW released checkpoints, and the Meta SAM checkpoint under
-Apache 2.0. District polygons from geoBoundaries under CC BY 4.0. The
+Open data throughout. Field labels and imagery from Fields of The World, under
+the licence FTW lists for each country (B-25), FTW's released checkpoints from
+v1 to v3.1, and the Meta SAM checkpoint under Apache 2.0. District polygons from geoBoundaries under CC BY 4.0. The
 December to February images are Copernicus Sentinel-2 L2A scenes read from
 Microsoft's Planetary Computer, listed scene by scene in `rabi_scenes.csv`.
 
@@ -1463,6 +1693,11 @@ python src\rabi_download.py --season 2016-17
 python src\rabi_download.py --season 2015-16
 python src\rabi_test.py --season 2016-17
 python src\rabi_test.py --season 2015-16
+python src\newer_checkpoints.py --part download
+python src\newer_checkpoints.py --part run
+python src\newer_checkpoints.py --part report
+python src\budget_newer.py --part watershed
+python src\budget_newer.py --part report
 python src\precision.py --country india --method ftw
 python src\precision.py --country india --method watershed --setting 0.02
 python src\precision.py --country slovenia --method ftw
@@ -1485,7 +1720,8 @@ classical sweep. SAM is about 16 hours for India and 10 for Slovenia across both
 composites, at roughly 75 seconds per chip per composite, and `sam_run.py`
 appends as it goes so an interrupted run resumes. `season_test.py` takes about
 ten minutes per country, `rabi_download.py` 30 to 60 minutes a season and
-`rabi_test.py` about 15. `build_comparison.py` takes
+`rabi_test.py` about 15, `newer_checkpoints.py` about 20 for seven
+checkpoints and `budget_newer.py` about 5. `build_comparison.py` takes
 seconds and reads only the CSVs.
 
 Outputs land in `results/<country>/`:
@@ -1519,10 +1755,14 @@ Outputs land in `results/<country>/`:
 | `rabi_match.csv` | India only: FTW's chips rebuilt from every archive scene tried |
 | `rabi_scenes.csv` | India only: the rabi scene used per chip, with its chip cloud |
 | `rabi_test_<season>_*.csv` | India only: FTW and watershed given the rabi image |
+| `newer_ckpt/<checkpoint>_chips.csv` | per chip, each FTW checkpoint's parcels, hits, objects and null |
+| `newer_ckpt/<checkpoint>_parcels.csv` | per parcel IoU and width for each checkpoint |
+| `watershed_chips_min500.csv` | per chip, watershed hits and objects at every setting to h 0.6 |
 | `probe/` | the 5-chip ViT-B timing probe that chose ViT-H |
 
 `shape_test.csv` and `shape_test_bands.csv` sit in `results/` itself, since
-they compare the two countries.
+they compare the two countries, and so do `newer_checkpoints.csv`, its
+`_changes`, `_gap` and `_widths` tables, and `budget_newer.csv`.
 
 Filenames carrying a setting, such as `parcel_width_seg_watershed_0p02_min500.csv`,
 are the ones to cite. The short forms without a setting hold whichever setting

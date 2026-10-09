@@ -18,7 +18,13 @@ inference or unexplained, it says so.
 runs FTW's published method against it. `COMPARISON.md` puts two classical
 methods and a foundation model beside that checkpoint over the same chips, and
 that is where the current headline numbers live. A technical review of all
-three documents is in `REVIEW.md`. The gaps it found that change how these
+three documents is in `REVIEW.md`.
+
+The checkpoint run here is FTW's v1 release of October 2024. FTW had published
+v2 and v3 before this stage was written, so calling v1 the current open state
+of the art below was wrong (B-24 in `COMPARISON.md`). v3 finds 12.91% of Indian
+parcels against v1's 2.72%. Findings 18 and 19 in `COMPARISON.md` carry the
+later checkpoints. The gaps it found that change how these
 numbers should be read are listed under Known gaps in `COMPARISON.md`.
 
 ---
@@ -340,7 +346,8 @@ than recall.
 **O-05. No fine-tuning has been attempted.** The published checkpoint is what
 anyone would pick up, so what it does untouched is the honest thing to report
 first. FTW's own Table 5 shows fine-tuning moving India's object recall from
-0.14 to 0.19, so it helps and does not transform.
+0.14 to 0.19, so it helps and does not transform. FTW's later checkpoints,
+untouched, are in `COMPARISON.md` findings 18 and 19.
 
 **O-06. Licensing cuts against the better model.** The FULL checkpoint trains
 on Latvia, Portugal, South Africa and Lithuania, whose labels are CC-BY-NC or

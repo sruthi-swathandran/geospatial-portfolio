@@ -14,31 +14,36 @@ ground and shows what each method found on it.
 
 ## What holds
 
-**1. On India the method fails, and the imagery carries more than it finds.**
-The released FTW checkpoint recovers 2.7% of labelled Indian parcels. Read at
-the same object count the checkpoint emits, 175 per chip, methods never trained
-on a field boundary do better:
+**1. On India, methods never trained on a field boundary still beat FTW.**
+The best public FTW checkpoint, v3 with an EfficientNet-B7 encoder, recovers
+12.9% of labelled Indian parcels. Read at the same object count it emits, 245
+per chip, watershed and SAM do better:
 
-| method, India, at 175 objects per chip | recall |
+| method, India, at v3 B7's 245 objects per chip | recall |
 |---|---:|
-| SAM ViT-H, colour infrared | 0.158 |
-| watershed | 0.107 |
-| felzenszwalb | 0.031 |
-| FTW 3-class checkpoint | 0.027 |
+| SAM ViT-H, colour infrared, read at 222 objects | 18.31% |
+| watershed | 14.83% |
+| FTW v3, EfficientNet-B7 | 12.91% |
 
-SAM on natural colour reaches 0.152. Its first run was given the wrong bands,
-because the code took FTW's band order to start with blue, and reached 0.153
-and 0.151. Rerun on the composites intended, the result barely moved (B-23).
+SAM cannot draw more than 222 objects per Indian chip, so it is read there,
+with fewer objects than FTW, and its lead of 5.40 points stands. Watershed's
+lead is 1.92 points, with an interval from +0.21 to +3.59.
 
-The checkpoint barely clears chance. Random Voronoi cells at the same count,
-which never see the imagery, average 0.0209 over 200 draws, and 3 of those 200
-draws beat it.
+This project first tested FTW's v1 checkpoint of October 2024 and called it the
+released state of the art, after FTW had replaced it (B-24). v1 recovers 2.7%.
+At its 175 objects per chip SAM reached 0.158, watershed 0.107 and
+felzenszwalb 0.031, and random Voronoi cells at the same count, which never see
+the imagery, beat v1 in 3 of 200 draws. SAM's figures are on the composites
+intended; its first run used the wrong bands and moved by half a point when
+corrected (B-23).
 
-**2. On Slovenia the same checkpoint works.** It recovers 22.2% of parcels from
-20 objects per chip, and 42.1% of the objects it emits match a real parcel,
-against 4.4% for watershed. Slovenia has a complete cadastre, so that is
-precision. Read at the same 20 objects per chip, watershed recovers 5.9%. FTW
-is a good model failing on India.
+**2. On Slovenia FTW works, and v3 works better.** v3 B7 recovers 33.1% of
+parcels from 20.5 objects per chip. It beats every SAM composite, at 21.2% to
+25.7%, though SAM draws 73 to 86 objects, and watershed at the same 20.5
+objects recovers 6.3%. v1 recovered 22.2% from 20 objects, and 42.1% of the
+objects it emits match a real parcel, against 4.4% for watershed. Slovenia has
+a complete cadastre, so that is precision. FTW is a good model failing on
+India.
 
 **3. Resolution does not explain the Indian failure.** Both countries are the
 same 10 m Sentinel-2. If the imagery set the limit, a parcel of a given ground
@@ -46,9 +51,9 @@ width would be found about as often in each. It is not:
 
 | ground width | method | India | Slovenia | ratio |
 |---|---|---:|---:|---:|
-| 20 to 30 m | FTW | 0.41% | 7.89% | 19.3x |
-| 30 to 50 m | FTW | 0.58% | 23.62% | 41.0x |
-| 50 m up | FTW | 7.11% | 58.80% | 8.3x |
+| 20 to 30 m | FTW v1 | 0.41% | 7.89% | 19.3x |
+| 30 to 50 m | FTW v1 | 0.58% | 23.62% | 41.0x |
+| 50 m up | FTW v1 | 7.11% | 58.80% | 8.3x |
 | 30 to 50 m | watershed | 22.49% | 47.64% | 2.1x |
 | 50 m up | watershed | 41.33% | 71.10% | 1.7x |
 | 30 to 50 m | SAM ViT-H natural colour | 9.23% | 34.48% | 3.7x |
@@ -56,13 +61,15 @@ width would be found about as often in each. It is not:
 
 Slovenia wins every band by every method, 1.7 to 41.0 times. Its labelled
 parcels are also narrower than India's, 30.4 m against 42.3 m at the median.
+FTW v3 B7 narrows the ratios and keeps the order: about 17 times at 20 to 30 m,
+8 at 30 to 50 m and 2.3 at 50 m up.
 
 **4. Neither do the Indian labels.** India's labels are hand-drawn, five per
 chip. Measured against the image gradient, among parcels over 50 m across they
 sit closer to the visible edge than Slovenia's, +1.81 m against +2.23 m, and
 India is still found 8.3 times less often.
 
-**5. The checkpoint misses Indian parcels.** It puts no object at all on 74.4%
+**5. The v1 checkpoint misses Indian parcels.** It puts no object at all on 74.4%
 of them. SAM, spending a similar budget on 100 test chips, reaches 91.3% of
 labelled parcels where FTW reaches 24.7%, measured on its first run's inputs.
 On the largest Indian fields, over about 100 m across, SAM recovers 50.8%
@@ -70,26 +77,31 @@ against FTW's 17.5%, the one result here close to practical use.
 
 **6. Nor does parcel shape.** Slovenian parcels are more strip-like than
 India's. Given India's mix of widths and shapes, Slovenia is still found 10.7
-times as often by FTW, against 11.5 times when only widths are matched.
+times as often by FTW v1, against 11.5 times when only widths are matched.
 
 **7. Nor does the season, beyond a small part.** FTW's second image for India
 is from March to June, the dry months after the rabi harvest, and it works
-against the checkpoint. Given the kharif image twice instead, FTW finds 4.79%
+against the v1 checkpoint. Given the kharif image twice instead, FTW finds 4.79%
 of Indian parcels against 2.72%. An image from December to February, when
 rabi crops are standing, helps by the same amount and no more, in both rabi
 seasons tested. The best arrangement still leaves India about four times
 below Slovenia.
 
-**What is still open** is why the checkpoint does not read Indian field edges.
-Width, shape, label placement and season are each measured and none explains
-the gap. The labelled Indian boundaries carry a weaker image gradient than
+**8. FTW's own later training is the largest change measured.** v3 lifts India
+from 2.7% to 12.9%, and nearly all of that gain is above its null, so it comes
+from better placed boundaries. India rises from 0.12 to 0.39 of Slovenia with
+the same checkpoint. The gain is on parcels 30 m and wider; below that every
+checkpoint stays near 1%.
+
+**What is still open** is why even v3 reads Indian field edges so much worse
+than Slovenian ones. Width, shape, label placement and season each explain
+little. The labelled Indian boundaries carry a weaker image gradient than
 Slovenia's, 1.297 times their interior against 1.588, but a blind check
-against one analyst agreed with that measure only weakly. Given the rabi image
-alone, FTW does no better than as shipped while watershed finds about as many
-boundaries in it as in kharif, so the edges are in the imagery and the model
-does not use them. India was in the checkpoint's training data, which makes
-that harder to explain, and retraining on Indian chips is the test not yet
-run.
+against one analyst agreed with that measure only weakly. Watershed finds
+about as many boundaries in the December to February image as in kharif,
+while v1 given that image does no better, so the edges are in the imagery.
+No checkpoint has been fine-tuned on Indian chips here. FTW reports fine-tuning
+a model trained without India moving it from 0.14 to 0.19 in its own scoring.
 
 ![Recall against objects emitted per chip](figures/recall_by_object_budget.png)
 
@@ -111,9 +123,15 @@ is applied to every method. `COMPARISON.md` explains each control.
 - **Indian labels are presence-only.** Five parcels per chip are drawn and
   98.96% of each chip carries no label, so India gives recall and only a floor
   on precision.
-- **Most Slovenian figures at the budget are bounds.** Watershed has been
-  measured there. Felzenszwalb and SAM were not run coarse enough to reach 20
-  objects per chip.
+- **Against v1, most Slovenian figures at the budget are bounds.** Watershed
+  has been measured there. Felzenszwalb and SAM were not run coarse enough to
+  reach 20 objects per chip. Against v3, SAM loses while drawing more objects,
+  so that comparison stands.
+- **The figures, the interactive map and most tables show FTW v1.** The later
+  checkpoints are in findings 18 and 19 of `COMPARISON.md`.
+- **FTW's FULL checkpoints carry noncommercial terms** from some of their
+  training labels. v3.1 is the CC-BY version, and it probably did not see
+  Slovenia, which flatters its India to Slovenia ratio.
 - **The parcel reconstruction is bounded, not validated.** FTW erodes each
   parcel's edge and this project gives it back. Varying that step moves no
   recall by more than 0.0017, but it has never been checked against
@@ -124,8 +142,9 @@ is applied to every method. `COMPARISON.md` explains each control.
 - **Settings were chosen on the data they are reported from.** Measured on 40
   held-out splits, that is worth at most 0.0066 of recall.
 - **Intervals resample whole chips**, since parcels in one chip share a scene.
-  FTW's headline figures are 2.72% [1.71, 3.88] in India and 22.22%
-  [18.56, 25.88] in Slovenia.
+  FTW v1's headline figures are 2.72% [1.71, 3.88] in India and 22.22%
+  [18.56, 25.88] in Slovenia, and v3 B7's 12.91% [10.66, 15.08] and 33.06%
+  [29.00, 36.73].
 
 ---
 
@@ -135,7 +154,7 @@ is applied to every method. `COMPARISON.md` explains each control.
 assistant, Claude. It is not independent peer review. It lists 21 findings,
 and every one is now closed or scoped with the reason stated.
 
-`COMPARISON.md` carries 23 corrections, B-01 to B-23, each with the published
+`COMPARISON.md` carries 25 corrections, B-01 to B-25, each with the published
 value, the corrected one and why the first was wrong. The largest: FTW ships Slovenia on pixels 4.14 m across and 6.00 m
 tall, and treating them as square had overstated the cross-country gap by up to
 forty per cent. The conclusion survived the correction.
@@ -154,7 +173,8 @@ Open data only. Nothing here comes from any private, client or internal source.
 
 | source | what | licence |
 |---|---|---|
-| [Fields of The World](https://source.coop/kerner-lab/fields-of-the-world) | chips, labels, released checkpoints | CC-BY-4.0 |
+| [Fields of The World](https://source.coop/kerner-lab/fields-of-the-world) | chips and labels | per country, listed on that page; Slovenia's labels CC-BY-SA-4.0 (B-25) |
+| [FTW baseline checkpoints](https://github.com/fieldsoftheworld/ftw-baselines/releases), v1 to v3.1 | the trained models | CC-BY-4.0 for the CC-BY checkpoints; the FULL ones carry the terms of their noncommercial training data |
 | Copernicus Sentinel-2 | the imagery behind the chips | Copernicus / ESA terms |
 | Copernicus Sentinel-2 L2A via [Microsoft Planetary Computer](https://planetarycomputer.microsoft.com/) | the December to February images | Copernicus / ESA terms |
 | [Segment Anything](https://github.com/facebookresearch/segment-anything) | SAM ViT-H checkpoint | Apache 2.0 |
@@ -191,7 +211,7 @@ the Fields of The World benchmark.
 Suggested citation:
 
 > Swathandran, S. (2026). *Field boundaries for Indian smallholdings from
-> Sentinel-2: what the released state of the art recovers, and what an untrained
+> Sentinel-2: what the published model recovers, and what an untrained
 > baseline recovers beside it.*
 > github.com/sruthi-swathandran/geospatial-portfolio
 

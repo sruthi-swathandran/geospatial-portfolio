@@ -1,7 +1,7 @@
 {
- "written_at": "2026-10-08T11:07:32+00:00",
+ "written_at": "2026-10-09T10:28:41+00:00",
  "git": {
-  "commit": "c4f34c32e87f1ebeb3f91618e752788e0fdf6bc5",
+  "commit": "7aa11291e64f9c6406547bdcf2d4f38427378255",
   "uncommitted_changes": true
  },
  "interpreter": {
@@ -110,6 +110,11 @@
    "sha256": "805cc73e218195cdb32ccfdf5d04feb9d9f2098aa0180521de78357cc6319bfd"
   },
   {
+   "file": "3_Class_FULL_FTW_Pretrained_v2.ckpt",
+   "bytes": 204472351,
+   "sha256": "8d44562829ffc1d3d8a7cca29831ee214be8e0c592f9a35014bd30380f416342"
+  },
+  {
    "file": "3class_ccby.ckpt",
    "bytes": 204471122,
    "sha256": "d04671c498c181a2bca4b9c1a82fb8dcc93384eaf55841cb6672692f6fb21d3c"
@@ -118,6 +123,26 @@
    "file": "3class_full.ckpt",
    "bytes": 204471058,
    "sha256": "22d9075e53c016532780c4d94b9cf3c1106754639ca0a1373506650590ca6ca8"
+  },
+  {
+   "file": "prue_efnet3_checkpoint.ckpt",
+   "bytes": 53239115,
+   "sha256": "9021b02e54ccf13d71b78b0ff16e6c75b6970007d6d2f74d3518beba36cd4e43"
+  },
+  {
+   "file": "prue_efnet7_checkpoint.ckpt",
+   "bytes": 270119641,
+   "sha256": "2b1b34a17b85b8f70da6ff737529743b6bc6049e987bce5a1fcdd7279eb3b120"
+  },
+  {
+   "file": "prue_efnetb3_ccby_checkpoint.ckpt",
+   "bytes": 53242827,
+   "sha256": "cd51f020168e66ddd1eff501e81da347b39632af34bebf19a6a20d6c73c5a6d4"
+  },
+  {
+   "file": "prue_efnetb7_ccby_checkpoint.ckpt",
+   "bytes": 270127109,
+   "sha256": "3eb7624d22262915c82bc3e9bd56d27ea776a6b837df950da87a228c65c4228e"
   },
   {
    "file": "sam_vit_b_01ec64.pth",
@@ -135,6 +160,11 @@
    "script": "bootstrap_ci.py",
    "line": 121,
    "value": 20260922
+  },
+  {
+   "script": "budget_newer.py",
+   "line": 355,
+   "value": 20261011
   },
   {
    "script": "build_comparison.py",
@@ -165,6 +195,11 @@
    "script": "label_registration.py",
    "line": 305,
    "value": 11
+  },
+  {
+   "script": "newer_checkpoints.py",
+   "line": 605,
+   "value": 20261010
   },
   {
    "script": "null_strength.py",
@@ -198,9 +233,28 @@
   }
  ],
  "outputs": {
+  "results/budget_newer.csv": {
+   "kind": "csv",
+   "rows": 50,
+   "columns": {
+    "country": "d3a09e0b2b0e7761a69ee21c943aafe04b0100ec496e589b020dff8da8da7085",
+    "checkpoint": "e3e2ef0994386be6a673a41d8884818f5b6f96a14c7744db243da5a1ec7f8420",
+    "budget": "7017772959229988f73f76a1111b721426e4d6584b69820b85741beab1babcb5",
+    "ftw_recall": "c003bdc24623b6aa39749b4d12aed34f53d0c6a7e9a37c623307b944c1f50e8f",
+    "method": "0cc6c0f76399897cc6a2bb54d8724b881f8ad7b039e783dfffc83d1145ac2704",
+    "objects_used": "4e2edbbd4214ca75232d99050e0d16697b53f3cb3a1852c396618359c68d79e0",
+    "clamped": "5e5c1c5889f3cfae90ea9f7cb2a74f0ec1385906e61fbfb659ac11a08be48de8",
+    "recall_at_budget": "cf4a834954dc3b5ab6a51bc55b4726469a2efe4f0bcd4fc0e09a0a7df7bc46ad",
+    "minus_ftw": "ecfec5263f5d930ec0aab2da690cdafba7abaadd13ea500e8d59d3abc0317c53",
+    "lo": "e3635749e899259f281936947320ac4e3e56cedbfb6a1328b31200d573c70c4b",
+    "hi": "a4a37d1c48d0c39846a6ca45d8f07accf7e100509144b6f4cdcab6ce19423154",
+    "reading": "b8f23b747c4b0ad89f486f075344ab9626da41d15b2173959f801126a25af51a",
+    "headline": "428b490fc72ec37b4b80ee7782fec0ee9f183f6b9fe91b6ee8ee78cccc44da6b"
+   }
+  },
   "results/comparison_tables.md": {
    "kind": "file",
-   "sha256": "91f4fb65e6a72630cf8e4fa6f745eb49bfa23470821e561857f2df8c0fc2be89"
+   "sha256": "b3a60bb7747afb60257601fa949e82cd95827183faf1d6214a8409c6f08f1d49"
   },
   "results/country_comparison.csv": {
    "kind": "csv",
@@ -406,6 +460,174 @@
     "ring_+18m": "d52b8e1eb81c230f008ec160ef5e67277de9e5bb27f9732937f21ae7e7525ec1",
     "null_offset_m": "328fffec270311169496be374921982d418c0225797fbe417fa5ad818c5932e1",
     "null_gain": "dc3d69384a301359642455584581c4e7934fc8e06c644d90637c7e4a93fbd930"
+   }
+  },
+  "results/india/newer_ckpt/v1_cc-by_chips.csv": {
+   "kind": "csv",
+   "rows": 399,
+   "columns": {
+    "chip": "6f136833b4ef7f2698106b8896e6badf908aabb5773d97e4c1d5fb5b018a03f1",
+    "parcels": "edba592fc7ec6658be423fa75ed97ecf70269a93685a9c8d7c060f71c8ae2df2",
+    "hits": "81b223e0efd665cfe4f98cb3563a1f3f2bdbb7fdd6aca5a184e99d925e8dc964",
+    "objects": "ecb7c3a1891459e9927beac19388695bd2eb4e12377c96634e73781b34cf741d",
+    "null_hits": "5785f54b758767afb8343ad7dae90a124d6a9d7ed30bb82b660cdfdd29c781b0",
+    "px_differ_published": "2a662cc78f08882091388170f057981d631496ee918e71e84cbc65d70d6f2a1d",
+    "px_total": "c6c60e008c19f8f87b990752a76bab740ec9d9867c5ee4bc535ef9f3a592e781"
+   }
+  },
+  "results/india/newer_ckpt/v1_cc-by_parcels.csv": {
+   "kind": "csv",
+   "rows": 1983,
+   "columns": {
+    "chip": "3119c5c12138f5ddbf868a2530a1e67bef91bb9fc0301fb987687706c59dae82",
+    "parcel_id": "787b3fb54ac0b06c77b791ede2adb2916121428149bf719186217465cbf70348",
+    "width_m": "ed93d79c44e316532262b3f03f98a378bac5a6efe971b61046c376ed4120c46b",
+    "best_iou": "b5f55627922a6ccd6a39a6f824a047edb363a573a57b2659a98e6533b10a2b3d",
+    "found": "888c8af86368e7c286b2ea082f3c1ad97d7bfd577a7214a24fa1f44e1a44641b"
+   }
+  },
+  "results/india/newer_ckpt/v1_full_chips.csv": {
+   "kind": "csv",
+   "rows": 399,
+   "columns": {
+    "chip": "6f136833b4ef7f2698106b8896e6badf908aabb5773d97e4c1d5fb5b018a03f1",
+    "parcels": "edba592fc7ec6658be423fa75ed97ecf70269a93685a9c8d7c060f71c8ae2df2",
+    "hits": "6f84e7c37c0ac4b182151029261c9b6061f43064c94bbfb162bebb6992b60b01",
+    "objects": "e8b01941e4335850e7629118fa39a94871fe0b61cbb0013d679eea76a172ff2d",
+    "null_hits": "f52ead5a7af07103fe770d1b4f7b0b7e40047c3c3658afae075476bc79cd2349",
+    "px_differ_published": "e564dd5d2bc45ca1f7def28c3895efc3a3f90fb00fca0a0e4985c3573829344f",
+    "px_total": "c6c60e008c19f8f87b990752a76bab740ec9d9867c5ee4bc535ef9f3a592e781"
+   }
+  },
+  "results/india/newer_ckpt/v1_full_parcels.csv": {
+   "kind": "csv",
+   "rows": 1983,
+   "columns": {
+    "chip": "3119c5c12138f5ddbf868a2530a1e67bef91bb9fc0301fb987687706c59dae82",
+    "parcel_id": "787b3fb54ac0b06c77b791ede2adb2916121428149bf719186217465cbf70348",
+    "width_m": "ed93d79c44e316532262b3f03f98a378bac5a6efe971b61046c376ed4120c46b",
+    "best_iou": "3793d5115c22904c7fb161dca2749a52e7306382629ad62bf6106205b1931724",
+    "found": "93ca5f6e5508023c465142e76a2f534d90befc9ce8d41f94a45c6392c1681d4f"
+   }
+  },
+  "results/india/newer_ckpt/v2_full_chips.csv": {
+   "kind": "csv",
+   "rows": 399,
+   "columns": {
+    "chip": "6f136833b4ef7f2698106b8896e6badf908aabb5773d97e4c1d5fb5b018a03f1",
+    "parcels": "edba592fc7ec6658be423fa75ed97ecf70269a93685a9c8d7c060f71c8ae2df2",
+    "hits": "aef53e66437952f590c3b91f6f2bff37a9dc46089faa4f529feb9c57ee998aef",
+    "objects": "c7ea8dc543e5c9ed1ea45b3293869d9d95efa35780ce9897dee5ab7c4db5299d",
+    "null_hits": "eca3bae84a32a9707d236ce2a127feec0b8c5933e1a1d65cbab2a6ca07bc14da",
+    "px_differ_published": "6066e621349901fbeccec5d72bf09d991a52ad2cbf3b65cdc40cc3d7457b9b01",
+    "px_total": "6066e621349901fbeccec5d72bf09d991a52ad2cbf3b65cdc40cc3d7457b9b01"
+   }
+  },
+  "results/india/newer_ckpt/v2_full_parcels.csv": {
+   "kind": "csv",
+   "rows": 1983,
+   "columns": {
+    "chip": "3119c5c12138f5ddbf868a2530a1e67bef91bb9fc0301fb987687706c59dae82",
+    "parcel_id": "787b3fb54ac0b06c77b791ede2adb2916121428149bf719186217465cbf70348",
+    "width_m": "ed93d79c44e316532262b3f03f98a378bac5a6efe971b61046c376ed4120c46b",
+    "best_iou": "655da6df63b36cafbe93a08b490572db1121969610bbe3659c661d70db28302e",
+    "found": "56dd1e57c7d93b14ef09cf18b64e624851b9a20be5755b673d5569dcf53f56b4"
+   }
+  },
+  "results/india/newer_ckpt/v31_cc-by_b3_chips.csv": {
+   "kind": "csv",
+   "rows": 399,
+   "columns": {
+    "chip": "6f136833b4ef7f2698106b8896e6badf908aabb5773d97e4c1d5fb5b018a03f1",
+    "parcels": "edba592fc7ec6658be423fa75ed97ecf70269a93685a9c8d7c060f71c8ae2df2",
+    "hits": "934e7bdec2f51f4ce9a70f4ac8b9e2f71daa6d5a8f04afb35b2b6c385460a948",
+    "objects": "a5b9fc256c34178c94a8d5656866a617e155c9949bbc7d62262d74bf488659a4",
+    "null_hits": "44dcbad2903549bb424776fcf6f3c7dd7be9ca0a4de0165b23b114cb054b280a",
+    "px_differ_published": "6066e621349901fbeccec5d72bf09d991a52ad2cbf3b65cdc40cc3d7457b9b01",
+    "px_total": "6066e621349901fbeccec5d72bf09d991a52ad2cbf3b65cdc40cc3d7457b9b01"
+   }
+  },
+  "results/india/newer_ckpt/v31_cc-by_b3_parcels.csv": {
+   "kind": "csv",
+   "rows": 1983,
+   "columns": {
+    "chip": "3119c5c12138f5ddbf868a2530a1e67bef91bb9fc0301fb987687706c59dae82",
+    "parcel_id": "787b3fb54ac0b06c77b791ede2adb2916121428149bf719186217465cbf70348",
+    "width_m": "ed93d79c44e316532262b3f03f98a378bac5a6efe971b61046c376ed4120c46b",
+    "best_iou": "4dd5ea2fb90e741295b835842245e305409a88ab27bfbbda60d85fa5c46fb77a",
+    "found": "2db6af4778e04f9f91656abbc6856ecef90e6564e219c1afdb3f1c69573386c4"
+   }
+  },
+  "results/india/newer_ckpt/v31_cc-by_b7_chips.csv": {
+   "kind": "csv",
+   "rows": 399,
+   "columns": {
+    "chip": "6f136833b4ef7f2698106b8896e6badf908aabb5773d97e4c1d5fb5b018a03f1",
+    "parcels": "edba592fc7ec6658be423fa75ed97ecf70269a93685a9c8d7c060f71c8ae2df2",
+    "hits": "070144aafb962f3f2311e1edb881a367a39ec42f5c2458811901ee3ed7a928a2",
+    "objects": "bda2555473c5df2adde3e6be38eec3bbbff1850238b5217cd78a013021646857",
+    "null_hits": "b09591383bb1a05fedd50790f43bc7e8e59df2892a4fded35f44bef26463878c",
+    "px_differ_published": "6066e621349901fbeccec5d72bf09d991a52ad2cbf3b65cdc40cc3d7457b9b01",
+    "px_total": "6066e621349901fbeccec5d72bf09d991a52ad2cbf3b65cdc40cc3d7457b9b01"
+   }
+  },
+  "results/india/newer_ckpt/v31_cc-by_b7_parcels.csv": {
+   "kind": "csv",
+   "rows": 1983,
+   "columns": {
+    "chip": "3119c5c12138f5ddbf868a2530a1e67bef91bb9fc0301fb987687706c59dae82",
+    "parcel_id": "787b3fb54ac0b06c77b791ede2adb2916121428149bf719186217465cbf70348",
+    "width_m": "ed93d79c44e316532262b3f03f98a378bac5a6efe971b61046c376ed4120c46b",
+    "best_iou": "b0d611f8ca1c74b2eb3258fa9063e03082b673dc5fc2ff7a0c1cab098a435165",
+    "found": "8dc4afc28a1041f64837407389c03b57ab7626210c45fdf29b7316e9ddb7d150"
+   }
+  },
+  "results/india/newer_ckpt/v3_full_b3_chips.csv": {
+   "kind": "csv",
+   "rows": 399,
+   "columns": {
+    "chip": "6f136833b4ef7f2698106b8896e6badf908aabb5773d97e4c1d5fb5b018a03f1",
+    "parcels": "edba592fc7ec6658be423fa75ed97ecf70269a93685a9c8d7c060f71c8ae2df2",
+    "hits": "c187f9fdc226bf29474b8f1a4542b1c69266a94e0811bc27d90e14670c657b6c",
+    "objects": "d32e3ea5a4e4305274ad2affbeb690786c1348da877bc7ef8ee46eaa8d992e8a",
+    "null_hits": "ebb540121148e6b8bb7d0a068b0d01cc5c697dd4b786623d1fece2019ecc4036",
+    "px_differ_published": "6066e621349901fbeccec5d72bf09d991a52ad2cbf3b65cdc40cc3d7457b9b01",
+    "px_total": "6066e621349901fbeccec5d72bf09d991a52ad2cbf3b65cdc40cc3d7457b9b01"
+   }
+  },
+  "results/india/newer_ckpt/v3_full_b3_parcels.csv": {
+   "kind": "csv",
+   "rows": 1983,
+   "columns": {
+    "chip": "3119c5c12138f5ddbf868a2530a1e67bef91bb9fc0301fb987687706c59dae82",
+    "parcel_id": "787b3fb54ac0b06c77b791ede2adb2916121428149bf719186217465cbf70348",
+    "width_m": "ed93d79c44e316532262b3f03f98a378bac5a6efe971b61046c376ed4120c46b",
+    "best_iou": "7c8e05c38bf1135328c2e409d577c77dee139ab6edd7feae4ff62269b91c76b9",
+    "found": "65db0e7da38e43d7ea7b3c542843579f34a0e35e74ca5f4e9bcf806f396a8e25"
+   }
+  },
+  "results/india/newer_ckpt/v3_full_b7_chips.csv": {
+   "kind": "csv",
+   "rows": 399,
+   "columns": {
+    "chip": "6f136833b4ef7f2698106b8896e6badf908aabb5773d97e4c1d5fb5b018a03f1",
+    "parcels": "edba592fc7ec6658be423fa75ed97ecf70269a93685a9c8d7c060f71c8ae2df2",
+    "hits": "59bd4dca7269988701bb33b4b7f0af84838d2dbef13b0b27ad1c25271b3b0559",
+    "objects": "eb673399329c17197a2b5dc9734f510d36d6e6544f9c1256c11e241cf237f92c",
+    "null_hits": "735a582a1b9f90d056f286e8bdfd2aee358078f4d4f724edebca638a94d5df3d",
+    "px_differ_published": "6066e621349901fbeccec5d72bf09d991a52ad2cbf3b65cdc40cc3d7457b9b01",
+    "px_total": "6066e621349901fbeccec5d72bf09d991a52ad2cbf3b65cdc40cc3d7457b9b01"
+   }
+  },
+  "results/india/newer_ckpt/v3_full_b7_parcels.csv": {
+   "kind": "csv",
+   "rows": 1983,
+   "columns": {
+    "chip": "3119c5c12138f5ddbf868a2530a1e67bef91bb9fc0301fb987687706c59dae82",
+    "parcel_id": "787b3fb54ac0b06c77b791ede2adb2916121428149bf719186217465cbf70348",
+    "width_m": "ed93d79c44e316532262b3f03f98a378bac5a6efe971b61046c376ed4120c46b",
+    "best_iou": "c1f552f2733cf0bafe34d60edfda9bd82e8d7d115cece2322b29eb9e18689187",
+    "found": "0780055d0ab260f1539c450b54fe394954b5d4de59418c06bf15e8c6756eb850"
    }
   },
   "results/india/null_draws_ftw.csv": {
@@ -2333,6 +2555,78 @@
     "recall_at_ftw_budget": "8424ec48f091748ccd02aa17145ef7447f521074a26b2c3a034c5ec69f471634"
    }
   },
+  "results/india/watershed_chips_min500.csv": {
+   "kind": "csv",
+   "rows": 5187,
+   "columns": {
+    "chip": "62ae141b29f05bc314e72a97413326af17e5059d1111b0c52617552ea12e5067",
+    "setting": "59717d2612c67f5d575ef9ec14aa66d473ade3bc3b9cf11729c7960c2e03ece6",
+    "parcels": "12a1783b235129b7c10c21c66890926d49e2200ea18923de525b680cb408c3fa",
+    "hits": "0ecf7a2c6ca0b3209cf3190c9725bf6faa265aefa88298ae3fb76da32a6c8700",
+    "objects": "ebb7c933eae574d36ceaf2df45fa300655636111560773b1546a7592877c0450"
+   }
+  },
+  "results/newer_checkpoints.csv": {
+   "kind": "csv",
+   "rows": 14,
+   "columns": {
+    "country": "20689b298f1ae22b9e8fff4390b483df6e1c3dd5f28a332eb382ee60edcbc7da",
+    "checkpoint": "2ed185dc3a27289d70c4313ec6579a06348e44f2c36e95b522e68d0ef51c271d",
+    "licence": "836cd4fa5179eccbf68fc5801e63d738bc221955c0341437ee6174f7c0b948bd",
+    "chips": "5a2cfec139e572f04f7f8eed5c58e125c11c2d985117e02d93c6c44145d51118",
+    "parcels": "d733b1cb82176ac574e61d9f8f8b1288758dadfafd71fd10e887584924f098ab",
+    "objects_per_chip": "9b06d9230f355299f1aea4fa617c1943f7829a848519d2bd7ab64e60518b7ced",
+    "recall": "4f2023315f5fed84a574665f3cc7a8c5fbb69c9f58be827212a4532782a58d79",
+    "lo": "8cbf789fe280337cf369441bd8a5c06af404903ab2d57490674db2adcdbd7396",
+    "hi": "940be7894271f31128159bb8c9359f11ee1ef59c1664a4e4f8e6eda9450e48a1",
+    "null_recall": "195f3447bb7c747a1c02c8095d5c7f16bd497318803958eafe3f5f94b4bb0e26",
+    "above_null": "004df914db500652a1b823005fccf47d3c51ba447a97ba3c6050d661e859308d"
+   }
+  },
+  "results/newer_checkpoints_changes.csv": {
+   "kind": "csv",
+   "rows": 14,
+   "columns": {
+    "country": "20689b298f1ae22b9e8fff4390b483df6e1c3dd5f28a332eb382ee60edcbc7da",
+    "x": "579754764dc1cdc81b2351a6b92d62c44d8432a989df2a9bee8a97a40bd07b30",
+    "y": "6422fc99c360d02fa78f9404c7e2cd424c7b62bf442dcf8bd0161001c689f71c",
+    "recall_change": "c4a561d1f07862c0dd471ed3c95b8823cc56b6683c282a6725e43ccc485e65ee",
+    "recall_lo": "b2a6fa063b3ae923c381b3451565c0aa42b0bcebe31b8b308c0b4302fe76d4fa",
+    "recall_hi": "43f55b7f21c8ef2e097340323004b761403ea83cd5f1c04f67884ebbabf68faf",
+    "above_null_change": "588d451663f873e3741403eb2476f47129717a902def2cebd43ae1b19e825094",
+    "above_null_lo": "f0ea177243c7c3580f995152f5b264328c1662cfce2aa298c751e18e21b877bf",
+    "above_null_hi": "d6cb25007050ba8c70f143abcaf97f9a69f690d4b407a79ef0f1dc1d49e0f672",
+    "r1": "f55809d776ab286a5eeed4fa40f2290fb94f46d83c0c9734521751f45a18090b",
+    "r2": "b1814eff299d27e671b7093a196bae60544c756f81e45ce27c950f7677689dde"
+   }
+  },
+  "results/newer_checkpoints_gap.csv": {
+   "kind": "csv",
+   "rows": 7,
+   "columns": {
+    "checkpoint": "13acb8735c2733212556598e78985b4ab0b79dcece66d27efa8978d92a0e6f5e",
+    "ratio": "e6cf302a25ee548dcab0ec91c1c5b6b2654ddf3e3f80757834571da88b042273",
+    "lo": "d99061d7e4458b02ec04ec981c938a68aad68335a25a176970ab0c381c0dc556",
+    "hi": "807558f410d1f76e62319e3975a2b5146000d4e5218706070b6e08df2e112df4",
+    "meets_third": "a0dd4304c887a3ca23d44a071ff08aa0ace695d5aeea680e3e55b4b7b0d991ba"
+   }
+  },
+  "results/newer_checkpoints_widths.csv": {
+   "kind": "csv",
+   "rows": 14,
+   "columns": {
+    "country": "20689b298f1ae22b9e8fff4390b483df6e1c3dd5f28a332eb382ee60edcbc7da",
+    "checkpoint": "2ed185dc3a27289d70c4313ec6579a06348e44f2c36e95b522e68d0ef51c271d",
+    "under 20 m": "19d55209bab96500105b15d6001fb0115b7dce34c7f1758cc90d09d91b47ea51",
+    "under 20 m parcels": "c5ced4b941719da74ff0347c1e61d19b93147c610b91287d7a82dac9f2e390c2",
+    "20 to 30 m": "7b3032d54c3c023ae19b7017cf9c881baf58d7afaa36673c5dbd6efe2e99c085",
+    "20 to 30 m parcels": "3e76587a2a653b47f409dfba23eaecfbfa48a279b85eb0457e4b80ddbe2f63fa",
+    "30 to 50 m": "c8e0800156648b9cd82e9149097504b87a94866f1f5dd36a794ebed87507143f",
+    "30 to 50 m parcels": "a5326d7683ed7dc3fe5bad3c5704c2a18227b229a6e985e7166d9a2a6b668ece",
+    "50 m up": "0aae744ad7fa1c2e58bea5793ca1189066b97dfd35a3c9c50e016e7a2b6c5f29",
+    "50 m up parcels": "939bbf5c83755254696eabca6148796fd44d2eb84b2c33d4de2d40fcb80fcc83"
+   }
+  },
   "results/saturation_3class_full.csv": {
    "kind": "csv",
    "rows": 2,
@@ -2561,6 +2855,174 @@
     "ring_+18m": "d52e191524c731416392133628dccf17a49623c1a48c671f9656a76fd2e80fc5",
     "null_offset_m": "3d7d47e2ec0c537b37dccbe62594e1c81c8441da82860472dc217519eb5cf5b4",
     "null_gain": "856f5b4a2084c3db17380727a559d2abfd0d977d5a89ddcbe1fa4e3f5e1dfd6c"
+   }
+  },
+  "results/slovenia/newer_ckpt/v1_cc-by_chips.csv": {
+   "kind": "csv",
+   "rows": 228,
+   "columns": {
+    "chip": "fc37e35c5166c9d0f92e144b381af093b715335697b4f01a5452fca2b36e0cf7",
+    "parcels": "aab03c2a83fd758e91f593fb79bf6cf33d935cea83f03e5970a2316f7a2a9a0b",
+    "hits": "946739831f4bd5ed5ca4d55a5ba7c723bd827732b78c9ed136007be6465b9bbf",
+    "objects": "997115a918187d0c788ac95270bbf905402752074d48b9a6881805ddba7c5800",
+    "null_hits": "766d8a6c4c24e3c9e5994b6af569b224c707ee26b5fcbb2137f17ff0f757df24",
+    "px_differ_published": "99b6ac7c26a2054f920e717c560cb55d1d0ea649dcbcad31af0df401e5504583",
+    "px_total": "fd8ea126282471c22bbb4d40f19c851a93c011b27a1be34cb5efc69cbac27092"
+   }
+  },
+  "results/slovenia/newer_ckpt/v1_cc-by_parcels.csv": {
+   "kind": "csv",
+   "rows": 6831,
+   "columns": {
+    "chip": "c6808718a8f6ae73655cff3b1c14d898e273194d33b0ba49a016d071e98d5e85",
+    "parcel_id": "399217032dd48ae87fb39025da79fa8c1bcfb16f3479b2f0debe4e836e54edb5",
+    "width_m": "efbf38d6a938689221d2e7aa1ce40db209e2f337401f5dda6a72cabb22b6f7c1",
+    "best_iou": "9fc8da72dba4b832aa8659292ad15236eb3fdbbbe90e5d1cbd89616d3b1c9fd9",
+    "found": "e6c3e1d076f6495097db511254c095c69da6ee72ab2c42ef659188d6dc7498dd"
+   }
+  },
+  "results/slovenia/newer_ckpt/v1_full_chips.csv": {
+   "kind": "csv",
+   "rows": 228,
+   "columns": {
+    "chip": "fc37e35c5166c9d0f92e144b381af093b715335697b4f01a5452fca2b36e0cf7",
+    "parcels": "aab03c2a83fd758e91f593fb79bf6cf33d935cea83f03e5970a2316f7a2a9a0b",
+    "hits": "95d21201f2e114a7a17e3843df68955f36f5bcbcda961885790441c22e8d1d20",
+    "objects": "b14cf40617df33ae56a884d494fd047a1f418e3c3ca0ff49b76a3dfca2e1f78c",
+    "null_hits": "aeaf09b38a3dff3c4f6636b19c737386aeaa82125bc4f9681377e2112b2a01f5",
+    "px_differ_published": "254d963538fce0eba5fa5efba177a8c4d3304dcb753c878a5bc8bcc256f435d4",
+    "px_total": "fd8ea126282471c22bbb4d40f19c851a93c011b27a1be34cb5efc69cbac27092"
+   }
+  },
+  "results/slovenia/newer_ckpt/v1_full_parcels.csv": {
+   "kind": "csv",
+   "rows": 6831,
+   "columns": {
+    "chip": "c6808718a8f6ae73655cff3b1c14d898e273194d33b0ba49a016d071e98d5e85",
+    "parcel_id": "399217032dd48ae87fb39025da79fa8c1bcfb16f3479b2f0debe4e836e54edb5",
+    "width_m": "efbf38d6a938689221d2e7aa1ce40db209e2f337401f5dda6a72cabb22b6f7c1",
+    "best_iou": "2443bf89ee09b3e88d5fdf7dc9d8a01c97754d83524482476744bf3fbc24ec51",
+    "found": "f2d6088dbe1e778ac4ca3347468cc44f067c7371477fd89e25c336bdc9480e73"
+   }
+  },
+  "results/slovenia/newer_ckpt/v2_full_chips.csv": {
+   "kind": "csv",
+   "rows": 228,
+   "columns": {
+    "chip": "fc37e35c5166c9d0f92e144b381af093b715335697b4f01a5452fca2b36e0cf7",
+    "parcels": "aab03c2a83fd758e91f593fb79bf6cf33d935cea83f03e5970a2316f7a2a9a0b",
+    "hits": "b350aed4a5ac1eca8d2cdb1e8f1c37932a3a0fbadd263ebbb716ba004c4c99cf",
+    "objects": "cd26496ab42f485d5b1e3c5554f6de01581e56ee577428131850971faccff96d",
+    "null_hits": "c77678a1d0411f4e9c4e7a6af34bd15e7870338dbbc7a35ca4d7da8da7d7a11a",
+    "px_differ_published": "af5df5d602e143786ad1cd57bc599ca26d2e1379f77527be4ee94e3748f18952",
+    "px_total": "af5df5d602e143786ad1cd57bc599ca26d2e1379f77527be4ee94e3748f18952"
+   }
+  },
+  "results/slovenia/newer_ckpt/v2_full_parcels.csv": {
+   "kind": "csv",
+   "rows": 6831,
+   "columns": {
+    "chip": "c6808718a8f6ae73655cff3b1c14d898e273194d33b0ba49a016d071e98d5e85",
+    "parcel_id": "399217032dd48ae87fb39025da79fa8c1bcfb16f3479b2f0debe4e836e54edb5",
+    "width_m": "efbf38d6a938689221d2e7aa1ce40db209e2f337401f5dda6a72cabb22b6f7c1",
+    "best_iou": "c2e45ca4266cbc2e7d709748a719c688b220bf391c5e49d444db7a4f732b219d",
+    "found": "ccb6c7f339cb14e3c0ea7d49d85066a0cd29dc86073592443837b86032b74cc1"
+   }
+  },
+  "results/slovenia/newer_ckpt/v31_cc-by_b3_chips.csv": {
+   "kind": "csv",
+   "rows": 228,
+   "columns": {
+    "chip": "fc37e35c5166c9d0f92e144b381af093b715335697b4f01a5452fca2b36e0cf7",
+    "parcels": "aab03c2a83fd758e91f593fb79bf6cf33d935cea83f03e5970a2316f7a2a9a0b",
+    "hits": "fed0de92d9a6d909b307965304a6de18fce47bdc739c1b0abb4b43e910073ce1",
+    "objects": "a6eca3f05e172ed4270727c7dbebd9af0d9682b1781983e305801dba1264dd84",
+    "null_hits": "ee845fd045132aa75afdfd3c6323b942e68a0976ea8e084ca1a99598e114c348",
+    "px_differ_published": "af5df5d602e143786ad1cd57bc599ca26d2e1379f77527be4ee94e3748f18952",
+    "px_total": "af5df5d602e143786ad1cd57bc599ca26d2e1379f77527be4ee94e3748f18952"
+   }
+  },
+  "results/slovenia/newer_ckpt/v31_cc-by_b3_parcels.csv": {
+   "kind": "csv",
+   "rows": 6831,
+   "columns": {
+    "chip": "c6808718a8f6ae73655cff3b1c14d898e273194d33b0ba49a016d071e98d5e85",
+    "parcel_id": "399217032dd48ae87fb39025da79fa8c1bcfb16f3479b2f0debe4e836e54edb5",
+    "width_m": "efbf38d6a938689221d2e7aa1ce40db209e2f337401f5dda6a72cabb22b6f7c1",
+    "best_iou": "405bfe579dd32e93933b0379fcbba13567241864f162f3c960ccc3305742188f",
+    "found": "8705b20c042fd20fe636be9f4e8194c1404dd1f02ecd4285aa016f86ce4ae6f8"
+   }
+  },
+  "results/slovenia/newer_ckpt/v31_cc-by_b7_chips.csv": {
+   "kind": "csv",
+   "rows": 228,
+   "columns": {
+    "chip": "fc37e35c5166c9d0f92e144b381af093b715335697b4f01a5452fca2b36e0cf7",
+    "parcels": "aab03c2a83fd758e91f593fb79bf6cf33d935cea83f03e5970a2316f7a2a9a0b",
+    "hits": "7ec0f5e0f152e5cabcafdf501c37f6249100fff476976d4b7602d67c5bff9a5a",
+    "objects": "22424526f68902c39f41f3e40095f85301b4e4c859e19b5f8fcb08675b4b5dad",
+    "null_hits": "821468513ffaeb754ad7c16acea3c6096878729d13abb247f846015e3cb52e9b",
+    "px_differ_published": "af5df5d602e143786ad1cd57bc599ca26d2e1379f77527be4ee94e3748f18952",
+    "px_total": "af5df5d602e143786ad1cd57bc599ca26d2e1379f77527be4ee94e3748f18952"
+   }
+  },
+  "results/slovenia/newer_ckpt/v31_cc-by_b7_parcels.csv": {
+   "kind": "csv",
+   "rows": 6831,
+   "columns": {
+    "chip": "c6808718a8f6ae73655cff3b1c14d898e273194d33b0ba49a016d071e98d5e85",
+    "parcel_id": "399217032dd48ae87fb39025da79fa8c1bcfb16f3479b2f0debe4e836e54edb5",
+    "width_m": "efbf38d6a938689221d2e7aa1ce40db209e2f337401f5dda6a72cabb22b6f7c1",
+    "best_iou": "a637e3ca1fe675fdf610fb4e6f3705e9a376e685a164cfe0029ba7c24683f7c9",
+    "found": "42773280e611763b321f71a615cd52aecf6774f0711440612cb687db461de0f4"
+   }
+  },
+  "results/slovenia/newer_ckpt/v3_full_b3_chips.csv": {
+   "kind": "csv",
+   "rows": 228,
+   "columns": {
+    "chip": "fc37e35c5166c9d0f92e144b381af093b715335697b4f01a5452fca2b36e0cf7",
+    "parcels": "aab03c2a83fd758e91f593fb79bf6cf33d935cea83f03e5970a2316f7a2a9a0b",
+    "hits": "5a67f838c5f1128000039a82d1c413cb69e08ec8afd08d55d75c38c859136331",
+    "objects": "61d93fb8131ab001640d376cf5211ad27734d1a02e26e1c3c090a6e36e1b5967",
+    "null_hits": "558b0430f0cca76f58e9f60b6f0e4cd40de52e68681b753115069a4e60e8044f",
+    "px_differ_published": "af5df5d602e143786ad1cd57bc599ca26d2e1379f77527be4ee94e3748f18952",
+    "px_total": "af5df5d602e143786ad1cd57bc599ca26d2e1379f77527be4ee94e3748f18952"
+   }
+  },
+  "results/slovenia/newer_ckpt/v3_full_b3_parcels.csv": {
+   "kind": "csv",
+   "rows": 6831,
+   "columns": {
+    "chip": "c6808718a8f6ae73655cff3b1c14d898e273194d33b0ba49a016d071e98d5e85",
+    "parcel_id": "399217032dd48ae87fb39025da79fa8c1bcfb16f3479b2f0debe4e836e54edb5",
+    "width_m": "efbf38d6a938689221d2e7aa1ce40db209e2f337401f5dda6a72cabb22b6f7c1",
+    "best_iou": "e4279e737d4d9e0a672f95ef8c6f0289b27caba913110cf4c3f05d2c08f9838f",
+    "found": "634f00e7c986a1696086ca407f548a8b3df1410d1849e5d40580ffe791ed6867"
+   }
+  },
+  "results/slovenia/newer_ckpt/v3_full_b7_chips.csv": {
+   "kind": "csv",
+   "rows": 228,
+   "columns": {
+    "chip": "fc37e35c5166c9d0f92e144b381af093b715335697b4f01a5452fca2b36e0cf7",
+    "parcels": "aab03c2a83fd758e91f593fb79bf6cf33d935cea83f03e5970a2316f7a2a9a0b",
+    "hits": "a80cf45cda47c40195c06efe0185574f3310b0566d7b3a0c475e129d000a84ae",
+    "objects": "c276f19d74c0128d6a0540e4bf3fe98254b0abeaa08ea7c29aa17dc42dbd9339",
+    "null_hits": "87734a8f0d0594f32aeb5b9a63ede25ebefde48dcb204ba3e1ada46d9fc9ff98",
+    "px_differ_published": "af5df5d602e143786ad1cd57bc599ca26d2e1379f77527be4ee94e3748f18952",
+    "px_total": "af5df5d602e143786ad1cd57bc599ca26d2e1379f77527be4ee94e3748f18952"
+   }
+  },
+  "results/slovenia/newer_ckpt/v3_full_b7_parcels.csv": {
+   "kind": "csv",
+   "rows": 6831,
+   "columns": {
+    "chip": "c6808718a8f6ae73655cff3b1c14d898e273194d33b0ba49a016d071e98d5e85",
+    "parcel_id": "399217032dd48ae87fb39025da79fa8c1bcfb16f3479b2f0debe4e836e54edb5",
+    "width_m": "efbf38d6a938689221d2e7aa1ce40db209e2f337401f5dda6a72cabb22b6f7c1",
+    "best_iou": "4f394c50d1ac8d76d6d159752d81835d552539891766b8a5d61ca986414b5613",
+    "found": "5f1944da1f03e9b5a12af8475ee55032416b4d06188d3344862683ce57a907d6"
    }
   },
   "results/slovenia/parcel_contrast.csv": {
@@ -4222,6 +4684,17 @@
     "null_recall": "24c154cec3e7b5af46b243f7ae95e9e88f610fccd0bb441317d0a7db61ca8c57",
     "gap": "fec88136939c358b06e798602597a8d40d103fec9a39d655ded1aed21182529e",
     "recall_at_ftw_budget": "77914488a82ea620499387fe1ee4bdf8a19bef583b7b1abbaad8267fcd1255da"
+   }
+  },
+  "results/slovenia/watershed_chips_min500.csv": {
+   "kind": "csv",
+   "rows": 2964,
+   "columns": {
+    "chip": "dfdae8baf467224722baa6dc75fb10cd68bfb93a956d6b0d02f47361d62bf714",
+    "setting": "5dbde31c8d6bb6c8ee1cdde198939344737c4bba1fc1309897af8558564a449d",
+    "parcels": "61ace21302a4e88a8a3dd41c7541eb8a684fe411a1bf6f9d8091b24c788b8d93",
+    "hits": "42c6181505be0ce2900f2f3c0a9df42fc8a2252ab822693e9568e58454b8deb1",
+    "objects": "cd559c1da155cc914217f1f0234bf23d0bdeedb4a567635ae3393bf322787ff3"
    }
   },
   "figures/contrast_panel_india.png": {

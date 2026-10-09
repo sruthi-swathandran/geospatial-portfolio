@@ -88,11 +88,22 @@ as drawn with red and blue swapped. SAM has since been rerun on the intended
 composites: on India at FTW's object count, colour infrared reaches 0.158 and
 natural colour 0.152, against 0.153 and 0.151 for the first run.
 
-Last, the season question B-22 left open was tested directly. An image from
+Then the season question B-22 left open was tested directly. An image from
 December to February, built for every Indian test chip in two rabi seasons
 with FTW's own download recipe, helps the checkpoint only as much as a second
 kharif image does. F-01's cause is narrowed to the checkpoint itself; see
 finding 17 in `COMPARISON.md`.
+
+Last, FTW's later releases. The project had tested FTW's v1 checkpoint and
+called it the released state of the art after FTW had published v2 and v3
+(**B-24**). Seven checkpoints from v1 to v3.1 have now been run. v3 finds
+12.91% of Indian parcels against v1's 2.72%, nearly all of it above its null,
+and India rises from 0.12 to 0.39 of Slovenia. Watershed and SAM still beat v3
+on India at its object count, by 1.92 and 5.40 points, and v3 beats SAM on
+Slovenia. The checkpoint version is the largest single change this project has
+measured; see findings 18 and 19 in `COMPARISON.md`. **B-25** corrects this
+review's statement below that every FTW input is CC-BY-4.0: FTW lists a
+licence per country, and Slovenia's labels are CC-BY-SA-4.0.
 
 ---
 
@@ -487,7 +498,8 @@ pages of text.
 It does not say the checkpoint works on India. It does not. Every method
 measured, including one that was never trained on anything, finds more Indian
 parcels than the released model does at matched object budget, and that result
-survives all three controls.
+survives all three controls. That was measured against FTW's v1 checkpoint.
+Against v3, watershed and SAM still do, by smaller margins (finding 19).
 
 It does not say the measurement work is weak. It is the strongest part, and the
 null plus budget pair is genuinely better practice than most of what this is
