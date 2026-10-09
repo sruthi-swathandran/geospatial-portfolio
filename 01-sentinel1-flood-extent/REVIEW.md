@@ -26,7 +26,7 @@ be approximately right. Nothing in the repository establishes that it is.
 | SAR preprocessing | Partly | RTC is a provider-level product; orbit, thermal noise, calibration and terrain correction are Microsoft's, not ours |
 | Optical preprocessing | No | No optical data used |
 | Temporal stack | Partly | Three single dates, no compositing |
-| Sample design, hyperparameters, tuning | Mostly no | Threshold method, no classifier, no training. The one tuned parameter was selected on the valid split |
+| Sample design, hyperparameters, tuning | Mostly no | Threshold method. Nothing is trained and there is no classifier. The one tuned parameter was selected on the valid split |
 | Accuracy reporting | Yes, and failing | |
 | Area estimation | Yes, and failing | |
 | MMU | Yes, passing | |
@@ -35,7 +35,7 @@ be approximately right. Nothing in the repository establishes that it is.
 
 ---
 
-## Phase 1 — Inventory
+## Phase 1. Inventory
 
 ### Repository state
 
@@ -107,12 +107,12 @@ different numbers.
 
 ---
 
-## Phase 2 — Methodological audit, selected results
+## Phase 2. Methodological audit, selected results
 
 **Geometry.** All processing is in EPSG:32646 (UTM 46N) at a fixed pixel size,
 so areas are computed in projected metres rather than degrees. UTM is conformal,
-not equal-area. The AOI spans 92.15–94.16°E against a central meridian of 93°E,
-so the scale factor stays within roughly 0.9996–1.0002 and the areal error is
+not equal-area. The AOI spans 92.15 to 94.16°E against a central meridian of 93°E,
+so the scale factor stays within roughly 0.9996 to 1.0002 and the areal error is
 under about 0.1%, on the order of 120 ha on the headline figure. Acceptable, and
 currently unstated.
 
@@ -148,18 +148,18 @@ deterministic. Reruns should be bit-identical; not verified.
 
 ---
 
-## Phase 3 — Findings
+## Phase 3. Findings
 
 ### Confirmed
 
 | ID | Severity | Component | Finding | Evidence | Effect on reported area | Required action |
 |---|---|---|---|---|---|---|
-| F-01 | **Blocking** | Area estimation | The reported product has never been validated. All accuracy figures come from 65 chips at 10 m, scored **before** the slope mask, edge buffer and MMU exist. Those three steps remove 45% of the raw area. The validated product and the reported product are different products. | `operating_point.py` scores chips; `refine_scene.py` produces the reported raster; no script scores the latter | Unknown, and currently unquantifiable | State it in Results, not only in narrative. Report the chip-scale accuracy as applying to the chip-scale product only |
+| F-01 | **Blocking** | Area estimation | The reported product has never been validated. All accuracy figures come from 65 chips at 10 m, scored **before** the slope mask, edge buffer and MMU exist. Those three steps remove 45% of the raw area. The validated product and the reported product are different products. | `operating_point.py` scores chips; `refine_scene.py` produces the reported raster; no script scores the latter | Unknown, and currently unquantifiable | State it in Results as well as in the narrative. Report the chip-scale accuracy as applying to the chip-scale product only |
 | F-02 | **Blocking** | Area estimation | 119,779 ha is a pixel count with no uncertainty. Good practice (Olofsson et al. 2014, *Remote Sensing of Environment*) requires a design-based estimator with a standard error. At the chosen operating point recall is 0.608, so the map systematically omits water. | `full_scene.py` totals; `results/final_method.json` | Direction: under-detection at the map level, partly offset by commission. At chip scale the tuned point gave −5% against truth | Either produce a bias-adjusted estimate with CI, or label the figure explicitly as an uncorrected map pixel count and quote the chip-scale bias as the only available guide |
 | F-03 | Major | Accuracy reporting | No confidence intervals on any accuracy figure. n = 65 chips, micro-averaged, which weights by pixel count and hides chip-level variance. | README accuracy table; `metrics.py` | None directly | Bootstrap over chips; report IoU, P and R with 95% CI, and report macro alongside micro |
-| F-04 | Major | Parameter provenance | Three of the four decisions that set the final number (slope 8°, occurrence 50%, edge buffer 30 px) were chosen by inspecting full-scene distributions with no held-out data, and cannot be validated because no labels exist outside the chips. They live in argparse defaults. | `refine_scene.py` argparse | They remove 45% of the raw area between them | Move to config; publish the final area across a grid of all three, not only at the chosen point |
+| F-04 | Major | Parameter provenance | Three of the four decisions that set the final number (slope 8°, occurrence 50%, edge buffer 30 px) were chosen by inspecting full-scene distributions with no held-out data, and cannot be validated because no labels exist outside the chips. They live in argparse defaults. | `refine_scene.py` argparse | They remove 45% of the raw area between them | Move to config; publish the final area across a grid of all three as well as at the chosen point |
 | F-05 | Major | Config integrity | `config.py` declares `SLOPE_MAX_DEG = 5.0` and `GSW_PERMANENT_MIN = 80`; the pipeline runs 8.0 and 50. The stated source of truth is wrong. | `config.py`; `refine_scene.py`; `full_scene.py:101` | None to the computed number; total loss of auditability | Single source of truth, imported everywhere |
-| F-06 | Major | Resampling | Resampling is declared for WorldCover only. S1 VH, DEM and GSW take the library default, undeclared and unjustified, and both the threshold and the slope mask are sensitive to it. | `full_scene.py:223,232`, `refine_scene.py:105` vs `district_stats.py:132` | Unquantified | Declare explicitly for every load with a one-line justification per variable |
+| F-06 | Major | Resampling | Resampling is declared for WorldCover only. S1 VH, DEM and GSW take the library default without saying so. Both the threshold and the slope mask are sensitive to it. | `full_scene.py:223,232`, `refine_scene.py:105` vs `district_stats.py:132` | Unquantified | Declare explicitly for every load with a one-line justification per variable |
 | F-07 | Major | Validation design | The Sen1Floods11 splits for a single event are spatially adjacent chips from one scene sharing radiometry, terrain and flood state. "Test IoU 0.680" implies a transferability it does not support. | Official split CSVs; `chips.py:split_lookup` | None | Describe the test split as a within-scene check on threshold overfitting, not as evidence of generalisation |
 | F-08 | Major | Representativeness | Quoted accuracy applies to floodplain chips; the area figure is computed over 6.26 M ha including hills and upland the chips never sampled. The three artefact retractions already prove the domains differ. | README "Three times a conclusion did not survive" | None directly; bounds the meaning of every accuracy figure | One sentence in Results, adjacent to the accuracy table |
 | F-09 | Minor | Projection | Areas computed in UTM 46N, a conformal projection. Distortion under ~0.1% over this AOI, about 120 ha. Unstated. | `config.py` `TARGET_CRS` | ~120 ha, negligible | State the CRS and the bound in the README |
@@ -181,7 +181,7 @@ deterministic. Reruns should be bit-identical; not verified.
 
 ---
 
-## Phase 4 — Remediation, proposed
+## Phase 4. Remediation, proposed
 
 Per the protocol I am not changing anything that alters a reported number
 without asking. Ordered by value:
@@ -208,7 +208,7 @@ without asking. Ordered by value:
 7. **Minimal requirements** (F-10), **data manifest** (F-14), **repo hygiene**
    (F-13).
 
-## Phase 5 — README
+## Phase 5. README
 
 The current README is closer to a methods section than to marketing, but against
 this protocol it fails on: accuracy without intervals, area without an
@@ -217,12 +217,12 @@ no citation block, no licence, no changelog, and no expected runtimes or row
 counts for reproduction. Items 1 to 4 above would have to land first, since the
 README should not claim more rigour than the repository holds.
 
-## Phase 6 — Map
+## Phase 6. Map
 
 Not attempted. The current `docs/index.html` is a working web deliverable but is
-not a publication map: no scale bar, no north arrow, no graticule, no inset
-locator, no stated CRS on the face, no per-class area table with uncertainty,
-and a palette chosen for screen rather than for colour-blind safety. Building
+not a publication map. It lacks a scale bar, north arrow, graticule, inset
+locator, a stated CRS on the face and a per-class area table with uncertainty,
+and its palette was chosen for screen rather than for colour-blind safety. Building
 one is straightforward once F-02 is settled, because the area table needs the
 uncertainty column that does not yet exist.
 

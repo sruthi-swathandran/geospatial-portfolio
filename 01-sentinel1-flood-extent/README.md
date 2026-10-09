@@ -74,7 +74,7 @@ Sonitpur; relief allocated by flooded cropland would go to Nagaon.
 
 ## Two operating points, one bracket
 
-The threshold was chosen twice, against two criteria, and both are defensible.
+The threshold was chosen twice against two criteria. Both choices are defensible.
 
 | | Map-optimal | Area-matched |
 |---|---:|---:|
@@ -191,7 +191,7 @@ nor the refinement steps behind them have been validated against anything.*
 ### Why the three maps are not merged into one
 
 Filling the 12 August map's eastern gap with 7 August data would produce a
-seamless-looking picture describing no moment that existed. The cost is
+gap-free picture describing no moment that existed. The cost is
 measurable rather than hypothetical. In the 1.82 million hectares both passes
 saw, flood fell to 75.1% of its extent in those five days. The 7 August wedge
 holds 36,755 ha, so on 12 August it would have been nearer 27,600 ha. **A naive
@@ -420,7 +420,7 @@ worth stating plainly: no score in this repository would have found any of them.
 
 ## Limitations
 
-- **The study area is not Assam, and it is not only Assam.** The AOI comes from
+- **The study area covers part of Assam and land beyond it.** The AOI comes from
   the Sen1Floods11 chip footprints. Of the four districts named as worst
   affected in a Sentinel-1 map published on 4 August 2016, it contains two,
   Golaghat and Jorhat, and misses two that lie on either side of it: Bongaigaon
@@ -517,7 +517,7 @@ a CSV beside its figure.
 | 8 | `fetch_dem.py`, `mask_terrain_water.py` | Terrain and permanent water |
 | 9 | `change_detect.py`, `fetch_dry_reference.py`, `change_sweep.py` | Test change detection and reject it |
 | 10 | `operating_point.py`, `product_vs_window.py` | Choose an operating point; price the GEE migration |
-| 11 | `full_scene.py`, `refine_scene.py`, `refine_figure.py` | Full scene, tiled and resumable, then artefact removal, and the before and after figure |
+| 11 | `full_scene.py`, `refine_scene.py`, `refine_figure.py` | Full scene, tiled and resumable. Artefact removal and the before and after figure |
 | 12 | `district_stats.py`, `cropland_scene.py` | Flooded cropland by district, and scene-wide |
 | 13 | `find_swaths.py`, `orbit_offset.py`, `compare_dates.py` | Second and third acquisitions, cross-orbit check, date comparison |
 | 14 | `make_map.py`, `make_date_maps.py`, `make_figures.py` | Publication map at 300 dpi, the three-date and recession sheets, and the charts the README carries |
