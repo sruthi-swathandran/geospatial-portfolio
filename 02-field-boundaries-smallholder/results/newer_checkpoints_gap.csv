@@ -1,0 +1,8 @@
+checkpoint,ratio,lo,hi,meets_third
+v1 full,0.1224,0.0773,0.1785,False
+v1 cc-by,0.2061,0.1317,0.305,False
+v2 full,0.0887,0.0529,0.1394,False
+v3 full b3,0.3575,0.2853,0.4535,False
+v3 full b7,0.3905,0.3164,0.4784,False
+v3.1 cc-by b3,0.489,0.3695,0.6557,True
+v3.1 cc-by b7,0.508,0.3967,0.6513,True
