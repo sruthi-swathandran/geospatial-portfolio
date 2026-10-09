@@ -83,6 +83,7 @@ import csv
 import hashlib
 import sys
 import time
+import urllib.error
 import urllib.request
 from pathlib import Path
 
@@ -175,6 +176,49 @@ def sha256(path: Path) -> str:
 # download
 # ---------------------------------------------------------------------------
 
+def fetch(url: str, part: Path, attempts: int = 6) -> None:
+    """Download to part, carrying on from what is already there.
+
+    A connection that sends nothing for 60 seconds is dropped and tried
+    again from the last byte received, so a stalled download cannot hang.
+    """
+    for attempt in range(1, attempts + 1):
+        have = part.stat().st_size if part.exists() else 0
+        req = urllib.request.Request(url)
+        if have:
+            req.add_header("Range", f"bytes={have}-")
+        try:
+            with urllib.request.urlopen(req, timeout=60) as r:
+                if have and r.status != 206:
+                    have = 0                  # server ignored the range
+                size = have + int(r.headers.get("Content-Length", 0))
+                with part.open("ab" if have else "wb") as fh:
+                    got, shown = have, have
+                    while True:
+                        block = r.read(1 << 20)
+                        if not block:
+                            break
+                        fh.write(block)
+                        got += len(block)
+                        if got - shown >= 20e6 or got == size:
+                            shown = got
+                            print(f"  {'':<14} {got / 1e6:6.0f} of "
+                                  f"{size / 1e6:.0f} MB", flush=True)
+            if not size or part.stat().st_size >= size:
+                return
+        except urllib.error.HTTPError as exc:
+            if exc.code == 416 and have:      # nothing left to send
+                return
+            print(f"  {'':<14} attempt {attempt} stopped: {exc}", flush=True)
+            time.sleep(5)
+        except Exception as exc:                              # noqa: BLE001
+            print(f"  {'':<14} attempt {attempt} stopped: {exc}", flush=True)
+            time.sleep(5)
+    sys.exit(f"  could not download {url} after {attempts} attempts. Run "
+             "the same command again later; it carries on from the last "
+             "byte.")
+
+
 def download(models: Path) -> None:
     print(RULE)
     print("CHECKPOINTS")
@@ -185,9 +229,10 @@ def download(models: Path) -> None:
         dest = models / spec["file"]
         if not dest.exists():
             part = dest.with_suffix(".part")
-            print(f"  {key:<14} downloading {spec['url'].rsplit('/', 1)[1]}")
+            print(f"  {key:<14} downloading {spec['url'].rsplit('/', 1)[1]}",
+                  flush=True)
             tic = time.time()
-            urllib.request.urlretrieve(spec["url"], part)
+            fetch(spec["url"], part)
             part.replace(dest)
             print(f"  {'':<14} {dest.stat().st_size / 1e6:.0f} MB in "
                   f"{time.time() - tic:.0f}s")
