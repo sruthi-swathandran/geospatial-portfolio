@@ -33,7 +33,8 @@ over them would give intervals far too narrow.
 
 Outputs:
     results/accuracy_ci.csv
-    results/figures/accuracy_ci.png
+    results/figures/accuracy_ci_check.png    a quick look, not tracked. The README
+        figure of the same data is accuracy_ci.png, drawn by make_figures.py
 
 Usage:
     python src\\accuracy_ci.py
@@ -267,8 +268,8 @@ def main() -> None:
     fig.suptitle(f"{EVENT}: chip-scale accuracy at {thr:.2f} dB "
                  f"({len(per_chip)} chips)")
     fig.tight_layout()
-    fig.savefig(FIGURES / "accuracy_ci.png", dpi=130)
-    print("\nwrote accuracy_ci.csv and figures/accuracy_ci.png")
+    fig.savefig(FIGURES / "accuracy_ci_check.png", dpi=130)
+    print("\nwrote accuracy_ci.csv and figures/accuracy_ci_check.png")
 
 
 if __name__ == "__main__":

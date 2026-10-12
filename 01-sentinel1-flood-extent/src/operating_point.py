@@ -38,7 +38,8 @@ compute a score.
 Outputs:
     results/operating_point.csv
     results/final_method.json
-    results/figures/operating_point.png
+    results/figures/operating_point_check.png    a quick look, not tracked. The README
+        figure of the same data is operating_point.png, drawn by make_figures.py
 
 Usage:
     python src\\operating_point.py
@@ -340,10 +341,10 @@ def main() -> None:
 
     fig.suptitle(f"{EVENT}: choosing an operating point on {len(ids)} chips")
     fig.tight_layout()
-    fig.savefig(FIGURES / "operating_point.png", dpi=130)
+    fig.savefig(FIGURES / "operating_point_check.png", dpi=130)
 
     print("\nwrote operating_point.csv, final_method.json and "
-          "figures/operating_point.png")
+          "figures/operating_point_check.png")
 
 
 if __name__ == "__main__":

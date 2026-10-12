@@ -1,5 +1,5 @@
 VERIFICATION REPORT
-README sha256 07fe3560b7a3c65d
+README sha256 befcf5a7d6397a22
 project: D:\geospatial-portfolio\01-sentinel1-flood-extent
 read-only; nothing in the repo is modified
 
@@ -9,8 +9,8 @@ indexed 22811 numeric values from results/
 ==============================================================================
 A. EVERY NUMBER IN THE README, TRACED TO A FILE
 ==============================================================================
-  · 271 numbers matched a value in results/
-  · 167 skipped as years, codes or section numbers
+  · 273 numbers matched a value in results/
+  · 169 skipped as years, codes or section numbers
 [WARN] 5 numbers could not be matched to any file. Each needs a human decision: derived, rounded, or wrong.
 
 --- unmatched README numbers ------------------------------------------------
@@ -18,7 +18,7 @@ A. EVERY NUMBER IN THE README, TRACED TO A FILE
   L212           27,600   holds 36,755 ha, so on 12 August it would have been nearer 27,600 ha. **A naive
   L330          729,161   passes share 1,819,972 ha, and eight tiles covering 729,161 ha of that were
   L404           64,615   | Acquisition date | 7 Aug vs 31 Aug, same ground | 64,615 ha to 38,887 ha |
-  L586        6,344,561   | `full_scene.py --res 20` | ~25 min | 46 tiles, 6,344,561 ha classified before refinement |
+  L589        6,344,561   | `full_scene.py --res 20` | ~25 min | 46 tiles, 6,344,561 ha classified before refinement |
 
 ==============================================================================
 A2. EVERY NUMBER ON docs/index.html, TRACED TO A FILE

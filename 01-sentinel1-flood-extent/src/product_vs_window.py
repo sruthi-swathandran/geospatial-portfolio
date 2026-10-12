@@ -38,7 +38,8 @@ rather than assuming away.
 
 Outputs:
     results/product_vs_window.csv
-    results/figures/product_vs_window.png
+    results/figures/product_vs_window_check.png    a quick look, not tracked. The README
+        figure of the same data is product_vs_window.png, drawn by make_figures.py
 
 Usage:
     python src\\product_vs_window.py
@@ -291,9 +292,9 @@ def main() -> None:
 
     fig.suptitle(f"{EVENT}: what does leaving Earth Engine actually cost?")
     fig.tight_layout()
-    fig.savefig(FIGURES / "product_vs_window.png", dpi=130)
+    fig.savefig(FIGURES / "product_vs_window_check.png", dpi=130)
 
-    print("\nwrote product_vs_window.csv and figures/product_vs_window.png")
+    print("\nwrote product_vs_window.csv and figures/product_vs_window_check.png")
 
 
 if __name__ == "__main__":

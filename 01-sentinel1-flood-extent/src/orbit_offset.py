@@ -32,7 +32,8 @@ same way the reference date and the permanent water cut are already reported.
 
 Outputs:
     results/orbit_offset.csv
-    results/figures/orbit_offset.png
+    results/figures/orbit_offset_check.png    a quick look, not tracked. The README
+        figure of the same data is orbit_offset.png, drawn by make_figures.py
 
 Usage:
     python src\\orbit_offset.py
@@ -223,8 +224,8 @@ def main() -> None:
 
     fig.suptitle(f"{EVENT}: cross-orbit check before mapping the eastern wedge")
     fig.tight_layout()
-    fig.savefig(FIGURES / "orbit_offset.png", dpi=130)
-    print("\nwrote orbit_offset.csv and figures/orbit_offset.png")
+    fig.savefig(FIGURES / "orbit_offset_check.png", dpi=130)
+    print("\nwrote orbit_offset.csv and figures/orbit_offset_check.png")
 
 
 if __name__ == "__main__":

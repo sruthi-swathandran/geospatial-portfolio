@@ -324,7 +324,8 @@ Water Management Institute made it from ESA Sentinel-1 data and it is posted on
 ReliefWeb. Its worst-affected list is credited to ASDMA figures as of 1 August,
 which count people affected, and the README now says so. ASDMA's 25 July
 counts, as quoted in an ACAPS briefing note of 3 August 2016, are added as a
-second ranking check.
+second ranking check. Majuli was part of Jorhat until 8 September 2016, so
+the README also gives Jorhat and Majuli together; the order is unchanged.
 
 ### C-20 The alignment step was said to fix a 10 px offset (I-18)
 
@@ -411,6 +412,16 @@ signs are typeset, the change-detection point is labelled as the best over all
 65 chips (C-18), and the two operating-point labels now sit above the curves,
 where before their white halo hid part of the all-chips line. No plotted value
 changed.
+
+### C-27 Six analysis scripts drew over the README figures
+
+`operating_point.py`, `change_sweep.py`, `product_vs_window.py`,
+`sensitivity_grid.py`, `accuracy_ci.py` and `orbit_offset.py` each saved a
+quick-look figure under the name `make_figures.py` uses for the README version,
+so rerunning any of them replaced a README figure until `make_figures.py` ran
+again (C-26 came from this). They now write `<name>_check.png`, which
+`.gitignore` excludes, and `make_figures.py` is the only writer of the figures
+the README shows.
 
 ### Measured in this round (I-21, I-22, I-25)
 

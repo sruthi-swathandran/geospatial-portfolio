@@ -33,7 +33,8 @@ section 4 below measures exactly which.
 
 Outputs:
     results/change_sweep.csv
-    results/figures/change_sweep.png
+    results/figures/change_sweep_check.png    a quick look, not tracked. The README
+        figure of the same data is change_sweep.png, drawn by make_figures.py
 
 Usage:
     python src\\change_sweep.py
@@ -400,9 +401,9 @@ def main() -> None:
     fig.suptitle(f"{EVENT}: can any change threshold beat a single date? "
                  f"({args.ref} reference)")
     fig.tight_layout()
-    fig.savefig(FIGURES / "change_sweep.png", dpi=130)
+    fig.savefig(FIGURES / "change_sweep_check.png", dpi=130)
 
-    print("\nwrote change_sweep.csv and figures/change_sweep.png")
+    print("\nwrote change_sweep.csv and figures/change_sweep_check.png")
 
 
 if __name__ == "__main__":

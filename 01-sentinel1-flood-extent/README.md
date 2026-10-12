@@ -481,7 +481,10 @@ worth stating plainly: no score in this repository would have found any of them.
   in an [ACAPS briefing note of 3 August 2016](https://www.acaps.org/sites/acaps/files/products/files/20160803_acaps_briefing_note_update_india_floods.pdf), put Dhemaji, Jorhat,
   Golaghat and Lakhimpur above 100,000 people each. The three of those inside
   the study area hold the top places in the 7 August flooded-cropland table,
-  Golaghat first, then Lakhimpur and Jorhat. That agreement is about which
+  Golaghat first, then Lakhimpur and Jorhat. Majuli was part of Jorhat until
+  it became a district on 8 September 2016, so ASDMA's July count for Jorhat
+  includes it; Jorhat and Majuli together hold about 5,070 ha of flooded cropland,
+  still third behind Lakhimpur's 5,604 ha. That agreement is about which
   districts were hit and carries no information on hectares. For scale, the same Economic
   Survey gives Assam's average annual flood-affected area as 9.31 lakh hectares
   across the whole state and a whole season; the 119,779 ha here is one

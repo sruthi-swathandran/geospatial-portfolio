@@ -19,7 +19,10 @@ data/
 # --- results: commit the numbers, not the rasters --------------------------
 */results/**/*.tif
 */results/**/*.pmtiles
-# CSVs, metrics and figures stay tracked — they are the portfolio.
+# CSVs, metrics and figures stay tracked: they are the portfolio. The
+# exception is the quick-look copies analysis scripts draw for themselves;
+# the README figures come from make_figures.py.
+*/results/figures/*_check.png
 
 # --- python ---------------------------------------------------------------
 __pycache__/

@@ -35,7 +35,8 @@ number at the equivalent settings.
 Outputs:
     data/gsw_scene/India_gsw_<res>m_<ty>_<tx>.tif   cached
     results/sensitivity_grid.csv
-    results/figures/sensitivity_grid.png
+    results/figures/sensitivity_grid_check.png    a quick look, not tracked. The README
+        figure of the same data is sensitivity_grid.png, drawn by make_figures.py
 
 Usage:
     python src\\sensitivity_grid.py --res 20
@@ -293,8 +294,8 @@ def main() -> None:
     fig.suptitle(f"{EVENT}: reported flood area across three unvalidated "
                  f"parameters (before MMU)")
     fig.tight_layout()
-    fig.savefig(FIGURES / "sensitivity_grid.png", dpi=130)
-    print("\nwrote sensitivity_grid.csv and figures/sensitivity_grid.png")
+    fig.savefig(FIGURES / "sensitivity_grid_check.png", dpi=130)
+    print("\nwrote sensitivity_grid.csv and figures/sensitivity_grid_check.png")
 
 
 if __name__ == "__main__":
