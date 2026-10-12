@@ -122,8 +122,9 @@ for p, what in required:
 
 # --------------------------------------------------------------- 4 leftovers
 head("4. No scratch files left behind")
-for p in (SRC / "apply_threedate_update.py", REPO / "commit_msg.txt",
-          SRC / "preflight.py"):
+# preflight.py itself used to be on this list, so every run warned that the
+# check should delete itself (C-24)
+for p in (SRC / "apply_threedate_update.py", REPO / "commit_msg.txt"):
     if p.exists():
         warn(f"still present, delete before or after committing: "
              f"{p.relative_to(REPO)}")
@@ -211,26 +212,26 @@ if raw:
                     "fullscene_stats_20m.json flood_ha")
 
 
-def crop_total(name):
-    p = RESULTS / name
-    if not p.exists():
-        return None
-    with open(p, encoding="utf-8") as fh:
-        return sum(float(r["flooded_cropland_ha"]) for r in csv.DictReader(fh))
+# Flooded cropland is checked against cropland_scene.csv, the scene-wide count
+# the README quotes since C-12. This used to sum the district files, so it
+# required the README to keep the superseded 80,923 ha (C-24).
+scene_crop = {}
+cs = RESULTS / "cropland_scene.csv"
+if cs.exists():
+    with open(cs, encoding="utf-8") as fh:
+        for r in csv.DictReader(fh):
+            scene_crop[r["variant"]] = float(r["flooded_cropland_scene_ha"])
+else:
+    fail("cropland_scene.csv missing")
 
-
-for suffix, label in (("", "12 Aug, map-optimal"),
-                      ("_areamatched", "12 Aug, area-matched"),
-                      ("_20160807", "7 Aug, map-optimal"),
-                      ("_20160807am", "7 Aug, area-matched"),
-                      ("_20160831", "31 Aug, map-optimal"),
-                      ("_20160831am", "31 Aug, area-matched")):
-    name = f"district_flood_stats{suffix}.csv"
-    t = crop_total(name)
-    if t is None:
-        fail(f"{name} missing")
-    else:
-        check_in_readme(t, f"flooded cropland, {label}", name)
+for label in ("12 Aug, map-optimal", "12 Aug, area-matched",
+              "7 Aug, map-optimal", "7 Aug, area-matched",
+              "31 Aug, map-optimal", "31 Aug, area-matched"):
+    if label in scene_crop:
+        check_in_readme(scene_crop[label], f"flooded cropland, {label}",
+                        "cropland_scene.csv")
+    elif scene_crop:
+        fail(f"cropland_scene.csv has no row for {label}")
 
 acc = RESULTS / "accuracy_ci.csv"
 if acc.exists():
@@ -292,18 +293,22 @@ mf = ROOT / "MANIFEST_files.csv"
 if not mf.exists():
     fail("MANIFEST_files.csv missing, run make_manifest.py")
 else:
-    stale = missing = 0
+    sys.path.insert(0, str(SRC))
+    from make_manifest import sha256 as manifest_sha256   # same rule, LF text
+    stale = missing = skipped = 0
     for r in csv.DictReader(mf.read_text(encoding="utf-8").splitlines()):
         p = ROOT / r["path"]
+        # data/ is not in git, so a clone has none of it; that is not a fault
+        if r["path"].startswith("data/") and not DATA.exists():
+            skipped += 1
+            continue
         if not p.exists():
             missing += 1
             continue
-        h = hashlib.sha256()
-        with open(p, "rb") as fh:
-            for b in iter(lambda: fh.read(1 << 20), b""):
-                h.update(b)
-        if h.hexdigest() != r["sha256"]:
+        if manifest_sha256(p) != r["sha256"]:
             stale += 1
+    if skipped:
+        ok(f"{skipped} data/ entries skipped, since data/ is not present")
     if missing:
         fail(f"{missing} manifest entries no longer exist")
     if stale:
@@ -311,6 +316,23 @@ else:
              f"re-run make_manifest.py")
     if not missing and not stale:
         ok("every digested artefact matches")
+
+# ------------------------------------------------- 8b verify report current
+head("8b. verify_report.txt written after the last README edit")
+vr = ROOT / "verify_report.txt"
+if not vr.exists():
+    warn("verify_report.txt missing, run verify_all.py")
+else:
+    # the report quotes README line numbers, so an older report points at the
+    # wrong lines (C-24). Its first line records the README digest it read.
+    first = vr.read_text(encoding="utf-8", errors="ignore").splitlines()[:3]
+    want = hashlib.sha256((ROOT / "README.md").read_bytes()
+                          .replace(b"\r\n", b"\n")).hexdigest()[:16]
+    if any(want in line for line in first):
+        ok("verify_report.txt was written from the current README")
+    else:
+        fail("verify_report.txt was not written from the current README; "
+             "rerun verify_all.py")
 
 # ------------------------------------------------------------ 9 placeholders
 head("9. Placeholders")

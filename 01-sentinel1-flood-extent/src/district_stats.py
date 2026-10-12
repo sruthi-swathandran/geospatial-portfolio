@@ -1,7 +1,7 @@
 """
 RS-01 / step 12 - flooded cropland by district.
 
-"130,772 hectares of water" is a remote sensing result. "X hectares of cropland
+"119,779 hectares of flood" is a remote sensing result. "X hectares of cropland
 flooded in Barpeta district" is something a relief officer, an insurer or an
 agriculture department can act on. This is the step that turns one into the
 other, and it is the only output of this project a non-specialist will read.
@@ -159,9 +159,11 @@ def main() -> None:
                     help="how many districts to chart")
     ap.add_argument("--variant", default="",
                     help="suffix identifying which acquisition to summarise")
-    ap.add_argument("--wc-year", default=None,
-                    help="WorldCover year to use; default is the most recent "
-                         "available, which is the closest to the event")
+    ap.add_argument("--wc-year",
+                    default=getattr(config, "WORLDCOVER_YEAR", None),
+                    help="WorldCover year to use; default config."
+                         "WORLDCOVER_YEAR, pinned so a new release cannot "
+                         "change the figures silently (C-24)")
     args = ap.parse_args()
 
     res = args.res

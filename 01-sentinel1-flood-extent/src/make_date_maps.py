@@ -436,7 +436,8 @@ def figure_three_dates(rows, dist, india, dec, variant):
              f"incidence angles on different days, and would misstate area by "
              f"roughly 9,150 ha. Where a panel is white, nothing was "
              f"observed, which is not the\nsame as observing no water. "
-             f"Imaged area is measured after the 600 m swath-edge buffer has "
+             f"Imaged area is measured after the "
+             f"{cfg.applied_edge_px() * 20} m swath-edge buffer has "
              f"been set to no data. Areas are counted at full resolution; the "
              f"display is decimated {dec}× for drawing only.",
              fontsize=8.2, va="top", color=MUTED, linespacing=1.6)

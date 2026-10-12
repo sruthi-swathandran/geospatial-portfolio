@@ -231,7 +231,7 @@ def main() -> None:
     print("  They describe the single-date threshold applied to 65 "
           "co-registered\n  chips at 10 m. They do NOT describe the reported "
           "full-scene product,\n  which additionally passes through a slope "
-          "mask, a 600 m swath-edge\n  buffer and a 10-pixel minimum mapping "
+          "mask, a swath-edge buffer of\n  about 640 m and a 10-pixel minimum mapping "
           "unit that together remove 45% of\n  the raw area. No labelled data "
           "exists for those steps, so the reported\n  119,779 ha carries no "
           "validated accuracy of any kind.")

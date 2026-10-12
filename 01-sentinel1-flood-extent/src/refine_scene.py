@@ -130,16 +130,17 @@ def core_mask(src_tif, buffer_px, factor=8):
     """
     Everything further than buffer_px from the swath boundary.
 
-    Measured on this scene: flood classification runs at about 17% of area
-    inside the first 30 pixels of the frame edge and 1.9% beyond 45, because the
-    return falls away at near and far range and residual border noise leaves
-    those pixels dark enough to pass a water threshold. They are not dry and
-    they are not wet, they are unmeasured, so the buffer becomes NO DATA rather
-    than land.
+    Measured on the 12 August map by edge_rate.py: flood classification runs
+    at 32.9% of area inside the buffer against 3.1% in the interior
+    (results/edge_rate.csv), because the return falls away at near and far
+    range and residual border noise leaves those pixels dark enough to pass a
+    water threshold. They are not dry and they are not wet, they are
+    unmeasured, so the buffer becomes NO DATA rather than land.
 
-    Eroded on a decimated copy. A 194 megapixel boolean erosion is minutes of
-    work and hundreds of megabytes for a 600 m buffer whose edge does not need
-    to be exact.
+    Eroded on a copy decimated by `factor`. A 194 megapixel boolean erosion is
+    minutes of work and hundreds of megabytes for a buffer whose edge does not
+    need to be exact. The erosion runs round(buffer_px / factor) times, so a
+    request of 30 pixels at factor 8 applies 32, about 640 m at 20 m (C-21).
     """
     with rasterio.open(src_tif) as src:
         h, w = src.height, src.width

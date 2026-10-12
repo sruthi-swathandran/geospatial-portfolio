@@ -14,7 +14,7 @@ This measures it.
 Definition
 ----------
 full_scene.py classifies the whole imaged swath. refine_scene.py then sets a
-600 m band inside the swath boundary to no data, on the argument that
+band of about 640 m inside the swath boundary to no data, on the argument that
 classification there is dominated by the range-edge brightness roll-off rather
 than by water. The band is therefore exactly:
 

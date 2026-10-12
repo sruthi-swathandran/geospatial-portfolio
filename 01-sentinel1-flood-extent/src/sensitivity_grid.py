@@ -6,7 +6,7 @@ between the raw threshold output and the reported flood area:
 
     slope cut          8 degrees
     permanent water    JRC occurrence >= 50%
-    swath edge buffer  30 pixels, 600 m at 20 m
+    swath edge buffer  30 pixels requested, 32 applied, about 640 m at 20 m
 
 None of them can be validated. The Sen1Floods11 labels cover 65 floodplain
 chips and none of these three situations occurs in them, so there is no held-out
@@ -66,7 +66,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from config import (                                        # noqa: E402
     EVENT, BBOX, DATA, RESULTS, MPC_STAC, DEM_COLLECTION, GSW_COLLECTION,
     TILE_PX, TILE_HALO_PX, RESAMPLING, SLOPE_MAX_DEG, GSW_PERMANENT_MIN,
-    EDGE_BUFFER_PX, pixel_ha,
+    EDGE_BUFFER_PX, pixel_ha, applied_edge_px,
 )
 from refine_scene import slope_degrees, dem_tile            # noqa: E402
 
@@ -281,10 +281,11 @@ def main() -> None:
     axes[0].set_title("Published choice circled", fontsize=10)
 
     vals = [area(si0, oi0, k) for k in range(ne)]
-    axes[1].plot([b * res for b in EDGE_CUTS], vals, marker="o",
-                 color="#2b6f8f")
-    axes[1].axvline(EDGE_BUFFER_PX * res, color="#b03030", linestyle="--",
-                    label=f"published {int(EDGE_BUFFER_PX*res)} m")
+    # distances as applied: whole erosions of the 8x decimated mask (C-21)
+    axes[1].plot([applied_edge_px(b) * res if b > 0 else 0
+                  for b in EDGE_CUTS], vals, marker="o", color="#2b6f8f")
+    axes[1].axvline(applied_edge_px() * res, color="#b03030", linestyle="--",
+                    label=f"published, about {int(applied_edge_px()*res)} m")
     axes[1].set_xlabel("swath edge buffer (m)")
     axes[1].set_ylabel("flood (ha)")
     axes[1].grid(alpha=.25); axes[1].legend(fontsize=8)

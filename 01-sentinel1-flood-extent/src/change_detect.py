@@ -224,6 +224,7 @@ def main() -> None:
 
     print("\nHOW WET WAS EACH REFERENCE?")
     print("---------------------------")
+    wet_rows = []
     for name in available:
         frac = []
         for chip_id in ids:
@@ -234,6 +235,17 @@ def main() -> None:
         if frac:
             print(f"  {name:<6} {np.median(frac):.1%} of labelled water was "
                   f"already below the water threshold")
+            wet_rows.append({"reference": name,
+                             "median_share_already_dark":
+                                 round(float(np.median(frac)), 4),
+                             "chips": len(frac),
+                             "threshold_db": t_abs_vh})
+    # The README quotes these. They used to be printed only (C-24).
+    if wet_rows:
+        with open(RESULTS / "reference_wetness.csv", "w", newline="") as fh:
+            ww = csv.DictWriter(fh, fieldnames=list(wet_rows[0]))
+            ww.writeheader()
+            ww.writerows(wet_rows)
     print("  Water present on both dates produces no change signal. This number "
           "is the\n  ceiling on what change detection can recover, and it is a "
           "property of the\n  reference date rather than of the method.")

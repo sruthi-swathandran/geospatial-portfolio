@@ -128,6 +128,8 @@ def main() -> None:
             if land.sum() > 5000 else None,
             "p25_diff": round(float(np.percentile(d, 25)), 3),
             "p75_diff": round(float(np.percentile(d, 75)), 3),
+            # so a land-only offset can be weighted by land pixels (C-17)
+            "land_pixels": int(land.sum()),
         })
         dA.append(a[::13]); dB.append(b[::13]); dD.append(d[::13])
         print(f"\r  {n}/{len(picked)} tiles ({time.time()-t0:.0f}s)",
@@ -151,8 +153,9 @@ def main() -> None:
 
     off_all = float(np.median(D))
     off_land = float(np.median(D[land])) if land.sum() > 1000 else float("nan")
+    # sample standard deviation, the figure the README quotes (C-17)
     spread = float(np.std([r["median_diff_land_db"] for r in rows
-                           if r["median_diff_land_db"] is not None]))
+                           if r["median_diff_land_db"] is not None], ddof=1))
 
     print("\nPOOLED")
     print("------")

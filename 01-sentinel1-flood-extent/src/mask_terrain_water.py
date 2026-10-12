@@ -70,7 +70,8 @@ from skimage.filters import threshold_otsu  # noqa: E402
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import config                               # noqa: E402
-from config import EVENT, LABELS_DIR, DATA, RESULTS, MPC_STAC, BBOX  # noqa: E402
+from config import (EVENT, LABELS_DIR, DATA, RESULTS, MPC_STAC,   # noqa: E402
+                    BBOX, TARGET_RES, pixel_ha)
 from chips import read, split_lookup, lee_filter    # noqa: E402
 import metrics as M                         # noqa: E402
 
@@ -81,7 +82,7 @@ GSW_DIR.mkdir(parents=True, exist_ok=True)
 FIGURES = RESULTS / "figures"
 FIGURES.mkdir(parents=True, exist_ok=True)
 
-PIXEL_HA = 0.01
+PIXEL_HA = pixel_ha(TARGET_RES)   # was 0.01, which assumed 10 m (C-25)
 GSW_COLLECTION = getattr(config, "GSW_COLLECTION", "jrc-gsw")
 SLOPE_CUTS = (2.0, 3.0, 5.0, 8.0, 10.0, 15.0, 20.0, 90.0)   # 90 = no mask
 OCCURRENCE_CUTS = (10, 25, 50, 70, 80, 90)

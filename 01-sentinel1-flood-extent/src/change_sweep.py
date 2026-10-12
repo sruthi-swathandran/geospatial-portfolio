@@ -332,6 +332,7 @@ def main() -> None:
             per_t[t][1] += int((single & water & dark).sum())
             per_t[t][2] += int((single & ~water & dark).sum())
 
+    rate_rows = []
     for t in probe:
         dark, tp_k, fp_k = per_t[t]
         tw_cut = 1.0 - tp_k / max(tp_s, 1)
@@ -339,6 +340,18 @@ def main() -> None:
         verdict = "backwards" if tw_cut > fp_cut else "helping"
         print(f"  {t:>+10.2f}{dark/scene_px:>15.1%}{tw_cut:>16.1%}"
               f"{fp_cut:>15.1%}{verdict:>12}")
+        rate_rows.append({"threshold_db": t,
+                          "scene_darkened": round(dark / scene_px, 4),
+                          "true_water_cut": round(tw_cut, 4),
+                          "false_pos_cut": round(fp_cut, 4),
+                          "verdict": verdict,
+                          "labelled_water_share":
+                              round(truth_area / (scene_px * PIXEL_HA), 4)})
+    # The README quotes these. They used to be printed only (C-24).
+    with open(RESULTS / "change_filter_rates.csv", "w", newline="") as fh:
+        rw = csv.DictWriter(fh, fieldnames=list(rate_rows[0]))
+        rw.writeheader()
+        rw.writerows(rate_rows)
 
     print(f"\n  scene = {scene_px * PIXEL_HA:,.0f} ha across {len(ids)} chips; "
           f"hand-labelled water = {truth_area:,.0f} ha "

@@ -7,7 +7,7 @@ reader who saw it can find out what happened to it.
 
 ---
 
-## 2016 review round (methodological audit)
+## 2026 review round (methodological audit)
 
 Full findings in `REVIEW.md`. Corrections below are the ones that changed a
 published number. No method was changed: these are corrections of measurement
@@ -251,6 +251,159 @@ the 26,223 ha `refine_figure.py` measures as moving to no data.
 is weak evidence, because with 22,516 indexed values a tolerance will land on
 an unrelated value sooner or later: 11,067 matched by coincidence while its
 own partner did not. The misses are the signal. The report now says so.
+
+---
+
+## Issue register round, October 2026
+
+An issue register compiled against commit 614d8bb listed 27 errors and
+irregularities that the records above did not. Each was checked against the
+code before anything was changed. Items I-01 to I-27 below refer to that
+register. No headline figure moves: 119,779 to 170,625 ha of flood and 46,943
+to 87,127 ha of flooded cropland are unchanged.
+
+### C-14 The Earth Engine cost was not split at matched recall (I-02)
+
+The README said "at matched recall" and then quoted the precision differences
+between each curve's best-on-valid points. `product_vs_window.py` defines
+matched recall as each curve's row nearest the baseline recall of 0.601, and
+read that way the split comes out the other way round.
+
+| Part of the precision gap | Superseded | Corrected |
+|---|---:|---:|
+| RTC to the GEE product | +0.009 | +0.024 |
+| Pooled to per-scene Otsu | +0.031 | +0.016 |
+| Total | +0.040 | +0.040 |
+
+The 0.012 IoU cost of the migration is unchanged; it is a difference between
+best-on-valid points and is now described as one. The broader reading holds:
+both parts are small against the 0.326 to 0.680 spread between splits.
+
+### C-15 `final_method.json` stated three things that were no longer true (I-01, I-08)
+
+`slope_mask_reason` said the slope cut "removed true water faster than shadow".
+Its own figures, precision +0.008 for recall −0.003 at 20°, mean the cut
+removed about 0.4% of true water and about 3.8% of false water. The method was
+called "single-date pooled Otsu" though the threshold is swept against labels,
+`slope_mask` was null though the scene applies 8°, and the change signal was
+quoted at IoU 0.147, superseded on 9 September. All four were strings typed into
+`operating_point.py`. They are now written from `mask_terrain_water.csv`,
+`change_sweep.csv` and `config.py` on every run. The notes at the top of
+`full_scene.py` carried the same wording and are rewritten.
+
+### C-16 `flood_only_ha` still counted unlabelled pixels (I-06)
+
+C-01 restricted `area_ha` to labelled ground. The `flood_only_ha` field
+computed two lines later in `operating_point.py` was missed and counted every
+predicted pixel. It now counts labelled ground only. No README figure uses it;
+the new values are in `operating_point.csv` and `final_method.json`.
+
+### C-17 The cross-orbit offset was called a median (I-16)
+
+The 0.05 dB in the README is a weighted mean of the eight tile land medians,
+each weighted by the tile's total pixel count, and the 0.11 dB scatter is their
+sample standard deviation, while `orbit_offset.py` printed the population
+figure, 0.103. The README and `verify_all.py` now name the statistics.
+`orbit_offset.py` now prints the sample figure and writes each tile's land
+pixel count, so a future run can weight by land pixels; that run has not been
+made.
+
+### C-18 The change-detection figure was chosen on all chips (I-20)
+
+IoU 0.196 is the best of the sweep over all 65 chips, test split included.
+Chosen on the valid split, as every other setting in the project is, the same
+signal reaches 0.146. Both figures are now stated. It flatters a rejected
+method, so the rejection stands.
+
+### C-19 The external check was looser than it read (I-19)
+
+The README said both worst-affected districts inside the study area "appear at
+the top" of the 7 August cropland table. Golaghat is first and Jorhat third,
+behind Lakhimpur. The publisher of the 4 August map the check rests on was not
+recorded, and the README now says so.
+
+### C-20 The alignment step was said to fix a 10 px offset (I-18)
+
+The median shift in `coregistration.csv` is 2 pixels in x and 0 in y, with the
+largest at 11. The pipeline table now says so.
+
+### C-21 The "600 m" swath-edge buffer is about 640 m (I-23)
+
+`refine_scene.core_mask` erodes a mask decimated by 8, `round(30 / 8) = 4`
+times, so the 30 pixels requested become 32, about 640 m at 20 m.
+`sensitivity_grid.py` builds its buffers the same way, so no figure was
+computed on a different buffer from the one described; only the description
+changes. `config.applied_edge_px()` now gives the applied width, and the
+README, the public page, the publication map, the three-date sheet and the
+sensitivity figure use it.
+
+### C-22 The README pointed to a raster that is not in the repository (I-04)
+
+No raster is committed. The README now says which scripts produce the
+area-matched raster.
+
+### C-23 The public page claimed more of its numbers were read from files than were (I-05)
+
+The footer said every number on the page is read from `results/` at build
+time. Eleven were typed. The accuracy figures, the change-detection figures and
+the district counts are now read at build time. Three stay typed because the
+scripts that produce them print without storing: the all-water score 0.130,
+the 99.3% of the channel below 8°, and the 97.8% WorldCover coverage. The
+footer names those three and says how they are checked.
+
+### C-24 The reproduction checks could not pass on a clean copy (I-12 to I-15, I-24, I-26, I-27)
+
+- **Manifest digests (I-14).** Digests were taken on CRLF files while git
+  stores and checks out LF, so no clone could match them. `make_manifest.py`
+  now normalises line endings before hashing and writes LF, and
+  `preflight.py` uses the same function. `accuracy_ci.csv`, which really had
+  changed, and the files C-12 and C-13 added are picked up by the rerun.
+- **`preflight.py` (I-13).** It required the README to carry the superseded
+  80,923 ha and now checks flooded cropland against `cropland_scene.csv`. It no
+  longer lists itself as a scratch file to delete, and it skips `data/`
+  entries when `data/` is absent, as it is on any clone.
+- **`verify_report.txt` (I-12).** The report records a digest of the README it
+  read, and `preflight.py` fails if the README has changed since.
+- **Figure freshness (I-15).** `verify_all.py` section D compared file times,
+  which git does not keep. It now uses each file's last commit time when the
+  file is tracked and unchanged, and its file time otherwise.
+- **Usable chips (I-24).** `triage_fetch.py` and `coregister.py` both wrote
+  `usable_chips.txt` by different rules. `triage_fetch.py` now writes
+  `triage_usable_chips.txt`, and `coregister.py` is the only writer of the list
+  later steps read.
+- **WorldCover year (I-26).** `district_stats.py` took the newest year the
+  catalogue offered. It now defaults to `config.WORLDCOVER_YEAR = "2021"`.
+- **Console-only figures (I-27).** The separability figures, the share of
+  water already dark on each reference date and the change-filter deletion
+  rates were printed and never stored. `product_vs_window.py`,
+  `change_detect.py` and `change_sweep.py` now write
+  `product_separability.csv`, `reference_wetness.csv` and
+  `change_filter_rates.csv`.
+
+### C-25 Housekeeping (I-03, I-07, I-09, I-10, I-11, I-17)
+
+- C-07 said the empty `notebooks/` and `viewer/` folders were removed. They
+  were still there, each holding a `.gitkeep`, and are now deleted (I-03).
+- `operating_point.py`, `product_vs_window.py` and `mask_terrain_water.py` set
+  `PIXEL_HA = 0.01`, and `operating_point.py` its own occurrence cut of 50,
+  after C-03 said `pixel_ha()` had replaced the literal. All three now use
+  `pixel_ha(TARGET_RES)` and `GSW_PERMANENT_MIN`. Both values are unchanged at
+  10 m (I-07).
+- Two comments still justified the edge buffer with the superseded 17% and
+  1.9%; they now cite `edge_rate.csv` (I-09).
+- Three docstrings described an earlier pipeline: `full_scene.py`,
+  `district_stats.py` and `verify_all.py` (I-10).
+- This round of review was headed "2016 review" here and in `config.py`; it
+  took place in 2026 (I-11).
+- `REVIEW.md` S-01 said nearest resampling from 10 m to 20 m discards half the
+  samples. It discards three quarters; an erratum is added (I-17).
+
+### Measured in this round (I-21, I-22, I-25)
+
+`register_checks.py` measures the three items the register could not settle
+by reading: the Lee filter's noise term, the clean-up step the chips were
+scored without, and the two ways the 12 August frames are looked up. Its
+readings were set before it ran. Results are added below when they exist.
 
 ---
 

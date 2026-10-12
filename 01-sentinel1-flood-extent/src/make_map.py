@@ -36,7 +36,8 @@ import matplotlib.gridspec as gridspec
 
 import sys
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from config import EVENT, DATA, RESULTS, TARGET_CRS, pixel_ha   # noqa: E402
+from config import (EVENT, DATA, RESULTS, TARGET_CRS, pixel_ha,  # noqa: E402
+                    applied_edge_px)
 
 RES = 20.0
 FS = RESULTS / "fullscene"
@@ -251,7 +252,7 @@ meta = [
     ("SENSOR", "Sentinel-1A IW GRD, RTC gamma0, VH polarisation"),
     ("ACQUISITION", "12 August 2016, 23:46 UTC, relative orbit 77, descending"),
     ("METHOD", "Lee 5×5 speckle filter in linear power, single-date\n"
-               "threshold, 600 m swath-edge buffer to no data, slope > 8°\n"
+               f"threshold, {applied_edge_px() * 20} m swath-edge buffer to no data, slope > 8°\n"
                "reclassified as land, minimum mapping unit 0.4 ha"),
     ("PERMANENT WATER", "JRC Global Surface Water occurrence ≥ 50%\n"
                         "(Pekel et al. 2016)"),

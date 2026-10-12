@@ -111,9 +111,13 @@ def main() -> None:
               f"min {u_corr.min():.3f}")
         print(f"  their bias:        median {np.median(u_bias):+.2f} dB  "
               f"range {u_bias.min():+.2f} .. {u_bias.max():+.2f}")
-        out = RESULTS / "usable_chips.txt"
+        # Its own file. coregister.py writes usable_chips.txt, the list every
+        # later chip script reads, by a different rule; with both writing it,
+        # the chip set depended on which ran last (C-24).
+        out = RESULTS / "triage_usable_chips.txt"
         out.write_text("\n".join(r_["chip_id"] for r_ in usable))
-        print(f"  wrote {out.name} — the chip list the change detector should use")
+        print(f"  wrote {out.name}. The chip list later steps use is "
+              f"usable_chips.txt, written by coregister.py")
 
     print("\n  A change detector built on partly-empty chips would produce "
           "confident nonsense.\n  Better to state the covered subset and its "

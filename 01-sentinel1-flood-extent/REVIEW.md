@@ -179,6 +179,8 @@ deterministic. Reruns should be bit-identical; not verified.
 | S-04 | Moderate | The residual scattered water in the north-west may be genuine wetland rather than artefact. | Cross-tabulate residual flood against JRC seasonality and WorldCover wetland classes |
 | S-05 | Minor | Reruns may not be bit-identical if any load path is order-dependent. | Hash `India_water_20m.tif` across two clean runs |
 
+Erratum to S-01, added 12 October 2026: a 20 m pixel covers four 10 m pixels and nearest-neighbour keeps one of them, so it discards three quarters of the samples, not half. That strengthens the suspicion. The test is unchanged.
+
 ---
 
 ## Phase 4. Remediation, proposed

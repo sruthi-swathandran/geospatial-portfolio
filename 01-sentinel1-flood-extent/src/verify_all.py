@@ -37,6 +37,7 @@ from __future__ import annotations
 import csv
 import json
 import re
+import subprocess
 import sys
 from pathlib import Path
 
@@ -580,12 +581,25 @@ def check_orbit():
     dif = [float(r["median_diff_db"]) for r in rows]
     land = [float(r["median_diff_land_db"]) for r in rows
             if r.get("median_diff_land_db") not in (None, "")]
+    # Weighted by land pixels when orbit_offset.py has written them, by each
+    # tile's total pixels otherwise. Either way it is a weighted MEAN of the
+    # tile medians; this used to be printed as a median (C-17).
+    lpx = [float(r["land_pixels"]) for r in rows
+           if r.get("land_pixels") not in (None, "")]
     w = sum(d * p for d, p in zip(dif, px)) / sum(px)
     report(INFO, f"{len(rows)} tiles, {sum(px) / 1e6:.2f} M pixels")
-    report(INFO, f"pixel-weighted median offset, all pixels: {w:+.4f} dB")
+    report(INFO, f"pixel-weighted mean of tile medians, all pixels: "
+                 f"{w:+.4f} dB")
     if land:
-        wl = sum(d * p for d, p in zip(land, px)) / sum(px)
-        report(INFO, f"pixel-weighted median offset, land only: {wl:+.4f} dB")
+        wts, by = (lpx, "land pixels") if len(lpx) == len(land) else \
+            (px, "total pixels")
+        wl = sum(d * p for d, p in zip(land, wts)) / sum(wts)
+        report(INFO, f"weighted mean of tile land medians, by {by}: "
+                     f"{wl:+.4f} dB")
+        m = sum(land) / len(land)
+        sd = (sum((x - m) ** 2 for x in land) / (len(land) - 1)) ** 0.5
+        report(INFO, f"sample standard deviation of tile land medians: "
+                     f"{sd:.4f} dB")
     report(INFO, f"unweighted median of tile medians: "
                  f"{sorted(dif)[len(dif) // 2]:+.4f} dB")
     report(INFO, f"mean absolute tile median: "
@@ -613,7 +627,7 @@ def check_imaged_area():
                      f"{float(flood):,.0f} + permanent {float(perm):,.0f} "
                      f"= {raw_imaged:,.0f} ha BEFORE refinement"
                      + (f", nodata {float(nodata):,.0f}" if nodata else ""))
-        report(INFO, "refinement moves the 600 m swath rim to nodata, so the "
+        report(INFO, "refinement moves the swath rim, about 640 m, to nodata, so the "
                      "imaged area AFTER refinement is smaller. If the README "
                      "table mixes the two, that is the discrepancy.")
 
@@ -708,6 +722,32 @@ FIG_SOURCE = {
 }
 
 
+def last_change(path: Path) -> tuple[float, str]:
+    """When a file last changed, in a way that survives a fresh clone.
+
+    File times are set by the order git writes files on checkout, so on a
+    clean clone they say nothing about which came first (C-24). A tracked file
+    with no local changes is dated by its last commit instead. Anything else,
+    untracked or edited since, falls back to its modification time.
+    """
+    try:
+        rel = path.resolve().relative_to(ROOT.resolve().parent)
+        top = ROOT.parent
+        dirty = subprocess.run(["git", "-C", str(top), "status", "--porcelain",
+                                "--", str(rel)], capture_output=True,
+                               text=True, check=True).stdout.strip()
+        if not dirty:
+            t = subprocess.run(["git", "-C", str(top), "log", "-1",
+                                "--format=%ct", "--", str(rel)],
+                               capture_output=True, text=True,
+                               check=True).stdout.strip()
+            if t:
+                return float(t), "commit"
+    except (OSError, ValueError, subprocess.CalledProcessError):
+        pass
+    return path.stat().st_mtime, "file time"
+
+
 def check_figures():
     head("D. FIGURE FRESHNESS")
     figs = RES / "figures"
@@ -720,14 +760,16 @@ def check_figures():
         if not f.exists():
             report(WARN, f"{name} does not exist")
             continue
-        ft = f.stat().st_mtime
+        ft, how = last_change(f)
         for s in sources:
             sp = RES / s
             if not sp.exists():
                 continue
-            if sp.stat().st_mtime > ft:
+            st, how_s = last_change(sp)
+            if st > ft:
                 stale += 1
-                report(FAIL, f"{name} is OLDER than {s}. Redraw it.")
+                report(FAIL, f"{name} is OLDER than {s} (by {how} and "
+                             f"{how_s}). Redraw it.")
                 break
         else:
             report(PASS, f"{name} is newer than its source data")
@@ -753,9 +795,10 @@ def check_figures():
 def trace_docs(index):
     """The same tracing over docs/index.html.
 
-    That page is hand-written and nothing regenerates it, so a number
-    corrected in the README stays wrong there until somebody notices. It is
-    what GitHub Pages serves, so it is the first thing a reader sees. Only
+    build_docs_page.py generates that page from results/, apart from a few
+    numbers it names in its footer, and this tracing is what keeps those
+    honest. It is what GitHub Pages serves, so it is the first thing a reader
+    sees. Only
     numbers written with thousands separators are traced, which is the class
     that carries hectares and keeps the false-positive rate near zero.
     """
@@ -798,7 +841,13 @@ def trace_docs(index):
 
 
 def main() -> None:
+    import hashlib
+    digest = hashlib.sha256(README.read_bytes().replace(b"\r\n", b"\n")
+                            ).hexdigest()[:16] if README.exists() else "none"
     print("VERIFICATION REPORT")
+    # preflight.py reads this to tell whether the report is older than the
+    # README it describes (C-24)
+    print(f"README sha256 {digest}")
     print(f"project: {ROOT}")
     print("read-only; nothing in the repo is modified\n")
 

@@ -14,6 +14,11 @@ figures they produce.
 The manifest is generated rather than written by hand, so it cannot drift away
 from the tree it describes.
 
+Digests are taken with line endings normalised to LF. Python's csv module
+writes CRLF on Windows, while .gitattributes stores and checks out LF, so a
+digest of the raw bytes could never be matched from a clone (C-24). Text that
+differs only in line endings now has one digest everywhere.
+
 Outputs:
     MANIFEST.csv        one row per directory group
     MANIFEST_files.csv  one row per tracked small file, with digest
@@ -39,11 +44,10 @@ DIGEST_MAX_BYTES = 8 * 1024 * 1024
 
 
 def sha256(path: Path) -> str:
-    h = hashlib.sha256()
-    with open(path, "rb") as fh:
-        for block in iter(lambda: fh.read(1 << 20), b""):
-            h.update(block)
-    return h.hexdigest()
+    """SHA-256 of a text artefact with CRLF read as LF. preflight.py imports
+    this, so the writer and the checker cannot disagree on the rule."""
+    data = path.read_bytes().replace(b"\r\n", b"\n")
+    return hashlib.sha256(data).hexdigest()
 
 
 def group_of(path: Path) -> str:
@@ -76,12 +80,13 @@ def main() -> None:
             if p.suffix.lower() in DIGEST_SUFFIXES and size <= DIGEST_MAX_BYTES:
                 rows.append({
                     "path": p.relative_to(PROJECT).as_posix(),
-                    "bytes": size,
+                    # bytes as LF text, so the count matches a clone too
+                    "bytes": len(p.read_bytes().replace(b"\r\n", b"\n")),
                     "sha256": sha256(p),
                 })
 
     with open(PROJECT / "MANIFEST.csv", "w", newline="", encoding="utf-8") as fh:
-        w = csv.writer(fh)
+        w = csv.writer(fh, lineterminator="\n")
         w.writerow(["group", "files", "bytes", "megabytes", "file_types"])
         for name in sorted(groups):
             g = groups[name]
@@ -92,7 +97,8 @@ def main() -> None:
 
     with open(PROJECT / "MANIFEST_files.csv", "w", newline="",
               encoding="utf-8") as fh:
-        w = csv.DictWriter(fh, fieldnames=["path", "bytes", "sha256"])
+        w = csv.DictWriter(fh, fieldnames=["path", "bytes", "sha256"],
+                           lineterminator="\n")
         w.writeheader()
         w.writerows(sorted(rows, key=lambda r: r["path"]))
 

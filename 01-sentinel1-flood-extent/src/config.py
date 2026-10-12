@@ -106,7 +106,7 @@ MAX_WATER_THRESHOLD_VV = -12.0
 # --------------------------------------------------------------------------
 # Full-scene refinement
 # --------------------------------------------------------------------------
-# CHANGED 2016 review: these were declared here as 5.0 and 80 while the
+# CHANGED 2026 review: these were declared here as 5.0 and 80 while the
 # pipeline actually ran 8.0 and 50, so the file that exists to be the source of
 # truth stated two parameters wrongly. Corrected to the values in use, and the
 # other two refinement parameters moved here from argparse defaults.
@@ -122,7 +122,11 @@ MAX_WATER_THRESHOLD_VV = -12.0
 
 SLOPE_MAX_DEG = 8.0            # 99.3% of the permanent channel sits below this
 GSW_PERMANENT_MIN = 50         # JRC occurrence %; 95% of that area is labelled water
-EDGE_BUFFER_PX = 30            # 600 m at 20 m; flood runs 17% there against 1.9% inside
+EDGE_BUFFER_PX = 30            # requested; see the note below
+# refine_scene.core_mask erodes a copy decimated by 8, round(30 / 8) = 4 times,
+# so the buffer actually applied is 32 pixels, about 640 m at 20 m (C-21).
+# Flood runs at 32.9% of area inside it against 3.1% in the interior,
+# measured by edge_rate.py in results/edge_rate.csv (C-13).
 MIN_OBJECT_PX_SCENE = 10       # 0.4 ha at 20 m; below this is a sample, not a flood
 
 TILE_PX = 2048                 # processing tile side
@@ -147,6 +151,19 @@ RESAMPLING = {
 
 CROPLAND_CLASS = 40            # ESA WorldCover code
 GEOBOUNDARIES_API = "https://www.geoboundaries.org/api/current/gbOpen/IND/ADM2/"
+
+
+# ESA WorldCover year. district_stats.py used to take the newest year the
+# catalogue offered, so a new release would have changed every cropland figure
+# on a rerun with no change to the code (C-24). Pinned to the year the
+# published figures used.
+WORLDCOVER_YEAR = "2021"
+
+
+def applied_edge_px(buffer_px: int = EDGE_BUFFER_PX, factor: int = 8) -> int:
+    """The swath-edge buffer refine_scene.core_mask actually applies, in
+    pixels: whole erosions of a mask decimated by `factor` (C-21)."""
+    return max(1, round(buffer_px / factor)) * factor
 
 
 def pixel_ha(res_m: float) -> float:

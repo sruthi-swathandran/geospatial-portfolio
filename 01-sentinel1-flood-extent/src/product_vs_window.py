@@ -59,7 +59,7 @@ import numpy as np                          # noqa: E402
 import rasterio                             # noqa: E402
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from config import EVENT, DATA, RESULTS     # noqa: E402
+from config import EVENT, DATA, RESULTS, TARGET_RES, pixel_ha  # noqa: E402
 from chips import read, split_lookup, lee_filter    # noqa: E402
 import metrics as M                         # noqa: E402
 
@@ -67,7 +67,7 @@ REF_DIR = DATA / "reference"
 FIGURES = RESULTS / "figures"
 FIGURES.mkdir(parents=True, exist_ok=True)
 
-PIXEL_HA = 0.01
+PIXEL_HA = pixel_ha(TARGET_RES)   # was 0.01, which assumed 10 m (C-25)
 PRODUCTS = ("rtc_lee", "gee_lee", "gee_raw")
 STYLE = {"rtc_lee": ("#2b6f8f", "-", "RTC gamma0, Lee 5x5"),
          "gee_lee": ("#2f8f4f", "-", "GEE sigma0 (S1Hand), Lee 5x5"),
@@ -124,6 +124,7 @@ def main() -> None:
     print("----------------------------------------------------")
     print(f"  {'product':<32}{'water dB':>10}{'land dB':>10}"
           f"{'contrast':>10}{'pooled sd':>11}{'d-prime':>9}")
+    sep_rows = []
     for prod in PRODUCTS:
         w, l = [], []
         for chip_id in ids:
@@ -138,6 +139,17 @@ def main() -> None:
         print(f"  {STYLE[prod][2]:<32}{w.mean():>10.2f}{l.mean():>10.2f}"
               f"{contrast:>10.2f}{pooled_sd:>11.2f}"
               f"{contrast / pooled_sd:>9.2f}")
+        sep_rows.append({"product": prod,
+                         "water_db": round(float(w.mean()), 4),
+                         "land_db": round(float(l.mean()), 4),
+                         "contrast_db": round(contrast, 4),
+                         "pooled_sd_db": round(pooled_sd, 4),
+                         "d_prime": round(contrast / pooled_sd, 4)})
+    # The README quotes these. They used to be printed only (C-24).
+    with open(RESULTS / "product_separability.csv", "w", newline="") as fh:
+        sw = csv.DictWriter(fh, fieldnames=list(sep_rows[0]))
+        sw.writeheader()
+        sw.writerows(sep_rows)
     print("\n  d-prime is contrast divided by the pooled spread, which is what\n"
           "  actually limits a threshold. Two products can share a contrast and\n"
           "  separate differently if one is noisier.")

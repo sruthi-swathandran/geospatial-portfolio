@@ -60,7 +60,8 @@ import numpy as np                          # noqa: E402
 import rasterio                             # noqa: E402
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from config import EVENT, DATA, RESULTS     # noqa: E402
+from config import (EVENT, DATA, RESULTS, TARGET_RES,   # noqa: E402
+                    GSW_PERMANENT_MIN, SLOPE_MAX_DEG, pixel_ha)
 from chips import read, split_lookup, lee_filter    # noqa: E402
 import metrics as M                         # noqa: E402
 
@@ -69,8 +70,9 @@ GSW_DIR = DATA / "gsw"
 FIGURES = RESULTS / "figures"
 FIGURES.mkdir(parents=True, exist_ok=True)
 
-PIXEL_HA = 0.01
-OCCURRENCE_CUT = 50          # settled in step 10: 95% of this area is labelled water
+# from config, so the chip scripts and the scene cannot disagree on either
+PIXEL_HA = pixel_ha(TARGET_RES)
+OCCURRENCE_CUT = GSW_PERMANENT_MIN   # step 10: 95% of this area is labelled water
 
 
 def usable_chips() -> list[str]:
@@ -81,6 +83,52 @@ def usable_chips() -> list[str]:
             return ids
     return sorted(p.name.split("_")[1]
                   for p in REF_DIR.glob(f"{EVENT}_*_FLOODRTC_ALIGNED.tif"))
+
+
+def slope_reason() -> str:
+    """The chip evidence for the slope cut, read from mask_terrain_water.csv.
+
+    These strings used to be typed here, and one of them said the cut removed
+    true water faster than false water when its own numbers showed the
+    opposite (C-15). They are now written from the measurements.
+    """
+    path = RESULTS / "mask_terrain_water.csv"
+    if not path.exists():
+        return "mask_terrain_water.csv not found; run mask_terrain_water.py"
+    vals = {}
+    with open(path, newline="") as fh:
+        for r in csv.DictReader(fh):
+            vals[(r["section"], r["key"])] = float(r["value"])
+    none = "slope_90.0"
+    cuts = [k for k, key in vals if k.startswith("slope_") and k != none
+            and key == "iou_valid"]
+    cut = max(cuts, key=lambda k: vals[(k, "iou_valid")])
+    dp = vals[(cut, "p_all")] - vals[(none, "p_all")]
+    dr = vals[(cut, "r_all")] - vals[(none, "r_all")]
+    deg = float(cut.split("_")[1])
+    return (f"swept 2 to 20 degrees on the chips in step 10; the best cut on "
+            f"the valid split, {deg:g} degrees, changed precision by "
+            f"{dp:+.3f} and recall by {dr:+.3f} against no cut, "
+            f"too small to decide anything on chip evidence, so no cut on "
+            f"the chips. The scene applies {SLOPE_MAX_DEG:g} degrees in "
+            f"refine_scene.py, because the scene holds hillside the chips "
+            f"never sample")
+
+
+def change_reason() -> str:
+    """The change-detection evidence, read from change_sweep.csv."""
+    path = RESULTS / "change_sweep.csv"
+    if not path.exists():
+        return "change_sweep.csv not found; run change_sweep.py"
+    with open(path, newline="") as fh:
+        rows = [r for r in csv.DictReader(fh) if r["gate"] == "0"]
+    on_valid = max(rows, key=lambda r: float(r["iou_valid"]))
+    on_all = max(rows, key=lambda r: float(r["iou_all"]))
+    return (f"step 9c; the best change threshold was the one that made the "
+            f"constraint inert. The change signal alone, chosen on the valid "
+            f"split, scores IoU {float(on_valid['iou_all']):.3f} over all "
+            f"chips; the best over all chips, test split included, is "
+            f"{float(on_all['iou_all']):.3f}")
 
 
 def load_chip(chip_id: str):
@@ -133,7 +181,11 @@ def main() -> None:
             area_all += float(np.sum(pred == 1)) * PIXEL_HA
             if occ is not None:
                 perm = np.isfinite(occ) & (occ >= OCCURRENCE_CUT)
-                flood_ha += float(np.sum(water & ~nodata & ~perm)) * PIXEL_HA
+                # on labelled ground only, as metrics.mapped_area_px counts
+                # area_ha two lines up (C-01). The first version counted every
+                # predicted pixel, labelled or not (C-16)
+                flood_ha += float(np.sum(water & ~nodata & ~perm
+                                         & (label != -1))) * PIXEL_HA
         a = M.aggregate([c for v in by_split.values() for c in v])
         row = {"threshold": float(t), "iou_all": round(a["iou"], 4),
                "p_all": round(a["precision"], 4),
@@ -223,19 +275,15 @@ def main() -> None:
 
     chosen = {
         "event": EVENT,
-        "method": "single-date pooled Otsu on RTC gamma0 VH, Lee 5x5",
+        "method": "single-date threshold on RTC gamma0 VH after a 5x5 Lee "
+                  "filter, swept against the hand labels and chosen on the "
+                  "valid split",
         "polarisation": "VH",
         "speckle_filter": "Lee 5x5 on linear power",
-        "slope_mask": None,
-        "slope_mask_reason": "swept 2 to 20 degrees in step 10; removed true "
-                             "water faster than shadow, precision +0.008 for "
-                             "recall -0.003",
+        "slope_mask": {"on_chips": None, "on_scene_deg": SLOPE_MAX_DEG},
+        "slope_mask_reason": slope_reason(),
         "change_detection": None,
-        "change_detection_reason": "step 9c; best change threshold was the one "
-                                   "that made the constraint inert, and the "
-                                   "change signal alone scored IoU 0.147 "
-                                   "against 0.130 for labelling the whole "
-                                   "scene as water",
+        "change_detection_reason": change_reason(),
         "permanent_water": {"source": "JRC Global Surface Water occurrence",
                             "cut_percent": OCCURRENCE_CUT,
                             "note": "used only to report flood extent, never "

@@ -89,18 +89,17 @@ AM_ROW = {"20160807": "7 Aug, area-matched",
 SIMPLIFY_DEG = 0.002      # 1.1 display pixels, below what the canvas can show
 COORD_DP = 4              # about 11 m, well under one display pixel
 
-# Numbers that live in an analysis rather than in a single column. Each is
-# named with the file it came from. verify_all.py section A2 traces every one
-# of them against results/, so a drift here is caught rather than shipped.
+# Numbers typed here rather than read at build time. The page names them in
+# its footer. Each is printed by an analysis script and not stored in a
+# column of results/, so verify_all.py can only trace them by finding a
+# matching value somewhere, which is weak evidence (C-23). The accuracy
+# figures, the change-detection IoU and the district counts that used to sit
+# here are read from files now; see accuracy_figures(), change_figures() and
+# district_counts().
 LIT = {
-    "iou_map": "0.519",          # accuracy_ci.csv, micro IoU at -18.75 dB
-    "iou_area": "0.522",         # operating_point.csv at -17.75 dB
-    "ci_lo": "0.395",            # accuracy_ci.csv percentile bootstrap
-    "ci_hi": "0.609",
-    "ci_halfwidth": "0.11",
-    "change_best": "0.196",      # change_sweep.csv, gate 0, drop 2 dB
     "all_water": "0.130",        # the same configuration with no drop required
-    "perm_below_slope": "99.3%",  # flood_by_slope, share of channel under 8 deg
+    "perm_below_slope": "99.3%",  # refine_scene.py console, channel under 8 deg
+    "wc_cover": "97.8%",         # cropland_scene.py console, WorldCover tiles
 }
 
 # gsw_lo and gsw_hi are read from mask_terrain_water.csv at build time rather
@@ -159,6 +158,37 @@ def write_overlays():
     ch[both & ((a == PERM) | (b == PERM))] = 4
     n = png(ch, PAL_CHANGE, DOCS / "overlay_change.png")
     print(f"  overlay_change.png{'':<2}{n / 1024:>6.0f} KB")
+
+
+def accuracy_figures():
+    """Micro IoU and its interval from accuracy_ci.csv, and the area-matched
+    point's IoU from final_method.json. These were typed into LIT until C-23."""
+    with open(cfg.RESULTS / "accuracy_ci.csv", encoding="utf-8") as fh:
+        a = next(r for r in csv.DictReader(fh) if r.get("split") == "all")
+    fm = json.load(open(cfg.RESULTS / "final_method.json", encoding="utf-8"))
+    lo, hi = float(a["iou_ci_lo"]), float(a["iou_ci_hi"])
+    return {"iou_map": f"{float(a['iou']):.3f}",
+            "iou_area": f"{fm['operating_points']['area_matched']['iou_all']:.3f}",
+            "ci_lo": f"{lo:.3f}", "ci_hi": f"{hi:.3f}",
+            "ci_halfwidth": f"{(hi - lo) / 2:.2f}"}
+
+
+def change_figures():
+    """The change signal alone, from change_sweep.csv: the best over all chips,
+    and the setting chosen on the valid split, read over all chips (C-18)."""
+    with open(cfg.RESULTS / "change_sweep.csv", encoding="utf-8") as fh:
+        rows = [r for r in csv.DictReader(fh) if r["gate"] == "0"]
+    on_all = max(rows, key=lambda r: float(r["iou_all"]))
+    on_valid = max(rows, key=lambda r: float(r["iou_valid"]))
+    return {"change_best": f"{float(on_all['iou_all']):.3f}",
+            "change_valid": f"{float(on_valid['iou_all']):.3f}"}
+
+
+def district_counts(payload):
+    """Districts imaged on any date, and on all three, from the district files."""
+    seen = [set(n for n, a in zip(payload["names"], payload["attrs"][t])
+                if a is not None) for t, *_ in DATES]
+    return len(set.union(*seen)), len(set.intersection(*seen))
 
 
 def macro_iou():
@@ -531,8 +561,8 @@ BODY = """<title>Brahmaputra Flood Ledger</title>
   <section class="notes">
     <div>
       <h2>Why three dates and not one map</h2>
-      <p>Across the three acquisitions there are <strong>44</strong> districts
-      and only <strong>18</strong> are seen by all three. 12 August is relative
+      <p>Across the three acquisitions there are <strong>{n_any}</strong> districts
+      and only <strong>{n_all}</strong> are seen by all three. 12 August is relative
       orbit 77 and images {imaged12} million hectares; 7 and 31 August are orbit
       4 and image {imaged07} and {imaged31} million. Nagaon is fully imaged on
       12 August and not imaged at all on the other two.</p>
@@ -555,14 +585,15 @@ BODY = """<title>Brahmaputra Flood Ledger</title>
       event.</p>
       <p>Change detection against an earlier date was tested and rejected. With
       the change signal alone the sweep reaches <strong>{change_best} IoU</strong>
-      at a required drop of 2 dB; relax that requirement and it converges on
+      over all chips, test split included, at a required drop of 2 dB; chosen on
+      the valid split it reaches {change_valid}. Relax the drop and it converges on
       <strong>{all_water}</strong>, which is what labelling the entire scene as
       water scores.</p>
     </div>
     <div>
       <h2>What the numbers depend on</h2>
       <p>Three things are dark to radar without being wet, and each was found by
-      looking at the map rather than by any metric. A 600 m buffer inside the
+      looking at the map rather than by any metric. A buffer of about 640 m inside the
       swath boundary is marked no data, where flood classification ran at
       <strong>{edge_rate}</strong> of area against <strong>{interior_rate}</strong>
       in the interior, {edge_ratio} times the rate. Ground steeper than
@@ -599,7 +630,7 @@ BODY = """<title>Brahmaputra Flood Ledger</title>
       <p>Cropland comes from ESA WorldCover 2021, four to five years after the
       event, because no open 10 m cropland map exists for India in 2016. Land
       that changed use in between is misattributed, and the fetched tiles cover
-      97.8% of the grid, so every cropland figure here is a floor.</p>
+      {wc_cover} of the grid, so every cropland figure here is a floor.</p>
       <p>District boundaries are present-day geoBoundaries ADM2, and Assam has
       created districts since 2016, so these will not match a 2016 bulletin one
       for one.</p>
@@ -610,9 +641,15 @@ BODY = """<title>Brahmaputra Flood Ledger</title>
       strip. The map layer is a preview render; every number comes from the 20 m
       raster.</p>
       <p class="built">Built by <code>build_docs_page.py</code> on {built}.
-      The wording here is written; every number in it, and every figure in the
-      panel above, is read from <code>results/</code> at build time. The page
-      it replaced was maintained by hand and had drifted from its sources.</p>
+      The wording here is written. Every number in it, and every figure in the
+      panel above, is read from <code>results/</code> at build time, except three
+      that analysis scripts print without storing: the all-water score of
+      {all_water}, the {perm_below_slope} of the channel below 8&deg;, and the
+      {wc_cover} WorldCover coverage. <code>verify_all.py</code> checks those
+      three by finding a matching value
+      in <code>results/</code>, which shows the value exists, not that it is the
+      right one. The page it replaced was maintained by hand and had drifted
+      from its sources.</p>
     </div>
   </section>
 </div>
@@ -1014,8 +1051,12 @@ def main() -> None:
     h12 = head["20160812"]
     lo, hi = gsw_range()
     er, ir, ratio = edge_rates()
+    n_any, n_all = district_counts(payload)
     fmt = dict(LIT)
+    fmt.update(accuracy_figures())
+    fmt.update(change_figures())
     fmt.update(
+        n_any=str(n_any), n_all=str(n_all),
         gsw_lo=f"{lo:,.0f}", gsw_hi=f"{hi:,.0f}",
         iou_macro=f"{macro_iou():.3f}",
         edge_rate=f"{er:.1f}%", interior_rate=f"{ir:.1f}%",

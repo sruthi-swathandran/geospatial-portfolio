@@ -101,8 +101,10 @@ Sonitpur are first, second and third at both thresholds. Below that the order
 shuffles; Karbi Anglong East moves from tenth to sixth. Who was worst affected
 survives the choice. How much does not.
 
-Full area-matched outputs are in `results/district_flood_stats_areamatched.csv`
-and `results/fullscene/India_water_20m_areamatched_refined.tif`.
+Full area-matched outputs are in `results/district_flood_stats_areamatched.csv`.
+The raster itself, `results/fullscene/India_water_20m_areamatched_refined.tif`,
+is not in the repository, since no raster is; `full_scene.py` and
+`refine_scene.py --apply` produce it at the area-matched threshold.
 
 ---
 
@@ -123,7 +125,7 @@ threshold choice described above rather than a new source of uncertainty.
 | 12 Aug 2016 | 77 | 6.26 M ha | 119,779 to 170,625 ha | 46,943 to 87,127 ha |
 | 31 Aug 2016 | 4 | 3.16 M ha | 38,887 to 44,991 ha | 5,776 to 9,256 ha |
 
-Imaged area is measured after the 600 m swath-edge buffer has been set to no
+Imaged area is measured after the swath-edge buffer, about 640 m, has been set to no
 data, so it is smaller than the raw classified area quoted in the runtimes table
 further down.
 
@@ -176,7 +178,7 @@ which is not the same as observing no water. The 12 August pass is relative
 orbit 77 and images 6.26 M ha while the other two are orbit 4 and image 3.17
 and 3.16 M ha, which is why 7 and 31 August are compared against each other on
 their shared ground rather than against 12 August. Imaged area throughout is
-measured after the 600 m swath-edge buffer has been set to no data.*
+measured after the swath-edge buffer, about 640 m, has been set to no data.*
 
 ![What the flood did between 7 and 31 August](results/figures/flood_recession.png)
 
@@ -209,16 +211,16 @@ than by any metric.
 | Step | Removed | Remaining |
 |---|---:|---:|
 | Raw threshold at −18.75 dB | | 217,490 ha |
-| Swath edge buffer, 600 m to no data | 26,223 ha | 191,267 ha |
+| Swath edge buffer, about 640 m, to no data | 26,223 ha | 191,267 ha |
 | Slope above 8° reclassified as land | 68,437 ha | 122,830 ha |
 | Connected components under 10 px | 3,052 ha | **119,779 ha** |
 
 **Swath edge.** Flood classification runs at 32.9% of area within the first
-600 m of the frame boundary against 3.1% in the interior, measured on the
+640 m or so of the frame boundary against 3.1% in the interior, measured on the
 12 August map by `edge_rate.py` and written to `results/edge_rate.csv`. That is
 a contrast of about eleven to one. Earlier versions of this section said 17%
 and 1.9%, which came from no file and were not what the rasters say; the decay
-distance beyond 600 m is still an impression rather than a measurement. The pattern is unambiguous; the mechanism is most likely incompletely
+distance beyond the buffer is still an impression rather than a measurement. The pattern is unambiguous; the mechanism is most likely incompletely
 removed GRD border noise combined with falling return at near and far range, and
 that attribution has not been verified against the product documentation. The
 buffer becomes no data rather than land, because those pixels are unmeasured
@@ -283,16 +285,21 @@ inputs rather than about a bug.
 ### What leaving Google Earth Engine costs
 
 The published baseline was built on Earth Engine sigma0. This pipeline uses
-Planetary Computer RTC gamma0 and never touches Earth Engine. At matched recall
-the precision gap decomposes as:
+Planetary Computer RTC gamma0 and never touches Earth Engine. At matched recall,
+each curve read at the point whose recall is nearest the baseline's 0.601, the
+precision gap decomposes as:
 
 ```
-moving from RTC to the GEE product     +0.009
-moving from pooled to per-scene Otsu   +0.031
+moving from RTC to the GEE product     +0.024
+moving from pooled to per-scene Otsu   +0.016
 total gap to the published baseline    +0.040
 ```
 
-So the migration costs about 0.009 of precision and 0.012 of IoU. Separability
+So the migration costs about 0.024 of precision at matched recall, and 0.012 of
+IoU with each product at its own best threshold on the valid split. An earlier
+version of this section gave +0.009 and +0.031, which were the precision
+differences between each curve's best-on-valid points rather than at matched
+recall (C-14). Separability
 explains why it is small: RTC has less contrast (6.10 dB against 7.95) but is
 also less noisy (spread 3.10 against 3.89), so d-prime lands at 1.97 against
 2.04. Terrain-corrected radiometry is flatter and cleaner rather than worse.
@@ -308,9 +315,10 @@ own best threshold, a larger effect than the entire platform migration.
 
 Orbits 77 and 4 view the same ground at different incidence angles. The two
 passes share 1,819,972 ha, and eight tiles covering 729,161 ha of that were
-compared. Over land they agree to **0.05 dB**, the pixel-weighted median of the
-per-tile median differences, with **0.11 dB of scatter between tiles**, the
-standard deviation of those same medians. One threshold serves both orbits, and
+compared. Over land they agree to **0.05 dB**, the pixel-weighted mean of the
+per-tile land medians, each tile weighted by its total pixel count, with
+**0.11 dB of scatter between tiles**, the sample standard deviation of those
+same medians. One threshold serves both orbits, and
 that is measured rather than assumed. For anyone building multi-orbit monitoring
 on this stack it is a load-bearing fact.
 
@@ -338,10 +346,11 @@ and both gate settings found the optimum at the point where the change
 constraint stops excluding anything. **The best available change configuration is
 the one that ignores the change signal.**
 
-With the change signal alone the best the sweep reaches is IoU 0.196, at a
-required drop of 2 dB. Relax that requirement to nothing and the same
-configuration converges on 0.130, which is what labelling the entire scene as
-water scores.
+With the change signal alone the best the sweep reaches over all 65 chips, test
+split included, is IoU 0.196, at a required drop of 2 dB. Chosen on the valid
+split instead, as every other setting here is, it reaches 0.146. Relax the
+required drop to nothing and the same configuration converges on 0.130, which
+is what labelling the entire scene as water scores.
 
 The reason is measurable. At thresholds where the filter actually bites it
 deletes true water faster than false positives, 66% against 46% at −3 dB. Between
@@ -402,7 +411,7 @@ of them still failed when the pipeline moved from 65 chips to 63,000 km². All
 three failures have the same shape: the validation set was selected around the
 flood, so it represents the flood rather than the region.
 
-1. **Otsu window.** Per-scene threshold estimation, worth +0.031 precision on a
+1. **Otsu window.** Per-scene threshold estimation, worth +0.016 precision on a
    floodplain scene, returned −15.36 dB when run over the whole 200 × 381 km
    rectangle, 3.4 dB too permissive, classifying 53% of the imaged area as
    flood. The AOI contains hills and dry upland the labelled chips never
@@ -422,7 +431,8 @@ worth stating plainly: no score in this repository would have found any of them.
 
 - **The study area covers part of Assam and land beyond it.** The AOI comes from
   the Sen1Floods11 chip footprints. Of the four districts named as worst
-  affected in a Sentinel-1 map published on 4 August 2016, it contains two,
+  affected in a Sentinel-1 map published on 4 August 2016, whose publisher
+  this project did not record, it contains two,
   Golaghat and Jorhat, and misses two that lie on either side of it: Bongaigaon
   at 90.4 to 90.9°E and Dhemaji at 94.2 to 95.5°E. Sivasagar, Dibrugarh,
   Tinsukia and Barpeta are also outside. In the other direction the swath
@@ -448,8 +458,10 @@ worth stating plainly: no score in this repository would have found any of them.
   covers flood control works and expenditure rather than event damage. Outside
   the 65 hand-labelled chips this map is unvalidated. The only external
   cross-check available is of ranking rather than magnitude: of the two
-  worst-affected districts that fall inside the study area, both appear at the
-  top of the 7 August flooded-cropland table. For scale, the same Economic
+  worst-affected districts that fall inside the study area, Golaghat is first
+  and Jorhat third in the 7 August flooded-cropland table, behind Lakhimpur.
+  The publisher of that 4 August map was not recorded, so this check cannot be
+  followed up as it stands. For scale, the same Economic
   Survey gives Assam's average annual flood-affected area as 9.31 lakh hectares
   across the whole state and a whole season; the 119,779 ha here is one
   satellite pass on one day over part of the state.
@@ -513,7 +525,7 @@ a CSV beside its figure.
 | 4 | `mask_chips.py` | Nine threshold variants, ablated |
 | 5 | `threshold_analysis.py` | Class separation and threshold sweep |
 | 6 | `ceiling_analysis.py` | Decompose the accuracy ceiling |
-| 7 | `fetch_reference.py`, `coregister.py`, `shift_field.py` | RTC onto chip grids, and fix a 10 px offset |
+| 7 | `fetch_reference.py`, `coregister.py`, `shift_field.py` | RTC onto chip grids, and align each chip to the label grid (median shift 2 px, up to 11 px) |
 | 8 | `fetch_dem.py`, `mask_terrain_water.py` | Terrain and permanent water |
 | 9 | `change_detect.py`, `fetch_dry_reference.py`, `change_sweep.py` | Test change detection and reject it |
 | 10 | `operating_point.py`, `product_vs_window.py` | Choose an operating point; price the GEE migration |
@@ -524,7 +536,7 @@ a CSV beside its figure.
 | Audit | `accuracy_ci.py` | Confusion matrix, per-class accuracy, bootstrap intervals |
 | Audit | `sensitivity_grid.py` | Reported area across all 216 refinement parameter combinations |
 | Audit | `make_manifest.py` | File counts, sizes and SHA-256 digests for reproduction checking |
-| Audit | `edge_rate.py` | Flood called inside the 600 m swath-edge buffer against the interior |
+| Audit | `edge_rate.py` | Flood called inside the swath-edge buffer against the interior |
 | Audit | `cropland_scene.py` | Flooded cropland over the whole raster rather than over district polygons |
 | Audit | `refine_figure.py` | The before and after of refinement, rebuilt from the two rasters |
 | Audit | `verify_all.py` | Traces every number in README.md and docs/index.html back to results/ |

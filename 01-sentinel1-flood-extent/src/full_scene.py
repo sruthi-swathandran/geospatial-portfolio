@@ -13,11 +13,20 @@ THE METHOD, AND WHERE EACH PIECE CAME FROM
   VH only                     step 5: VV adds nothing a threshold can use
   Lee 5x5 on linear power     step 10c: worth +0.037 IoU on the GEE product,
                               a bigger effect than the whole GEE to RTC move
-  per-scene Otsu              step 10c: worth +0.016 precision at matched
-                              recall against one pooled threshold, and the full
-                              scene is the first place it can actually be done
-  no slope mask               step 10: swept 2 to 20 degrees, removed true water
-                              faster than shadow
+  swept threshold             step 10b: read from results/final_method.json,
+                              the point that maximises IoU on the valid split.
+                              Per-scene Otsu was worth +0.016 precision at
+                              matched recall on the chips, but over the whole
+                              AOI it returned -15.36 dB and called 53% of the
+                              imaged area flood, so it is kept only as --otsu
+  clean-up before counting    morph_clean, removing water patches and holes
+                              under 25 pixels. The chips were scored without
+                              it, so the validated and reported products
+                              differ here too (I-22)
+  no slope mask here          step 10: on the chips the best cut changed
+                              precision by +0.008 and recall by -0.003, too
+                              small to decide anything. The scene applies an
+                              8 degree cut afterwards, in refine_scene.py
   no change detection         step 9c: the best change threshold was the one
                               that made the constraint inert
   permanent water separated,  step 10: 95% of pixels JRC calls water half the
@@ -55,7 +64,7 @@ Usage:
     python src\\full_scene.py --res 20
     python src\\full_scene.py --res 20 --limit-tiles 2      # smoke test
     python src\\full_scene.py
-    python src\\full_scene.py --threshold -18.75            # override Otsu
+    python src\\full_scene.py --threshold -18.75            # override the file
 """
 
 from __future__ import annotations
