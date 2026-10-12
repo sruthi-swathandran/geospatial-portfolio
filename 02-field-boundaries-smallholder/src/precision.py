@@ -28,6 +28,11 @@ one sweep. SAM is measured on a subset, because a full pass costs 26 hours.
     python src\\precision.py --country india --method ftw
     python src\\precision.py --country india --method watershed --setting 0.02
     python src\\precision.py --country slovenia --method ftw
+    python src\\precision.py --country india --method sam --composite cir --limit 100
+
+The SAM subset was first run on composite false, which is near infrared, blue
+and green rather than colour infrared (B-23). That file is kept; the cir run
+writes its own.
 """
 
 from __future__ import annotations
@@ -130,11 +135,11 @@ def main() -> None:
 
     gen = None
     if args.method == "sam":
-        # SAM keeps no segmentations on disk, so precision for it means
-        # regenerating them. Generation is the whole cost and filtering
-        # afterwards is free, which sam_verify_filter.py established to the
-        # mask, so one pass at the loose threshold covers whichever setting is
-        # asked for. A full country is 26 hours, hence --limit.
+        # sam_run.py keeps no segmentations, so precision for SAM means
+        # generating them, about 75 seconds a chip; a full country is 26
+        # hours, hence --limit. Each chip's raster is cached under
+        # data/sam_cache/ (sam_run.cached_segments), so ring_sensitivity.py
+        # can reuse this pass on the same chips instead of repeating it.
         import sam_run as S2
         try:
             from segment_anything import (SamAutomaticMaskGenerator,
@@ -172,12 +177,8 @@ def main() -> None:
             seg = C.ftw_segments(chip, args.ref_tag)
         elif args.method == "sam":
             import sam_run as S2
-            img = S2.rgb8(chip, S2.COMPOSITES[args.composite])
-            masks = gen.generate(img)
-            keep = [m for m in masks
-                    if m["predicted_iou"] >= args.sam_threshold
-                    and m["stability_score"] >= S2.GEN_STABILITY]
-            seg = S2.masks_to_labels(keep, img.shape[:2])
+            seg = S2.cached_segments(chip, args.composite, args.sam_threshold,
+                                     lambda: gen, args.model)
         else:
             try:
                 stack = C.read_stack(chip)

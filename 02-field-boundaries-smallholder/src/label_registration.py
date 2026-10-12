@@ -2,7 +2,9 @@
 RS-02. Are the Indian labels drawn where the edges are?
 
 At matched ground width the same sensor and the same method find Slovenian
-parcels between 1.8 and 71.5 times more often than Indian ones. The leading
+parcels between 1.7 and 41.0 times more often than Indian ones, measured on
+Slovenia's pixels as they are, 4.138 m across and 6.002 m tall (B-18, B-19).
+This was written when the range read 1.8 to 71.5 times, on square pixels. The leading
 explanation is label geometry: India is presence-only with five parcels drawn
 by hand per chip, Slovenia is a complete cadastre, and IoU against a loosely
 placed polygon is depressed whatever the imagery shows. That explanation has

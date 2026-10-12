@@ -5,9 +5,10 @@ Stage 1 measured the reference data. This runs the method against it.
 What is being tested is FTW's own published approach rather than anything of
 ours: free Sentinel-2 at 10 m, two seasonal windows stacked into eight
 channels, a U-Net with an EfficientNet-B3 encoder, and a three-class head for
-field interior, field boundary and background. That is the current open state
-of the art for global field delineation and it is what anyone starting this
-work today would pick up.
+field interior, field boundary and background. The checkpoint is FTW's first
+public release, v1 of October 2024. FTW has since released v2 and v3, which
+find more Indian parcels; this stage keeps v1 because every later comparison
+was built on it, and the next section says where the later checkpoints are.
 
 Every number traces to a file under `results/`. Where a number is a bound, an
 inference or unexplained, it says so.
@@ -21,8 +22,9 @@ that is where the current headline numbers live. A technical review of all
 three documents is in `REVIEW.md`.
 
 The checkpoint run here is FTW's v1 release of October 2024. FTW had published
-v2 and v3 before this stage was written, so calling v1 the current open state
-of the art below was wrong (B-24 in `COMPARISON.md`). v3 finds 12.91% of Indian
+v2 and v3 before this stage was written, so an earlier version of this page
+calling v1 the current open state of the art was wrong (B-24 in
+`COMPARISON.md`). v3 finds 12.91% of Indian
 parcels against v1's 2.72%. Findings 18 and 19 in `COMPARISON.md` carry the
 later checkpoints. The gaps it found that change how these
 numbers should be read are listed under Known gaps in `COMPARISON.md`.
@@ -38,7 +40,8 @@ numbers should be read are listed under Known gaps in `COMPARISON.md`.
    parcel in them can be matched at any threshold.
 3. Recall against parcel width shows a threshold near three native pixels
    across. Below it the released checkpoint finds 1 parcel in 441, which is
-   0.23% with a 95% interval of [0.01, 1.26].
+   0.23% with a 95% interval of [0.01, 1.26]
+   (`results/india/threshold_check.csv`).
 4. Our India object recall is 0.027 against reconstructed parcels, and 0.053 in
    FTW's own convention, which scores against the eroded interior. The 0.053 is
    the figure that compares to theirs, and it sits inside FTW's published range
@@ -104,6 +107,13 @@ read 0.053 rather than 0.027. See S-08. Training on fifteen extra countries
 moves Slovenia a long way and leaves India where it was, 59 parcels found
 against 54 out of 1,983, which is inside the noise.
 
+Slovenia's object precision, 0.240, divides the 1,518 matched objects by all
+6,322 connected components the checkpoint emits over the 228 test chips, with
+no size filter. `COMPARISON.md` reports the same 1,518 as a matched object
+share of 42.06%, over the 3,609 objects left after FTW's 500 m² filter on the
+185 chips that carry labels. The two are the same matches counted against
+different denominators.
+
 Our Slovenia FULL row sits almost on FTW's published India row, 0.595 against
 0.57 and 0.635 against 0.63. That is the calibration check: when the model
 works, this scorer returns numbers in the published range.
@@ -165,25 +175,28 @@ across its largest inscribed circle:
 
 | width, native 10 m px | India found | Slovenia found |
 |---|---:|---:|
-| under 2 | 0.0% | 1.5% |
-| 2 to 3 | 0.4% | 13.0% |
-| 3 to 4 | 0.2% | 36.3% |
-| 4 to 5 | 1.1% | 47.6% |
-| 5 to 7 | 3.7% | 62.1% |
-| 7 to 10 | 6.4% | 69.6% |
-| 10 to 15 | 15.1% | 69.6% |
-| over 15 | 30.0% | 82.4% |
+| under 2 | 0.0% | 0.5% |
+| 2 to 3 | 0.4% | 7.9% |
+| 3 to 4 | 0.2% | 18.9% |
+| 4 to 5 | 1.1% | 34.0% |
+| 5 to 7 | 3.7% | 48.5% |
+| 7 to 10 | 6.4% | 66.2% |
+| 10 to 15 | 15.1% | 71.8% |
+| over 15 | 30.0% | 76.1% |
 
-Slovenia steps from 1.5% to 36.3% between two and four pixels across, then
-climbs more slowly and flattens near 70%. Its area curve over the same parcels climbs steadily
-with no step in it. **Width shows a threshold where area shows a gradient**,
-and the threshold sits where a one to two pixel boundary on each side stops
-leaving an interior.
+Slovenia's widths are measured on its tall pixels, 4.138 m across and 6.002 m
+north to south (B-18, B-19 in `COMPARISON.md`). On those widths its recall
+rises steadily, from 0.5% under two pixels to 66.2% at seven to ten, and then
+flattens. An earlier version of this table used the widths from before that
+correction and read a step from 1.5% to 36.3% between two and four pixels as a
+threshold where a one to two pixel boundary stops leaving an interior. On the
+corrected widths there is no step; the rise is spread from two pixels to ten.
 
-Measured as a correlation the two look alike: width +0.548 against area +0.525
-for Slovenia, +0.230 against +0.218 for India. Width and area are strongly
-correlated in any real parcel set, so that comparison cannot separate them.
-The shape of the curve can, and does.
+As a correlation of found against log width and log area, width leads area
+slightly in Slovenia, +0.531 against +0.513, and not at all in India, +0.223
+against +0.225. Width and area move together in any real parcel set, so this
+section shows that recall rises with size in Slovenia and stays low at every
+size in India. It does not separate width from area.
 
 India stays flat and low at every width, topping out at 30% above fifteen
 pixels across, because saturation is a scene-level failure that a parcel's own
@@ -263,7 +276,10 @@ predicted and labelled coverage is +0.933.
 
 **S-05. Width was predicted to separate found from missed much more cleanly
 than area.** It is better by a margin too small to claim, in both countries.
-What survives is the curve shape rather than the correlation.
+This page then argued that the curve's shape, a step in Slovenia between two
+and four pixels, did what the correlation could not. That step came from
+widths measured before B-19 and is not in the corrected ones, so neither the
+correlation nor the curve separates width from area.
 
 **S-06. The first comparison figure sampled chips alphabetically**, landed in
 one forested Slovenian area, and made a correct result look like a dead one.
@@ -286,8 +302,10 @@ from a small parcel, so the effect is largest exactly where this project's
 claims live. India's object recall moves from 0.053 to 0.027 and Slovenia's
 from 0.289 to 0.222, factors of 1.95 and 1.30. Slovenia's object precision
 moves from 0.312 to 0.240. Slovenia's width curve moves from 3.2% found under
-two native pixels and 50.4% at three to four, to 1.5% and 36.3%. Every pixel
-metric is unchanged, because those never touched the instance raster.
+two native pixels and 50.4% at three to four, to 1.5% and 36.3%; B-19 later
+moved it to 0.5% and 18.9% by measuring Slovenian widths on the pixel's true
+height. Every pixel metric is unchanged, because those never touched the
+instance raster.
 
 FTW's own `get_object_level_metrics` takes `semantic_2class` as truth, where
 value 1 is the interior, so the eroded target is their convention as well. The
@@ -312,7 +330,7 @@ report object recall 0.14 for a model pre-trained on FTW minus India and tested
 on India without fine-tuning, alongside 0.03 for a France-pretrained model and
 0.05 for an AI4Boundaries-pretrained one. We measure 0.053 in their convention 
 with the released CC-BY and FULL checkpoints, both of which include India in 
-training.Our figure sits inside their range, so the framing is not that we score
+training. Our figure sits inside their range, so the framing is not that we score
 far below them. It is that seeing the country in training should help and 
 appears not to.
 
@@ -335,7 +353,7 @@ recall.
 What remains is the model or its training. Their Table 5 rows come from models
 they trained per experiment, not from the released checkpoints, and nothing in
 the paper reports per-country results for the checkpoints we ran. Reproducing
-their training is out of reach on a 2 GB GPU, so **this stays open, narrowed to
+their training is out of reach on this machine, a six-core CPU with no GPU, so **this stays open, narrowed to
 one candidate.** The India figures here remain a lower bound.
 
 **O-04. The polygonize step has not been run end to end.** Its source has been

@@ -14,11 +14,11 @@ Thickness matters because it decides whether the reconstruction is right:
 
     one pixel thick   the ring is the parcel's own outer edge. interior + ring
                       is the parcel, the reconstruction is exact, and the
-                      median parcel is 0.302 ha.
+                      median parcel is 0.303 ha.
 
     two pixels thick  the band may straddle the true polygon edge, half inside
                       and half out. Then interior + ring overshoots, the true
-                      median sits between 0.166 and 0.302 ha, and the 0.24 ha
+                      median sits between 0.166 and 0.303 ha, and the 0.24 ha
                       the source paper reports lands near the middle.
 
 Euclidean distance answers it without ambiguity. For every ring pixel this
@@ -120,7 +120,7 @@ def main() -> None:
         print("  So the ring is the parcel's own outer edge, not a band")
         print("  straddling it. interior + ring is the rasterised parcel, the")
         print("  reconstruction in ftw_common is exact, and the median parcel")
-        print("  measures 0.302 ha ON THIS GRID.")
+        print("  measures 0.303 ha ON THIS GRID.")
         print()
         print("  That last qualifier matters. The source paper reports 0.24 ha")
         print("  for the same labels, measured on the original vector polygons")
@@ -130,16 +130,16 @@ def main() -> None:
         print("  inside. At a median 82 grid pixels with a perimeter near 36,")
         print("  a half-pixel outward bias would account for the gap. That is")
         print("  a plausible explanation and not a verified one, so treat")
-        print("  0.302 ha as an upper bound on the true parcel.")
+        print("  0.303 ha as an upper bound on the true parcel.")
     elif within_141 > 0.6:
         print("  Mixed. Most of the ring touches the interior but a real share")
         print("  sits further out, so the band is not a clean one-pixel edge.")
-        print("  Quote the parcel median as a range, 0.166 to 0.302 ha, until")
+        print("  Quote the parcel median as a range, 0.166 to 0.303 ha, until")
         print("  the original vectors settle it.")
     else:
         print("  The ring is TWO pixels thick or more, so it may straddle the")
         print("  polygon edge. interior + ring then overshoots the parcel.")
-        print("  Quote the range 0.166 to 0.302 ha, and note that the paper's")
+        print("  Quote the range 0.166 to 0.303 ha, and note that the paper's")
         print("  0.24 ha sits inside it.")
 
     out = F.RESULTS / "ring_thickness.csv"

@@ -1,8 +1,8 @@
 """
 RS-02 stage 3. Put a confidence interval on the width threshold.
 
-Per-district recall rests on twenty to fifty parcels, which is too few to
-carry a claim. Pooling the districts whose parcels are narrow gives a number
+Per-district recall rests on 4 to 84 parcels, median 10
+(results/india/district_profile.csv), which is too few to carry a claim. Pooling the districts whose parcels are narrow gives a number
 that can be stated. This also checks what India's recall looks like without
 Rajasthan, which supplies a quarter of the test parcels on its own.
 
@@ -12,6 +12,10 @@ width and say nothing.
 
     python src\\threshold_check.py --country india
     python src\\threshold_check.py --country india --cut 3.5
+
+Every line printed is also written to results/<country>/threshold_check.csv,
+or threshold_check_<width table>.csv with --width-file, so the intervals
+RESULTS.md quotes have a file behind them.
 """
 
 from __future__ import annotations
@@ -45,11 +49,18 @@ def ci(found: int, total: int, alpha: float = 0.05):
     return float(lo), float(hi)
 
 
+ROWS: list[dict] = []
+
+
 def line(label: str, found: int, total: int):
     lo, hi = ci(found, total)
     rate = found / total if total else float("nan")
     print(f"  {label:<44} {found:>5,} / {total:>5,}  "
           f"{rate * 100:5.2f}%  [{lo * 100:4.2f}, {hi * 100:5.2f}]")
+    ROWS.append({"group": label, "found": found, "parcels": total,
+                 "recall_pct": round(rate * 100, 2),
+                 "ci_lo_pct": round(lo * 100, 2),
+                 "ci_hi_pct": round(hi * 100, 2)})
 
 
 def main() -> None:
@@ -126,6 +137,15 @@ def main() -> None:
                         right=False)
     for name, grp in df.groupby("band", observed=True):
         line(f"width {name} native px", int(grp["hit"].sum()), len(grp))
+
+    # one file per width table, so the watershed and FTW runs in the run
+    # order do not overwrite the default one RESULTS.md quotes
+    out = F.RESULTS / ("threshold_check.csv" if not args.width_file else
+                       f"threshold_check_{Path(wname).stem}.csv")
+    pd.DataFrame([dict(country=F.COUNTRY, table=wname, iou=args.iou,
+                       district_cut=args.cut, parcel_cut=args.parcel_cut, **r)
+                  for r in ROWS]).to_csv(out, index=False, lineterminator="\n")
+    print(f"\n  wrote {out.relative_to(F.PROJECT)}")
 
     print("\n" + RULE)
     print("An interval that includes zero at the top is the claim worth")

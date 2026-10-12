@@ -8,7 +8,9 @@ Every number below traces to a file in `results/india/`. Where a number is an
 estimate, a bound or an inference, it says so.
 
 Data: [Fields of The World](https://source.coop/kerner-lab/fields-of-the-world),
-India subset, with Slovenia as a control. CC-BY-4.0, imagery Copernicus / ESA.
+India subset, with Slovenia as a control. Labels are licensed per country,
+CC-BY-4.0 for India and CC-BY-SA-4.0 for Slovenia (B-25 in `COMPARISON.md`);
+imagery Copernicus / ESA.
 Nothing here comes from any non-public source.
 
 ## Where this sits
@@ -28,8 +30,8 @@ control's.
 
 ## The short version
 
-1. The chips are not on a 10 m grid. They are 256 pixels across 1,536 m, which
-   is 6.07 m per pixel, and Sentinel-2's finest bands sample at 10 m. The grid
+1. The chips are not on a 10 m grid. They are 256 pixels of 6.067 m, about
+   1,553 m across, and Sentinel-2's finest bands sample at 10 m. The grid
    is finer than the sensor.
 2. 98.96% of every chip is unlabelled, and it is not empty ground. Each chip
    holds hundreds of visually distinct fields, of which five carry a label,
@@ -54,8 +56,9 @@ control's.
 Measured geodesically from each chip's own transform over 80 chips:
 **6.067 m per pixel**, both across and down. 256 pixels gives 1,553 m, and
 1,536 m is 1,024 × 1.5 m, the footprint of the Airbus imagery the parcels were
-digitised on. So FTW cut Sentinel-2 to the labelling image's footprint and
-resampled it to a 256 square.
+digitised on. So FTW cut Sentinel-2 to roughly the labelling image's
+footprint and resampled it to a 256 square. The 17 m between 1,553 m and
+1,536 m is not accounted for here.
 
 The resampling is arithmetic, not inference: a 10 m sensor cannot produce 6 m
 pixels. What needed measuring was the method. Exactly **0.71% of neighbouring
@@ -112,7 +115,8 @@ nearest interior pixel:
 |---:|---:|
 | 1.00 | 78.67% |
 | 1.41 | 18.07% |
-| 2.00 and beyond | 3.14% |
+| 2.00 to 3.00 | 3.15% |
+| beyond 3.00, left unassigned (C-06) | 0.11% |
 
 1.00 is an orthogonal step and 1.41 the same ring reached diagonally, so
 **96.74% of the ring is one pixel of parcel edge**. What lies beyond turns up

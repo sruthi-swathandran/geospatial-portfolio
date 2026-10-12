@@ -10,7 +10,8 @@ country after it looked right on the first.
   keying off it dilated every parcel three pixels into open ground.
 
   Parcels touching a chip edge are truncated, so their measured size is a
-  floor. India has none. Slovenia has 22,158 of 69,435. They are reported
+  floor. India has none. Slovenia has 21,188 of 69,435, 30.5%
+  (results/slovenia/field_sizes.csv). They are reported
   separately rather than mixed into one distribution.
 
 Writes, under results/<country>/:

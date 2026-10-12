@@ -2,7 +2,7 @@
 RS-02. Look at what the model did where a parcel was actually labelled.
 
 The India numbers say something odd. The 3-class FULL checkpoint predicts field
-over 28.6% of a chip, and yet pixel recall against labelled parcels is 23.3%
+over 28.5% of a chip (results/saturation_3class_full.csv), and yet pixel recall against labelled parcels is 23.3%
 and median best IoU is 0.000 for every size bin below 5 by 5. So the model is
 predicting plenty of field somewhere, and almost none of it lands on the
 parcels FTW drew.

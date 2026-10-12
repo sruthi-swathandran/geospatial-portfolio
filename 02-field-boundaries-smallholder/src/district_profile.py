@@ -15,6 +15,17 @@ parcels narrow enough that the three-pixel threshold bites.
 Width and recall are computed from separate tables and merged afterwards, so a
 mismatch in parcel numbering between them cannot silently drop rows.
 
+The output names its checkpoint and its scoring in two columns, and gives
+width and area in native 10 m pixels, as the column names now say. The first
+committed version (16 September 2026) was written 37 seconds before the S-08
+fix and carried recall against the eroded interior; rerunning this rewrites it
+against the reconstructed parcel.
+
+Too thin to carry district claims. 133 districts hold 1 to 17 test chips,
+median 2, and 4 to 84 parcels, median 10, so most districts' recall rests on a
+handful of parcels. It is a sampling map for choosing districts to run, and
+the script prints how many districts clear the floors.
+
     python src\\district_profile.py
     python src\\district_profile.py --min-test 5 --min-parcels 20
 """
@@ -132,8 +143,14 @@ def main() -> None:
     out = (recall.join(width, how="outer").join(chips, how="outer")
            .fillna({"test_chips": 0}))
     out["test_chips"] = out["test_chips"].astype(int)
-    out = out[["state", "test_chips", "parcels", "median_width_px",
-               "share_narrow", "median_area_px", "median_iou", "recall"]]
+    out = out.rename(columns={"median_width_px": "median_width_native_px",
+                              "median_area_px": "median_area_native_px"})
+    out["checkpoint"] = (f"FTW v1 {args.classes}-class"
+                         f"{args.tag.replace('_', ' ').upper()}").strip()
+    out["scored_against"] = "reconstructed parcel (S-08)"
+    out = out[["state", "test_chips", "parcels", "median_width_native_px",
+               "share_narrow", "median_area_native_px", "median_iou",
+               "recall", "checkpoint", "scored_against"]]
 
     print("\n" + RULE)
     print("BY TEST CHIPS")
@@ -151,7 +168,8 @@ def main() -> None:
         print("  nothing clears both floors. Lower --min-test or "
               "--min-parcels and look again.")
     else:
-        print(keep.sort_values("median_width_px").head(args.top).to_string())
+        print(keep.sort_values("median_width_native_px")
+              .head(args.top).to_string())
 
     by_state = (sc.dropna(subset=["district"]).groupby("state")
                 .agg(parcels=(iou_col, "size"),
@@ -164,8 +182,20 @@ def main() -> None:
     print(by_state.head(15).to_string())
 
     p = F.RESULTS / "district_profile.csv"
-    out.to_csv(p)
+    out.to_csv(p, lineterminator="\n")
     print(f"\n  wrote {p.relative_to(F.PROJECT)}")
+
+    # how thin it is, so nobody reads a district's recall as a finding
+    pooled = float((sc[iou_col] >= args.iou).mean())
+    print(f"\n  pooled recall over every scored parcel: {pooled:.3f}")
+    print(f"  {len(out)} districts, test chips {int(out['test_chips'].min())}"
+          f" to {int(out['test_chips'].max())} (median "
+          f"{out['test_chips'].median():g}), parcels "
+          f"{int(out['parcels'].min())} to {int(out['parcels'].max())} "
+          f"(median {out['parcels'].median():g})")
+    print(f"  {int((out['recall'] == 0).sum())} districts at zero recall, "
+          f"{len(keep)} clear --min-test {args.min_test} and --min-parcels "
+          f"{args.min_parcels}")
 
     print("\n" + RULE)
     print("Two things to read here. Whether any district has both enough test")

@@ -33,6 +33,12 @@ deliberate: a file that rounds differently is a different file.
 
 Run it from inside the project's .venv. It records whatever interpreter runs
 it, so run from the wrong one it will say so.
+
+Run it after the commit that holds the outputs, not before. It records HEAD,
+so a manifest written before committing names the previous commit and says
+uncommitted_changes: true, which is how the 9 October 2026 manifest came to
+name 0a5bd73 while describing 43badc3. Committed on its own straight after,
+it names the commit whose outputs it hashed and reports a clean tree.
 """
 
 from __future__ import annotations
@@ -75,7 +81,9 @@ def git_state() -> dict:
                            capture_output=True, text=True)
         return r.stdout.strip() if r.returncode == 0 else None
     commit = run("rev-parse", "HEAD")
-    dirty = run("status", "--porcelain", "--", ".")
+    # the manifest itself is the one file expected to differ from HEAD
+    dirty = run("status", "--porcelain", "--", ".",
+                ":(exclude)results/run_manifest.json")
     return {"commit": commit,
             "uncommitted_changes": None if dirty is None else bool(dirty)}
 

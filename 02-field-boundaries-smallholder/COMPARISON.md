@@ -38,8 +38,8 @@ and SAM against them, and the README's headline now uses v3 (B-24).
    are upper bounds rather than measurements. See B-08.
 3. FTW's Indian output barely clears its own null, measured properly. At 200
    draws rather than three, random Voronoi cells of the same count average
-   0.0209 against the checkpoint's 0.0272. Three draws in 200 beat it outright
-   and the best reached 0.0308, above the trained model, on cells that never
+   0.0209 against the checkpoint's 0.0272. Three draws in 200 reached it, two
+   above and one level, and the best reached 0.0308, above the trained model, on cells that never
    saw the imagery. The gap is +0.0063, about twelve parcels in 1,983, and it
    clears the null at roughly one draw in seventy. Real, and small enough that
    the three-draw version in the table below could not have established it.
@@ -98,7 +98,7 @@ and SAM against them, and the README's headline now uses v3 (B-24).
 14. Choosing each method's setting on the data it is reported from was worth
     almost nothing. Over 40 chip-level splits per country, picking on one half
     and reading on the other moves recall by between -0.002 and +0.007, and
-    seven of the eight method and country pairs choose the same setting in
+    eleven of the twelve method and country pairs choose the same setting in
     every split.
 15. Parcel shape does not explain the country gap. Slovenian parcels are more
     strip-like than Indian ones, but giving Slovenia India's mix of widths and
@@ -221,8 +221,10 @@ highest label overstates the count by however many were dropped.
 `figures/recall_by_object_budget.png` draws this control for both countries.
 Interpolation clamps when the budget falls outside a method's sweep, and a
 clamped figure is a bound rather than a measurement. Every table below carries
-a column saying which happened. All five Indian figures are interpolated. Four
-of the five Slovenian ones are clamped.
+a column saying which happened. All six Indian figures beside FTW's own are
+interpolated. All six Slovenian ones are clamped in the main table; watershed
+has since been measured at 0.059 with its sweep extended, so five remain
+bounds, felzenszwalb and the four SAM composites.
 
 **A minimum object size.** FTW's own `polygonize` drops anything under 500
 square metres, so scoring its raw argmax output would count specks its shipped
@@ -316,7 +318,8 @@ baseline.
 ## Slovenia
 
 185 of 228 chips carry at least one labelled parcel; the rest are forest and
-similar. 6,831 parcels, 4.139 m grid, about 37 parcels per chip.
+similar. 6,831 parcels, on grid pixels 4.138 m across and 6.002 m tall
+(B-18), about 37 parcels per chip.
 
 | method | setting | objects/chip | median IoU | recall | null | gap |
 |---|---:|---:|---:|---:|---:|---:|
@@ -537,9 +540,16 @@ of parcels untouched. About a sixth of the misses are the filter deleting
 fragments the model did find, and five sixths are the model finding nothing.
 The matched object count stays at exactly 54 either way, so none of the 46,679
 sub-threshold objects would have scored: FTW's polygonize default is deleting
-only junk.
+only junk. Both counts are rows of `precision_summary.csv`, 116,335 objects
+without the filter and 69,656 with it, over the 398 chips that carry labels.
+The 62.3% is `precision_ftw_min0.csv`.
 
 **Matched object share**, which is precision on Slovenia and a floor on India.
+It is a different figure from the 0.240 object precision in `RESULTS.md`,
+though both count the same 1,518 matched objects. That one divides by all
+6,322 connected components FTW emits over the 228 Slovenian test chips, with
+no size filter; this one by the 3,609 objects left after the 500 m² filter on
+the 185 chips that carry labels.
 
 | method | India, floor | Slovenia, precision |
 |---|---:|---:|
@@ -623,7 +633,8 @@ rate in each if that is true. It is not.
 
 Widths are in metres here rather than native pixels, because the two countries
 sit on grids of different fineness. India's chips measure 6.067 m per grid
-pixel and Slovenia's 4.139 m, both upsampled from the same 10 m source, so a
+pixel and Slovenia's 4.138 by 6.002 m, both upsampled from the same 10 m
+source, so a
 band cut in grid pixels covers a different physical size in each country. An
 earlier version of this comparison made that mistake and it hid the effect
 below by about half. See B-09.
@@ -696,7 +707,7 @@ enters the comparison:
 
 The gap widens as parcels get larger, which is not the shape a resolution
 artefact takes. Only parcels wide enough to survive two erosions can be
-measured, 1,467 of 1,983 in India and 4,307 of 6,827 in Slovenia, so this is
+measured, 1,467 of 1,983 in India and 4,307 of 6,823 in Slovenia, so this is
 silent about the narrowest band in each country.
 
 A 1.2x deficit in edge gradient is a contributor of measured size and cannot
@@ -1204,15 +1215,18 @@ including FieldSeg at 10 m and a Canadian prairies dataset built this way, none
 of which has been read here beyond its title.
 
 **That width is the only thing that matters.** The district work in stage 3
-found Jodhpur with the widest parcels in the Indian test set, 7.35 native
-pixels median and none below the threshold, still at 0.048 recall. That was
+found Jodhpur, which holds more test parcels than any other district, 84, with
+the widest parcels of any district holding 30 or more, 7.40 native pixels
+median and none below the threshold, still at 0.048 recall, 4 of its 84.
+That figure was first read from a profile scored the pre-S-08 way and holds
+on the current scoring; the profile has been rewritten (errata round below). That was
 written off as an anecdote until contrast was measured at national scale, and
 it now reads as the first sighting of the effect in What this says rather than
 as a curiosity.
 
-**That the Slovenian margin is quantified.** Three of the five figures at
-Slovenia's object budget are clamped. Watershed has been measured there;
-felzenszwalb and SAM have not. See B-08. Against v3, SAM loses while drawing
+**That the Slovenian margin is quantified.** Five of the seven figures at
+Slovenia's object budget remain bounds, felzenszwalb and the four SAM
+composites. Watershed has been measured there; the others have not. See B-08. Against v3, SAM loses while drawing
 more objects, so v3's margin over SAM there does stand (finding 19).
 
 **That v3 is the best FTW can do.** Only its B3 and B7 encoders were run. B5
@@ -1265,13 +1279,13 @@ rather than the generated column. Every table here is now written by
 `results/` while the open items still listed it as missing. Caught by the review
 in `REVIEW.md`, not by anything in the workflow.
 
-**B-08. The Slovenian comparison at matched budget is four bounds and one
-measurement.** No competing method was run coarse enough to reach 20 objects per
+**B-08. The Slovenian comparison at matched budget is mostly bounds.** No competing method was run coarse enough to reach 20 objects per
 chip. The clamped figures are each method's value at its own coarsest setting,
 which is above 20 in every case, so each overstates that method. FTW's Slovenian
 win is wider than the table shows and the margin is not measurable from what has
 been run. Watershed has since been measured there at 0.059, with its sweep
-extended in `season_test.py`. The other three remain bounds.
+extended in `season_test.py`. The others remain bounds: felzenszwalb, and
+since B-23 four SAM composites rather than two.
 
 **B-09. Cross-country width bands were cut in grid pixels.** India's grid is
 6.067 m and Slovenia's 4.139 m, so a band of five grid pixels means 30.3 m in
@@ -1337,7 +1351,7 @@ fragmentation from the object count without counting what the objects overlap.
 **B-17. Selection optimism was assumed to matter and does not.** Every setting
 in this document is the best of its sweep chosen on the reporting data, which
 the review raised as a Major finding. Measured over 40 chip-level splits per
-country it moves recall by at most +0.0066, and seven of eight method and
+country it moves recall by at most +0.0066, and eleven of twelve method and
 country pairs pick the same setting in every split.
 
 **B-18. The two countries are not on the same kind of grid, and this project
@@ -1372,7 +1386,8 @@ at matched ground width was **1.8 to 71.5 times** and is **1.7 to 41.0 times**:
 | 50 m up | 7.11% | 65.91% | 58.80% | 9.3x | 8.3x |
 
 B-20 moved the 20 to 30 m row once more, to 7.89% and 19.3x. The conclusion
-is unchanged and its size was overstated by up to forty per cent. Slovenia still beats India at matched ground width by every method in
+is unchanged and its size was overstated by up to 43%, the 30 to 50 m row
+falling from 71.5x to 41.0x. Slovenia still beats India at matched ground width by every method in
 every band, so resolution is still ruled out and so is label geometry.
 
 The label registration walk carried the same fault, cutting its rings at whole
@@ -1506,6 +1521,118 @@ clamped notes are corrected. Found while drawing FTW v3 on the budget figure,
 because `budget_newer.py` counts per chip and its SAM counts did not match the
 tables.
 
+### Errata round, October 2026
+
+An audit of the repository at `4375154` on 12 October 2026 listed 25 problems
+no document recorded, A-01 to A-25, and 13 stale passages in `src/`, D-01 to
+D-13. They keep the audit's numbers here. Every logged correction above was
+already fixed in the document that logged it; these are older files and
+sentences the fixes never reached, and figures with no file behind them.
+
+**A-01. The stage 3 district profile was stale.** `district_profile.csv` was
+committed 37 seconds before the S-08 fix and never rewritten, so its recall
+was scored against the eroded interior and pooled to 0.053 where the
+project's figure is 0.027. It is rewritten on the current scoring, names its
+checkpoint and scoring in two columns, and gives width and area in native
+10 m pixels by name. It is also too thin for district claims: 133 districts
+hold 1 to 17 test chips, median 2, and 4 to 84 parcels, median 10. The README
+and `district_profile.py` now say it is a sampling map. Jodhpur's 0.048 holds
+under both scorings, 4 of 84.
+
+**A-02. India's row had dropped out of the stage 2 summary.**
+`score_predictions.py` wrote `score_summary_3class_full.csv` fresh on every
+run, so a Slovenia-only run on 3 October removed India's row while
+`RESULTS.md` still cited it. It now replaces only the countries it scored, and
+the file is regenerated with both.
+
+**A-03. Finding 5 set two samples side by side.** "No object on 74.4%" is FTW
+over all 1,983 Indian parcels; "FTW reaches 24.7%" is FTW over SAM's 494-parcel
+subset, where the matching pair is 75.3% untouched. Each figure is now given
+with its own sample, and "reaches" is said to mean an object overlaps the
+parcel, which is short of finding it at IoU 0.5.
+
+**A-04. Two precisions for one checkpoint on Slovenia.** `RESULTS.md`'s 0.240
+and the 42.06% matched object share here count the same 1,518 matched objects
+over different denominators, 6,322 unfiltered components on 228 chips against
+3,609 filtered objects on the 185 labelled chips. Both documents now say so.
+
+**A-05, A-06, A-16, A-24.** Counts that predated later work: five Slovenian
+budget figures remain bounds, felzenszwalb and the four SAM composites B-23
+left, where the text said three; eleven of twelve method and country pairs pick the same setting in every
+split, not seven of eight; B-18 cut the cross-country ratios by up to 43%, not
+forty per cent; and edge contrast was measured on 4,307 of 6,823 Slovenian
+parcels, not 6,827.
+
+**A-07, A-08, A-20, A-25.** `RESULTS.md` no longer opens by calling v1 the
+state of the art. `FINDINGS.md` and `ftw_common.SOURCE` give the per-country
+licence. A missing space in O-03 is restored. The hardware is a six-core CPU
+with no GPU throughout; O-03 had said training was out of reach on a 2 GB GPU.
+
+**A-09, A-22.** `REVIEW.md`'s acceptance table now shows each criterion at
+`5b63eae` beside its state now, and its status section, dated 12 October,
+says that Phases 1 to 6 describe the repository as first reviewed.
+
+**A-10. The run manifest named the wrong commit.** It was written before the
+commit holding its outputs, so it recorded the previous commit with
+uncommitted changes. `run_manifest.py` now ignores its own file when checking
+the tree, and the run order runs it after committing.
+
+**A-11, A-13. Quoted figures with no file behind them.** `bootstrap_ci.py` now
+writes `results/bootstrap_ci.csv` and `threshold_check.py` writes
+`threshold_check.csv`, so the README's intervals and `RESULTS.md`'s
+[0.01, 1.26] trace to files. FTW's unfiltered run is a row of
+`precision_summary.csv`: 116,335 objects, 292.3 per chip, and 46,679 more than
+the filtered run's 69,656.
+
+**A-12. One recall, three intervals.** Known gaps now explains that each script
+seeds its own chip bootstrap, so the same recall carries intervals differing in
+the second decimal.
+
+**A-14. The run order left out scripts that produced cited outputs.**
+Reproducing now names every script that writes something a document cites,
+including `pick_district.py`, whose `chip_district.csv` three others read,
+and `build_map.py`, and lists the four diagnostics that write nothing cited.
+
+**A-15, A-17, A-18, A-19, A-23.** `FINDINGS.md`'s short version gave 1,536 m
+over 256 pixels as 6.07 m; it is 256 pixels of 6.067 m, about 1,553 m, and the
+17 m against the labelling footprint is stated as unexplained. Its ring table
+splits 2.00 to 3.00 pixels, 3.15%, from the 0.11% left unassigned beyond three.
+Slovenia's section gives both pixel dimensions. SAM's subset is the first 100
+test chips, 99 of them labelled. Three null draws "beat" FTW where two beat it
+and one tied.
+
+**A-21. `RESULTS.md`'s Slovenian width curve predated B-19.** Its table and
+correlations came from widths measured on square pixels. On the corrected
+widths Slovenian recall rises steadily from 0.5% under two pixels to 66.2% at
+seven to ten, with no step between two and four, and the correlations are
++0.531 for width against +0.513 for area in Slovenia, +0.223 against +0.225 in
+India. The section no longer claims that width shows a threshold where area
+shows a gradient. India's row is unchanged.
+
+**D-01 to D-13.** Thirteen docstrings, comments and printed messages carried
+figures the documents had since corrected: Slovenia's edge-truncated parcels,
+the median parcel area, label coverage, the field share each checkpoint
+predicts, the cross-country range, SAM's timing and filtering equivalence, the
+recall FTW's convention gives, references to an O-11 that does not exist, and
+which map layers are flagged as clamped. Each now carries the current figure
+and its file. None fed a result.
+
+**Rerun in this round, readings set before running.** B-23 left three results
+on the wrong SAM inputs. Each is rerun on what was intended.
+
+- The 100-chip precision subset on colour infrared at 0.50. Finding 5 stands
+  if SAM on colour infrared still covers more of the 494 parcels with exactly
+  one object than FTW's 18.2%, at an object count within a quarter of FTW's
+  175 per chip. If it does not, finding 5 is rewritten to what was measured.
+- The SAM row of the ring sweep, on the same chips. F-12's statement for SAM
+  stands if no cap moves its recall by more than two parcels in 494.
+- A fresh blind contrast panel of 20 parcels the first never showed, drawn in
+  natural colour, scored against the bars `contrast_panel.py` set before the
+  first: 0.75 with p under 0.05 closes F-14, 0.60 is weak, and below 0.60 the
+  documents stop calling the measure contrast.
+
+Results are added below when they exist.
+
 ---
 
 ## Known gaps
@@ -1515,7 +1642,7 @@ should be read. The full list of 21 findings is in that document.
 
 **The null at three draws, now measured at 200.** Closed. FTW's Indian gap is
 +0.0063 against a null whose standard deviation is 0.0030, and 3 draws in 200
-of random cells beat the checkpoint outright. The direction holds and the
+of random cells reached the checkpoint, two above it and one level. The direction holds and the
 magnitude is now known. Run `src\null_strength.py` to reproduce it.
 
 **Intervals treated parcels as independent, now measured by chip.** Closed, and
@@ -1525,7 +1652,13 @@ parcels widens FTW's Slovenian interval from [21.24, 23.23] to
 [2.05, 3.54] to [1.71, 3.88], 1.45 times wider. Slovenia suffers more because
 it carries about 37 parcels per chip against India's 5, so its parcels repeat
 each other more. Every interval this project has published should be read at
-the chip-level width. Run `src\bootstrap_ci.py` to reproduce it. Width bands
+the chip-level width. Run `src\bootstrap_ci.py` to reproduce it; it writes
+`results/bootstrap_ci.csv`. Other scripts carry their own chip bootstrap with
+their own seed and draw count, so the same recall shows slightly different
+intervals in different tables: FTW v1's India figure is [1.71, 3.88] here,
+[1.72, 3.89] in `season_ftw.csv` and [1.76, 3.88] in `newer_checkpoints.csv`,
+and Slovenia's [18.56, 25.88], [18.52, 25.97] and [18.62, 25.99]. The
+differences are resampling noise in the second decimal. Width bands
 holding fewer than ten found parcels fall back to the parcel-level interval,
 because a bootstrap over chips cannot resolve a tail it almost never samples.
 
@@ -1665,7 +1798,8 @@ tables every IoU, recall and width column is identical, and only `hectares` and
 `precision_summary.csv` came back with the same three rows in a different
 order, because `precision.py` appended the row it rewrote; it now sorts. The
 Indian SAM run was not repeated at 16 hours, but the F-12 subset reproduced it
-exactly on 100 chips. No reported number depends on which interpreter wrote it.
+exactly on the first 100 test chips, 99 of which carry labels. No reported
+number depends on which interpreter wrote it.
 
 ---
 
@@ -1677,9 +1811,17 @@ v1 to v3.1, and the Meta SAM checkpoint under Apache 2.0. District polygons from
 December to February images are Copernicus Sentinel-2 L2A scenes read from
 Microsoft's Planetary Computer, listed scene by scene in `rabi_scenes.csv`.
 
+Stage 1's commands close `FINDINGS.md` and stage 2's close `RESULTS.md`; this
+block continues from them, and with those two it names every script in `src/`
+that writes something a document cites.
+
 ```
+python src\compare_inputs.py --countries india,slovenia --chips 40
+python src\verify_against_ftw.py --classes 3 --tag _full
 python src\compare_segmenters.py --country india
 python src\compare_segmenters.py --country slovenia
+python src\sam_probe.py --country india --limit 8
+python src\sam_verify_filter.py --country india --limit 4
 python src\sam_run.py --country india --model vit_h --composites true,false
 python src\sam_run.py --country slovenia --model vit_h --composites true,false
 python src\sam_run.py --country india --model vit_h --composites rgb,cir
@@ -1695,6 +1837,7 @@ python src\null_strength.py --country india --method ftw --draws 200
 python src\label_registration.py --self-test
 python src\label_registration.py --country india
 python src\label_registration.py --country slovenia
+python src\parcel_contrast.py --country india
 python src\contrast_panel.py --country india --redraw
 python src\ring_sensitivity.py --country india
 python src\ring_sensitivity.py --country slovenia
@@ -1713,25 +1856,48 @@ python src\newer_checkpoints.py --part report
 python src\budget_newer.py --part watershed
 python src\budget_newer.py --part report
 python src\precision.py --country india --method ftw
+python src\precision.py --country india --method ftw --min-size-m2 0
 python src\precision.py --country india --method watershed --setting 0.02
+python src\precision.py --country india --method sam --composite false --limit 100
+python src\precision.py --country india --method sam --composite cir --limit 100
+python src\ring_sensitivity.py --country india --methods sam --limit 100
+python src\ring_sensitivity.py --country india --methods sam --limit 100 --composite cir
 python src\precision.py --country slovenia --method ftw
 python src\precision.py --country slovenia --method watershed --setting 0.05
 python src\holdout.py --country india
 python src\holdout.py --country slovenia
 python src\bootstrap_ci.py --country india --by-width
 python src\bootstrap_ci.py --country slovenia --by-width
-python src\check_tables.py
 python src\figure_budget.py
+python src\pick_district.py
+python src\district_profile.py
+python src\district_plan.py
+python src\threshold_check.py --country india
 python src\threshold_check.py --country india --width-file parcel_width_seg_watershed_min500.csv
 python src\threshold_check.py --country india --width-file parcel_width_seg_ftw_min500.csv
 python src\reconcile_ftw.py --country india
+python src\build_map.py
+python src\build_comparison.py
+python src\check_tables.py
+python src\check_style.py --triples
 python src\run_manifest.py
 ```
+
+`pick_district.py` writes `chip_district.csv`, which `district_profile.py`,
+`district_plan.py` and `threshold_check.py` read, so it runs before them.
+`run_manifest.py` runs last and after committing, so the commit it records is
+the one holding the outputs it hashes. Four scripts are diagnostics that
+print and write nothing a document cites: `diagnose_download.py`,
+`explore_ftw.py`, `inspect_ftw_api.py` and `inspect_inference.py`.
+`contrast_panel.py` without `--redraw` draws a fresh blind panel and retires
+the current one, so it is not part of a rerun.
 
 The nulls are seeded, so the comparison runs reproduce to the digit. Runtime on
 a CPU-only machine is about 27 minutes for India and 25 for Slovenia on the
 classical sweep. SAM is about 16 hours for India and 10 for Slovenia across both
-composites, at roughly 75 seconds per chip per composite, and `sam_run.py`
+composites, at roughly 75 seconds per chip per composite, and each 100-chip
+precision subset about two hours, which its ring sweep then reuses from
+`data/sam_cache/`, and `sam_run.py`
 appends as it goes so an interrupted run resumes. `season_test.py` takes about
 ten minutes per country, `rabi_download.py` 30 to 60 minutes a season and
 `rabi_test.py` about 15, `newer_checkpoints.py` about 20 for seven
@@ -1757,6 +1923,11 @@ Outputs land in `results/<country>/`:
 | `ring_sensitivity.csv` | recall by method at each cap |
 | `ring_sensitivity_bands.csv` | recall by method and ground width band at each cap |
 | `precision_<method>_min500.csv` | per-parcel fragmentation, and object counts |
+| `precision_summary.csv` | one row per precision run, with its object count, including FTW unfiltered |
+| `ring_sensitivity_sam.csv`, `ring_sensitivity_sam_cir.csv` | SAM recall at each cap on the first 100 test chips, per composite |
+| `threshold_check.csv` | the recall intervals by district group and width that `RESULTS.md` quotes |
+| `district_profile.csv` | stage 3 sampling map, per district: chips, parcels, width and FTW v1 recall |
+| `chip_district.csv` | the district each chip falls in, from geoBoundaries |
 | `holdout_selection.csv` | what choosing a setting on the reporting data cost |
 | `parcel_width_ground.csv` | parcel width in metres on rectangular pixels |
 | `scorer_reconciliation.csv` | truth and prediction combinations, for S-08 |
@@ -1775,7 +1946,8 @@ Outputs land in `results/<country>/`:
 | `probe/` | the 5-chip ViT-B timing probe that chose ViT-H |
 
 `shape_test.csv` and `shape_test_bands.csv` sit in `results/` itself, since
-they compare the two countries, and so do `newer_checkpoints.csv`, its
+they compare the two countries, as does `bootstrap_ci.csv`, the chip-level
+intervals for both, and so do `newer_checkpoints.csv`, its
 `_changes`, `_gap` and `_widths` tables, and `budget_newer.csv`.
 
 Filenames carrying a setting, such as `parcel_width_seg_watershed_0p02_min500.csv`,

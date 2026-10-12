@@ -80,7 +80,7 @@ def show_object_metric_source():
     print("  on presence-only data. This function gets no such argument. If it")
     print("  treats every predicted object with no matching label as a false")
     print("  positive, then object precision on India counts correct parcels")
-    print("  as errors, because 98.89% of the chip was never labelled.")
+    print("  as errors, because 98.96% of the chip was never labelled.")
 
 
 def load_model(ckpt_path):
@@ -205,8 +205,9 @@ def main() -> None:
           f"median {np.median(pf):,.0f} of 65,536 "
           f"({np.median(pf) / 65536 * 100:.1f}%), "
           f"chips predicting nothing: {int((pf == 0).sum()):,}")
-    print("\n  That share is worth a glance before scoring. FTW's labels cover")
-    print("  1.03% of an Indian chip and 12.18% of a Slovenian one, but the")
+    print("\n  That share is worth a glance before scoring. FTW's parcels,")
+    print("  interior and ring together, cover 1.04% of an Indian chip and")
+    print("  12.18% of a Slovenian one, but the")
     print("  model is predicting over the whole chip either way, so a much")
     print("  larger share here is expected on India and is not by itself a")
     print("  fault.")

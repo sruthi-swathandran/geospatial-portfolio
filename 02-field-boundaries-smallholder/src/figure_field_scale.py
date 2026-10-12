@@ -1,9 +1,11 @@
 """
 RS-02 / step 4. Look at the parcels, at the resolution the sensor actually has.
 
-Everything before this was summary statistics. "Median 0.24 ha" and "61% under
-5 by 5 native pixels" are the right numbers and they still do not show anyone
-what that looks like to Sentinel-2. This draws it.
+Everything before this was summary statistics. A median parcel of 0.303 ha and
+42.98% under 5 by 5 native pixels (FINDINGS.md, results/india/field_sizes.csv)
+are the numbers, and they still do not show anyone what that looks like to
+Sentinel-2. An earlier version of this line quoted 0.24 ha, the source paper's
+figure, and 61%, both from before the parcel was reconstructed. This draws it.
 
   figures/field_scale.png
       Parcels at the 5th, 25th, 50th, 75th and 95th percentile of the measured

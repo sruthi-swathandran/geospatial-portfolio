@@ -320,7 +320,7 @@ def main() -> None:
     # Every setting gets its own tables, the winner included. The width
     # comparison across methods is only fair at a matched object count, and
     # baking in whichever setting won on gap makes that impossible after the
-    # fact. See O-11.
+    # fact. COMPARISON.md's budget column is what reads them that way.
     for key in runs:
         if not rows[key]:
             continue

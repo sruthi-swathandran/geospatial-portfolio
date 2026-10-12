@@ -90,8 +90,11 @@ FTW_BANDS = ("B04", "B03", "B02", "B08")
 NATIVE_M = 10.0         # Sentinel-2's finest bands
 MAX_RING_DIST = 3.0     # pixels; a ring further out than this is orphaned
 
-SOURCE = ("Fields of The World (CC-BY-4.0), Kerner Lab via Source "
-          "Cooperative. Sentinel-2 imagery, Copernicus / ESA.")
+# FTW licenses its labels per country (B-25): India CC-BY-4.0, Slovenia
+# CC-BY-SA-4.0
+SOURCE = ("Fields of The World, Kerner Lab via Source Cooperative, labels "
+          "under per-country licences (India CC-BY-4.0, Slovenia "
+          "CC-BY-SA-4.0). Sentinel-2 imagery, Copernicus / ESA.")
 
 print(f"[ftw] country={COUNTRY}  data={DATA}")
 if not DATA.exists():

@@ -20,6 +20,15 @@ precision. A ratio near one means clustering costs nothing for that figure. A
 ratio of two means the interval should have been twice as wide.
 
 It reads the per-parcel tables that already exist, so nothing is rerun.
+Every row it prints is also written to results/bootstrap_ci.csv, one row per
+country, table and width band, replacing that table's earlier rows, so the
+intervals the README quotes have a file behind them.
+
+Other scripts carry their own chip bootstrap with their own seed and draw
+count, so the same recall can show slightly different intervals in different
+tables: FTW v1's India figure is [1.71, 3.88] here at 10,000 draws, [1.72,
+3.89] in season_ftw.csv and [1.76, 3.88] in newer_checkpoints.csv. The
+differences are resampling noise in the last digit.
 
     python src\\bootstrap_ci.py --country india
     python src\\bootstrap_ci.py --country india ^
@@ -90,10 +99,10 @@ def chip_bootstrap(df: pd.DataFrame, draws: int, rng, alpha: float = 0.05):
 BOOTSTRAP_FLOOR = 10
 
 
-def report(label: str, df: pd.DataFrame, draws: int, rng) -> None:
+def report(label: str, df: pd.DataFrame, draws: int, rng) -> dict | None:
     found, total = int(df["hit"].sum()), len(df)
     if not total:
-        return
+        return None
     rate = found / total
     cl, ch = clopper_pearson(found, total)
     bl, bh, nchips = chip_bootstrap(df, draws, rng)
@@ -108,6 +117,13 @@ def report(label: str, df: pd.DataFrame, draws: int, rng) -> None:
           f"[{cl * 100:5.2f}, {ch * 100:5.2f}]   "
           f"[{bl * 100:5.2f}, {bh * 100:5.2f}]   "
           f"[{ul * 100:5.2f}, {uh * 100:5.2f}]   {note}")
+    return {"band": label, "found": found, "parcels": total,
+            "chips": nchips, "recall_pct": round(rate * 100, 2),
+            "parcel_lo": round(cl * 100, 2), "parcel_hi": round(ch * 100, 2),
+            "chip_lo": round(bl * 100, 2), "chip_hi": round(bh * 100, 2),
+            "report_lo": round(ul * 100, 2), "report_hi": round(uh * 100, 2),
+            "widening": (round(ratio, 2) if not thin else ""),
+            "governs": "parcel" if thin else "union"}
 
 
 def main() -> None:
@@ -151,13 +167,26 @@ def main() -> None:
           f"{'parcel 95%':^16}   {'chip 95%':^16}   "
           f"{'report this':^16}   against parcel")
 
-    report("overall", df, args.draws, rng)
+    rows = [report("overall", df, args.draws, rng)]
 
     if args.by_width and "metres" in df.columns:
         band = pd.cut(df["metres"], WIDTH_EDGES, labels=WIDTH_LABELS,
                       right=False)
         for lab in WIDTH_LABELS:
-            report(lab, df[band == lab], args.draws, rng)
+            rows.append(report(lab, df[band == lab], args.draws, rng))
+
+    rows = [dict(country=F.COUNTRY, table=args.table, iou=args.iou,
+                 draws=args.draws, seed=args.seed, **r) for r in rows if r]
+    out = F.PROJECT / "results" / "bootstrap_ci.csv"
+    old = pd.read_csv(out) if out.exists() else pd.DataFrame()
+    if not old.empty:
+        old = old[~((old["country"] == F.COUNTRY)
+                    & (old["table"] == args.table)
+                    & (old["iou"] == args.iou))]
+    (pd.concat([old, pd.DataFrame(rows)], ignore_index=True)
+     .sort_values(["country", "table", "iou"], kind="stable")
+     .to_csv(out, index=False, lineterminator="\n"))
+    print(f"\n  wrote {out.relative_to(F.PROJECT)}")
 
     print("\n" + RULE)
     print("Report the fourth column. The last one says how much wider it is")

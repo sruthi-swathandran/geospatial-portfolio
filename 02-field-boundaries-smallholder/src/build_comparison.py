@@ -317,6 +317,7 @@ PRECISION_NAMES = {
     "watershed_0.02": "watershed 0.02",
     "watershed_0.05": "watershed 0.05",
     "sam_vit_h_false_0p5": "SAM ViT-H NIR-blue-green 0.50",
+    "sam_vit_h_cir_0p5": "SAM ViT-H colour infrared 0.50",
 }
 
 
@@ -365,6 +366,8 @@ def matched_parcel_table(country: str, subset_method: str) -> list:
     keys = set(map(tuple, pd.read_csv(ref)[["chip", "parcel_id"]].values))
 
     summary = pd.read_csv(rd / "precision_summary.csv")
+    # the unfiltered FTW row (min_size_m2 0) shares the method name
+    summary = summary[summary["min_size_m2"] == 500]
     opc = dict(zip(summary["method"], summary["objects_per_chip"]))
 
     lines = [
@@ -526,6 +529,29 @@ def ring_tables() -> list:
             for m in methods:
                 v = rec[(rec.cap == r["cap"]) & (rec.method == m)].recall
                 cells.append(f"{float(v.iloc[0]):.4f}")
+            out.append("| " + " | ".join(cells) + " |")
+
+    # SAM regenerates its masks, so it ran on the first 100 test chips only,
+    # one file per composite: the first run's near infrared, blue and green
+    # (B-23), and colour infrared, the input intended
+    rd = results_dir("india")
+    sam = [(name, rd / f"ring_sensitivity_sam{suffix}.csv")
+           for name, suffix in (("NIR-blue-green, first run", ""),
+                                ("colour infrared", "_cir"))]
+    sam = [(n, pd.read_csv(p)) for n, p in sam if p.exists()]
+    if sam:
+        out.append("\n### SAM ViT-H 0.50, India, first 100 test chips\n")
+        out.append("| cap | " + " | ".join(f"{n} recall" for n, _ in sam)
+                   + " |")
+        out.append("|---|" + "---:|" * len(sam))
+        for cap in sam[0][1].cap:
+            cells = [cap]
+            for _, d in sam:
+                r = d[d.cap == cap]
+                cells.append("" if r.empty else
+                             f"{float(r.recall.iloc[0]):.4f} "
+                             f"({int(r.found.iloc[0])}/"
+                             f"{int(r.parcels.iloc[0])})")
             out.append("| " + " | ".join(cells) + " |")
 
     if len(data) == 2:

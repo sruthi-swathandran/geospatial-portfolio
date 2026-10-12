@@ -13,9 +13,10 @@ newer_checkpoints.py. The other methods are read at one setting each, the one
 whose object count per chip sits nearest FTW v3's, so the map compares like
 with like as far as a single setting allows. The headline figures in COMPARISON.md are interpolated to FTW's
 exact count and will differ a little from the totals shown here; the page says
-which setting each method is at and what it emits. In Slovenia no method other
-than FTW was run coarse enough to come near FTW's count (B-08), so the page
-labels those layers as clamped.
+which setting each method is at and what it emits. A layer is flagged as
+clamped when even its coarsest setting emits half again FTW's count. In
+Slovenia that flags SAM; watershed, its sweep extended to h 0.6 (B-08), is
+shown unflagged at h 0.3, and felzenszwalb is not on the page.
 
 Inputs are files this project already has: chip footprints from the label
 rasters, per-parcel scores from results/, district names from

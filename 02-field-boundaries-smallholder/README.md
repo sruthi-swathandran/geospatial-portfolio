@@ -33,7 +33,7 @@ This project first tested FTW's v1 checkpoint of October 2024 and called it the
 released state of the art, after FTW had replaced it (B-24). v1 recovers 2.7%.
 At its 175 objects per chip SAM reached 0.158, watershed 0.107 and
 felzenszwalb 0.031, and random Voronoi cells at the same count, which never see
-the imagery, beat v1 in 3 of 200 draws. SAM's figures are on the composites
+the imagery, reached v1 in 3 of 200 draws, two above it and one level. SAM's figures are on the composites
 intended; its first run used the wrong bands and moved by half a point when
 corrected (B-23).
 
@@ -143,8 +143,9 @@ is applied to every method. `COMPARISON.md` explains each control.
   held-out splits, that is worth at most 0.0066 of recall.
 - **Intervals resample whole chips**, since parcels in one chip share a scene.
   FTW v1's headline figures are 2.72% [1.71, 3.88] in India and 22.22%
-  [18.56, 25.88] in Slovenia, and v3 B7's 12.91% [10.66, 15.08] and 33.06%
-  [29.00, 36.73].
+  [18.56, 25.88] in Slovenia (`results/bootstrap_ci.csv`), and v3 B7's
+  12.91% [10.66, 15.08] and 33.06% [29.00, 36.73]
+  (`results/newer_checkpoints.csv`).
 
 ---
 
@@ -155,9 +156,11 @@ assistant, Claude. It is not independent peer review. It lists 21 findings,
 and every one is now closed or scoped with the reason stated.
 
 `COMPARISON.md` carries 26 corrections, B-01 to B-26, each with the published
-value, the corrected one and why the first was wrong. The largest: FTW ships Slovenia on pixels 4.14 m across and 6.00 m
-tall, and treating them as square had overstated the cross-country gap by up to
-forty per cent. The conclusion survived the correction.
+value, the corrected one and why the first was wrong, and an errata round from
+October 2026 that carried them into older files and sentences they had missed.
+The largest: FTW ships Slovenia on pixels 4.14 m across and 6.00 m tall, and
+treating them as square had overstated the cross-country gap by up to 43%. The
+conclusion survived the correction.
 
 Two checks guard the numbers. `src\check_tables.py` fails if any number in a
 table in `COMPARISON.md` cannot be traced to a table generated from the result
@@ -198,7 +201,9 @@ runs FTW against it, `COMPARISON.md` sets the other methods beside it, and
 `REVIEW.md` is the technical review of all three.
 
 Stage 3, a district-level breakdown across Indian agro-climatic zones, is
-started and not finished.
+started and not finished. Its one output, `results/india/district_profile.csv`,
+is a sampling map for choosing districts: most of its 133 districts hold one
+or two test chips and about ten parcels, too few to carry a district result.
 
 ---
 

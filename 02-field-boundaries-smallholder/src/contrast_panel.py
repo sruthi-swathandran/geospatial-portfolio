@@ -39,6 +39,10 @@ The bars were set before any real answers existed:
     python src\\contrast_panel.py --country india --redraw
     python src\\contrast_panel.py --country india --score <numbers>
 
+The first panel scored, seed 20260925, was drawn with red and blue swapped
+(B-23). A second, seed 20261012, is drawn in natural colour from parcels the
+first never showed.
+
 The second form draws the current panel again without changing which parcels
 are on it. In the third, replace <numbers> with the panel numbers you judged as
 having a visible edge, separated by commas and nothing else.
@@ -64,17 +68,21 @@ except Exception:                                             # noqa: BLE001
 RULE = "=" * 78
 PAD_M = 40.0          # context around the parcel, in metres
 N_PER_QUARTILE = 5
-# The panel was drawn, and judged, with blue, green and red in the red, green
-# and blue channels, because the code then assumed FTW stores blue first. It
-# stores red first (B-23). Kept as it was so --redraw reproduces the crops the
-# marks were made on. A new panel should use ("B04", "B03", "B02").
-PANEL_BANDS = ("B02", "B03", "B04")
+# The first scored panel (seed 20260925) was drawn, and judged, with blue,
+# green and red in the red, green and blue channels, because the code then
+# assumed FTW stores blue first. It stores red first (B-23). Every key now
+# records the bands its crops were drawn in, so --redraw reproduces whichever
+# panel is current; a key without that column is the first panel. New panels
+# are drawn in natural colour.
+FIRST_PANEL_BANDS = ("B02", "B03", "B04")
+NATURAL_BANDS = ("B04", "B03", "B02")
 N_PERMUTATIONS = 20000
 TRACKS_AUC, TRACKS_P, WEAK_AUC = 0.75, 0.05, 0.60
 
 
-def crop(chip, mask, pad_px):
-    """A window around one parcel in PANEL_BANDS, stretched for looking at."""
+def crop(chip, mask, pad_px, bands):
+    """A window around one parcel in the given bands, stretched for looking
+    at."""
     import rasterio
     ys, xs = np.nonzero(mask)
     y0 = max(0, ys.min() - pad_px)
@@ -83,7 +91,7 @@ def crop(chip, mask, pad_px):
     x1 = min(mask.shape[1], xs.max() + pad_px + 1)
     path = F.IMG_A / chip
     with rasterio.open(path) as s:
-        arr = s.read(F.band_index(path, PANEL_BANDS),
+        arr = s.read(F.band_index(path, bands),
                      window=((y0, y1), (x0, x1))).astype(np.float32)
     out = np.empty(arr.shape, np.float32)
     for i in range(arr.shape[0]):
@@ -201,7 +209,7 @@ def score(args, key_path: Path) -> None:
     print(RULE)
 
 
-def render(sel):
+def render(sel, bands):
     """Draw each parcel twice, plain on the left and outlined on the right.
 
     The outline is a contour traced between pixels, so it sits on the pixel
@@ -232,7 +240,7 @@ def render(sel):
         col = slot * 3
         _, _, _, full = F.load_labels(r["chip"])
         mask = full == int(r["parcel_id"])
-        img, sub = crop(r["chip"], mask, pad_px)
+        img, sub = crop(r["chip"], mask, pad_px, bands)
         a_plain = fig.add_subplot(gs[row, col])
         a_line = fig.add_subplot(gs[row, col + 1])
         for ax in (a_plain, a_line):
@@ -268,7 +276,9 @@ def redraw(key_path: Path) -> None:
     if not key_path.exists():
         sys.exit(f"{key_path} not found. Draw a panel first.")
     sel = pd.read_csv(key_path).sort_values("panel_no")
-    dest = render(sel)
+    bands = (tuple(str(sel["bands"].iloc[0]).split())
+             if "bands" in sel.columns else FIRST_PANEL_BANDS)
+    dest = render(sel, bands)
     print(RULE)
     print(f"CONTRAST PANEL REDRAWN, {F.COUNTRY.upper()}")
     print(RULE)
@@ -309,11 +319,13 @@ def draw(args, key_path: Path) -> None:
                                   random_state=args.seed).reset_index(drop=True)
     sel["panel_no"] = np.arange(1, len(sel) + 1)
     sel["seed"] = args.seed
+    sel["bands"] = " ".join(NATURAL_BANDS)
 
-    dest = render(sel)
+    dest = render(sel, NATURAL_BANDS)
 
-    sel[["panel_no", "seed", "chip", "parcel_id", "edge_over_interior",
-         "drawn_contrast", "width_native_px"]].to_csv(key_path, index=False)
+    sel[["panel_no", "seed", "bands", "chip", "parcel_id",
+         "edge_over_interior", "drawn_contrast",
+         "width_native_px"]].to_csv(key_path, index=False)
 
     print(RULE)
     print(f"CONTRAST PANEL, {F.COUNTRY.upper()}, seed {args.seed}")
@@ -336,7 +348,8 @@ def main() -> None:
     ap.add_argument("--country", default="india")
     ap.add_argument("--score", default="",
                     help="comma separated panel numbers you judged visible")
-    ap.add_argument("--seed", type=int, default=20260925)
+    # 20260925 drew the first scored panel; 20261012 the natural colour one
+    ap.add_argument("--seed", type=int, default=20261012)
     ap.add_argument("--redraw", action="store_true",
                     help="draw the current panel again, same parcels")
     ap.add_argument("--force", action="store_true",

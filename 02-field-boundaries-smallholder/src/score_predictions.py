@@ -1,8 +1,9 @@
 """
 RS-02 / stage 2. Score the FTW checkpoint, honestly, per parcel and by size.
 
-The question is not whether the model finds cropland. On India it predicts
-88% of a chip as field and the landscape really is densely farmed, so pixel
+The question is not whether the model finds cropland. On India the 2-class
+checkpoint predicts 92.8% of a chip as field (results/country_comparison.csv)
+and the landscape really is densely farmed, so pixel
 recall will be high and will mean very little. The question is whether those
 predicted regions are individual parcels or several parcels merged into one.
 Under-segmentation and good detection look identical in a pixel score and
@@ -339,10 +340,24 @@ def main() -> None:
     if summaries:
         out = F.PROJECT / "results" / f"score_summary_{args.classes}class{args.tag}.csv"
         out.parent.mkdir(parents=True, exist_ok=True)
+        # Replace only the countries scored in this run. Writing the file
+        # fresh is how a Slovenia-only rerun on 3 October 2026 dropped
+        # India's row while RESULTS.md still cited it.
+        ran = {s["country"] for s in summaries}
+        kept = []
+        if out.exists():
+            with open(out, newline="", encoding="utf-8") as fh:
+                kept = [r for r in csv.DictReader(fh) if r["country"] not in ran]
+        order = ["india", "slovenia"]
+        rows = sorted(kept + summaries,
+                      key=lambda r: (order.index(r["country"])
+                                     if r["country"] in order else 99,
+                                     r["country"]))
         with open(out, "w", newline="", encoding="utf-8") as fh:
-            w = csv.DictWriter(fh, fieldnames=list(summaries[0]))
+            w = csv.DictWriter(fh, fieldnames=list(summaries[0]),
+                               lineterminator="\n")
             w.writeheader()
-            w.writerows(summaries)
+            w.writerows(rows)
         print(f"\n  wrote {out.relative_to(F.PROJECT)}")
 
     figure(all_rows, args.iou, args.classes, args.tag)

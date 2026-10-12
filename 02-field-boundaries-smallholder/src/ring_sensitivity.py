@@ -32,6 +32,11 @@ figure in segmenter_comparison_min500.csv, because nothing else differs.
     python src\\ring_sensitivity.py --country india
     python src\\ring_sensitivity.py --country slovenia
     python src\\ring_sensitivity.py --country india --methods sam --limit 100
+    python src\\ring_sensitivity.py --country india --methods sam --limit 100 --composite cir
+
+The first SAM form reproduces the published row, which used near infrared,
+blue and green (B-23). The second is the colour infrared rerun; run after
+precision.py on the same 100 chips it reuses that run's segmentations.
 
 Writes ring_sensitivity_truth.csv, ring_sensitivity.csv and
 ring_sensitivity_bands.csv in the country's results folder, and prints the
@@ -92,7 +97,7 @@ def full_fields_m(inst, c3, cap_m, x_m, y_m):
 
 
 def sam_generator(points):
-    """SAM ViT-H near infrared, blue and green at 0.50, as precision.py ran it."""
+    """SAM ViT-H's automatic mask generator, as precision.py builds it."""
     import sam_run as S2
     from segment_anything import SamAutomaticMaskGenerator, sam_model_registry
     ckpt = S2.fetch(S2.BASE + S2.CKPTS["vit_h"],
@@ -105,13 +110,11 @@ def sam_generator(points):
         min_mask_region_area=0)
 
 
-def sam_segments(chip, gen):
+def sam_segments(chip, get_gen, composite):
+    """SAM ViT-H at 0.50 on one composite, read from precision.py's cache
+    when that run has already made this chip (sam_run.cached_segments)."""
     import sam_run as S2
-    img = S2.rgb8(chip, S2.COMPOSITES["false"])
-    keep = [m for m in gen.generate(img)
-            if m["predicted_iou"] >= 0.50
-            and m["stability_score"] >= S2.GEN_STABILITY]
-    return S2.masks_to_labels(keep, img.shape[:2])
+    return S2.cached_segments(chip, composite, 0.50, get_gen)
 
 
 def cross_country(results_root: Path) -> None:
@@ -149,6 +152,10 @@ def main() -> None:
     ap.add_argument("--min-size-m2", type=float, default=500.0)
     ap.add_argument("--limit", type=int, default=0)
     ap.add_argument("--points", type=int, default=32)
+    ap.add_argument("--composite", default="false",
+                    help="SAM input. false, the first run's near infrared, "
+                         "blue and green, is what the published SAM row used "
+                         "(B-23); cir is colour infrared")
     args = ap.parse_args()
 
     import importlib
@@ -175,7 +182,14 @@ def main() -> None:
     print(f"  methods: {', '.join(methods)}, objects under "
           f"{args.min_size_m2:.0f} m2 dropped ({min_px} grid pixels)\n")
 
-    gen = sam_generator(args.points) if "sam" in methods else None
+    # built on the first cache miss only, so a run over chips precision.py
+    # has already generated never loads the model
+    gen = {}
+
+    def get_gen():
+        if "g" not in gen:
+            gen["g"] = sam_generator(args.points)
+        return gen["g"]
 
     truth = {c: {"ring_px": 0, "orphan_px": 0, "area": [], "width": []}
              for c, _ in CAPS}
@@ -201,7 +215,7 @@ def main() -> None:
             if m == "ftw":
                 seg = C.ftw_segments(chip, args.ref_tag)
             elif m == "sam":
-                seg = sam_segments(chip, gen)
+                seg = sam_segments(chip, get_gen, args.composite)
             else:
                 grad = C.gradient(stack) if grad is None else grad
                 seg = C.segment(stack, grad, m,
@@ -239,7 +253,11 @@ def main() -> None:
     if not scored:
         sys.exit("no chip carried a label")
 
-    tag = "_sam" if methods == ["sam"] else ""
+    # the first SAM run, on composite false, keeps its original file name
+    tag = ""
+    if methods == ["sam"]:
+        tag = "_sam" + ("" if args.composite == "false"
+                        else f"_{args.composite}")
     trows, mrows, brows = [], [], []
     for cap, cap_m in CAPS:
         t = truth[cap]

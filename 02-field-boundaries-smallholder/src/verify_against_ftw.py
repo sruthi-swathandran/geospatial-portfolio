@@ -1,7 +1,9 @@
 """
 RS-02. Score our predictions with FTW's own code, and compare.
 
-Our India object recall is 0.053. FTW's paper reports India without
+Our India object recall is 0.053 in FTW's convention, against the eroded
+interior; against the reconstructed parcel it is 0.027 (S-08 in RESULTS.md).
+The 0.053 is the one to set beside FTW's paper, which reports India without
 fine-tuning at 0.03, 0.05 and 0.14 depending on the pre-training set, so ours
 sits inside their range. What stays unexplained is that their 0.14 comes from a
 model trained on FTW minus India, while our checkpoints include India and score

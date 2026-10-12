@@ -2,17 +2,19 @@
 RS-02 stage 2b, third method. SAM over the same chips, scored the same way.
 
 Cost shapes the design. On this CPU the image encoder is about 4 seconds and
-each prompt about 62 milliseconds, so a 32 by 32 grid costs roughly 67 seconds
-per chip per composite. Running that several times over to sweep object counts
+each prompt about 62 milliseconds, so a 32 by 32 grid was estimated at roughly
+67 seconds per chip per composite; the full runs averaged about 75. Running that several times over to sweep object counts
 would take days.
 
 It does not have to. SAM discards masks below pred_iou_thresh and
 stability_score_thresh, and it attaches both scores to every mask it returns.
 So this generates once with permissive thresholds and filters afterwards,
-turning one pass into a whole sweep. The caveat is that SAM applies its
-overlap suppression after its own thresholds, so a permissive pass followed by
-filtering is close to but not identical with a strict pass. It is the same
-pipeline at every setting here, which is what the comparison needs.
+turning one pass into a whole sweep. SAM applies both score filters before
+its overlap suppression and ranks that suppression by predicted IoU alone, so
+for the predicted IoU sweep a permissive pass filtered afterwards reproduces a
+strict pass exactly: sam_verify_filter.py checked it to the mask, 985 masks
+with none lost and none gained. Stability is generated at SAM's default and
+never swept, because loosening it breaks that equivalence.
 
 Two composites are run rather than one. SAM takes three 8-bit channels while
 FTW's model sees eight bands across two seasons, and picking whichever three
@@ -148,6 +150,31 @@ def masks_to_labels(masks, shape) -> np.ndarray:
     return lab
 
 
+def cached_segments(chip: str, composite: str, threshold: float, get_gen,
+                    model: str = "vit_h") -> np.ndarray:
+    """SAM's instance raster for one chip at one setting, generated once.
+
+    precision.py and ring_sensitivity.py each regenerated the same 100 chips
+    at about 75 seconds a chip. The raster at a given composite and predicted
+    IoU threshold is kept under data/sam_cache/, which is not committed, so
+    the second script reads what the first made. get_gen is called only on a
+    miss, so a fully cached run never loads the model.
+    """
+    name = f"{model}_{composite}_{str(threshold).replace('.', 'p')}"
+    path = (F.PROJECT / "data" / "sam_cache" / F.COUNTRY / name
+            / (Path(chip).stem + ".npz"))
+    if path.exists():
+        return np.load(path)["seg"]
+    img = rgb8(chip, COMPOSITES[composite])
+    keep = [m for m in get_gen().generate(img)
+            if m["predicted_iou"] >= threshold
+            and m["stability_score"] >= GEN_STABILITY]
+    seg = masks_to_labels(keep, img.shape[:2])
+    path.parent.mkdir(parents=True, exist_ok=True)
+    np.savez_compressed(path, seg=seg)
+    return seg
+
+
 def setting_name(pair) -> str:
     return f"{pair[0]:.2f}/{pair[1]:.2f}"
 
@@ -238,7 +265,8 @@ def aggregate(path: Path, iou_cut: float, country: str, min_size: float,
                 for r in [dict(r, country=country) for r in rs]]
 
     # Every setting gets its own tables, so the width comparison across
-    # methods can be read at a matched object count afterwards. See O-11.
+    # methods can be read at a matched object count afterwards, which is
+    # what COMPARISON.md's budget column does.
     for (comp, name), rs in tables.items():
         slug = name.split("/")[0].replace(".", "p")
         S.write_tables(keep_cols(rs), F.RESULTS,
@@ -257,8 +285,9 @@ def aggregate(path: Path, iou_cut: float, country: str, min_size: float,
         print(f"\n  {np.mean(secs):.1f} s per chip per composite")
 
     print("\n" + RULE)
-    print("Set the gap column beside watershed's +0.197 on India and FTW's")
-    print("+0.008. Then read object count: a row near 175 is comparable with")
+    print("Set the gap column beside watershed's +0.1955 on India and FTW's")
+    print("+0.0052 (segmenter_comparison_min500.csv). Then read object")
+    print("count: a row near 175 is comparable with")
     print("FTW directly, and a row far below it is not, because best-overlap")
     print("matching rewards producing more objects.")
     print(RULE)

@@ -2,9 +2,11 @@
 RS-02 stage 2b. Does a parcel fail because it is narrow, or because its edge
 is invisible?
 
-Stage 3's district work turned up Jodhpur with the widest parcels in the Indian
-test set, 7.35 native pixels median and none below the three-pixel floor, still
-at 0.048 recall. The explanation offered was that arid ground gives little to
+Stage 3's district work turned up Jodhpur, the district with the most test
+parcels, 84, and the widest of any district holding 30 or more: 7.40 native
+pixels median and none below the three-pixel floor, still at 0.048 recall, 4
+of 84. The first profile was scored the pre-S-08 way; the figure holds on the
+current scoring (results/india/district_profile.csv). The explanation offered was that arid ground gives little to
 separate one field from the next, which is a claim about contrast rather than
 resolution. It was never measured, only gestured at, and a district is a poor
 unit for a claim about individual parcels.
