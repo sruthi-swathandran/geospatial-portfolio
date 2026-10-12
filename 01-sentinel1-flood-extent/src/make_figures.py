@@ -244,7 +244,9 @@ def fig_operating_point(dpi):
         ax1.plot(t, d["iou_all"][o], lw=2.6, color=INK, label="all 65 chips")
 
     ax1.set_ylabel("IoU against hand labels")
-    ax1.set_ylim(0, float(np.nanmax(d["iou_test"][o])) * 1.14)
+    # headroom above the highest curve, so the two labels sit clear of
+    # every line instead of hiding part of one behind their halo
+    ax1.set_ylim(0, float(np.nanmax(d["iou_test"][o])) * 1.38)
     ax1.tick_params(labelbottom=False)
     frame(ax1)
     legend_into(lax, *ax1.get_legend_handles_labels(), ncol=4)
@@ -256,8 +258,8 @@ def fig_operating_point(dpi):
 
     top = ax1.get_ylim()[1]
     for idx, col, lab, side, yf in (
-            (i_map, BLUE, "map-optimal\nhighest IoU on valid", "right", 0.60),
-            (i_area, SAND, "area-matched\nmapped area unbiased", "left", 0.30)):
+            (i_map, BLUE, "map-optimal\nhighest IoU on valid", "right", 0.87),
+            (i_area, SAND, "area-matched\nmapped area unbiased", "left", 0.87)):
         if idx is None:
             continue
         for ax in (ax1, ax2):
@@ -436,15 +438,19 @@ def fig_change_sweep(dpi):
     ax.axvline(0, color=MUTED, lw=0.9)
 
     # Two points, and they answer different questions. The first is what the
-    # change signal manages on its own, which is the figure the README quotes.
+    # change signal manages on its own, at its best over all 65 chips. The
+    # README quotes it beside 0.146, the same signal at the drop chosen on the
+    # valid split (C-18). Its label sits out in the empty upper left with a
+    # leader line, so its halo hides none of the gate 1 curves.
     # The second is the best available once the absolute-threshold gate is
     # allowed to help while the drop requirement still bites.
     marks = []
     if 0.0 in set(gate.tolist()):
         m0 = gate == 0.0
         marks.append((int(np.nanargmax(np.where(m0, y, -np.inf))),
-                      "change signal alone,\nbest {v:.3f} at {t} dB",
-                      BRICK, (-10, 18), "right"))
+                      "change signal alone, best over\nall 65 chips "
+                      "{v:.3f} at {t} dB",
+                      BRICK, (-150, 60), "right"))
     restrictive = t <= -0.5
     if restrictive.any():
         j1 = int(np.nanargmax(np.where(restrictive, y, -np.inf)))
@@ -457,7 +463,10 @@ def fig_change_sweep(dpi):
         ax.annotate(fmt.format(v=y[j], t=db(t[j])), (t[j], y[j]),
                     xytext=off, textcoords="offset points", ha=ha,
                     fontsize=8.2, color=col, linespacing=1.45, bbox=HALO,
-                    zorder=6)
+                    zorder=6,
+                    arrowprops=(dict(arrowstyle="-", color=col, lw=0.8,
+                                     shrinkA=2, shrinkB=5)
+                                if abs(off[0]) > 40 else None))
 
     ax.annotate("change test admits pixels\nthat got brighter",
                 xy=(hi, ax.get_ylim()[1] * 0.62), xytext=(-8, 0),
@@ -647,7 +656,16 @@ def fig_sensitivity_grid(dpi):
     if d is None:
         return
     slope, occ = d["slope_max_deg"], d["occurrence_permanent_min"]
-    edge = d.get("edge_buffer_m", d.get("edge_buffer_px"))
+    if "edge_buffer_px" in d and "edge_buffer_m" in d:
+        # label each buffer by the distance actually removed: whole erosions
+        # of the 8x decimated mask, so 30 px requested is 32 px applied (C-21)
+        px = d["edge_buffer_px"]
+        with np.errstate(divide="ignore", invalid="ignore"):
+            res = float(np.nanmax(d["edge_buffer_m"] / np.where(px > 0, px, np.nan)))
+        edge = np.array([cfg.applied_edge_px(int(p)) * res if p > 0 else 0.0
+                         for p in px])
+    else:
+        edge = d.get("edge_buffer_m", d.get("edge_buffer_px"))
     ha, pub = d["flood_ha"], d.get("is_published", np.zeros_like(d["flood_ha"]))
 
     s_vals = sorted(set(slope.tolist()))
@@ -696,7 +714,7 @@ def fig_sensitivity_grid(dpi):
             ax.set_ylabel("permanent-water cut\n(JRC occurrence, %)")
         else:
             ax.set_yticklabels([])
-        ax.set_xlabel("edge buffer (m)")
+        ax.set_xlabel("edge buffer as applied (m)")
         ax.set_title("no slope cut" if s >= 90 else f"slope ≤ {s:g}°",
                      fontsize=9.5, color=INK, fontweight="bold", pad=5)
         for sp in ax.spines.values():

@@ -1,0 +1,8 @@
+threshold_db,scene_darkened,true_water_cut,false_pos_cut,verdict,labelled_water_share
+-6.0,0.0213,0.8711,0.8539,backwards,0.1297
+-3.0,0.1233,0.6614,0.4617,backwards,0.1297
+-1.0,0.3692,0.4409,0.2363,backwards,0.1297
+-0.5,0.4657,0.3522,0.1864,backwards,0.1297
+0.0,0.5677,0.2571,0.1406,backwards,0.1297
+1.0,0.7543,0.0971,0.0696,backwards,0.1297
+1.75,0.8556,0.034,0.037,helping,0.1297

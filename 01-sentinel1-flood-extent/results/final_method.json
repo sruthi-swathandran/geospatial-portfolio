@@ -1,12 +1,15 @@
 {
   "event": "India",
-  "method": "single-date pooled Otsu on RTC gamma0 VH, Lee 5x5",
+  "method": "single-date threshold on RTC gamma0 VH after a 5x5 Lee filter, swept against the hand labels and chosen on the valid split",
   "polarisation": "VH",
   "speckle_filter": "Lee 5x5 on linear power",
-  "slope_mask": null,
-  "slope_mask_reason": "swept 2 to 20 degrees in step 10; removed true water faster than shadow, precision +0.008 for recall -0.003",
+  "slope_mask": {
+    "on_chips": null,
+    "on_scene_deg": 8.0
+  },
+  "slope_mask_reason": "swept 2 to 20 degrees on the chips in step 10; the best cut on the valid split, 20 degrees, changed precision by +0.008 and recall by -0.003 against no cut, too small to decide anything on chip evidence, so no cut on the chips. The scene applies 8 degrees in refine_scene.py, because the scene holds hillside the chips never sample",
   "change_detection": null,
-  "change_detection_reason": "step 9c; best change threshold was the one that made the constraint inert, and the change signal alone scored IoU 0.147 against 0.130 for labelling the whole scene as water",
+  "change_detection_reason": "step 9c; the best change threshold was the one that made the constraint inert. The change signal alone, chosen on the valid split, scores IoU 0.146 over all chips; the best over all chips, test split included, is 0.196",
   "permanent_water": {
     "source": "JRC Global Surface Water occurrence",
     "cut_percent": 50,
@@ -21,7 +24,7 @@
       "p_all": 0.7797,
       "r_all": 0.6076,
       "area_ha": 14405.3,
-      "flood_only_ha": 13659.0,
+      "flood_only_ha": 10775.9,
       "area_err": -0.2206
     },
     "area_matched": {
@@ -32,7 +35,7 @@
       "p_all": 0.6872,
       "r_all": 0.6849,
       "area_ha": 18421.5,
-      "flood_only_ha": 18297.1,
+      "flood_only_ha": 14736.1,
       "area_err": -0.0033
     }
   },

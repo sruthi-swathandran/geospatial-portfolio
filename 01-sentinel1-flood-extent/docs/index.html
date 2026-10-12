@@ -228,14 +228,15 @@ dd.new{color:var(--new);font-weight:500}
       event.</p>
       <p>Change detection against an earlier date was tested and rejected. With
       the change signal alone the sweep reaches <strong>0.196 IoU</strong>
-      at a required drop of 2 dB; relax that requirement and it converges on
+      over all chips, test split included, at a required drop of 2 dB; chosen on
+      the valid split it reaches 0.146. Relax the drop and it converges on
       <strong>0.130</strong>, which is what labelling the entire scene as
       water scores.</p>
     </div>
     <div>
       <h2>What the numbers depend on</h2>
       <p>Three things are dark to radar without being wet, and each was found by
-      looking at the map rather than by any metric. A 600 m buffer inside the
+      looking at the map rather than by any metric. A buffer of about 640 m inside the
       swath boundary is marked no data, where flood classification ran at
       <strong>32.9%</strong> of area against <strong>3.1%</strong>
       in the interior, 11 times the rate. Ground steeper than
@@ -282,10 +283,16 @@ dd.new{color:var(--new);font-weight:500}
       Indian district polygon, in Bangladesh, Bhutan and the Arunachal border
       strip. The map layer is a preview render; every number comes from the 20 m
       raster.</p>
-      <p class="built">Built by <code>build_docs_page.py</code> on 10 September 2026.
-      The wording here is written; every number in it, and every figure in the
-      panel above, is read from <code>results/</code> at build time. The page
-      it replaced was maintained by hand and had drifted from its sources.</p>
+      <p class="built">Built by <code>build_docs_page.py</code> on 12 October 2026.
+      The wording here is written. Every number in it, and every figure in the
+      panel above, is read from <code>results/</code> at build time, except three
+      that analysis scripts print without storing: the all-water score of
+      0.130, the 99.3% of the channel below 8&deg;, and the
+      97.8% WorldCover coverage. <code>verify_all.py</code> checks those
+      three by finding a matching value
+      in <code>results/</code>, which shows the value exists, not that it is the
+      right one. The page it replaced was maintained by hand and had drifted
+      from its sources.</p>
     </div>
   </section>
 </div>

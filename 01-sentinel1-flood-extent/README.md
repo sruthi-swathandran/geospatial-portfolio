@@ -96,6 +96,19 @@ without saying which is how a flood map ends up quoted for a purpose it was
 never tuned for, and earlier versions of this README did exactly that: they gave
 a hectare figure computed at the map-optimal point.
 
+**The chips and the scene differ by one clean-up step.** `full_scene.py`
+removes water patches and holes under 25 pixels before anything is counted, and
+the chip figures above were scored without it. Measured on the 65 chips
+(`results/register_check_clean.csv`), the step lowers mapped water by 2.9% at
+−18.75 dB and 3.4% at −17.75 dB. IoU stays at 0.519 at the first and rises to
+0.527 at the second, since most of what it removes was false water. So on the
+chips the pipeline behind the scene's area-matched figure maps 3.7% less water
+than the labels, against the 0.3% in the table. The Lee filter's noise term
+also differs, taken per chip in validation and per tile in the scene. Fixing it
+to one pooled value moved chip IoU by 0.001 and mapped area by under 0.4% at
+either point (`results/register_check_lee.csv`). The chips cannot show how
+large that effect is on scene tiles that contain hills.
+
 **The ranking is robust even though the magnitude is not.** Nagaon, Morigaon and
 Sonitpur are first, second and third at both thresholds. Below that the order
 shuffles; Karbi Anglong East moves from tenth to sixth. Who was worst affected
@@ -431,8 +444,9 @@ worth stating plainly: no score in this repository would have found any of them.
 
 - **The study area covers part of Assam and land beyond it.** The AOI comes from
   the Sen1Floods11 chip footprints. Of the four districts named as worst
-  affected in a Sentinel-1 map published on 4 August 2016, whose publisher
-  this project did not record, it contains two,
+  affected on the International Water Management Institute's Sentinel-1 flood
+  map of 4 August 2016, made from ESA data and posted on
+  [ReliefWeb](https://reliefweb.int/map/india/mapping-floods-assam-india-using-sentinel-1-satellite-images-04-august-2016), it contains two,
   Golaghat and Jorhat, and misses two that lie on either side of it: Bongaigaon
   at 90.4 to 90.9°E and Dhemaji at 94.2 to 95.5°E. Sivasagar, Dibrugarh,
   Tinsukia and Barpeta are also outside. In the other direction the swath
@@ -445,7 +459,10 @@ worth stating plainly: no score in this repository would have found any of them.
 - **The headline is an uncorrected map pixel count and is probably low.** At the
   operating point used for the full scene the map recovers 14,405 ha of the
   18,483 ha of hand-labelled water, a shortfall of 22.1%. Scaling the reported
-  figure by that ratio gives 153,681 ha, but chip error rates should not
+  figure by that ratio gives 153,681 ha. The scene also drops water patches
+  under 25 pixels before counting, a step the chips were scored without. With
+  it the chips recover 13,984 ha, a shortfall of 24.3%, and the same scaling
+  gives about 158,300 ha. Chip error rates should not
   be assumed to hold over terrain the chips never sampled. A design-based
   estimate with a standard error would need a probability sample of the mapped
   area, which has not been drawn. See `REVIEW.md` F-01 and F-02.
@@ -457,11 +474,15 @@ worth stating plainly: no score in this repository would have found any of them.
   annual record; and the flood chapter of the Economic Survey, Assam 2016-17
   covers flood control works and expenditure rather than event damage. Outside
   the 65 hand-labelled chips this map is unvalidated. The only external
-  cross-check available is of ranking rather than magnitude: of the two
-  worst-affected districts that fall inside the study area, Golaghat is first
-  and Jorhat third in the 7 August flooded-cropland table, behind Lakhimpur.
-  The publisher of that 4 August map was not recorded, so this check cannot be
-  followed up as it stands. For scale, the same Economic
+  cross-check available is of ranking rather than magnitude, and it is loose.
+  The worst-affected list on the IWMI map sits in its text and is credited to
+  ASDMA figures as of 1 August, so it ranks districts by people affected, six
+  days before the 7 August scene. ASDMA's district counts for 25 July, quoted
+  in an [ACAPS briefing note of 3 August 2016](https://www.acaps.org/sites/acaps/files/products/files/20160803_acaps_briefing_note_update_india_floods.pdf), put Dhemaji, Jorhat,
+  Golaghat and Lakhimpur above 100,000 people each. The three of those inside
+  the study area hold the top places in the 7 August flooded-cropland table,
+  Golaghat first, then Lakhimpur and Jorhat. That agreement is about which
+  districts were hit and carries no information on hectares. For scale, the same Economic
   Survey gives Assam's average annual flood-affected area as 9.31 lakh hectares
   across the whole state and a whole season; the 119,779 ha here is one
   satellite pass on one day over part of the state.

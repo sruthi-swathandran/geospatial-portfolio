@@ -21,8 +21,9 @@ THE METHOD, AND WHERE EACH PIECE CAME FROM
                               imaged area flood, so it is kept only as --otsu
   clean-up before counting    morph_clean, removing water patches and holes
                               under 25 pixels. The chips were scored without
-                              it, so the validated and reported products
-                              differ here too (I-22)
+                              it. On them it lowers mapped area by 2.9% and
+                              3.4% at the two operating points (I-22,
+                              register_check_clean.csv)
   no slope mask here          step 10: on the chips the best cut changed
                               precision by +0.008 and recall by -0.003, too
                               small to decide anything. The scene applies an
@@ -131,9 +132,11 @@ def flood_items(client, quiet=False, date=None, orbit=None):
     Resolve the flood frames the way every other script here does.
 
     FLOOD_ITEMS holds Sentinel-1 GRD granule names from the Earth Search
-    catalogue. The RTC collection on Planetary Computer does not use those ids,
-    so searching by id returns nothing. Bounding box plus date plus relative
-    orbit is what the rest of the pipeline uses and what actually works.
+    catalogue. The RTC collection on Planetary Computer adds an _rtc suffix to
+    those ids, so a search by the bare id returns nothing. fetch_reference.py
+    adds the suffix. This searches by bounding box, date and relative orbit,
+    as the rest of the pipeline does. For 12 August both return the same
+    three frames (register_check_items.csv, I-25).
     """
     date = date or FLOOD_DATE
     orbit = RELATIVE_ORBIT if orbit is None else orbit

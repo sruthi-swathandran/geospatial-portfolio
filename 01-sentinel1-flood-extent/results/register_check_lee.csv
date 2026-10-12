@@ -1,0 +1,3 @@
+check,operating_point,threshold_db,iou_before,iou_after,precision_before,precision_after,recall_before,recall_after,area_ha_before,area_ha_after,iou_change,area_change,over_bar,pooled_term
+lee_term_pooled,max_iou,-18.75,0.5186,0.5177,0.7797,0.7798,0.6076,0.6064,14405.3,14372.7,-0.0009,-0.0023,False,0.001927
+lee_term_pooled,area_matched,-17.75,0.5221,0.5212,0.6872,0.6876,0.6849,0.6829,18421.5,18357.9,-0.0009,-0.0034,False,0.001927

@@ -319,8 +319,12 @@ method, so the rejection stands.
 
 The README said both worst-affected districts inside the study area "appear at
 the top" of the 7 August cropland table. Golaghat is first and Jorhat third,
-behind Lakhimpur. The publisher of the 4 August map the check rests on was not
-recorded, and the README now says so.
+behind Lakhimpur. The 4 August map has since been traced: the International
+Water Management Institute made it from ESA Sentinel-1 data and it is posted on
+ReliefWeb. Its worst-affected list is credited to ASDMA figures as of 1 August,
+which count people affected, and the README now says so. ASDMA's 25 July
+counts, as quoted in an ACAPS briefing note of 3 August 2016, are added as a
+second ranking check.
 
 ### C-20 The alignment step was said to fix a 10 px offset (I-18)
 
@@ -335,7 +339,7 @@ times, so the 30 pixels requested become 32, about 640 m at 20 m.
 computed on a different buffer from the one described; only the description
 changes. `config.applied_edge_px()` now gives the applied width, and the
 README, the public page, the publication map, the three-date sheet and the
-sensitivity figure use it.
+sensitivity figures in `sensitivity_grid.py` and `make_figures.py` use it.
 
 ### C-22 The README pointed to a raster that is not in the repository (I-04)
 
@@ -398,12 +402,37 @@ footer names those three and says how they are checked.
 - `REVIEW.md` S-01 said nearest resampling from 10 m to 20 m discards half the
   samples. It discards three quarters; an erratum is added (I-17).
 
+### C-26 Three README figures were older than the code that draws them
+
+`operating_point.png`, `change_sweep.png` and `product_vs_window.png` in the
+repository came from an earlier version of `make_figures.py`. Redrawn by the
+current one from the same CSVs, they differ in labelling and layout only. Minus
+signs are typeset, the change-detection point is labelled as the best over all
+65 chips (C-18), and the two operating-point labels now sit above the curves,
+where before their white halo hid part of the all-chips line. No plotted value
+changed.
+
 ### Measured in this round (I-21, I-22, I-25)
 
-`register_checks.py` measures the three items the register could not settle
-by reading: the Lee filter's noise term, the clean-up step the chips were
-scored without, and the two ways the 12 August frames are looked up. Its
-readings were set before it ran. Results are added below when they exist.
+`register_checks.py` measures what the register could not settle by reading.
+Its readings were set before it ran, and both chip checks reproduced the
+published IoU (0.5186 and 0.5221) before changing anything.
+
+- **I-21, Lee noise term: under the bar.** Fixing the term to the median of the
+  65 per-chip values (0.00193 in linear power) moved IoU by −0.0009 at both
+  operating points and mapped area by −0.23% and −0.34%. The bar was 0.005 IoU
+  or 1% area. Recorded as measured and small. The chips cannot show its size on
+  hilly scene tiles. `results/register_check_lee.csv`.
+- **I-22, `morph_clean`: over the bar on area.** With the clean-up the scene
+  applies, chip mapped area falls 2.93% at −18.75 dB and 3.36% at −17.75 dB.
+  IoU is unchanged at the first and rises by 0.0050 at the second. The README
+  now states these figures and what follows from them for the headline scaling
+  and for the area-matched point. `results/register_check_clean.csv`.
+- **I-25, frame lookup: the same frames.** The lookup by id with the `_rtc`
+  suffix and the search by bounding box, date and orbit return the same three
+  12 August frames. The `full_scene.flood_items` docstring said the id lookup
+  returns nothing, which holds only for bare GRD ids, and now says that.
+  `results/register_check_items.csv`.
 
 ---
 
