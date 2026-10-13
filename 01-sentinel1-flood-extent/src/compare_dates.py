@@ -12,8 +12,8 @@ worth, by splitting the ground into three parts and refusing to add them
 together.
 
     OVERLAP     seen by both passes. Flood here can be compared date to date,
-                and the disagreement is what a seamless-looking mosaic would
-                have quietly averaged away.
+                and the disagreement is what a mosaic without visible joins
+                would have quietly averaged away.
 
     WEDGE       seen only on 7 August. Real flood, real hectares, wrong date
                 for the event. Reportable on its own and never added to the

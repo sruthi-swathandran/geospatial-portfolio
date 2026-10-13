@@ -1,5 +1,5 @@
 """
-Shared chip I/O and SAR processing — no plotting, no heavy imports.
+Shared chip I/O and SAR processing: no plotting, no heavy imports.
 
 Split out of mask_chips.py so that scripts which only need to read chips and
 filter SAR don't drag matplotlib (and therefore the whole font/XML stack) in

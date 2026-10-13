@@ -1,5 +1,5 @@
 """
-RS-01 / step 7b — why does our RTC read differ from the dataset's chip?
+RS-01 / step 7b. Why does our RTC read differ from the dataset's chip?
 
 The check returned correlation 0.68 and a +3.7 dB bias. Neither number is fatal
 on its own, but they mean different things depending on their cause, and the
@@ -24,15 +24,15 @@ cause decides what we are allowed to do next. Three candidates:
 
   C. TERRAIN. Different DEMs and terrain-flattening give different answers on
      slopes.
-     Signature: the difference is spatially structured — patchy on hillsides,
-     clean on the floodplain — rather than uniform.
+     Signature: the difference is spatially structured: patchy on hillsides,
+     clean on the floodplain, rather than uniform.
 
 Speckle alone caps how high the correlation can go: two independent processing
 chains of the same acquisition are not expected to agree pixel-for-pixel. So
 read the SHIFT test first. If no shift improves things, the grids are aligned
 and 0.68 is just what two chains look like through speckle.
 
-Figures are optional here — if matplotlib will not import on your machine, the
+Figures are optional here: if matplotlib will not import on your machine, the
 numbers still print.
 
 Usage:
@@ -84,12 +84,12 @@ def main() -> None:
     chips = sorted(p.name.split("_")[1]
                    for p in REF_DIR.glob(f"{EVENT}_*_FLOODRTC.tif"))
     if not chips:
-        raise SystemExit("No fetched chips in data/reference — run fetch_reference.py")
+        raise SystemExit("No fetched chips in data/reference: run fetch_reference.py")
 
     print(f"{len(chips)} fetched chip(s)\n")
 
     all_ours, all_theirs, all_label = [], [], []
-    print("B. SHIFT TEST — does a pixel offset improve agreement?")
+    print("B. SHIFT TEST: does a pixel offset improve agreement?")
     print("-----------------------------------------------------")
     for chip_id in chips:
         ours, theirs, label = load_pair(chip_id)
@@ -112,7 +112,7 @@ def main() -> None:
     label = np.concatenate(all_label)
     diff = ours - theirs
 
-    print("\nA. RADIOMETRY — is the offset level-dependent?")
+    print("\nA. RADIOMETRY: is the offset level-dependent?")
     print("---------------------------------------------")
     print(f"  overall bias (ours - theirs): {np.median(diff):+.2f} dB   "
           f"sd {np.std(diff):.2f}")
@@ -147,7 +147,7 @@ def main() -> None:
         print(f"  same threshold shifted by the water-class bias: "
               f"{EVENT_VH_THRESHOLD + shift_water:+.2f} dB")
         print("  Do NOT reuse -21.56 dB on RTC data. Either re-estimate the "
-              "threshold in\n  RTC space, or — better — use RTC only for CHANGE "
+              "threshold in\n  RTC space, or, better, use RTC only for CHANGE "
               "(flood minus reference),\n  where any product-level offset "
               "cancels out entirely.")
 
@@ -157,7 +157,7 @@ def main() -> None:
         matplotlib.use("Agg")
         import matplotlib.pyplot as plt
     except Exception as exc:                             # noqa: BLE001
-        print(f"\n(skipping figures: matplotlib unavailable — {exc})")
+        print(f"\n(skipping figures: matplotlib unavailable: {exc})")
         return
 
     fig, axes = plt.subplots(1, 2, figsize=(12.5, 5))

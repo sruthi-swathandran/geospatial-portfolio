@@ -1,5 +1,5 @@
 """
-RS-01 / step 8c + 10a — fetch the DEM, and test whether terrain explains the shifts.
+RS-01 / step 8c + 10a. Fetch the DEM, and test whether terrain explains the shifts.
 
 Two jobs at once, deliberately. The Copernicus DEM is needed in phase 10 anyway,
 to mask radar shadow and layover by slope. Fetching it now also lets us test the
@@ -10,7 +10,7 @@ Where the shift investigation stands:
   - The offsets are REAL. The seven chips that ran to the +/-10 boundary have
     post-alignment correlation of 0.974, higher than the interior median. A
     search chasing noise does not produce a peak that good. So those chips
-    genuinely sit 10+ pixels — 100 m or more — from where the labels put them.
+    genuinely sit 10+ pixels, 100 m or more, from where the labels put them.
 
   - They are NOT spatially organised at chip scale. dx against longitude is
     -0.109 and against latitude +0.118. There is no smooth gradient across the
@@ -25,7 +25,7 @@ The physics, which makes this a prediction rather than a fishing expedition: a
 height error h displaces a SAR pixel in slant range by roughly h / tan(theta).
 At Sentinel-1's ~35 degree incidence that is about 1.4 x h. So a 70 m
 disagreement between SRTM (which GEE used) and the Copernicus DEM (which RTC
-uses) would displace a pixel by about 100 m — 10 pixels — in range, which for
+uses) would displace a pixel by about 100 m, 10 pixels, in range, which for
 this descending pass is close to east-west. That is exactly the size and the
 axis we are seeing.
 
@@ -80,7 +80,7 @@ def slope_degrees(elev: np.ndarray, lat: float, deg_per_px: float) -> np.ndarray
 
     A degree of latitude is about 110.54 km everywhere; a degree of longitude
     shrinks with the cosine of latitude. Ignoring that would overstate east-west
-    gradients by about 12% at 26 N — small, but free to get right.
+    gradients by about 12% at 26 N, small, but free to get right.
     """
     dy_m = deg_per_px * 110_540.0
     dx_m = deg_per_px * 111_320.0 * np.cos(np.deg2rad(lat))
@@ -102,7 +102,7 @@ def main() -> None:
     items = list(client.search(collections=[DEM_COLLECTION], bbox=BBOX).items())
     print(f"{DEM_COLLECTION}: {len(items)} tile(s) over the AOI")
     if not items:
-        raise SystemExit("No DEM items returned — check the collection id in config.py")
+        raise SystemExit("No DEM items returned: check the collection id in config.py")
 
     rows, t0 = [], time.time()
     for n, chip_id in enumerate(ids, 1):
@@ -187,7 +187,7 @@ def main() -> None:
                   f"median slope {np.median([r['slope_mean'] for r in small]):5.2f} deg")
             print("\n  A large-shift group that is clearly higher or steeper is the"
                   "\n  identification. Similar terrain in both groups means terrain "
-                  "is not it,\n  and the correction stays empirical — which is still "
+                  "is not it,\n  and the correction stays empirical, which is still "
                   "a correct result,\n  just a less satisfying sentence.")
 
     try:
@@ -210,7 +210,7 @@ def main() -> None:
             ax.set_ylabel("|dx| correction (pixels)")
             ax.grid(alpha=0.25)
             ax.set_title(f"r = {np.corrcoef(x, y)[0,1]:+.3f}")
-        fig.suptitle(f"{EVENT} — does terrain explain the registration offset?")
+        fig.suptitle(f"{EVENT}: does terrain explain the registration offset?")
         fig.tight_layout()
         out = RESULTS / "figures" / "terrain_vs_shift.png"
         out.parent.mkdir(parents=True, exist_ok=True)

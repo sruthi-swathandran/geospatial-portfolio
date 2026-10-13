@@ -201,7 +201,7 @@ def main() -> None:
     for i, f in enumerate(feats, 1):
         g = transform_geom("EPSG:4326", str(crs), f["geometry"])
         shapes.append((g, i))
-        # area of the WHOLE district, not just the imaged part. Computed in the
+        # area of the WHOLE district, imaged or not. Computed in the
         # projected CRS, so it is metres squared and converts cleanly.
         district_ha[i] = shape(g).area / 10_000.0
 

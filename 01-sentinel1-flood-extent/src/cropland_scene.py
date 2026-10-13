@@ -1,5 +1,5 @@
 """
-Flooded cropland over the whole scene, not only inside district polygons.
+Flooded cropland over the whole scene, inside district polygons and outside them.
 
 The README pairs a scene-wide flood figure (119,779 ha) with a cropland figure
 (43,494 ha) that district_stats.py computes by summing over ADM2 polygons.
@@ -155,7 +155,7 @@ def measure(water_path, plan):
             seen = wat != NODATA
             flood_crop += int(np.count_nonzero((wat == FLOOD) & is_crop))
             crop_imaged += int(np.count_nonzero(is_crop & seen))
-        # totals over the whole raster, not only tiled ground
+        # totals over the whole raster, tiled ground or not
         for i in range(0, w.height, 2048):
             for j in range(0, w.width, 2048):
                 win = Window(j, i, min(2048, w.width - j),

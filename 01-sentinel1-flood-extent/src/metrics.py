@@ -4,7 +4,7 @@ Binary segmentation metrics for RS-01.
 Kept in its own file because the same functions score three different things:
 the authors' Otsu baseline, each stage of our own pipeline, and the final
 ablation table. If the metric code differs between them, the comparison is
-meaningless — so it lives here and everything imports it.
+meaningless, so it lives here and everything imports it.
 
 Convention throughout: 1 = water, 0 = not water, -1 = no data (Sen1Floods11's
 own convention for its hand labels).
@@ -19,7 +19,7 @@ def confusion(pred: np.ndarray, truth: np.ndarray, ignore_value: int = -1) -> di
     """
     Pixel counts for the water class.
 
-    Pixels where truth == ignore_value are dropped entirely — they are not
+    Pixels where truth == ignore_value are dropped entirely: they are not
     counted as correct or incorrect. Counting them as background is the most
     common quiet error in flood accuracy assessment, and it inflates every
     metric, because no-data regions are usually large and always "not water".
@@ -70,7 +70,7 @@ def aggregate(confusions: list[dict]) -> dict:
     Micro-average: sum the pixel counts, then compute the metrics once.
 
     Micro rather than macro (mean of per-chip IoU) because chips vary enormously
-    in how much water they contain — a chip with 12 water pixels would otherwise
+    in how much water they contain, a chip with 12 water pixels would otherwise
     carry the same weight as a chip that is half river. Report macro alongside
     it if you like, but the headline number should be micro, and the write-up
     should say which it is. A lot of published flood numbers are ambiguous on
@@ -89,7 +89,7 @@ def macro(confusions: list[dict]) -> dict:
 
     Precision is undefined for a chip where nothing was predicted as water
     (tp + fp == 0), and one such chip would turn a plain mean into nan. Those
-    chips are skipped for precision only — and the count of skipped chips is
+    chips are skipped for precision only, and the count of skipped chips is
     reported, because "the method predicted no water at all here" is itself
     informative and shouldn't vanish silently.
     """

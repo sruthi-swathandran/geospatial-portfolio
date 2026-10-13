@@ -1,14 +1,14 @@
 """
-RS-01 / step 7 — pull the pre-event scene from STAC onto the chip grid.
+RS-01 / step 7. Pull the pre-event scene from STAC onto the chip grid.
 
 This is where the cloud-native stack finally earns its place. We do NOT download
 Sentinel-1 scenes. We ask a STAC API for two specific acquisitions, and read
 only the 512x512 windows we need out of the Cloud-Optimised GeoTIFFs on the
-other end — 68 small windows instead of ~4 GB of SAFE archives.
+other end: 68 small windows instead of ~4 GB of SAFE archives.
 
 Two dates are fetched, and the first one is a test rather than a product:
 
-  FLOOD DATE (2016-08-12)  We already have this imagery — it is what Sen1Floods11
+  FLOOD DATE (2016-08-12)  We already have this imagery: it is what Sen1Floods11
                            packaged as S1Hand. Fetching it again from Planetary
                            Computer and correlating the two is an end-to-end check
                            on geolocation, resampling and units. If our RTC read
@@ -91,7 +91,7 @@ def chip_geobox(chip_id: str):
     The exact grid of a Sen1Floods11 chip, as an odc GeoBox.
 
     Passing this to odc.stac.load as `like=` means the fetched imagery lands
-    pixel-for-pixel on the chip's grid — same CRS, same transform, same shape —
+    pixel-for-pixel on the chip's grid: same CRS, same transform, same shape,
     so it can be compared with the hand labels without a resampling step of our
     own, and without any chance of a half-pixel offset creeping in.
     """
@@ -182,14 +182,14 @@ def main() -> None:
         corr = np.array([r["vh_corr_vs_S1Hand"] for r in rows
                          if "vh_corr_vs_S1Hand" in r])
         bias = np.array([r["vh_bias_db"] for r in rows if "vh_bias_db" in r])
-        print("\nSANITY CHECK — our RTC read vs the dataset's own chip (VH)")
+        print("\nSANITY CHECK: our RTC read vs the dataset's own chip (VH)")
         print(f"  correlation  median {np.median(corr):.3f}  "
               f"min {corr.min():.3f}  max {corr.max():.3f}")
         print(f"  bias (dB)    median {np.median(bias):+.2f}  "
               f"min {bias.min():+.2f}  max {bias.max():+.2f}")
         print("  A high correlation with a small constant bias means the grids "
               "line up and\n  only the processing chain differs (RTC vs the "
-              "dataset's GRD). A low\n  correlation means misalignment — stop "
+              "dataset's GRD). A low\n  correlation means misalignment: stop "
               "and fix that before going further.")
 
     ref_median = [r["REF_vh_median"] for r in rows if "REF_vh_median" in r]

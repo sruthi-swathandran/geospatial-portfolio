@@ -1,5 +1,5 @@
 """
-RS-01 / step 3 — look at the data before modelling it, and get the number to beat.
+RS-01 / step 3. Look at the data before modelling it, and get the number to beat.
 
 Two jobs:
 
@@ -12,7 +12,7 @@ Two jobs:
   2. THE BASELINE. Score the dataset authors' own Otsu output
      (S1OtsuLabelHand) against the hand labels, on the official splits. That
      is the number your pipeline has to beat, computed by you, on your machine,
-     with your metric code — which is a far stronger claim than quoting a paper.
+     with your metric code, which is a far stronger claim than quoting a paper.
 
 Outputs:
     results/chip_inventory.csv
@@ -75,7 +75,7 @@ def describe_units(vv: np.ndarray) -> str:
         return f"decibels (1st-99th pct {lo:.1f} .. {hi:.1f} dB)"
     if 0 <= lo and hi <= 2:
         return f"linear power / sigma0 ({lo:.4f} .. {hi:.4f})"
-    return f"unclear ({lo:.3f} .. {hi:.3f}) — inspect before thresholding"
+    return f"unclear ({lo:.3f} .. {hi:.3f}): inspect before thresholding"
 
 
 def main() -> None:
@@ -149,7 +149,7 @@ def main() -> None:
           f"land {total_land/total_px:6.2%}   nodata {total_nodata/total_px:6.2%}")
     print(f"  -> {total_nodata:,} no-data pixels are excluded from every metric below.")
 
-    print("\nBASELINE — the authors' Otsu output vs the hand labels")
+    print("\nBASELINE, the authors' Otsu output vs the hand labels")
     print("------------------------------------------------------")
     for split in ("train", "valid", "test", "bolivia", "unknown"):
         if split not in confs_by_split:
@@ -209,7 +209,7 @@ def main() -> None:
                 ax.set_ylabel(f"{chip_id}\n{r['split']}  IoU {r['otsu_iou']:.2f}",
                               fontsize=9)
 
-    fig.suptitle(f"{EVENT} — Sen1Floods11 hand-labelled chips, wettest three",
+    fig.suptitle(f"{EVENT}: Sen1Floods11 hand-labelled chips, wettest three",
                  fontsize=12)
     fig.tight_layout()
     out_png = FIGURES / "example_chips.png"

@@ -1,5 +1,5 @@
 """
-RS-01 / step 7e — is the low correlation a data problem or a metric problem?
+RS-01 / step 7e. Is the low correlation a data problem or a metric problem?
 
 Coverage is ruled out: the disagreeing chips have zero no-data. So either the
 imagery really is wrong on those chips, or pixel correlation is the wrong way to
@@ -9,7 +9,7 @@ Correlation measures shared VARIANCE. Sentinel-1 VH over flat, uniform terrain
 is nearly constant plus heavy multiplicative speckle. Two independent processing
 chains of the same acquisition produce independent speckle realisations, so over
 a featureless chip almost all the variance is noise and the correlation collapses
-towards zero — even when both images are perfectly correct and perfectly aligned.
+towards zero, even when both images are perfectly correct and perfectly aligned.
 On a chip containing a river, a treeline, a town, real structure dominates and
 correlation is high.
 
@@ -76,7 +76,7 @@ def main() -> None:
     chips = sorted(p.name.split("_")[1]
                    for p in REF_DIR.glob(f"{EVENT}_*_FLOODRTC.tif"))
     if not chips:
-        raise SystemExit("Nothing in data/reference — run fetch_reference.py")
+        raise SystemExit("Nothing in data/reference: run fetch_reference.py")
 
     rows = []
     for chip_id in chips:

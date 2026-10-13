@@ -1,5 +1,5 @@
 """
-RS-01 / step 6 — why does the ceiling sit at IoU ~0.70, and what is the bright water?
+RS-01 / step 6. Why does the ceiling sit at IoU ~0.70, and what is the bright water?
 
 The sweep put the best single VH threshold at about 0.70 IoU on test, and the
 class distributions say why: 25% of hand-labelled water pixels are brighter than
@@ -14,17 +14,17 @@ asserting the fashionable one:
       water, part land, and lands between the two modes. Test: split water into
       edge and interior by eroding the label mask. If bright water is mostly
       edge, the ceiling is a resolution limit and the fix is sub-pixel or
-      higher-resolution data — not a better threshold.
+      higher-resolution data, not a better threshold.
 
   H2  FLOODED VEGETATION. Water under a canopy produces double-bounce off
-      trunks and stems and comes back BRIGHT, not dark — the well-known blind
-      spot of SAR flood mapping. Test: compute NDVI from the paired Sentinel-2
+      trunks and stems and comes back BRIGHT rather than dark, the familiar
+      blind spot of SAR flood mapping. Test: compute NDVI from the paired Sentinel-2
       chip and compare it between dark water and bright water. If bright water
       is vegetated, the fix is a different feature (VV/VH ratio, change against
       a pre-event reference), not a better threshold.
 
   H3  ROUGHENED OPEN WATER. Wind roughens the surface and raises backscatter.
-      Test: bright water that is interior AND has low NDVI falls here — it is
+      Test: bright water that is interior AND has low NDVI falls here: it is
       the residual once H1 and H2 are accounted for.
 
 Whatever the split, the number that matters for the write-up is the same: how
@@ -95,8 +95,8 @@ def main() -> None:
         raise SystemExit("No chips found.")
 
     vh_edge, vh_interior = [], []
-    # Four buckets, not two. Edge pixels are mixed by definition — they contain
-    # land — so they are BOTH brighter and greener than open water, and a plain
+    # Four buckets, not two. Edge pixels are mixed by definition: they contain
+    # land, so they are BOTH brighter and greener than open water, and a plain
     # bright-vs-dark NDVI comparison cannot tell flooded vegetation apart from
     # ordinary edge mixing. Splitting interior from edge first is what makes the
     # vegetation question answerable.
@@ -174,7 +174,7 @@ def main() -> None:
         print(f"  missed by a {t:>6.2f} dB threshold  {missed:>12,}"
               f"  ({missed/tot_water:.1%}) -> recall ceiling {1-missed/tot_water:.3f}")
 
-    print("\nH1 — EDGE OR INTERIOR?")
+    print("\nH1: EDGE OR INTERIOR?")
     print("----------------------")
     print(f"  edge water pixels     {vh_edge.size:>12,}  median VH "
           f"{np.median(vh_edge):6.2f} dB")
@@ -193,7 +193,7 @@ def main() -> None:
           "flood is\n     thin and fragmented: channels, field margins, "
           "sheet water between bunds.")
 
-    print("\nH2 — IS BRIGHT WATER VEGETATED, OR JUST MIXED?")
+    print("\nH2: IS BRIGHT WATER VEGETATED, OR JUST MIXED?")
     print("---------------------------------------------")
     pooled = {k: (np.concatenate(v) if any(a.size for a in v) else np.array([]))
               for k, v in ndvi_buckets.items()}
@@ -208,13 +208,13 @@ def main() -> None:
             diff = float(np.median(i_b) - np.median(i_d))
             print(f"\n  INTERIOR-ONLY difference (the test that counts): {diff:+.3f}")
             print("  Edge pixels are part land by construction, so they are both "
-                  "brighter and\n  greener regardless of vegetation — comparing "
+                  "brighter and\n  greener regardless of vegetation: comparing "
                   "bright vs dark across all water\n  cannot separate the two "
                   "explanations. Comparing them WITHIN the interior can:\n"
                   "  a clear positive difference is flooded vegetation; near "
                   "zero is roughening.")
     else:
-        print("  no usable S2 pixels — check the band indices at the top of this file")
+        print("  no usable S2 pixels: check the band indices at the top of this file")
 
     with open(RESULTS / "ceiling_breakdown.csv", "w", newline="") as fh:
         w = csv.DictWriter(fh, fieldnames=list(rows[0]))
@@ -242,7 +242,7 @@ def main() -> None:
     labels = [k.replace("_", "\n") for k in order if pooled[k].size]
     if data:
         # matplotlib renamed this parameter in 3.9 and drops the old name in
-        # 3.11 — you are on 3.11.1, so the new spelling comes first.
+        # 3.11: you are on 3.11.1, so the new spelling comes first.
         try:
             axes[1].boxplot(data, tick_labels=labels, showfliers=False)
         except TypeError:
@@ -255,7 +255,7 @@ def main() -> None:
         axes[1].text(0.5, 0.5, "no S2 NDVI available", ha="center", va="center")
         axes[1].axis("off")
 
-    fig.suptitle(f"{EVENT} — what limits recall")
+    fig.suptitle(f"{EVENT}: what limits recall")
     fig.tight_layout()
     fig.savefig(FIGURES / "bright_water.png", dpi=130)
     print("\nwrote ceiling_breakdown.csv, figures/bright_water.png")

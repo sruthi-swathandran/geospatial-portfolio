@@ -1,11 +1,11 @@
 """
-RS-01 / step 1 — find the Sentinel-1 scenes for a Sen1Floods11 event.
+RS-01 / step 1. Find the Sentinel-1 scenes for a Sen1Floods11 event.
 
 Sen1Floods11 gives us, per event, the S1 acquisition date, the orbit direction
 and the relative orbit number. To map a flood we need TWO acquisitions on the
 SAME relative orbit: the flood one, and a dry reference from before the event.
 Same relative orbit matters because backscatter depends on incidence angle and
-look direction -- comparing across orbits compares apples to pears.
+look direction, so comparing across orbits compares apples to pears.
 
 This script searches two STAC APIs so you can pick your access route:
 

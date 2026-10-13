@@ -1,5 +1,5 @@
 """
-RS-01 / step 2 — get the Sen1Floods11 hand labels for the India event.
+RS-01 / step 2. Get the Sen1Floods11 hand labels for the India event.
 
 Updated after seeing the real bucket layout. Beyond the imagery and the labels,
 the bucket carries two things worth taking:
@@ -17,7 +17,7 @@ the bucket carries two things worth taking:
 
 JRCWaterHand gives per-chip permanent water, so permanent-water separation can
 be validated without a second trip to the JRC collection. S2Hand is the optical
-view of the same chip — the evidence for "SAR missed this flooded area", which
+view of the same chip, the evidence for "SAR missed this flooded area", which
 is a claim you want a picture for.
 
 Usage
@@ -48,11 +48,11 @@ GET_URL = f"https://storage.googleapis.com/{BUCKET}/{{name}}"
 
 # Layer -> why we want it
 LAYERS = {
-    "S1Hand":           "Sentinel-1 VV+VH for the chip — the model input",
-    "LabelHand":        "hand-drawn ground truth — the thing we score against",
-    "S1OtsuLabelHand":  "the authors' own Otsu result — our comparison baseline",
+    "S1Hand":           "Sentinel-1 VV+VH for the chip, the model input",
+    "LabelHand":        "hand-drawn ground truth, the thing we score against",
+    "S1OtsuLabelHand":  "the authors' own Otsu result: our comparison baseline",
     "JRCWaterHand":     "JRC permanent water for the chip",
-    "S2Hand":           "Sentinel-2 optical — visual evidence for missed flooding",
+    "S2Hand":           "Sentinel-2 optical: visual evidence for missed flooding",
 }
 DEFAULT_LAYERS = list(LAYERS)
 
@@ -159,7 +159,7 @@ def build_footprints() -> None:
 
     files = sorted((LABELS_DIR / "S1Hand").glob(f"{EVENT}_*_S1Hand.tif"))
     if not files:
-        raise SystemExit(f"No chips in {LABELS_DIR / 'S1Hand'} — run --download first.")
+        raise SystemExit(f"No chips in {LABELS_DIR / 'S1Hand'}: run --download first.")
 
     # which split each chip belongs to, if the split files were downloaded
     split_of: dict[str, str] = {}

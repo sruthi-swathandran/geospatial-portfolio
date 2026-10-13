@@ -35,7 +35,7 @@ evidence for whichever cut you pick, and it belongs in the README.
 
 ON THE MINIMUM MAPPING UNIT
 ---------------------------
-A lone 20 m pixel of flood is not a mappable flood, it is one noisy sample. Most
+A lone 20 m pixel of flood is one noisy sample and too small to map. Most
 operational flood products drop connected components below a threshold, and
 saying so with a number is better than leaving thousands of single pixels in a
 product and calling it detail. Objects are removed per tile with a 16 pixel

@@ -1,5 +1,5 @@
 """
-RS-01 / step 5 — how much of this problem is the threshold, and where is the ceiling?
+RS-01 / step 5. How much of this problem is the threshold, and where is the ceiling?
 
 The ablation says something specific: gating the threshold moved precision from
 0.28 to 0.90, and the remaining loss is recall. Before writing more code it is
@@ -8,22 +8,22 @@ worth answering three questions with the data itself.
   1. WHAT DOES THE SEPARATION ACTUALLY LOOK LIKE?
      Plot VH for hand-labelled water pixels against VH for land pixels. The
      overlap between those two distributions is a hard ceiling on any method
-     that thresholds VH. If they overlap by 20%, no threshold — adaptive,
-     tiled, gated, or divinely inspired — gets past it, and the way forward is
-     a different feature, not a better threshold.
+     that thresholds VH. If they overlap by 20%, no threshold gets past
+     it, however adaptive, tiled or gated, and the way forward is a different
+     feature rather than a better threshold.
 
   2. WHERE IS THE BEST SINGLE THRESHOLD, AND HOW SHARP IS THE OPTIMUM?
      Sweep VH from -30 to -10 dB, score every value on the VALID split only,
      and plot IoU against threshold. A flat optimum means the exact value
      hardly matters and the published -21.56 dB is fine. A sharp one means
-     per-event calibration is essential — which is itself a finding about
+     per-event calibration is essential, which is itself a finding about
      operational deployment.
 
   3. DOES THE SCALE OF ESTIMATION MATTER MORE THAN THE METHOD?
      Compare three thresholds computed with no labels at all: Otsu per chip
      (what failed), Otsu on all chips pooled (scene-like), and the published
      per-event value. If pooling fixes most of the gap, the lesson is that
-     Otsu was never the problem — the window you showed it was.
+     Otsu was never the problem, the window you showed it was.
 
 Reported honestly: the swept threshold USES the valid labels, so it is a tuned
 number and only its TEST score is quotable. The pooled and published
@@ -189,7 +189,7 @@ def main() -> None:
         ax.axvline(t, color="black", linestyle=style, linewidth=1.4, label=name)
     ax.set_xlabel("VH backscatter (dB)")
     ax.set_ylabel("density")
-    ax.set_title(f"{EVENT} — VH distribution of hand-labelled water vs land")
+    ax.set_title(f"{EVENT}: VH distribution of hand-labelled water vs land")
     ax.legend(fontsize=9)
     fig.tight_layout()
     fig.savefig(FIGURES / "class_separation.png", dpi=130)
@@ -207,7 +207,7 @@ def main() -> None:
                label="published -21.56")
     ax.set_xlabel("VH threshold (dB)")
     ax.set_ylabel("IoU (water)")
-    ax.set_title(f"{EVENT} — single-threshold sensitivity")
+    ax.set_title(f"{EVENT}: single-threshold sensitivity")
     ax.legend(fontsize=9)
     ax.grid(alpha=0.25)
     fig.tight_layout()

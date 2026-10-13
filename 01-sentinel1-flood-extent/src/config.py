@@ -1,5 +1,5 @@
 """
-RS-01 configuration — the decisions, in one place, with the reasoning.
+RS-01 configuration, the decisions, in one place, with the reasoning.
 
 Every later script imports from here. Keeping the choices in a file rather than
 scattered through notebooks is what makes the project reproducible, and the
@@ -31,7 +31,7 @@ RELATIVE_ORBIT = 77
 ORBIT_STATE = "descending"
 
 # --------------------------------------------------------------------------
-# Scenes — chosen from the find_scenes.py output
+# Scenes: chosen from the find_scenes.py output
 # --------------------------------------------------------------------------
 # FLOOD: three consecutive frames on 2016-08-12, all VV+VH, relative orbit 77.
 # Three items rather than one because a single IW frame is ~250 km along-track
@@ -44,7 +44,7 @@ FLOOD_ITEMS = [
 ]
 
 # REFERENCE: 2016-07-19, same relative orbit, same overpass time (23:46), and
-# crucially also VV+VH.
+# also VV+VH, which the comparison needs.
 #
 # Why not 2016-07-31, which is closer in time (12 days rather than 24)?
 # Because it is single-polarisation (1SSV = VV only). Comparing a VV+VH flood
@@ -60,7 +60,7 @@ REFERENCE_ITEMS = [
 
 # HONEST CAVEAT, to be stated in the README rather than buried:
 # 19 July 2016 is mid-monsoon in Assam. It is a *pre-event* reference, not a
-# dry one — parts of the floodplain may already have been inundated. A true
+# dry one: parts of the floodplain may already have been inundated. A true
 # low-water baseline would come from the pre-monsoon (Feb-Apr 2016) on the same
 # orbit, at the cost of seasonal differences in vegetation backscatter.
 # Phase 5 tests both and reports the difference in flooded-area estimate;
@@ -81,7 +81,7 @@ LANDCOVER_COLLECTION = "esa-worldcover"
 # --------------------------------------------------------------------------
 # Processing parameters
 # --------------------------------------------------------------------------
-TARGET_CRS = "EPSG:32646"      # UTM 46N — covers the AOI; metres, so areas are honest
+TARGET_CRS = "EPSG:32646"      # UTM 46N: covers the AOI; metres, so areas are honest
 TARGET_RES = 10                # metres
 SCENE_RES = 20.0               # metres; the published run is full_scene.py --res 20
 CHUNK = 2048                   # dask chunk size in pixels
@@ -92,14 +92,14 @@ OTSU_TILE = 512                # tile size for adaptive thresholding (full scene
 # Sen1Floods11 stores a per-event VH threshold in its metadata; for the India
 # event it is -21.56 dB. That is the value the dataset authors used, derived at
 # SCENE scale. Having it lets us test "a single well-chosen event threshold"
-# against "a threshold estimated per chip" — which turns out to be the crux.
+# against "a threshold estimated per chip", which turns out to be the crux.
 EVENT_VH_THRESHOLD = -21.56
 
 # Physical bounds on where a water threshold can plausibly sit for Sentinel-1
 # sigma0 in dB. Open water is a specular reflector: it is DARK. Land, even wet
 # bare soil, rarely falls below these. If an automatic threshold lands above
 # them it is not separating water from land, it is splitting the land
-# distribution in half — which is precisely how Otsu fails on a chip that
+# distribution in half, which is precisely how Otsu fails on a chip that
 # contains little or no water.
 MAX_WATER_THRESHOLD_VH = -15.0
 MAX_WATER_THRESHOLD_VV = -12.0

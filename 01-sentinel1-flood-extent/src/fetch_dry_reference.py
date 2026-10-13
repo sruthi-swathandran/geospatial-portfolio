@@ -2,7 +2,7 @@
 RS-01 / step 9b - get a reference date that is actually dry.
 
 Change detection scored 0.069 IoU against 0.515 for the single-date threshold.
-That is not a marginal loss, it is a failure, and the cause is measured rather
+That is a failure rather than a marginal loss, and the cause is measured rather
 than guessed: 45.1% of the pixels labelled water on 12 August were already below
 the water threshold on 19 July. Nearly half the flood cannot produce a change
 signal against that reference, because it was already there.

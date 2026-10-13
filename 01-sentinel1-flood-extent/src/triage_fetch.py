@@ -1,5 +1,5 @@
 """
-RS-01 / step 7d — which chips did the STAC fetch actually cover?
+RS-01 / step 7d. Which chips did the STAC fetch actually cover?
 
 Across 68 chips the correlation against the dataset's own imagery ranges from
 0.921 down to -0.029. A median of 0.58 with a minimum near zero is not one
@@ -10,7 +10,7 @@ this feeds a change detector.
 The leading suspect is coverage. We fetched three Sentinel-1 frames per date,
 chosen because they cover the FLOOD acquisition footprint. The 68 label chips
 span 1.56 x 1.61 degrees, and any chip falling outside those three frames comes
-back empty or part-empty — odc.stac.load fills what it cannot read with NaN, and
+back empty or part-empty: odc.stac.load fills what it cannot read with NaN, and
 a chip that is mostly NaN can still scrape past the "more than 1000 valid pixels"
 guard with a handful of pixels that correlate with nothing.
 
@@ -20,7 +20,7 @@ This reads the report the fetch already wrote and answers three questions:
   2. Do the low-correlation chips line up with the high-NaN chips?
   3. Is the reference date covered as well as the flood date? The reference
      frames were selected on the same orbit but they are a different pass, so
-     their footprint is close to — not identical to — the flood one.
+     their footprint is close to, not identical to, the flood one.
 
 If coverage explains it, the fix is more frames, not more processing.
 
@@ -52,7 +52,7 @@ def fnum(row: dict, key: str):
 
 def main() -> None:
     if not REPORT.exists():
-        raise SystemExit(f"{REPORT} not found — run fetch_reference.py first")
+        raise SystemExit(f"{REPORT} not found: run fetch_reference.py first")
 
     rows = list(csv.DictReader(REPORT.read_text().splitlines()))
     print(f"{len(rows)} chips in the fetch report\n")

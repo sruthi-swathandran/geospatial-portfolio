@@ -1,5 +1,5 @@
 """
-RS-01 / step 8b — is the shift field real, or is the search chasing noise?
+RS-01 / step 8b. Is the shift field real, or is the search chasing noise?
 
 Widening the search from +/-5 to +/-10 left the core untouched (dx median -2
 either way, about 39 chips between 0 and -4) and moved only a tail: four chips
@@ -9,7 +9,7 @@ jumped to -10. Two readings, and they call for opposite actions:
   widening further is right and the offset has a physical cause worth naming.
 
   NO PEAK TO FIND. On a chip with little structure the correlation surface is
-  almost flat, so the maximum lands wherever noise puts it — often at the edge,
+  almost flat, so the maximum lands wherever noise puts it, often at the edge,
   because the overlap shrinks with displacement and small overlaps are noisier.
   Widening then produces larger and more confident nonsense.
 
@@ -19,7 +19,7 @@ not to widen. If they have HIGH correlation, the displacement is real.
 
 The script also tests the range-direction hypothesis. SAR geolocation error
 caused by DEM disagreement acts along slant range, which for this descending
-pass runs roughly east-west — so it should appear in dx and not dy, and it
+pass runs roughly east-west, so it should appear in dx and not dy, and it
 should vary with terrain rather than randomly across the scene. dy sd is 0.86
 against dx sd 4.09, which is consistent. Plotting dx against chip position tests
 whether the variation is spatially organised (terrain or frame geometry) or
@@ -70,7 +70,7 @@ def centroids() -> dict[str, tuple[float, float]]:
 
 def main() -> None:
     if not COREG.exists():
-        raise SystemExit(f"{COREG} not found — run coregister.py first")
+        raise SystemExit(f"{COREG} not found: run coregister.py first")
 
     rows = list(csv.DictReader(COREG.read_text().splitlines()))
     cent = centroids() if FOOTPRINTS.exists() else {}
@@ -110,7 +110,7 @@ def main() -> None:
         print(f"  corr(dy, longitude) = {np.corrcoef(dy[ok], lon[ok])[0,1]:+.3f}")
         print(f"  corr(dy, latitude)  = {np.corrcoef(dy[ok], lat[ok])[0,1]:+.3f}")
         print("\n  A strong relationship with position means frame geometry or "
-              "terrain —\n  something structured. Near zero everywhere means a "
+              "terrain,\n  something structured. Near zero everywhere means a "
               "constant offset plus\n  per-chip noise, and the constant is all "
               "you should correct for.")
         print(f"\n  interior dx: median {np.median(dx[ok]):+.1f}  "
@@ -159,7 +159,7 @@ def main() -> None:
                         color="black", s=70, label="boundary")
     axes[1].set_xlabel("|dx| correction (px)")
     axes[1].set_ylabel("correlation after alignment")
-    axes[1].set_title("Big corrections — real, or no peak to find?")
+    axes[1].set_title("Big corrections: real, or no peak to find?")
     axes[1].grid(alpha=0.25)
     axes[1].legend(fontsize=8)
 

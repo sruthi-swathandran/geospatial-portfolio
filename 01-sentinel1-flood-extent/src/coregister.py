@@ -1,5 +1,5 @@
 """
-RS-01 / step 8 — co-register the RTC chips to the Sen1Floods11 grid.
+RS-01 / step 8. Co-register the RTC chips to the Sen1Floods11 grid.
 
 Revised after the agreement check, which changed two things.
 
@@ -11,9 +11,9 @@ on the averaged image is both more reliable and more honest about what is being
 matched: structure, not noise.
 
 SECOND, and this is why the earlier run should not be trusted: the previous
-search allowed shifts of +/-2, and 37 of 68 chips came back with dx = -2 — the
+search allowed shifts of +/-2, and 37 of 68 chips came back with dx = -2, the
 edge of the search. An optimum sitting on the boundary of its search range is
-not an optimum; it is a truncation. The real offset may be larger, and every
+a truncation. The real offset may be larger, and every
 chip pegged at the edge was under-corrected.
 
 So the search widens to +/-5 by default and the script reports how many chips
@@ -25,7 +25,7 @@ products, worth stating as a finding in its own right: 2 pixels is 20 m, and
 20 m matters when 43.8% of the labelled water sits within 20 m of land.
 
 The reported (dy, dx) is the CORRECTION applied to the RTC image to bring it
-onto the label grid — the negative of the measured displacement. The sign
+onto the label grid, the negative of the measured displacement. The sign
 convention and apply_shift were verified by a round trip: an image displaced by
 a known (sy, sx) yields best = (-sy, -sx) and correlates at 1.000 after the
 correction is applied.
@@ -95,7 +95,7 @@ def apply_shift(arr: np.ndarray, dy: int, dx: int) -> np.ndarray:
 
 
 def contrast(vh: np.ndarray, label: np.ndarray) -> float | None:
-    """Median land VH minus median water VH — how separable the classes are."""
+    """Median land VH minus median water VH: how separable the classes are."""
     w = (label == 1) & np.isfinite(vh)
     l = (label == 0) & np.isfinite(vh)
     if w.sum() < 500 or l.sum() < 500:
@@ -113,7 +113,7 @@ def main() -> None:
     chips = sorted(p.name.split("_")[1]
                    for p in REF_DIR.glob(f"{EVENT}_*_FLOODRTC.tif"))
     if not chips:
-        raise SystemExit("Nothing in data/reference — run fetch_reference.py first")
+        raise SystemExit("Nothing in data/reference: run fetch_reference.py first")
 
     print(f"{len(chips)} chips, searching +/-{args.max_shift} px on "
           f"speckle-suppressed images\n")
@@ -213,7 +213,7 @@ def main() -> None:
     (RESULTS / "usable_chips.txt").write_text("\n".join(usable))
     print(f"\n  chips reaching correlation >= {args.min_corr} after alignment: "
           f"{len(usable)} of {len(rows)}")
-    print("  wrote usable_chips.txt — the subset the change detector should use.")
+    print("  wrote usable_chips.txt, the subset the change detector should use.")
     print("  Chips that will not align are usually steep terrain, where a single"
           "\n  rigid shift cannot fix a locally varying displacement. Excluding "
           "them and\n  saying so is better than averaging over them silently.")
@@ -227,8 +227,8 @@ def main() -> None:
               f"(n={len(ct)})")
         print(f"  Planetary Computer RTC gamma0:    {np.median(co):5.2f} dB")
         print(f"  difference:                       {np.median(co)-np.median(ct):+5.2f} dB")
-        print("  Less contrast means the same algorithm has less to work with — a"
-              "\n  property of the product, not of anyone's method.")
+        print("  Less contrast means the same algorithm has less to work with, a"
+              "\n  property of the product rather than of anyone's method.")
 
     print("\nwrote coregistration.csv and aligned chip pairs")
 

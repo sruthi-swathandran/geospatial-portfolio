@@ -1,5 +1,5 @@
 """
-RS-01 / step 4 — build the water mask one decision at a time, and measure each.
+RS-01 / step 4. Build the water mask one decision at a time, and measure each.
 
 Round 2. Round 1 produced recall 0.80-0.88 with precision 0.23-0.28: the masks
 were finding the water and then calling a great deal of land water as well. The
@@ -7,7 +7,7 @@ cause is structural, not a coding error:
 
     Otsu assumes two comparable populations. Across these chips water is about
     10% of valid pixels, and many individual chips contain almost none. Given a
-    histogram with one mode, Otsu still returns a threshold — it splits the land
+    histogram with one mode, Otsu still returns a threshold: it splits the land
     distribution down the middle. A chip with no water then comes back roughly
     half "water", and precision collapses.
 
