@@ -1,7 +1,7 @@
 {
- "written_at": "2026-10-13T05:22:25+00:00",
+ "written_at": "2026-10-13T06:23:57+00:00",
  "git": {
-  "commit": "6a14889a2e0cb9241c5bd7a759020dd5c2e34f61",
+  "commit": "dba2cfa52dce611ad9508debfe98dd4d19f7edeb",
   "uncommitted_changes": false
  },
  "interpreter": {
@@ -277,8 +277,8 @@
    }
   },
   "results/comparison_tables.md": {
-   "kind": "file",
-   "sha256": "e76b29a3f152451b200021998aa105264a86af137803942f0141f6d3a40999b9"
+   "kind": "text, LF",
+   "sha256": "0e4771efe3624e6bff7976dd160701634718340aafe844c486b09330a7834bf1"
   },
   "results/country_comparison.csv": {
    "kind": "csv",
