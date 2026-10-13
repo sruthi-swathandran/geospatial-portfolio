@@ -877,19 +877,23 @@ def trace_docs(index):
 
     # the one decimal the page reads from a single column (R-01, S-02)
     rc = RES / "register_check_clean.csv"
+    row = None
     if rc.exists():
         with open(rc, encoding="utf-8") as fh:
             row = next((r for r in csv.DictReader(fh)
                         if r.get("operating_point") == "area_matched"
                         and r.get("limit_scale") == "scene scale"), None)
-        if row and row.get("area_vs_labels_after"):
-            want = f"{-float(row['area_vs_labels_after']) * 100:.1f}%"
-            if f"maps {want} less water" in " ".join(s.split()):
-                report(PASS, f"clean-up shortfall {want} <- "
-                             f"register_check_clean.csv area_vs_labels_after")
-            else:
-                report(FAIL, f"the page does not quote the clean-up shortfall "
-                             f"{want} from register_check_clean.csv")
+    if row and row.get("area_vs_labels_after"):
+        want = f"{-float(row['area_vs_labels_after']) * 100:.1f}%"
+        if f"maps {want} less water" in " ".join(s.split()):
+            report(PASS, f"clean-up shortfall {want} <- "
+                         f"register_check_clean.csv area_vs_labels_after")
+        else:
+            report(FAIL, f"the page does not quote the clean-up shortfall "
+                         f"{want} from register_check_clean.csv")
+    else:
+        report(WARN, "clean-up shortfall not checked: register_check_clean.csv "
+                     "or its scene-scale row is missing")
 
     print(f"  \u00b7 {traced} numbers matched a value in results/")
     if untraced:

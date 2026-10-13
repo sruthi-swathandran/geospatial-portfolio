@@ -225,7 +225,7 @@ def fig_operating_point(dpi):
         "The upper panel is agreement with the labels. The lower is how much "
         "water the map draws against how much the labels contain.\n"
         "They do not peak in the same place. One threshold matches the shape "
-        "of the flood best, the other matches its size. On these\nchips the "
+        "of the flood best; the other matches its size. On these\nchips the "
         "two are not separable, so the README reports both rather than "
         "picking one and hoping.",
         "operating_point.csv", legend_row=True)

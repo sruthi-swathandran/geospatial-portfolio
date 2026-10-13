@@ -610,6 +610,20 @@ A fourth register found five points left after R-01 to R-05, and a fifth, at
 - **T-01, T-02.** A comma splice in `threshold_analysis.py`'s docstring is a
   semicolon, and `compare_rtc.py` no longer prints two colons in one message.
 
+### Sixth round, U-01 to U-03
+
+A sixth register, at `3faaecb`, found the points above fixed and three
+optional ones left.
+
+- **U-01.** The public page said "every number comes from the 20 m raster",
+  though its accuracy scores and the chip-level areas are measured on the
+  10 m chips. It now says the scene and district areas are measured on the 20 m raster, not
+  on the preview.
+- **U-02.** A2's shortfall check said nothing when `register_check_clean.csv`
+  or its scene-scale row was missing. It now reports a warning.
+- **U-03.** A comma splice in the operating-point chart's caption is a
+  semicolon, and the chart is redrawn.
+
 ---
 
 ## Open, not fixed
