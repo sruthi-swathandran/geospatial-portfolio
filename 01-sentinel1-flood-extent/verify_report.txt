@@ -1,5 +1,5 @@
 VERIFICATION REPORT
-README sha256 060f8a0ff172d2b0
+README sha256 1a14ce3d34566ffa
 project: D:\geospatial-portfolio\01-sentinel1-flood-extent
 read-only; nothing in the repo is modified
 
@@ -22,10 +22,11 @@ A. EVERY NUMBER IN THE README, TRACED TO A FILE
   L613        6,344,561   | `full_scene.py --res 20` | ~25 min | 46 tiles, 6,344,561 ha classified before refinement |
 
 ==============================================================================
-A2. EVERY NUMBER ON docs/index.html, TRACED TO A FILE
+A2. NUMBERS ON docs/index.html, TRACED TO A FILE
 ==============================================================================
+[PASS] clean-up shortfall 10.2% <- register_check_clean.csv area_vs_labels_after
   · 9 numbers matched a value in results/
-[PASS] every number on the public page traces to results/
+[PASS] every thousands-separated number on the public page traces to results/
         A match means some file in results/ holds that value, not that it is
         the right value. The misses are the strong signal.
 

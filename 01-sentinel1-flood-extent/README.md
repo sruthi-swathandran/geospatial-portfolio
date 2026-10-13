@@ -80,7 +80,7 @@ The threshold was chosen twice against two criteria. Both choices are defensible
 | | Map-optimal | Area-matched |
 |---|---:|---:|
 | Threshold | −18.75 dB | −17.75 dB |
-| Chosen to | maximise IoU on the valid split | make mapped area unbiased against labels |
+| Chosen to | maximise IoU on the valid split | make mapped area match the labels, before clean-up |
 | Chip-scale IoU, all 65 | 0.519 | 0.522 |
 | Chip-scale mapped water | 14,405 ha (−22.1% vs labels) | 18,422 ha (−0.3%) |
 | Full scene, raw threshold | 217,490 ha | 319,398 ha |
@@ -580,15 +580,15 @@ a CSV beside its figure.
 | Audit | `edge_rate.py` | Flood called inside the swath-edge buffer against the interior |
 | Audit | `cropland_scene.py` | Flooded cropland over the whole raster rather than over district polygons |
 | Audit | `refine_figure.py` | The before and after of refinement, rebuilt from the two rasters |
-| Audit | `verify_all.py` | Traces every number in README.md and docs/index.html back to results/ |
+| Audit | `verify_all.py` | Traces the figures in README.md and docs/index.html back to results/ |
 | Audit | `register_checks.py` | The Lee noise term, the clean-up step at chip and scene scale, and the frame lookup, each against a bar set before running |
 | Audit | `preflight.py` | Pre-publication checklist: scripts parse, constants match the text, the manifest and the verify report are current |
 | Publish | `build_docs_page.py` | Generates docs/index.html and its four map overlays from results/ |
 
 `build_docs_page.py` needs the refined rasters under `results/fullscene/`, which
 are kept out of git, so the public page cannot be rebuilt from a clone. On a
-clone, `verify_all.py` section A2 checks every number on the page against
-`results/` instead.
+clone, `verify_all.py` section A2 checks the page's hectare figures and its
+clean-up shortfall against `results/` instead.
 
 Reproducing the headline figure:
 

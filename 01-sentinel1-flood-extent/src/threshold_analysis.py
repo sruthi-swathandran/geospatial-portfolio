@@ -23,7 +23,7 @@ worth answering three questions with the data itself.
      Compare three thresholds computed with no labels at all: Otsu per chip
      (what failed), Otsu on all chips pooled (scene-like), and the published
      per-event value. If pooling fixes most of the gap, the lesson is that
-     Otsu was never the problem, the window you showed it was.
+     Otsu was never the problem; the window you showed it was.
 
 Reported honestly: the swept threshold USES the valid labels, so it is a tuned
 number and only its TEST score is quotable. The pooled and published

@@ -9,5 +9,5 @@ data/reference,340,713713108,713.71,.tif x340
 data/sen1floods11,481,385243359,385.24,".tif x476, .csv x4, .json x1"
 data/worldcover,49,11072261,11.07,.tif x49
 results,61,9182637,9.18,".csv x44, .json x8, .geojson x7, (none) x1, .txt x1"
-results/figures,32,14728871,14.73,".png x29, .pdf x3"
+results/figures,32,14736460,14.74,".png x29, .pdf x3"
 results/fullscene,31,17647538,17.65,".png x13, .tif x12, .json x6"

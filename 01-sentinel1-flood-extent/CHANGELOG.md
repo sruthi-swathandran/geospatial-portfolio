@@ -586,6 +586,30 @@ smaller points.
   refined rasters; the README says so and points to `verify_all.py` section
   A2, which checks the page's numbers on a clone.
 
+### Fourth and fifth rounds, S-01 to S-05 and T-01, T-02
+
+A fourth register found five points left after R-01 to R-05, and a fifth, at
+`2717c21`, found them still open and two slips in the comment clean-up.
+
+- **S-01.** The printed map's note still called −17.75 dB "mapped area
+  unbiased against them". It now reads "area matching them before clean-up,
+  about a tenth low after it", and the map is redrawn.
+- **S-02.** `verify_all.py` section A2 said it traced every number on the
+  public page; it traces numbers with thousands separators. Its wording, the
+  README's and `build_docs_page.py`'s now say that, and A2 now also checks the
+  page's clean-up shortfall against `register_check_clean.csv`'s
+  `area_vs_labels_after`.
+- **S-03.** A2's docstring no longer mentions numbers named in the page
+  footer, since none are.
+- **S-04.** The README's operating-point table and the operating-point chart
+  say "before clean-up" where they said "unbiased", and the chart is redrawn.
+- **S-05.** The page's thresholds, slope cut, buffer and pixel limits are
+  settings written into its text. `build_docs_page.py` and the footer now
+  say every result is read from `results/`, and name the settings as written
+  in.
+- **T-01, T-02.** A comma splice in `threshold_analysis.py`'s docstring is a
+  semicolon, and `compare_rtc.py` no longer prints two colons in one message.
+
 ---
 
 ## Open, not fixed

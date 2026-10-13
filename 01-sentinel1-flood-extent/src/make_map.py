@@ -223,8 +223,9 @@ for lab, a, b, col in rows:
 
 y -= 0.004
 rax.text(0.0, y, "Range spans two defensible thresholds: −18.75 dB, maximum\n"
-                 "agreement with hand labels, and −17.75 dB, mapped area\n"
-                 "unbiased against them. Not a confidence interval.",
+                 "agreement with hand labels, and −17.75 dB, area matching\n"
+                 "them before clean-up, about a tenth low after it. Not a\n"
+                 "confidence interval.",
          fontsize=7.8, va="top", color="#5C6B76", transform=rax.transAxes)
 y -= 0.060
 

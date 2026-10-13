@@ -845,14 +845,16 @@ def check_figures():
 def trace_docs(index):
     """The same tracing over docs/index.html.
 
-    build_docs_page.py generates that page from results/, apart from a few
-    numbers it names in its footer, and this tracing is what keeps those
-    honest. It is what GitHub Pages serves, so it is the first thing a reader
-    sees. Only
-    numbers written with thousands separators are traced, which is the class
-    that carries hectares and keeps the false-positive rate near zero.
+    build_docs_page.py generates that page from results/, and this tracing
+    checks what it printed. It is what GitHub Pages serves, so it is the first
+    thing a reader sees. Numbers written with thousands separators are traced
+    against every value in results/, which is the class that carries hectares
+    and keeps the false-positive rate near zero. One decimal is checked
+    against its own column: the clean-up shortfall the page quotes, against
+    register_check_clean.csv (S-02). Other decimals and the method's settings
+    are not traced here.
     """
-    head("A2. EVERY NUMBER ON docs/index.html, TRACED TO A FILE")
+    head("A2. NUMBERS ON docs/index.html, TRACED TO A FILE")
     p = ROOT / "docs" / "index.html"
     if not p.exists():
         report(WARN, "docs/index.html not found")
@@ -873,6 +875,22 @@ def trace_docs(index):
         else:
             untraced.append(raw)
 
+    # the one decimal the page reads from a single column (R-01, S-02)
+    rc = RES / "register_check_clean.csv"
+    if rc.exists():
+        with open(rc, encoding="utf-8") as fh:
+            row = next((r for r in csv.DictReader(fh)
+                        if r.get("operating_point") == "area_matched"
+                        and r.get("limit_scale") == "scene scale"), None)
+        if row and row.get("area_vs_labels_after"):
+            want = f"{-float(row['area_vs_labels_after']) * 100:.1f}%"
+            if f"maps {want} less water" in " ".join(s.split()):
+                report(PASS, f"clean-up shortfall {want} <- "
+                             f"register_check_clean.csv area_vs_labels_after")
+            else:
+                report(FAIL, f"the page does not quote the clean-up shortfall "
+                             f"{want} from register_check_clean.csv")
+
     print(f"  \u00b7 {traced} numbers matched a value in results/")
     if untraced:
         report(WARN, f"{len(untraced)} number(s) on the public page match no "
@@ -884,7 +902,8 @@ def trace_docs(index):
         print("        it cites, not against whatever else happens to be in "
               "results/.")
     else:
-        report(PASS, "every number on the public page traces to results/")
+        report(PASS, "every thousands-separated number on the public page "
+                     "traces to results/")
     print("        A match means some file in results/ holds that value, not "
           "that it is")
     print("        the right value. The misses are the strong signal.")

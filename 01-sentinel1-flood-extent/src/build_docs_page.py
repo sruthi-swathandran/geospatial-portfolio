@@ -89,9 +89,12 @@ AM_ROW = {"20160807": "7 Aug, area-matched",
 SIMPLIFY_DEG = 0.002      # 1.1 display pixels, below what the canvas can show
 COORD_DP = 4              # about 11 m, well under one display pixel
 
-# No number on the page is typed. The last three that were, the all-water
+# No result on the page is typed. The last three that were, the all-water
 # score, the channel's share below 8 degrees and the WorldCover coverage, are
-# read by stored_figures() (C-23, M-03, M-05). Two of them had been in
+# read by stored_figures() (C-23, M-03, M-05). The method's settings are
+# written into the template as settings: the two thresholds, the 8 degree
+# slope cut, the buffer of about 640 m, the 10 pixel and 1 ha limits, the 5x5
+# filter, the 65 chips and the 2 dB drop (S-05). Two of them had been in
 # results/ all along; the coverage is now a column of cropland_scene.csv.
 
 # gsw_lo and gsw_hi are read from mask_terrain_water.csv at build time rather
@@ -688,8 +691,10 @@ BODY = """<title>Brahmaputra Flood Ledger</title>
       strip. The map layer is a preview render; every number comes from the 20 m
       raster.</p>
       <p class="built">Built by <code>build_docs_page.py</code> on {built}.
-      The wording here is written. Every number in it, and every figure in the
-      panel above, is read from <code>results/</code> at build time. The page it replaced was maintained by hand and had drifted
+      The wording here is written. Every result in it, and every figure in the
+      panel above, is read from <code>results/</code> at build time; the
+      method's settings, such as the two thresholds and the 8&deg; slope cut,
+      are written in. The page it replaced was maintained by hand and had drifted
       from its sources.</p>
     </div>
   </section>
@@ -1142,7 +1147,8 @@ def main() -> None:
           f"drained {ch['drained']:>8,.0f}   new {ch['new']:>6,.0f}")
 
     print(f"\nwrote {out.relative_to(cfg.PROJECT)} and four overlays.")
-    print("Re-run verify_all.py: section A2 traces every number on this page.")
+    print("Re-run verify_all.py: section A2 traces this page's hectare figures "
+          "and its clean-up shortfall.")
 
 
 if __name__ == "__main__":

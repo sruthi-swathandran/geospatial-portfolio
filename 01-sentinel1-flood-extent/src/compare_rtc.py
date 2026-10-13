@@ -157,7 +157,7 @@ def main() -> None:
         matplotlib.use("Agg")
         import matplotlib.pyplot as plt
     except Exception as exc:                             # noqa: BLE001
-        print(f"\n(skipping figures: matplotlib unavailable: {exc})")
+        print(f"\n(skipping figures, since matplotlib is unavailable: {exc})")
         return
 
     fig, axes = plt.subplots(1, 2, figsize=(12.5, 5))

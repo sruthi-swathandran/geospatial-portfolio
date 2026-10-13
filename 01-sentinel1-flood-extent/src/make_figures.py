@@ -259,7 +259,7 @@ def fig_operating_point(dpi):
     top = ax1.get_ylim()[1]
     for idx, col, lab, side, yf in (
             (i_map, BLUE, "map-optimal\nhighest IoU on valid", "right", 0.87),
-            (i_area, SAND, "area-matched\nmapped area unbiased", "left", 0.87)):
+            (i_area, SAND, "area-matched\nbefore clean-up", "left", 0.87)):
         if idx is None:
             continue
         for ax in (ax1, ax2):
