@@ -18,7 +18,9 @@ This writes results/run_manifest.json, which records:
     the SHA-256 of every checkpoint in models/, which git does not carry
     every seed set in src/, with the script and line it is set on
     every output under results/ and figures/: for a CSV, its row count and a
-        hash of each column's text; for anything else, a hash of the file
+        hash of each column's text; for a text file (.md, .txt, .json,
+        .html, .geojson, .svg), a hash of its text with line endings turned
+        to LF; for anything else, a hash of the file
 
 Hashing columns one at a time is what makes the compare mode useful. Run the
 manifest, rerun a script, run it again with --compare, and it says file by

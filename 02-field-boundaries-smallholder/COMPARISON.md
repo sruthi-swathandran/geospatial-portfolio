@@ -1682,9 +1682,10 @@ which the second panel repeats.
 **Follow-up, 13 October 2026.** A check of the round at `03717fb` found six
 slips, N-01 to N-06, none changing a finding, table or figure.
 
-- **N-01.** `run_manifest.py` hashed text outputs as raw bytes, so a Windows
-  working copy, with CRLF line endings, never matched a clone, where git
-  stores LF. `comparison_tables.md`, the one text output fingerprinted that
+- **N-01.** `build_comparison.py` wrote `comparison_tables.md` in text mode on
+  Windows, where Python turns each line ending into CRLF, and
+  `run_manifest.py` hashed those raw bytes, so the fingerprint never matched
+  a clone, where git stores LF. `comparison_tables.md`, the one text output fingerprinted that
   way, failed on every clone; that was the whole of the A-10 mismatch, and
   its content matched. Text outputs are now hashed with LF line endings, and
   `build_comparison.py` writes LF. A `--compare` against a manifest from
@@ -1698,6 +1699,13 @@ slips, N-01 to N-06, none changing a finding, table or figure.
 - **N-06.** `sam_probe.py` still printed watershed's +0.197 and FTW's +0.008,
   the same stale figures D-07 fixed in `sam_run.py`. It prints +0.1955 and
   +0.0052 and names the file.
+
+A check at `dd33fbe` found three descriptions of the manifest that no longer
+matched it. `run_manifest.py`'s docstring now lists the text kind beside CSVs
+and other files; the N-01 entry above now places the CRLF in
+`build_comparison.py`'s output, where it came from, since git checks out LF
+on Windows too; and `REVIEW.md`'s F-15 row says only CSVs are hashed column by
+column.
 
 ---
 
