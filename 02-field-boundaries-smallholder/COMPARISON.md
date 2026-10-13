@@ -1685,11 +1685,12 @@ slips, N-01 to N-06, none changing a finding, table or figure.
 - **N-01.** `build_comparison.py` wrote `comparison_tables.md` in text mode on
   Windows, where Python turns each line ending into CRLF, and
   `run_manifest.py` hashed those raw bytes, so the fingerprint never matched
-  a clone, where git stores LF. `comparison_tables.md`, the one text output fingerprinted that
-  way, failed on every clone; that was the whole of the A-10 mismatch, and
-  its content matched. Text outputs are now hashed with LF line endings, and
-  `build_comparison.py` writes LF. A `--compare` against a manifest from
-  before this change reports those files as a change of kind, once.
+  a clone, where git stores LF. `comparison_tables.md`, the one text output
+  fingerprinted that way, failed on every clone; that was the whole of the
+  A-10 mismatch, and its content matched. Text outputs are now hashed with LF
+  line endings, and `build_comparison.py` writes LF. A `--compare` against a
+  manifest from before this change reports those files as a change of kind,
+  once.
 - **N-02.** The A-02 entry above said parcel areas moved by about 0.1%. They
   moved by +0.57% at the median; it now gives the figures.
 - **N-03.** `REVIEW.md`'s status section was edited on 13 October under a
@@ -1700,12 +1701,17 @@ slips, N-01 to N-06, none changing a finding, table or figure.
   the same stale figures D-07 fixed in `sam_run.py`. It prints +0.1955 and
   +0.0052 and names the file.
 
-A check at `dd33fbe` found three descriptions of the manifest that no longer
-matched it. `run_manifest.py`'s docstring now lists the text kind beside CSVs
-and other files; the N-01 entry above now places the CRLF in
-`build_comparison.py`'s output, where it came from, since git checks out LF
-on Windows too; and `REVIEW.md`'s F-15 row says only CSVs are hashed column by
-column.
+**Second follow-up, 13 October 2026.** A check at `dd33fbe` found three
+descriptions of the manifest, M-01 to M-03, that no longer matched it.
+
+- **M-01.** `run_manifest.py`'s docstring described two kinds of fingerprint.
+  It now lists the text kind beside CSVs and other files, with the same six
+  suffixes the code uses.
+- **M-02.** The N-01 entry above put the CRLF in a Windows working copy. It
+  now puts it in `build_comparison.py`'s output, where it came from, since git
+  checks out LF on Windows too.
+- **M-03.** `REVIEW.md`'s F-15 row said every output was hashed column by
+  column. It now says only CSVs are.
 
 ---
 
