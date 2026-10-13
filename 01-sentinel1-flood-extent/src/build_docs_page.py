@@ -212,6 +212,22 @@ def stored_figures():
             "wc_cover": f"{float(first['worldcover_grid_cover_pct']):.1f}%"}
 
 
+def clean_shortfall():
+    """How far short of the labels the area-matched point falls once the
+    map's 1 ha clean-up is applied, from register_check_clean.csv (R-01)."""
+    p = cfg.RESULTS / "register_check_clean.csv"
+    with open(p, encoding="utf-8") as fh:
+        for r in csv.DictReader(fh):
+            if (r["operating_point"] == "area_matched"
+                    and r.get("limit_scale") == "scene scale"):
+                if not r.get("area_vs_labels_after"):
+                    sys.exit(f"{p.name} has no area_vs_labels_after column. "
+                             f"Rerun register_checks.py --part clean. "
+                             f"Nothing written.")
+                return f"{-float(r['area_vs_labels_after']) * 100:.1f}%"
+    sys.exit(f"{p.name} has no scene-scale area_matched row. Nothing written.")
+
+
 def district_counts(payload):
     """Districts imaged on any date, and on all three, from the district files."""
     seen = [set(n for n, a in zip(payload["names"], payload["attrs"][t])
@@ -641,8 +657,11 @@ BODY = """<title>Brahmaputra Flood Ledger</title>
       <h2>Which number, and how sure</h2>
       <p>The threshold was chosen twice against two defensible criteria. At
       <code>&minus;18.75 dB</code> the map agrees best with hand labels pixel by
-      pixel; at <code>&minus;17.75 dB</code> its total area is unbiased against
-      them. The two score <strong>{iou_map}</strong> and <strong>{iou_area}</strong>
+      pixel; at <code>&minus;17.75 dB</code> its total area matches them on the
+      chips before the clean-up step the map applies, which removes water
+      patches and fills holes under 1 ha. With that step, on the chips, it maps
+      {am_short} less water than the labels, so the upper figure is itself
+      likely to be low. The two score <strong>{iou_map}</strong> and <strong>{iou_area}</strong>
       IoU, indistinguishable inside a confidence interval of
       &plusmn;{ci_halfwidth}. This page draws the first; the range beside each
       figure gives the second.</p>
@@ -1075,6 +1094,7 @@ def main() -> None:
     er, ir, ratio = edge_rates()
     n_any, n_all = district_counts(payload)
     fmt = stored_figures()
+    fmt["am_short"] = clean_shortfall()
     fmt.update(accuracy_figures())
     fmt.update(change_figures())
     fmt.update(

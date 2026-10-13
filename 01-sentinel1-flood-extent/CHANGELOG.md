@@ -474,8 +474,8 @@ from the 1 ha rows. Results below.
 The skip for absent data/ tested the folder, and importing `make_manifest`
 imports `config.py`, which creates an empty data/. On a clone the check then
 reported five missing manifest entries. It now skips data/ entries when none of
-the data/ files exists, so a partial data/ still fails. Checked on a clone of
-`7f9de52`: 46 passed, none failed.
+the data/ files exists, so a partial data/ still fails. Checked on a fresh
+clone with the fix in place: 46 passed, none failed.
 
 ### N-02 The freshness check failed a correct figure
 
@@ -564,6 +564,27 @@ rewriting that file needs Planetary Computer.
   applied widths added; the published row reads 30, 600, 32, 640.
   `cropland_scene.csv` reproduces every area and records WorldCover covering
   97.84% of the grid.
+
+### Third round, R-01 to R-05
+
+A third register, at `081a132`, found all 17 items above fixed and five
+smaller points.
+
+- **R-01.** The public page still called the area-matched figure unbiased and
+  never mentioned the clean-up step. It now says the area matches the labels
+  before that step and maps less water with it, reading the shortfall from a
+  new `area_vs_labels_after` column of `register_check_clean.csv`, so the
+  10.2% traces to a file. The README's opening and its "anyone buying a
+  hectare figure" sentence say the same.
+- **R-02.** The orbit chart's subtitle gave the all-ground mean, −0.015 dB,
+  beside the README's land figure of 0.05 dB. It now gives the land-pixel
+  weighted mean of the tile land medians, −0.048 dB.
+- **R-03.** The unfiltered shares in `reference_wetness.csv` are close to
+  `dry_reference.csv`'s, not equal, since that file covers 63 chips.
+- **R-04.** The N-01 check ran on a clone with the fix, not on `7f9de52`.
+- **R-05.** The public page cannot be rebuilt from a clone, since it needs the
+  refined rasters; the README says so and points to `verify_all.py` section
+  A2, which checks the page's numbers on a clone.
 
 ---
 

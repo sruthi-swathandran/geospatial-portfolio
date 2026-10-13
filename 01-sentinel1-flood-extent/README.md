@@ -10,8 +10,9 @@ and 87,127 ha was cropland**.
 
 That range is not measurement noise. It is the gap between two operating points
 that both have an argument behind them: one chosen to maximise agreement with
-hand labels pixel by pixel, the other chosen so the mapped area is unbiased
-against those labels. They differ by one decibel. Every figure in this README is
+hand labels pixel by pixel, the other chosen so the mapped area on the labelled
+chips matches those labels before the map's clean-up step, which then takes
+about a tenth off it. They differ by one decibel. Every figure in this README is
 reported with the decision that moves it and the amount it moves by.
 
 Interactive map: [three acquisitions and the recession between them](https://sruthi-swathandran.github.io/geospatial-portfolio/01-sentinel1-flood-extent/docs/)
@@ -91,7 +92,8 @@ inside a confidence interval of ±0.11. They differ by 42% on flood area and 86%
 on flooded cropland.
 
 A map user wants the first. Anyone buying a hectare figure wants the second,
-because the first recovers only 78% of hand-labelled water. Publishing one
+because the first recovers only 78% of hand-labelled water, and both fall
+further short once the clean-up step is counted (below). Publishing one
 without saying which is how a flood map ends up quoted for a purpose it was
 never tuned for, and earlier versions of this README did exactly that: they gave
 a hectare figure computed at the map-optimal point.
@@ -361,8 +363,8 @@ reference. It was tested against two references and abandoned.
 *Already wet* is the median share of hand-labelled water that was already at or
 below the water threshold on the reference date, measured on Lee-filtered
 references as the method sees them (`results/reference_wetness.csv`). The
-same file gives the unfiltered shares, about ten points higher, which are what
-`dry_reference.csv` reports.
+same file gives the unfiltered shares, about ten points higher, which are
+close to what `dry_reference.csv` reports over 63 chips.
 
 Sweeping the change threshold from −12 to +4 dB across four smoothing windows
 and both gate settings found the optimum at the point where the change
@@ -582,6 +584,11 @@ a CSV beside its figure.
 | Audit | `register_checks.py` | The Lee noise term, the clean-up step at chip and scene scale, and the frame lookup, each against a bar set before running |
 | Audit | `preflight.py` | Pre-publication checklist: scripts parse, constants match the text, the manifest and the verify report are current |
 | Publish | `build_docs_page.py` | Generates docs/index.html and its four map overlays from results/ |
+
+`build_docs_page.py` needs the refined rasters under `results/fullscene/`, which
+are kept out of git, so the public page cannot be rebuilt from a clone. On a
+clone, `verify_all.py` section A2 checks every number on the page against
+`results/` instead.
 
 Reproducing the headline figure:
 

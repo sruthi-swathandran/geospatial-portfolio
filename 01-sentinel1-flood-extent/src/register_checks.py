@@ -134,8 +134,9 @@ def score(preds: dict, labels: dict) -> dict:
     confs = [M.confusion(preds[c], labels[c]) for c in preds]
     a = M.aggregate(confs)
     area = sum(M.mapped_area_px(preds[c], labels[c]) for c in preds) * PIXEL_HA
+    label = sum(int((labels[c] == 1).sum()) for c in preds) * PIXEL_HA
     return {"iou": a["iou"], "precision": a["precision"],
-            "recall": a["recall"], "area_ha": area}
+            "recall": a["recall"], "area_ha": area, "label_ha": label}
 
 
 def compare(name: str, base: dict, alt: dict, point: str, t: float) -> dict:
@@ -158,6 +159,13 @@ def compare(name: str, base: dict, alt: dict, point: str, t: float) -> dict:
             "area_ha_before": round(base["area_ha"], 1),
             "area_ha_after": round(alt["area_ha"], 1),
             "iou_change": d_iou, "area_change": d_area,
+            # mapped area against the hand-labelled water, so the page and
+            # the README can read the shortfall rather than compute it (R-01)
+            "label_ha": round(base["label_ha"], 1),
+            "area_vs_labels_before": round(base["area_ha"] / base["label_ha"]
+                                           - 1, 4) + 0.0,
+            "area_vs_labels_after": round(alt["area_ha"] / alt["label_ha"]
+                                          - 1, 4) + 0.0,
             "over_bar": big}
 
 

@@ -1,5 +1,5 @@
-check,operating_point,threshold_db,iou_before,iou_after,precision_before,precision_after,recall_before,recall_after,area_ha_before,area_ha_after,iou_change,area_change,over_bar,limit_px,limit_ha,limit_scale
-morph_clean,max_iou,-18.75,0.5186,0.5186,0.7797,0.7929,0.6076,0.5999,14405.3,13983.6,0.0,-0.0293,True,25,0.25,"chip scale, as first run"
-morph_clean,max_iou,-18.75,0.5186,0.5137,0.7797,0.8122,0.6076,0.5829,14405.3,13266.1,-0.0049,-0.0791,True,100,1.0,scene scale
-morph_clean,area_matched,-17.75,0.5221,0.527,0.6872,0.7035,0.6849,0.6775,18421.5,17801.8,0.005,-0.0336,True,25,0.25,"chip scale, as first run"
-morph_clean,area_matched,-17.75,0.5221,0.5293,0.6872,0.7314,0.6849,0.6569,18421.5,16601.1,0.0072,-0.0988,True,100,1.0,scene scale
+check,operating_point,threshold_db,iou_before,iou_after,precision_before,precision_after,recall_before,recall_after,area_ha_before,area_ha_after,iou_change,area_change,label_ha,area_vs_labels_before,area_vs_labels_after,over_bar,limit_px,limit_ha,limit_scale
+morph_clean,max_iou,-18.75,0.5186,0.5186,0.7797,0.7929,0.6076,0.5999,14405.3,13983.6,0.0,-0.0293,18483.4,-0.2206,-0.2434,True,25,0.25,"chip scale, as first run"
+morph_clean,max_iou,-18.75,0.5186,0.5137,0.7797,0.8122,0.6076,0.5829,14405.3,13266.1,-0.0049,-0.0791,18483.4,-0.2206,-0.2823,True,100,1.0,scene scale
+morph_clean,area_matched,-17.75,0.5221,0.527,0.6872,0.7035,0.6849,0.6775,18421.5,17801.8,0.005,-0.0336,18483.4,-0.0033,-0.0369,True,25,0.25,"chip scale, as first run"
+morph_clean,area_matched,-17.75,0.5221,0.5293,0.6872,0.7314,0.6849,0.6569,18421.5,16601.1,0.0072,-0.0988,18483.4,-0.0033,-0.1018,True,100,1.0,scene scale

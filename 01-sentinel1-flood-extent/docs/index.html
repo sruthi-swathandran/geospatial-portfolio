@@ -256,8 +256,11 @@ dd.new{color:var(--new);font-weight:500}
       <h2>Which number, and how sure</h2>
       <p>The threshold was chosen twice against two defensible criteria. At
       <code>&minus;18.75 dB</code> the map agrees best with hand labels pixel by
-      pixel; at <code>&minus;17.75 dB</code> its total area is unbiased against
-      them. The two score <strong>0.519</strong> and <strong>0.522</strong>
+      pixel; at <code>&minus;17.75 dB</code> its total area matches them on the
+      chips before the clean-up step the map applies, which removes water
+      patches and fills holes under 1 ha. With that step, on the chips, it maps
+      10.2% less water than the labels, so the upper figure is itself
+      likely to be low. The two score <strong>0.519</strong> and <strong>0.522</strong>
       IoU, indistinguishable inside a confidence interval of
       &plusmn;0.11. This page draws the first; the range beside each
       figure gives the second.</p>

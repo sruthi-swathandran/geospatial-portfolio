@@ -593,13 +593,22 @@ def fig_orbit_offset(dpi):
 
     o = np.argsort(diff)
     ypos = np.arange(len(o))
-    w = float(np.nansum(diff * px) / np.nansum(px))
+    # The subtitle carries the README's statistic: land medians weighted by
+    # land pixels (C-17, M-11). The all-ground figure, water included, was
+    # here before and read as a different number from the text above (R-02).
+    if land is not None:
+        land_px = d.get("land_pixels", px)
+        w = float(np.nansum(land * land_px) / np.nansum(land_px))
+        w_label = "land-pixel-weighted mean of tile land medians"
+    else:
+        w = float(np.nansum(diff * px) / np.nansum(px))
+        w_label = "pixel-weighted mean of tile medians, all ground"
 
     fig, slot, lax = canvas(
         9.8, 4.9,
         "Two orbits looking at the same ground, five days apart",
         f"{len(o)} overlap tiles, {np.nansum(px) / 1e6:.1f} M pixels, "
-        f"pixel-weighted mean of tile medians {w:+.3f} dB",
+        f"{w_label} {w:+.3f} dB",
         "The 12 August map is relative orbit 77. The 7 and 31 August maps are "
         "orbit 4. Different orbits see the same surface at different "
         "incidence angles,\nso before comparing anything across them it is "
