@@ -1,134 +1,134 @@
-district,state,test_chips,parcels,median_width_px,share_narrow,median_area_px,median_iou,recall
-Agra,Uttar Pradesh,3,15,4.25,0.133,27.6,0.0,0.0
-Ahmadabad,Gujarāt,6,30,4.82,0.1,42.8,0.034,0.067
-Allahabad,Uttar Pradesh,5,25,3.03,0.48,18.4,0.0,0.0
-Alwar,Rājasthān,6,30,4.25,0.2,24.4,0.0,0.0
-Anand,Gujarāt,3,15,3.77,0.0,31.2,0.228,0.267
-Anantapur,Andhra Pradesh,2,10,2.11,1.0,10.1,0.014,0.0
-Aravali,Gujarāt,1,5,3.03,0.0,41.2,0.0,0.0
-Ariyalur,Tamil Nādu,1,5,3.03,0.0,20.6,0.182,0.0
-Arwal,Bihār,1,5,2.82,0.6,11.0,0.0,0.0
-Balangir,Odisha,5,25,2.82,0.52,14.3,0.0,0.0
-Ballia,Uttar Pradesh,2,10,3.4,0.0,24.3,0.0,0.0
-Baloda Bazar,Chhattīsgarh,2,10,3.77,0.2,27.0,0.0,0.0
-Banda,Uttar Pradesh,5,25,5.46,0.04,54.0,0.191,0.2
-Banswara,Rājasthān,4,20,3.03,0.35,16.7,0.0,0.0
-Baran,Rājasthān,3,15,6.47,0.0,86.8,0.289,0.267
-Bastar,Chhattīsgarh,3,15,2.82,0.533,14.0,0.0,0.0
-Belgaum,Karnātaka,2,10,5.14,0.1,64.5,0.094,0.3
-Betul,Madhya Pradesh,1,5,3.03,0.4,19.5,0.0,0.0
-Bharatpur,Rājasthān,5,25,3.23,0.36,22.8,0.0,0.0
-Bharuch,Gujarāt,1,5,4.25,0.0,34.6,0.031,0.0
-Bhiwani,Haryāna,2,10,7.89,0.0,110.3,0.0,0.0
-Bhojpur,Bihār,2,10,3.5,0.3,27.9,0.0,0.0
-Bijapur,Karnātaka,6,30,4.82,0.067,51.5,0.024,0.167
-Bijnor,Uttar Pradesh,6,30,3.77,0.267,37.9,0.0,0.0
-Bikaner,Rājasthān,1,5,15.58,0.0,318.7,0.723,0.8
-Bundi,Rājasthān,6,30,4.25,0.067,26.7,0.11,0.2
-Buxar,Bihār,4,20,3.03,0.45,17.1,0.0,0.0
-Chatra,Jhārkhand,3,11,2.82,0.636,11.4,0.0,0.0
-Chhatarpur,Madhya Pradesh,1,5,2.11,1.0,6.2,0.0,0.0
-Chitrakoot,Uttar Pradesh,1,5,5.46,0.2,43.7,0.0,0.0
-Chittaurgarh,Rājasthān,3,15,3.77,0.267,40.4,0.0,0.067
-Chittoor,Andhra Pradesh,6,30,2.47,0.533,12.5,0.0,0.0
-Churu,Rājasthān,2,10,5.46,0.0,86.6,0.038,0.0
-Dakshin Dinajpur,West Bengal,1,5,1.82,0.8,7.4,0.0,0.0
-Dausa,Rājasthān,2,10,5.46,0.0,43.9,0.0,0.0
-Dewas,Madhya Pradesh,3,15,9.18,0.0,162.1,0.0,0.0
-Dhaulpur,Rājasthān,1,5,4.82,0.0,66.2,0.062,0.0
-Dungarpur,Rājasthān,1,5,3.03,0.4,17.6,0.0,0.0
-Fatehpur,Uttar Pradesh,3,15,3.23,0.2,24.6,0.0,0.0
-Gandhinagar,Gujarāt,3,15,5.46,0.067,47.8,0.0,0.0
-Ganganagar,Rājasthān,3,15,6.67,0.0,95.6,0.056,0.0
-Gaya,Bihār,2,10,3.03,0.1,15.1,0.0,0.0
-Gir Somnath,Gujarāt,1,5,7.07,0.2,67.3,0.065,0.2
-Gulbarga,Karnātaka,2,10,7.89,0.0,91.0,0.07,0.0
-Gumla,Jhārkhand,3,15,2.82,0.533,13.6,0.0,0.0
-Guntur,Andhra Pradesh,11,55,3.77,0.182,36.0,0.0,0.055
-Gwalior,Madhya Pradesh,3,15,3.77,0.067,21.7,0.046,0.067
-Hamirpur,Uttar Pradesh,2,10,3.77,0.1,32.2,0.0,0.0
-Hanumangarh,Rājasthān,10,50,5.46,0.1,64.1,0.044,0.06
-Harda,Madhya Pradesh,5,25,7.53,0.16,85.3,0.062,0.04
-Hoshangabad,Madhya Pradesh,2,10,3.77,0.1,25.4,0.0,0.0
-Jaipur,Rājasthān,11,55,4.4,0.109,37.9,0.0,0.0
-Jamnagar,Gujarāt,3,15,9.1,0.0,139.7,0.11,0.067
-Jaunpur,Uttar Pradesh,3,15,2.11,0.733,12.1,0.0,0.0
-Jehanabad,Bihār,2,10,2.11,1.0,10.3,0.0,0.0
-Jhalawar,Rājasthān,1,5,1.82,1.0,8.1,0.0,0.0
-Jhunjhunun,Rājasthān,6,30,4.25,0.067,39.5,0.0,0.0
-Jodhpur,Rājasthān,17,84,7.35,0.0,102.0,0.033,0.048
-Junagadh,Gujarāt,1,5,6.47,0.0,126.1,0.364,0.0
-Jyotiba Phule Nagar,Uttar Pradesh,2,10,4.15,0.3,25.5,0.0,0.0
-Kadapa(YSR),Andhra Pradesh,1,5,4.54,0.0,34.6,0.0,0.0
-Karauli,Rājasthān,3,15,4.54,0.0,42.6,0.0,0.067
-Kaushambi,Uttar Pradesh,1,5,3.03,0.4,16.5,0.0,0.0
-Kheda,Gujarāt,3,15,4.4,0.2,38.2,0.113,0.067
-Khunti,Jhārkhand,3,15,2.82,0.533,12.1,0.0,0.0
-Koraput,Odisha,6,24,3.03,0.417,17.8,0.0,0.0
-Koriya,Chhattīsgarh,2,10,3.4,0.4,21.1,0.0,0.0
-Kota,Rājasthān,4,20,7.48,0.0,85.1,0.388,0.4
-Krishna,Andhra Pradesh,3,15,5.46,0.067,53.3,0.125,0.133
-Latehar,Jhārkhand,1,5,2.11,0.8,10.3,0.0,0.0
-Leh(Ladakh),Ladākh,1,5,2.82,0.6,14.0,0.0,0.0
-Mahasamund,Chhattīsgarh,2,10,2.32,0.6,15.6,0.0,0.0
-Mahendragarh,Haryāna,1,5,5.46,0.0,40.1,0.0,0.0
-Mahisagar,Gujarāt,1,5,3.03,0.2,10.7,0.0,0.0
-Mahoba,Uttar Pradesh,4,20,5.0,0.1,46.0,0.097,0.0
-Malkangiri,Odisha,1,5,2.82,0.6,12.1,0.0,0.0
-Mandsaur,Madhya Pradesh,5,25,4.25,0.0,35.7,0.209,0.12
-Mansa,Punjab,1,5,11.53,0.0,151.1,0.387,0.4
-Mayiladuthurai,Tamil Nādu,1,5,4.25,0.0,38.6,0.515,0.6
-Mirzapur,Uttar Pradesh,2,10,4.61,0.0,40.1,0.0,0.0
-Morbi,Gujarāt,1,5,6.78,0.0,115.4,0.163,0.0
-Morena,Madhya Pradesh,1,5,4.25,0.0,26.8,0.0,0.0
-Nabarangapur,Odisha,4,20,2.93,0.5,21.7,0.0,0.0
-Nagaur,Rājasthān,2,10,7.57,0.0,76.5,0.003,0.0
-Nainital,Uttarākhand,4,20,3.77,0.4,30.1,0.0,0.0
-Nalanda,Bihār,1,5,4.25,0.4,33.4,0.0,0.0
-Namakkal,Tamil Nādu,1,5,2.82,0.8,12.1,0.0,0.0
-Nawada,Bihār,1,5,2.11,0.8,7.7,0.0,0.0
-Neemuch,Madhya Pradesh,3,15,5.46,0.0,44.1,0.057,0.133
-Nuapada,Odisha,1,5,1.82,1.0,9.2,0.0,0.0
-Osmanabad,Mahārāshtra,5,25,6.67,0.0,71.0,0.092,0.2
-Palamu,Jhārkhand,2,10,2.82,0.7,14.5,0.0,0.0
-Panch Mahals,Gujarāt,3,15,3.03,0.333,21.3,0.0,0.0
-Pashchimi Singhbhum,Jhārkhand,3,15,2.82,0.533,15.1,0.0,0.0
-Perambalur,Tamil Nādu,1,5,3.03,0.0,16.5,0.0,0.0
-Pilibhit,Uttar Pradesh,1,5,6.26,0.0,54.8,0.02,0.0
-Porbandar,Gujarāt,1,5,7.89,0.0,113.6,0.0,0.0
-Prakasam,Andhra Pradesh,3,15,4.82,0.0,54.0,0.227,0.0
-Pratapgarh,Uttar Pradesh,7,35,3.77,0.314,27.2,0.0,0.0
-Rae Bareli,Uttar Pradesh,1,5,3.23,0.2,17.6,0.0,0.0
-Raisen,Madhya Pradesh,1,5,4.25,0.0,18.0,0.087,0.0
-Rajkot,Gujarāt,6,30,5.46,0.1,88.4,0.046,0.033
-Rampur,Uttar Pradesh,1,5,3.03,0.4,19.1,0.0,0.0
-Ranchi,Jhārkhand,2,10,1.82,0.9,6.2,0.0,0.0
-Ranipet,Tamil Nādu,1,5,3.03,0.2,16.9,0.259,0.0
-Ratlam,Madhya Pradesh,5,25,4.4,0.04,46.7,0.0,0.0
-Rayagada,Odisha,2,10,4.25,0.2,34.0,0.0,0.0
-Rewa,Madhya Pradesh,10,50,3.5,0.24,19.8,0.0,0.06
-Rewari,Haryāna,2,10,6.67,0.0,48.0,0.191,0.3
-Rohtas,Bihār,1,5,2.11,0.6,11.4,0.0,0.2
-Sabar Kantha,Gujarāt,1,5,5.46,0.0,46.0,0.0,0.0
-Sambhal,Uttar Pradesh,1,5,3.77,0.2,21.0,0.0,0.0
-Sangli,Mahārāshtra,2,10,4.85,0.0,57.0,0.0,0.0
-Satna,Madhya Pradesh,2,10,3.77,0.0,43.2,0.0,0.0
-Sawai Madhopur,Rājasthān,5,25,6.47,0.0,73.5,0.0,0.16
-Sehore,Madhya Pradesh,2,10,5.69,0.0,58.8,0.012,0.0
-Sidhi,Madhya Pradesh,5,25,1.82,0.84,7.0,0.0,0.0
-Sikar,Rājasthān,3,15,3.03,0.133,23.9,0.0,0.0
-Simdega,Jhārkhand,2,10,3.03,0.4,13.6,0.0,0.0
-Singrauli,Madhya Pradesh,2,10,1.96,0.9,9.4,0.0,0.0
-Sirsa,Haryāna,3,15,5.46,0.067,48.5,0.341,0.2
-Solapur,Mahārāshtra,8,40,4.4,0.15,41.7,0.023,0.075
-Srikakulam,Andhra Pradesh,2,10,3.5,0.4,22.8,0.0,0.0
-Subarnapur,Odisha,1,5,3.03,0.4,18.4,0.0,0.0
-Sundargarh,Odisha,3,15,2.82,0.667,9.9,0.0,0.0
-Surendranagar,Gujarāt,2,10,8.64,0.0,136.6,0.226,0.2
-Thiruvarur,Tamil Nādu,1,5,4.25,0.0,30.1,0.231,0.0
-Tiruchirappalli,Tamil Nādu,3,15,3.23,0.133,23.2,0.0,0.0
-Tonk,Rājasthān,5,25,5.46,0.04,59.6,0.0,0.08
-Udaipur,Rājasthān,1,4,2.82,0.75,19.9,0.0,0.0
-Udham Singh Nagar,Uttarākhand,1,5,6.26,0.0,47.0,0.412,0.2
-Vadodara,Gujarāt,5,25,5.46,0.0,60.6,0.211,0.28
-Vizianagaram,Andhra Pradesh,8,40,3.03,0.375,15.3,0.0,0.0
+district,state,test_chips,parcels,median_width_native_px,share_narrow,median_area_native_px,median_iou,recall,checkpoint,scored_against
+Agra,Uttar Pradesh,3,15,4.3,0.133,28.6,0.0,0.0,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Ahmadabad,Gujarāt,6,30,4.88,0.1,44.0,0.025,0.067,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Allahabad,Uttar Pradesh,5,25,3.03,0.48,18.4,0.0,0.0,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Alwar,Rājasthān,6,30,4.26,0.2,24.8,0.0,0.033,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Anand,Gujarāt,3,15,3.84,0.0,32.3,0.225,0.0,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Anantapur,Andhra Pradesh,2,10,2.11,1.0,10.2,0.028,0.0,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Aravali,Gujarāt,1,5,3.06,0.0,41.5,0.0,0.0,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Ariyalur,Tamil Nādu,1,5,3.03,0.0,20.6,0.256,0.0,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Arwal,Bihār,1,5,2.88,0.6,11.5,0.0,0.0,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Balangir,Odisha,5,25,2.85,0.52,14.4,0.0,0.0,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Ballia,Uttar Pradesh,2,10,3.46,0.0,25.0,0.0,0.0,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Baloda Bazar,Chhattīsgarh,2,10,3.77,0.2,27.2,0.0,0.0,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Banda,Uttar Pradesh,5,25,5.42,0.04,53.5,0.169,0.16,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Banswara,Rājasthān,4,20,3.03,0.35,16.6,0.0,0.0,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Baran,Rājasthān,3,15,6.48,0.0,87.2,0.216,0.067,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Bastar,Chhattīsgarh,3,15,2.82,0.533,14.0,0.0,0.0,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Belgaum,Karnātaka,2,10,5.14,0.1,64.1,0.111,0.3,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Betul,Madhya Pradesh,1,5,3.07,0.4,20.1,0.0,0.0,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Bharatpur,Rājasthān,5,25,3.27,0.36,23.2,0.0,0.0,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Bharuch,Gujarāt,1,5,4.32,0.0,35.8,0.02,0.0,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Bhiwani,Haryāna,2,10,7.91,0.0,110.9,0.0,0.0,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Bhojpur,Bihār,2,10,3.57,0.3,29.0,0.042,0.0,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Bijapur,Karnātaka,6,30,4.81,0.067,51.4,0.016,0.133,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Bijnor,Uttar Pradesh,6,30,3.82,0.267,39.0,0.0,0.0,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Bikaner,Rājasthān,1,5,15.69,0.0,323.3,0.642,0.8,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Bundi,Rājasthān,6,30,4.23,0.067,26.5,0.068,0.133,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Buxar,Bihār,4,20,3.07,0.45,17.7,0.0,0.0,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Chatra,Jhārkhand,3,11,2.84,0.636,11.6,0.0,0.0,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Chhatarpur,Madhya Pradesh,1,5,2.11,1.0,6.3,0.0,0.0,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Chitrakoot,Uttar Pradesh,1,5,5.42,0.2,43.4,0.0,0.0,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Chittaurgarh,Rājasthān,3,15,3.75,0.267,40.1,0.0,0.0,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Chittoor,Andhra Pradesh,6,30,2.48,0.533,12.6,0.0,0.0,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Churu,Rājasthān,2,10,5.44,0.0,86.2,0.03,0.0,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Dakshin Dinajpur,West Bengal,1,5,1.84,0.8,7.5,0.0,0.0,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Dausa,Rājasthān,2,10,5.47,0.0,44.3,0.0,0.0,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Dewas,Madhya Pradesh,3,15,9.18,0.0,164.1,0.0,0.0,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Dhaulpur,Rājasthān,1,5,4.89,0.0,68.0,0.044,0.0,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Dungarpur,Rājasthān,1,5,3.03,0.4,17.6,0.0,0.0,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Fatehpur,Uttar Pradesh,3,15,3.21,0.2,24.4,0.0,0.0,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Gandhinagar,Gujarāt,3,15,5.56,0.067,49.7,0.0,0.0,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Ganganagar,Rājasthān,3,15,6.65,0.0,96.0,0.043,0.0,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Gaya,Bihār,2,10,3.09,0.1,15.5,0.0,0.0,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Gir Somnath,Gujarāt,1,5,7.11,0.2,68.1,0.049,0.0,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Gulbarga,Karnātaka,2,10,7.9,0.0,91.2,0.056,0.0,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Gumla,Jhārkhand,3,15,2.86,0.533,14.1,0.0,0.0,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Guntur,Andhra Pradesh,11,55,3.76,0.182,35.7,0.0,0.0,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Gwalior,Madhya Pradesh,3,15,3.83,0.067,22.5,0.033,0.0,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Hamirpur,Uttar Pradesh,2,10,3.77,0.1,32.4,0.0,0.0,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Hanumangarh,Rājasthān,10,50,5.44,0.1,63.8,0.04,0.02,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Harda,Madhya Pradesh,5,25,7.56,0.16,85.5,0.047,0.04,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Hoshangabad,Madhya Pradesh,2,10,3.81,0.1,26.0,0.0,0.0,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Jaipur,Rājasthān,11,55,4.42,0.109,38.0,0.0,0.0,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Jamnagar,Gujarāt,3,15,9.1,0.0,139.7,0.09,0.0,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Jaunpur,Uttar Pradesh,3,15,2.12,0.733,12.2,0.0,0.0,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Jehanabad,Bihār,2,10,2.14,1.0,10.7,0.0,0.0,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Jhalawar,Rājasthān,1,5,1.82,1.0,8.1,0.0,0.0,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Jhunjhunun,Rājasthān,6,30,4.24,0.067,39.5,0.0,0.0,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Jodhpur,Rājasthān,17,84,7.4,0.0,104.0,0.034,0.048,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Junagadh,Gujarāt,1,5,6.5,0.0,127.2,0.29,0.0,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Jyotiba Phule Nagar,Uttar Pradesh,2,10,4.21,0.3,26.3,0.0,0.0,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Kadapa(YSR),Andhra Pradesh,1,5,4.57,0.0,35.0,0.0,0.0,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Karauli,Rājasthān,3,15,4.56,0.0,43.4,0.0,0.067,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Kaushambi,Uttar Pradesh,1,5,3.02,0.4,16.5,0.0,0.0,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Kheda,Gujarāt,3,15,4.42,0.2,39.4,0.114,0.0,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Khunti,Jhārkhand,3,15,2.84,0.533,12.2,0.0,0.0,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Koraput,Odisha,6,24,3.04,0.417,18.0,0.0,0.0,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Koriya,Chhattīsgarh,2,10,3.4,0.4,21.1,0.0,0.0,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Kota,Rājasthān,4,20,7.47,0.0,86.3,0.303,0.35,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Krishna,Andhra Pradesh,3,15,5.41,0.067,52.5,0.117,0.067,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Latehar,Jhārkhand,1,5,2.13,0.8,10.6,0.0,0.0,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Leh(Ladakh),Ladākh,1,5,2.87,0.6,14.4,0.0,0.0,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Mahasamund,Chhattīsgarh,2,10,2.33,0.6,15.7,0.0,0.0,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Mahendragarh,Haryāna,1,5,5.49,0.0,40.3,0.0,0.0,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Mahisagar,Gujarāt,1,5,3.04,0.2,10.8,0.0,0.0,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Mahoba,Uttar Pradesh,4,20,5.01,0.1,46.1,0.08,0.0,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Malkangiri,Odisha,1,5,2.83,0.6,12.2,0.0,0.0,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Mandsaur,Madhya Pradesh,5,25,4.22,0.0,35.1,0.173,0.0,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Mansa,Punjab,1,5,11.49,0.0,149.9,0.316,0.2,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Mayiladuthurai,Tamil Nādu,1,5,4.22,0.0,38.3,0.372,0.2,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Mirzapur,Uttar Pradesh,2,10,4.64,0.0,40.6,0.0,0.0,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Morbi,Gujarāt,1,5,6.82,0.0,117.0,0.132,0.0,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Morena,Madhya Pradesh,1,5,4.3,0.0,27.4,0.0,0.0,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Nabarangapur,Odisha,4,20,2.94,0.5,21.9,0.0,0.0,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Nagaur,Rājasthān,2,10,7.61,0.0,77.5,0.002,0.0,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Nainital,Uttarākhand,4,20,3.8,0.4,30.7,0.0,0.0,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Nalanda,Bihār,1,5,4.25,0.4,33.6,0.0,0.0,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Namakkal,Tamil Nādu,1,5,2.84,0.8,12.3,0.0,0.0,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Nawada,Bihār,1,5,2.12,0.8,7.8,0.0,0.0,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Neemuch,Madhya Pradesh,3,15,5.42,0.0,43.5,0.042,0.0,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Nuapada,Odisha,1,5,1.83,1.0,9.2,0.0,0.0,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Osmanabad,Mahārāshtra,5,25,6.67,0.0,71.0,0.062,0.12,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Palamu,Jhārkhand,2,10,2.86,0.7,15.0,0.0,0.0,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Panch Mahals,Gujarāt,3,15,3.04,0.333,21.3,0.0,0.0,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Pashchimi Singhbhum,Jhārkhand,3,15,2.84,0.533,15.3,0.0,0.0,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Perambalur,Tamil Nādu,1,5,3.03,0.0,16.5,0.0,0.0,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Pilibhit,Uttar Pradesh,1,5,6.25,0.0,54.7,0.034,0.0,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Porbandar,Gujarāt,1,5,7.83,0.0,112.8,0.0,0.0,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Prakasam,Andhra Pradesh,3,15,4.81,0.0,53.9,0.24,0.0,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Pratapgarh,Uttar Pradesh,7,35,3.75,0.314,27.1,0.0,0.0,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Rae Bareli,Uttar Pradesh,1,5,3.22,0.2,17.5,0.0,0.0,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Raisen,Madhya Pradesh,1,5,4.29,0.0,18.4,0.129,0.0,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Rajkot,Gujarāt,6,30,5.47,0.1,89.9,0.037,0.033,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Rampur,Uttar Pradesh,1,5,3.06,0.4,19.5,0.0,0.0,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Ranchi,Jhārkhand,2,10,1.83,0.9,6.3,0.0,0.0,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Ranipet,Tamil Nādu,1,5,3.03,0.2,16.9,0.26,0.0,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Ratlam,Madhya Pradesh,5,25,4.38,0.04,46.1,0.0,0.0,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Rayagada,Odisha,2,10,4.27,0.2,34.4,0.0,0.0,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Rewa,Madhya Pradesh,10,50,3.49,0.24,19.7,0.0,0.04,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Rewari,Haryāna,2,10,6.71,0.0,48.7,0.13,0.0,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Rohtas,Bihār,1,5,2.14,0.6,11.7,0.0,0.0,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Sabar Kantha,Gujarāt,1,5,5.49,0.0,46.6,0.0,0.0,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Sambhal,Uttar Pradesh,1,5,3.82,0.2,21.5,0.0,0.0,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Sangli,Mahārāshtra,2,10,4.85,0.0,56.5,0.0,0.0,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Satna,Madhya Pradesh,2,10,3.75,0.0,43.0,0.0,0.0,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Sawai Madhopur,Rājasthān,5,25,6.48,0.0,74.1,0.0,0.0,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Sehore,Madhya Pradesh,2,10,5.75,0.0,59.8,0.013,0.0,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Sidhi,Madhya Pradesh,5,25,1.82,0.84,7.0,0.0,0.0,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Sikar,Rājasthān,3,15,3.04,0.133,23.8,0.0,0.0,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Simdega,Jhārkhand,2,10,3.08,0.4,14.1,0.0,0.0,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Singrauli,Madhya Pradesh,2,10,1.97,0.9,9.4,0.0,0.0,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Sirsa,Haryāna,3,15,5.43,0.067,48.3,0.246,0.067,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Solapur,Mahārāshtra,8,40,4.39,0.15,41.6,0.014,0.05,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Srikakulam,Andhra Pradesh,2,10,3.52,0.4,23.1,0.0,0.0,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Subarnapur,Odisha,1,5,3.07,0.4,18.7,0.0,0.0,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Sundargarh,Odisha,3,15,2.84,0.667,10.3,0.0,0.0,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Surendranagar,Gujarāt,2,10,8.73,0.0,139.1,0.199,0.2,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Thiruvarur,Tamil Nādu,1,5,4.25,0.0,29.9,0.171,0.0,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Tiruchirappalli,Tamil Nādu,3,15,3.25,0.133,23.3,0.0,0.0,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Tonk,Rājasthān,5,25,5.48,0.04,60.0,0.0,0.0,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Udaipur,Rājasthān,1,4,2.82,0.75,19.9,0.0,0.0,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Udham Singh Nagar,Uttarākhand,1,5,6.3,0.0,47.8,0.295,0.0,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Vadodara,Gujarāt,5,25,5.49,0.0,61.3,0.158,0.12,FTW v1 3-class FULL,reconstructed parcel (S-08)
+Vizianagaram,Andhra Pradesh,8,40,3.06,0.375,15.5,0.0,0.0,FTW v1 3-class FULL,reconstructed parcel (S-08)

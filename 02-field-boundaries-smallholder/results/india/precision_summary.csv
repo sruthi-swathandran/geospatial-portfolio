@@ -1,4 +1,6 @@
 method,min_size_m2,chips,parcels,objects,objects_per_chip,matched_objects,matched_share,no_object_pct,exactly_one_pct,five_or_more_pct,median_objects_over,subset
+ftw,0,398,1983,116335,292.3,54,0.000464,62.3,21.9,1.6,0,False
 ftw,500,398,1983,69656,175.0,54,0.000775,74.4,18.9,0.3,0,False
+sam_vit_h_cir_0p5,500,99,494,19363,195.6,79,0.00408,10.1,30.0,8.9,2,True
 sam_vit_h_false_0p5,500,99,494,18848,190.4,80,0.004244,8.7,33.0,8.5,2,True
 watershed_0.02,500,398,1983,268998,675.9,488,0.001814,0.0,7.2,38.2,4,False

@@ -1,0 +1,14 @@
+country,table,iou,district_cut,parcel_cut,group,found,parcels,recall_pct,ci_lo_pct,ci_hi_pct
+india,parcel_width_seg_watershed_min500.csv,0.5,3.25,3.0,all parcels,488,1983,24.61,22.73,26.57
+india,parcel_width_seg_watershed_min500.csv,0.5,3.25,3.0,Rajasthan only,138,523,26.39,22.66,30.39
+india,parcel_width_seg_watershed_min500.csv,0.5,3.25,3.0,everything except Rajasthan,350,1460,23.97,21.8,26.25
+india,parcel_width_seg_watershed_min500.csv,0.5,3.25,3.0,districts with median width <= 3.25 px,68,584,11.64,9.16,14.53
+india,parcel_width_seg_watershed_min500.csv,0.5,3.25,3.0,parcels narrower than 3.0 px,14,441,3.17,1.75,5.27
+india,parcel_width_seg_watershed_min500.csv,0.5,3.25,3.0,parcels 3.0 px and wider,474,1542,30.74,28.44,33.11
+india,parcel_width_seg_watershed_min500.csv,0.5,3.25,3.0,width <2 native px,2,196,1.02,0.12,3.64
+india,parcel_width_seg_watershed_min500.csv,0.5,3.25,3.0,width 2 to 3 native px,12,245,4.9,2.56,8.4
+india,parcel_width_seg_watershed_min500.csv,0.5,3.25,3.0,width 3 to 4 native px,86,503,17.1,13.91,20.68
+india,parcel_width_seg_watershed_min500.csv,0.5,3.25,3.0,width 4 to 5 native px,109,364,29.95,25.28,34.94
+india,parcel_width_seg_watershed_min500.csv,0.5,3.25,3.0,width 5 to 7 native px,168,347,48.41,43.05,53.81
+india,parcel_width_seg_watershed_min500.csv,0.5,3.25,3.0,width 7 to 10 native px,82,202,40.59,33.76,47.71
+india,parcel_width_seg_watershed_min500.csv,0.5,3.25,3.0,width 10+ native px,29,126,23.02,15.99,31.35

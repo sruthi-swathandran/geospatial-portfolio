@@ -1,2 +1,3 @@
 seed,country,n,marked_visible,marked_numbers,rank_score,permutation_p,median_split_agree
 20260925,india,20,6,4 5 13 14 18 19,0.6548,0.1576,12
+20261012,india,20,10,2 3 4 5 8 9 13 16 17 19,0.65,0.1394,10

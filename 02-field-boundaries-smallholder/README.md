@@ -69,9 +69,12 @@ chip. Measured against the image gradient, among parcels over 50 m across they
 sit closer to the visible edge than Slovenia's, +1.81 m against +2.23 m, and
 India is still found 8.3 times less often.
 
-**5. The v1 checkpoint misses Indian parcels.** It puts no object at all on 74.4%
-of them. SAM, spending a similar budget on 100 test chips, reaches 91.3% of
-labelled parcels where FTW reaches 24.7%, measured on its first run's inputs.
+**5. The v1 checkpoint misses Indian parcels.** Across all 1,983 labelled
+Indian parcels it puts no object at all on 74.4% of them. On the 494 parcels of
+the first 100 test chips, SAM on colour infrared, spending a similar budget,
+has an object over 89.9% of them where FTW reaches 24.7%, and covers 30.0%
+with exactly one object against FTW's 18.2%. Reaching a parcel means an object
+overlaps it, short of finding it at IoU 0.5.
 On the largest Indian fields, over about 100 m across, SAM recovers 50.8%
 against FTW's 17.5%, the one result here close to practical use.
 
@@ -136,9 +139,10 @@ is applied to every method. `COMPARISON.md` explains each control.
   parcel's edge and this project gives it back. Varying that step moves no
   recall by more than 0.0017, but it has never been checked against
   independently digitised parcels.
-- **A few SAM figures rest on its first run.** Precision on 100 chips and the
-  reconstruction sweep used near infrared, blue and green (B-23).
-- **The contrast measure rests on one analyst's eye** and 20 parcels.
+- **SAM's precision is measured on a subset**, the first 100 test chips, 99 of
+  them labelled, because a full pass takes about 26 hours.
+- **The contrast measure rests on one analyst's eye**, over two blind panels of
+  20 parcels, and agrees with it weakly both times.
 - **Settings were chosen on the data they are reported from.** Measured on 40
   held-out splits, that is worth at most 0.0066 of recall.
 - **Intervals resample whole chips**, since parcels in one chip share a scene.

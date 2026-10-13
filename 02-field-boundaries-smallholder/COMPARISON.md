@@ -49,13 +49,15 @@ and SAM against them, and the README's headline now uses v3 (B-24).
    at 676 objects per chip, touches every one and cuts 38.2% into five pieces
    or more. Two opposite failures that this document described as one until
    the objects were counted. See B-16.
-5. SAM spends the same budget as the checkpoint and puts it in the right
-   places. At 190 objects per chip against FTW's 175, it reaches 91.3% of
-   labelled parcels where FTW reaches 24.7%, and leaves 33.0% covered by
-   exactly one object against FTW's 18.2% and watershed's 7.1%. Since one
+5. SAM spends about the same budget as the checkpoint and puts it in the
+   right places. On the first 100 test chips, 494 parcels, SAM on colour
+   infrared emits 196 objects per chip against FTW's 175 and has an object
+   over 89.9% of the parcels where FTW reaches 24.7%. It leaves 30.0% covered
+   by exactly one object, against FTW's 18.2% and watershed's 7.1%. Since one
    object covering one parcel is the precondition for a good IoU, this is
-   where its recall advantage comes from. Measured on 100 of 399 chips, on the
-   first run's near infrared, blue and green (B-23).
+   where its recall advantage comes from. Reaching a parcel means an object
+   overlaps it, short of finding it at IoU 0.5. The first run, on the wrong
+   bands (B-23), gave 91.3% and 33.0%.
 6. Watershed clears its null across the entire sweep, from 40 objects per chip
    to 917, with a gap running +0.018 to +0.196 that never reaches zero. A
    margin that survives a twentyfold range of settings is not a parameter
@@ -503,7 +505,8 @@ shows it here whatever the labelling.
 | watershed 0.02 | 675.9 | 0.0% | 7.2% | 38.2% |
 
 SAM costs 75 seconds per chip to regenerate, so it was measured on the first
-100 chips rather than all 399. Those chips run slightly small, a median parcel
+100 test chips rather than all 399, 99 of which carry labels. Those chips run
+slightly small, a median parcel
 of 6.21 grid pixels against 7.00 across the country, so the three methods are
 compared below on the same 494 parcels rather than against the full-set figures
 above.
@@ -511,17 +514,22 @@ above.
 | on the same 494 parcels | objects/chip | parcels with no object | covered by exactly one | cut into 5 or more |
 |---|---:|---:|---:|---:|
 | FTW 3-class FULL | 175.0 | 75.3% | 18.2% | 0.0% |
-| **SAM ViT-H NIR-blue-green 0.50** | **190.4** | **8.7%** | **33.0%** | **8.5%** |
+| **SAM ViT-H colour infrared 0.50** | **195.6** | **10.1%** | **30.0%** | **8.9%** |
+| SAM ViT-H NIR-blue-green 0.50, first run | 190.4 | 8.7% | 33.0% | 8.5% |
 | watershed 0.02 | 675.9 | 0.0% | 7.1% | 30.8% |
 
-That middle row is the most useful thing in this section. SAM spends
-essentially the checkpoint's budget, 190 objects per chip against 175, on the
-first run's near infrared, blue and green (B-23), and reaches 91.3% of the
-labelled parcels where the checkpoint reaches 24.7%. It
-also leaves a third of them covered by exactly one object, which is the
-precondition for clearing IoU 0.5, against FTW's 18.2% and watershed's 7.1%.
-SAM's recall advantage on India is not that it emits more. It is that it emits
-in the right places.
+The SAM rows are the most useful thing in this section. On colour infrared,
+the input intended, SAM spends close to the checkpoint's budget, 196 objects
+per chip against 175, and puts at least one object over 89.9% of these
+parcels where the checkpoint reaches 24.7%. Reaching a parcel means an object
+overlaps it, which is short of finding it at IoU 0.5. SAM also leaves 30.0%
+covered by exactly one object, the precondition for clearing IoU 0.5, against
+FTW's 18.2% and watershed's 7.1%. Its recall advantage on India comes from
+where it puts its objects, since it emits about as many as FTW. The first
+run's near infrared, blue and green (B-23) gave 91.3% and 33.0%, so the input
+error moved these by about three points and left the reading as it was.
+Across all 1,983 Indian parcels, the checkpoint reaches 25.6% and leaves
+74.4% untouched, as in the first table.
 
 | on Slovenia | objects/chip | parcels with no object | covered by exactly one | cut into 5 or more |
 |---|---:|---:|---:|---:|
@@ -554,7 +562,8 @@ the 185 chips that carry labels.
 | method | India, floor | Slovenia, precision |
 |---|---:|---:|
 | FTW 3-class FULL | 0.08% | **42.06%** |
-| SAM ViT-H NIR-blue-green 0.50 | 0.42% | not measured |
+| SAM ViT-H colour infrared 0.50 | 0.41% | not measured |
+| SAM ViT-H NIR-blue-green 0.50, first run | 0.42% | not measured |
 | watershed | 0.18% | 4.43% |
 
 Read the Slovenian column. The checkpoint is right about 42% of the time while
@@ -736,17 +745,26 @@ inside and outside differ clearly with no sharp step at the line. That is the
 likely gap between the two readings. The measure responds to how sharp the edge
 is, and the eye also responds to a plain difference in brightness.
 
-The crops were drawn with red and blue swapped (B-23). Whether a boundary is
-visible depends more on where brightness changes than on its hue, so the marks
-should stand, but the panel was never seen in natural colour.
+Those crops were drawn with red and blue swapped (B-23). So a second panel was
+drawn in natural colour, from 20 parcels neither earlier panel had shown, and
+judged against the same bars. She marked 10 of 20. The rank score is 0.650,
+with p = 0.14: weak again, within half a hundredth of the first. The two
+parcels the measure ranks highest are both marked and the three lowest are
+not; in between the two readings part company in both directions, with four
+marked parcels measuring only 1.10 to 1.17. The swapped colours were not
+hiding agreement.
 
 An earlier panel was spent without a valid score, when the example numbers in
 the instructions were scored in place of real judgements. Its 20 parcels were
-kept out of this one. One person and 20 parcels cannot separate weak agreement
-from moderate, and no further panel was drawn to try for a pass.
+kept out of both scored panels. One person and 20 parcels a panel cannot
+separate weak agreement from moderate, and two panels agreeing on weak is
+reason to stop drawing them rather than to try for a pass. A second analyst
+would test something new.
 
-*Source: `results/india/contrast_panel_scores.csv` and
-`contrast_panel_key.csv`, `figures/contrast_panel_india.png`.*
+*Source: `results/india/contrast_panel_scores.csv`, one row per scored panel;
+the natural colour panel's key is `contrast_panel_key.csv` and the first
+scored panel's is `contrast_panel_key_spent_2.csv`;
+`figures/contrast_panel_india.png` shows the natural colour panel.*
 
 **Parcel shape is ruled out.** Slovenian parcels are more strip-like than Indian
 ones. Taking a parcel's area over the square of its width, which is 1 for a
@@ -1473,13 +1491,15 @@ colour gains most, 0.295 against 0.276 at the loosest setting, and every SAM
 figure there is still a ceiling at FTW's budget. Natural colour now carries the
 cross-country table, the shape test and the budget figure, and colour infrared
 carries the Indian headline and the map. Precision and fragmentation on the
-100-chip subset, which finding 5 quotes, and the SAM row of the ring sweep still
-rest on the first run's inputs, and say so where they appear.
+100-chip subset, which finding 5 quotes, and the SAM row of the ring sweep were
+rerun on colour infrared in the errata round of October 2026 and the reading of
+each held; the first run's figures are kept beside them.
 
 The same assumption reached three other places. The 20 crops on the contrast
 panel were drawn with red and blue swapped, so the analyst judged them in
-those colours, and `contrast_panel.py` keeps drawing them that way so the panel
-can be reproduced. The figures from `figure_predictions.py`,
+those colours. `contrast_panel.py` still draws that panel the same way when
+redrawn from its key, and a second panel of 20 new parcels was drawn in
+natural colour and judged in the errata round, with the same result. The figures from `figure_predictions.py`,
 `figure_field_scale.py` and `compare_inputs.py` used bands 4, 3 and 2 as
 colour infrared and so showed near infrared, blue and green; they are redrawn.
 And the window table added for B-22 read band 1 as blue when it is red. It now
@@ -1543,7 +1563,12 @@ under both scorings, 4 of 84.
 `score_predictions.py` wrote `score_summary_3class_full.csv` fresh on every
 run, so a Slovenia-only run on 3 October removed India's row while
 `RESULTS.md` still cited it. It now replaces only the countries it scored, and
-the file is regenerated with both.
+the file is regenerated with both; India's row returns exactly as last
+published. The same run rewrote India's per-parcel table, whose areas still
+used one pixel size for every chip. With each chip's own pixel area (B-21),
+`hectares` and `native_10m_px` move by about 0.1%, a few parcels cross a size
+bin edge in `score_bins_3class_full.csv`, and no IoU, recall or quoted figure
+changes.
 
 **A-03. Finding 5 set two samples side by side.** "No object on 74.4%" is FTW
 over all 1,983 Indian parcels; "FTW reaches 24.7%" is FTW over SAM's 494-parcel
@@ -1631,7 +1656,24 @@ on the wrong SAM inputs. Each is rerun on what was intended.
   first: 0.75 with p under 0.05 closes F-14, 0.60 is weak, and below 0.60 the
   documents stop calling the measure contrast.
 
-Results are added below when they exist.
+All three have run.
+
+- **Precision subset: finding 5 stands.** On colour infrared SAM emits 195.6
+  objects per chip, 12% above FTW's 175, and covers 30.0% of the 494 parcels
+  with exactly one object against FTW's 18.2%. It reaches 89.9% where FTW
+  reaches 24.7%, against 91.3% on the first run's inputs. Its matched share,
+  the floor on Indian precision, is 0.41% against 0.42%.
+  `precision_sam_vit_h_cir_0p5_min500.csv` and `precision_summary.csv`.
+- **Ring sweep: F-12's SAM statement stands.** 79 of 494 at the published cap,
+  81 at 12 m and 80 at 18 and 24 m, so no cap moves SAM by more than two
+  parcels. `ring_sensitivity_sam_cir.csv`.
+- **Contrast panel: weak again.** In natural colour, on 20 parcels no earlier
+  panel showed, the rank score is 0.650 with p = 0.14, against 0.655 and
+  p = 0.16 on the first. Between 0.60 and 0.75, so F-14 stays scoped and the
+  measure stays a difference between countries. `contrast_panel_scores.csv`.
+
+So nothing now rests on the swapped composites except the first panel's marks,
+which the second panel repeats.
 
 ---
 
@@ -1679,10 +1721,12 @@ therefore rests on recall alone.
 **Boundary contrast agrees only weakly with the eye.** It is measured against
 each parcel's own interior, which removes the chip from the comparison, and the
 machinery behind it passes a self-test against known displacements. Checked
-blind against one analyst on 20 parcels, it ranks her visible edges higher
-about two times in three, p = 0.16. It is a difference in edge sharpness between
-countries and should not be read per parcel. A second analyst would
-strengthen the check more than a second panel from the same one.
+blind against one analyst on two panels of 20 parcels, the first with red and
+blue swapped and the second in natural colour, it ranks her visible edges
+higher about two times in three, rank scores 0.655 and 0.650, p = 0.16 and
+0.14. It is a difference in edge sharpness between countries and should not be
+read per parcel. A second analyst would strengthen the check more than a third
+panel from the same one.
 
 **The measured grid is now reconciled, and it was wrong.** Not the
 measurement itself, which was right about the east to west size, but the
@@ -1694,8 +1738,8 @@ the chips rather than against a specification.
 **SAM on the intended composites, now run.** Natural colour and colour
 infrared were run on every test chip in both countries, about 26 hours of CPU,
 and moved SAM's Indian figure at FTW's budget by half a point (B-23). The
-100-chip precision subset and the SAM row of the ring sweep were not rerun and
-stay on the first run's near infrared, blue and green.
+100-chip precision subset and the SAM row of the ring sweep were rerun on
+colour infrared in October 2026; both readings held.
 
 **Parcel shape and the seasonal windows, now tested.** Shape explains 3% of
 FTW's country gap and none of the other methods'. India's dry-season window
@@ -1766,11 +1810,15 @@ times in every case. The Indian counts behind them are small, 1 and 5 parcels
 found in the two narrower bands, and that is true at every cap, so the cap is
 not what makes them fragile.
 
-SAM keeps no segmentations, so it was regenerated for the sweep on the 100
-Indian chips `precision.py` used, near infrared, blue and green at 0.50. At the published cap
-it reproduces the main run on those chips exactly, 80 of 494 parcels and a
-recall of 0.1619, which also shows the regeneration is deterministic. At 12 m
-it finds one parcel more, 0.1640, and at 18 and 24 m it is back at 0.1619.
+SAM keeps no segmentations, so it was regenerated for the sweep on the first
+100 Indian test chips, the ones `precision.py` used, at 0.50. On the first
+run's near infrared, blue and green, the published cap reproduces the main run
+on those chips exactly, 80 of 494 parcels and a recall of 0.1619, which also
+shows the regeneration is deterministic. At 12 m it finds one parcel more,
+0.1640, and at 18 and 24 m it is back at 0.1619. On colour infrared, rerun in
+October 2026 from the segmentations `precision.py` cached, the published cap
+reproduces the main run's 79 of 494, 0.1599; 12 m finds 81 and 18 and 24 m
+find 80. No cap moves SAM by more than two parcels on either input.
 
 This bounds the reconstruction. Validating it still needs parcels digitised
 independently of FTW.
@@ -1916,7 +1964,8 @@ Outputs land in `results/<country>/`:
 | `parcel_contrast.csv` | per-parcel edge over chip median, superseded by `label_registration.csv` (B-15); carries its measure and gradient build |
 | `null_draws_ftw.csv` | every null draw behind finding 3 |
 | `label_registration.csv` | per-parcel edge displacement and contrast |
-| `contrast_panel_key.csv` | the 20 parcels on the blind panel, with their values |
+| `contrast_panel_key.csv` | the 20 parcels on the natural colour panel, with their values |
+| `contrast_panel_key_spent_2.csv` | the first scored panel, drawn with red and blue swapped |
 | `contrast_panel_key_spent_1.csv` | the earlier panel, spent without a valid score |
 | `contrast_panel_scores.csv` | the analyst's marks and the rank score |
 | `ring_sensitivity_truth.csv` | parcel area, width and unassigned ring at each reconstruction cap |

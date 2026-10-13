@@ -1,0 +1,14 @@
+country,table,iou,district_cut,parcel_cut,group,found,parcels,recall_pct,ci_lo_pct,ci_hi_pct
+india,parcel_width_3class_full.csv,0.5,3.25,3.0,all parcels,54,1983,2.72,2.05,3.54
+india,parcel_width_3class_full.csv,0.5,3.25,3.0,Rajasthan only,23,523,4.4,2.81,6.53
+india,parcel_width_3class_full.csv,0.5,3.25,3.0,everything except Rajasthan,31,1460,2.12,1.45,3.0
+india,parcel_width_3class_full.csv,0.5,3.25,3.0,districts with median width <= 3.25 px,0,584,0.0,0.0,0.63
+india,parcel_width_3class_full.csv,0.5,3.25,3.0,parcels narrower than 3.0 px,1,441,0.23,0.01,1.26
+india,parcel_width_3class_full.csv,0.5,3.25,3.0,parcels 3.0 px and wider,53,1542,3.44,2.59,4.47
+india,parcel_width_3class_full.csv,0.5,3.25,3.0,width <2 native px,0,196,0.0,0.0,1.86
+india,parcel_width_3class_full.csv,0.5,3.25,3.0,width 2 to 3 native px,1,245,0.41,0.01,2.25
+india,parcel_width_3class_full.csv,0.5,3.25,3.0,width 3 to 4 native px,1,503,0.2,0.01,1.1
+india,parcel_width_3class_full.csv,0.5,3.25,3.0,width 4 to 5 native px,4,364,1.1,0.3,2.79
+india,parcel_width_3class_full.csv,0.5,3.25,3.0,width 5 to 7 native px,13,347,3.75,2.01,6.32
+india,parcel_width_3class_full.csv,0.5,3.25,3.0,width 7 to 10 native px,13,202,6.44,3.47,10.75
+india,parcel_width_3class_full.csv,0.5,3.25,3.0,width 10+ native px,22,126,17.46,11.28,25.23

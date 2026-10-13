@@ -193,6 +193,7 @@ Same sensor, same method, same physical parcel size.
 |---|---:|---:|---:|---:|---:|---:|
 | FTW 3-class FULL | 175.0 | 74.4% | 18.9% | 0.3% | 0.08% | 1,983 |
 | SAM ViT-H NIR-blue-green 0.50 (subset) | 190.4 | 8.7% | 33.0% | 8.5% | 0.42% | 494 |
+| SAM ViT-H colour infrared 0.50 (subset) | 195.6 | 10.1% | 30.0% | 8.9% | 0.41% | 494 |
 | watershed 0.02 | 675.9 | 0.0% | 7.2% | 38.2% | 0.18% | 1,983 |
 
 ## India, held-out setting choice
@@ -229,6 +230,7 @@ Same sensor, same method, same physical parcel size.
 | method | parcels | objects/chip | no object | exactly one | 5 or more |
 |---|---:|---:|---:|---:|---:|
 | FTW 3-class FULL | 494 | 175.0 | 75.3% | 18.2% | 0.0% |
+| SAM ViT-H colour infrared 0.50 | 494 | 195.6 | 10.1% | 30.0% | 8.9% |
 | SAM ViT-H NIR-blue-green 0.50 | 494 | 190.4 | 8.7% | 33.0% | 8.5% |
 | watershed 0.02 | 494 | 675.9 | 0.0% | 7.1% | 30.8% |
 
@@ -289,6 +291,15 @@ Same sensor, same method, same physical parcel size.
 | 12 m | 1.83% | 0.315 ha | 30.4 m | 49.76% | 0.2227 | 0.3467 | 0.2136 |
 | 18 m | 0.89% | 0.317 ha | 30.4 m | 49.64% | 0.2222 | 0.3474 | 0.2137 |
 | 24 m | 0.68% | 0.317 ha | 30.4 m | 49.61% | 0.2222 | 0.3474 | 0.2137 |
+
+### SAM ViT-H 0.50, India, first 100 test chips
+
+| cap | NIR-blue-green, first run recall | colour infrared recall |
+|---|---:|---:|
+| 3 px, published | 0.1619 (80/494) | 0.1599 (79/494) |
+| 12 m | 0.1640 (81/494) | 0.1640 (81/494) |
+| 18 m | 0.1619 (80/494) | 0.1619 (80/494) |
+| 24 m | 0.1619 (80/494) | 0.1619 (80/494) |
 
 ### FTW at matched ground width, every cap
 
