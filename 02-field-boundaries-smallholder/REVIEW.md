@@ -25,7 +25,7 @@ contradicted by the project's own data and has to be withdrawn or scoped.
 
 ---
 
-## Status, updated 12 October 2026
+## Status, updated 13 October 2026
 
 Work done since this review was written. This section is current. Phases 1 to
 6 and the acceptance table below describe the repository as the review found

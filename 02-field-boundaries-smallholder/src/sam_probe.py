@@ -250,8 +250,9 @@ def main() -> None:
               f"and {total * per * len(comps) / 60:.0f} min for {len(comps)}")
 
     print("\n" + RULE)
-    print("Compare the gap column against watershed's +0.197 on India and")
-    print("FTW's +0.008. A gap near zero means SAM is scattering shapes, and")
+    print("Compare the gap column against watershed's +0.1955 on India and")
+    print("FTW's +0.0052 (segmenter_comparison_min500.csv). A gap near zero")
+    print("means SAM is scattering shapes, and")
     print("the recall beside it means nothing whatever its value. If the time")
     print("per chip is unworkable, --points 16 cuts the prompt grid to a")
     print("quarter and is worth measuring before reaching for a smaller model.")

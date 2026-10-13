@@ -1070,7 +1070,8 @@ def main() -> None:
     dest.write_text("# Generated tables for COMPARISON.md\n"
                     "\nRebuild with `python src\\build_comparison.py`. "
                     "Do not edit by hand.\n"
-                    + "\n".join(out) + "\n", encoding="utf-8")
+                    + "\n".join(out) + "\n", encoding="utf-8",
+                    newline="\n")
     print(f"\n  wrote {dest.relative_to(F.PROJECT)}")
 
     print("\n" + RULE)

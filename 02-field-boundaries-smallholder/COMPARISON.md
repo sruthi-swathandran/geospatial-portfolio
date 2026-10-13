@@ -527,7 +527,7 @@ covered by exactly one object, the precondition for clearing IoU 0.5, against
 FTW's 18.2% and watershed's 7.1%. Its recall advantage on India comes from
 where it puts its objects, since it emits about as many as FTW. The first
 run's near infrared, blue and green (B-23) gave 91.3% and 33.0%, so the input
-error moved these by about three points and left the reading as it was.
+error moved these by 1.4 and 3.0 points and left the reading as it was.
 Across all 1,983 Indian parcels, the checkpoint reaches 25.6% and leaves
 74.4% untouched, as in the first table.
 
@@ -751,7 +751,7 @@ judged against the same bars. She marked 10 of 20. The rank score is 0.650,
 with p = 0.14: weak again, within half a hundredth of the first. The two
 parcels the measure ranks highest are both marked and the three lowest are
 not; in between the two readings part company in both directions, with four
-marked parcels measuring only 1.10 to 1.17. The swapped colours were not
+marked parcels measuring only 1.10 to 1.16. The swapped colours were not
 hiding agreement.
 
 An earlier panel was spent without a valid score, when the example numbers in
@@ -1566,9 +1566,11 @@ run, so a Slovenia-only run on 3 October removed India's row while
 the file is regenerated with both; India's row returns exactly as last
 published. The same run rewrote India's per-parcel table, whose areas still
 used one pixel size for every chip. With each chip's own pixel area (B-21),
-`hectares` and `native_10m_px` move by about 0.1%, a few parcels cross a size
-bin edge in `score_bins_3class_full.csv`, and no IoU, recall or quoted figure
-changes.
+`hectares` moves by +0.57% at the median and +0.79% on average, from −1.66% to
++4.71%, and `native_10m_px` by +0.54% at the median. In
+`score_bins_3class_full.csv` five size bins gain or lose a few parcels and two
+bin recalls move, 0.0446 to 0.0445 and 0.0967 to 0.0945. No IoU or found value
+changes, and no document quotes those bins.
 
 **A-03. Finding 5 set two samples side by side.** "No object on 74.4%" is FTW
 over all 1,983 Indian parcels; "FTW reaches 24.7%" is FTW over SAM's 494-parcel
@@ -1600,7 +1602,9 @@ says that Phases 1 to 6 describe the repository as first reviewed.
 **A-10. The run manifest named the wrong commit.** It was written before the
 commit holding its outputs, so it recorded the previous commit with
 uncommitted changes. `run_manifest.py` now ignores its own file when checking
-the tree, and the run order runs it after committing.
+the tree, and the run order runs it after committing. The one fingerprint
+that failed against a clone, `comparison_tables.md`, was line endings, not
+content; see the follow-up below.
 
 **A-11, A-13. Quoted figures with no file behind them.** `bootstrap_ci.py` now
 writes `results/bootstrap_ci.csv` and `threshold_check.py` writes
@@ -1674,6 +1678,26 @@ All three have run.
 
 So nothing now rests on the swapped composites except the first panel's marks,
 which the second panel repeats.
+
+**Follow-up, 13 October 2026.** A check of the round at `03717fb` found six
+slips, N-01 to N-06, none changing a finding, table or figure.
+
+- **N-01.** `run_manifest.py` hashed text outputs as raw bytes, so a Windows
+  working copy, with CRLF line endings, never matched a clone, where git
+  stores LF. `comparison_tables.md`, the one text output fingerprinted that
+  way, failed on every clone; that was the whole of the A-10 mismatch, and
+  its content matched. Text outputs are now hashed with LF line endings, and
+  `build_comparison.py` writes LF. A `--compare` against a manifest from
+  before this change reports those files as a change of kind, once.
+- **N-02.** The A-02 entry above said parcel areas moved by about 0.1%. They
+  moved by +0.57% at the median; it now gives the figures.
+- **N-03.** `REVIEW.md`'s status section was edited on 13 October under a
+  12 October date. It is dated 13 October.
+- **N-04.** "About three points" covered two figures, 1.4 and 3.0 points.
+- **N-05.** The four marked parcels measure 1.10 to 1.16, not 1.17.
+- **N-06.** `sam_probe.py` still printed watershed's +0.197 and FTW's +0.008,
+  the same stale figures D-07 fixed in `sam_run.py`. It prints +0.1955 and
+  +0.0052 and names the file.
 
 ---
 

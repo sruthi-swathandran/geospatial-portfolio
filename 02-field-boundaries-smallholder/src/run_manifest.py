@@ -75,6 +75,17 @@ def sha256_file(path: Path, chunk: int = 1 << 20) -> str:
     return h.hexdigest()
 
 
+# Text outputs are hashed with CRLF turned into LF. Git stores them with LF
+# (.gitattributes), so a Windows working copy and a fresh clone hold the same
+# text in different bytes, and hashing raw bytes reported
+# comparison_tables.md as changed on every clone when nothing had (N-01).
+TEXT_SUFFIXES = {".md", ".txt", ".json", ".html", ".geojson", ".svg"}
+
+
+def sha256_text(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes().replace(b"\r\n", b"\n")).hexdigest()
+
+
 def git_state() -> dict:
     def run(*args):
         r = subprocess.run(["git", "-C", str(PROJECT), *args],
@@ -175,6 +186,8 @@ def outputs() -> dict:
                 continue
             if p.suffix.lower() == ".csv":
                 out[rel] = describe_csv(p)
+            elif p.suffix.lower() in TEXT_SUFFIXES:
+                out[rel] = {"kind": "text, LF", "sha256": sha256_text(p)}
             else:
                 out[rel] = {"kind": "file", "sha256": sha256_file(p)}
     return out
@@ -200,7 +213,7 @@ def compare(old: dict, new: dict) -> int:
         x, y = a[name], b[name]
         if x["kind"] != y["kind"]:
             changed.append((name, "kind changed"))
-        elif x["kind"] == "file":
+        elif x["kind"] in ("file", "text, LF"):
             (same if x["sha256"] == y["sha256"] else changed).append(
                 (name, "" if x["sha256"] == y["sha256"] else "bytes differ"))
         else:
