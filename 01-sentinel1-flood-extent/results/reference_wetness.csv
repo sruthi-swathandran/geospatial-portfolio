@@ -1,3 +1,5 @@
-reference,median_share_already_dark,chips,threshold_db
-july,0.4509,61,-17.44480571392803
-dry,0.1873,61,-17.44480571392803
+reference,references,median_share_already_dark,chips,threshold_db
+july,Lee 5x5,0.4509,61,-17.4448
+july,unfiltered,0.5539,61,-17.4448
+dry,Lee 5x5,0.1873,61,-17.4448
+dry,unfiltered,0.2939,61,-17.4448

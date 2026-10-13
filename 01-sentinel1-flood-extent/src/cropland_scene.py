@@ -197,7 +197,7 @@ def main() -> None:
                   f"({d_flood / fa * 100:.1f}% of scene)")
             print(f"    cropland, districts only   {d_crop:>12,.0f} ha  "
                   f"({d_crop / fc * 100:.1f}% of scene)")
-            print(f"    cropland outside districts {fc - d_crop:>12,.0f} ha")
+            print(f"    cropland outside districts {round(fc - d_crop) + 0:>12,.0f} ha")
         print(f"    share of scene flood on cropland "
               f"{fc / fa * 100:>6.1f}%")
         if d_flood:
@@ -212,7 +212,8 @@ def main() -> None:
             imaged_scene_ha=round(im, 1),
             flood_districts_ha=round(d_flood, 1) if d_flood else "",
             flooded_cropland_districts_ha=round(d_crop, 1) if d_crop else "",
-            cropland_outside_districts_ha=(round(fc - d_crop, 1)
+            # + 0.0 so a difference that rounds to nothing is not -0.0
+            cropland_outside_districts_ha=(round(fc - d_crop, 1) + 0.0
                                            if d_crop else ""),
             pct_of_flood_on_cropland_scene=round(fc / fa * 100, 2),
             worldcover_grid_cover_pct=build_plan.grid_cover_pct,

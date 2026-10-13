@@ -540,7 +540,30 @@ rewriting that file needs Planetary Computer.
 
 ### Measured in this round
 
-Results are added below when they exist.
+- **N-03, clean-up at the scene's 1 ha: over the bar, and larger.** Both
+  baselines reproduced 0.5186 and 0.5221, and the 0.25 ha rows reproduced the
+  first measurement exactly. At 1 ha the step lowers chip mapped area by 7.91%
+  at −18.75 dB and 9.88% at −17.75 dB, against 2.93% and 3.36% at 0.25 ha.
+  IoU moves by −0.0049 at the first and +0.0072 at the second. By the rule set
+  before rerunning, the README now quotes the 1 ha rows: on the chips the
+  area-matched pipeline maps 10.2% less water than the labels, against 3.7%
+  as first stated, and the map-optimal one recovers 13,266 ha of 18,483, a
+  shortfall of 28.2% that scales the headline to about 166,900 ha, against
+  24.3% and 158,300 ha. No published map figure changes; the bracket's upper
+  end is now said to be likely low as well. `results/register_check_clean.csv`.
+- **M-11, orbit offset weighted by land: the figure stands.** Over the same
+  eight tiles, with the same per-tile medians, the land-weighted mean of the
+  tile land medians is −0.048 dB against −0.047 dB weighted by all pixels,
+  and the sample standard deviation is 0.11 dB either way. Both round to the
+  README's 0.05 dB, so the figure stays and the README now names the land
+  weighting. `results/orbit_offset.csv`.
+- **N-06, already dark.** Filtered, 45.1% on 19 July and 18.7% on 14 April, as
+  quoted; unfiltered, 55.4% and 29.4%, which is the gap to
+  `dry_reference.csv`. `results/reference_wetness.csv`.
+- **N-05, M-05.** `sensitivity_grid.csv` reproduces every flood area with the
+  applied widths added; the published row reads 30, 600, 32, 640.
+  `cropland_scene.csv` reproduces every area and records WorldCover covering
+  97.84% of the grid.
 
 ---
 

@@ -332,8 +332,8 @@ own best threshold, a larger effect than the entire platform migration.
 
 Orbits 77 and 4 view the same ground at different incidence angles. The two
 passes share 1,819,972 ha, and eight tiles covering 729,161 ha of that were
-compared. Over land they agree to **0.05 dB**, the pixel-weighted mean of the
-per-tile land medians, each tile weighted by its total pixel count, with
+compared. Over land they agree to **0.05 dB**, the mean of the per-tile land
+medians, each tile weighted by its land pixel count, with
 **0.11 dB of scatter between tiles**, the sample standard deviation of those
 same medians. One threshold serves both orbits, and
 that is measured rather than assumed. For anyone building multi-orbit monitoring

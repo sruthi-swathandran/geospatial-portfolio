@@ -1,24 +1,25 @@
 VERIFICATION REPORT
-README sha256 befcf5a7d6397a22
+README sha256 7d796c21b9b403d0
 project: D:\geospatial-portfolio\01-sentinel1-flood-extent
 read-only; nothing in the repo is modified
 
-indexed 22811 numeric values from results/
+indexed 23311 numeric values from results/
 
 
 ==============================================================================
 A. EVERY NUMBER IN THE README, TRACED TO A FILE
 ==============================================================================
-  · 273 numbers matched a value in results/
-  · 169 skipped as years, codes or section numbers
-[WARN] 5 numbers could not be matched to any file. Each needs a human decision: derived, rounded, or wrong.
+  · 280 numbers matched a value in results/
+  · 178 skipped as years, codes or section numbers
+[WARN] 6 numbers could not be matched to any file. Each needs a human decision: derived, rounded, or wrong.
 
 --- unmatched README numbers ------------------------------------------------
-  L152           64,615   flood, 7 Aug                64,615 ha         90,785 ha
-  L212           27,600   holds 36,755 ha, so on 12 August it would have been nearer 27,600 ha. **A naive
-  L330          729,161   passes share 1,819,972 ha, and eight tiles covering 729,161 ha of that were
-  L404           64,615   | Acquisition date | 7 Aug vs 31 Aug, same ground | 64,615 ha to 38,887 ha |
-  L589        6,344,561   | `full_scene.py --res 20` | ~25 min | 46 tiles, 6,344,561 ha classified before refinement |
+  L156           64,615   flood, 7 Aug                64,615 ha         90,785 ha
+  L216           27,600   holds 36,755 ha, so on 12 August it would have been nearer 27,600 ha. **A naive
+  L334          729,161   passes share 1,819,972 ha, and eight tiles covering 729,161 ha of that were
+  L418           64,615   | Acquisition date | 7 Aug vs 31 Aug, same ground | 64,615 ha to 38,887 ha |
+  L479          166,900   shortfall of 28.2%, and the same scaling gives about 166,900 ha. Chip error
+  L606        6,344,561   | `full_scene.py --res 20` | ~25 min | 46 tiles, 6,344,561 ha classified before refinement |
 
 ==============================================================================
 A2. EVERY NUMBER ON docs/index.html, TRACED TO A FILE
@@ -52,9 +53,9 @@ B. INTERNAL CONSISTENCY
 [PASS] 12 Aug, area-matched: edge buffer removed 28,447 ha, 319,398 to 290,951
 [PASS] 12 Aug, area-matched: 290,951 − steep 115,947 − small 4,379 = 170,625 against reported 170,625, gap +0 ha
 [PASS] 7 Aug, map-optimal: edge buffer removed 5,908 ha, 84,777 to 78,870
-[PASS] 7 Aug, map-optimal: 78,870 − steep 13,712 − small 454 = 64,704 against reported 64,704, gap -0 ha
+[PASS] 7 Aug, map-optimal: 78,870 − steep 13,712 − small 454 = 64,704 against reported 64,704, gap +0 ha
 [PASS] 7 Aug, area-matched: edge buffer removed 7,202 ha, 120,675 to 113,473
-[PASS] 7 Aug, area-matched: 113,473 − steep 21,938 − small 620 = 90,915 against reported 90,915, gap -0 ha
+[PASS] 7 Aug, area-matched: 113,473 − steep 21,938 − small 620 = 90,915 against reported 90,915, gap +0 ha
 [PASS] 31 Aug, map-optimal: edge buffer removed 5,385 ha, 56,849 to 51,464
 [PASS] 31 Aug, map-optimal: 51,464 − steep 12,154 − small 423 = 38,887 against reported 38,887, gap +0 ha
 [PASS] 31 Aug, area-matched: edge buffer removed 6,203 ha, 70,937 to 64,734
@@ -67,7 +68,7 @@ B. INTERNAL CONSISTENCY
   · 12 Aug, map-optimal: 0.71% of permanent water sits above 8°, so 99.3% below
 [PASS] 12 Aug, map-optimal: CSV footer kept_ha 119,779 against stats flood_ha_after 119,779
 [PASS] 12 Aug, area-matched: 7 slope bins sum to 290,951 ha against flood_ha_before 290,951, +0.00%
-[PASS] 12 Aug, area-matched: bins at or above 8° hold 115,947 ha against removed_steep_ha 115,947, gap -0 ha
+[PASS] 12 Aug, area-matched: bins at or above 8° hold 115,947 ha against removed_steep_ha 115,947, gap +0 ha
   · 12 Aug, area-matched: 39.9% of mapped flood sits above 8°
   · 12 Aug, area-matched: 0.96% of permanent water sits above 8°, so 99.0% below
 [PASS] 12 Aug, area-matched: CSV footer kept_ha 170,625 against stats flood_ha_after 170,625
@@ -156,7 +157,7 @@ B. INTERNAL CONSISTENCY
 --- cross-orbit agreement ---------------------------------------------------
   · 8 tiles, 18.23 M pixels
   · pixel-weighted mean of tile medians, all pixels: -0.0153 dB
-  · weighted mean of tile land medians, by total pixels: -0.0473 dB
+  · weighted mean of tile land medians, by land pixels: -0.0478 dB
   · sample standard deviation of tile land medians: 0.1104 dB
   · unweighted median of tile medians: -0.0510 dB
   · mean absolute tile median: 0.2526 dB
@@ -184,24 +185,28 @@ C. NUMERIC LITERALS IN src/ THAT DUPLICATE A CONFIG CONSTANT
 ==============================================================================
 D. FIGURE FRESHNESS
 ==============================================================================
-[FAIL] accuracy_ci.png is OLDER than accuracy_ci.csv (by commit and commit). Redraw it.
-[PASS] change_detection.png is newer than its source data
-[PASS] change_sweep.png is newer than its source data
-[PASS] compare_0807_vs_0831.png is newer than its source data
-[PASS] compare_0807_vs_0831_am.png is newer than its source data
-[PASS] compare_0812_vs_0807.png is newer than its source data
-[PASS] flood_extent_map.png is newer than its source data
-[PASS] flood_recession.png is newer than its source data
-[PASS] flood_three_dates.png is newer than its source data
-[PASS] flooded_cropland.png is newer than its source data
-[PASS] flooded_cropland_20160807.png is newer than its source data
-[PASS] flooded_cropland_20160831.png is newer than its source data
-[PASS] flooded_cropland_areamatched.png is newer than its source data
-[PASS] mask_terrain_water.png is newer than its source data
-[PASS] operating_point.png is newer than its source data
-[PASS] orbit_offset.png is newer than its source data
-[PASS] product_vs_window.png is newer than its source data
-[PASS] sensitivity_grid.png is newer than its source data
+[PASS] accuracy_ci.png: accuracy_ci.csv changed after it was drawn, but every column it held then is unchanged
+[PASS] accuracy_ci.png is not older than its source data
+[PASS] change_detection.png is not older than its source data
+[PASS] change_sweep.png is not older than its source data
+[PASS] compare_0807_vs_0831.png is not older than its source data
+[PASS] compare_0807_vs_0831_am.png is not older than its source data
+[PASS] compare_0812_vs_0807.png is not older than its source data
+[PASS] flood_extent_map.pdf is not older than its source data
+[PASS] flood_extent_map.png is not older than its source data
+[PASS] flood_recession.png is not older than its source data
+[PASS] flood_three_dates.png is not older than its source data
+[PASS] flooded_cropland.png is not older than its source data
+[PASS] flooded_cropland_20160807.png is not older than its source data
+[PASS] flooded_cropland_20160831.png is not older than its source data
+[PASS] flooded_cropland_areamatched.png is not older than its source data
+[PASS] mask_terrain_water.png is not older than its source data
+[PASS] operating_point.png is not older than its source data
+[PASS] orbit_offset.png is not older than its source data
+[PASS] product_vs_window.png is not older than its source data
+[PASS] sensitivity_grid.png: sensitivity_grid.csv changed after it was drawn, but every column it held then is unchanged
+[PASS] sensitivity_grid.png is not older than its source data
+[PASS] no figure is older than the data behind it
 
 --- figures referenced by README that do not exist --------------------------
 [PASS] results/figures/accuracy_ci.png
@@ -220,7 +225,7 @@ D. FIGURE FRESHNESS
 ==============================================================================
 SUMMARY
 ==============================================================================
-  1 failures
+  0 failures
   4 warnings
 
 A warning is not automatically a problem. It is a place where this script

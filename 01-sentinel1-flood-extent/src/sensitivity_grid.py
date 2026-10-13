@@ -230,10 +230,12 @@ def main() -> None:
     print("\nFLOOD AREA ACROSS THE SWATH EDGE BUFFER")
     print(f"(slope <= {SLOPE_MAX_DEG:g} deg, occurrence < {GSW_PERMANENT_MIN}%)")
     print("-" * 52)
-    print(f"  {'buffer':<12}{'metres':>9}{'flood ha':>13}{'vs published':>15}")
+    print(f"  {'requested':<12}{'applied m':>10}{'flood ha':>13}"
+          f"{'vs published':>15}")
     for k, b in enumerate(EDGE_CUTS):
         v = area(si0, oi0, k)
-        print(f"  {str(b)+' px':<12}{int(b*res):>9}{v:>13,.0f}"
+        ap = applied_edge_px(b) if b > 0 else 0
+        print(f"  {str(b)+' px':<12}{int(ap*res):>10}{v:>13,.0f}"
               f"{v/max(published,1)-1:>+14.1%}")
 
     lo = min(area(i, j, k) for i in range(ns) for j in range(no)
