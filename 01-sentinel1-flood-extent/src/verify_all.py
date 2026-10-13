@@ -312,7 +312,7 @@ def check_raw_vs_refined():
             report(status, f"{label}: {float(before):,.0f} − steep "
                            f"{float(steep):,.0f} − small {float(small):,.0f} "
                            f"= {expect:,.0f} against reported "
-                           f"{float(after):,.0f}, gap {gap:+,.0f} ha")
+                           f"{float(after):,.0f}, gap {round(gap) + 0:+,.0f} ha")
             if status == FAIL:
                 report(INFO, "the edge buffer also removes area and may not "
                              "be in these two fields; check refine_scene.py")
@@ -357,7 +357,7 @@ def check_slope_histogram():
             status = PASS if abs(gap) < max(50.0, 0.005 * float(steep)) else FAIL
             report(status, f"{label}: bins at or above {cut:g}° hold "
                            f"{above:,.0f} ha against removed_steep_ha "
-                           f"{float(steep):,.0f}, gap {gap:+,.0f} ha")
+                           f"{float(steep):,.0f}, gap {round(gap) + 0:+,.0f} ha")
         if bins and tot:
             report(INFO, f"{label}: {above / tot * 100:.1f}% of mapped flood "
                          f"sits above {cut:g}°")
@@ -717,6 +717,7 @@ FIG_SOURCE = {
     "flooded_cropland_20160831.png":
         ["district_flood_stats_20160831.csv"],
     "flood_extent_map.png": ["district_flood_stats.csv"],
+    "flood_extent_map.pdf": ["district_flood_stats.csv"],
     "flood_three_dates.png": ["district_flood_stats.csv"],
     "flood_recession.png": ["district_flood_stats_20160807.csv"],
 }
@@ -748,6 +749,51 @@ def last_change(path: Path) -> tuple[float, str]:
     return path.stat().st_mtime, "file time"
 
 
+def drawn_from_same_data(fig: Path, src: Path) -> bool:
+    """Whether a source still holds what it held when the figure was drawn.
+
+    Commit times alone failed a correct figure (N-02): accuracy_ci.csv gained
+    three columns the figure never reads, so it was committed a day after the
+    figure, which came out byte for byte the same when redrawn and so kept its
+    older commit. This reads the source as it was at the figure's last commit.
+    For a CSV, every column that existed then must hold the same values now,
+    so columns added since cannot make a figure stale. Anything else must be
+    byte for byte the same. A figure with no clean commit gets no such pass.
+    """
+    top = ROOT.parent
+    try:
+        frel = fig.resolve().relative_to(top.resolve()).as_posix()
+        srel = src.resolve().relative_to(top.resolve()).as_posix()
+        if subprocess.run(["git", "-C", str(top), "status", "--porcelain",
+                           "--", frel], capture_output=True, text=True,
+                          check=True).stdout.strip():
+            return False
+        commit = subprocess.run(["git", "-C", str(top), "log", "-1",
+                                 "--format=%H", "--", frel],
+                                capture_output=True, text=True,
+                                check=True).stdout.strip()
+        if not commit:
+            return False
+        then = subprocess.run(["git", "-C", str(top), "show",
+                               f"{commit}:{srel}"], capture_output=True,
+                              check=True).stdout
+    except (OSError, ValueError, subprocess.CalledProcessError):
+        return False
+    now = src.read_bytes()
+    norm = lambda b: b.replace(b"\r\n", b"\n")
+    if src.suffix.lower() != ".csv":
+        return norm(then) == norm(now)
+    old = list(csv.reader(norm(then).decode("utf-8").splitlines()))
+    new = list(csv.reader(norm(now).decode("utf-8").splitlines()))
+    if not old or not new or len(old) != len(new):
+        return False
+    try:
+        idx = [new[0].index(c) for c in old[0]]
+    except ValueError:
+        return False
+    return all([r[i] for i in idx] == o for r, o in zip(new[1:], old[1:]))
+
+
 def check_figures():
     head("D. FIGURE FRESHNESS")
     figs = RES / "figures"
@@ -766,13 +812,17 @@ def check_figures():
             if not sp.exists():
                 continue
             st, how_s = last_change(sp)
+            if st > ft and drawn_from_same_data(f, sp):
+                report(PASS, f"{name}: {s} changed after it was drawn, but "
+                             f"every column it held then is unchanged")
+                continue
             if st > ft:
                 stale += 1
                 report(FAIL, f"{name} is OLDER than {s} (by {how} and "
                              f"{how_s}). Redraw it.")
                 break
         else:
-            report(PASS, f"{name} is newer than its source data")
+            report(PASS, f"{name} is not older than its source data")
     if stale == 0:
         report(PASS, "no figure is older than the data behind it")
 

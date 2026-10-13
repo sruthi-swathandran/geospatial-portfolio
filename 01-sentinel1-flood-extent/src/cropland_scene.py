@@ -130,6 +130,8 @@ def build_plan(water_path):
                     f"pixels. Nothing written.")
 
     covered = sum((r1 - r0) * (c1 - c0) for _, r0, r1, c0, c1 in plan)
+    # kept for the CSV, so the README's coverage figure has a file (M-05)
+    build_plan.grid_cover_pct = round(covered / (H * W) * 100, 2)
     print(f"  {len(plan)} WorldCover tiles cover {covered:,} of "
           f"{H * W:,} pixels ({covered / (H * W) * 100:.1f}%)")
     if covered < H * W:
@@ -213,6 +215,7 @@ def main() -> None:
             cropland_outside_districts_ha=(round(fc - d_crop, 1)
                                            if d_crop else ""),
             pct_of_flood_on_cropland_scene=round(fc / fa * 100, 2),
+            worldcover_grid_cover_pct=build_plan.grid_cover_pct,
         ))
 
     if out:

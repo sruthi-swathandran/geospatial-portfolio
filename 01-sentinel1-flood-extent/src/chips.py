@@ -136,9 +136,15 @@ def tiled_otsu(db: np.ndarray, tile: int, gated: bool,
     return (None if gated else global_otsu(db)), 0, examined
 
 
-def morph_clean(mask: np.ndarray) -> np.ndarray:
+def morph_clean(mask: np.ndarray, min_object: int = MIN_OBJECT_PX,
+                min_hole: int = MIN_HOLE_PX) -> np.ndarray:
     """
     Drop specks, fill pinholes.
+
+    The limits are in pixels, so they cover different ground at different
+    resolutions: 25 pixels is 0.25 ha at 10 m and 1 ha at the scene's 20 m.
+    full_scene.py calls this with the defaults on 20 m tiles; to reproduce
+    that on 10 m chips, pass four times the defaults (register_checks.py).
 
     scikit-image 0.26 renamed these parameters and changed the comparison from
     "smaller than" to "smaller than or equal to", so max_size = N - 1 matches
@@ -146,9 +152,9 @@ def morph_clean(mask: np.ndarray) -> np.ndarray:
     """
     m = mask.astype(bool)
     try:
-        m = remove_small_objects(m, max_size=MIN_OBJECT_PX - 1)
-        m = remove_small_holes(m, max_size=MIN_HOLE_PX - 1)
+        m = remove_small_objects(m, max_size=min_object - 1)
+        m = remove_small_holes(m, max_size=min_hole - 1)
     except TypeError:
-        m = remove_small_objects(m, min_size=MIN_OBJECT_PX)
-        m = remove_small_holes(m, area_threshold=MIN_HOLE_PX)
+        m = remove_small_objects(m, min_size=min_object)
+        m = remove_small_holes(m, area_threshold=min_hole)
     return m.astype(np.int8)

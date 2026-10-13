@@ -30,7 +30,8 @@ Outputs:
     data/worldcover/India_wc_<res>m_<ty>_<tx>.tif
     results/district_flood_stats.csv
     results/district_flood_stats.geojson       for the web map in step 13
-    results/figures/flooded_cropland.png
+
+The flooded cropland chart is drawn by make_figures.py from the CSV.
 
 Usage:
     python src\\district_stats.py --res 20

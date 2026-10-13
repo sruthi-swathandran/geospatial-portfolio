@@ -98,12 +98,16 @@ a hectare figure computed at the map-optimal point.
 
 **The chips and the scene differ by one clean-up step.** `full_scene.py`
 removes water patches and holes under 25 pixels before anything is counted, and
-the chip figures above were scored without it. Measured on the 65 chips
-(`results/register_check_clean.csv`), the step lowers mapped water by 2.9% at
-−18.75 dB and 3.4% at −17.75 dB. IoU stays at 0.519 at the first and rises to
-0.527 at the second, since most of what it removes was false water. So on the
-chips the pipeline behind the scene's area-matched figure maps 3.7% less water
-than the labels, against the 0.3% in the table. The Lee filter's noise term
+the chip figures above were scored without it. At the scene's 20 m, 25 pixels
+is 1 ha. Measured on the 65 chips with the same 1 ha limit
+(`results/register_check_clean.csv`), the step lowers mapped water by 7.9% at
+−18.75 dB and 9.9% at −17.75 dB. IoU falls from 0.519 to 0.514 at the first and
+rises from 0.522 to 0.529 at the second. So on the chips the pipeline behind
+the scene's area-matched figure maps 10.2% less water than the labels, against
+the 0.3% in the table, and the upper end of the bracket is itself likely to be
+low. An earlier version of this paragraph measured the step at the chips' own
+10 m, where 25 pixels is a quarter of a hectare, and gave 2.9%, 3.4% and 3.7%
+(N-03 in `CHANGELOG.md`). The Lee filter's noise term
 also differs, taken per chip in validation and per tile in the scene. Fixing it
 to one pooled value moved chip IoU by 0.001 and mapped area by under 0.4% at
 either point (`results/register_check_lee.csv`). The chips cannot show how
@@ -354,6 +358,12 @@ reference. It was tested against two references and abandoned.
 | 14 April 2016, pre-monsoon | 18.7% | 0.178 | 0.295 |
 | Single date, no reference | | **0.515** | 0.709 |
 
+*Already wet* is the median share of hand-labelled water that was already at or
+below the water threshold on the reference date, measured on Lee-filtered
+references as the method sees them (`results/reference_wetness.csv`). The
+same file gives the unfiltered shares, about ten points higher, which are what
+`dry_reference.csv` reports.
+
 Sweeping the change threshold from −12 to +4 dB across four smoothing windows
 and both gate settings found the optimum at the point where the change
 constraint stops excluding anything. **The best available change configuration is
@@ -362,13 +372,17 @@ the one that ignores the change signal.**
 With the change signal alone the best the sweep reaches over all 65 chips, test
 split included, is IoU 0.196, at a required drop of 2 dB. Chosen on the valid
 split instead, as every other setting here is, it reaches 0.146. Relax the
-required drop to nothing and the same configuration converges on 0.130, which
-is what labelling the entire scene as water scores.
+required drop to nothing and every change-only configuration, the absolute
+gate off, converges on about 0.13, 0.129 for that one, which is what labelling
+the entire scene as water scores.
 
 The reason is measurable. At thresholds where the filter actually bites it
-deletes true water faster than false positives, 66% against 46% at −3 dB. Between
-April and August, 45% of the study area darkened, because the monsoon wet
-everything, while the flood covers 13%. The change signal is mostly a seasonal
+deletes true water faster than false positives: requiring a 3 dB drop removes
+66% of the true water the single-date threshold found and 46% of its false
+alarms. Between April and August, 46.6% of the labelled ground on the chips
+darkened by 0.5 dB or more, because the monsoon wet everything, while
+hand-labelled water, the river included, covers 13% of it
+(`results/change_filter_rates.csv`). The change signal is mostly a seasonal
 wetting map with the flood buried inside it.
 
 A related trap: Otsu on a difference image picks a threshold close to zero,
@@ -460,9 +474,10 @@ worth stating plainly: no score in this repository would have found any of them.
   operating point used for the full scene the map recovers 14,405 ha of the
   18,483 ha of hand-labelled water, a shortfall of 22.1%. Scaling the reported
   figure by that ratio gives 153,681 ha. The scene also drops water patches
-  under 25 pixels before counting, a step the chips were scored without. With
-  it the chips recover 13,984 ha, a shortfall of 24.3%, and the same scaling
-  gives about 158,300 ha. Chip error rates should not
+  and fills holes under 1 ha before counting, a step the chips were scored
+  without. With it, at that 1 ha limit, the chips recover 13,266 ha, a
+  shortfall of 28.2%, and the same scaling gives about 166,900 ha. Chip error
+  rates should not
   be assumed to hold over terrain the chips never sampled. A design-based
   estimate with a standard error would need a probability sample of the mapped
   area, which has not been drawn. See `REVIEW.md` F-01 and F-02.
@@ -564,6 +579,8 @@ a CSV beside its figure.
 | Audit | `cropland_scene.py` | Flooded cropland over the whole raster rather than over district polygons |
 | Audit | `refine_figure.py` | The before and after of refinement, rebuilt from the two rasters |
 | Audit | `verify_all.py` | Traces every number in README.md and docs/index.html back to results/ |
+| Audit | `register_checks.py` | The Lee noise term, the clean-up step at chip and scene scale, and the frame lookup, each against a bar set before running |
+| Audit | `preflight.py` | Pre-publication checklist: scripts parse, constants match the text, the manifest and the verify report are current |
 | Publish | `build_docs_page.py` | Generates docs/index.html and its four map overlays from results/ |
 
 Reproducing the headline figure:
@@ -614,13 +631,14 @@ Microsoft Planetary Computer.
 Suggested citation:
 
 > Swathandran, S. (2026). *Flood extent and flooded cropland from Sentinel-1,
-> Brahmaputra valley, August 2016.* Version 1.1.
+> Brahmaputra valley, August 2016.* Version 1.2.
 > github.com/sruthi-swathandran/geospatial-portfolio
 
 Contact and issues: please open a GitHub issue on this repository.
 
-Version 1.1 supersedes 1.0 after a methodological audit; `CHANGELOG.md` lists
-every number that changed and `REVIEW.md` the findings that prompted it.
+Version 1.2 supersedes 1.1 after two issue-register rounds in October 2026,
+and 1.1 superseded 1.0 after a methodological audit; `CHANGELOG.md` lists every
+number that changed and `REVIEW.md` the findings that prompted the audit.
 
 Long runs are resumable. `full_scene.py` records each finished tile and
 re-signs Planetary Computer asset URLs every 25 minutes, since the SAS tokens

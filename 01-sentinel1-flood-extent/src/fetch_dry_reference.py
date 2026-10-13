@@ -32,6 +32,12 @@ Outputs (with --fetch):
     data/reference/India_<chip>_REFDRY_ALIGNED.tif
     results/dry_reference.csv
 
+The water_already_dark_* columns in dry_reference.csv are measured on the
+references as fetched, with no speckle filter, at --water-threshold, over
+every aligned chip. The method thresholds Lee-filtered images, so the shares
+the README quotes come from change_detect.py's reference_wetness.csv, which
+gives both and runs about ten points lower filtered (N-06).
+
 Usage:
     python src\\fetch_dry_reference.py
     python src\\fetch_dry_reference.py --fetch 2016-03-15

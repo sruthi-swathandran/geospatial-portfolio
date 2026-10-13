@@ -83,6 +83,7 @@ LANDCOVER_COLLECTION = "esa-worldcover"
 # --------------------------------------------------------------------------
 TARGET_CRS = "EPSG:32646"      # UTM 46N — covers the AOI; metres, so areas are honest
 TARGET_RES = 10                # metres
+SCENE_RES = 20.0               # metres; the published run is full_scene.py --res 20
 CHUNK = 2048                   # dask chunk size in pixels
 
 SPECKLE_WINDOW = 5             # Lee filter window

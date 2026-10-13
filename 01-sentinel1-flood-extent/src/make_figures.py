@@ -599,7 +599,7 @@ def fig_orbit_offset(dpi):
         9.8, 4.9,
         "Two orbits looking at the same ground, five days apart",
         f"{len(o)} overlap tiles, {np.nansum(px) / 1e6:.1f} M pixels, "
-        f"pixel-weighted median offset {w:+.3f} dB",
+        f"pixel-weighted mean of tile medians {w:+.3f} dB",
         "The 12 August map is relative orbit 77. The 7 and 31 August maps are "
         "orbit 4. Different orbits see the same surface at different "
         "incidence angles,\nso before comparing anything across them it is "
@@ -656,7 +656,9 @@ def fig_sensitivity_grid(dpi):
     if d is None:
         return
     slope, occ = d["slope_max_deg"], d["occurrence_permanent_min"]
-    if "edge_buffer_px" in d and "edge_buffer_m" in d:
+    if "edge_buffer_applied_m" in d:
+        edge = d["edge_buffer_applied_m"]
+    elif "edge_buffer_px" in d and "edge_buffer_m" in d:
         # label each buffer by the distance actually removed: whole erosions
         # of the 8x decimated mask, so 30 px requested is 32 px applied (C-21)
         px = d["edge_buffer_px"]

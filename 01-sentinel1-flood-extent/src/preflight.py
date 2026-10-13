@@ -296,10 +296,15 @@ else:
     sys.path.insert(0, str(SRC))
     from make_manifest import sha256 as manifest_sha256   # same rule, LF text
     stale = missing = skipped = 0
-    for r in csv.DictReader(mf.read_text(encoding="utf-8").splitlines()):
+    rows = list(csv.DictReader(mf.read_text(encoding="utf-8").splitlines()))
+    # data/ is not in git, so a clone has none of its files, and that is not
+    # a fault. Test for the files rather than the folder: importing config.py
+    # creates an empty data/ (N-01). A partial data/ is still a fault.
+    have_data = any((ROOT / r["path"]).exists()
+                    for r in rows if r["path"].startswith("data/"))
+    for r in rows:
         p = ROOT / r["path"]
-        # data/ is not in git, so a clone has none of it; that is not a fault
-        if r["path"].startswith("data/") and not DATA.exists():
+        if r["path"].startswith("data/") and not have_data:
             skipped += 1
             continue
         if not p.exists():
@@ -308,7 +313,7 @@ else:
         if manifest_sha256(p) != r["sha256"]:
             stale += 1
     if skipped:
-        ok(f"{skipped} data/ entries skipped, since data/ is not present")
+        ok(f"{skipped} data/ entries skipped, since none of data/ is present")
     if missing:
         fail(f"{missing} manifest entries no longer exist")
     if stale:

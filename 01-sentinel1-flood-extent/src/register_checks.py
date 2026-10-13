@@ -14,7 +14,11 @@ readings are set here before any of them has run.
 
     clean   I-22. full_scene.py runs morph_clean, dropping water patches and
             holes under 25 pixels, before anything is counted. The chips were
-            scored without it. This scores the chips with and without it.
+            scored without it. This scores the chips with and without it, at
+            two limits: 25 pixels, which is 0.25 ha on the 10 m chips, and 100
+            pixels, which is the 1 ha that 25 pixels covers at the scene's
+            20 m. The first run measured only the 0.25 ha limit (N-03); the
+            1 ha rows are the ones that describe the published map.
 
     items   I-25. fetch_reference.py finds the 12 August frames by id with an
             _rtc suffix; full_scene.py says that returns nothing and searches
@@ -41,6 +45,10 @@ HOW IT WILL BE READ, SET BEFORE RUNNING
             by more than 1% at either operating point. Below that, the README
             says the chips were scored without it and that the difference was
             measured and is small. Above it, the README says how large it is.
+            Second round (N-03, set before rerunning): the same bars apply to
+            the 1 ha rows, and wherever the README describes the published
+            map, its figures come from those rows, with the 0.25 ha rows kept
+            as the first measurement.
 
     items   The lookups agree if they return the same set of item ids. If
             they do, I-25 is closed with the ids recorded. If not, the ids
@@ -69,9 +77,10 @@ from pathlib import Path
 import numpy as np
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from config import (EVENT, DATA, RESULTS, TARGET_RES, SPECKLE_WINDOW,  # noqa: E402
-                    pixel_ha)
-from chips import read, split_lookup, morph_clean                    # noqa: E402
+from config import (EVENT, DATA, RESULTS, TARGET_RES, SCENE_RES,      # noqa: E402
+                    SPECKLE_WINDOW, pixel_ha)
+from chips import (read, split_lookup, morph_clean,                  # noqa: E402
+                   MIN_OBJECT_PX, MIN_HOLE_PX)
 import metrics as M                                                  # noqa: E402
 
 REF_DIR = DATA / "reference"
@@ -132,6 +141,8 @@ def score(preds: dict, labels: dict) -> dict:
 def compare(name: str, base: dict, alt: dict, point: str, t: float) -> dict:
     d_iou = alt["iou"] - base["iou"]
     d_area = alt["area_ha"] / base["area_ha"] - 1 if base["area_ha"] else 0.0
+    # + 0.0 turns a rounded -0.0 into 0.0 (M-10)
+    d_iou, d_area = round(d_iou, 4) + 0.0, round(d_area, 4) + 0.0
     big = abs(d_iou) > IOU_BAR or abs(d_area) > AREA_BAR
     print(f"  {point:<14}{t:>7.2f}  IoU {base['iou']:.4f} -> {alt['iou']:.4f}"
           f" ({d_iou:+.4f})   area {base['area_ha']:,.1f} -> "
@@ -146,7 +157,7 @@ def compare(name: str, base: dict, alt: dict, point: str, t: float) -> dict:
             "recall_after": round(alt["recall"], 4),
             "area_ha_before": round(base["area_ha"], 1),
             "area_ha_after": round(alt["area_ha"], 1),
-            "iou_change": round(d_iou, 4), "area_change": round(d_area, 4),
+            "iou_change": d_iou, "area_change": d_area,
             "over_bar": big}
 
 
@@ -200,21 +211,36 @@ def part_clean() -> None:
     raw, labels = load(ids)
     filt = {c: lee(raw[c])[0].astype("float32") for c in ids}
     print(f"\nI-22. morph_clean BEFORE SCORING, {len(ids)} chips")
+    # full_scene.process_tile calls morph_clean with its pixel defaults on
+    # tiles at SCENE_RES, so on these TARGET_RES chips the same ground needs
+    # the limits scaled by the pixel area ratio
+    scale = int(round((SCENE_RES / TARGET_RES) ** 2))
+    limits = [(1, "chip scale, as first run"), (scale, "scene scale")]
     rows = []
     for point, (t, published) in operating_points().items():
-        plain, cleaned = {}, {}
+        plain, nod_of, water_of = {}, {}, {}
         for c in ids:
             img = filt[c]
-            nod = ~np.isfinite(img)
-            water = img <= t
-            plain[c] = np.where(nod, -1, water.astype(np.int8)).astype(np.int8)
-            # the same call full_scene.process_tile makes
-            cw = morph_clean(water.astype(np.int8)).astype(bool)
-            cleaned[c] = np.where(nod, -1, cw.astype(np.int8)).astype(np.int8)
+            nod_of[c] = ~np.isfinite(img)
+            water_of[c] = img <= t
+            plain[c] = np.where(nod_of[c], -1,
+                                water_of[c].astype(np.int8)).astype(np.int8)
         base = score(plain, labels)
         reproduces(base, published, point)
-        rows.append(compare("morph_clean", base, score(cleaned, labels),
-                            point, t))
+        for k, label in limits:
+            obj, hole = MIN_OBJECT_PX * k, MIN_HOLE_PX * k
+            cleaned = {}
+            for c in ids:
+                cw = morph_clean(water_of[c].astype(np.int8),
+                                 obj, hole).astype(bool)
+                cleaned[c] = np.where(nod_of[c], -1,
+                                      cw.astype(np.int8)).astype(np.int8)
+            print(f"  limit {obj} px, {obj * PIXEL_HA:g} ha, {label}")
+            row = compare("morph_clean", base, score(cleaned, labels),
+                          point, t)
+            rows.append({**row, "limit_px": obj,
+                         "limit_ha": round(obj * PIXEL_HA, 4),
+                         "limit_scale": label})
     write(rows, "register_check_clean.csv")
 
 

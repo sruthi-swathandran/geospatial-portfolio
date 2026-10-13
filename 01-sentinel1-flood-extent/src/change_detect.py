@@ -226,20 +226,32 @@ def main() -> None:
     print("---------------------------")
     wet_rows = []
     for name in available:
-        frac = []
-        for chip_id in ids:
-            d = data[chip_id]
-            w = (d["label"] == 1) & np.isfinite(d[name][1])
-            if w.sum() > 500:
-                frac.append(float(np.mean(d[name][1][w] <= t_abs_vh)))
-        if frac:
-            print(f"  {name:<6} {np.median(frac):.1%} of labelled water was "
-                  f"already below the water threshold")
-            wet_rows.append({"reference": name,
-                             "median_share_already_dark":
-                                 round(float(np.median(frac)), 4),
-                             "chips": len(frac),
-                             "threshold_db": t_abs_vh})
+        # The method thresholds Lee-filtered images, so the filtered share is
+        # the one the README quotes. The unfiltered share is written beside
+        # it because fetch_dry_reference.py's dry_reference.csv reports that
+        # one, about ten points higher, under column names that do not say
+        # so (N-06).
+        for refs in ("Lee 5x5", "unfiltered"):
+            frac = []
+            for chip_id in ids:
+                d = data[chip_id]
+                if refs == "Lee 5x5":
+                    vh = d[name][1]
+                else:
+                    with rasterio.open(REF_DIR / f"{EVENT}_{chip_id}_"
+                                       f"{REFERENCES[name]}.tif") as src:
+                        vh = src.read(2).astype("float64")
+                w = (d["label"] == 1) & np.isfinite(vh)
+                if w.sum() > 500:
+                    frac.append(float(np.mean(vh[w] <= t_abs_vh)))
+            if frac:
+                print(f"  {name:<6} {refs:<11} {np.median(frac):.1%} of "
+                      f"labelled water was already below the water threshold")
+                wet_rows.append({"reference": name, "references": refs,
+                                 "median_share_already_dark":
+                                     round(float(np.median(frac)), 4),
+                                 "chips": len(frac),
+                                 "threshold_db": round(float(t_abs_vh), 4)})
     # The README quotes these. They used to be printed only (C-24).
     if wet_rows:
         with open(RESULTS / "reference_wetness.csv", "w", newline="") as fh:

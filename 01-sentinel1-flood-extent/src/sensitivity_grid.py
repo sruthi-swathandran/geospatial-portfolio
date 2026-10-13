@@ -150,8 +150,9 @@ def main() -> None:
     with rasterio.open(src_tif) as src:
         h, w = src.height, src.width
     cores, cfac = edge_cores(src_tif, EDGE_CUTS)
-    print(f"edge classes built for buffers {EDGE_CUTS} px "
-          f"({[int(b*res) for b in EDGE_CUTS]} m)\n")
+    print(f"edge classes built for buffers {EDGE_CUTS} px requested, "
+          f"{[applied_edge_px(b) if b > 0 else 0 for b in EDGE_CUTS]} px "
+          f"applied ({[int((applied_edge_px(b) if b > 0 else 0) * res) for b in EDGE_CUTS]} m)\n")
 
     ns, no, ne = len(SLOPE_CUTS), len(OCC_CUTS), len(EDGE_CUTS)
     H = np.zeros((ns, no, ne + 1), np.int64)     # water pixels
@@ -250,13 +251,18 @@ def main() -> None:
 
     with open(RESULTS / "sensitivity_grid.csv", "w", newline="") as fh:
         w_ = csv.writer(fh)
+        # requested widths kept for anything reading the old columns; the
+        # applied ones are what edge_cores removed, whole erosions of the 8x
+        # decimated mask (C-21, N-05)
         w_.writerow(["slope_max_deg", "occurrence_permanent_min",
-                     "edge_buffer_px", "edge_buffer_m", "flood_ha",
-                     "is_published"])
+                     "edge_buffer_px", "edge_buffer_m",
+                     "edge_buffer_applied_px", "edge_buffer_applied_m",
+                     "flood_ha", "is_published"])
         for i, sc in enumerate(SLOPE_CUTS):
             for j, oc in enumerate(OCC_CUTS):
                 for k, b in enumerate(EDGE_CUTS):
-                    w_.writerow([sc, oc, b, int(b * res),
+                    ap = applied_edge_px(b) if b > 0 else 0
+                    w_.writerow([sc, oc, b, int(b * res), ap, int(ap * res),
                                  round(area(i, j, k), 1),
                                  int(i == si0 and j == oi0 and k == ei0)])
 

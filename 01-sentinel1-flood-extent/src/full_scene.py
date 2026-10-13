@@ -21,9 +21,10 @@ THE METHOD, AND WHERE EACH PIECE CAME FROM
                               imaged area flood, so it is kept only as --otsu
   clean-up before counting    morph_clean, removing water patches and holes
                               under 25 pixels. The chips were scored without
-                              it. On them it lowers mapped area by 2.9% and
-                              3.4% at the two operating points (I-22,
-                              register_check_clean.csv)
+                              it. At this 20 m, 25 pixels is 1 ha; on the
+                              chips the same 1 ha limit lowers mapped area
+                              by 7.9% and 9.9% at the two operating points
+                              (I-22, N-03, register_check_clean.csv)
   no slope mask here          step 10: on the chips the best cut changed
                               precision by +0.008 and recall by -0.003, too
                               small to decide anything. The scene applies an

@@ -354,7 +354,9 @@ time. Eleven were typed. The accuracy figures, the change-detection figures and
 the district counts are now read at build time. Three stay typed because the
 scripts that produce them print without storing: the all-water score 0.130,
 the 99.3% of the channel below 8°, and the 97.8% WorldCover coverage. The
-footer names those three and says how they are checked.
+footer names those three and says how they are checked. Two of the three were
+in results/ all along and the third is now stored, so all three are read at
+build time; see M-03 and M-05 below.
 
 ### C-24 The reproduction checks could not pass on a clean copy (I-12 to I-15, I-24, I-26, I-27)
 
@@ -420,8 +422,9 @@ changed.
 quick-look figure under the name `make_figures.py` uses for the README version,
 so rerunning any of them replaced a README figure until `make_figures.py` ran
 again (C-26 came from this). They now write `<name>_check.png`, which
-`.gitignore` excludes, and `make_figures.py` is the only writer of the figures
-the README shows.
+`.gitignore` excludes, and `make_figures.py` is the only writer of the README's
+charts. The map, the two date sheets and the terrain and water mask panel each
+have their own script, and nothing else writes over them.
 
 ### Measured in this round (I-21, I-22, I-25)
 
@@ -434,8 +437,10 @@ published IoU (0.5186 and 0.5221) before changing anything.
   operating points and mapped area by −0.23% and −0.34%. The bar was 0.005 IoU
   or 1% area. Recorded as measured and small. The chips cannot show its size on
   hilly scene tiles. `results/register_check_lee.csv`.
-- **I-22, `morph_clean`: over the bar on area.** With the clean-up the scene
-  applies, chip mapped area falls 2.93% at −18.75 dB and 3.36% at −17.75 dB.
+- **I-22, `morph_clean`: over the bar on area.** With the clean-up run at the
+  chips' 10 m, where its 25 pixel limit is 0.25 ha, chip mapped area falls
+  2.93% at −18.75 dB and 3.36% at −17.75 dB. That was not the scene's limit,
+  which is 1 ha at 20 m; N-03 below measures it.
   IoU is unchanged at the first and rises by 0.0050 at the second. The README
   now states these figures and what follows from them for the headline scaling
   and for the area-matched point. `results/register_check_clean.csv`.
@@ -444,6 +449,98 @@ published IoU (0.5186 and 0.5221) before changing anything.
   12 August frames. The `full_scene.flood_items` docstring said the id lookup
   returns nothing, which holds only for bare GRD ids, and now says that.
   `results/register_check_items.csv`.
+
+---
+
+## Final register round, October 2026
+
+A second register, compiled at `7f9de52` while checking the first round's
+fixes, found six issues, N-01 to N-06, and eleven minor ones, M-01 to M-11.
+They keep its numbers here. None moves a headline flood or cropland figure.
+
+### N-03 The clean-up step was measured at a quarter of the scene's ground
+
+`morph_clean` drops water patches and fills holes under 25 pixels. On the 10 m
+chips that is 0.25 ha; on the 20 m scene `full_scene.py --res 20` maps, it is
+1 ha. `register_checks.py` ran it with the defaults on the chips, so I-22
+measured a gentler step than the published map applies. `morph_clean` now
+takes its limits as arguments, and the check runs at both: 25 pixels, as
+before, and 100 pixels, the scene's 1 ha. Set before rerunning: the same bars
+apply, and wherever the README describes the published map its figures come
+from the 1 ha rows. Results below.
+
+### N-01 `preflight.py` failed on a fresh clone
+
+The skip for absent data/ tested the folder, and importing `make_manifest`
+imports `config.py`, which creates an empty data/. On a clone the check then
+reported five missing manifest entries. It now skips data/ entries when none of
+the data/ files exists, so a partial data/ still fails. Checked on a clone of
+`7f9de52`: 46 passed, none failed.
+
+### N-02 The freshness check failed a correct figure
+
+`accuracy_ci.csv` gained three columns (C-13) that `accuracy_ci.png` never
+draws, and was committed after the figure, which redrew byte for byte the same.
+By commit time the figure was stale. Section D of `verify_all.py` now reads the
+source as it was at the figure's last commit: for a CSV, if every column that
+existed then holds the same values now, the figure passes; anything else must
+match byte for byte. The committed report no longer carries a failure.
+
+### N-04 "45% of the study area darkened" matched no row of its file
+
+`change_filter_rates.csv` has no 45%; the nearest row is 46.6% at a 0.5 dB
+drop, measured over labelled ground on the chips, not the study area, and its
+13% is hand-labelled water with the river in it. The README now quotes that
+row and says what it covers, and ties the 66% against 46% to the 3 dB drop it
+comes from.
+
+### N-05 `sensitivity_grid.csv` labelled buffers with requested widths
+
+The file keeps `edge_buffer_px` and `edge_buffer_m` and adds
+`edge_buffer_applied_px` and `edge_buffer_applied_m`, so the published row
+reads 30, 600, 32 and 640. `make_figures.py` reads the applied column.
+
+### N-06 Two files gave different "already dark" shares
+
+`reference_wetness.csv` now carries a `references` column with Lee-filtered and
+unfiltered rows, and its threshold is rounded. The filtered rows are the 45.1%
+and 18.7% the README quotes, now named as their source; the unfiltered ones
+explain why `dry_reference.csv`, measured on unfiltered references, reads about
+ten points higher. `fetch_dry_reference.py`'s docstring says so, since
+rewriting that file needs Planetary Computer.
+
+### Minor, M-01 to M-11
+
+- **M-01.** C-27 now says `make_figures.py` writes the README's charts and
+  that the map, the date sheets and the mask panel have their own scripts.
+- **M-02.** The orbit chart's subtitle reads "pixel-weighted mean of tile
+  medians", as C-17 renamed it everywhere else.
+- **M-03, M-05.** The public page typed three figures. The all-water score is
+  the labelled water share in `change_filter_rates.csv`, the 99.3% follows
+  from `refine_scene_20m.csv`, and `cropland_scene.py` now writes
+  `worldcover_grid_cover_pct`. `build_docs_page.py` reads all three, and its
+  footer no longer lists exceptions.
+- **M-04.** "The same configuration converges on 0.130" named the wrong row.
+  Every change-only configuration converges on about 0.13; the one that
+  reaches 0.196 gives 0.129.
+- **M-06.** The README's script table lists `register_checks.py` and
+  `preflight.py`.
+- **M-07.** The README is version 1.2.
+- **M-08.** `district_stats.py` no longer lists a figure it does not draw.
+- **M-09.** `verify_all.py` checks the map PDF the README links as well as the
+  PNG.
+- **M-10.** `register_checks.py` writes no negative zeros,
+  `reference_wetness.csv` rounds its threshold, and `verify_all.py` prints a
+  gap that rounds to nothing as +0.
+- **M-11.** `orbit_offset.py` is rerun so `orbit_offset.csv` carries
+  `land_pixels` and `verify_all.py` weights the land medians by land. Set
+  before rerunning: if the land-weighted mean rounds to the README's 0.05 dB,
+  the figure stands and the README names the new weighting; otherwise the
+  README quotes the new figure.
+
+### Measured in this round
+
+Results are added below when they exist.
 
 ---
 

@@ -89,18 +89,10 @@ AM_ROW = {"20160807": "7 Aug, area-matched",
 SIMPLIFY_DEG = 0.002      # 1.1 display pixels, below what the canvas can show
 COORD_DP = 4              # about 11 m, well under one display pixel
 
-# Numbers typed here rather than read at build time. The page names them in
-# its footer. Each is printed by an analysis script and not stored in a
-# column of results/, so verify_all.py can only trace them by finding a
-# matching value somewhere, which is weak evidence (C-23). The accuracy
-# figures, the change-detection IoU and the district counts that used to sit
-# here are read from files now; see accuracy_figures(), change_figures() and
-# district_counts().
-LIT = {
-    "all_water": "0.130",        # the same configuration with no drop required
-    "perm_below_slope": "99.3%",  # refine_scene.py console, channel under 8 deg
-    "wc_cover": "97.8%",         # cropland_scene.py console, WorldCover tiles
-}
+# No number on the page is typed. The last three that were, the all-water
+# score, the channel's share below 8 degrees and the WorldCover coverage, are
+# read by stored_figures() (C-23, M-03, M-05). Two of them had been in
+# results/ all along; the coverage is now a column of cropland_scene.csv.
 
 # gsw_lo and gsw_hi are read from mask_terrain_water.csv at build time rather
 # than typed. The page used to say 11,067 and 23,423, which appear nowhere in
@@ -162,7 +154,7 @@ def write_overlays():
 
 def accuracy_figures():
     """Micro IoU and its interval from accuracy_ci.csv, and the area-matched
-    point's IoU from final_method.json. These were typed into LIT until C-23."""
+    point's IoU from final_method.json. These were typed in until C-23."""
     with open(cfg.RESULTS / "accuracy_ci.csv", encoding="utf-8") as fh:
         a = next(r for r in csv.DictReader(fh) if r.get("split") == "all")
     fm = json.load(open(cfg.RESULTS / "final_method.json", encoding="utf-8"))
@@ -182,6 +174,42 @@ def change_figures():
     on_valid = max(rows, key=lambda r: float(r["iou_valid"]))
     return {"change_best": f"{float(on_all['iou_all']):.3f}",
             "change_valid": f"{float(on_valid['iou_all']):.3f}"}
+
+
+def stored_figures():
+    """Three figures the page once typed, each read from the file that holds
+    it.
+
+    all_water: labelling every valid chip pixel as water scores the labelled
+    water share as its IoU, which change_sweep.py writes to
+    change_filter_rates.csv. perm_below_slope: refine_scene.py's slope
+    histogram, permanent water under SLOPE_MAX_DEG over all permanent water.
+    wc_cover: cropland_scene.py's share of the grid with a WorldCover tile.
+    """
+    with open(cfg.RESULTS / "change_filter_rates.csv", encoding="utf-8") as fh:
+        share = float(next(csv.DictReader(fh))["labelled_water_share"])
+    # the slope histogram is the rows whose first field is a number; the
+    # summary rows after it (slope_cut, min_pixels, kept_ha) are not
+    def numeric(x):
+        try:
+            float(x)
+            return True
+        except (TypeError, ValueError):
+            return False
+    with open(cfg.RESULTS / "refine_scene_20m.csv", encoding="utf-8") as fh:
+        rows = [r for r in csv.DictReader(fh) if numeric(r.get("slope_lo"))
+                and numeric(r.get("permanent_ha"))]
+    perm = sum(float(r["permanent_ha"]) for r in rows)
+    below = sum(float(r["permanent_ha"]) for r in rows
+                if float(r["slope_hi"]) <= cfg.SLOPE_MAX_DEG)
+    with open(cfg.RESULTS / "cropland_scene.csv", encoding="utf-8") as fh:
+        first = next(csv.DictReader(fh))
+    if not first.get("worldcover_grid_cover_pct"):
+        sys.exit("cropland_scene.csv has no worldcover_grid_cover_pct column. "
+                 "Rerun cropland_scene.py. Nothing written.")
+    return {"all_water": f"{share:.3f}",
+            "perm_below_slope": f"{below / perm * 100:.1f}%",
+            "wc_cover": f"{float(first['worldcover_grid_cover_pct']):.1f}%"}
 
 
 def district_counts(payload):
@@ -642,13 +670,7 @@ BODY = """<title>Brahmaputra Flood Ledger</title>
       raster.</p>
       <p class="built">Built by <code>build_docs_page.py</code> on {built}.
       The wording here is written. Every number in it, and every figure in the
-      panel above, is read from <code>results/</code> at build time, except three
-      that analysis scripts print without storing: the all-water score of
-      {all_water}, the {perm_below_slope} of the channel below 8&deg;, and the
-      {wc_cover} WorldCover coverage. <code>verify_all.py</code> checks those
-      three by finding a matching value
-      in <code>results/</code>, which shows the value exists, not that it is the
-      right one. The page it replaced was maintained by hand and had drifted
+      panel above, is read from <code>results/</code> at build time. The page it replaced was maintained by hand and had drifted
       from its sources.</p>
     </div>
   </section>
@@ -1052,7 +1074,7 @@ def main() -> None:
     lo, hi = gsw_range()
     er, ir, ratio = edge_rates()
     n_any, n_all = district_counts(payload)
-    fmt = dict(LIT)
+    fmt = stored_figures()
     fmt.update(accuracy_figures())
     fmt.update(change_figures())
     fmt.update(
