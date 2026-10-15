@@ -15,6 +15,11 @@ chips matches those labels before the map's clean-up step, which then takes
 about a tenth off it. They differ by one decibel. Every figure in this README is
 reported with the decision that moves it and the amount it moves by.
 
+A labelled sample of the map, described
+[below](#independent-check-of-the-12-august-map), puts open-water flood inside
+the floodplain at **160,688 ± 30,796 ha**, against 102,697 ha mapped there at
+−18.75 dB and 146,367 ha at −17.75 dB. The upper figure is the closer one.
+
 Interactive map: [three acquisitions and the recession between them](https://sruthi-swathandran.github.io/geospatial-portfolio/01-sentinel1-flood-extent/docs/)
 
 This repository has been through a methodological review written with an AI
@@ -29,7 +34,7 @@ superseded value and why it was wrong.
 | Dates | 7, 12 and 31 August 2016 |
 | Resolution | 20 m |
 | Method | Speckle-filtered single-date threshold, −18.75 or −17.75 dB |
-| Validation | Sen1Floods11 hand labels, 65 chips, official splits |
+| Validation | Sen1Floods11 hand labels, 65 chips, official splits; a stratified sample of the 12 August map labelled on Sentinel-2 |
 | Data | Open only: Microsoft Planetary Computer, JRC, ESA, geoBoundaries |
 
 ---
@@ -206,8 +211,9 @@ against itself rather than against a different viewing geometry. Total flood
 fell 40% over those 24 days while flooded cropland fell 81%. The water that
 persists is in channels, chars and low wetland rather than on fields, which
 drain in about three weeks. Peak extent is the number that gets reported and
-duration is the number that damages a rice crop. Neither the change classes
-nor the refinement steps behind them have been validated against anything.*
+duration is the number that damages a rice crop. The change classes are
+unvalidated, and the refinement steps are checked only on 12 August, in the
+independent check below.*
 
 ### Why the three maps are not merged into one
 
@@ -299,7 +305,7 @@ inputs rather than about a bug.
 
 ![Per-chip IoU with bootstrap intervals](results/figures/accuracy_ci.png)
 
-*Per-chip IoU with percentile bootstrap intervals resampled over chips rather than pixels. These figures describe the chip-scale product. They do not describe the full-scene map reported above, which has never been validated against independent labels.*
+*Per-chip IoU with percentile bootstrap intervals resampled over chips rather than pixels. These figures describe the chip-scale product. They do not describe the full-scene map reported above, which the independent check below scores directly.*
 
 ### What leaving Google Earth Engine costs
 
@@ -346,6 +352,100 @@ on this stack it is a load-bearing fact.
 ![Backscatter agreement between relative orbits 4 and 77](results/figures/orbit_offset.png)
 
 *Backscatter agreement between relative orbits 4 and 77 over the ground they share.*
+
+---
+
+## Independent check of the 12 August map
+
+The accuracy above comes from 65 chips scored before the slope cut, the
+swath-edge buffer and the clean-up existed. This section scores the map itself.
+A stratified random sample of the published 20 m map was labelled by eye on an
+optical image of the same day, and the labels were turned into an area estimate
+with a standard error by the stratified estimator of Olofsson et al. (2014).
+Every step is in `src/`, and every number below is in `results/validation/`.
+
+**Reference image.** Sentinel-2A imaged the study area at 04:15 UTC on 12
+August, about twenty hours before the Sentinel-1 frames at 23:46 UTC, while the
+flood was receding. Cloud covers much of the scene, so points were drawn only
+where the scene classification shipped with the image shows clear sky with no
+cloud within 100 m, and only where a test on the image itself found no cloud or
+haze within 100 m. That classification misses some cloud outright, and the
+image test removed 41 of the 591 candidates it had passed. Two earlier draws
+were set aside before their labels were used: the first let points through at
+cloud edges, and the second put one inside a cloud bank the classification had
+missed. One point of the second draw had been labelled. Both earlier keys, that
+label and a log of every draw are kept in `results/validation/sample/`.
+
+**Design.** Seven strata, read off the map:
+
+| Stratum | Mapped ha | Clear ha sampled | Points |
+|---|---:|---:|---:|
+| Flood at −18.75 dB | 119,779 | 46,582 | 100 |
+| Permanent water | 58,389 | 30,417 | 40 |
+| Flood at −17.75 dB only | 50,847 | 20,258 | 80 |
+| Removed by the slope cut or the clean-up | 70,686 | 9,438 | 60 |
+| Swath-edge buffer | 79,785 | 20,429 | 50 |
+| Land within about 1 km of flood | 1,428,300 | 560,868 | 100 |
+| Land further from flood | 4,536,775 | 1,566,047 | 120 |
+
+A further 60 points went to the floodplain part of the last stratum, where the
+first pass put only 7. One interpreter labelled every point, in random order and
+without the map: W for open water, V for water seen through vegetation, N for
+not water and C for unreadable, each with a confidence from 1 to 3. 21 of the
+main sample were unreadable.
+
+**Where the estimate holds.** Clear sky is not spread at random. Under cloud,
+the land strata are far higher and steeper than where the sample could see, so
+the headline is restricted to the floodplain: ground at or below 150 m with a
+slope of 2° or less, which holds 102,697 of the 119,779 ha mapped. Inside it
+the clear and cloudy parts agree on slope in every stratum, with standardised
+differences of 0.13 or less, though the cloudy part lies about 10 m lower and
+so further downstream.
+
+**Open-water flood inside the floodplain.**
+
+| | Open-water flood | Mapped at −18.75 dB | Mapped at −17.75 dB |
+|---|---:|---:|---:|
+| Clear part only | 70,659 ± 14,411 ha | 42,419 ha | 60,357 ha |
+| All of the floodplain | **160,688 ± 30,796 ha** | 102,697 ha | 146,367 ha |
+
+The 95% interval for the whole floodplain runs from 100,327 to 221,049 ha. At
+−18.75 dB, 0.73 of what the map calls flood is open water, ± 0.05, and the map
+finds 0.46 of the open water there, ± 0.09. At −17.75 dB the two figures are
+0.60 and 0.54. Moving the floodplain ceiling to 100 m or 200 m gives 151,794 or
+157,603 ha. The map is fairly reliable where it says flood and misses about
+half of it, and the upper end of the published range is the closer one.
+
+**The refinement steps.** Of 57 readable points in what the slope cut and the
+clean-up removed, 6 were water and 5 of them open water: about 6,201 ± 2,672 ha
+of the 70,686 ha removed was real open water. Inside the swath-edge buffer 1 of
+45 readable points was water, so the buffer set aside very little real flood.
+
+**Water under vegetation is reported apart.** Counting V as flood more than
+doubles the estimate, to 393,655 ± 47,226 ha in the floodplain. It stays out of
+the headline. In August the valley's rice paddies normally stand in water, and
+V turns up about as often far from mapped flood as near it: 19 of 100 points in
+land near flood, and 10 of 67 in floodplain land further away. Of those 19, 10
+were marked as guesses. A C-band VH threshold cannot see water under a crop
+canopy in any case.
+
+What this check does not cover:
+
+- **One interpreter.** Nobody else has labelled these points, so how much the
+  calls depend on the person making them is unmeasured.
+- **Timing.** The optical image is about twenty hours earlier than the radar
+  while the flood was receding, which pushes the optical estimates up a little.
+  Map land was water at between 20.4% and 27.0% of points whatever the distance
+  to the nearest cloud, so the sample shows no trend with cloud.
+- **The hills.** Outside the floodplain the map is unchecked. Stretching the
+  clear-sky rates across all of it gives 210,547 ± 37,549 ha of open water, a
+  figure the terrain difference makes untrustworthy.
+- **The other dates.** The 7 and 31 August maps are not checked.
+
+The image chips sit under `data/validation/chips/` and are not committed;
+`draw_sample.py --chips-only` rebuilds them from the key.
+
+---
 
 ## What was tried and rejected
 
@@ -480,17 +580,18 @@ worth stating plainly: no score in this repository would have found any of them.
   without. With it, at that 1 ha limit, the chips recover 13,266 ha, a
   shortfall of 28.2%, and the same scaling gives about 166,900 ha. Chip error
   rates should not
-  be assumed to hold over terrain the chips never sampled. A design-based
-  estimate with a standard error would need a probability sample of the mapped
-  area, which has not been drawn. See `REVIEW.md` F-01 and F-02.
+  be assumed to hold over terrain the chips never sampled. The independent
+  check above confirms the direction for open water in the floodplain, with a
+  standard error. See `REVIEW.md` F-01 and F-02.
 
 - **No external validation was obtainable.** No contemporaneous district-wise
   inundation product for this event could be retrieved from open archives. The
   ASDMA report archive begins in 2017 and the site was unreachable; the NRSC
   Flood Hazard Zonation Atlas is a multi-year frequency product rather than an
   annual record; and the flood chapter of the Economic Survey, Assam 2016-17
-  covers flood control works and expenditure rather than event damage. Outside
-  the 65 hand-labelled chips this map is unvalidated. The only external
+  covers flood control works and expenditure rather than event damage. Beyond
+  the 65 hand-labelled chips and the labelled sample described above, nothing
+  checks this map. The only external
   cross-check available is of ranking rather than magnitude, and it is loose.
   The worst-affected list on the IWMI map sits in its text and is credited to
   ASDMA figures as of 1 August, so it ranks districts by people affected, six
@@ -583,6 +684,12 @@ a CSV beside its figure.
 | Audit | `verify_all.py` | Traces the figures in README.md and docs/index.html back to results/ |
 | Audit | `register_checks.py` | The Lee noise term, the clean-up step at chip and scene scale, and the frame lookup, each against a bar set before running |
 | Audit | `preflight.py` | Pre-publication checklist: scripts parse, constants match the text, the manifest and the verify report are current |
+| Check | `scene_inventory.py` | Free optical scenes around 12 August, and their cloud |
+| Check | `clear_sky.py` | Sentinel-2 scene classification on the map grid, and clear sky per stratum |
+| Check | `draw_sample.py`, `topup_sample.py` | The stratified sample with its image screen and chips, and the floodplain top-up |
+| Check | `screen_points.py` | The brightness measurements the image screen's cutoffs were chosen from |
+| Check | `label_tool.py` | Labelling by keyboard, blind to the map |
+| Check | `estimate_accuracy.py`, `floodplain_layer.py` | Accuracy and area with standard errors, for the clear part, the floodplain and the whole map |
 | Publish | `build_docs_page.py` | Generates docs/index.html and its four map overlays from results/ |
 
 `build_docs_page.py` needs the refined rasters under `results/fullscene/`, which

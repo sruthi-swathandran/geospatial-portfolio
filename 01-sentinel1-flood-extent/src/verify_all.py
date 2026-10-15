@@ -99,7 +99,9 @@ def build_index():
     """value -> list of 'file :: where'. Derived sums are added too, because a
     README figure is often a total the CSV holds only as parts."""
     idx = []
-    for p in sorted(RES.glob("*.csv")) + sorted((RES / "fullscene").glob("*.csv")):
+    for p in (sorted(RES.glob("*.csv")) + sorted((RES / "fullscene").glob("*.csv"))
+              + sorted((RES / "validation").glob("*.csv"))
+              + [RES / "validation" / "sample" / "strata.csv"]):
         try:
             with open(p, encoding="utf-8", newline="") as fh:
                 rows = list(csv.DictReader(fh))

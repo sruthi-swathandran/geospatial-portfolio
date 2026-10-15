@@ -16,6 +16,14 @@ pixel count carrying no uncertainty, produced by a pipeline whose final three
 processing steps have never been validated against anything. The number may well
 be approximately right. Nothing in the repository establishes that it is.
 
+**Update, October 2026.** F-01 and F-02 are now addressed for the floodplain,
+which holds 102,697 of the 119,779 ha mapped. A stratified random sample of the
+map, labelled on the Sentinel-2A image of the same day, gives an open-water
+flood area with a standard error and the map's accuracy against it; see the
+README section "Independent check of the 12 August map" and `CHANGELOG.md`
+C-28. Outside the floodplain, and on the 7 and 31 August maps, both findings
+still stand.
+
 ---
 
 ## Scope note: what of the protocol applies

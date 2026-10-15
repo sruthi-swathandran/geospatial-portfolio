@@ -1,0 +1,32 @@
+Labelling rules for the RS-01 accuracy sample
+
+Each chip shows one point. Label the 20 m cell inside the small square at the
+centre of the close-up panels, judged on the Sentinel-2A image of 12 August 2016,
+04:15 UTC. The radar map is from 23:46 UTC the same day.
+
+Panels
+  1  false colour close-up, 640 m wide: shortwave infrared, near infrared, red
+  2  true colour close-up, same area
+  3  false colour context, 2.56 km wide; the box marks the close-up
+
+In false colour, open water is blue: deep navy when clear, bright blue when
+silty, as a flooded river usually is. Vegetation is green, and a flooded crop
+often shows as green mixed with blue. Bare or dry soil is pink to magenta, wet
+soil darker and bluer than dry soil. Haze shows as a pale wash over everything.
+
+Label, one letter in the label column of labels.csv
+  W  open water covers most of the cell, flood or river or pond
+  V  water visible through or between vegetation, such as a flooded paddy
+     or a flooded crop canopy
+  N  not water: land, crops, forest, soil, settlement
+  C  cannot tell: cloud, shadow, haze, or too mixed to call
+
+Confidence, one number in the confidence column
+  1  sure    2  fairly sure    3  a guess
+
+Rules
+  * Judge the centre cell only. Mixed cells go to whatever covers most of it.
+  * Use the note column for anything odd, such as a river bank or a cloud edge.
+  * Do not open points_key.csv until every point has a label. It holds the map
+    class, and seeing it would bias the labels.
+  * Do not look at the radar map or the flood map while labelling.

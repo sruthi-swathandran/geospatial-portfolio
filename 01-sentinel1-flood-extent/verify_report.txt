@@ -1,31 +1,30 @@
 VERIFICATION REPORT
-README sha256 1a14ce3d34566ffa
+README sha256 345edeee4b79789f
 project: D:\geospatial-portfolio\01-sentinel1-flood-extent
 read-only; nothing in the repo is modified
 
-indexed 23332 numeric values from results/
+indexed 25734 numeric values from results/
 
 
 ==============================================================================
 A. EVERY NUMBER IN THE README, TRACED TO A FILE
 ==============================================================================
-  · 281 numbers matched a value in results/
-  · 178 skipped as years, codes or section numbers
-[WARN] 6 numbers could not be matched to any file. Each needs a human decision: derived, rounded, or wrong.
+  · 353 numbers matched a value in results/
+  · 211 skipped as years, codes or section numbers
+[WARN] 5 numbers could not be matched to any file. Each needs a human decision: derived, rounded, or wrong.
 
 --- unmatched README numbers ------------------------------------------------
-  L158           64,615   flood, 7 Aug                64,615 ha         90,785 ha
-  L218           27,600   holds 36,755 ha, so on 12 August it would have been nearer 27,600 ha. **A naive
-  L336          729,161   passes share 1,819,972 ha, and eight tiles covering 729,161 ha of that were
-  L420           64,615   | Acquisition date | 7 Aug vs 31 Aug, same ground | 64,615 ha to 38,887 ha |
-  L481          166,900   shortfall of 28.2%, and the same scaling gives about 166,900 ha. Chip error
-  L613        6,344,561   | `full_scene.py --res 20` | ~25 min | 46 tiles, 6,344,561 ha classified before refinement |
+  L163           64,615   flood, 7 Aug                64,615 ha         90,785 ha
+  L224           27,600   holds 36,755 ha, so on 12 August it would have been nearer 27,600 ha. **A naive
+  L342          729,161   passes share 1,819,972 ha, and eight tiles covering 729,161 ha of that were
+  L520           64,615   | Acquisition date | 7 Aug vs 31 Aug, same ground | 64,615 ha to 38,887 ha |
+  L581          166,900   shortfall of 28.2%, and the same scaling gives about 166,900 ha. Chip error
 
 ==============================================================================
 A2. NUMBERS ON docs/index.html, TRACED TO A FILE
 ==============================================================================
 [PASS] clean-up shortfall 10.2% <- register_check_clean.csv area_vs_labels_after
-  · 9 numbers matched a value in results/
+  · 14 numbers matched a value in results/
 [PASS] every thousands-separated number on the public page traces to results/
         A match means some file in results/ holds that value, not that it is
         the right value. The misses are the strong signal.

@@ -231,6 +231,51 @@ def clean_shortfall():
     sys.exit(f"{p.name} has no scene-scale area_matched row. Nothing written.")
 
 
+def validation_figures():
+    """The independent check, from results/validation/ (C-28)."""
+    v = cfg.RESULTS / "validation"
+    need = [v / "floodplain_summary.csv", v / "accuracy_strata.csv",
+            v / "sample" / "labels.csv"]
+    for p in need:
+        if not p.exists():
+            sys.exit(f"{p} missing. Run estimate_accuracy.py and "
+                     f"floodplain_layer.py. Nothing written.")
+    with open(need[0], encoding="utf-8") as fh:
+        fp = [r for r in csv.DictReader(fh)
+              if r["cutoff"] == "150 m" and r["variant"] == "W only"
+              and r["layer"] == "whole floodplain"]
+
+    def pick(metric, mp=""):
+        return next(float(r["value"]) for r in fp
+                    if r["metric"] == metric and r["map"] == mp)
+
+    def pick_se(metric, mp=""):
+        return next(float(r["se"]) for r in fp
+                    if r["metric"] == metric and r["map"] == mp)
+
+    with open(need[1], encoding="utf-8") as fh:
+        st = {r["stratum"]: r for r in csv.DictReader(fh)
+              if r["variant"] == "W or V"}
+    with open(need[2], encoding="utf-8") as fh:
+        n_points = sum(1 for r in csv.DictReader(fh) if (r["label"] or "").strip())
+    pub, upper = "-18.75 dB, published", "-17.75 dB"
+    ua = pick("user's accuracy", pub)
+    pa = pick("producer's accuracy", pub)
+    return dict(
+        n_points=str(n_points),
+        ow=f"{pick('flood area, ha'):,.0f}",
+        ow_se=f"{pick_se('flood area, ha'):,.0f}",
+        fp_flood=f"{pick('mapped flood, ha', pub):,.0f}",
+        fp_upper=f"{pick('mapped flood, ha', upper):,.0f}",
+        ua=f"{ua * 100:.0f}%",
+        pa=f"{pa * 100:.0f}%",
+        rm_n=st["removed by refinement"]["n_labelled"],
+        rm_water=st["removed by refinement"]["n_flood"],
+        edge_n=st["swath edge"]["n_labelled"],
+        edge_water=st["swath edge"]["n_flood"],
+    )
+
+
 def district_counts(payload):
     """Districts imaged on any date, and on all three, from the district files."""
     seen = [set(n for n, a in zip(payload["names"], payload["attrs"][t])
@@ -648,8 +693,11 @@ BODY = """<title>Brahmaputra Flood Ledger</title>
       {perm_below_slope} of the permanent channel sits below that slope.
       Components under 10 pixels are dropped. On 12 August the chain runs
       {raw12} &rarr; {before12} &rarr; {mid12} &rarr; <strong>{flood12} ha</strong>.</p>
-      <p>None of those three steps is validated. The hand labels cover 65
-      floodplain chips and none of these situations appears in them.</p>
+      <p>The hand labels cover 65 floodplain chips and none of these
+      situations appears in them. A labelled sample of the map checked two of
+      the steps afterwards: of {rm_n} readable points in what the slope cut and
+      the clean-up removed, {rm_water} were water, and inside the buffer
+      {edge_water} of {edge_n}.</p>
       <p>Permanent water means JRC Global Surface Water occurrence of 50% or
       more. Moving that definition between 10% and 90% moves flood extent
       between <strong>{gsw_lo}</strong> and <strong>{gsw_hi} ha</strong> on the
@@ -671,9 +719,15 @@ BODY = """<title>Brahmaputra Flood Ledger</title>
       <p>Accuracy on the 65 labelled chips is IoU <strong>{iou_map}</strong>, 95%
       interval <strong>{ci_lo} to {ci_hi}</strong>, bootstrapped over chips. Macro
       IoU is {iou_macro} with a minimum of zero, so the method fails outright on
-      some chips. Nothing here has been checked against an independent flood
-      map: no contemporaneous district-wise inundation figure for this event was
-      retrievable from open archives.</p>
+      some chips. No independent flood map for this event was retrievable
+      from open archives, so the map was checked against a stratified sample of
+      {n_points} points labelled on the Sentinel-2A image of the same morning.
+      Inside the floodplain, which holds {fp_flood} of the {flood12} ha mapped,
+      open-water flood comes to <strong>{ow} &plusmn; {ow_se} ha</strong>,
+      against {fp_upper} ha at &minus;17.75 dB. About {ua} of what the map calls
+      flood is open water, and it finds about {pa} of the open water there.
+      Water seen through vegetation is counted apart, since in August it
+      includes rice paddies standing in water as usual.</p>
     </div>
     <div>
       <h2>Read this before quoting a figure</h2>
@@ -1101,6 +1155,7 @@ def main() -> None:
     fmt = stored_figures()
     fmt["am_short"] = clean_shortfall()
     fmt.update(accuracy_figures())
+    fmt.update(validation_figures())
     fmt.update(change_figures())
     fmt.update(
         n_any=str(n_any), n_all=str(n_all),

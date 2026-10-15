@@ -113,6 +113,8 @@ required = [
     (RESULTS / "figures" / "flood_extent_map.png", "publication map, raster"),
     (RESULTS / "figures" / "flood_extent_map.pdf", "publication map, vector"),
     (RESULTS / "final_method.json", "settled method"),
+    (RESULTS / "validation" / "floodplain_summary.csv", "independent check"),
+    (RESULTS / "validation" / "sample" / "labels.csv", "independent labels"),
     (REPO / "LICENSE", "licence"),
     (REPO / "requirements.txt", "minimal requirements"),
     (REPO / "requirements-lock.txt", "environment lock"),
@@ -258,6 +260,19 @@ if sg.exists():
         warn("sensitivity_grid.csv has no row flagged as published")
 else:
     warn("sensitivity_grid.csv missing")
+
+fs = RESULTS / "validation" / "floodplain_summary.csv"
+if fs.exists():
+    hit = [r for r in csv.DictReader(fs.read_text(encoding="utf-8").splitlines())
+           if r["cutoff"] == "150 m" and r["variant"] == "W only"
+           and r["layer"] == "whole floodplain" and r["metric"] == "flood area, ha"]
+    if hit:
+        check_in_readme(hit[0]["value"], "open-water flood, floodplain, sample",
+                        "validation/floodplain_summary.csv")
+    else:
+        fail("floodplain_summary.csv has no 150 m open-water area row")
+else:
+    fail("validation/floodplain_summary.csv missing")
 
 fm = load_json(RESULTS / "final_method.json")
 if fm:

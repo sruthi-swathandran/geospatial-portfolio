@@ -7,7 +7,9 @@ data/gsw,65,1224347,1.22,.tif x65
 data/gsw_scene,46,6561020,6.56,.tif x46
 data/reference,340,713713108,713.71,.tif x340
 data/sen1floods11,481,385243359,385.24,".tif x476, .csv x4, .json x1"
+data/validation,2270,237230063,237.23,".png x2267, .py x1, .tif x1, .npz x1"
 data/worldcover,49,11072261,11.07,.tif x49
 results,61,9182637,9.18,".csv x44, .json x8, .geojson x7, (none) x1, .txt x1"
 results/figures,32,14736495,14.74,".png x29, .pdf x3"
 results/fullscene,31,17647538,17.65,".png x13, .tif x12, .json x6"
+results/validation,23,273150,0.27,".csv x21, .txt x2"

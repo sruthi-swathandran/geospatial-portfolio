@@ -1,0 +1,5 @@
+distance,n,map_flood_n,map_flood_not_flood_pct,map_land_n,map_land_flood_pct
+100 to 200 m,57,22,22.7,35,22.9
+200 to 500 m,144,31,9.7,113,20.4
+500 to 1000 m,137,23,8.7,114,24.6
+1000 m and over,146,24,12.5,122,27.0

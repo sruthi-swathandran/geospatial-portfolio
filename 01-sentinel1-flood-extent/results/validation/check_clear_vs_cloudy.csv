@@ -1,0 +1,8 @@
+stratum,n_clear,n_rest,elevation_m_median_clear,elevation_m_median_rest,elevation_m_smd,slope_deg_median_clear,slope_deg_median_rest,slope_deg_smd
+flood,3000,3000,66.5,58.5,-0.47,0.2,0.3,-0.31
+permanent water,3000,3000,66.5,56.0,-0.21,0.0,0.0,0.0
+upper threshold only,3000,3000,69.5,61.5,-0.5,0.4,0.5,-0.39
+removed by refinement,3000,3000,807.0,4936.6,-2.17,30.0,25.2,0.19
+swath edge,3000,3000,155.9,1262.9,-1.12,7.0,18.6,-0.45
+land near flood,3000,3000,76.0,90.9,-0.92,1.7,4.4,-0.59
+land far from flood,3000,3000,364.1,1262.4,-1.0,14.2,22.4,-0.53

@@ -626,14 +626,48 @@ optional ones left.
 
 ---
 
+## Independent sample of the 12 August map, October 2026
+
+### C-28 The map now has an accuracy estimate of its own (F-01, F-02)
+
+Until now every accuracy figure described 65 chips scored before the slope cut,
+the swath-edge buffer and the clean-up, and the README said a design-based
+estimate "has not been drawn". It has now. A stratified random sample of the
+published 20 m map was labelled on the Sentinel-2A image of 12 August, 04:15
+UTC, and `estimate_accuracy.py` and `floodplain_layer.py` turn the labels into
+areas and accuracies with standard errors. No published figure changes; the map
+figures stay as they were, and the README adds the estimate beside them.
+
+- **The sample.** Seven strata read off the map, 550 points, plus 60 in
+  floodplain land far from flood, where the main draw put only 7. One
+  interpreter labelled them blind to the map.
+- **Three draws.** The first used the scene classification alone and let
+  points through at cloud edges. The second added a 100 m distance from
+  classified cloud and still put P0002 inside a cloud bank the classification
+  had missed. The third adds a brightness test on the image, whose cutoffs were
+  chosen on the second draw by checking chips before any labelling. The two
+  earlier keys, the one label made on the second draw, and a log of every draw
+  are kept in `results/validation/sample/`.
+- **Where it holds.** Under cloud the land strata are far higher and steeper
+  than in clear sky, so the headline is the floodplain, at or below 150 m with
+  2° of slope or less. There the clear and cloudy parts agree on slope.
+- **What it says.** Open-water flood in the floodplain is 160,688 ± 30,796 ha,
+  against 102,697 ha mapped there at −18.75 dB and 146,367 ha at −17.75 dB.
+  Water seen through vegetation is reported apart, since it turns up as often
+  far from flood as near it and in August includes paddies standing in water.
+- **Where it lives.** Small results go to `results/validation/` and are
+  committed. The Sentinel-2 classification raster and the image chips stay in
+  `data/validation/`, which git ignores; `clear_sky.py` and
+  `draw_sample.py --chips-only` rebuild them.
+
+---
+
 ## Open, not fixed
 
-- **F-01 / F-02.** The reported product has never been validated. All accuracy
-  figures describe the chip-scale threshold output at 10 m, before the slope
-  mask, edge buffer and MMU exist. A design-based area estimate with a standard
-  error requires a probability sample of the mapped area that has not been
-  drawn. Documented in README limitations with the direction and rough size of
-  the bias.
+- **F-01 / F-02, outside the floodplain.** C-28 checks the floodplain, which
+  holds 102,697 of the 119,779 ha mapped. In the hills, where cloud hid the
+  ground on 12 August, the map is still unchecked, and so are the 7 and 31
+  August maps.
 - **F-07.** The Sen1Floods11 splits for one event are spatially adjacent chips
   from a single scene. The test split checks that the threshold was not fitted
   to the valid split. It is not evidence of transfer.
