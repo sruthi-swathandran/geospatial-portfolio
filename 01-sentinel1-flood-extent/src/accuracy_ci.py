@@ -233,9 +233,9 @@ def main() -> None:
           "co-registered\n  chips at 10 m. They do NOT describe the reported "
           "full-scene product,\n  which additionally passes through a slope "
           "mask, a swath-edge buffer of\n  about 640 m and a 10-pixel minimum mapping "
-          "unit that together remove 45% of\n  the raw area. No labelled data "
-          "exists for those steps, so the reported\n  119,779 ha carries no "
-          "validated accuracy of any kind.")
+          "unit that together remove 45% of\n  the raw area. The labelled "
+          "sample in results/validation/ scores that\n  product directly; "
+          "these chip figures do not.")
     print("\n  The test split is adjacent chips from the same scene. It checks "
           "that the\n  threshold was not fitted to the valid split. It is not "
           "evidence of\n  transfer to another event, sensor or basin.")

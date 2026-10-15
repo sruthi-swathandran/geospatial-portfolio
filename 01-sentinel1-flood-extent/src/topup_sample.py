@@ -63,7 +63,9 @@ def draw_candidates(scl):
     keys_all, flat_all = np.empty(0), np.empty(0, "int64")
     tiles = []
     for f in sorted(DEM_DIR.glob("India_dem_20m_*_*.tif")):
-        m = re.search(r"_(\d+)_(\d+)\.tif$", f.name)
+        # the default DEM cache only; a resampling test keeps its own tiles
+        # in the same folder under a longer name (refine_scene.py)
+        m = re.fullmatch(r"India_dem_20m_(\d+)_(\d+)\.tif", f.name)
         if m:
             tiles.append((int(m.group(1)), int(m.group(2)), f))
 

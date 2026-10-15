@@ -64,6 +64,8 @@ Two checks on the whole-map assumption
 Outputs, under results/validation/
 ----------------------------------
   accuracy_labels.csv          per stratum: how many points got each label
+  accuracy_labels_by_scl.csv   every point, top-up included, by the scene
+                               classification class it sits on
   accuracy_strata.csv          per stratum: n, share of flood, interval
   accuracy_summary.csv         every estimate, both layers, all variants
   check_cloud_distance.csv
@@ -105,7 +107,9 @@ DEM_DIR = DATA / "dem_scene"
 
 IN_MAP = [1, 2, 3, 4, 6, 7]          # every stratum but the swath edge
 EDGE = 5
-MAPS = {"-18.75 dB, published": {1}, "-17.75 dB": {1, 3}}
+# The maps the strata were read from. Since C-31 the published map has a
+# bilinear DEM and is scored by score_map.py; these stay as drawn.
+MAPS = {"-18.75 dB, as drawn": {1}, "-17.75 dB, as drawn": {1, 3}}
 VARIANTS = {
     "W or V": lambda r: r["label"] in ("W", "V"),
     "W only": lambda r: r["label"] == "W",
@@ -198,7 +202,8 @@ def occurrence_at(xs, ys):
 
 
 def terrain_at(xs, ys):
-    tiles = tile_lookup(DEM_DIR, "India_dem_20m_*.tif")
+    # digits only, so tiles cached by a DEM resampling test are left out
+    tiles = tile_lookup(DEM_DIR, "India_dem_20m_[0-9]*_[0-9]*.tif")
     elev = sample_tiles(tiles, xs, ys, lambda d, a: a)
     slope = sample_tiles(tiles, xs, ys,
                          lambda d, a: slope_degrees(a, abs(d.transform.a)))
@@ -230,6 +235,25 @@ def label_counts(points, codes=None):
             for c in "123":
                 row[f"{lab}{c}"] = sum(1 for p in ps if p["label"] == lab
                                        and p["confidence"] == c)
+        rows.append(row)
+    return rows
+
+
+def labels_by_scl():
+    """Labels by scene classification class, over all 610 points. Dark area
+    and unclassified pixels are eligible as well as the clear classes, and
+    much of the open water sits on them (REGISTER V-04)."""
+    names = {2: "dark area", 4: "vegetation", 5: "bare soil", 6: "water",
+             7: "unclassified"}
+    pts = load_points(include_topup=True)
+    rows = []
+    groups = [(str(k), v, {k}) for k, v in names.items()]
+    groups.append(("2 and 7", "dark area or unclassified", {2, 7}))
+    for code, name, members in groups:
+        ps = [p for p in pts if int(p["scl_class"]) in members]
+        row = dict(scl_class=code, name=name, points=len(ps))
+        for lab in "WVNC":
+            row[lab] = sum(1 for p in ps if p["label"] == lab)
         rows.append(row)
     return rows
 
@@ -293,8 +317,8 @@ def check_cloud_distance(points, scl, ref):
     for lo, hi in DIST_BINS:
         inbin = [p for p in points if p["usable"] and p["code"] in IN_MAP
                  and p["cloud_m"] >= lo and (hi is None or p["cloud_m"] < hi)]
-        mf = [p for p in inbin if p["code"] in MAPS["-18.75 dB, published"]]
-        ml = [p for p in inbin if p["code"] not in MAPS["-18.75 dB, published"]]
+        mf = [p for p in inbin if p["code"] in MAPS["-18.75 dB, as drawn"]]
+        ml = [p for p in inbin if p["code"] not in MAPS["-18.75 dB, as drawn"]]
         rows.append(dict(
             distance=f"{lo} to {hi} m" if hi else f"{lo} m and over",
             n=len(inbin),
@@ -481,6 +505,7 @@ def main():
         p["usable"] = p["label"] in ("W", "V", "N")
 
     write_csv(OUT / "accuracy_labels.csv", label_counts(points))
+    write_csv(OUT / "accuracy_labels_by_scl.csv", labels_by_scl())
     write_csv(OUT / "accuracy_strata.csv", strata_rows)
     write_csv(OUT / "accuracy_summary.csv", summary)
     dist = check_cloud_distance(points, scl, main_ref)

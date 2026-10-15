@@ -140,12 +140,16 @@ TILE_HALO_PX = 16              # enough for a 5x5 Lee filter and the morphology 
 # implicit meant three of four raster loads were resampled by an undeclared
 # rule, including the two that feed the threshold and the slope mask.
 #
-# These values reproduce the behaviour the published numbers were computed
-# with. They are declared rather than changed, so alternatives can be tested
-# against a known baseline instead of being slipped in. See REVIEW.md S-01/S-02.
+# Both were tested in October 2026 (CHANGELOG C-31). Averaging VH moved the
+# refined map by 0.3% and was not adopted: nearest keeps single 10 m values,
+# which is what the threshold was tuned on. A bilinear DEM was adopted. Nearest
+# turned a 30 m DEM into a stepped 20 m surface, and three open-water points
+# of the labelled sample on the valley floor sat on false slopes of 10 to 11
+# degrees and were cut. Bilinear puts them under 8 degrees and keeps them, and
+# the flat river above the cut falls from 415 to 275 ha.
 RESAMPLING = {
     "sar": "nearest",          # 10 m gamma0 onto the target grid
-    "dem": "nearest",          # 30 m Copernicus DEM, feeds the slope mask
+    "dem": "bilinear",         # 30 m Copernicus DEM, feeds the slope mask
     "occurrence": "nearest",   # JRC continuous %, average would be defensible
     "landcover": "mode",       # categorical: must never be interpolated
 }

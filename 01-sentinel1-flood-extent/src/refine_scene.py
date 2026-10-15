@@ -43,13 +43,16 @@ halo, so a component straddling a tile edge is judged on what falls inside the
 padded window rather than being cut in half.
 
 Outputs:
-    data/dem_scene/India_dem_<res>m_<ty>_<tx>.tif      cached DEM tiles
+    data/dem_scene/India_dem_<res>m_<ty>_<tx>.tif      cached DEM tiles, nearest
+    data/dem_scene/India_dem_<res>m_bilinear_<ty>_<tx>.tif   the same, bilinear
     results/fullscene/India_water_<res>m_refined.tif   with --apply
     results/refine_scene_<res>m.csv
 
 Usage:
     python src\\refine_scene.py --res 20
     python src\\refine_scene.py --res 20 --apply --slope 8 --min-pixels 10
+    python src\\refine_scene.py --res 20 --apply --resample-dem bilinear
+        writes beside the published files under a _dem-bilinear suffix
 """
 
 from __future__ import annotations
@@ -103,7 +106,9 @@ def dem_tile(items, gbox, key, res, resampling=None) -> np.ndarray:
     # alternative would silently reuse tiles built with the default and report
     # no difference.
     resampling = resampling or RESAMPLING["dem"]
-    suffix = "" if resampling == RESAMPLING["dem"] else f"_{resampling}"
+    # Named by the rule itself, not by whether it is the default, so changing
+    # the default can never pick up tiles built with the old one.
+    suffix = "" if resampling == "nearest" else f"_{resampling}"
     cache = DEM_DIR / f"{EVENT}_dem_{res:g}m{suffix}_{key[0]}_{key[1]}.tif"
     if cache.exists():
         with rasterio.open(cache) as src:
@@ -179,6 +184,10 @@ def main() -> None:
     res = args.res
     tag = f"{res:g}m" + (f"_{args.variant}" if args.variant else "")
     src_tif = OUT_DIR / f"{EVENT}_water_{tag}.tif"
+    # A DEM test reads the same unrefined map but must not write over the
+    # published refinement, so its outputs carry the resampling in the name.
+    otag = tag if args.resample_dem == RESAMPLING["dem"] \
+        else f"{tag}_dem-{args.resample_dem}"
     if not src_tif.exists():
         raise SystemExit(f"{src_tif} not found. Run full_scene.py first.")
 
@@ -191,7 +200,7 @@ def main() -> None:
         raise SystemExit(f"no {DEM_COLLECTION} items over the AOI")
     print(f"{DEM_COLLECTION}: {len(dem_items)} tile(s)")
 
-    dst_tif = OUT_DIR / f"{EVENT}_water_{tag}_refined.tif"
+    dst_tif = OUT_DIR / f"{EVENT}_water_{otag}_refined.tif"
     if args.apply:
         shutil.copyfile(src_tif, dst_tif)
         print(f"writing into {dst_tif.name}")
@@ -263,11 +272,13 @@ def main() -> None:
         removed_slope += int(steep.sum())
         gentle = flood & ~steep
         if args.min_pixels > 1 and gentle.any():
-            # scikit-image 0.26 deprecated min_size in favour of max_size, and
-            # flipped the comparison: min_size=n dropped objects smaller than
-            # n, max_size=m drops objects smaller than OR EQUAL TO m. So
-            # max_size = min_pixels - 1 is exactly the old behaviour, which
-            # keeps the published 3,052 ha unchanged while surviving 2.0.
+            # max_size=m drops components of m pixels or fewer, so
+            # min_pixels - 1 drops those smaller than min_pixels, as config.py
+            # states. Before C-05 this called min_size=min_pixels, which
+            # scikit-image 0.26 quietly passes on as max_size=min_pixels and
+            # so also dropped components of exactly 10 pixels. The three
+            # map-optimal maps of September were refined that way and the
+            # three area-matched ones the other way (CHANGELOG C-31).
             try:
                 cleaned = remove_small_objects(gentle,
                                                max_size=args.min_pixels - 1)
@@ -320,7 +331,7 @@ def main() -> None:
         print("\n  Nothing written. Re-run with --apply once you are happy with "
               "the cut.")
 
-    with open(RESULTS / f"refine_scene_{tag}.csv", "w", newline="") as fh:
+    with open(RESULTS / f"refine_scene_{otag}.csv", "w", newline="") as fh:
         w_ = csv.writer(fh)
         w_.writerow(["slope_lo", "slope_hi", "flood_ha", "permanent_ha"])
         for i in range(len(hist)):
@@ -338,6 +349,9 @@ def main() -> None:
         stats_path = RESULTS / f"fullscene_stats_{tag}.json"
         if stats_path.exists():
             stats = json.loads(stats_path.read_text())
+            stats_path = RESULTS / f"fullscene_stats_{otag}.json"
+            stats["resampling"] = dict(RESAMPLING, **stats.get("resampling", {}))
+            stats["resampling"]["dem"] = args.resample_dem
             stats["refined"] = {
                 "slope_cut_deg": args.slope,
                 "min_pixels": args.min_pixels,
@@ -369,9 +383,9 @@ def main() -> None:
     ax.set_title(f"{EVENT}: mapped flood against terrain, {res:g} m")
     ax.legend(fontsize=8)
     fig.tight_layout()
-    fig.savefig(OUT_DIR / f"flood_by_slope_{tag}.png", dpi=130)
+    fig.savefig(OUT_DIR / f"flood_by_slope_{otag}.png", dpi=130)
 
-    print(f"\nwrote refine_scene_{tag}.csv and flood_by_slope_{tag}.png")
+    print(f"\nwrote refine_scene_{otag}.csv and flood_by_slope_{otag}.png")
 
 
 if __name__ == "__main__":

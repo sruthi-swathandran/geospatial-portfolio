@@ -27,10 +27,11 @@ histogram. One pass over the scene answers the whole grid.
 WHAT IT CANNOT COVER
 --------------------
 The minimum mapping unit is spatial, not per-pixel, so it cannot live in a
-histogram. It is excluded here. At the published settings it removed 3,052 ha,
-about 2.5% of what survived the other two, and it is roughly independent of
-them. Figures below are therefore about 3,000 ha higher than the published
-number at the equivalent settings.
+histogram. It is excluded here. At the published settings it removes about
+1,500 ha, about 1.2% of what survives the other two, and it is roughly
+independent of them. Figures below are therefore about that much higher than
+the published number at the equivalent settings. It removed 3,052 ha before
+C-31, when the September maps also dropped components of exactly 10 pixels.
 
 Outputs:
     data/gsw_scene/India_gsw_<res>m_<ty>_<tx>.tif   cached
@@ -224,8 +225,8 @@ def main() -> None:
         print(line)
     print(f"\n  * published settings, {published:,.0f} ha before the minimum "
           "mapping unit")
-    print(f"    (the MMU then removes about 3,000 ha, giving the reported "
-          "119,779 ha)")
+    print("    (the MMU then removes a little more, giving the reported "
+          "figure in\n    results/fullscene_stats_20m.json)")
 
     print("\nFLOOD AREA ACROSS THE SWATH EDGE BUFFER")
     print(f"(slope <= {SLOPE_MAX_DEG:g} deg, occurrence < {GSW_PERMANENT_MIN}%)")

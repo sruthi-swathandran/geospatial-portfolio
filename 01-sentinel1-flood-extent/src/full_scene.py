@@ -352,6 +352,13 @@ def main() -> None:
             RESAMPLING["sar"], RESAMPLING["occurrence"]):
         print(f"  RESAMPLING OVERRIDDEN: sar={args.resample_sar}, "
               f"occurrence={args.resample_occurrence}")
+    if (args.resample_sar, args.resample_occurrence) != (
+            RESAMPLING["sar"], RESAMPLING["occurrence"]) and not args.variant:
+        # Without a suffix the test would resume from the published run's
+        # record, find every tile done, and rewrite the published statistics.
+        raise SystemExit("  a resampling test needs --variant, such as "
+                         "--variant sar_average, so it writes beside the "
+                         "published map instead of over it")
     tag = f"{res:g}m" + (f"_{args.variant}" if args.variant else "")
     out_tif = OUT_DIR / f"{EVENT}_water_{tag}.tif"
     state_path = OUT_DIR / f"state_{tag}.json"

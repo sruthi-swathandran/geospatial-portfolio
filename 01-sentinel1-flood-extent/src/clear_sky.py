@@ -74,9 +74,17 @@ MPC = "https://planetarycomputer.microsoft.com/api/stac/v1"
 S2_DATE = "2016-08-12"
 
 FULL = RESULTS / "fullscene"
-MAP = FULL / "India_water_20m_refined.tif"            # published, -18.75 dB
-RAW = FULL / "India_water_20m.tif"                    # before refinement
-UPPER = FULL / "India_water_20m_areamatched_refined.tif"   # -17.75 dB, refined
+# The sample was drawn on the maps as they stood in October 2026, refined with
+# a nearest-resampled DEM. The strata come from these two and must keep coming
+# from them, whatever the published map becomes (C-31). The -18.75 dB one also
+# dropped flood components of exactly 10 pixels, hence --min-pixels 11 below.
+# Rebuild them with
+#   python src\\refine_scene.py --res 20 --apply --resample-dem nearest --min-pixels 11
+#   python src\\refine_scene.py --res 20 --apply --resample-dem nearest --variant areamatched
+# score_map.py checks both against the hectares the draw recorded.
+MAP = FULL / "India_water_20m_dem-nearest_refined.tif"      # as drawn, -18.75 dB
+RAW = FULL / "India_water_20m.tif"                          # before refinement
+UPPER = FULL / "India_water_20m_areamatched_dem-nearest_refined.tif"  # -17.75 dB
 
 OUT = RESULTS / "validation"                 # small results, committed
 WORK = DATA / "validation"                   # large or rebuilt, not committed

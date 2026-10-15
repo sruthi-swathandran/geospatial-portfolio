@@ -4,9 +4,9 @@ Mapping flood water with radar is not hard. Saying how much of the answer comes
 from the imagery and how much comes from choices nobody declares is harder, and
 that is what this project is about.
 
-**Between 119,779 and 170,625 ha of flood water** on 12 August 2016 across 6.26
-million hectares of the central Brahmaputra valley, of which **between 46,943
-and 87,127 ha was cropland**.
+**Between 120,790 and 171,683 ha of flood water** on 12 August 2016 across 6.26
+million hectares of the central Brahmaputra valley, of which **between 47,028
+and 87,274 ha was cropland**.
 
 That range is not measurement noise. It is the gap between two operating points
 that both have an argument behind them: one chosen to maximise agreement with
@@ -17,8 +17,8 @@ reported with the decision that moves it and the amount it moves by.
 
 A labelled sample of the map, described
 [below](#independent-check-of-the-12-august-map), puts open-water flood inside
-the floodplain at **160,688 ± 30,796 ha**, against 102,697 ha mapped there at
-−18.75 dB and 146,367 ha at −17.75 dB. The upper figure is the closer one.
+the floodplain at **160,688 ± 30,796 ha**, against 102,758 ha mapped there at
+−18.75 dB and 146,400 ha at −17.75 dB. The upper figure is the closer one.
 With a second person's labels on the hardest points the estimate is
 130,608 ± 24,733 ha, so who reads the hard cells moves it about as much as the
 sampling does.
@@ -27,7 +27,7 @@ Interactive map: [three acquisitions and the recession between them](https://sru
 
 This repository has been through a methodological review written with an AI
 assistant, Claude. It is not independent peer review. `REVIEW.md` lists every
-finding with its severity and evidence, including three that remain open.
+finding with its severity and evidence, including those that remain open.
 `CHANGELOG.md` records every number that changed as a result, with the
 superseded value and why it was wrong.
 
@@ -50,27 +50,27 @@ superseded value and why it was wrong.
 
 | District | Flooded cropland | Flood water | Cropland imaged | District imaged |
 |---|---:|---:|---:|---:|
-| Nagaon | 13,428 ha | 17,244 ha | 128,978 ha | 100% |
-| Morigaon | 11,336 ha | 15,829 ha | 75,691 ha | 84% |
-| Sonitpur | 4,523 ha | 28,464 ha | 137,015 ha | 100% |
-| Biswanath | 3,201 ha | 14,184 ha | 76,739 ha | 100% |
-| Hojai | 3,177 ha | 3,367 ha | 72,312 ha | 100% |
-| Golaghat | 1,746 ha | 7,703 ha | 40,793 ha | 36% |
-| Cachar | 1,454 ha | 2,004 ha | 31,994 ha | 49% |
-| Darrang | 1,292 ha | 8,387 ha | 20,794 ha | 30% |
-| Udalguri | 1,285 ha | 1,904 ha | 35,789 ha | 32% |
+| Nagaon | 13,435 ha | 17,280 ha | 128,978 ha | 100% |
+| Morigaon | 11,340 ha | 15,850 ha | 75,691 ha | 84% |
+| Sonitpur | 4,534 ha | 28,624 ha | 137,015 ha | 100% |
+| Biswanath | 3,218 ha | 14,397 ha | 76,739 ha | 100% |
+| Hojai | 3,178 ha | 3,374 ha | 72,312 ha | 100% |
+| Golaghat | 1,757 ha | 7,837 ha | 40,793 ha | 36% |
+| Cachar | 1,461 ha | 2,015 ha | 31,994 ha | 49% |
+| Darrang | 1,293 ha | 8,405 ha | 20,794 ha | 30% |
+| Udalguri | 1,290 ha | 1,918 ha | 35,789 ha | 32% |
 
 Full table in `results/district_flood_stats.csv`. The last column is the share
 of the district the satellite swath actually saw. Rows below 50% are marked
 PARTIAL and below 15% SLIVER in the console output of `district_stats.py`,
 because a percentage computed over a sliver is arithmetic rather than evidence.
 
-These rows sum to 110,081 ha of flood and 43,494 ha of flooded cropland, which
+These rows sum to 110,938 ha of flood and 43,564 ha of flooded cropland, which
 is 92% of the scene-wide totals quoted above. The remainder falls outside every
 Indian district polygon. Scene-wide figures are in `results/cropland_scene.csv`.
 
 **Flood area and flooded cropland are not the same story.** Sonitpur has the
-largest flood of any district at 28,464 ha, and only 16% of it is on cropland,
+largest flood of any district at 28,624 ha, and only 16% of it is on cropland,
 against 78% in Nagaon. Sonitpur sits where the braid belt is widest, so most of
 its water is in sand and channel. Relief allocated by flood area would go to
 Sonitpur; relief allocated by flooded cropland would go to Nagaon.
@@ -92,8 +92,8 @@ The threshold was chosen twice against two criteria. Both choices are defensible
 | Chip-scale IoU, all 65 | 0.519 | 0.522 |
 | Chip-scale mapped water | 14,405 ha (−22.1% vs labels) | 18,422 ha (−0.3%) |
 | Full scene, raw threshold | 217,490 ha | 319,398 ha |
-| Full scene, refined | 119,779 ha | 170,625 ha |
-| Flooded cropland | 46,943 ha | 87,127 ha |
+| Full scene, refined | 120,790 ha | 171,683 ha |
+| Flooded cropland | 47,028 ha | 87,274 ha |
 
 The two are statistically indistinguishable on the chips: 0.519 and 0.522, well
 inside a confidence interval of ±0.11. They differ by 42% on flood area and 86%
@@ -148,9 +148,9 @@ threshold choice described above rather than a new source of uncertainty.
 
 | Date | Orbit | Imaged | Flood | Flooded cropland |
 |---|---:|---:|---:|---:|
-| 7 Aug 2016 | 4 | 3.17 M ha | 64,704 to 90,915 ha | 30,035 to 52,882 ha |
-| 12 Aug 2016 | 77 | 6.26 M ha | 119,779 to 170,625 ha | 46,943 to 87,127 ha |
-| 31 Aug 2016 | 4 | 3.16 M ha | 38,887 to 44,991 ha | 5,776 to 9,256 ha |
+| 7 Aug 2016 | 4 | 3.17 M ha | 65,356 to 91,670 ha | 30,109 to 52,999 ha |
+| 12 Aug 2016 | 77 | 6.26 M ha | 120,790 to 171,683 ha | 47,028 to 87,274 ha |
+| 31 Aug 2016 | 4 | 3.16 M ha | 39,481 to 45,648 ha | 5,826 to 9,325 ha |
 
 Imaged area is measured after the swath-edge buffer, about 640 m, has been set to no
 data, so it is smaller than the raw classified area quoted in the runtimes table
@@ -163,17 +163,17 @@ hydrology:
 
 ```
                           map-optimal      area-matched
-flood, 7 Aug                64,615 ha         90,785 ha
-flood, 31 Aug               38,887 ha         44,991 ha
-drained over 24 days        27,843 ha         48,950 ha
-newly flooded                2,114 ha          3,157 ha
-persistence                     56.9%             46.1%
-net change                   to 60.2%          to 49.6%
-direction              receding 13.2:1   receding 15.5:1
+flood, 7 Aug                65,268 ha         91,540 ha
+flood, 31 Aug               39,481 ha         45,648 ha
+drained over 24 days        27,933 ha         49,099 ha
+newly flooded                2,147 ha          3,207 ha
+persistence                     57.2%             46.4%
+net change                   to 60.5%          to 49.9%
+direction              receding 13.0:1   receding 15.3:1
 ```
 
 **Total flood fell 40% or 50% over those 24 days, depending on the operating
-point. Flooded cropland fell 80.8% or 82.5%.**
+point. Flooded cropland fell 80.6% or 82.4%.**
 
 That contrast is the point. The total-flood figure moves by ten percentage
 points across a threshold choice; the cropland figure moves by less than two.
@@ -181,8 +181,8 @@ The interpretive claim, that fields drain while channels do not, is robust to a
 decision that shifts total flood area by 42%.
 
 The water that persists is not on fields. Golaghat shed 90% of its flooded
-cropland; Majuli shed 50% while its total flood barely moved at all, 16,453 ha
-down to 15,304. Fields drain within about three weeks; channels, chars and low
+cropland; Majuli shed half while its total flood barely moved at all, 16,638 ha
+down to 15,483. Fields drain within about three weeks; channels, chars and low
 wetland do not.
 
 Peak extent is the number that gets reported. Duration is the number that
@@ -191,7 +191,7 @@ and almost none of the duration. Majuli had a tenth of the peak and held it.
 
 One prediction recorded because it was wrong. Loosening the threshold by a
 decibel was expected to sweep in terrain and edge noise. On 7 August it did the
-opposite: of the 26,211 ha it adds, 22,847 ha is cropland, 87% of it. Partially
+opposite: of the 26,314 ha it adds, 22,891 ha is cropland, 87% of it. Partially
 inundated fields with emergent crop sit at intermediate backscatter and are
 exactly what a small relaxation captures. On 31 August, with the crop drained,
 only 57% of the added water is cropland. How threshold-sensitive a flood map is
@@ -223,14 +223,14 @@ independent check below.*
 Filling the 12 August map's eastern gap with 7 August data would produce a
 gap-free picture describing no moment that existed. The cost is
 measurable rather than hypothetical. In the 1.82 million hectares both passes
-saw, flood fell to 75.1% of its extent in those five days. The 7 August wedge
-holds 36,755 ha, so on 12 August it would have been nearer 27,600 ha. **A naive
-mosaic would have reported roughly 9,150 ha of water that had already gone**,
-about 7.6% of the total, with no visible seam.
+saw, flood fell to 75.3% of its extent in those five days. The 7 August wedge
+holds 36,915 ha, so on 12 August it would have been nearer 27,800 ha. **A naive
+mosaic would have reported roughly 9,100 ha of water that had already gone**,
+about 7.5% of the total, with no visible seam.
 
 ---
 
-## How 217,490 becomes 119,779
+## How 217,490 becomes 120,790
 
 The raw threshold output over the full scene is 217,490 ha. Three things are
 dark to radar without being wet, and each was found by looking at the map rather
@@ -240,8 +240,8 @@ than by any metric.
 |---|---:|---:|
 | Raw threshold at −18.75 dB | | 217,490 ha |
 | Swath edge buffer, about 640 m, to no data | 26,223 ha | 191,267 ha |
-| Slope above 8° reclassified as land | 68,437 ha | 122,830 ha |
-| Connected components under 10 px | 3,052 ha | **119,779 ha** |
+| Slope above 8° reclassified as land | 68,958 ha | 122,309 ha |
+| Connected components under 10 px | 1,519 ha | **120,790 ha** |
 
 **Swath edge.** Flood classification runs at 32.9% of area within the first
 640 m or so of the frame boundary against 3.1% in the interior, measured on the
@@ -255,11 +255,26 @@ buffer becomes no data rather than land, because those pixels are unmeasured
 rather than dry. It removes real water where the swath edge crosses wet ground,
 and Majuli is the clearest case.
 
-**Terrain.** Permanent water is the control: 99.3% of the Brahmaputra channel
-sits below 8° of slope. The mapped flood put 35.8% of itself above that, and
-23.6% above 20°, on ground where the river has 0.11% of its area. Beyond 8° the
-flood class is over-represented by a factor of 11 in the 8 to 12 degree band,
-rising to 330 above 35 degrees, relative to what genuine water does.
+**Terrain.** Permanent water is the control: 99.5% of the Brahmaputra channel
+sits below 8° of slope. The mapped flood put 36.1% of itself above that, and
+24.2% above 20°, on ground where the river has 0.10% of its area. Beyond 8° the
+flood class is over-represented by a factor of 18 in the 8 to 12 degree band,
+rising to about 400 above 35 degrees, relative to what genuine water does.
+
+**The DEM is resampled bilinearly.** Slope comes from the 30 m Copernicus DEM
+put onto the 20 m grid. Until October 2026 that was done by nearest neighbour,
+which turns the 30 m cells into a stepped surface whose risers read as slope.
+Bilinear was tested against it (REVIEW S-02) and adopted. The slope cut now
+removes 68,958 ha against 68,437, and the channel above 8° falls by about a
+third, from 0.7% to 0.5% of it. On the labelled sample below, four points
+change and all four move toward their labels: three that are surely open water,
+on the valley floor at 69 to 76 m, had slopes of 10 to 11° and were cut, and
+now sit under 8° and are kept, while a point at 1,634 m that is not water is now
+cut. Averaging the 10 m VH onto the grid, in place of the nearest value, was
+tested as well (REVIEW S-01) and not adopted. It cut the raw flood from 217,490
+to 216,370 ha and changed five sample points, three toward their labels and two
+away. Nearest keeps single 10 m values, which is what the threshold was tuned
+on. `CHANGELOG.md` C-31 gives both runs.
 
 **Minimum mapping unit.** A lone 20 m pixel is a noisy sample, not a mappable
 flood.
@@ -268,7 +283,7 @@ flood.
 
 ![Raw threshold output against the refined map](results/fullscene/refine_before_after.png)
 
-*The raw threshold output beside the refined map. Removing the swath edge, steep terrain and objects below the minimum mapping unit is what takes 217,490 ha down to 119,779 ha. The third panel is exact rather than illustrative: every pixel the raw map called flood is now one of three things, 119,779 ha still flood, 26,223 ha turned to no data inside the swath-edge buffer, and 71,489 ha turned to land under the slope cut and the minimum mapping unit. The slope cut and the minimum mapping unit share a colour because the two rasters alone cannot separate them; the pipeline records them as 68,437 and 3,052 ha.*
+*The raw threshold output beside the refined map. Removing the swath edge, steep terrain and objects below the minimum mapping unit is what takes 217,490 ha down to 120,790 ha. The third panel is exact rather than illustrative: every pixel the raw map called flood is now one of three things, 120,790 ha still flood, 26,223 ha turned to no data inside the swath-edge buffer, and 70,477 ha turned to land under the slope cut and the minimum mapping unit. The slope cut and the minimum mapping unit share a colour because the two rasters alone cannot separate them; the pipeline records them as 68,958 and 1,519 ha.*
 
 ## Validation
 
@@ -362,26 +377,32 @@ on this stack it is a load-bearing fact.
 
 The accuracy above comes from 65 chips scored before the slope cut, the
 swath-edge buffer and the clean-up existed. This section scores the map itself.
-A stratified random sample of the published 20 m map was labelled by eye on an
-optical image of the same day, and the labels were turned into an area estimate
+A stratified random sample of the 20 m map, as it stood before the DEM change
+above, was labelled by eye on an optical image of the same day, and the labels were turned into an area estimate
 with a standard error by the stratified estimator of Olofsson et al. (2014).
 Every step is in `src/`, and every number below is in `results/validation/`.
 
 **Reference image.** Sentinel-2A imaged the study area at 04:15 UTC on 12
 August, about twenty hours before the Sentinel-1 frames at 23:46 UTC, while the
 flood was receding. Cloud covers much of the scene, so points were drawn only
-where the scene classification shipped with the image shows clear sky with no
-cloud within 100 m, and only where a test on the image itself found no cloud or
-haze within 100 m. That classification misses some cloud outright, and the
-image test removed 41 of the 591 candidates it had passed. Two earlier draws
-were set aside before their labels were used: the first let points through at
-cloud edges, and the second put one inside a cloud bank the classification had
-missed. One point of the second draw had been labelled. Both earlier keys, that
-label and a log of every draw are kept in `results/validation/sample/`.
+where the scene classification shipped with the image shows no cloud, cloud
+shadow or cirrus within 100 m, and only where a test on the image itself found
+no cloud or haze within 100 m. The classification's dark-area and unclassified
+pixels count as eligible. 105 points sit on them, top-up included, and 40 of
+those were labelled open water, so leaving them out would have hidden much of
+the flood. "Clear" below means eligible in this sense. The classification misses
+some cloud outright, and the image test removed 41 of the 591 candidates it had
+passed. Two earlier draws were set aside before their labels were used: the
+first let points through at cloud edges, and the second put one inside a cloud
+bank the classification had missed. One point of the second draw had been
+labelled. Both earlier keys, that label and a log of every draw are kept in
+`results/validation/sample/`.
 
-**Design.** Seven strata, read off the map:
+**Design.** Seven strata, read off the map as it was drawn on. They stay as
+drawn, since every point's weight comes from them, and the published map is
+scored against the same points (below):
 
-| Stratum | Mapped ha | Clear ha sampled | Points |
+| Stratum | Mapped ha | Eligible ha sampled | Points |
 |---|---:|---:|---:|
 | Flood at −18.75 dB | 119,779 | 46,582 | 100 |
 | Permanent water | 58,389 | 30,417 | 40 |
@@ -400,14 +421,15 @@ main sample were unreadable.
 **Where the estimate holds.** Clear sky is not spread at random. Under cloud,
 the land strata are far higher and steeper than where the sample could see, so
 the headline is restricted to the floodplain: ground at or below 150 m with a
-slope of 2° or less, which holds 102,697 of the 119,779 ha mapped. Inside it
+slope of 2° or less, which held 102,697 of the 119,779 ha mapped as drawn.
+Inside it
 the clear and cloudy parts agree on slope in every stratum, with standardised
 differences of 0.13 or less, though the cloudy part lies about 10 m lower and
 so further downstream.
 
 **Open-water flood inside the floodplain.**
 
-| | Open-water flood | Mapped at −18.75 dB | Mapped at −17.75 dB |
+| | Open-water flood | Mapped at −18.75 dB, as drawn | Mapped at −17.75 dB, as drawn |
 |---|---:|---:|---:|
 | Clear part only | 70,659 ± 14,411 ha | 42,419 ha | 60,357 ha |
 | All of the floodplain | **160,688 ± 30,796 ha** | 102,697 ha | 146,367 ha |
@@ -419,10 +441,23 @@ finds 0.46 of the open water there, ± 0.09. At −17.75 dB the two figures are
 157,603 ha. The map is fairly reliable where it says flood and misses about
 half of it, and the upper end of the published range is the closer one.
 
+**The published map.** With the bilinear DEM the map holds 102,758 ha of flood
+in the floodplain at −18.75 dB and 146,400 ha at −17.75 dB. No floodplain point
+changes class, so its accuracies there are the ones above. Over the whole map,
+where the three valley-floor points are now kept, user's accuracy goes from
+0.740 to 0.755 and producer's from 0.421 to 0.439, both well inside their
+standard errors. `score_map.py` reads each version of the map at the sample
+points and scores it with the estimator for strata that differ from the map
+classes (Stehman, 2014), since a changed map cuts across the strata it was
+drawn with. On the map as drawn it reproduces the figures above exactly.
+
 **The refinement steps.** Of 57 readable points in what the slope cut and the
 clean-up removed, 6 were water and 5 of them open water: about 6,201 ± 2,672 ha
-of the 70,686 ha removed was real open water. Inside the swath-edge buffer 1 of
-45 readable points was water, so the buffer set aside very little real flood.
+of the 70,686 ha removed was real open water. Three of those five are the
+valley-floor points the bilinear DEM now keeps. Inside the swath-edge buffer 1 of
+45 readable points was flood, seen through vegetation and marked as a guess. One
+more was open water on ground JRC counts as permanent, which is not flood by
+this project's definition. The buffer set aside very little real flood.
 
 **Water under vegetation is reported apart.** Counting V as flood more than
 doubles the estimate, to 393,655 ± 47,226 ha in the floodplain. It stays out of
@@ -453,7 +488,7 @@ others, so the headline is the top of what different readers give. The gap
 between readers is about as large as the standard error, which leaves it out.
 Over the whole map the second person's labels move open-water flood from
 210,547 to 195,493 ha. Every reading still finds more open water in the
-floodplain than the 102,697 ha mapped at −18.75 dB, and the 146,367 ha at
+floodplain than the 102,758 ha mapped at −18.75 dB, and the 146,400 ha at
 −17.75 dB lies within their range. Claude's labels are an AI's reading of the
 same chips, not a third person's.
 
@@ -545,12 +580,12 @@ Four places, all measured on this event.
 |---|---|---|
 | Change-detection reference date | 19 July vs 14 April | 6,161 ha vs 17,575 ha |
 | Permanent water definition | JRC occurrence 10% to 90% | 8,893 ha to 19,458 ha |
-| Terrain cut | none to 2° | 191,268 ha to 104,958 ha |
-| Acquisition date | 7 Aug vs 31 Aug, same ground | 64,615 ha to 38,887 ha |
+| Terrain cut | none to 2° | 191,268 ha to 105,588 ha |
+| Acquisition date | 7 Aug vs 31 Aug, same ground | 65,268 ha to 39,481 ha |
 
 The terrain-cut row is read from `results/sensitivity_grid.csv`, which is
 computed after the swath-edge buffer and before the minimum mapping unit. Both
-of its numbers therefore sit one step short of the reported 119,779 ha.
+of its numbers therefore sit one step short of the reported 120,790 ha.
 
 Every one of those is a choice an analyst makes silently and a reader never
 sees. On this river the number moves more with the definitions than with the
@@ -576,7 +611,7 @@ flood, so it represents the flood rather than the region.
    sampled.
 2. **Slope mask.** Neutral on the chips, because all 65 sit in the floodplain
    and there are no mountains in the validation set. On the full scene it
-   removes 68,437 ha of hillside radar shadow.
+   removes 68,958 ha of hillside radar shadow.
 3. **Swath edge.** Never visible in chip-scale validation at all, because chips
    are interior. It contributed about 26,000 ha of the raw scene total.
 
@@ -604,10 +639,10 @@ worth stating plainly: no score in this repository would have found any of them.
 - **The headline is an uncorrected map pixel count and is probably low.** At the
   operating point used for the full scene the map recovers 14,405 ha of the
   18,483 ha of hand-labelled water, a shortfall of 22.1%. Scaling the reported
-  figure by that ratio gives 153,681 ha. The scene also drops water patches
+  figure by that ratio gives about 155,000 ha. The scene also drops water patches
   and fills holes under 1 ha before counting, a step the chips were scored
   without. With it, at that 1 ha limit, the chips recover 13,266 ha, a
-  shortfall of 28.2%, and the same scaling gives about 166,900 ha. Chip error
+  shortfall of 28.2%, and the same scaling gives about 168,300 ha. Chip error
   rates should not
   be assumed to hold over terrain the chips never sampled. The independent
   check above confirms the direction for open water in the floodplain, with a
@@ -630,11 +665,11 @@ worth stating plainly: no score in this repository would have found any of them.
   the study area hold the top places in the 7 August flooded-cropland table,
   Golaghat first, then Lakhimpur and Jorhat. Majuli was part of Jorhat until
   it became a district on 8 September 2016, so ASDMA's July count for Jorhat
-  includes it; Jorhat and Majuli together hold about 5,070 ha of flooded cropland,
-  still third behind Lakhimpur's 5,604 ha. That agreement is about which
+  includes it; Jorhat and Majuli together hold about 5,075 ha of flooded cropland,
+  still third behind Lakhimpur's 5,611 ha. That agreement is about which
   districts were hit and carries no information on hectares. For scale, the same Economic
   Survey gives Assam's average annual flood-affected area as 9.31 lakh hectares
-  across the whole state and a whole season; the 119,779 ha here is one
+  across the whole state and a whole season; the 120,790 ha here is one
   satellite pass on one day over part of the state.
 - **Land cover date.** ESA WorldCover exists for 2020 and 2021 only. The
   cropland layer is four to five years after this flood and there is no open
@@ -718,6 +753,7 @@ a CSV beside its figure.
 | Check | `draw_sample.py`, `topup_sample.py` | The stratified sample with its image screen and chips, and the floodplain top-up |
 | Check | `screen_points.py` | The brightness measurements the image screen's cutoffs were chosen from |
 | Check | `label_tool.py` | Labelling by keyboard, blind to the map |
+| Check | `score_map.py` | Any version of the map scored against the same sample, for the resampling tests |
 | Check | `second_label.py`, `compare_labels.py` | Second readings of the guesses and 40 random points, scored against the first and fed back into the estimate |
 | Check | `estimate_accuracy.py`, `floodplain_layer.py` | Accuracy and area with standard errors, for the clear part, the floodplain and the whole map |
 | Publish | `build_docs_page.py` | Generates docs/index.html and its four map overlays from results/ |
@@ -748,10 +784,10 @@ windowed request against a remote COG.
 | `fetch_labels.py` | ~10 min | 481 files under `data/sen1floods11/` |
 | `fetch_reference.py` | ~30 min | 340 files under `data/reference/` |
 | `full_scene.py --res 20` | ~25 min | 46 tiles, 6,344,561 ha classified before refinement |
-| `refine_scene.py --apply` | ~30 s | 119,779 ha kept as flood |
-| `district_stats.py` | ~3 min first run, ~15 s cached | 35 districts, 110,081 ha |
+| `refine_scene.py --apply` | ~30 s with cached DEM tiles, ~20 min without | 120,790 ha kept as flood |
+| `district_stats.py` | ~3 min first run, ~15 s cached | 35 districts, 110,938 ha |
 | `accuracy_ci.py` | ~30 s | IoU 0.519, CI [0.395, 0.609] |
-| `sensitivity_grid.py` | ~10 min first run | published cell 122,832 ha |
+| `sensitivity_grid.py` | ~10 min first run | published cell 122,310 ha |
 | `make_map.py` | ~1 min | two files in `results/figures/` |
 
 `full_scene.py` records each finished tile and re-signs Planetary Computer asset

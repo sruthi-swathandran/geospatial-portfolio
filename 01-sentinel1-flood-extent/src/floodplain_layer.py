@@ -103,7 +103,9 @@ def grid_pass(scl):
 
     tiles = []
     for f in sorted(DEM_DIR.glob("India_dem_20m_*_*.tif")):
-        m = re.search(r"_(\d+)_(\d+)\.tif$", f.name)
+        # the default DEM cache only; a resampling test keeps its own tiles
+        # in the same folder under a longer name (refine_scene.py)
+        m = re.fullmatch(r"India_dem_20m_(\d+)_(\d+)\.tif", f.name)
         if m:
             tiles.append((int(m.group(1)), int(m.group(2)), f))
 
@@ -255,8 +257,10 @@ def main():
         for k, name in NAMES.items():
             strata_rows.append(dict(
                 cutoff=c, elevation_max_m=CUTOFFS[c][0], slope_max_deg=CUTOFFS[c][1],
-                stratum=name, floodplain_mapped_ha=round(areas[k]["mapped"]),
-                floodplain_screened_eligible_ha=round(areas[k]["eligible"]),
+                # one decimal, so scripts that read these areas back give the
+                # same totals as this one (REGISTER V-05)
+                stratum=name, floodplain_mapped_ha=round(areas[k]["mapped"], 1),
+                floodplain_screened_eligible_ha=round(areas[k]["eligible"], 1),
                 screen_acceptance=round(rates[c][k], 3),
                 points_inside=sum(1 for p in sub if p["code"] == k)))
         for vname, is_water in VARIANTS.items():
@@ -301,7 +305,8 @@ def main():
 
     e_max, s_max = CUTOFFS[MAIN]
     print(f"\n  floodplain: at or below {e_max:g} m and {s_max:g} degrees of slope")
-    print(f"  it holds {total_flood:,} of the 119,779 ha of mapped flood\n")
+    print(f"  it holds {total_flood:,} of the 119,779 ha of flood on the map "
+          f"as drawn\n")
     print(f"  {'stratum':<22} {'floodplain ha':>14} {'clear ha':>11} {'points':>7}")
     for r in strata_rows:
         if r["cutoff"] == MAIN:

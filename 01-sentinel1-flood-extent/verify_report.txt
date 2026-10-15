@@ -1,23 +1,25 @@
 VERIFICATION REPORT
-README sha256 5cd4568ee59123ed
+README sha256 71969275b8c0f910
 project: D:\geospatial-portfolio\01-sentinel1-flood-extent
 read-only; nothing in the repo is modified
 
-indexed 26499 numeric values from results/
+indexed 27175 numeric values from results/
 
 
 ==============================================================================
 A. EVERY NUMBER IN THE README, TRACED TO A FILE
 ==============================================================================
-  · 381 numbers matched a value in results/
-  · 213 skipped as years, codes or section numbers
-[WARN] 4 numbers could not be matched to any file. Each needs a human decision: derived, rounded, or wrong.
+  · 398 numbers matched a value in results/
+  · 224 skipped as years, codes or section numbers
+[WARN] 6 numbers could not be matched to any file. Each needs a human decision: derived, rounded, or wrong.
 
 --- unmatched README numbers ------------------------------------------------
-  L166           64,615   flood, 7 Aug                64,615 ha         90,785 ha
-  L227           27,600   holds 36,755 ha, so on 12 August it would have been nearer 27,600 ha. **A naive
-  L345          729,161   passes share 1,819,972 ha, and eight tiles covering 729,161 ha of that were
-  L549           64,615   | Acquisition date | 7 Aug vs 31 Aug, same ground | 64,615 ha to 38,887 ha |
+  L166           65,268   flood, 7 Aug                65,268 ha         91,540 ha
+  L166           91,540   flood, 7 Aug                65,268 ha         91,540 ha
+  L227           27,800   holds 36,915 ha, so on 12 August it would have been nearer 27,800 ha. **A naive
+  L360          729,161   passes share 1,819,972 ha, and eight tiles covering 729,161 ha of that were
+  L584           65,268   | Acquisition date | 7 Aug vs 31 Aug, same ground | 65,268 ha to 39,481 ha |
+  L642          155,000   figure by that ratio gives about 155,000 ha. The scene also drops water patches
 
 ==============================================================================
 A2. NUMBERS ON docs/index.html, TRACED TO A FILE
@@ -33,77 +35,78 @@ B. INTERNAL CONSISTENCY
 ==============================================================================
 
 --- scene totals against the sum of district totals -------------------------
-[WARN] 12 Aug, map-optimal: scene 119,779 ha, districts sum to 110,081 ha, -8.1%
+[WARN] 12 Aug, map-optimal: scene 120,790 ha, districts sum to 110,938 ha, -8.2%
   · districts clip to ADM2 polygons, so a small shortfall is expected; a large one is not
-[WARN] 12 Aug, area-matched: scene 170,625 ha, districts sum to 155,596 ha, -8.8%
+[WARN] 12 Aug, area-matched: scene 171,683 ha, districts sum to 156,638 ha, -8.8%
   · districts clip to ADM2 polygons, so a small shortfall is expected; a large one is not
-[PASS] 7 Aug, map-optimal: scene 64,704 ha, districts sum to 64,704 ha, -0.0%
+[PASS] 7 Aug, map-optimal: scene 65,356 ha, districts sum to 65,356 ha, +0.0%
   · districts clip to ADM2 polygons, so a small shortfall is expected; a large one is not
-[PASS] 7 Aug, area-matched: scene 90,915 ha, districts sum to 90,915 ha, +0.0%
+[PASS] 7 Aug, area-matched: scene 91,670 ha, districts sum to 91,670 ha, -0.0%
   · districts clip to ADM2 polygons, so a small shortfall is expected; a large one is not
-[PASS] 31 Aug, map-optimal: scene 38,887 ha, districts sum to 38,887 ha, +0.0%
+[PASS] 31 Aug, map-optimal: scene 39,481 ha, districts sum to 39,481 ha, +0.0%
   · districts clip to ADM2 polygons, so a small shortfall is expected; a large one is not
-[PASS] 31 Aug, area-matched: scene 44,991 ha, districts sum to 44,991 ha, -0.0%
+[PASS] 31 Aug, area-matched: scene 45,648 ha, districts sum to 45,648 ha, -0.0%
   · districts clip to ADM2 polygons, so a small shortfall is expected; a large one is not
 
 --- raw threshold output against the refined figure -------------------------
 [PASS] 12 Aug, map-optimal: edge buffer removed 26,223 ha, 217,490 to 191,267
-[PASS] 12 Aug, map-optimal: 191,267 − steep 68,437 − small 3,052 = 119,779 against reported 119,779, gap +0 ha
+[PASS] 12 Aug, map-optimal: 191,267 − steep 68,958 − small 1,518 = 120,790 against reported 120,790, gap +0 ha
 [PASS] 12 Aug, area-matched: edge buffer removed 28,447 ha, 319,398 to 290,951
-[PASS] 12 Aug, area-matched: 290,951 − steep 115,947 − small 4,379 = 170,625 against reported 170,625, gap +0 ha
+[PASS] 12 Aug, area-matched: 290,951 − steep 116,923 − small 2,346 = 171,683 against reported 171,683, gap +0 ha
 [PASS] 7 Aug, map-optimal: edge buffer removed 5,908 ha, 84,777 to 78,870
-[PASS] 7 Aug, map-optimal: 78,870 − steep 13,712 − small 454 = 64,704 against reported 64,704, gap +0 ha
+[PASS] 7 Aug, map-optimal: 78,870 − steep 13,160 − small 353 = 65,356 against reported 65,356, gap +0 ha
 [PASS] 7 Aug, area-matched: edge buffer removed 7,202 ha, 120,675 to 113,473
-[PASS] 7 Aug, area-matched: 113,473 − steep 21,938 − small 620 = 90,915 against reported 90,915, gap +0 ha
+[PASS] 7 Aug, area-matched: 113,473 − steep 21,282 − small 520 = 91,670 against reported 91,670, gap +0 ha
 [PASS] 31 Aug, map-optimal: edge buffer removed 5,385 ha, 56,849 to 51,464
-[PASS] 31 Aug, map-optimal: 51,464 − steep 12,154 − small 423 = 38,887 against reported 38,887, gap +0 ha
+[PASS] 31 Aug, map-optimal: 51,464 − steep 11,642 − small 342 = 39,481 against reported 39,481, gap +0 ha
 [PASS] 31 Aug, area-matched: edge buffer removed 6,203 ha, 70,937 to 64,734
-[PASS] 31 Aug, area-matched: 64,734 − steep 19,167 − small 576 = 44,991 against reported 44,991, gap +0 ha
+[PASS] 31 Aug, area-matched: 64,734 − steep 18,599 − small 487 = 45,648 against reported 45,648, gap +0 ha
 
 --- slope histogram against the refined totals ------------------------------
-[PASS] 12 Aug, map-optimal: 7 slope bins sum to 191,268 ha against flood_ha_before 191,267, +0.00%
-[PASS] 12 Aug, map-optimal: bins at or above 8° hold 68,437 ha against removed_steep_ha 68,437, gap +0 ha
-  · 12 Aug, map-optimal: 35.8% of mapped flood sits above 8°
-  · 12 Aug, map-optimal: 0.71% of permanent water sits above 8°, so 99.3% below
-[PASS] 12 Aug, map-optimal: CSV footer kept_ha 119,779 against stats flood_ha_after 119,779
+[PASS] 12 Aug, map-optimal: 7 slope bins sum to 191,267 ha against flood_ha_before 191,267, +0.00%
+[PASS] 12 Aug, map-optimal: bins at or above 8° hold 68,958 ha against removed_steep_ha 68,958, gap +0 ha
+  · 12 Aug, map-optimal: 36.1% of mapped flood sits above 8°
+  · 12 Aug, map-optimal: 0.47% of permanent water sits above 8°, so 99.5% below
+[PASS] 12 Aug, map-optimal: CSV footer kept_ha 120,790 against stats flood_ha_after 120,790
 [PASS] 12 Aug, area-matched: 7 slope bins sum to 290,951 ha against flood_ha_before 290,951, +0.00%
-[PASS] 12 Aug, area-matched: bins at or above 8° hold 115,947 ha against removed_steep_ha 115,947, gap +0 ha
-  · 12 Aug, area-matched: 39.9% of mapped flood sits above 8°
-  · 12 Aug, area-matched: 0.96% of permanent water sits above 8°, so 99.0% below
-[PASS] 12 Aug, area-matched: CSV footer kept_ha 170,625 against stats flood_ha_after 170,625
-[PASS] 7 Aug, map-optimal: 7 slope bins sum to 78,870 ha against flood_ha_before 78,870, +0.00%
-[PASS] 7 Aug, map-optimal: bins at or above 8° hold 13,712 ha against removed_steep_ha 13,712, gap +0 ha
-  · 7 Aug, map-optimal: 17.4% of mapped flood sits above 8°
-  · 7 Aug, map-optimal: 0.87% of permanent water sits above 8°, so 99.1% below
-[PASS] 7 Aug, map-optimal: CSV footer kept_ha 64,704 against stats flood_ha_after 64,704
+[PASS] 12 Aug, area-matched: bins at or above 8° hold 116,923 ha against removed_steep_ha 116,923, gap +0 ha
+  · 12 Aug, area-matched: 40.2% of mapped flood sits above 8°
+  · 12 Aug, area-matched: 0.69% of permanent water sits above 8°, so 99.3% below
+[PASS] 12 Aug, area-matched: CSV footer kept_ha 171,683 against stats flood_ha_after 171,683
+[PASS] 7 Aug, map-optimal: 7 slope bins sum to 78,870 ha against flood_ha_before 78,870, -0.00%
+[PASS] 7 Aug, map-optimal: bins at or above 8° hold 13,160 ha against removed_steep_ha 13,160, gap +0 ha
+  · 7 Aug, map-optimal: 16.7% of mapped flood sits above 8°
+  · 7 Aug, map-optimal: 0.42% of permanent water sits above 8°, so 99.6% below
+[PASS] 7 Aug, map-optimal: CSV footer kept_ha 65,356 against stats flood_ha_after 65,356
 [PASS] 7 Aug, area-matched: 7 slope bins sum to 113,473 ha against flood_ha_before 113,473, +0.00%
-[PASS] 7 Aug, area-matched: bins at or above 8° hold 21,938 ha against removed_steep_ha 21,938, gap +0 ha
-  · 7 Aug, area-matched: 19.3% of mapped flood sits above 8°
-  · 7 Aug, area-matched: 0.94% of permanent water sits above 8°, so 99.1% below
-[PASS] 7 Aug, area-matched: CSV footer kept_ha 90,915 against stats flood_ha_after 90,915
+[PASS] 7 Aug, area-matched: bins at or above 8° hold 21,282 ha against removed_steep_ha 21,282, gap +0 ha
+  · 7 Aug, area-matched: 18.8% of mapped flood sits above 8°
+  · 7 Aug, area-matched: 0.48% of permanent water sits above 8°, so 99.5% below
+[PASS] 7 Aug, area-matched: CSV footer kept_ha 91,670 against stats flood_ha_after 91,670
 [PASS] 31 Aug, map-optimal: 7 slope bins sum to 51,464 ha against flood_ha_before 51,464, -0.00%
-[PASS] 31 Aug, map-optimal: bins at or above 8° hold 12,154 ha against removed_steep_ha 12,154, gap +0 ha
-  · 31 Aug, map-optimal: 23.6% of mapped flood sits above 8°
-  · 31 Aug, map-optimal: 0.85% of permanent water sits above 8°, so 99.2% below
-[PASS] 31 Aug, map-optimal: CSV footer kept_ha 38,887 against stats flood_ha_after 38,887
-[PASS] 31 Aug, area-matched: 7 slope bins sum to 64,734 ha against flood_ha_before 64,734, +0.00%
-[PASS] 31 Aug, area-matched: bins at or above 8° hold 19,167 ha against removed_steep_ha 19,167, gap +0 ha
-  · 31 Aug, area-matched: 29.6% of mapped flood sits above 8°
-  · 31 Aug, area-matched: 0.91% of permanent water sits above 8°, so 99.1% below
-[PASS] 31 Aug, area-matched: CSV footer kept_ha 44,991 against stats flood_ha_after 44,991
+[PASS] 31 Aug, map-optimal: bins at or above 8° hold 11,642 ha against removed_steep_ha 11,642, gap +0 ha
+  · 31 Aug, map-optimal: 22.6% of mapped flood sits above 8°
+  · 31 Aug, map-optimal: 0.42% of permanent water sits above 8°, so 99.6% below
+[PASS] 31 Aug, map-optimal: CSV footer kept_ha 39,481 against stats flood_ha_after 39,481
+[PASS] 31 Aug, area-matched: 7 slope bins sum to 64,734 ha against flood_ha_before 64,734, -0.00%
+[PASS] 31 Aug, area-matched: bins at or above 8° hold 18,599 ha against removed_steep_ha 18,599, gap +0 ha
+  · 31 Aug, area-matched: 28.7% of mapped flood sits above 8°
+  · 31 Aug, area-matched: 0.46% of permanent water sits above 8°, so 99.5% below
+[PASS] 31 Aug, area-matched: CSV footer kept_ha 45,648 against stats flood_ha_after 45,648
 
 --- the published cell of the sensitivity grid ------------------------------
   · published cell: slope 8.0, occurrence 50, edge 600
 [PASS] published slope 8 against config 8
 [PASS] published occurrence 50 against config 50
 [PASS] published edge px 30 against config 30
-[PASS] grid says 122,832 ha at the published settings against 122,831 ha pre-MMU (119,779 reported + 3,052 removed by the MMU), +0.00%
+[PASS] grid says 122,310 ha at the published settings against 122,309 ha pre-MMU (120,790 reported + 1,518 removed by the MMU), +0.00%
   · the grid is pre-MMU by construction; CHANGELOG C-08 says so, and the README chain table shows the same value at that step
 
 --- config constants against what the stats files record was run ------------
 [PASS] 12 Aug, map-optimal: slope cut run at 8, config declares 8
 [PASS] 12 Aug, map-optimal: min pixels run at 10, config declares 10
 [PASS] 12 Aug, map-optimal: occurrence cut run at 50, config declares 50
+[PASS] 12 Aug, map-optimal: resampling matches config
 [PASS] 12 Aug, area-matched: slope cut run at 8, config declares 8
 [PASS] 12 Aug, area-matched: min pixels run at 10, config declares 10
 [PASS] 12 Aug, area-matched: occurrence cut run at 50, config declares 50
@@ -111,6 +114,7 @@ B. INTERNAL CONSISTENCY
 [PASS] 7 Aug, map-optimal: slope cut run at 8, config declares 8
 [PASS] 7 Aug, map-optimal: min pixels run at 10, config declares 10
 [PASS] 7 Aug, map-optimal: occurrence cut run at 50, config declares 50
+[PASS] 7 Aug, map-optimal: resampling matches config
 [PASS] 7 Aug, area-matched: slope cut run at 8, config declares 8
 [PASS] 7 Aug, area-matched: min pixels run at 10, config declares 10
 [PASS] 7 Aug, area-matched: occurrence cut run at 50, config declares 50
@@ -118,16 +122,17 @@ B. INTERNAL CONSISTENCY
 [PASS] 31 Aug, map-optimal: slope cut run at 8, config declares 8
 [PASS] 31 Aug, map-optimal: min pixels run at 10, config declares 10
 [PASS] 31 Aug, map-optimal: occurrence cut run at 50, config declares 50
+[PASS] 31 Aug, map-optimal: resampling matches config
 [PASS] 31 Aug, area-matched: slope cut run at 8, config declares 8
 [PASS] 31 Aug, area-matched: min pixels run at 10, config declares 10
 [PASS] 31 Aug, area-matched: occurrence cut run at 50, config declares 50
 [PASS] 31 Aug, area-matched: resampling matches config
 
 --- the 7 to 31 August change figures ---------------------------------------
-  · map-optimal: seen_by_both 3,159,751.7, seen_only_2016-08-07 5,432.3, seen_only_2016-08-31 0.0, overlap_flood_both_dates 36,772.4, overlap_drained_by_2016-08-31 27,843.0, overlap_new_by_2016-08-31 2,114.4, wedge_flood_2016-08-07 88.3, wedge_flood_2016-08-31 0.0, persistence_fraction 0.6, date_to_date_iou 0.6
-  · map-optimal: implied flood 7 Aug 64,615 ha, 31 Aug 38,887 ha, fall 39.8%, persistence 56.9%
-  · area-matched: seen_by_both 3,159,751.7, seen_only_2016-08-07 5,432.3, seen_only_2016-08-31 0.0, overlap_flood_both_dates 41,834.7, overlap_drained_by_2016-08-31 48,950.2, overlap_new_by_2016-08-31 3,156.7, wedge_flood_2016-08-07 130.0, wedge_flood_2016-08-31 0.0, persistence_fraction 0.5, date_to_date_iou 0.4
-  · area-matched: implied flood 7 Aug 90,785 ha, 31 Aug 44,991 ha, fall 50.4%, persistence 46.1%
+  · map-optimal: seen_by_both 3,159,751.7, seen_only_2016-08-07 5,432.3, seen_only_2016-08-31 0.0, overlap_flood_both_dates 37,334.3, overlap_drained_by_2016-08-31 27,933.4, overlap_new_by_2016-08-31 2,146.6, wedge_flood_2016-08-07 88.3, wedge_flood_2016-08-31 0.0, persistence_fraction 0.6, date_to_date_iou 0.6
+  · map-optimal: implied flood 7 Aug 65,268 ha, 31 Aug 39,481 ha, fall 39.5%, persistence 57.2%
+  · area-matched: seen_by_both 3,159,751.7, seen_only_2016-08-07 5,432.3, seen_only_2016-08-31 0.0, overlap_flood_both_dates 42,440.8, overlap_drained_by_2016-08-31 49,099.5, overlap_new_by_2016-08-31 3,207.3, wedge_flood_2016-08-07 130.0, wedge_flood_2016-08-31 0.0, persistence_fraction 0.5, date_to_date_iou 0.4
+  · area-matched: implied flood 7 Aug 91,540 ha, 31 Aug 45,648 ha, fall 50.1%, persistence 46.4%
 
 --- the accuracy headline ---------------------------------------------------
   ·    all  n= 65  IoU 0.5186 [0.3947, 0.6086]  P 0.7797  R 0.6076
@@ -184,7 +189,6 @@ C. NUMERIC LITERALS IN src/ THAT DUPLICATE A CONFIG CONSTANT
 ==============================================================================
 D. FIGURE FRESHNESS
 ==============================================================================
-[PASS] accuracy_ci.png: accuracy_ci.csv changed after it was drawn, but every column it held then is unchanged
 [PASS] accuracy_ci.png is not older than its source data
 [PASS] change_detection.png is not older than its source data
 [PASS] change_sweep.png is not older than its source data
@@ -203,7 +207,6 @@ D. FIGURE FRESHNESS
 [PASS] operating_point.png is not older than its source data
 [PASS] orbit_offset.png is not older than its source data
 [PASS] product_vs_window.png is not older than its source data
-[PASS] sensitivity_grid.png: sensitivity_grid.csv changed after it was drawn, but every column it held then is unchanged
 [PASS] sensitivity_grid.png is not older than its source data
 [PASS] no figure is older than the data behind it
 

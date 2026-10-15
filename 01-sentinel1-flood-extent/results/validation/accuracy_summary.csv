@@ -1,67 +1,67 @@
 layer,variant,map,metric,value,se,ci95_low,ci95_high
 clear sky,W or V,,"flood area, ha",202489.0,24752.0,153975.0,251004.0
-clear sky,W or V,"-18.75 dB, published","mapped flood, ha",46582.0,0.0,46582.0,46582.0
-clear sky,W or V,"-18.75 dB, published",user's accuracy,0.87,0.0338,0.8038,0.9362
-clear sky,W or V,"-18.75 dB, published",producer's accuracy,0.2001,0.0252,0.1508,0.2495
-clear sky,W or V,"-18.75 dB, published",overall accuracy,0.9208,0.0117,0.898,0.9437
-clear sky,W or V,-17.75 dB,"mapped flood, ha",65827.0,0.0,65827.0,65827.0
-clear sky,W or V,-17.75 dB,user's accuracy,0.8465,0.0276,0.7924,0.9005
-clear sky,W or V,-17.75 dB,producer's accuracy,0.2752,0.0342,0.2082,0.3421
-clear sky,W or V,-17.75 dB,overall accuracy,0.9261,0.0117,0.9032,0.9489
+clear sky,W or V,"-18.75 dB, as drawn","mapped flood, ha",46582.0,0.0,46582.0,46582.0
+clear sky,W or V,"-18.75 dB, as drawn",user's accuracy,0.87,0.0338,0.8038,0.9362
+clear sky,W or V,"-18.75 dB, as drawn",producer's accuracy,0.2001,0.0252,0.1508,0.2495
+clear sky,W or V,"-18.75 dB, as drawn",overall accuracy,0.9208,0.0117,0.898,0.9437
+clear sky,W or V,"-17.75 dB, as drawn","mapped flood, ha",65827.0,0.0,65827.0,65827.0
+clear sky,W or V,"-17.75 dB, as drawn",user's accuracy,0.8465,0.0276,0.7924,0.9005
+clear sky,W or V,"-17.75 dB, as drawn",producer's accuracy,0.2752,0.0342,0.2082,0.3421
+clear sky,W or V,"-17.75 dB, as drawn",overall accuracy,0.9261,0.0117,0.9032,0.9489
 clear sky,W or V,,"real flood inside the swath-edge buffer, ha",409.0,409.0,-392.0,1209.0
 clear sky,W or V,,"real flood removed by refinement, ha",944.0,368.0,223.0,1664.0
 whole map,W or V,,"flood area, ha",526900.0,63732.0,401985.0,651814.0
-whole map,W or V,"-18.75 dB, published","mapped flood, ha",119779.0,0.0,119779.0,119779.0
-whole map,W or V,"-18.75 dB, published",user's accuracy,0.87,0.0338,0.8038,0.9362
-whole map,W or V,"-18.75 dB, published",producer's accuracy,0.1978,0.0247,0.1494,0.2461
-whole map,W or V,"-18.75 dB, published",overall accuracy,0.93,0.0102,0.9101,0.95
-whole map,W or V,-17.75 dB,"mapped flood, ha",170626.0,0.0,170626.0,170626.0
-whole map,W or V,-17.75 dB,user's accuracy,0.846,0.0276,0.792,0.9
-whole map,W or V,-17.75 dB,producer's accuracy,0.274,0.0337,0.208,0.34
-whole map,W or V,-17.75 dB,overall accuracy,0.9347,0.0102,0.9148,0.9547
+whole map,W or V,"-18.75 dB, as drawn","mapped flood, ha",119779.0,0.0,119779.0,119779.0
+whole map,W or V,"-18.75 dB, as drawn",user's accuracy,0.87,0.0338,0.8038,0.9362
+whole map,W or V,"-18.75 dB, as drawn",producer's accuracy,0.1978,0.0247,0.1494,0.2461
+whole map,W or V,"-18.75 dB, as drawn",overall accuracy,0.93,0.0102,0.9101,0.95
+whole map,W or V,"-17.75 dB, as drawn","mapped flood, ha",170626.0,0.0,170626.0,170626.0
+whole map,W or V,"-17.75 dB, as drawn",user's accuracy,0.846,0.0276,0.792,0.9
+whole map,W or V,"-17.75 dB, as drawn",producer's accuracy,0.274,0.0337,0.208,0.34
+whole map,W or V,"-17.75 dB, as drawn",overall accuracy,0.9347,0.0102,0.9148,0.9547
 whole map,W or V,,"real flood inside the swath-edge buffer, ha",1773.0,1773.0,-1702.0,5248.0
 whole map,W or V,,"real flood removed by refinement, ha",7441.0,2899.0,1759.0,13122.0
 clear sky,W only,,"flood area, ha",80089.0,14563.0,51546.0,108631.0
-clear sky,W only,"-18.75 dB, published","mapped flood, ha",46582.0,0.0,46582.0,46582.0
-clear sky,W only,"-18.75 dB, published",user's accuracy,0.74,0.0441,0.6536,0.8264
-clear sky,W only,"-18.75 dB, published",producer's accuracy,0.4304,0.0788,0.2759,0.5849
-clear sky,W only,"-18.75 dB, published",overall accuracy,0.9728,0.0069,0.9593,0.9862
-clear sky,W only,-17.75 dB,"mapped flood, ha",65827.0,0.0,65827.0,65827.0
-clear sky,W only,-17.75 dB,user's accuracy,0.6083,0.0348,0.5402,0.6764
-clear sky,W only,-17.75 dB,producer's accuracy,0.5,0.0909,0.3218,0.6781
-clear sky,W only,-17.75 dB,overall accuracy,0.969,0.0069,0.9555,0.9824
+clear sky,W only,"-18.75 dB, as drawn","mapped flood, ha",46582.0,0.0,46582.0,46582.0
+clear sky,W only,"-18.75 dB, as drawn",user's accuracy,0.74,0.0441,0.6536,0.8264
+clear sky,W only,"-18.75 dB, as drawn",producer's accuracy,0.4304,0.0788,0.2759,0.5849
+clear sky,W only,"-18.75 dB, as drawn",overall accuracy,0.9728,0.0069,0.9593,0.9862
+clear sky,W only,"-17.75 dB, as drawn","mapped flood, ha",65827.0,0.0,65827.0,65827.0
+clear sky,W only,"-17.75 dB, as drawn",user's accuracy,0.6083,0.0348,0.5402,0.6764
+clear sky,W only,"-17.75 dB, as drawn",producer's accuracy,0.5,0.0909,0.3218,0.6781
+clear sky,W only,"-17.75 dB, as drawn",overall accuracy,0.969,0.0069,0.9555,0.9824
 clear sky,W only,,"real flood inside the swath-edge buffer, ha",0.0,0.0,0.0,0.0
 clear sky,W only,,"real flood removed by refinement, ha",786.0,339.0,122.0,1451.0
 whole map,W only,,"flood area, ha",210547.0,37549.0,136951.0,284143.0
-whole map,W only,"-18.75 dB, published","mapped flood, ha",119779.0,0.0,119779.0,119779.0
-whole map,W only,"-18.75 dB, published",user's accuracy,0.74,0.0441,0.6536,0.8264
-whole map,W only,"-18.75 dB, published",producer's accuracy,0.421,0.0757,0.2725,0.5694
-whole map,W only,"-18.75 dB, published",overall accuracy,0.9756,0.006,0.9638,0.9873
-whole map,W only,-17.75 dB,"mapped flood, ha",170626.0,0.0,170626.0,170626.0
-whole map,W only,-17.75 dB,user's accuracy,0.6057,0.0347,0.5378,0.6737
-whole map,W only,-17.75 dB,producer's accuracy,0.4909,0.0876,0.3191,0.6626
-whole map,W only,-17.75 dB,overall accuracy,0.9722,0.006,0.9604,0.9839
+whole map,W only,"-18.75 dB, as drawn","mapped flood, ha",119779.0,0.0,119779.0,119779.0
+whole map,W only,"-18.75 dB, as drawn",user's accuracy,0.74,0.0441,0.6536,0.8264
+whole map,W only,"-18.75 dB, as drawn",producer's accuracy,0.421,0.0757,0.2725,0.5694
+whole map,W only,"-18.75 dB, as drawn",overall accuracy,0.9756,0.006,0.9638,0.9873
+whole map,W only,"-17.75 dB, as drawn","mapped flood, ha",170626.0,0.0,170626.0,170626.0
+whole map,W only,"-17.75 dB, as drawn",user's accuracy,0.6057,0.0347,0.5378,0.6737
+whole map,W only,"-17.75 dB, as drawn",producer's accuracy,0.4909,0.0876,0.3191,0.6626
+whole map,W only,"-17.75 dB, as drawn",overall accuracy,0.9722,0.006,0.9604,0.9839
 whole map,W only,,"real flood inside the swath-edge buffer, ha",0.0,0.0,0.0,0.0
 whole map,W only,,"real flood removed by refinement, ha",6201.0,2672.0,963.0,11438.0
 clear sky,confident only,,"flood area, ha",137622.0,22099.0,94309.0,180935.0
-clear sky,confident only,"-18.75 dB, published","mapped flood, ha",46582.0,0.0,46582.0,46582.0
-clear sky,confident only,"-18.75 dB, published",user's accuracy,0.875,0.0355,0.8055,0.9445
-clear sky,confident only,"-18.75 dB, published",producer's accuracy,0.2962,0.0482,0.2018,0.3906
-clear sky,confident only,"-18.75 dB, published",overall accuracy,0.9516,0.0104,0.9311,0.972
-clear sky,confident only,-17.75 dB,"mapped flood, ha",65443.0,0.0,65443.0,65443.0
-clear sky,confident only,-17.75 dB,user's accuracy,0.8363,0.0306,0.7763,0.8963
-clear sky,confident only,-17.75 dB,producer's accuracy,0.3977,0.0642,0.2719,0.5235
-clear sky,confident only,-17.75 dB,overall accuracy,0.9559,0.0104,0.9354,0.9763
+clear sky,confident only,"-18.75 dB, as drawn","mapped flood, ha",46582.0,0.0,46582.0,46582.0
+clear sky,confident only,"-18.75 dB, as drawn",user's accuracy,0.875,0.0355,0.8055,0.9445
+clear sky,confident only,"-18.75 dB, as drawn",producer's accuracy,0.2962,0.0482,0.2018,0.3906
+clear sky,confident only,"-18.75 dB, as drawn",overall accuracy,0.9516,0.0104,0.9311,0.972
+clear sky,confident only,"-17.75 dB, as drawn","mapped flood, ha",65443.0,0.0,65443.0,65443.0
+clear sky,confident only,"-17.75 dB, as drawn",user's accuracy,0.8363,0.0306,0.7763,0.8963
+clear sky,confident only,"-17.75 dB, as drawn",producer's accuracy,0.3977,0.0642,0.2719,0.5235
+clear sky,confident only,"-17.75 dB, as drawn",overall accuracy,0.9559,0.0104,0.9354,0.9763
 clear sky,confident only,,"real flood inside the swath-edge buffer, ha",0.0,0.0,0.0,0.0
 clear sky,confident only,,"real flood removed by refinement, ha",814.0,350.0,127.0,1500.0
 whole map,confident only,,"flood area, ha",360497.0,57037.0,248704.0,472290.0
-whole map,confident only,"-18.75 dB, published","mapped flood, ha",119779.0,0.0,119779.0,119779.0
-whole map,confident only,"-18.75 dB, published",user's accuracy,0.875,0.0355,0.8055,0.9445
-whole map,confident only,"-18.75 dB, published",producer's accuracy,0.2907,0.0466,0.1993,0.3821
-whole map,confident only,"-18.75 dB, published",overall accuracy,0.9568,0.0091,0.939,0.9746
-whole map,confident only,-17.75 dB,"mapped flood, ha",170626.0,0.0,170626.0,170626.0
-whole map,confident only,-17.75 dB,user's accuracy,0.835,0.0307,0.7749,0.8951
-whole map,confident only,-17.75 dB,producer's accuracy,0.3952,0.0629,0.272,0.5185
-whole map,confident only,-17.75 dB,overall accuracy,0.9607,0.0091,0.9429,0.9785
+whole map,confident only,"-18.75 dB, as drawn","mapped flood, ha",119779.0,0.0,119779.0,119779.0
+whole map,confident only,"-18.75 dB, as drawn",user's accuracy,0.875,0.0355,0.8055,0.9445
+whole map,confident only,"-18.75 dB, as drawn",producer's accuracy,0.2907,0.0466,0.1993,0.3821
+whole map,confident only,"-18.75 dB, as drawn",overall accuracy,0.9568,0.0091,0.939,0.9746
+whole map,confident only,"-17.75 dB, as drawn","mapped flood, ha",170626.0,0.0,170626.0,170626.0
+whole map,confident only,"-17.75 dB, as drawn",user's accuracy,0.835,0.0307,0.7749,0.8951
+whole map,confident only,"-17.75 dB, as drawn",producer's accuracy,0.3952,0.0629,0.272,0.5185
+whole map,confident only,"-17.75 dB, as drawn",overall accuracy,0.9607,0.0091,0.9429,0.9785
 whole map,confident only,,"real flood inside the swath-edge buffer, ha",0.0,0.0,0.0,0.0
 whole map,confident only,,"real flood removed by refinement, ha",6426.0,2765.0,1006.0,11846.0

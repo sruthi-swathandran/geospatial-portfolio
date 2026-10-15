@@ -235,12 +235,13 @@ def validation_figures():
     """The independent check, from results/validation/ (C-28)."""
     v = cfg.RESULTS / "validation"
     need = [v / "floodplain_summary.csv", v / "accuracy_strata.csv",
-            v / "sample" / "labels.csv", v / "second" / "effect.csv"]
+            v / "sample" / "labels.csv", v / "second" / "effect.csv",
+            v / "map_scores.csv"]
     for p in need:
         if not p.exists():
             sys.exit(f"{p} missing. Run estimate_accuracy.py, then "
-                     f"floodplain_layer.py and compare_labels.py. "
-                     f"Nothing written.")
+                     f"floodplain_layer.py, compare_labels.py and "
+                     f"score_map.py. Nothing written.")
     with open(need[0], encoding="utf-8") as fh:
         fp = [r for r in csv.DictReader(fh)
               if r["cutoff"] == "150 m" and r["variant"] == "W only"
@@ -264,16 +265,26 @@ def validation_figures():
                    if r["labels"].startswith("first, with person")
                    and r["scope"] == "floodplain" and r["layer"] == "whole"
                    and r["variant"] == "W only")
-    pub, upper = "-18.75 dB, published", "-17.75 dB"
-    ua = pick("user's accuracy", pub)
-    pa = pick("producer's accuracy", pub)
+    # Accuracy and mapped area of the published maps come from score_map.py,
+    # since the published map is no longer the one the strata came from (C-31).
+    with open(need[4], encoding="utf-8") as fh:
+        ms = [r for r in csv.DictReader(fh) if r["scope"] == "floodplain"
+              and r["layer"] == "whole" and r["variant"] in ("W only", "")]
+
+    def score(metric, mp):
+        return next(float(r["value"]) for r in ms
+                    if r["metric"] == metric and r["map"] == mp)
+
+    pub, upper = "published, -18.75 dB", "published, -17.75 dB"
+    ua = score("user's accuracy", pub)
+    pa = score("producer's accuracy", pub)
     return dict(
         n_points=str(n_points),
         ow=f"{pick('flood area, ha'):,.0f}",
         ow_se=f"{pick_se('flood area, ha'):,.0f}",
         ow2=f"{ow2:,.0f}",
-        fp_flood=f"{pick('mapped flood, ha', pub):,.0f}",
-        fp_upper=f"{pick('mapped flood, ha', upper):,.0f}",
+        fp_flood=f"{score('mapped flood, ha, counted', pub):,.0f}",
+        fp_upper=f"{score('mapped flood, ha, counted', upper):,.0f}",
         ua=f"{ua * 100:.0f}%",
         pa=f"{pa * 100:.0f}%",
         rm_n=st["removed by refinement"]["n_labelled"],
@@ -703,8 +714,10 @@ BODY = """<title>Brahmaputra Flood Ledger</title>
       <p>The hand labels cover 65 floodplain chips and none of these
       situations appears in them. A labelled sample of the map checked two of
       the steps afterwards: of {rm_n} readable points in what the slope cut and
-      the clean-up removed, {rm_water} were water, and inside the buffer
-      {edge_water} of {edge_n}.</p>
+      the clean-up removed, {rm_water} were flood water, three of them on the
+      valley floor where the bilinear DEM now keeps them, and inside the buffer
+      {edge_water} of {edge_n}. Water on ground JRC counts as permanent is not
+      counted as flood.</p>
       <p>Permanent water means JRC Global Surface Water occurrence of 50% or
       more. Moving that definition between 10% and 90% moves flood extent
       between <strong>{gsw_lo}</strong> and <strong>{gsw_hi} ha</strong> on the

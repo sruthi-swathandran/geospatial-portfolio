@@ -1,0 +1,38 @@
+{
+  "event": "India",
+  "resolution_m": 20.0,
+  "threshold_db": -17.75,
+  "date": "2016-08-12",
+  "relative_orbit": 77,
+  "pixel_ha": 0.04,
+  "grid": [
+    19052,
+    10169
+  ],
+  "crs": "EPSG:32646",
+  "tiles_in_grid": 50,
+  "tiles_in_swath": 46,
+  "tiles_done": 46,
+  "occurrence_cut": 50,
+  "threshold_source": "command line",
+  "resampling": {
+    "sar": "nearest",
+    "dem": "nearest",
+    "occurrence": "nearest",
+    "landcover": "mode"
+  },
+  "flood_ha": 319398.3,
+  "permanent_ha": 60953.5,
+  "water_ha": 380351.8,
+  "land_ha": 5964208.7,
+  "nodata_ha": 1405031.0,
+  "refined": {
+    "slope_cut_deg": 8.0,
+    "min_pixels": 10,
+    "flood_ha_before": 290951.3,
+    "flood_ha_after": 170625.4,
+    "removed_steep_ha": 115946.6,
+    "removed_small_ha": 4379.3,
+    "note": "the slope mask was neutral on the labelled chips (precision +0.008, recall -0.003) because every chip is in the floodplain; it is applied here for the uplands the chips never sampled"
+  }
+}

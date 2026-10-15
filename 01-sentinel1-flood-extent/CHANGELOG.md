@@ -682,6 +682,129 @@ renumbered chips and the pack sent to the second person stay in
 `data/validation/`, which git ignores. `label_tool.py` gained `--sheet` and
 `--chips` so it can open a second sheet.
 
+### C-30 Eighth register round, V-03 to V-05
+
+The register on f6b7263 found five points. V-01, a top-up of land near flood,
+and V-02, the step from clear sky to cloud, wait for the map that S-01 and
+S-02 settle. The other three are fixed here.
+
+- **V-03, the swath-edge count.** The README said 1 of 45 readable points in
+  the buffer was water. The labels are 1 W and 1 V, and the register read that
+  as 2. The count of 1 is right by the project's definition of flood: the W
+  point, P0543, has a JRC occurrence of 90 and so is permanent water. The
+  README now says so, and the page says "flood water" where it said "water".
+- **V-04, what "clear" covers.** The draw takes classes 2 and 7 of the scene
+  classification, dark area and unclassified, as well as the clear ones. The
+  README now says points were drawn where the classification shows no cloud,
+  cloud shadow or cirrus within 100 m, gives the 105 points on those two
+  classes, and heads the column "Eligible ha sampled". The counts are in a
+  new `accuracy_labels_by_scl.csv`.
+- **V-05, two roundings of one figure.** `floodplain_layer.py` wrote stratum
+  areas rounded to the hectare, and `compare_labels.py` read them back, so its
+  first-reader figures came out at 160,689 and 70,660 ha against 160,688 and
+  70,659 in the summary. The areas are now written to one decimal.
+
+Ready for S-01 and S-02, with no published figure changed:
+
+- `full_scene.py` refuses a resampling test without `--variant`. Without one
+  it would have resumed from the published run's record and rewritten
+  `fullscene_stats_20m.json`. `refine_scene.py` writes a DEM test under a
+  `_dem-bilinear` name instead of over `refine_scene_20m.csv`.
+- `score_map.py` scores any version of the map against the sample. The strata
+  stay as drawn and the map class is read at each point, the estimator of
+  Stehman (2014) for strata that differ from the map classes. On the published
+  map it reproduces `floodplain_layer.py`, and checks that before it writes
+  `map_scores.csv`.
+
+### C-31 Resampling tested, the DEM made bilinear, the clean-up made consistent
+
+REVIEW.md suspected two resampling rules, S-01 for the VH load and S-02 for
+the DEM behind the slope cut. Both were run against the published 12 August
+map and scored on the labelled sample with `score_map.py`.
+
+- **S-01, averaged VH. Not adopted.** The raw flood went from 217,490 to
+  216,370 ha. Refined with the same DEM and clean-up as the comparison run, it
+  came to 119,384 ha against 119,970, 0.5% less. Five sample points changed,
+  three toward their labels and two away. Nearest keeps single 10 m values,
+  which is what the threshold was tuned on on the chips.
+- **A prediction that failed.** Before the refined result was seen, the
+  expected change was a fall of 5 to 15%, reasoning that averaging mixes water
+  and land in linear power at flood edges, where land dominates. It was 0.5%.
+  The likely reason is that the Lee filter already mixes linear power across
+  those edges, so most of that effect was in the map before. That reason has
+  not been measured.
+- **S-02, bilinear DEM. Adopted.** The slope cut removes 68,958 ha against
+  68,437, and the permanent channel above 8° falls from about 415 to 275 ha.
+  Four sample points change and all four move toward their labels. P0085,
+  P0090 and P0105 are open water marked sure, on the valley floor at 69 to
+  76 m; the nearest DEM gave them slopes of 10.4 to 11.0° and the bilinear one
+  6.9 to 7.6°, so they are no longer cut. P0067, not water, at 1,634 m, goes
+  from 7.3° to 12.0° and is now cut. `config.RESAMPLING["dem"]` is
+  `"bilinear"`, and the DEM tile cache is named by the rule, so a change of
+  default cannot reuse tiles built the old way.
+
+**A correction to C-05.** C-05 replaced `min_size=10` with `max_size=9` and
+said the clean-up "still removes 3,052 ha". That was not rerun, and it was
+wrong. scikit-image 0.26 passes a `min_size` argument on as `max_size`
+unchanged, so the September call dropped components of 10 pixels or fewer,
+where the code since C-05, and config.py, drop those under 10. The September
+maps were not all refined the same way. Recounted from the raw rasters:
+
+| Map | Removed in September, ha | 10 px or fewer | 9 px or fewer |
+|---|---:|---:|---:|
+| 12 Aug, map-optimal | 3,051.8 | 3,051.8 | 2,860 |
+| 7 Aug, map-optimal | 454.2 | 454.2 | 426.6 |
+| 31 Aug, map-optimal | 422.6 | 422.6 | 400.2 |
+| 12 Aug, area-matched | 4,379.3 | 4,666 | 4,379.3 |
+| 7 Aug, area-matched | 620.2 | 650 | 620.2 |
+| 31 Aug, area-matched | 575.5 | 609 | 575.5 |
+
+All six are now refined with the documented rule. On 12 August, map-optimal,
+the move from 119,779 to 120,790 ha is about 191 ha from the clean-up and
+820 ha from the DEM.
+
+**The sample stays on the maps it was drawn from.** The strata were read off
+the September maps, and every point's weight comes from their hectares, so
+they cannot follow the published map. `clear_sky.py` now points at
+`India_water_20m_dem-nearest_refined.tif` and its area-matched twin, rebuilt
+with the nearest DEM, and for the first with `--min-pixels 11`, which
+reproduces the September clean-up. A first rebuild without that flag came out
+191 ha larger and moved the floodplain flood stratum from 102,697 to 102,737 ha
+without changing a single point; `score_map.py` now stops if either map as
+drawn differs from the hectares the draw recorded in `strata.csv`.
+`estimate_accuracy.py` labels its maps "as drawn", and the page takes the
+published map's figures from `map_scores.csv`. Open-water flood on the ground,
+160,688 ± 30,796 ha, does not change, since it estimates the ground.
+
+**Two faults caught before they wrote anything.** The bilinear tiles share a
+folder with the nearest ones, and `floodplain_layer.py`, `topup_sample.py` and
+`estimate_accuracy.py` matched both, which would have counted the floodplain
+twice. They now read the nearest tiles only. And the DEM cache was named by
+whether a rule was the default, so changing the default would have read
+nearest tiles as bilinear.
+
+Published figures:
+
+| Quantity | Superseded | Corrected |
+|---|---:|---:|
+| Flood, 12 Aug, map-optimal | 119,779 ha | 120,790 ha |
+| Flood, 12 Aug, area-matched | 170,625 ha | 171,683 ha |
+| Flood, 7 Aug, map-optimal / area-matched | 64,704 / 90,915 ha | 65,356 / 91,670 ha |
+| Flood, 31 Aug, map-optimal / area-matched | 38,887 / 44,991 ha | 39,481 / 45,648 ha |
+| Flooded cropland, 12 Aug | 46,943 / 87,127 ha | 47,028 / 87,274 ha |
+| Flooded cropland, 7 Aug | 30,035 / 52,882 ha | 30,109 / 52,999 ha |
+| Flooded cropland, 31 Aug | 5,776 / 9,256 ha | 5,826 / 9,325 ha |
+| District totals, 12 Aug, flood / cropland | 110,081 / 43,494 ha | 110,938 / 43,564 ha |
+| Removed by the slope cut / the clean-up, 12 Aug | 68,437 / 3,052 ha | 68,958 / 1,519 ha |
+| Sensitivity grid, published cell | 122,832 ha | 122,310 ha |
+| Drained 7 to 31 Aug | 27,843 / 48,950 ha | 27,933 / 49,099 ha |
+| Newly flooded 7 to 31 Aug | 2,114 / 3,157 ha | 2,147 / 3,207 ha |
+| Mapped flood in the floodplain, published | 102,697 / 146,367 ha | 102,758 / 146,400 ha |
+| User's / producer's accuracy, whole map, −18.75 dB | 0.740 / 0.421 | 0.755 / 0.439 |
+| Headline scaled by the chip shortfall, without / with the clean-up | 153,681 / about 166,900 ha | about 155,000 / 168,300 ha |
+
+Every district row moves by a few hectares; the ranking does not change.
+
 ---
 
 ## Open, not fixed
@@ -693,6 +816,3 @@ renumbered chips and the pack sent to the second person stay in
 - **F-07.** The Sen1Floods11 splits for one event are spatially adjacent chips
   from a single scene. The test split checks that the threshold was not fitted
   to the valid split. It is not evidence of transfer.
-- **S-01 / S-02.** Whether nearest resampling of VH and of the DEM biases the
-  threshold and the slope mask. Machinery to test it is in place; the runs have
-  not been made.
