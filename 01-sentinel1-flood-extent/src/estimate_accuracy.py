@@ -132,7 +132,7 @@ def load_points(include_topup=False):
     only, so the whole-stratum estimates here leave them out."""
     with open(SAMPLE / "points_key.csv", encoding="utf-8") as fh:
         key = {r["point_id"]: r for r in csv.DictReader(fh)
-               if include_topup or (r.get("batch") or "main") != "topup"}
+               if include_topup or not (r.get("batch") or "main").startswith("topup")}
     with open(SAMPLE / "labels.csv", encoding="utf-8") as fh:
         for r in csv.DictReader(fh):
             if r["point_id"] not in key:

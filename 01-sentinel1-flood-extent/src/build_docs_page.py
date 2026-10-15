@@ -745,7 +745,7 @@ BODY = """<title>Brahmaputra Flood Ledger</title>
       Inside the floodplain, which holds {fp_flood} of the {flood12} ha mapped,
       open-water flood comes to <strong>{ow} &plusmn; {ow_se} ha</strong>,
       against {fp_upper} ha at &minus;17.75 dB. With a second person's labels
-      on the hardest points it comes to {ow2} ha. About {ua} of what the map calls
+      on the relabelled points it comes to {ow2} ha. About {ua} of what the map calls
       flood is open water, and it finds about {pa} of the open water there.
       Water seen through vegetation is counted apart, since in August it
       includes rice paddies standing in water as usual.</p>

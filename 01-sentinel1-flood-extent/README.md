@@ -17,11 +17,11 @@ reported with the decision that moves it and the amount it moves by.
 
 A labelled sample of the map, described
 [below](#independent-check-of-the-12-august-map), puts open-water flood inside
-the floodplain at **160,688 ± 30,796 ha**, against 102,758 ha mapped there at
-−18.75 dB and 146,400 ha at −17.75 dB. The upper figure is the closer one.
-With a second person's labels on the hardest points the estimate is
-130,608 ± 24,733 ha, so who reads the hard cells moves it about as much as the
-sampling does.
+the floodplain at **135,505 ± 13,221 ha**, against 102,758 ha mapped there at
+−18.75 dB and 146,400 ha at −17.75 dB, so the true figure lies between the two.
+Read by a second person, the relabelled points give 123,996 ha, and read by
+Claude 118,349 ha, so which threshold comes closer depends on who reads the
+hard cells.
 
 Interactive map: [three acquisitions and the recession between them](https://sruthi-swathandran.github.io/geospatial-portfolio/01-sentinel1-flood-extent/docs/)
 
@@ -388,9 +388,9 @@ flood was receding. Cloud covers much of the scene, so points were drawn only
 where the scene classification shipped with the image shows no cloud, cloud
 shadow or cirrus within 100 m, and only where a test on the image itself found
 no cloud or haze within 100 m. The classification's dark-area and unclassified
-pixels count as eligible. 105 points sit on them, top-up included, and 40 of
-those were labelled open water, so leaving them out would have hidden much of
-the flood. "Clear" below means eligible in this sense. The classification misses
+pixels count as eligible. Counting both top-ups, 153 points sit on them and
+48 of those were labelled open water, so leaving them out would have
+hidden much of the flood. "Clear" below means eligible in this sense. The classification misses
 some cloud outright, and the image test removed 41 of the 591 candidates it had
 passed. Two earlier draws were set aside before their labels were used: the
 first let points through at cloud edges, and the second put one inside a cloud
@@ -413,7 +413,9 @@ scored against the same points (below):
 | Land further from flood | 4,536,775 | 1,566,047 | 120 |
 
 A further 60 points went to the floodplain part of the last stratum, where the
-first pass put only 7. The first interpreter labelled every point, in random
+first pass put only 7. Later, 150 more went to the floodplain part of land
+within about 1 km of flood, which held 624,310 ha of the floodplain and only 44
+readable points, and carried most of the headline's variance. The first interpreter labelled every point, in random
 order and without the map: W for open water, V for water seen through vegetation, N for
 not water and C for unreadable, each with a confidence from 1 to 3. 21 of the
 main sample were unreadable.
@@ -431,15 +433,17 @@ so further downstream.
 
 | | Open-water flood | Mapped at −18.75 dB, as drawn | Mapped at −17.75 dB, as drawn |
 |---|---:|---:|---:|
-| Clear part only | 70,659 ± 14,411 ha | 42,419 ha | 60,357 ha |
-| All of the floodplain | **160,688 ± 30,796 ha** | 102,697 ha | 146,367 ha |
+| Clear part only | 59,172 ± 6,204 ha | 42,419 ha | 60,357 ha |
+| All of the floodplain | **135,505 ± 13,221 ha** | 102,697 ha | 146,367 ha |
 
-The 95% interval for the whole floodplain runs from 100,327 to 221,049 ha. At
+The 95% interval for the whole floodplain runs from 109,593 to 161,417 ha. At
 −18.75 dB, 0.73 of what the map calls flood is open water, ± 0.05, and the map
-finds 0.46 of the open water there, ± 0.09. At −17.75 dB the two figures are
-0.60 and 0.54. Moving the floodplain ceiling to 100 m or 200 m gives 151,794 or
-157,603 ha. The map is fairly reliable where it says flood and misses about
-half of it, and the upper end of the published range is the closer one.
+finds 0.55 of the open water there, ± 0.05. At −17.75 dB the two figures are
+0.60 and 0.64. Lowering the floodplain ceiling to 100 m gives 130,769 ha.
+Raising it to 200 m gives 157,603 ha, but that figure cannot use the top-ups,
+which were drawn inside 150 m, so it rests on the main sample alone in those
+strata. The map is fairly reliable where it says flood and misses close to
+half of it, and the true figure lies between the two thresholds.
 
 **The published map.** With the bilinear DEM the map holds 102,758 ha of flood
 in the floodplain at −18.75 dB and 146,400 ha at −17.75 dB. No floodplain point
@@ -459,13 +463,12 @@ valley-floor points the bilinear DEM now keeps. Inside the swath-edge buffer 1 o
 more was open water on ground JRC counts as permanent, which is not flood by
 this project's definition. The buffer set aside very little real flood.
 
-**Water under vegetation is reported apart.** Counting V as flood more than
-doubles the estimate, to 393,655 ± 47,226 ha in the floodplain. It stays out of
+**Water under vegetation is reported apart.** Counting V as flood nearly
+triples the estimate, to 400,861 ± 23,933 ha in the floodplain. It stays out of
 the headline. In August the valley's rice paddies normally stand in water, and
-V turns up about as often far from mapped flood as near it: 19 of 100 points in
-land near flood, and 10 of 67 in floodplain land further away. Of those 19, 10
-were marked as guesses. A C-band VH threshold cannot see water under a crop
-canopy in any case.
+V is common well away from mapped flood: 10 of 67 points in floodplain land far
+from it, and 62 of 194 in floodplain land near it, where only 14 were open
+water. A C-band VH threshold cannot see water under a crop canopy in any case.
 
 **A second reader.** The 62 points the first reader marked as guesses, outside
 permanent water, were labelled again along with 40 drawn at random from the
@@ -475,28 +478,46 @@ Claude did the same separately. On the random points the second person agreed
 with the first on 0.925 of them, a kappa of 0.856, and the kappa for open water
 against everything else was 0.857. On the guesses it fell to 0.542. Claude's
 kappa with the first reader was 0.736 on the random points and 0.461 on the
-guesses. Every other point keeps the first reader's label in the table below.
+guesses.
+
+The 150 top-up points came later, and the first reader labelled them
+differently: none was marked as a guess, where 18 of the 100 points near flood
+in the main sample had been, and 50 were called V, against 19 there. So 40 of
+them were drawn at random for a second reading, along with the 8 others the
+first reader called open water. On the random 40 the second person agreed with
+the first on 0.875 of them, a kappa of 0.776, about as well as on the main
+sample. Of the 8 open-water calls she kept 6 and Claude 3. Every other point
+keeps the first reader's label in the table below.
 
 | Labels on the relabelled points | Open-water flood in the floodplain | Counting V as flood |
 |---|---:|---:|
-| First reader | 160,688 ± 30,796 ha | 393,655 ± 47,226 ha |
-| Second person | 130,608 ± 24,733 ha | 374,336 ± 46,707 ha |
-| Claude | 143,738 ± 28,605 ha | 371,963 ± 46,852 ha |
+| First reader | 135,505 ± 13,221 ha | 400,861 ± 23,933 ha |
+| Second person | 123,996 ± 12,133 ha | 398,999 ± 24,034 ha |
+| Claude | 118,349 ± 11,708 ha | 396,059 ± 23,959 ha |
 
-The first reader called more of the hard cells open water than either of the
-others, so the headline is the top of what different readers give. The gap
-between readers is about as large as the standard error, which leaves it out.
-Over the whole map the second person's labels move open-water flood from
-210,547 to 195,493 ha. Every reading still finds more open water in the
-floodplain than the 102,758 ha mapped at −18.75 dB, and the 146,400 ha at
-−17.75 dB lies within their range. Claude's labels are an AI's reading of the
-same chips, not a third person's.
+The first reader again called more of the hard cells open water than either of
+the others, so the headline is the top of what different readers give, and the
+gap between readers is about as large as the standard error. Over the whole
+map, which leaves the top-ups out, the second person's labels move open-water
+flood from 210,547 to 195,493 ha. Every reading finds more open water in the
+floodplain than the 102,758 ha mapped at −18.75 dB and less than the 146,400 ha
+at −17.75 dB. Claude's labels are an AI's reading of the same chips, not a
+third person's. Each chip shows the point's original number in its title, so
+the renumbering hid the order and the set a point came from, though not which
+point it was; neither second reader had the first labels to hand.
 
 What this check does not cover:
 
 - **Readers.** Only the relabelled points have a second reading. The standard
   errors above cover sampling alone, and on the hard points the readers differ
-  by about as much again.
+  by about as much again. The first reader also knew that every top-up point
+  came from near mapped flood, which the main sample did not reveal.
+- **Cloud.** On the map as drawn, 60,278 of the 102,697 ha of flood in the
+  floodplain, 58.7%, lay under cloud. The whole-floodplain figure assumes the
+  map errs there as it does in clear sky. The terrain check backs that on
+  slope, less so on elevation: the cloudy part lies about 9 m lower in the flood
+  stratum and 11 m lower in permanent water. The ± leaves this out, and the
+  clear part alone gives 59,172 ± 6,204 ha.
 - **Timing.** The optical image is about twenty hours earlier than the radar
   while the flood was receding, which pushes the optical estimates up a little.
   Map land was water at between 20.4% and 27.0% of points whatever the distance

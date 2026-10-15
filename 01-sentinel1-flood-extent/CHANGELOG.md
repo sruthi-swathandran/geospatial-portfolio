@@ -685,8 +685,8 @@ renumbered chips and the pack sent to the second person stay in
 ### C-30 Eighth register round, V-03 to V-05
 
 The register on f6b7263 found five points. V-01, a top-up of land near flood,
-and V-02, the step from clear sky to cloud, wait for the map that S-01 and
-S-02 settle. The other three are fixed here.
+and V-02, the step from clear sky to cloud, waited for the map that S-01 and
+S-02 settled. The other three are fixed here.
 
 - **V-03, the swath-edge count.** The README said 1 of 45 readable points in
   the buffer was water. The labels are 1 W and 1 V, and the register read that
@@ -804,6 +804,56 @@ Published figures:
 | Headline scaled by the chip shortfall, without / with the clean-up | 153,681 / about 166,900 ha | about 155,000 / 168,300 ha |
 
 Every district row moves by a few hectares; the ranking does not change.
+
+### C-32 A second top-up, where the headline's uncertainty sat (V-01, V-02)
+
+The eighth register found that land within about 1 km of flood held 624,310 ha
+of the floodplain and 44 readable points, 5 of them open water, and carried
+96% of the headline's variance. `topup_sample.py --second` drew 150 more there
+under the same screen, as batch "topup2", P0611 to P0760, seed 20261017; 4
+candidates were screened out. Every script that leaves top-ups out of
+whole-stratum figures now treats any batch starting "topup" alike.
+
+| Open water in the floodplain | Superseded | Corrected |
+|---|---:|---:|
+| Whole floodplain | 160,688 ± 30,796 ha | 135,505 ± 13,221 ha |
+| 95% interval | 100,327 to 221,049 ha | 109,593 to 161,417 ha |
+| Clear part | 70,659 ± 14,411 ha | 59,172 ± 6,204 ha |
+| Floodplain ceiling at 100 m | 151,794 ha | 130,769 ha |
+| Counting V as flood | 393,655 ± 47,226 ha | 400,861 ± 23,933 ha |
+| Producer's accuracy, −18.75 dB / −17.75 dB | 0.46 / 0.54 | 0.55 / 0.64 |
+| Second person's labels on the relabelled points | 130,608 ± 24,733 ha | 123,996 ± 12,133 ha |
+| Claude's labels on the relabelled points | 143,738 ± 28,605 ha | 118,349 ± 11,708 ha |
+
+The open-water share in that stratum fell from 5 of 44 points to 14 of 191, so
+the error fell by more than the register's estimate. The new figure lies
+inside the old interval. The README no longer says the −17.75 dB map is the
+closer one: the first reader's figure lies nearer it, the second person's
+about midway, and Claude's nearer the −18.75 dB map. The 200 m ceiling,
+157,603 ha, cannot use either top-up and did not change. User's accuracy and
+everything over the whole map are unchanged, since the top-ups count only in
+the floodplain.
+
+**The first reader labelled the top-up differently.** None of the 150 was
+marked as a guess, against 18 of the 100 points near flood in the main sample,
+and 50 were called V, against 19. She also knew every one came from near
+mapped flood. `second_label.py --extend` therefore took 40 of them at random
+and the 8 other points she called open water, R103 to R150, for the same
+second person, who labelled them on the first reader's computer, and for
+Claude. On the random 40 the second person agreed with the first on 0.875 of
+the points, a kappa of 0.776, close to the 0.856 on the main sample. Of the 8
+open-water calls she kept 6 and Claude 3. `compare_labels.py` now reports
+every set in the key.
+
+**A limit of the renumbering.** Each chip shows its point's original number in
+the title. The R numbers hid the order and the set a point came from, but not
+which point it was. Neither second reader had the first labels open, and the
+first round had the same titles.
+
+**V-02.** The README's limits now name the step from clear sky to cloud: on the
+map as drawn 58.7% of the floodplain flood lay under cloud, the whole-floodplain
+figure assumes the map errs there as in clear sky, the terrain check supports
+that on slope more than on elevation, and the clear part is given beside it.
 
 ---
 

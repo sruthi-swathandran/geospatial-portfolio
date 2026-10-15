@@ -1,16 +1,16 @@
 VERIFICATION REPORT
-README sha256 71969275b8c0f910
+README sha256 0342171c93124cc2
 project: D:\geospatial-portfolio\01-sentinel1-flood-extent
 read-only; nothing in the repo is modified
 
-indexed 27175 numeric values from results/
+indexed 27499 numeric values from results/
 
 
 ==============================================================================
 A. EVERY NUMBER IN THE README, TRACED TO A FILE
 ==============================================================================
-  · 398 numbers matched a value in results/
-  · 224 skipped as years, codes or section numbers
+  · 415 numbers matched a value in results/
+  · 231 skipped as years, codes or section numbers
 [WARN] 6 numbers could not be matched to any file. Each needs a human decision: derived, rounded, or wrong.
 
 --- unmatched README numbers ------------------------------------------------
@@ -18,8 +18,8 @@ A. EVERY NUMBER IN THE README, TRACED TO A FILE
   L166           91,540   flood, 7 Aug                65,268 ha         91,540 ha
   L227           27,800   holds 36,915 ha, so on 12 August it would have been nearer 27,800 ha. **A naive
   L360          729,161   passes share 1,819,972 ha, and eight tiles covering 729,161 ha of that were
-  L584           65,268   | Acquisition date | 7 Aug vs 31 Aug, same ground | 65,268 ha to 39,481 ha |
-  L642          155,000   figure by that ratio gives about 155,000 ha. The scene also drops water patches
+  L605           65,268   | Acquisition date | 7 Aug vs 31 Aug, same ground | 65,268 ha to 39,481 ha |
+  L663          155,000   figure by that ratio gives about 155,000 ha. The scene also drops water patches
 
 ==============================================================================
 A2. NUMBERS ON docs/index.html, TRACED TO A FILE

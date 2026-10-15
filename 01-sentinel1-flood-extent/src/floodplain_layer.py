@@ -193,7 +193,7 @@ def terrain_rows(hist, e_bins, s_bins):
 def usable_topup(p, cutoff):
     """Top-up points were drawn inside the 150 m floodplain, so they speak for
     any floodplain inside that one, and not for a larger one."""
-    if (p.get("batch") or "main") != "topup":
+    if not (p.get("batch") or "main").startswith("topup"):
         return True
     return CUTOFFS[cutoff][0] <= CUTOFFS[MAIN][0]
 
@@ -212,9 +212,9 @@ def screened_rate(points, dom_flag, codes):
                       if codes[r["stratum"]] == k and np.isfinite(e)
                       and e <= e_max and s <= s_max and usable_topup(r, c))
             acc_all = sum(1 for p in points if p["code"] == k
-                          and (p.get("batch") or "main") != "topup")
+                          and not (p.get("batch") or "main").startswith("topup"))
             rej_all = sum(1 for r in out if codes[r["stratum"]] == k
-                          and (r.get("batch") or "main") != "topup")
+                          and not (r.get("batch") or "main").startswith("topup"))
             if acc + rej >= MIN_TESTED:
                 rates[c][k] = acc / (acc + rej)
             else:

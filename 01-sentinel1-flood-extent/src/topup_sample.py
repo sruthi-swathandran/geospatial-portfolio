@@ -26,13 +26,23 @@ New points continue the numbering, P0551 onward, are added to points_key.csv
 and labels.csv, and get chips like the rest. Rejected candidates go to
 screened_out.csv with batch "topup". Run once; it refuses if a top-up exists.
 
+A second top-up (REGISTER V-01)
+-------------------------------
+Land near flood holds 624,310 ha of the floodplain and only 44 readable
+points, and carries 96% of the headline's variance. --second draws 150 more
+there, inside the 150 m floodplain, under the same rules, as batch "topup2",
+P0611 onward. Every script that leaves top-up points out of whole-stratum
+estimates treats any batch starting "topup" the same way.
+
 Usage
 -----
-    python src\\topup_sample.py
+    python src\\topup_sample.py              # the first top-up, already drawn
+    python src\\topup_sample.py --second     # land near flood, V-01
 """
 
 from __future__ import annotations
 
+import argparse
 import csv
 import re
 import sys
@@ -46,14 +56,16 @@ from rasterio.windows import Window
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from clear_sky import MAP, RAW, SCL_TIF, UPPER, strata_of            # noqa: E402
-from draw_sample import (CELL, ELIGIBLE_SCL, OVERDRAW, SAMPLE,         # noqa: E402
+from draw_sample import (CELL, ELIGIBLE_SCL, NAMES, OVERDRAW, SAMPLE,  # noqa: E402
                          cut_chips, near_flood_mask, screen_candidates)
 from estimate_accuracy import DEM_DIR, slope_degrees                   # noqa: E402
 from floodplain_layer import CUTOFFS, MAIN, cloud_near_window          # noqa: E402
 
-SEED = 20261015
-N_TOPUP = 60
-STRATUM = 7                                  # land far from flood
+# batch: (stratum, points, seed); stratum 7 is land far from flood, 6 near
+BATCHES = {"topup": (7, 60, 20261015), "topup2": (6, 150, 20261017)}
+BATCH = "topup"
+STRATUM, N_TOPUP, SEED = BATCHES[BATCH]
+STRATUM_NAME = NAMES[STRATUM]
 
 
 def draw_candidates(scl):
@@ -74,7 +86,7 @@ def draw_candidates(scl):
         res = abs(ref.transform.a)
         print("  marking land within about 1 km of flood ...")
         near = near_flood_mask(ref, up)
-        print("  finding floodplain land far from flood under clear sky ...")
+        print(f"  finding floodplain {STRATUM_NAME} under clear sky ...")
         area_px = 0
         for ty, tx, f in tiles:
             r0, c0 = ty * 2048, tx * 2048
@@ -125,26 +137,33 @@ def draw_candidates(scl):
             lon, lat = to_ll.transform(x, y)
             one = Window(col, row, 1, 1)
             cands.append(dict(
-                stratum="land far from flood", row=row, col=col,
+                stratum=STRATUM_NAME, row=row, col=col,
                 x=round(x, 1), y=round(y, 1), lon=round(lon, 6), lat=round(lat, 6),
                 map_class=int(ref.read(1, window=one)[0, 0]),
                 raw_class=int(raw.read(1, window=one)[0, 0]),
                 upper_class=int(up.read(1, window=one)[0, 0]),
-                scl_class=int(scl[row, col]), batch="topup"))
+                scl_class=int(scl[row, col]), batch=BATCH))
         print(f"  {area_px * res * res / 1e4:,.0f} ha of such ground before the "
               f"image screen; {len(cands)} candidates kept")
         return cands, ref.crs
 
 
 def main():
+    global BATCH, STRATUM, N_TOPUP, SEED, STRATUM_NAME
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--second", action="store_true",
+                    help="the V-01 top-up of land near flood")
+    BATCH = "topup2" if ap.parse_args().second else "topup"
+    STRATUM, N_TOPUP, SEED = BATCHES[BATCH]
+    STRATUM_NAME = NAMES[STRATUM]
     print("=" * 78)
-    print("TOP-UP SAMPLE: FLOODPLAIN LAND FAR FROM FLOOD")
+    print(f"TOP-UP SAMPLE, {BATCH}: FLOODPLAIN {STRATUM_NAME.upper()}")
     print("=" * 78)
     key_path, sheet_path = SAMPLE / "points_key.csv", SAMPLE / "labels.csv"
     with open(key_path, encoding="utf-8") as fh:
         key = list(csv.DictReader(fh))
-    if any(r.get("batch") == "topup" for r in key):
-        sys.exit("a top-up is already in points_key.csv; nothing done")
+    if any(r.get("batch") == BATCH for r in key):
+        sys.exit(f"batch {BATCH} is already in points_key.csv; nothing done")
     with open(sheet_path, encoding="utf-8") as fh:
         reader = csv.DictReader(fh)
         sheet_fields, sheet = reader.fieldnames, list(reader)
@@ -189,15 +208,15 @@ def main():
     for r in out_rows:
         r["batch"] = r.get("batch") or "main"
     for r in rejected:
-        r["batch"] = "topup"
+        r["batch"] = BATCH
     with open(out_path, "w", newline="", encoding="utf-8") as fh:
         w = csv.DictWriter(fh, fieldnames=out_fields, extrasaction="ignore")
         w.writeheader()
         w.writerows(out_rows + rejected)
 
     with open(SAMPLE / "draw_log.txt", "a", encoding="utf-8") as fh:
-        fh.write(f"{datetime.now(timezone.utc):%Y-%m-%d %H:%M} UTC  top-up  seed "
-                 f"{SEED}  land far from flood, floodplain {MAIN}  "
+        fh.write(f"{datetime.now(timezone.utc):%Y-%m-%d %H:%M} UTC  {BATCH}  seed "
+                 f"{SEED}  {STRATUM_NAME}, floodplain {MAIN}  "
                  f"{tested.get(STRATUM, 0)} tested, {len(rejected)} screened out, "
                  f"{len(points)} points, P{start:04d} onward\n")
     print(f"\n  {len(points)} points added as P{start:04d} to "

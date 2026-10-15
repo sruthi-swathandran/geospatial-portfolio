@@ -1,25 +1,25 @@
 labels,scope,layer,variant,flood_area_ha,se,change_from_first_ha
-first,floodplain,whole,W only,160688,30796,0
-first,floodplain,clear part,W only,70659,14411,0
+first,floodplain,whole,W only,135505,13221,0
+first,floodplain,clear part,W only,59172,6204,0
 first,whole map,whole,W only,210547,37549,0
 first,whole map,clear part,W only,80089,14563,0
-first,floodplain,whole,W or V,393655,47226,0
-first,floodplain,clear part,W or V,179859,22240,0
+first,floodplain,whole,W or V,400861,23933,0
+first,floodplain,clear part,W or V,184990,11550,0
 first,whole map,whole,W or V,526900,63732,0
 first,whole map,clear part,W or V,202489,24752,0
-"first, with person on the relabelled points",floodplain,whole,W only,130608,24733,-30081
-"first, with person on the relabelled points",floodplain,clear part,W only,56650,11560,-14010
+"first, with person on the relabelled points",floodplain,whole,W only,123996,12133,-11509
+"first, with person on the relabelled points",floodplain,clear part,W only,53803,5676,-5370
 "first, with person on the relabelled points",whole map,whole,W only,195493,35057,-15054
 "first, with person on the relabelled points",whole map,clear part,W only,73918,13585,-6170
-"first, with person on the relabelled points",floodplain,whole,W or V,374336,46707,-19319
-"first, with person on the relabelled points",floodplain,clear part,W or V,171092,21995,-8766
+"first, with person on the relabelled points",floodplain,whole,W or V,398999,24034,-1861
+"first, with person on the relabelled points",floodplain,clear part,W or V,184433,11591,-557
 "first, with person on the relabelled points",whole map,whole,W or V,546880,74666,19980
 "first, with person on the relabelled points",whole map,clear part,W or V,207733,27714,5244
-"first, with Claude on the relabelled points",floodplain,whole,W only,143738,28605,-16951
-"first, with Claude on the relabelled points",floodplain,clear part,W only,61657,13083,-9002
+"first, with Claude on the relabelled points",floodplain,whole,W only,118349,11708,-17156
+"first, with Claude on the relabelled points",floodplain,clear part,W only,50601,5457,-8572
 "first, with Claude on the relabelled points",whole map,whole,W only,192353,35362,-18194
 "first, with Claude on the relabelled points",whole map,clear part,W only,72029,13570,-8060
-"first, with Claude on the relabelled points",floodplain,whole,W or V,371963,46852,-21692
-"first, with Claude on the relabelled points",floodplain,clear part,W or V,166821,21593,-13037
+"first, with Claude on the relabelled points",floodplain,whole,W or V,396059,23959,-4801
+"first, with Claude on the relabelled points",floodplain,clear part,W or V,182148,11568,-2842
 "first, with Claude on the relabelled points",whole map,whole,W or V,484893,61711,-42007
 "first, with Claude on the relabelled points",whole map,clear part,W or V,184362,23727,-18128

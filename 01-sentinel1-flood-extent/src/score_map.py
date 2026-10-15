@@ -227,7 +227,8 @@ def main():
                     for r in csv.DictReader(fh) if r["cutoff"] == MAIN}
     map_areas = load_strata()
     scopes = {"floodplain": ([p for p in points if p["in_floodplain"]], fp_areas),
-              "whole map": ([p for p in points if p["batch"] != "topup"], map_areas)}
+              "whole map": ([p for p in points
+                             if not p["batch"].startswith("topup")], map_areas)}
 
     with rasterio.open(MAP) as d:
         shape = (d.height, d.width)

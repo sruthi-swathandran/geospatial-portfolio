@@ -120,7 +120,8 @@ def estimate_with(points, override, fp_areas, map_areas):
 
         for scope, pts, areas in (
                 ("floodplain", [p for p in points if p["in_floodplain"]], fp_areas),
-                ("whole map", [p for p in points if p["batch"] != "topup"], map_areas)):
+                ("whole map", [p for p in points if not p["batch"].startswith("topup")],
+                 map_areas)):
             st = stratum_stats(pts, ref)
             for k in st:
                 if st[k]["n"] == 0:
@@ -145,8 +146,8 @@ def main():
     with open(SECOND / "relabel_key.csv", encoding="utf-8") as fh:
         key = list(csv.DictReader(fh))
     to_point = {r["relabel_id"]: r["point_id"] for r in key}
-    sets = {s: [r["relabel_id"] for r in key if r["set"] == s]
-            for s in ("random", "uncertain")}
+    names = list(dict.fromkeys(r["set"] for r in key))   # in order of appearance
+    sets = {s: [r["relabel_id"] for r in key if r["set"] == s] for s in names}
 
     points = load_points(include_topup=True)
     by_id = {p["point_id"]: p for p in points}
@@ -162,10 +163,10 @@ def main():
 
     agree = agreement(readings, sets)
     write_csv(SECOND / "agreement.csv", agree)
-    print(f"\n  {'pair':<18} {'set':<10} {'n':>4} {'agree':>7} {'kappa':>7} "
+    print(f"\n  {'pair':<18} {'set':<12} {'n':>4} {'agree':>7} {'kappa':>7} "
           f"{'agree W':>8} {'kappa W':>8} {'W flips':>8}")
     for r in agree:
-        print(f"  {r['pair']:<18} {r['set']:<10} {r['points']:>4} "
+        print(f"  {r['pair']:<18} {r['set']:<12} {r['points']:>4} "
               f"{r['agree_letters']:>7.2f} {r['kappa_letters']:>7.2f} "
               f"{r['agree_open_water']:>8.2f} {r['kappa_open_water']:>8.2f} "
               f"{r['open_water_flips']:>8}")
