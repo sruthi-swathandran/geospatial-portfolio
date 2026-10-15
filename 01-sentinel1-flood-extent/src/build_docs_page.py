@@ -235,11 +235,12 @@ def validation_figures():
     """The independent check, from results/validation/ (C-28)."""
     v = cfg.RESULTS / "validation"
     need = [v / "floodplain_summary.csv", v / "accuracy_strata.csv",
-            v / "sample" / "labels.csv"]
+            v / "sample" / "labels.csv", v / "second" / "effect.csv"]
     for p in need:
         if not p.exists():
-            sys.exit(f"{p} missing. Run estimate_accuracy.py and "
-                     f"floodplain_layer.py. Nothing written.")
+            sys.exit(f"{p} missing. Run estimate_accuracy.py, then "
+                     f"floodplain_layer.py and compare_labels.py. "
+                     f"Nothing written.")
     with open(need[0], encoding="utf-8") as fh:
         fp = [r for r in csv.DictReader(fh)
               if r["cutoff"] == "150 m" and r["variant"] == "W only"
@@ -258,6 +259,11 @@ def validation_figures():
               if r["variant"] == "W or V"}
     with open(need[2], encoding="utf-8") as fh:
         n_points = sum(1 for r in csv.DictReader(fh) if (r["label"] or "").strip())
+    with open(need[3], encoding="utf-8") as fh:
+        ow2 = next(float(r["flood_area_ha"]) for r in csv.DictReader(fh)
+                   if r["labels"].startswith("first, with person")
+                   and r["scope"] == "floodplain" and r["layer"] == "whole"
+                   and r["variant"] == "W only")
     pub, upper = "-18.75 dB, published", "-17.75 dB"
     ua = pick("user's accuracy", pub)
     pa = pick("producer's accuracy", pub)
@@ -265,6 +271,7 @@ def validation_figures():
         n_points=str(n_points),
         ow=f"{pick('flood area, ha'):,.0f}",
         ow_se=f"{pick_se('flood area, ha'):,.0f}",
+        ow2=f"{ow2:,.0f}",
         fp_flood=f"{pick('mapped flood, ha', pub):,.0f}",
         fp_upper=f"{pick('mapped flood, ha', upper):,.0f}",
         ua=f"{ua * 100:.0f}%",
@@ -724,7 +731,8 @@ BODY = """<title>Brahmaputra Flood Ledger</title>
       {n_points} points labelled on the Sentinel-2A image of the same morning.
       Inside the floodplain, which holds {fp_flood} of the {flood12} ha mapped,
       open-water flood comes to <strong>{ow} &plusmn; {ow_se} ha</strong>,
-      against {fp_upper} ha at &minus;17.75 dB. About {ua} of what the map calls
+      against {fp_upper} ha at &minus;17.75 dB. With a second person's labels
+      on the hardest points it comes to {ow2} ha. About {ua} of what the map calls
       flood is open water, and it finds about {pa} of the open water there.
       Water seen through vegetation is counted apart, since in August it
       includes rice paddies standing in water as usual.</p>

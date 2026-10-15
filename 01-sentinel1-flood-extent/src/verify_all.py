@@ -101,6 +101,7 @@ def build_index():
     idx = []
     for p in (sorted(RES.glob("*.csv")) + sorted((RES / "fullscene").glob("*.csv"))
               + sorted((RES / "validation").glob("*.csv"))
+              + sorted((RES / "validation" / "second").glob("*.csv"))
               + [RES / "validation" / "sample" / "strata.csv"]):
         try:
             with open(p, encoding="utf-8", newline="") as fh:

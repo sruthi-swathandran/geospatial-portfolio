@@ -19,6 +19,9 @@ A labelled sample of the map, described
 [below](#independent-check-of-the-12-august-map), puts open-water flood inside
 the floodplain at **160,688 ± 30,796 ha**, against 102,697 ha mapped there at
 −18.75 dB and 146,367 ha at −17.75 dB. The upper figure is the closer one.
+With a second person's labels on the hardest points the estimate is
+130,608 ± 24,733 ha, so who reads the hard cells moves it about as much as the
+sampling does.
 
 Interactive map: [three acquisitions and the recession between them](https://sruthi-swathandran.github.io/geospatial-portfolio/01-sentinel1-flood-extent/docs/)
 
@@ -389,8 +392,8 @@ label and a log of every draw are kept in `results/validation/sample/`.
 | Land further from flood | 4,536,775 | 1,566,047 | 120 |
 
 A further 60 points went to the floodplain part of the last stratum, where the
-first pass put only 7. One interpreter labelled every point, in random order and
-without the map: W for open water, V for water seen through vegetation, N for
+first pass put only 7. The first interpreter labelled every point, in random
+order and without the map: W for open water, V for water seen through vegetation, N for
 not water and C for unreadable, each with a confidence from 1 to 3. 21 of the
 main sample were unreadable.
 
@@ -429,10 +432,36 @@ land near flood, and 10 of 67 in floodplain land further away. Of those 19, 10
 were marked as guesses. A C-band VH threshold cannot see water under a crop
 canopy in any case.
 
+**A second reader.** The 62 points the first reader marked as guesses, outside
+permanent water, were labelled again along with 40 drawn at random from the
+rest, mixed and renumbered so nobody could tell which set a point came from. A
+second person labelled them blind to the first labels and to the map, and
+Claude did the same separately. On the random points the second person agreed
+with the first on 0.925 of them, a kappa of 0.856, and the kappa for open water
+against everything else was 0.857. On the guesses it fell to 0.542. Claude's
+kappa with the first reader was 0.736 on the random points and 0.461 on the
+guesses. Every other point keeps the first reader's label in the table below.
+
+| Labels on the relabelled points | Open-water flood in the floodplain | Counting V as flood |
+|---|---:|---:|
+| First reader | 160,688 ± 30,796 ha | 393,655 ± 47,226 ha |
+| Second person | 130,608 ± 24,733 ha | 374,336 ± 46,707 ha |
+| Claude | 143,738 ± 28,605 ha | 371,963 ± 46,852 ha |
+
+The first reader called more of the hard cells open water than either of the
+others, so the headline is the top of what different readers give. The gap
+between readers is about as large as the standard error, which leaves it out.
+Over the whole map the second person's labels move open-water flood from
+210,547 to 195,493 ha. Every reading still finds more open water in the
+floodplain than the 102,697 ha mapped at −18.75 dB, and the 146,367 ha at
+−17.75 dB lies within their range. Claude's labels are an AI's reading of the
+same chips, not a third person's.
+
 What this check does not cover:
 
-- **One interpreter.** Nobody else has labelled these points, so how much the
-  calls depend on the person making them is unmeasured.
+- **Readers.** Only the relabelled points have a second reading. The standard
+  errors above cover sampling alone, and on the hard points the readers differ
+  by about as much again.
 - **Timing.** The optical image is about twenty hours earlier than the radar
   while the flood was receding, which pushes the optical estimates up a little.
   Map land was water at between 20.4% and 27.0% of points whatever the distance
@@ -689,6 +718,7 @@ a CSV beside its figure.
 | Check | `draw_sample.py`, `topup_sample.py` | The stratified sample with its image screen and chips, and the floodplain top-up |
 | Check | `screen_points.py` | The brightness measurements the image screen's cutoffs were chosen from |
 | Check | `label_tool.py` | Labelling by keyboard, blind to the map |
+| Check | `second_label.py`, `compare_labels.py` | Second readings of the guesses and 40 random points, scored against the first and fed back into the estimate |
 | Check | `estimate_accuracy.py`, `floodplain_layer.py` | Accuracy and area with standard errors, for the clear part, the floodplain and the whole map |
 | Publish | `build_docs_page.py` | Generates docs/index.html and its four map overlays from results/ |
 

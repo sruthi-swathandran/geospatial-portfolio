@@ -30,6 +30,8 @@ Usage
     python src\\label_tool.py              # starts at the first unlabelled point
     python src\\label_tool.py --at P0120   # starts at a given point
     python src\\label_tool.py --simple     # no window; type answers instead
+    python src\\label_tool.py --sheet second\\sheet_person.csv --chips second_chips
+                                          # a second labelling, see second_label.py
 """
 
 from __future__ import annotations
@@ -193,9 +195,18 @@ def simple(rows, fields, start):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--at", help="point id to start at, such as P0120")
+    ap.add_argument("--sheet", help="sheet under results/validation, "
+                    "default sample/labels.csv")
+    ap.add_argument("--chips", help="chip folder under data/validation, "
+                    "default chips")
     ap.add_argument("--simple", action="store_true",
                     help="no window; type each answer in the command window")
     args = ap.parse_args()
+    global SHEET, CHIPS
+    if args.sheet:
+        SHEET = RESULTS / "validation" / Path(args.sheet)
+    if args.chips:
+        CHIPS = DATA / "validation" / args.chips
 
     if not SHEET.exists():
         sys.exit(f"missing {SHEET}; run draw_sample.py first")

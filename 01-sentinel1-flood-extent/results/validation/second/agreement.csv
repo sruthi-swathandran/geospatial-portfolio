@@ -1,0 +1,7 @@
+pair,set,points,agree_letters,kappa_letters,agree_open_water,kappa_open_water,open_water_flips
+first / person,random,40,0.925,0.856,0.95,0.857,2
+first / person,uncertain,62,0.694,0.542,0.871,0.687,8
+first / Claude,random,40,0.85,0.736,0.925,0.776,3
+first / Claude,uncertain,62,0.645,0.461,0.774,0.398,14
+person / Claude,random,40,0.875,0.779,0.975,0.925,1
+person / Claude,uncertain,62,0.565,0.348,0.774,0.363,14

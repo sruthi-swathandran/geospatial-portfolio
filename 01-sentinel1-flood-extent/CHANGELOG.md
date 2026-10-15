@@ -660,6 +660,28 @@ figures stay as they were, and the README adds the estimate beside them.
   `data/validation/`, which git ignores; `clear_sky.py` and
   `draw_sample.py --chips-only` rebuild them.
 
+### C-29 A second reader on the hard points
+
+C-28 rested on one interpreter. `second_label.py` took the 62 points outside
+permanent water that the first reader marked as guesses, added 40 at random
+and renumbered them in random order. A second person labelled them, and Claude
+labelled them separately, both blind to the first labels and to the map.
+`compare_labels.py` scores the agreement and recomputes the estimates with each
+second reader's labels on those points.
+
+| Quantity | First reader | Second person | Claude |
+|---|---:|---:|---:|
+| Open-water flood in the floodplain | 160,688 ± 30,796 ha | 130,608 ± 24,733 ha | 143,738 ± 28,605 ha |
+| Kappa with the first reader, random points | | 0.856 | 0.736 |
+| Kappa with the first reader, guesses | | 0.542 | 0.461 |
+
+The headline stays at 160,688 ha and is now described as the top of what
+different readers give. No other published figure changes. The key, both
+sheets and the two result tables are in `results/validation/second/`. The
+renumbered chips and the pack sent to the second person stay in
+`data/validation/`, which git ignores. `label_tool.py` gained `--sheet` and
+`--chips` so it can open a second sheet.
+
 ---
 
 ## Open, not fixed
