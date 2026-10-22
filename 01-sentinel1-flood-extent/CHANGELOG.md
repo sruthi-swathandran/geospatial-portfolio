@@ -855,6 +855,37 @@ map as drawn 58.7% of the floodplain flood lay under cloud, the whole-floodplain
 figure assumes the map errs there as in clear sky, the terrain check supports
 that on slope more than on elevation, and the clear part is given beside it.
 
+### C-33 The threshold tried on other floods (F-07)
+
+F-07 said the test split, adjacent chips from the India scene, could not show
+the threshold transfers. `transfer_events.py` scores the fixed −18.75 dB on the
+hand-labelled chips of the other Sen1Floods11 events. Each went through India's
+steps: Planetary Computer RTC read onto every chip on the event's date and
+orbit, shifted onto the label grid by correlation with the dataset's own
+imagery within ±5 pixels, Lee-filtered, thresholded. India, scored by the same
+code, reproduces 0.519 and the script stops if it ever does not.
+
+- **The metadata.** The dates and orbits `find_scenes.py` transcribed all
+  match `Sen1Floods11_Metadata.geojson`. Its `VH_thresh` field confirms the
+  −21.56 dB `config.py` gives for India as the dataset's own value, on Earth
+  Engine sigma0. Across events that field runs from −25.13 to −19.56 dB.
+- **What was scored.** 309 chips from nine events. Paraguay's 67 have no
+  Sentinel-1 scene on Planetary Computer for 31 October 2018, orbit 68, in RTC
+  or GRD; the nearest is 5 November on orbit 141. Two Sri Lanka chips never
+  aligned.
+- **The result.** Pooled IoU 0.493, 95% interval 0.432 to 0.551, against 0.519
+  on India and 0.499 for the authors' per-chip Otsu on the same chips. By event
+  it runs from 0.764 (Mekong) to 0.131 (Somalia). Pakistan and Somalia fail on
+  precision, 0.205 and 0.152, and their best single thresholds reach only
+  0.255 and 0.132. The best threshold per event spans −21.75 to −17.25 dB.
+- **Alignment.** Ten chips aligned at the edge of the search, eight of them in
+  Mekong; without those Mekong goes from 0.764 to 0.786.
+
+No published figure changes. The README gains a section, "Other floods", and
+the closing claim that the method should be checked before use in a new region,
+dry ones above all. The chips and RTC reads stay in `data/`; the per-event
+tables are in `results/transfer/`.
+
 ---
 
 ## Open, not fixed
@@ -863,6 +894,3 @@ that on slope more than on elevation, and the clear part is given beside it.
   holds 102,697 of the 119,779 ha mapped. In the hills, where cloud hid the
   ground on 12 August, the map is still unchecked, and so are the 7 and 31
   August maps.
-- **F-07.** The Sen1Floods11 splits for one event are spatially adjacent chips
-  from a single scene. The test split checks that the threshold was not fitted
-  to the valid split. It is not evidence of transfer.

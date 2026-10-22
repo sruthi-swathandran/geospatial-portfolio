@@ -6,10 +6,12 @@ data/dem_scene,100,1178479683,1178.48,.tif x100
 data/gsw,65,1224347,1.22,.tif x65
 data/gsw_scene,46,6561020,6.56,.tif x46
 data/reference,340,713713108,713.71,.tif x340
-data/sen1floods11,481,385243359,385.24,".tif x476, .csv x4, .json x1"
+data/sen1floods11,1616,1007177915,1007.18,".tif x1610, .csv x4, .json x1, .geojson x1"
+data/transfer,622,1305686228,1305.69,.tif x622
 data/validation,2599,303032302,303.03,".png x2593, .zip x2, .py x1, .tif x1, .npz x1, .csv x1"
 data/worldcover,49,11072261,11.07,.tif x49
 results,67,9186823,9.19,".csv x47, .json x11, .geojson x7, (none) x1, .txt x1"
 results/figures,32,14857664,14.86,".png x29, .pdf x3"
 results/fullscene,40,26005503,26.01,".png x17, .tif x16, .json x7"
+results/transfer,23,62912,0.06,.csv x23
 results/validation,30,327385,0.33,".csv x28, .txt x2"

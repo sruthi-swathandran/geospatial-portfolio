@@ -37,7 +37,7 @@ superseded value and why it was wrong.
 | Dates | 7, 12 and 31 August 2016 |
 | Resolution | 20 m |
 | Method | Speckle-filtered single-date threshold, −18.75 or −17.75 dB |
-| Validation | Sen1Floods11 hand labels, 65 chips, official splits; a stratified sample of the 12 August map labelled on Sentinel-2 |
+| Validation | Sen1Floods11 hand labels, 65 chips, official splits; the same threshold on 309 chips of nine other floods; a stratified sample of the 12 August map labelled on Sentinel-2 |
 | Data | Open only: Microsoft Planetary Computer, JRC, ESA, geoBoundaries |
 
 ---
@@ -324,6 +324,55 @@ inputs rather than about a bug.
 ![Per-chip IoU with bootstrap intervals](results/figures/accuracy_ci.png)
 
 *Per-chip IoU with percentile bootstrap intervals resampled over chips rather than pixels. These figures describe the chip-scale product. They do not describe the full-scene map reported above, which the independent check below scores directly.*
+
+### Other floods
+
+The three splits come from one scene, so they show the threshold was not fitted
+to the valid split and say nothing about another river. Sen1Floods11 has hand
+labels for ten other floods. `transfer_events.py` took each through the steps
+India went through: Planetary Computer RTC gamma0 read onto every chip, shifted
+onto the label grid, Lee-filtered and cut at −18.75 dB, with nothing tuned.
+Scored by the same code, India comes out at its 0.519 again.
+
+| Event | Chips | IoU at −18.75 dB | 95% CI | Precision | Recall | Best threshold for the event | IoU there | Authors' per-chip Otsu |
+|---|---:|---:|---|---:|---:|---:|---:|---:|
+| India | 65 | 0.519 | 0.400 to 0.601 | 0.780 | 0.608 | −18.25 dB | 0.525 | 0.531 |
+| Mekong | 30 | 0.764 | 0.677 to 0.822 | 0.939 | 0.804 | −17.25 dB | 0.779 | 0.780 |
+| Bolivia | 15 | 0.661 | 0.434 to 0.789 | 0.753 | 0.844 | −18.50 dB | 0.661 | 0.697 |
+| Nigeria | 18 | 0.639 | 0.533 to 0.732 | 0.950 | 0.661 | −17.25 dB | 0.692 | 0.643 |
+| Spain | 30 | 0.612 | 0.439 to 0.721 | 0.705 | 0.822 | −20.25 dB | 0.657 | 0.670 |
+| Sri Lanka | 40 | 0.568 | 0.337 to 0.724 | 0.657 | 0.807 | −21.25 dB | 0.675 | 0.649 |
+| Ghana | 53 | 0.473 | 0.367 to 0.548 | 0.797 | 0.537 | −17.50 dB | 0.528 | 0.408 |
+| USA | 69 | 0.412 | 0.304 to 0.509 | 0.480 | 0.745 | −20.50 dB | 0.506 | 0.508 |
+| Pakistan | 28 | 0.178 | 0.087 to 0.273 | 0.205 | 0.581 | −21.75 dB | 0.255 | 0.152 |
+| Somalia | 26 | 0.131 | 0.075 to 0.191 | 0.152 | 0.487 | −19.25 dB | 0.132 | 0.151 |
+| **Nine others, pooled** | **309** | **0.493** | 0.432 to 0.551 | 0.599 | 0.737 | −20.25 dB | 0.529 | 0.499 |
+
+Pooled, the threshold does about as well away from India as on it, and as well
+as the dataset authors' Otsu run separately on every chip. The pooled figure
+hides a range from 0.764 to 0.131. Where it fails, in Pakistan and Somalia,
+precision is 0.205 and 0.152: most of what it calls water is something else,
+and no single threshold fixes that, since the best for each event scores only
+0.255 and 0.132. Both are dry places, and dry sand or bare soil can be as dark
+as water in VH; that is the likely cause, though it has not been tested here.
+The best threshold also moves from event to event, from −21.75 to −17.25 dB.
+The dataset's own per-event thresholds, set on Earth Engine sigma0 and recorded
+in its metadata, spread over 5.6 dB the same way. The "best" columns are fitted
+to the very chips they score, so they flatter themselves. India's interval
+here, 0.400 to 0.601, differs a little from the 0.395 to 0.609 above only
+because the bootstrap draws differ.
+
+Two notes on what this covers. Paraguay, the tenth event, has no Sentinel-1
+scene for its date and orbit on Planetary Computer, in RTC or in the GRD it is
+made from; the nearest is 5 days later on another orbit, which would score a
+different flood, so it is left out (`results/transfer/probe_Paraguay.csv`).
+Two Sri Lanka chips never aligned with the dataset's own imagery and are left
+out, as three India chips were. Ten chips aligned at the edge of the ±5 pixel
+search; without the eight in Mekong it scores 0.786.
+
+So 0.519 is a fair figure for this method on floodplain rivers like this one,
+and it is no promise for a new region. A dry landscape can break it outright,
+and anyone using it elsewhere should check it there first.
 
 ### What leaving Google Earth Engine costs
 
@@ -774,6 +823,7 @@ a CSV beside its figure.
 | Check | `draw_sample.py`, `topup_sample.py` | The stratified sample with its image screen and chips, and the floodplain top-up |
 | Check | `screen_points.py` | The brightness measurements the image screen's cutoffs were chosen from |
 | Check | `label_tool.py` | Labelling by keyboard, blind to the map |
+| Check | `transfer_events.py` | The India threshold on the hand-labelled chips of nine other Sen1Floods11 floods |
 | Check | `score_map.py` | Any version of the map scored against the same sample, for the resampling tests |
 | Check | `second_label.py`, `compare_labels.py` | Second readings of the guesses and 40 random points, scored against the first and fed back into the estimate |
 | Check | `estimate_accuracy.py`, `floodplain_layer.py` | Accuracy and area with standard errors, for the clear part, the floodplain and the whole map |

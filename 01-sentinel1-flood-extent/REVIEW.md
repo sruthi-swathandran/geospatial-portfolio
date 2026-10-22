@@ -189,6 +189,8 @@ deterministic. Reruns should be bit-identical; not verified.
 
 Erratum to S-01, added 12 October 2026: a 20 m pixel covers four 10 m pixels and nearest-neighbour keeps one of them, so it discards three quarters of the samples, not half. That strengthens the suspicion. The test is unchanged.
 
+F-07 tested, 22 October 2026 (`CHANGELOG.md` C-33): the threshold scored on 309 hand-labelled chips of nine other Sen1Floods11 floods gives IoU 0.493 pooled against 0.519 on India, from 0.764 to 0.131 by event, failing on precision in the two dry events.
+
 Both tests run, 15 October 2026 (`CHANGELOG.md` C-31). S-01: averaging VH moved the raw flood by 0.5% and five sample points, three toward their labels and two away; not adopted. S-02: confirmed. The stepped DEM put valley-floor water on false slopes of 10 to 11 degrees; bilinear is now the declared rule and every published figure was rebuilt with it.
 
 ---
