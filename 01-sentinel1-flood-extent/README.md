@@ -634,7 +634,8 @@ maps. Points fall only where the QA band shows clear sky with no cloud, cirrus
 or shadow bit within 100 m, and the image test from 12 August, carried over to
 Landsat reflectance, rejected none. That left 41,600 of the 65,356 ha of flood
 mapped on 7 August eligible, and 12,974 of the 39,481 ha on 31 August. The
-first reader labelled both samples blind, as before.
+first reader labelled both samples blind, as before. A second person later
+relabelled 145 of the 7 August points (below).
 
 These checks are weaker than the 12 August one in two ways. Both images were
 taken three days before the radar rather than twenty hours, while the flood was
@@ -675,19 +676,51 @@ Outside the floodplain these samples have few points. No point fell in either
 map's flood above 150 m. On low sloped ground, 42 points on 7 August and 66 on
 31 August give user's accuracies of 0.571 ± 0.202 and 0.545 ± 0.158.
 
+**Clear sky against cloud.** `date_checks.py terrain` repeats the 12 August
+terrain check on both dates. Inside the floodplain the clear and cloudy parts
+agree on slope, with standardised differences of 0.24 or less. On elevation, 7
+August looks like 12 August: the clear part lies 1 to 12 m higher, with
+differences of 0.23 to 0.42. On 31 August the gap is larger. The clear part of
+the flood stratum lies 6 m higher, a difference of 1.02, and that of permanent
+water 10 m higher, 1.70. On the valley floor, lower ground usually lies further
+downstream, so on 31 August cloud probably covered a different stretch of the
+river from the one the sample saw. Its clear-part figure, 11,274 ± 3,254 ha of
+open water against 11,432 ha mapped, covers about a third of the map's
+floodplain flood and needs no assumption about cloud. The whole-floodplain
+27,717 ha stretches it over ground it stands in for poorly. Over the whole map
+the land strata under cloud are far higher and steeper on both dates, as on 12
+August.
+
+**A second reader.** `date_checks.py second` took every 7 August point in the
+map's flood and in "upper threshold only", 105 in all, since those calls set
+user's accuracy, and 40 more at random from the rest. They were mixed,
+renumbered and cut again as chips under the new numbers, and a second person
+labelled them blind to the first labels and to the map. On the 105 she agreed
+with the first reader on 0.876 of them, a kappa of 0.787, and 0.857 for open
+water against everything else. On the random 40 she agreed on 0.975, a kappa of
+0.847. Of the 56 points the first reader called water through vegetation, she
+called 49 the same, 2 open water, 4 not water and 1 unreadable. With her labels
+on those points, open water in the floodplain moves from 35,865 to 34,776 ±
+4,111 ha, user's accuracy from 0.566 to 0.577 and producer's accuracy from
+0.920 to 0.967. So the finding that much of the 7 August map's flood is water
+standing in crops does not rest on one reader. Both readers saw the same 30 m
+pixels, so this says nothing about pixel size.
+
 **What this does to the recession.** The two maps share a footprint, so their
 floodplain estimates compare directly. Open water fell from 35,865 ± 4,187 ha
 to 27,717 ± 6,235 ha, about one standard error of the difference, so the
 samples cannot show that open water fell at all. Counting water through
 vegetation, wet ground fell from 165,112 ± 34,321 ha to 38,283 ± 8,286 ha. Most
 of the fall in mapped flood is water leaving fields, which fits the 81% fall in
-flooded cropland above. Both whole-floodplain figures assume the map errs under
-cloud as it does in clear sky, and for these dates that was not tested.
+flooded cropland above. Both figures stretch clear-sky rates over cloud, and
+on 31 August the terrain check shows that stretch to be weak, so the
+comparison is less certain than its standard errors say.
 
 What this check does not cover:
 
-- **Readers.** Only the first reader labelled these samples. On 12 August a
-  second reading moved the headline by about one standard error.
+- **Readers.** A second person relabelled 145 of the 7 August points. The
+  31 August sample has one reader, and its 25 not-water calls in mapped flood
+  are the ones a second reading would test.
 - **Timing and pixel size.** The three-day gap and the 30 m pixels are stated
   above and not measured.
 - **The chips** sit under `data/validation/chips_20160807/` and
@@ -942,6 +975,7 @@ a CSV beside its figure.
 | Check | `transfer_events.py` | The India threshold on the hand-labelled chips of nine other Sen1Floods11 floods |
 | Check | `score_map.py` | Any version of the map scored against the same sample, for the resampling tests and the ground outside the floodplain |
 | Check | `date_sample.py` | Stratified samples of the 7 and 31 August maps on Landsat: draw, chips and estimate |
+| Check | `date_checks.py` | The terrain check of clear against cloudy ground, and a second reading, for those samples |
 | Check | `second_label.py`, `compare_labels.py` | Second readings of the guesses and 40 random points, scored against the first and fed back into the estimate |
 | Check | `estimate_accuracy.py`, `floodplain_layer.py` | Accuracy and area with standard errors, for the clear part, the floodplain and the whole map |
 | Publish | `build_docs_page.py` | Generates docs/index.html and its four map overlays from results/ |

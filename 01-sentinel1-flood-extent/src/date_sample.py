@@ -200,12 +200,11 @@ def eligible_window(qa_ds, r0, r1, c0, c1):
 
 
 # ------------------------------------------------------------------ draw
-def grid_pass(P, rng):
-    """Hectares per stratum and domain, and the candidates per stratum."""
+def tile_pass(P):
+    """One pass over the map grid, tile by tile with the nearest DEM. Yields
+    the window, the stratum of each pixel, whether it is eligible, and its
+    elevation and slope. grid_pass() and date_checks.py both read it."""
     tiles = dem_tiles()
-    mapped = {d: np.zeros(8, "int64") for d in DOMAINS}
-    eligible = {d: np.zeros(8, "int64") for d in DOMAINS}
-    best = {k: (np.empty(0), np.empty(0, "int64")) for k in ALLOCATION}
     with rasterio.open(P["map"]) as ref, rasterio.open(P["raw"]) as raw, \
             rasterio.open(P["upper"]) as up, rasterio.open(P["qa"]) as qa_ds:
         for d in (raw, up, qa_ds):
@@ -217,7 +216,6 @@ def grid_pass(P, rng):
         if missing:
             sys.exit(f"DEM tiles missing for {missing[:5]}; run refine_scene.py "
                      "with --resample-dem nearest first")
-        px_ha = abs(ref.transform.a * ref.transform.e) / 1e4
         res = abs(ref.transform.a)
         print("  marking land within about 1 km of flood ...")
         near = near_flood_mask(ref, up)
@@ -243,33 +241,48 @@ def grid_pass(P, rng):
             nb = near[np.ix_(np.arange(r0, r1) // CELL, np.arange(c0, c1) // CELL)]
             s[(s == 6) & ~nb] = 7
             ok = eligible_window(qa_ds, r0, r1, c0, c1)
-            with np.errstate(invalid="ignore"):
-                for dname, cut in DOMAINS.items():
-                    if cut is None:
-                        dom = np.ones((h, w), bool)
-                    else:
-                        dom = (elev <= cut[0]) & (slope <= cut[1])
-                    mapped[dname] += np.bincount(s[dom], minlength=8)
-                    eligible[dname] += np.bincount(s[dom & ok], minlength=8)
-            for k, n_plan in ALLOCATION.items():
-                keep = int(n_plan * OVERDRAW) + 10
-                idx = np.flatnonzero((s == k) & ok)
-                if idx.size == 0:
-                    continue
-                keys = rng.random(idx.size)
-                if idx.size > keep:
-                    sel = np.argpartition(keys, keep)[:keep]
-                    keys, idx = keys[sel], idx[sel]
-                rr, cc = np.divmod(idx, w)
-                flat = (rr + r0).astype("int64") * ref.width + (cc + c0)
-                k_all = np.concatenate([best[k][0], keys])
-                i_all = np.concatenate([best[k][1], flat])
-                if k_all.size > keep:
-                    sel = np.argpartition(k_all, keep)[:keep]
-                    k_all, i_all = k_all[sel], i_all[sel]
-                best[k] = (k_all, i_all)
+            yield dict(r0=r0, c0=c0, s=s, ok=ok, elev=elev, slope=slope,
+                       width=ref.width,
+                       px_ha=abs(ref.transform.a * ref.transform.e) / 1e4)
             if n % 10 == 0 or n == len(need):
                 print(f"    {n}/{len(need)}")
+
+
+def grid_pass(P, rng):
+    """Hectares per stratum and domain, and the candidates per stratum."""
+    mapped = {d: np.zeros(8, "int64") for d in DOMAINS}
+    eligible = {d: np.zeros(8, "int64") for d in DOMAINS}
+    best = {k: (np.empty(0), np.empty(0, "int64")) for k in ALLOCATION}
+    px_ha = None
+    for t in tile_pass(P):
+        s, ok, elev, slope = t["s"], t["ok"], t["elev"], t["slope"]
+        r0, c0, px_ha = t["r0"], t["c0"], t["px_ha"]
+        h, w = s.shape
+        with np.errstate(invalid="ignore"):
+            for dname, cut in DOMAINS.items():
+                if cut is None:
+                    dom = np.ones((h, w), bool)
+                else:
+                    dom = (elev <= cut[0]) & (slope <= cut[1])
+                mapped[dname] += np.bincount(s[dom], minlength=8)
+                eligible[dname] += np.bincount(s[dom & ok], minlength=8)
+        for k, n_plan in ALLOCATION.items():
+            keep = int(n_plan * OVERDRAW) + 10
+            idx = np.flatnonzero((s == k) & ok)
+            if idx.size == 0:
+                continue
+            keys = rng.random(idx.size)
+            if idx.size > keep:
+                sel = np.argpartition(keys, keep)[:keep]
+                keys, idx = keys[sel], idx[sel]
+            rr, cc = np.divmod(idx, w)
+            flat = (rr + r0).astype("int64") * t["width"] + (cc + c0)
+            k_all = np.concatenate([best[k][0], keys])
+            i_all = np.concatenate([best[k][1], flat])
+            if k_all.size > keep:
+                sel = np.argpartition(k_all, keep)[:keep]
+                k_all, i_all = k_all[sel], i_all[sel]
+            best[k] = (k_all, i_all)
     return mapped, eligible, best, px_ha
 
 
@@ -724,7 +737,8 @@ def check_rasters(P):
     print("  check: the maps and the QA raster are the ones the draw used")
 
 
-def estimate(P, map_date):
+def prepare(P):
+    """The labelled points, with JRC permanent water marked, and the scopes."""
     check_rasters(P)
     points = load_sample(P)
     bad = [p for p in points if p["label"] not in ("", "W", "V", "N", "C")]
@@ -738,8 +752,11 @@ def estimate(P, map_date):
     for p, o in zip(points, occ):
         p["permanent"] = bool(np.isfinite(o) and o >= GSW_PERMANENT_MIN)
         p["usable"] = p["label"] in ("W", "V", "N")
-    areas = load_areas(P)
-    scopes = {
+    return points, make_scopes(points, load_areas(P))
+
+
+def make_scopes(points, areas):
+    return {
         "floodplain": ([p for p in points if p["in_floodplain"] == "yes"],
                        areas["floodplain"]),
         "whole map": (points, areas["whole"]),
@@ -748,6 +765,27 @@ def estimate(P, map_date):
         "above 150 m": ([p for p in points if p["low_ground"] == "no"],
                         areas["above"]),
     }
+
+
+def score_rows(scopes, map_date):
+    """Every figure for both maps, scope, layer and variant."""
+    rows = []
+    for mname, field in MAPS.items():
+        for scope, (pts, ar) in scopes.items():
+            flags = {p["point_id"]: int(p[field]) == FLOOD for p in pts}
+            for layer, lname in (("mapped", "whole"), ("eligible", "clear part")):
+                for vname, letters in LETTERS.items():
+                    for metric, val, se in score(pts, flags, ar, layer, letters):
+                        rows.append(dict(map_date=map_date, map=mname, scope=scope,
+                                         layer=lname, variant=vname, metric=metric,
+                                         value=round(val, 4 if abs(val) < 2 else 0),
+                                         se=round(se, 4 if abs(val) < 2 else 0)))
+    return rows
+
+
+def estimate(P, map_date):
+    points, scopes = prepare(P)
+    areas = load_areas(P)
     for scope, (pts, ar) in scopes.items():
         for k in IN_MAP:
             n = sum(1 for p in pts if p["code"] == k and p["usable"])
@@ -757,17 +795,7 @@ def estimate(P, map_date):
                 print(f"  {scope}: {NAMES[k]} has {n} readable point(s) for "
                       f"{ar[k]['eligible']:,.0f} clear ha; {what}")
 
-    rows = []
-    for mname, field in MAPS.items():
-        flags = {p["point_id"]: int(p[field]) == FLOOD for p in points}
-        for scope, (pts, ar) in scopes.items():
-            for layer, lname in (("mapped", "whole"), ("eligible", "clear part")):
-                for vname, letters in LETTERS.items():
-                    for metric, val, se in score(pts, flags, ar, layer, letters):
-                        rows.append(dict(map_date=map_date, map=mname, scope=scope,
-                                         layer=lname, variant=vname, metric=metric,
-                                         value=round(val, 4 if abs(val) < 2 else 0),
-                                         se=round(se, 4 if abs(val) < 2 else 0)))
+    rows = score_rows(scopes, map_date)
 
     strata_rows = []
     for vname, letters in LETTERS.items():

@@ -1,0 +1,9 @@
+reader,set,first,second_W,second_V,second_N,second_C
+person,focus,W,35,4,1,0
+person,focus,V,2,49,4,1
+person,focus,N,0,1,8,0
+person,focus,C,0,0,0,0
+person,random,W,2,0,0,0
+person,random,V,0,1,1,0
+person,random,N,0,0,36,0
+person,random,C,0,0,0,0

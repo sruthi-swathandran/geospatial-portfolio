@@ -31,7 +31,10 @@ latter with a third top-up of 30 points. The 7 and 31 August maps each have a
 300-point sample labelled on Landsat three days earlier. What remains open is
 a second reading of those samples and the cloud assumption outside the
 floodplain, where a stratum with no open water found can still hide tens of
-thousands of hectares at the 95% bound.
+thousands of hectares at the 95% bound. Later the same day, C-35 added a
+terrain check on both samples and a second reader on 145 of the 7 August
+points; the 31 August sample still has one reader, and its clear part stands in
+poorly for the cloudy part of its floodplain.
 
 ---
 

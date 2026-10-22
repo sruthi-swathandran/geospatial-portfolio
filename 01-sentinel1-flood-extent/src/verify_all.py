@@ -103,6 +103,7 @@ def build_index():
               + sorted((RES / "validation").glob("*.csv"))
               + sorted((RES / "validation" / "second").glob("*.csv"))
               + sorted((RES / "validation").glob("sample_*/*.csv"))
+              + sorted((RES / "validation").glob("sample_*/second/*.csv"))
               + sorted((RES / "transfer").glob("*.csv"))
               + [RES / "validation" / "sample" / "strata.csv"]):
         try:

@@ -1,0 +1,15 @@
+domain,stratum,clear_px,rest_px,elevation_m_median_clear,elevation_m_median_rest,elevation_m_smd,slope_deg_median_clear,slope_deg_median_rest,slope_deg_smd
+floodplain,flood,285793,558396,80.5,74.5,1.02,0.0,0.0,-0.1
+floodplain,permanent water,155321,385626,79.5,69.5,1.7,0.0,0.0,-0.15
+floodplain,upper threshold only,64188,62947,87.5,78.5,0.5,0.4,0.4,0.0
+floodplain,removed by refinement,764,1821,80.5,72.5,0.33,0.0,0.0,-0.13
+floodplain,swath edge,80419,124344,86.5,85.5,0.34,0.4,0.5,-0.24
+floodplain,land near flood,2693648,2211018,88.5,79.5,0.59,0.6,0.6,-0.08
+floodplain,land far from flood,2236050,2214855,95.5,90.5,0.35,0.6,0.7,-0.09
+whole map,flood,324360,662661,80.5,75.5,-0.05,0.1,0.1,-0.15
+whole map,permanent water,162069,410273,79.5,69.5,0.27,0.1,0.1,-0.15
+whole map,upper threshold only,76368,77813,87.5,78.5,-0.01,0.4,0.4,-0.12
+whole map,removed by refinement,13659,283428,747.5,1193.5,-0.96,29.9,36.6,-0.42
+whole map,swath edge,218950,1425414,112.5,792.5,-1.07,2.9,19.1,-0.85
+whole map,land near flood,4499908,4513049,92.5,83.5,-0.31,1.1,1.9,-0.36
+whole map,land far from flood,14624012,53346192,210.5,857.5,-1.05,8.6,20.4,-0.72

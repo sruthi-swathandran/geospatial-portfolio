@@ -942,13 +942,40 @@ and 31 August maps".
   points on dark area or unclassified pixels, 62 of them open water, where the
   README said 153 and 48.
 
+### C-35 The 7 and 31 August samples: terrain check and a second reader
+
+C-34 left two things open on the new samples. `date_checks.py` does both. No
+published map figure changes.
+
+- **Terrain.** The clear part of each stratum against the rest, on elevation
+  and slope, as for 12 August. Inside the floodplain slope agrees on both dates
+  (standardised differences 0.24 or less). Elevation differs by 0.23 to 0.42
+  on 7 August, about as on 12 August, and by up to 1.70 on 31 August, where the
+  clear part of the flood stratum lies 6 m higher than the rest. The README now
+  gives the 31 August clear-part figure as the one that needs no assumption,
+  and says the whole-floodplain one, and so the recession comparison, rests
+  on a weak stand-in. Over the whole map the land strata under cloud are far higher and
+  steeper on both dates.
+- **A second reader on 7 August.** 145 points: all 105 in the map's flood and
+  in "upper threshold only", and 40 at random from the rest (seed 20261025),
+  renumbered SA001 onward with their chips cut again under the new numbers.
+  Agreement with the first reader is 0.876, kappa 0.787, on the 105 and 0.975,
+  kappa 0.847, on the 40. She kept 49 of the 56 water-through-vegetation calls.
+  Open water in the floodplain moves from 35,865 to 34,776 ± 4,111 ha with her
+  labels, user's accuracy from 0.566 to 0.577.
+- **Code.** `date_sample.py` now reads the grid through one generator,
+  `tile_pass()`, which the draw and the terrain check share, and its estimate
+  is split into `prepare()` and `score_rows()` so the second reading can reuse
+  it. Rerun on the 7 August files, the draw gives the same hectares and the
+  same candidates, and the estimate the same figures.
+
 ---
 
 ## Open, not fixed
 
-- **F-01 / F-02, readers and cloud.** The floodplain, the rest of the 12
-  August map and both other dates now have estimates with standard errors.
-  Only the 12 August sample has a second reader. Outside the floodplain and on
-  the other dates, the whole-area figures stretch clear-sky rates over cloud
-  without a terrain check, and the zero-hit bounds show how loosely a few dozen
-  points pin down missed water in the hills.
+- **F-01 / F-02, the 31 August sample and the hills.** The floodplain, the rest
+  of the 12 August map and both other dates now have estimates with standard
+  errors, and 7 August has a second reader. The 31 August sample has one
+  reader, and its clear part is a weak stand-in for the cloudy part of its
+  floodplain. Outside the floodplain the zero-hit bounds show how loosely a
+  few dozen points pin down missed water in the hills.
