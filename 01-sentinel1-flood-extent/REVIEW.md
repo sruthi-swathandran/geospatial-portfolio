@@ -33,8 +33,9 @@ a second reading of those samples and the cloud assumption outside the
 floodplain, where a stratum with no open water found can still hide tens of
 thousands of hectares at the 95% bound. Later the same day, C-35 added a
 terrain check on both samples and a second reader on 145 of the 7 August
-points; the 31 August sample still has one reader, and its clear part stands in
-poorly for the cloudy part of its floodplain.
+points, and C-36 a second reader on 145 of the 31 August points. What stays
+open is cloud: on 31 August the clear part stands in poorly for the cloudy part
+of its floodplain, and in the hills the bounds stay wide.
 
 ---
 

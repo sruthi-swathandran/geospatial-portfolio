@@ -635,7 +635,7 @@ or shadow bit within 100 m, and the image test from 12 August, carried over to
 Landsat reflectance, rejected none. That left 41,600 of the 65,356 ha of flood
 mapped on 7 August eligible, and 12,974 of the 39,481 ha on 31 August. The
 first reader labelled both samples blind, as before. A second person later
-relabelled 145 of the 7 August points (below).
+relabelled 145 points on each date (below).
 
 These checks are weaker than the 12 August one in two ways. Both images were
 taken three days before the radar rather than twenty hours, while the flood was
@@ -706,10 +706,24 @@ on those points, open water in the floodplain moves from 35,865 to 34,776 ±
 standing in crops does not rest on one reader. Both readers saw the same 30 m
 pixels, so this says nothing about pixel size.
 
+On 31 August the same design drew 145 points again, numbered and cut afresh.
+On the 105 she agreed with the first reader on 0.876 of them, a kappa of 0.787,
+by coincidence the same as on 7 August, and 0.902 for open water against
+everything else. On the random 40 she agreed on 0.950, a kappa of 0.812. Of the
+49 points the first reader called not water, she called 47 the same. In the
+map's flood stratum she called 29 of the 60 not water, against the first
+reader's 25, so the finding that much of the 31 August map's flood is dry
+ground holds. With her labels, open water in the clear part of the floodplain
+falls from 11,274 to 8,713 ± 2,403 ha against 11,432 ha mapped, over the whole
+floodplain from 27,717 to 22,551 ± 4,790 ha, and user's accuracy from 0.542 to
+0.500.
+
 **What this does to the recession.** The two maps share a footprint, so their
 floodplain estimates compare directly. Open water fell from 35,865 ± 4,187 ha
-to 27,717 ± 6,235 ha, about one standard error of the difference, so the
-samples cannot show that open water fell at all. Counting water through
+to 27,717 ± 6,235 ha on the first reader's labels, about one standard error
+of the difference. On the second person's it fell from 34,776 ± 4,111 ha to
+22,551 ± 4,790 ha, about two. So whether the samples show open water falling at
+all turns on who reads the hard cells. Counting water through
 vegetation, wet ground fell from 165,112 ± 34,321 ha to 38,283 ± 8,286 ha. Most
 of the fall in mapped flood is water leaving fields, which fits the 81% fall in
 flooded cropland above. Both figures stretch clear-sky rates over cloud, and
@@ -718,9 +732,9 @@ comparison is less certain than its standard errors say.
 
 What this check does not cover:
 
-- **Readers.** A second person relabelled 145 of the 7 August points. The
-  31 August sample has one reader, and its 25 not-water calls in mapped flood
-  are the ones a second reading would test.
+- **Readers.** A second person relabelled 145 points on each date, every
+  point in mapped flood and "upper threshold only" among them. The rest keep
+  one reading.
 - **Timing and pixel size.** The three-day gap and the 30 m pixels are stated
   above and not measured.
 - **The chips** sit under `data/validation/chips_20160807/` and

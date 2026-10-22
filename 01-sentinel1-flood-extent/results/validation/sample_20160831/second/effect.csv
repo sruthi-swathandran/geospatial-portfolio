@@ -1,0 +1,97 @@
+labels,map,scope,layer,variant,metric,value,se,change_from_first
+first,-18.75 dB,floodplain,whole,W only,"flood on the ground, ha",27717.0,6235.0,0.0
+first,-18.75 dB,floodplain,whole,W only,user's accuracy,0.5417,0.0727,0.0
+first,-18.75 dB,floodplain,whole,W only,producer's accuracy,0.6599,0.1397,0.0
+first,-18.75 dB,floodplain,whole,W or V,"flood on the ground, ha",38283.0,8286.0,0.0
+first,-18.75 dB,floodplain,whole,W or V,user's accuracy,0.5833,0.0719,0.0
+first,-18.75 dB,floodplain,whole,W or V,producer's accuracy,0.5145,0.1108,0.0
+first,-18.75 dB,floodplain,clear part,W only,"flood on the ground, ha",11274.0,3254.0,0.0
+first,-18.75 dB,floodplain,clear part,W only,user's accuracy,0.5417,0.0727,0.0
+first,-18.75 dB,floodplain,clear part,W only,producer's accuracy,0.5493,0.1568,0.0
+first,-18.75 dB,floodplain,clear part,W or V,"flood on the ground, ha",16721.0,4427.0,0.0
+first,-18.75 dB,floodplain,clear part,W or V,user's accuracy,0.5833,0.0719,0.0
+first,-18.75 dB,floodplain,clear part,W or V,producer's accuracy,0.3988,0.1079,0.0
+first,-18.75 dB,whole map,whole,W only,"flood on the ground, ha",33505.0,6883.0,0.0
+first,-18.75 dB,whole map,whole,W only,user's accuracy,0.5424,0.0654,0.0
+first,-18.75 dB,whole map,whole,W only,producer's accuracy,0.6391,0.1248,0.0
+first,-18.75 dB,whole map,whole,W or V,"flood on the ground, ha",113850.0,68597.0,0.0
+first,-18.75 dB,whole map,whole,W or V,user's accuracy,0.5763,0.0649,0.0
+first,-18.75 dB,whole map,whole,W or V,producer's accuracy,0.1998,0.1217,0.0
+first,-18.75 dB,whole map,clear part,W only,"flood on the ground, ha",12297.0,3276.0,0.0
+first,-18.75 dB,whole map,clear part,W only,user's accuracy,0.5424,0.0654,0.0
+first,-18.75 dB,whole map,clear part,W only,producer's accuracy,0.5627,0.148,0.0
+first,-18.75 dB,whole map,clear part,W or V,"flood on the ground, ha",32375.0,15300.0,0.0
+first,-18.75 dB,whole map,clear part,W or V,user's accuracy,0.5763,0.0649,0.0
+first,-18.75 dB,whole map,clear part,W or V,producer's accuracy,0.2271,0.109,0.0
+first,-17.75 dB,floodplain,whole,W only,"flood on the ground, ha",27717.0,6235.0,0.0
+first,-17.75 dB,floodplain,whole,W only,user's accuracy,0.5003,0.064,0.0
+first,-17.75 dB,floodplain,whole,W only,producer's accuracy,0.7013,0.1472,0.0
+first,-17.75 dB,floodplain,whole,W or V,"flood on the ground, ha",38283.0,8286.0,0.0
+first,-17.75 dB,floodplain,whole,W or V,user's accuracy,0.5619,0.0636,0.0
+first,-17.75 dB,floodplain,whole,W or V,producer's accuracy,0.5702,0.121,0.0
+first,-17.75 dB,floodplain,clear part,W only,"flood on the ground, ha",11274.0,3254.0,0.0
+first,-17.75 dB,floodplain,clear part,W only,user's accuracy,0.4852,0.0612,0.0
+first,-17.75 dB,floodplain,clear part,W only,producer's accuracy,0.5991,0.1696,0.0
+first,-17.75 dB,floodplain,clear part,W or V,"flood on the ground, ha",16721.0,4427.0,0.0
+first,-17.75 dB,floodplain,clear part,W or V,user's accuracy,0.554,0.0612,0.0
+first,-17.75 dB,floodplain,clear part,W or V,producer's accuracy,0.4612,0.1229,0.0
+first,-17.75 dB,whole map,whole,W only,"flood on the ground, ha",33505.0,6883.0,0.0
+first,-17.75 dB,whole map,whole,W only,user's accuracy,0.5068,0.0573,0.0
+first,-17.75 dB,whole map,whole,W only,producer's accuracy,0.6905,0.1334,0.0
+first,-17.75 dB,whole map,whole,W or V,"flood on the ground, ha",113850.0,68597.0,0.0
+first,-17.75 dB,whole map,whole,W or V,user's accuracy,0.5581,0.0571,0.0
+first,-17.75 dB,whole map,whole,W or V,producer's accuracy,0.2238,0.1359,0.0
+first,-17.75 dB,whole map,clear part,W only,"flood on the ground, ha",12297.0,3276.0,0.0
+first,-17.75 dB,whole map,clear part,W only,user's accuracy,0.4933,0.0548,0.0
+first,-17.75 dB,whole map,clear part,W only,producer's accuracy,0.629,0.1638,0.0
+first,-17.75 dB,whole map,clear part,W or V,"flood on the ground, ha",32375.0,15300.0,0.0
+first,-17.75 dB,whole map,clear part,W or V,user's accuracy,0.5512,0.0547,0.0
+first,-17.75 dB,whole map,clear part,W or V,producer's accuracy,0.2669,0.1274,0.0
+"first, with person on the relabelled points",-18.75 dB,floodplain,whole,W only,"flood on the ground, ha",22551.0,4790.0,-5166.0
+"first, with person on the relabelled points",-18.75 dB,floodplain,whole,W only,user's accuracy,0.5,0.0729,-0.0417
+"first, with person on the relabelled points",-18.75 dB,floodplain,whole,W only,producer's accuracy,0.7487,0.1392,0.0888
+"first, with person on the relabelled points",-18.75 dB,floodplain,whole,W or V,"flood on the ground, ha",35305.0,8296.0,-2978.0
+"first, with person on the relabelled points",-18.75 dB,floodplain,whole,W or V,user's accuracy,0.5,0.0729,-0.0833
+"first, with person on the relabelled points",-18.75 dB,floodplain,whole,W or V,producer's accuracy,0.4782,0.1133,-0.0363
+"first, with person on the relabelled points",-18.75 dB,floodplain,clear part,W only,"flood on the ground, ha",8713.0,2403.0,-2561.0
+"first, with person on the relabelled points",-18.75 dB,floodplain,clear part,W only,user's accuracy,0.5,0.0729,-0.0417
+"first, with person on the relabelled points",-18.75 dB,floodplain,clear part,W only,producer's accuracy,0.656,0.1729,0.1067
+"first, with person on the relabelled points",-18.75 dB,floodplain,clear part,W or V,"flood on the ground, ha",15688.0,4429.0,-1033.0
+"first, with person on the relabelled points",-18.75 dB,floodplain,clear part,W or V,user's accuracy,0.5,0.0729,-0.0833
+"first, with person on the relabelled points",-18.75 dB,floodplain,clear part,W or V,producer's accuracy,0.3643,0.1065,-0.0345
+"first, with person on the relabelled points",-18.75 dB,whole map,whole,W only,"flood on the ground, ha",27088.0,5237.0,-6417.0
+"first, with person on the relabelled points",-18.75 dB,whole map,whole,W only,user's accuracy,0.5,0.0651,-0.0424
+"first, with person on the relabelled points",-18.75 dB,whole map,whole,W only,producer's accuracy,0.7288,0.1254,0.0897
+"first, with person on the relabelled points",-18.75 dB,whole map,whole,W or V,"flood on the ground, ha",111434.0,68597.0,-2416.0
+"first, with person on the relabelled points",-18.75 dB,whole map,whole,W or V,user's accuracy,0.5167,0.0651,-0.0596
+"first, with person on the relabelled points",-18.75 dB,whole map,whole,W or V,producer's accuracy,0.1831,0.1142,-0.0167
+"first, with person on the relabelled points",-18.75 dB,whole map,clear part,W only,"flood on the ground, ha",9666.0,2412.0,-2631.0
+"first, with person on the relabelled points",-18.75 dB,whole map,clear part,W only,user's accuracy,0.5,0.0651,-0.0424
+"first, with person on the relabelled points",-18.75 dB,whole map,clear part,W only,producer's accuracy,0.6711,0.1595,0.1084
+"first, with person on the relabelled points",-18.75 dB,whole map,clear part,W or V,"flood on the ground, ha",31726.0,15301.0,-649.0
+"first, with person on the relabelled points",-18.75 dB,whole map,clear part,W or V,user's accuracy,0.5167,0.0651,-0.0596
+"first, with person on the relabelled points",-18.75 dB,whole map,clear part,W or V,producer's accuracy,0.2113,0.1039,-0.0158
+"first, with person on the relabelled points",-17.75 dB,floodplain,whole,W only,"flood on the ground, ha",22551.0,4790.0,-5166.0
+"first, with person on the relabelled points",-17.75 dB,floodplain,whole,W only,user's accuracy,0.4726,0.0643,-0.0277
+"first, with person on the relabelled points",-17.75 dB,floodplain,whole,W only,producer's accuracy,0.8142,0.149,0.1129
+"first, with person on the relabelled points",-17.75 dB,floodplain,whole,W or V,"flood on the ground, ha",35305.0,8296.0,-2978.0
+"first, with person on the relabelled points",-17.75 dB,floodplain,whole,W or V,user's accuracy,0.4852,0.0644,-0.0767
+"first, with person on the relabelled points",-17.75 dB,floodplain,whole,W or V,producer's accuracy,0.534,0.1241,-0.0362
+"first, with person on the relabelled points",-17.75 dB,floodplain,clear part,W only,"flood on the ground, ha",8713.0,2403.0,-2561.0
+"first, with person on the relabelled points",-17.75 dB,floodplain,clear part,W only,user's accuracy,0.4625,0.0617,-0.0227
+"first, with person on the relabelled points",-17.75 dB,floodplain,clear part,W only,producer's accuracy,0.7389,0.1921,0.1398
+"first, with person on the relabelled points",-17.75 dB,floodplain,clear part,W or V,"flood on the ground, ha",15688.0,4429.0,-1033.0
+"first, with person on the relabelled points",-17.75 dB,floodplain,clear part,W or V,user's accuracy,0.4798,0.062,-0.0742
+"first, with person on the relabelled points",-17.75 dB,floodplain,clear part,W or V,producer's accuracy,0.4257,0.122,-0.0355
+"first, with person on the relabelled points",-17.75 dB,whole map,whole,W only,"flood on the ground, ha",27088.0,5237.0,-6417.0
+"first, with person on the relabelled points",-17.75 dB,whole map,whole,W only,user's accuracy,0.4724,0.0571,-0.0344
+"first, with person on the relabelled points",-17.75 dB,whole map,whole,W only,producer's accuracy,0.796,0.1349,0.1055
+"first, with person on the relabelled points",-17.75 dB,whole map,whole,W or V,"flood on the ground, ha",111434.0,68597.0,-2416.0
+"first, with person on the relabelled points",-17.75 dB,whole map,whole,W or V,user's accuracy,0.5052,0.0572,-0.0529
+"first, with person on the relabelled points",-17.75 dB,whole map,whole,W or V,producer's accuracy,0.207,0.1287,-0.0168
+"first, with person on the relabelled points",-17.75 dB,whole map,clear part,W only,"flood on the ground, ha",9666.0,2412.0,-2631.0
+"first, with person on the relabelled points",-17.75 dB,whole map,clear part,W only,user's accuracy,0.4617,0.0545,-0.0316
+"first, with person on the relabelled points",-17.75 dB,whole map,clear part,W only,producer's accuracy,0.7624,0.1787,0.1334
+"first, with person on the relabelled points",-17.75 dB,whole map,clear part,W or V,"flood on the ground, ha",31726.0,15301.0,-649.0
+"first, with person on the relabelled points",-17.75 dB,whole map,clear part,W or V,user's accuracy,0.5008,0.0547,-0.0504
+"first, with person on the relabelled points",-17.75 dB,whole map,clear part,W or V,producer's accuracy,0.2519,0.123,-0.015

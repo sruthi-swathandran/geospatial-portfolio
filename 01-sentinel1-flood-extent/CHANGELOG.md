@@ -969,13 +969,31 @@ published map figure changes.
   it. Rerun on the 7 August files, the draw gives the same hectares and the
   same candidates, and the estimate the same figures.
 
+### C-36 A second reader on 31 August
+
+The same design as C-35 on the 31 August sample: 145 points, all 105 in the
+map's flood and "upper threshold only" and 40 at random (seed 20261026),
+renumbered SB001 onward and cut again. No published map figure changes.
+
+- **Agreement.** 0.876, kappa 0.787, on the 105, which by coincidence matches
+  7 August to three places; 0.950, kappa 0.812, on the 40. She kept 47 of the
+  49 not-water calls, and called 29 of the 60 points in the map's flood not
+  water, against 25.
+- **Effect.** Open water in the floodplain goes from 27,717 to 22,551 ± 4,790
+  ha, its clear part from 11,274 to 8,713 ± 2,403 ha, and user's accuracy from
+  0.542 to 0.500.
+- **The recession.** On the first reader's labels open water in the floodplain
+  fell by about one standard error of the difference between 7 and 31 August;
+  on the second person's, from 34,776 to 22,551 ha, by about two. The README
+  now says the answer turns on the reader.
+
 ---
 
 ## Open, not fixed
 
-- **F-01 / F-02, the 31 August sample and the hills.** The floodplain, the rest
+- **F-01 / F-02, cloud on 31 August and the hills.** The floodplain, the rest
   of the 12 August map and both other dates now have estimates with standard
-  errors, and 7 August has a second reader. The 31 August sample has one
-  reader, and its clear part is a weak stand-in for the cloudy part of its
-  floodplain. Outside the floodplain the zero-hit bounds show how loosely a
-  few dozen points pin down missed water in the hills.
+  errors, and both other dates have a second reader on the points that set
+  their user's accuracy. On 31 August the clear part is a weak stand-in for the
+  cloudy part of the floodplain. Outside the floodplain the zero-hit bounds
+  show how loosely a few dozen points pin down missed water in the hills.
