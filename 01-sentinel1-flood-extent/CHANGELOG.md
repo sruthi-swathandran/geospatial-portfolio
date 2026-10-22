@@ -886,11 +886,69 @@ the closing claim that the method should be checked before use in a new region,
 dry ones above all. The chips and RTC reads stay in `data/`; the per-event
 tables are in `results/transfer/`.
 
+### C-34 Outside the floodplain, and the 7 and 31 August maps (F-01, F-02)
+
+C-28 checked the floodplain of the 12 August map. This round checks the rest
+of that map and both other dates. No published map figure changes; the README
+gains two sections, "Outside the floodplain" and "Independent check of the 7
+and 31 August maps".
+
+- **The rest of the 12 August map.** `floodplain_layer.py` gains a cutoff of
+  150 m at any slope, which splits the rest in two. `score_map.py` scores each
+  part with the points in it. On low ground the DEM calls sloped, the map is
+  right where it says flood and finds 0.263 ± 0.120 of the open water in the
+  clear part. 16 of the 18 open-water points there sit between 57 and 81 m on
+  the valley floor.
+- **Above 150 m.** Only 280 ha of the 8,282 ha mapped there lay under clear
+  sky, with one point in it. `topup_sample.py --third` drew 30 more there (seed
+  20261022). 21 of the 30 readable are open water, a user's accuracy of 0.700 ±
+  0.085, 0.778 on the published map. The open water is on flat ground at a
+  median of 230 m; the false flood is in the mountains, median 1,219 m.
+  `usable_topup` now checks slope as well as elevation, and every test of a
+  top-up batch matches any name starting "topup".
+- **What zero hits rule out.** Where a land stratum finds no open water, its
+  share gets no variance, and above 150 m the producer's accuracy printed as
+  1.000 ± 0.000. `score_map.py` and `date_sample.py` now give the 95% upper
+  bound for every such group in `zero_hit_bounds.csv`. Above 150 m, land far
+  from flood could hide up to 45,859 clear hectares.
+- **The 7 and 31 August maps.** `scene_inventory.py --map-date` found no
+  usable Sentinel-2 scene near either date. `landsat_clear_sky.py` measured
+  Landsat clear sky over each map, and `date_sample.py` drew 300 points per
+  date on Landsat 7 of 4 August and Landsat 8 of 28 August (seeds 20261023 and
+  20261024), screened them, cut chips and estimated. In the floodplain, at
+  −18.75 dB:
+
+  | Map | Mapped | Open water | User's accuracy | Producer's accuracy |
+  |---|---:|---:|---:|---:|
+  | 7 August | 58,286 ha | 35,865 ± 4,187 ha | 0.566 ± 0.069 | 0.920 ± 0.033 |
+  | 31 August | 33,768 ha | 27,717 ± 6,235 ha | 0.542 ± 0.073 | 0.660 ± 0.140 |
+
+  The 7 August map's extra flood is mostly water standing in fields; the 31
+  August map's is mostly dry ground in the river's seasonal bed. The 7 August
+  producer's accuracy rests on no open water among 36 points in floodplain land
+  near flood, and the bound there would take it to about 0.54. Both images are
+  three days before the radar and 30 m, and only the first reader labelled.
+- **The recession.** In open water the floodplain fell from 35,865 to 27,717
+  ha, about one standard error of the difference. Counting water through
+  vegetation it fell from 165,112 to 38,283 ha. The README's recession figures
+  stand as map figures; the check says most of that fall is water leaving
+  fields.
+- **Tools.** `label_tool.py` gains S to skip a point in simple mode,
+  `--blank-only` to visit only unlabelled points, and refuses a label on a
+  point with no chip. That last one came from B0106, which was labelled before
+  its chip existed; the label was cleared and the point labelled again from
+  its chip.
+- **Counts.** `accuracy_labels_by_scl.csv` now counts all three top-ups: 167
+  points on dark area or unclassified pixels, 62 of them open water, where the
+  README said 153 and 48.
+
 ---
 
 ## Open, not fixed
 
-- **F-01 / F-02, outside the floodplain.** C-28 checks the floodplain, which
-  holds 102,697 of the 119,779 ha mapped. In the hills, where cloud hid the
-  ground on 12 August, the map is still unchecked, and so are the 7 and 31
-  August maps.
+- **F-01 / F-02, readers and cloud.** The floodplain, the rest of the 12
+  August map and both other dates now have estimates with standard errors.
+  Only the 12 August sample has a second reader. Outside the floodplain and on
+  the other dates, the whole-area figures stretch clear-sky rates over cloud
+  without a terrain check, and the zero-hit bounds show how loosely a few dozen
+  points pin down missed water in the hills.

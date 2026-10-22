@@ -278,7 +278,23 @@ def validation_figures():
     pub, upper = "published, -18.75 dB", "published, -17.75 dB"
     ua = score("user's accuracy", pub)
     pa = score("producer's accuracy", pub)
+
+    # The 7 and 31 August maps, each sampled on Landsat (C-34)
+    dated = {}
+    for tag in ("20160807", "20160831"):
+        p = v / f"sample_{tag}" / "estimates.csv"
+        if not p.exists():
+            sys.exit(f"{p} missing. Run date_sample.py estimate for that date. "
+                     "Nothing written.")
+        with open(p, encoding="utf-8") as fh:
+            rows = [r for r in csv.DictReader(fh) if r["map"] == "-18.75 dB"
+                    and r["scope"] == "floodplain" and r["layer"] == "whole"
+                    and r["variant"] == "W only"]
+        for metric, key in (("user's accuracy", "ua"), ("producer's accuracy", "pa")):
+            val = next(float(r["value"]) for r in rows if r["metric"] == metric)
+            dated[f"{key}{tag[-2:]}"] = f"{val * 100:.0f}%"
     return dict(
+        **dated,
         n_points=str(n_points),
         ow=f"{pick('flood area, ha'):,.0f}",
         ow_se=f"{pick_se('flood area, ha'):,.0f}",
@@ -749,6 +765,11 @@ BODY = """<title>Brahmaputra Flood Ledger</title>
       flood is open water, and it finds about {pa} of the open water there.
       Water seen through vegetation is counted apart, since in August it
       includes rice paddies standing in water as usual.</p>
+      <p>The 7 and 31 August maps were checked the same way on Landsat images
+      taken three days before the radar. In the floodplain about {ua07} and
+      {ua31} of what they call flood is open water, and they find about {pa07}
+      and {pa31} of it. On 7 August most of the rest is water standing in
+      fields, and on 31 August dry ground in the river's seasonal bed.</p>
     </div>
     <div>
       <h2>Read this before quoting a figure</h2>

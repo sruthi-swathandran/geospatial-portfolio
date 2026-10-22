@@ -23,13 +23,16 @@ Simple mode
 If the window does not open or ignores the keys, --simple works without it.
 Each chip opens in the Windows image viewer, and you type the answer in the
 command window: a letter and a number together, such as W1 or n2, then Enter.
-Add a note after a space, such as "V2 edge of a paddy". B goes back, Q quits.
+Add a note after a space, such as "V2 edge of a paddy". B goes back, S skips
+a point and leaves it blank, for one whose chip is not cut yet, Q quits.
 
 Usage
 -----
     python src\\label_tool.py              # starts at the first unlabelled point
     python src\\label_tool.py --at P0120   # starts at a given point
     python src\\label_tool.py --simple     # no window; type answers instead
+    python src\\label_tool.py --simple --blank-only --at P0001
+                                          # only the points still blank
     python src\\label_tool.py --sheet second\\sheet_person.csv --chips second_chips
                                           # a second labelling, see second_label.py
 """
@@ -156,16 +159,22 @@ def open_image(path):
         print(f"  open {path} to see the chip")
 
 
-def simple(rows, fields, start):
+def simple(rows, fields, start, blank_only=False):
     """Type each answer in the command window; no matplotlib window."""
     print("\nType a letter and a number, such as W1, then Enter. "
-          "B back, Q quit.\n")
-    i = start
-    while 0 <= i < len(rows):
+          "B back, S skip, Q quit.\n")
+    visit = [k for k in range(len(rows))
+             if not blank_only or not rows[k]["label"].strip()]
+    j = next((n for n, k in enumerate(visit) if k >= start), len(visit))
+    while 0 <= j < len(visit):
+        i = visit[j]
         r = rows[i]
         chip = CHIPS / f"{r['point_id']}.png"
-        if chip.exists():
+        has_chip = chip.exists()
+        if has_chip:
             open_image(chip)
+        else:
+            print(f"  no chip for {r['point_id']}: S to skip it, B back, Q quit")
         now = f" (now {r['label']}{r['confidence']})" if r["label"] else ""
         done = sum(1 for x in rows if x["label"].strip())
         ans = input(f"{r['point_id']}  {i + 1} of {len(rows)}, {done} labelled"
@@ -177,7 +186,13 @@ def simple(rows, fields, start):
         if head == "Q":
             break
         if head == "B":
-            i = max(0, i - 1)
+            j = max(0, j - 1)
+            continue
+        if head == "S":
+            j += 1
+            continue
+        if not has_chip:
+            print("  this point has no chip, so it cannot be labelled yet")
             continue
         if len(head) != 2 or head[0] not in "WVNC" or head[1] not in "123":
             print("  type a letter W, V, N or C and a number 1, 2 or 3, "
@@ -187,9 +202,13 @@ def simple(rows, fields, start):
         if note:
             r["note"] = note.replace(",", ";")
         save_rows(rows, fields)
-        i += 1
-    if i >= len(rows):
+        j += 1
+    if j >= len(visit):
         print("That was the last point.")
+    left = [r["point_id"] for r in rows if not r["label"].strip()]
+    if left:
+        print(f"{len(left)} still blank: {', '.join(left[:20])}"
+              f"{' ...' if len(left) > 20 else ''}")
 
 
 def main():
@@ -201,6 +220,8 @@ def main():
                     "default chips")
     ap.add_argument("--simple", action="store_true",
                     help="no window; type each answer in the command window")
+    ap.add_argument("--blank-only", action="store_true",
+                    help="simple mode: visit only points with no label yet")
     args = ap.parse_args()
     global SHEET, CHIPS
     if args.sheet:
@@ -234,7 +255,7 @@ def main():
         if not args.simple:
             print(f"matplotlib cannot open a window here (backend {backend}); "
                   "switching to simple mode.")
-        simple(rows, fields, start)
+        simple(rows, fields, start, args.blank_only)
         print(f"Saved to {SHEET}.")
         return
     print(f"matplotlib backend {backend}. Click the image window once so it "

@@ -1,0 +1,10 @@
+scope,stratum,n_readable,upper_share_95,clear_ha,upper_ha_95
+floodplain,land near flood,36,0.0974,167781,16341
+floodplain,land far from flood,2,0.8419,30546,25717
+whole map,land near flood,80,0.0451,376958,16987
+whole map,land far from flood,39,0.0903,1060566,95717
+"below 150 m, sloped",land near flood,28,0.1234,140448,17336
+"below 150 m, sloped",land far from flood,1,0.975,61420,59884
+above 150 m,upper threshold only,3,0.7076,981,694
+above 150 m,land near flood,16,0.2059,68729,14152
+above 150 m,land far from flood,36,0.0974,968881,94363

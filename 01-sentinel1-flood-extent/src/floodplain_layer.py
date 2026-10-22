@@ -75,8 +75,13 @@ from estimate_accuracy import (DEM_DIR, EDGE, IN_MAP, VARIANTS,         # noqa: 
                                slope_degrees, stratum_stats, terrain_at,
                                write_csv)
 
-CUTOFFS = {"150 m": (150.0, 2.0), "100 m": (100.0, 2.0), "200 m": (200.0, 2.0)}
+CUTOFFS = {"150 m": (150.0, 2.0), "100 m": (100.0, 2.0), "200 m": (200.0, 2.0),
+           "150 m, any slope": (150.0, 90.0)}
 MAIN = "150 m"
+# All ground at or below 150 m whatever its slope. With MAIN it splits the rest
+# of the map in two: low ground the DEM calls sloped, and ground above 150 m,
+# which score_map.py scores apart (REVIEW F-01, F-02).
+LOW = "150 m, any slope"
 MIN_TESTED = 10
 SHOWN = ("W only", "W or V")
 
@@ -192,10 +197,12 @@ def terrain_rows(hist, e_bins, s_bins):
 
 def usable_topup(p, cutoff):
     """Top-up points were drawn inside the 150 m floodplain, so they speak for
-    any floodplain inside that one, and not for a larger one."""
+    any floodplain inside that one, and not for a larger one, whether larger by
+    elevation or by slope."""
     if not (p.get("batch") or "main").startswith("topup"):
         return True
-    return CUTOFFS[cutoff][0] <= CUTOFFS[MAIN][0]
+    return (CUTOFFS[cutoff][0] <= CUTOFFS[MAIN][0]
+            and CUTOFFS[cutoff][1] <= CUTOFFS[MAIN][1])
 
 
 def screened_rate(points, dom_flag, codes):

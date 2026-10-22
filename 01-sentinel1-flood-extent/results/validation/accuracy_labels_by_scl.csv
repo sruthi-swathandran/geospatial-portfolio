@@ -1,7 +1,7 @@
 scl_class,name,points,W,V,N,C
-2,dark area,43,16,25,1,1
-4,vegetation,467,1,50,396,20
-5,bare soil,27,1,4,21,1
-6,water,113,109,1,3,0
-7,unclassified,110,32,52,23,3
-2 and 7,dark area or unclassified,153,48,77,24,4
+2,dark area,48,21,25,1,1
+4,vegetation,475,2,50,402,21
+5,bare soil,28,1,4,22,1
+6,water,120,115,1,4,0
+7,unclassified,119,41,52,23,3
+2 and 7,dark area or unclassified,167,62,77,24,4

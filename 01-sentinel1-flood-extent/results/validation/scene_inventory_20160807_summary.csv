@@ -1,0 +1,17 @@
+route,sensor,date,days_from_flood_map,scenes,aoi_seen_pct,median_cloud_pct,aoi_seen_by_usable_pct
+"Landsat C2 L2, Earth Search",Landsat 7,2016-08-02,-5,3,8.0,89.0,0.0
+"Landsat C2 L2, Planetary Computer",Landsat 7,2016-08-02,-5,3,8.0,89.0,0.0
+"Landsat C2 L2, Earth Search",Landsat 8,2016-08-03,-4,4,79.1,11.1,78.0
+"Landsat C2 L2, Planetary Computer",Landsat 8,2016-08-03,-4,4,79.1,11.1,78.0
+"Landsat C2 L2, Earth Search",Landsat 7,2016-08-04,-3,4,40.3,34.0,22.0
+"Landsat C2 L2, Planetary Computer",Landsat 7,2016-08-04,-3,4,40.3,34.0,22.0
+"Sentinel-2 L1C, Copernicus Data Space",Sentinel-2A,2016-08-05,-2,8,43.6,87.6,0.0
+"Sentinel-2 L2A, Planetary Computer",Sentinel-2A,2016-08-05,-2,8,43.6,97.3,0.0
+"Landsat C2 L2, Earth Search",Landsat 8,2016-08-10,3,3,7.1,78.2,0.0
+"Landsat C2 L2, Planetary Computer",Landsat 8,2016-08-10,3,3,7.1,78.2,0.0
+"Landsat C2 L2, Earth Search",Landsat 7,2016-08-11,4,4,81.2,55.0,0.0
+"Landsat C2 L2, Planetary Computer",Landsat 7,2016-08-11,4,4,81.2,55.0,0.0
+"Landsat C2 L2, Earth Search",Landsat 8,2016-08-12,5,4,38.1,45.2,0.0
+"Landsat C2 L2, Planetary Computer",Landsat 8,2016-08-12,5,4,38.1,45.2,0.0
+"Sentinel-2 L1C, Copernicus Data Space",Sentinel-2A,2016-08-12,5,15,81.4,36.8,38.6
+"Sentinel-2 L2A, Planetary Computer",Sentinel-2A,2016-08-12,5,15,81.4,40.1,32.0

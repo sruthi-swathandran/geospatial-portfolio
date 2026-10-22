@@ -24,6 +24,15 @@ README section "Independent check of the 12 August map" and `CHANGELOG.md`
 C-28. Outside the floodplain, and on the 7 and 31 August maps, both findings
 still stand.
 
+**Update, 22 October 2026.** The rest of the 12 August map and both other
+dates now have estimates with standard errors (`CHANGELOG.md` C-34). Low
+ground the DEM calls sloped and ground above 150 m are scored apart, the
+latter with a third top-up of 30 points. The 7 and 31 August maps each have a
+300-point sample labelled on Landsat three days earlier. What remains open is
+a second reading of those samples and the cloud assumption outside the
+floodplain, where a stratum with no open water found can still hide tens of
+thousands of hectares at the 95% bound.
+
 ---
 
 ## Scope note: what of the protocol applies

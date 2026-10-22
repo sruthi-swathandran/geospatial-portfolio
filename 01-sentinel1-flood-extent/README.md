@@ -37,7 +37,7 @@ superseded value and why it was wrong.
 | Dates | 7, 12 and 31 August 2016 |
 | Resolution | 20 m |
 | Method | Speckle-filtered single-date threshold, −18.75 or −17.75 dB |
-| Validation | Sen1Floods11 hand labels, 65 chips, official splits; the same threshold on 309 chips of nine other floods; a stratified sample of the 12 August map labelled on Sentinel-2 |
+| Validation | Sen1Floods11 hand labels, 65 chips, official splits; the same threshold on 309 chips of nine other floods; a stratified sample of the 12 August map labelled on Sentinel-2, and of the 7 and 31 August maps on Landsat |
 | Data | Open only: Microsoft Planetary Computer, JRC, ESA, geoBoundaries |
 
 ---
@@ -215,8 +215,9 @@ fell 40% over those 24 days while flooded cropland fell 81%. The water that
 persists is in channels, chars and low wetland rather than on fields, which
 drain in about three weeks. Peak extent is the number that gets reported and
 duration is the number that damages a rice crop. The change classes are
-unvalidated, and the refinement steps are checked only on 12 August, in the
-independent check below.*
+unvalidated. Each map is checked on its own against Landsat in the
+[independent check of the 7 and 31 August maps](#independent-check-of-the-7-and-31-august-maps),
+which finds that most of the fall is water leaving fields.*
 
 ### Why the three maps are not merged into one
 
@@ -437,8 +438,8 @@ flood was receding. Cloud covers much of the scene, so points were drawn only
 where the scene classification shipped with the image shows no cloud, cloud
 shadow or cirrus within 100 m, and only where a test on the image itself found
 no cloud or haze within 100 m. The classification's dark-area and unclassified
-pixels count as eligible. Counting both top-ups, 153 points sit on them and
-48 of those were labelled open water, so leaving them out would have
+pixels count as eligible. Counting all three top-ups, 167 points sit on them
+and 62 of those were labelled open water, so leaving them out would have
 hidden much of the flood. "Clear" below means eligible in this sense. The classification misses
 some cloud outright, and the image test removed 41 of the 591 candidates it had
 passed. Two earlier draws were set aside before their labels were used: the
@@ -571,13 +572,127 @@ What this check does not cover:
   while the flood was receding, which pushes the optical estimates up a little.
   Map land was water at between 20.4% and 27.0% of points whatever the distance
   to the nearest cloud, so the sample shows no trend with cloud.
-- **The hills.** Outside the floodplain the map is unchecked. Stretching the
-  clear-sky rates across all of it gives 210,547 ± 37,549 ha of open water, a
-  figure the terrain difference makes untrustworthy.
-- **The other dates.** The 7 and 31 August maps are not checked.
+- **Outside the floodplain.** Checked below, on far fewer points. Stretching
+  the clear-sky rates across the whole map gives 210,547 ± 37,549 ha of open
+  water, a figure the terrain difference makes untrustworthy.
+- **The other dates.** Checked in the next section, on Landsat images that are
+  coarser and three days earlier.
 
 The image chips sit under `data/validation/chips/` and are not committed;
 `draw_sample.py --chips-only` rebuilds them from the key.
+
+### Outside the floodplain
+
+The rest of the 12 August map splits in two on the same DEM: ground at or below
+150 m that the DEM calls steeper than 2°, and ground above 150 m.
+`score_map.py` scores each with the main-sample points that fall in it.
+
+**Low ground the DEM calls sloped.** It holds 8,801 ha of flood on the map as
+drawn and 9,551 ha on the published map, and 84 points, 18 of them open water.
+Every point the map called flood there was open water, but in the clear part
+the map found only 0.263 ± 0.120 of the open water: 14,732 ± 6,747 ha on the
+ground against 3,874 ha mapped. 16 of the 18 open-water points lie between 57
+and 81 m, on the valley floor, and the 30 m DEM gives them slopes of 2 to 15°.
+Five of them are among the points the slope cut removed. So this is mostly
+valley floor that only the DEM's slope puts outside the floodplain, and the map
+misses most of its water. Stretched over the cloudy part it comes to 32,258 ±
+14,844 ha.
+
+**Above 150 m.** The map as drawn holds 8,282 ha of flood here and the
+published map 8,481 ha, but only 280 ha of it lay under clear sky, where the
+main sample put one point. A third top-up added 30 points in that clear flood.
+Of the 30 readable, 21 are open water, so 0.700 ± 0.085 of what the map calls
+flood above 150 m is open water, and 0.778 ± 0.081 on the published map. The
+open water sits on flat ground, at 159 to 718 m with a median of 230 m and a
+median slope of 0.5°. The eight top-up points labelled not water lie much
+higher, at 263 to 3,081 m with a median of 1,219 m and a median slope of 3.4°,
+and the main sample's one point there, at 1,634 m, was not water either. The
+false flood up here is in the mountains. Stretched over the cloudy part, open
+water comes to 5,797 ± 705 ha against 8,282 ha mapped, a figure that rests on
+280 clear hectares.
+
+**What finding nothing rules out.** None of the 94 readable points in land far
+from flood above 150 m was open water. The estimator then gives that stratum no
+missed flood and no variance, and the map's producer's accuracy above 150 m
+comes out as 1.000 ± 0.000. That says only that none was found. At the 95%
+bound, up to 3.85% of the stratum's 1,191,667 clear hectares could be open
+water, about 45,859 ha. On low sloped ground the same stratum has only 12
+readable points and the bound is 49,430 ha. `score_map.py` writes this bound
+for every group with no open water found to `zero_hit_bounds.csv`.
+
+---
+
+## Independent check of the 7 and 31 August maps
+
+No Sentinel-2 scene near either date has usable sky (`scene_inventory.py
+--map-date`). Landsat does. `landsat_clear_sky.py` puts each scene's QA band on
+the map grid: the Landsat 7 scene of 4 August sees 66.4% of the 7 August map's
+flood under clear sky, and the Landsat 8 scene of 28 August sees 38.0% of the
+31 August map's. Each map got a stratified sample of 300 points from
+`date_sample.py`, in the same seven strata, read from that date's published
+maps. Points fall only where the QA band shows clear sky with no cloud, cirrus
+or shadow bit within 100 m, and the image test from 12 August, carried over to
+Landsat reflectance, rejected none. That left 41,600 of the 65,356 ha of flood
+mapped on 7 August eligible, and 12,974 of the 39,481 ha on 31 August. The
+first reader labelled both samples blind, as before.
+
+These checks are weaker than the 12 August one in two ways. Both images were
+taken three days before the radar rather than twenty hours, while the flood was
+receding, so they probably show more water than the radar saw. That pushes
+user's accuracy up and producer's accuracy down. And Landsat pixels are 30 m
+against the map's 20 m, so a pixel mixing water and crop is easier to read as
+water through vegetation.
+
+**Open-water flood inside the floodplain, −18.75 dB.**
+
+| Map | Mapped | Open water, clear part | Open water, all of the floodplain | User's accuracy | Producer's accuracy |
+|---|---:|---:|---:|---:|---:|
+| 7 August | 58,286 ha | 22,927 ± 2,676 ha | 35,865 ± 4,187 ha | 0.566 ± 0.069 | 0.920 ± 0.033 |
+| 12 August, published | 102,758 ha | 59,172 ± 6,204 ha | 135,505 ± 13,221 ha | 0.725 ± 0.047 | 0.550 ± 0.052 |
+| 31 August | 33,768 ha | 11,274 ± 3,254 ha | 27,717 ± 6,235 ha | 0.542 ± 0.073 | 0.660 ± 0.140 |
+
+On both dates a little over half of what the map calls flood in the floodplain
+is open water, below the 0.725 of 12 August, but the rest differs. Of the 60
+points in the 7 August map's flood, 34 are open water, 23 water through
+vegetation and 3 not water, and 18 of the 23 sit where JRC never recorded
+water, so they are fields. Of the 31 August map's 60, 32 are open water, 2
+water through vegetation, 25 not water and 1 unreadable, and 20 of the 25 sit
+where JRC records water between 1 and 49% of the time, the river's seasonal
+bed. Wet sand and silt left by the falling river could be dark enough to the
+radar to pass the threshold, and so could water that came back between 28 and
+31 August; the sample cannot tell the two apart. Counting water through
+vegetation as flood, 0.962 of the 7 August map's floodplain flood is wet,
+against 0.583 on 31 August.
+
+The 7 August producer's accuracy is weaker than its ± suggests. None of the 36
+readable floodplain points in land near flood was open water, so that stratum
+adds nothing to the estimate or to its variance. At the 95% bound it could hold
+16,341 clear hectares of open water, which would bring the clear-part
+producer's accuracy down to about 0.54. On 31 August only two points fell in
+floodplain land far from flood, and the bound there allows up to 75,300 ha.
+
+Outside the floodplain these samples have few points. No point fell in either
+map's flood above 150 m. On low sloped ground, 42 points on 7 August and 66 on
+31 August give user's accuracies of 0.571 ± 0.202 and 0.545 ± 0.158.
+
+**What this does to the recession.** The two maps share a footprint, so their
+floodplain estimates compare directly. Open water fell from 35,865 ± 4,187 ha
+to 27,717 ± 6,235 ha, about one standard error of the difference, so the
+samples cannot show that open water fell at all. Counting water through
+vegetation, wet ground fell from 165,112 ± 34,321 ha to 38,283 ± 8,286 ha. Most
+of the fall in mapped flood is water leaving fields, which fits the 81% fall in
+flooded cropland above. Both whole-floodplain figures assume the map errs under
+cloud as it does in clear sky, and for these dates that was not tested.
+
+What this check does not cover:
+
+- **Readers.** Only the first reader labelled these samples. On 12 August a
+  second reading moved the headline by about one standard error.
+- **Timing and pixel size.** The three-day gap and the 30 m pixels are stated
+  above and not measured.
+- **The chips** sit under `data/validation/chips_20160807/` and
+  `chips_20160831/`, are not committed, and `date_sample.py chips` rebuilds
+  them from the key.
 
 ---
 
@@ -818,13 +933,15 @@ a CSV beside its figure.
 | Audit | `verify_all.py` | Traces the figures in README.md and docs/index.html back to results/ |
 | Audit | `register_checks.py` | The Lee noise term, the clean-up step at chip and scene scale, and the frame lookup, each against a bar set before running |
 | Audit | `preflight.py` | Pre-publication checklist: scripts parse, constants match the text, the manifest and the verify report are current |
-| Check | `scene_inventory.py` | Free optical scenes around 12 August, and their cloud |
+| Check | `scene_inventory.py` | Free optical scenes around 12 August, or with `--map-date` around 7 or 31 August, and their cloud |
+| Check | `landsat_clear_sky.py` | Landsat QA on the map grid, and clear sky over the 7 and 31 August maps |
 | Check | `clear_sky.py` | Sentinel-2 scene classification on the map grid, and clear sky per stratum |
 | Check | `draw_sample.py`, `topup_sample.py` | The stratified sample with its image screen and chips, and the floodplain top-up |
 | Check | `screen_points.py` | The brightness measurements the image screen's cutoffs were chosen from |
 | Check | `label_tool.py` | Labelling by keyboard, blind to the map |
 | Check | `transfer_events.py` | The India threshold on the hand-labelled chips of nine other Sen1Floods11 floods |
-| Check | `score_map.py` | Any version of the map scored against the same sample, for the resampling tests |
+| Check | `score_map.py` | Any version of the map scored against the same sample, for the resampling tests and the ground outside the floodplain |
+| Check | `date_sample.py` | Stratified samples of the 7 and 31 August maps on Landsat: draw, chips and estimate |
 | Check | `second_label.py`, `compare_labels.py` | Second readings of the guesses and 40 random points, scored against the first and fed back into the estimate |
 | Check | `estimate_accuracy.py`, `floodplain_layer.py` | Accuracy and area with standard errors, for the clear part, the floodplain and the whole map |
 | Publish | `build_docs_page.py` | Generates docs/index.html and its four map overlays from results/ |

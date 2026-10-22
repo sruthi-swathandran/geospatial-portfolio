@@ -39,6 +39,14 @@ checks that before it reports anything else.
 The floodplain stays the one defined in floodplain_layer.py, on the nearest
 DEM the sample was drawn with, so every map is scored over the same ground.
 
+The rest of the map is scored in two parts (REVIEW F-01, F-02): ground at or
+below 150 m that the DEM calls steeper than 2 degrees, and ground above 150 m.
+Each part's hectares come from floodplain_layer.py's cutoffs by difference,
+and its points are the main-sample points that fall in it; above 150 m they
+are joined by the third top-up, drawn in the map's flood there. The clear part of each needs no assumption
+about cloud. The whole stretches clear-sky rates over ground the terrain check
+found higher and steeper under cloud, and is shown only beside it.
+
 Mapped flood is also counted on each raster, over the whole map and inside the
 floodplain, and written as "mapped flood, ha, counted" with no error. For the
 maps as drawn these counts equal the stratum areas, which is a second check.
@@ -54,9 +62,16 @@ Maps scored, where present under results/fullscene/
 The two "as drawn" maps are the ones the strata were read from, and the check
 runs on the first of them.
 
+Where a group of points in land on the map finds no open water at all, its
+share gets no variance, and "producer's accuracy 1.000 +/- 0.000" can follow.
+So for each such group the script also gives the 95% upper bound on the share
+(Clopper-Pearson, 1 - 0.025^(1/n) for n readable points) and the clear hectares
+it could hide, which is what the sample can rule out and no more.
+
 Outputs, under results/validation/
 ----------------------------------
   map_scores.csv
+  zero_hit_bounds.csv   groups with no open water found, and their bound
 
 Usage
 -----
@@ -82,7 +97,7 @@ from draw_sample import NAMES                                         # noqa: E4
 from estimate_accuracy import (IN_MAP, load_points, load_strata,     # noqa: E402
                                occurrence_at, terrain_at, write_csv)
 from estimate_accuracy import DEM_DIR, slope_degrees                  # noqa: E402
-from floodplain_layer import CUTOFFS, MAIN, usable_topup              # noqa: E402
+from floodplain_layer import CUTOFFS, LOW, MAIN, usable_topup         # noqa: E402
 
 OUT = RESULTS / "validation"
 CANDIDATES = {
@@ -107,14 +122,15 @@ def map_at(path, points, shape):
 
 
 def counted_ha(path):
-    """Flood pixels in the raster, over the whole map and in the floodplain."""
+    """Flood pixels in the raster: whole map, floodplain, all ground <= 150 m."""
     e_max, s_max = CUTOFFS[MAIN]
+    e_low = CUTOFFS[LOW][0]
     dem = {}
     for f in sorted(DEM_DIR.glob("India_dem_20m_*_*.tif")):
         m = re.fullmatch(r"India_dem_20m_(\d+)_(\d+)\.tif", f.name)
         if m:
             dem[(int(m.group(1)), int(m.group(2)))] = f
-    whole = plain = 0
+    whole = plain = low = 0
     with rasterio.open(path) as ref:
         px_ha = abs(ref.transform.a * ref.transform.e) / 1e4
         res = abs(ref.transform.a)
@@ -139,7 +155,8 @@ def counted_ha(path):
                     continue
                 with np.errstate(invalid="ignore"):
                     plain += int((flood & (elev <= e_max) & (slope <= s_max)).sum())
-    return whole * px_ha, plain * px_ha
+                    low += int((flood & (elev <= e_low)).sum())
+    return whole * px_ha, plain * px_ha, low * px_ha
 
 
 def total(A, vals):
@@ -203,6 +220,39 @@ def score(points, flags, areas, layer, letters):
             ("overall accuracy", ta / tot, math.sqrt(va) / tot)]
 
 
+ZERO_HIT_STRATA = (3, 4, 6, 7)        # land on the -18.75 dB map
+
+
+def zero_hit_bounds(points, areas, scope, letters=("W",)):
+    """For each land stratum with readable points and no open water among them,
+    the 95% upper bound on its share and the clear hectares that allows."""
+    rows = []
+    for k in ZERO_HIT_STRATA:
+        ps = [p for p in points if p["code"] == k]
+        read = [p for p in ps if p["label"] in ("W", "V", "N")]
+        if not read or any(p["label"] in letters and not p["permanent"]
+                           for p in read):
+            continue
+        share = 1 - 0.025 ** (1 / len(read))
+        clear = areas[k]["eligible"] * len(read) / len(ps)
+        rows.append(dict(scope=scope, stratum=NAMES[k], n_readable=len(read),
+                         upper_share_95=round(share, 4), clear_ha=round(clear),
+                         upper_ha_95=round(share * clear)))
+    return rows
+
+
+def print_bounds(rows):
+    if not rows:
+        return
+    print("\n  No open water found; what the sample can rule out (95% upper bound):")
+    print(f"  {'scope':<20} {'stratum':<22} {'n':>4} {'share':>7} "
+          f"{'clear ha':>11} {'up to ha':>9}")
+    for r in rows:
+        print(f"  {r['scope']:<20} {r['stratum']:<22} {r['n_readable']:>4} "
+              f"{r['upper_share_95']:>7.4f} {r['clear_ha']:>11,} "
+              f"{r['upper_ha_95']:>9,}")
+
+
 def main():
     print("=" * 78)
     print("MAP VERSIONS SCORED AGAINST THE LABELLED SAMPLE")
@@ -218,6 +268,7 @@ def main():
         p["batch"] = p.get("batch") or "main"
         p["in_floodplain"] = bool(np.isfinite(e) and e <= e_max and s <= s_max
                                   and usable_topup(p, MAIN))
+        p["low_ground"] = bool(np.isfinite(e) and e <= CUTOFFS[LOW][0])
 
     codes = {v: k for k, v in NAMES.items()}
     with open(OUT / "floodplain_strata.csv", encoding="utf-8") as fh:
@@ -225,10 +276,37 @@ def main():
                         mapped=float(r["floodplain_mapped_ha"]),
                         eligible=float(r["floodplain_screened_eligible_ha"]))
                     for r in csv.DictReader(fh) if r["cutoff"] == MAIN}
+    with open(OUT / "floodplain_strata.csv", encoding="utf-8") as fh:
+        low_areas = {codes[r["stratum"]]: dict(
+                         mapped=float(r["floodplain_mapped_ha"]),
+                         eligible=float(r["floodplain_screened_eligible_ha"]))
+                     for r in csv.DictReader(fh) if r["cutoff"] == LOW}
     map_areas = load_strata()
+
+    def minus(a, b):
+        return {k: dict(mapped=max(a[k]["mapped"] - b[k]["mapped"], 0.0),
+                        eligible=max(a[k]["eligible"] - b[k]["eligible"], 0.0))
+                for k in a}
+
+    main = [p for p in points if not p["batch"].startswith("topup")]
     scopes = {"floodplain": ([p for p in points if p["in_floodplain"]], fp_areas),
-              "whole map": ([p for p in points
-                             if not p["batch"].startswith("topup")], map_areas)}
+              "whole map": (main, map_areas),
+              "below 150 m, sloped": ([p for p in main if p["low_ground"]
+                                       and not p["in_floodplain"]],
+                                      minus(low_areas, fp_areas)),
+              # topup3 was drawn in mapped flood above 150 m, so it joins here
+              "above 150 m": ([p for p in main if not p["low_ground"]]
+                              + [p for p in points if p["batch"] == "topup3"],
+                              minus(map_areas, low_areas))}
+    for scope in ("below 150 m, sloped", "above 150 m"):
+        pts, areas = scopes[scope]
+        for k in IN_MAP:
+            n = sum(1 for p in pts if p["code"] == k and p["label"] in ("W", "V", "N"))
+            if n < 2 and areas[k]["eligible"] > 0:
+                what = ("its share is taken as zero" if n == 0 else
+                        "its share rests on that one point, with no variance")
+                print(f"  {scope}: {NAMES[k]} has {n} readable point(s) for "
+                      f"{areas[k]['eligible']:,.0f} clear ha; {what}")
 
     with rasterio.open(MAP) as d:
         shape = (d.height, d.width)
@@ -241,8 +319,10 @@ def main():
         moved = sum(1 for p in points if p["code"] in IN_MAP
                     and flags[p["point_id"]] != (p["code"] == 1))
         print(f"  {name:<22} read; {moved} points differ from the map as drawn")
-        whole_ha, plain_ha = counted_ha(path)
-        for scope, ha in (("whole map", whole_ha), ("floodplain", plain_ha)):
+        whole_ha, plain_ha, low_ha = counted_ha(path)
+        for scope, ha in (("whole map", whole_ha), ("floodplain", plain_ha),
+                          ("below 150 m, sloped", low_ha - plain_ha),
+                          ("above 150 m", whole_ha - low_ha)):
             rows.append(dict(map=name, scope=scope, layer="whole", variant="",
                              metric="mapped flood, ha, counted",
                              value=round(ha), se=0))
@@ -300,6 +380,35 @@ def main():
         u, pr = sel["user's accuracy"], sel["producer's accuracy"]
         print(f"  {name:<22} {m:>10,.0f}"
               f" {u['value']:>7.3f} ± {u['se']:.3f} {pr['value']:>7.3f} ± {pr['se']:.3f}")
+    for scope in ("below 150 m, sloped", "above 150 m"):
+        pts = scopes[scope][0]
+        print(f"\n  {scope}, open water (W only), {len(pts)} points:")
+        print(f"  {'map':<22} {'mapped, ha':>10} {'user, clear':>14} {'producer, clear':>16}")
+        for name in CANDIDATES:
+            sel = {r["metric"]: r for r in rows if r["map"] == name
+                   and r["scope"] == scope and r["layer"] == "clear part"
+                   and r["variant"] == "W only"}
+            if not sel:
+                continue
+            m = next(r["value"] for r in rows if r["map"] == name and r["scope"] == scope
+                     and r["metric"] == "mapped flood, ha, counted")
+            u, pr = sel["user's accuracy"], sel["producer's accuracy"]
+            print(f"  {name:<22} {m:>10,.0f} {u['value']:>7.3f} ± {u['se']:.3f}"
+                  f" {pr['value']:>9.3f} ± {pr['se']:.3f}")
+        for lname in ("clear part", "whole"):
+            g = next(r for r in rows if r["map"] == CHECKED and r["scope"] == scope
+                     and r["layer"] == lname and r["variant"] == "W only"
+                     and r["metric"] == "flood on the ground, ha")
+            x = next(r for r in rows if r["map"] == CHECKED and r["scope"] == scope
+                     and r["layer"] == lname and r["variant"] == "W only"
+                     and r["metric"] == "mapped flood, ha")
+            print(f"  {lname:<10}  open water on the ground {g['value']:>9,.0f} ± "
+                  f"{g['se']:,.0f} ha, mapped as drawn {x['value']:>9,.0f} ha")
+    print("  'whole' stretches clear-sky rates over higher, steeper ground.")
+    bounds = [r for scope, (pts, areas) in scopes.items()
+              for r in zero_hit_bounds(pts, areas, scope)]
+    write_csv(OUT / "zero_hit_bounds.csv", bounds)
+    print_bounds(bounds)
     print("\n  Flood on the ground is the same for every map; it is in map_scores.csv.")
     print(f"  wrote {OUT / 'map_scores.csv'}")
 

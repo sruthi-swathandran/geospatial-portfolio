@@ -1,0 +1,8 @@
+stratum,in_published_map,mapped_ha,eligible_ha,screened_eligible_ha,floodplain_mapped_ha,floodplain_eligible_ha,floodplain_screened_eligible_ha,low_mapped_ha,low_eligible_ha,low_screened_eligible_ha,n_planned,n_drawn,n_tested,n_screened_out
+flood,yes,65356.0,41599.9,41599.9,58286.5,37267.2,37267.2,64399.5,41056.1,41056.1,60,60,60,0
+permanent water,yes,23261.9,15074.5,15074.5,21943.8,14244.7,14244.7,23157.1,15045.8,15045.8,20,20,20,0
+upper threshold only,yes,26314.3,16848.6,16848.6,22979.7,14660.3,14660.3,24821.4,15867.8,15867.8,45,45,45,0
+removed by refinement,yes,13411.6,4915.7,4915.7,110.9,68.6,68.6,891.4,479.6,479.6,35,35,35,0
+swath edge,no,65883.7,25427.9,25427.9,8143.1,3603.0,3603.0,14660.5,7134.4,7134.4,20,20,20,0
+land near flood,yes,618055.7,376958.0,376958.0,275517.6,167780.9,167780.9,498736.2,308228.7,308228.7,80,80,80,0
+land far from flood,yes,2418784.5,1087760.0,1087760.0,56532.8,30546.4,30546.4,160161.7,91966.1,91966.1,40,40,40,0

@@ -240,7 +240,7 @@ def label_counts(points, codes=None):
 
 
 def labels_by_scl():
-    """Labels by scene classification class, over all 610 points. Dark area
+    """Labels by scene classification class, over every point, top-ups too. Dark area
     and unclassified pixels are eligible as well as the clear classes, and
     much of the open water sits on them (REGISTER V-04)."""
     names = {2: "dark area", 4: "vegetation", 5: "bare soil", 6: "water",

@@ -1,0 +1,1 @@
+2026-10-22 09:40 UTC  map 2016-08-07  scene 2016-08-04 (4 items)  seed 20261023  QA clear, no cloudy bit within 100 m  image screen core 2 px of 30 m above 0.15 at white 0.95, haze median 0.085 at 0.9  0 screened out  300 points  allocation {1: 60, 2: 20, 3: 45, 4: 35, 5: 20, 6: 80, 7: 40}

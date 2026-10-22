@@ -33,6 +33,8 @@ Usage
     python src\\scene_inventory.py
     python src\\scene_inventory.py --start 2016-08-05 --end 2016-08-19
     python src\\scene_inventory.py --cloud-max 50
+    python src\\scene_inventory.py --map-date 2016-08-07 --start 2016-08-02 --end 2016-08-12
+        for the 7 August map; writes scene_inventory_20160807*.csv instead
 
 Writes results/validation/scene_inventory.csv, one row per scene, and
 results/validation/scene_inventory_summary.csv, one row per route, sensor and
@@ -146,13 +148,18 @@ def main():
     ap.add_argument("--end", default="2016-08-15")
     ap.add_argument("--cloud-max", type=float, default=30.0,
                     help="scene cloud cover, in percent, counted as usable")
+    ap.add_argument("--map-date", default=FLOOD_DATE.isoformat(),
+                    help="the map the scenes would check; another date writes "
+                         "files named after it, beside the 12 August ones")
     args = ap.parse_args()
+    map_date = date.fromisoformat(args.map_date)
+    tag = "" if map_date == FLOOD_DATE else f"_{map_date:%Y%m%d}"
 
     out_dir = RESULTS / "validation"
     out_dir.mkdir(parents=True, exist_ok=True)
 
     print("=" * 78)
-    print("SCENE INVENTORY, OPTICAL REFERENCE AROUND THE 12 AUGUST 2016 MAP")
+    print(f"SCENE INVENTORY, OPTICAL REFERENCE AROUND THE {map_date:%d %B %Y} MAP".upper())
     print("=" * 78)
     print(f"  study area  {BBOX}, {AOI_HA:,.0f} ha")
     print(f"  window      {args.start} to {args.end}, UTC dates")
@@ -191,7 +198,7 @@ def main():
                     route=label, collection=col, sensor=sensor_of(it), id=it.id,
                     datetime_utc=t.strftime("%Y-%m-%d %H:%M"),
                     date=t.date().isoformat(),
-                    days_from_flood_map=(t.date() - FLOOD_DATE).days,
+                    days_from_flood_map=(t.date() - map_date).days,
                     cloud_pct="" if cloud_of(it) is None else round(cloud_of(it), 1),
                     aoi_overlap_pct=round(transform(TO_UTM, foot).area / 1e4
                                           / AOI_HA * 100, 1),
@@ -204,7 +211,8 @@ def main():
 
     rows.sort(key=lambda r: (r["route"], r["sensor"], r["datetime_utc"]))
     fields = [k for k in rows[0] if not k.startswith("_")]
-    with open(out_dir / "scene_inventory.csv", "w", newline="", encoding="utf-8") as fh:
+    with open(out_dir / f"scene_inventory{tag}.csv", "w", newline="",
+              encoding="utf-8") as fh:
         w = csv.DictWriter(fh, fieldnames=fields, extrasaction="ignore")
         w.writeheader()
         w.writerows(rows)
@@ -231,7 +239,7 @@ def main():
             aoi_seen_by_usable_pct=round(clear_ha / AOI_HA * 100, 1) if clouds else "",
         ))
 
-    with open(out_dir / "scene_inventory_summary.csv", "w", newline="",
+    with open(out_dir / f"scene_inventory{tag}_summary.csv", "w", newline="",
               encoding="utf-8") as fh:
         w = csv.DictWriter(fh, fieldnames=list(summary[0]))
         w.writeheader()
@@ -248,15 +256,15 @@ def main():
               f"{s['scenes']:>3} {s['aoi_seen_pct']:>5.0f}% {cloud:>6} {usable:>7}  "
               f"{s['route']}")
 
-    print("\n  d       days from the 12 August map")
+    print(f"\n  d       days from the {map_date:%d %B} map")
     print("  seen    share of the study area inside any scene that day")
     print("  cloud   median scene cloud cover, from the catalogue")
     print(f"  usable  share of the study area inside scenes at or below "
           f"{args.cloud_max:g}% cloud")
     print("\n  Landsat 7 images from 2016 have stripe gaps from its failed scan line")
     print("  corrector, so its usable share overstates what can be labelled.")
-    print(f"\n  wrote {out_dir / 'scene_inventory.csv'}")
-    print(f"  wrote {out_dir / 'scene_inventory_summary.csv'}")
+    print(f"\n  wrote {out_dir / f'scene_inventory{tag}.csv'}")
+    print(f"  wrote {out_dir / f'scene_inventory{tag}_summary.csv'}")
 
 
 if __name__ == "__main__":

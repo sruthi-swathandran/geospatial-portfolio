@@ -20,3 +20,10 @@ cutoff,elevation_max_m,slope_max_deg,stratum,floodplain_mapped_ha,floodplain_scr
 200 m,200.0,2.0,swath edge,15187.8,5178.5,0.909,7
 200 m,200.0,2.0,land near flood,633238.6,297335.5,0.938,45
 200 m,200.0,2.0,land far from flood,193939.6,101264.2,0.889,8
+"150 m, any slope",150.0,90.0,flood,111497.3,46292.5,0.943,99
+"150 m, any slope",150.0,90.0,permanent water,55736.6,29750.6,1.0,40
+"150 m, any slope",150.0,90.0,upper threshold only,46939.2,19903.8,0.941,80
+"150 m, any slope",150.0,90.0,removed by refinement,2513.2,1333.6,0.952,5
+"150 m, any slope",150.0,90.0,swath edge,26159.6,10498.0,1.0,22
+"150 m, any slope",150.0,90.0,land near flood,1039173.1,495244.8,0.933,84
+"150 m, any slope",150.0,90.0,land far from flood,456740.9,298316.6,1.0,20

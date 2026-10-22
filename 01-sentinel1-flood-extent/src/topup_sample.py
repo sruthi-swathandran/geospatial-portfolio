@@ -38,6 +38,15 @@ Usage
 -----
     python src\\topup_sample.py              # the first top-up, already drawn
     python src\\topup_sample.py --second     # land near flood, V-01
+    python src\\topup_sample.py --third      # mapped flood above 150 m
+
+A third top-up (REVIEW F-01, F-02)
+----------------------------------
+No main-sample point checks the map's flood above 150 m except one, which was
+not water. 8,282 ha of it lies there on the map as drawn, and 290 ha of that
+was under clear sky on 12 August. --third draws 30 points in that clear part,
+as batch "topup3", under the same screen. They speak for the clear 290 ha
+only; the rest of the hill flood lay under cloud.
 """
 
 from __future__ import annotations
@@ -59,10 +68,13 @@ from clear_sky import MAP, RAW, SCL_TIF, UPPER, strata_of            # noqa: E40
 from draw_sample import (CELL, ELIGIBLE_SCL, NAMES, OVERDRAW, SAMPLE,  # noqa: E402
                          cut_chips, near_flood_mask, screen_candidates)
 from estimate_accuracy import DEM_DIR, slope_degrees                   # noqa: E402
-from floodplain_layer import CUTOFFS, MAIN, cloud_near_window          # noqa: E402
+from floodplain_layer import CUTOFFS, LOW, MAIN, cloud_near_window     # noqa: E402
 
 # batch: (stratum, points, seed); stratum 7 is land far from flood, 6 near
-BATCHES = {"topup": (7, 60, 20261015), "topup2": (6, 150, 20261017)}
+BATCHES = {"topup": (7, 60, 20261015), "topup2": (6, 150, 20261017),
+           "topup3": (1, 30, 20261022)}
+# where each batch is drawn: inside the 150 m floodplain, or above 150 m
+DOMAIN = {"topup": "floodplain", "topup2": "floodplain", "topup3": "above 150 m"}
 BATCH = "topup"
 STRATUM, N_TOPUP, SEED = BATCHES[BATCH]
 STRATUM_NAME = NAMES[STRATUM]
@@ -86,7 +98,7 @@ def draw_candidates(scl):
         res = abs(ref.transform.a)
         print("  marking land within about 1 km of flood ...")
         near = near_flood_mask(ref, up)
-        print(f"  finding floodplain {STRATUM_NAME} under clear sky ...")
+        print(f"  finding {STRATUM_NAME}, {DOMAIN[BATCH]}, under clear sky ...")
         area_px = 0
         for ty, tx, f in tiles:
             r0, c0 = ty * 2048, tx * 2048
@@ -110,8 +122,11 @@ def draw_candidates(scl):
             s[(s == 6) & ~nb] = 7
             ok = (np.isin(scl[r0:r1, c0:c1], ELIGIBLE_SCL)
                   & ~cloud_near_window(scl, r0, r1, c0, c1))
-            sel = ((s == STRATUM) & ok & np.isfinite(elev)
-                   & (elev <= e_max) & (slope <= s_max))
+            if DOMAIN[BATCH] == "floodplain":
+                where = (elev <= e_max) & (slope <= s_max)
+            else:
+                where = elev > CUTOFFS[LOW][0]
+            sel = (s == STRATUM) & ok & np.isfinite(elev) & where
             idx = np.flatnonzero(sel)
             area_px += idx.size
             if idx.size == 0:
@@ -153,11 +168,14 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--second", action="store_true",
                     help="the V-01 top-up of land near flood")
-    BATCH = "topup2" if ap.parse_args().second else "topup"
+    ap.add_argument("--third", action="store_true",
+                    help="the top-up of mapped flood above 150 m")
+    args = ap.parse_args()
+    BATCH = "topup3" if args.third else "topup2" if args.second else "topup"
     STRATUM, N_TOPUP, SEED = BATCHES[BATCH]
     STRATUM_NAME = NAMES[STRATUM]
     print("=" * 78)
-    print(f"TOP-UP SAMPLE, {BATCH}: FLOODPLAIN {STRATUM_NAME.upper()}")
+    print(f"TOP-UP SAMPLE, {BATCH}: {STRATUM_NAME.upper()}, {DOMAIN[BATCH].upper()}")
     print("=" * 78)
     key_path, sheet_path = SAMPLE / "points_key.csv", SAMPLE / "labels.csv"
     with open(key_path, encoding="utf-8") as fh:
@@ -216,7 +234,7 @@ def main():
 
     with open(SAMPLE / "draw_log.txt", "a", encoding="utf-8") as fh:
         fh.write(f"{datetime.now(timezone.utc):%Y-%m-%d %H:%M} UTC  {BATCH}  seed "
-                 f"{SEED}  {STRATUM_NAME}, floodplain {MAIN}  "
+                 f"{SEED}  {STRATUM_NAME}, {DOMAIN[BATCH]}  "
                  f"{tested.get(STRATUM, 0)} tested, {len(rejected)} screened out, "
                  f"{len(points)} points, P{start:04d} onward\n")
     print(f"\n  {len(points)} points added as P{start:04d} to "

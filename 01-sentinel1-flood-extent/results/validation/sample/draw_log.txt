@@ -2,3 +2,4 @@
 2026-10-14 10:17 UTC  seed 20261013  eligible SCL [2, 4, 5, 6, 7]  no cloud within 100 m  image screen core 5 px above 0.15 at white 0.95, haze median 0.085 at 0.9  41 screened out  550 points  allocation {1: 100, 2: 40, 3: 80, 4: 60, 5: 50, 6: 100, 7: 120}
 2026-10-14 13:12 UTC  top-up  seed 20261015  land far from flood, floodplain 150 m  63 tested, 3 screened out, 60 points, P0551 onward
 2026-10-15 09:07 UTC  topup2  seed 20261017  land near flood, floodplain 150 m  154 tested, 4 screened out, 150 points, P0611 onward
+2026-10-22 09:08 UTC  topup3  seed 20261022  flood, above 150 m  34 tested, 4 screened out, 30 points, P0761 onward

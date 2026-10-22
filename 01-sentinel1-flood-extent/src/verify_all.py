@@ -102,6 +102,7 @@ def build_index():
     for p in (sorted(RES.glob("*.csv")) + sorted((RES / "fullscene").glob("*.csv"))
               + sorted((RES / "validation").glob("*.csv"))
               + sorted((RES / "validation" / "second").glob("*.csv"))
+              + sorted((RES / "validation").glob("sample_*/*.csv"))
               + sorted((RES / "transfer").glob("*.csv"))
               + [RES / "validation" / "sample" / "strata.csv"]):
         try:
