@@ -3,7 +3,7 @@ README sha256 57b5a9567b226328
 project: 01-sentinel1-flood-extent
 read-only; nothing in the repo is modified
 
-indexed 48818 numeric values from results/
+indexed 48920 numeric values from results/
 
 
 ==============================================================================

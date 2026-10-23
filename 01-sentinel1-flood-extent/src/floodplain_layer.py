@@ -42,6 +42,10 @@ Outputs, under results/validation/
   floodplain_strata.csv     hectares and points per stratum, per cutoff
   floodplain_summary.csv    every estimate, per cutoff, layer and variant
   floodplain_terrain.csv    the terrain check inside the 150 m floodplain
+  floodplain_zero_hit_bounds.csv
+                            strata with readable points and no flood among
+                            them, and the 95% upper bound on what they hide,
+                            as score_map.py gives for the rest of the map (C-39)
 
 Usage
 -----
@@ -254,7 +258,7 @@ def main():
     mapped, eligible, hist, e_bins, s_bins, px_ha = grid_pass(scl)
     rates = screened_rate(points, dom_flag, codes)
 
-    strata_rows, summary = [], []
+    strata_rows, summary, bounds = [], [], []
     total_flood = None
     for c in CUTOFFS:
         sub = [p for p in points if dom_flag[c][p["point_id"]]]
@@ -289,6 +293,19 @@ def main():
                 st[k]["readable"] = st[k]["n"] / labelled if labelled else 1.0
             scaled = {k: dict(areas[k], eligible=areas[k]["eligible"]
                               * st[k]["readable"]) for k in areas}
+            # a stratum with readable points and no flood among them prints
+            # 0.0 +/- 0.0; the bound says what those points can rule out
+            for k in (3, 4, EDGE, 6, 7):
+                n = st[k]["n"]
+                if n and st[k]["flood"] == 0:
+                    share = 1 - 0.025 ** (1 / n)
+                    bounds.append(dict(
+                        cutoff=c, variant=vname, stratum=NAMES[k], n_readable=n,
+                        upper_share_95=round(share, 4),
+                        clear_ha=round(scaled[k]["eligible"]),
+                        upper_clear_ha=round(share * scaled[k]["eligible"]),
+                        mapped_ha=round(areas[k]["mapped"]),
+                        upper_whole_ha=round(share * areas[k]["mapped"])))
             for layer in ("eligible", "mapped"):
                 for metric, mp, val, se in estimates(st, scaled, layer):
                     summary.append(dict(
@@ -309,6 +326,7 @@ def main():
     write_csv(OUT / "floodplain_strata.csv", strata_rows)
     write_csv(OUT / "floodplain_summary.csv", summary)
     write_csv(OUT / "floodplain_terrain.csv", terrain)
+    write_csv(OUT / "floodplain_zero_hit_bounds.csv", bounds)
 
     e_max, s_max = CUTOFFS[MAIN]
     print(f"\n  floodplain: at or below {e_max:g} m and {s_max:g} degrees of slope")
@@ -337,6 +355,15 @@ def main():
             if gap:
                 print(f"    no points inside for: {gap[0]['strata_without_points']};"
                       " counted as no flood")
+
+    print(f"\n  No flood found, {MAIN} floodplain, W only; 95% upper bound:")
+    print(f"  {'stratum':<22} {'n':>4} {'share':>7} {'clear ha':>10} {'up to':>8} "
+          f"{'whole ha':>10} {'up to':>8}")
+    for r in bounds:
+        if r["cutoff"] == MAIN and r["variant"] == "W only":
+            print(f"  {r['stratum']:<22} {r['n_readable']:>4} {r['upper_share_95']:>7.4f} "
+                  f"{r['clear_ha']:>10,} {r['upper_clear_ha']:>8,} "
+                  f"{r['mapped_ha']:>10,} {r['upper_whole_ha']:>8,}")
 
     print("\n  Flood area by cutoff, whole floodplain:")
     for vname in SHOWN + ("confident only",):

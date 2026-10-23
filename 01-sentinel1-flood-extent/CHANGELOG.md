@@ -1075,6 +1075,27 @@ behind it. No published figure changes.
 - **README.** "What finding nothing rules out" gains the mirror case, and the
   7 and 31 August section gives the −17.75 dB points above 150 m.
 
+### C-39 The same bound inside the floodplain
+
+A review of C-38 found the one file it had not reached. `floodplain_summary.csv`
+gives "real flood inside the swath-edge buffer" as 0.0 ± 0.0 in the 150 m
+floodplain, from readable points none of which was open water, and
+`floodplain_layer.py` wrote no bound for it. Neither figure is quoted in the
+README. No published figure changes.
+
+- **The bound.** `floodplain_layer.py` now writes
+  `floodplain_zero_hit_bounds.csv`: for every cutoff and variant, each land,
+  removed or swath-edge stratum with readable points and no flood among them,
+  and the 95% upper bound on its share in the clear part and in the whole
+  floodplain. In the 150 m floodplain the swath-edge buffer has 6 readable
+  points and no open water, so it could hold up to 2,044 clear hectares, or
+  6,472 over the whole floodplain.
+- **What it leaves alone.** "Removed by refinement" has no point inside the
+  floodplain at all, so no bound is possible; `strata_without_points` already
+  says so on every row it touches.
+- **Unchanged.** The other four floodplain files come out byte for byte the
+  same.
+
 ---
 
 ## Open, not fixed

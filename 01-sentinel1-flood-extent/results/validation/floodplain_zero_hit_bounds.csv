@@ -1,0 +1,15 @@
+cutoff,variant,stratum,n_readable,upper_share_95,clear_ha,upper_clear_ha,mapped_ha,upper_whole_ha
+150 m,W only,swath edge,6,0.4593,4451,2044,14091,6472
+150 m,confident only,swath edge,5,0.5218,4451,2322,14091,7353
+100 m,W only,swath edge,4,0.6024,3262,1965,11860,7144
+100 m,confident only,swath edge,3,0.7076,3262,2308,11860,8392
+200 m,W or V,land far from flood,7,0.4096,88606,36295,193940,79441
+200 m,W only,swath edge,7,0.4096,5178,2121,15188,6221
+200 m,W only,land far from flood,7,0.4096,88606,36295,193940,79441
+200 m,confident only,swath edge,6,0.4593,5178,2378,15188,6975
+200 m,confident only,land far from flood,7,0.4096,88606,36295,193940,79441
+"150 m, any slope",W or V,land far from flood,18,0.1853,268485,49751,456741,84635
+"150 m, any slope",W only,swath edge,20,0.1684,9544,1607,26160,4406
+"150 m, any slope",W only,land far from flood,18,0.1853,268485,49751,456741,84635
+"150 m, any slope",confident only,swath edge,17,0.1951,9393,1832,26160,5103
+"150 m, any slope",confident only,land far from flood,18,0.1853,268485,49751,456741,84635
