@@ -67,6 +67,8 @@ def sam_counts(composite, setting, model, points, min_size):
     import pandas as pd
     name = f"sam_raw_{model}_p{points}_min{int(min_size)}.csv"
     path = F.RESULTS / name
+    if not path.exists() and path.with_name(name + ".gz").exists():
+        path = path.with_name(name + ".gz")          # read_csv opens it as is
     if not path.exists():
         sys.exit(f"{path} not found")
     df = pd.read_csv(path, dtype={"composite": str})

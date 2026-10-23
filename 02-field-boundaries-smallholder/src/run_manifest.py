@@ -47,6 +47,7 @@ from __future__ import annotations
 
 import argparse
 import csv
+import gzip
 import hashlib
 import json
 import platform
@@ -157,7 +158,10 @@ def seeds() -> list:
 
 def describe_csv(path: Path) -> dict:
     csv.field_size_limit(CSV_FIELD_LIMIT)
-    with path.open(encoding="utf-8", newline="") as f:
+    # a gzipped CSV is hashed on its text, so compressing a file changes its
+    # name in the manifest and nothing else
+    opener = gzip.open if path.name.lower().endswith(".gz") else open
+    with opener(path, "rt", encoding="utf-8", newline="") as f:
         reader = csv.reader(f)
         try:
             header = next(reader)
@@ -186,7 +190,7 @@ def outputs() -> dict:
             rel = p.relative_to(PROJECT).as_posix()
             if "/pred_" in rel or rel.endswith("run_manifest.json"):
                 continue
-            if p.suffix.lower() == ".csv":
+            if p.name.lower().endswith((".csv", ".csv.gz")):
                 out[rel] = describe_csv(p)
             elif p.suffix.lower() in TEXT_SUFFIXES:
                 out[rel] = {"kind": "text, LF", "sha256": sha256_text(p)}

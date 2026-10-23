@@ -1434,7 +1434,7 @@ the precision gap between the two was tenfold and is nine and a half times. In
 the cross-country table the Slovenian 20 to 30 m figures move from 7.81% to
 7.89% for FTW and from 20.91% to 21.32% for watershed, and the headline range
 stays 1.7 to 41.0 times. The SAM rerun took about ten hours, and the log it
-replaced is kept as `sam_raw_vit_h_p32_min500_at720m2.csv`.
+replaced is kept as `sam_raw_vit_h_p32_min500_at720m2.csv.gz`, compressed (P-02).
 
 **B-21. Every Slovenian area was understated by 1.450, and a stage 1 claim
 reverses.** Areas were computed the same way, pixel count times
@@ -1540,6 +1540,17 @@ reading changes. The object counts in the sweep and budget tables and the
 clamped notes are corrected. Found while drawing FTW v3 on the budget figure,
 because `budget_newer.py` counts per chip and its SAM counts did not match the
 tables.
+
+**B-27. Two width bands reported an interval their label disowned.** Width
+bands with fewer than ten found parcels are labelled as falling back to the
+parcel-level interval, and `bootstrap_ci.py` says so in a comment and in its
+`governs` column. The code took the union of the parcel and chip intervals for
+every row all the same. Where the chip bootstrap reached lower, the reported
+lower end came from it. In India the 20 to 30 m band reported 0.00 to 2.25%
+where the parcel interval is 0.01 to 2.25%, and the 30 to 50 m band 0.12 to
+1.34% where it is 0.19 to 1.34%. Those rows now report the parcel interval, as
+labelled. No other row changes, no figure quoted elsewhere moves, and the
+error only ever widened an interval.
 
 ### Errata round, October 2026
 
@@ -1712,6 +1723,22 @@ descriptions of the manifest, M-01 to M-03, that no longer matched it.
   checks out LF on Windows too.
 - **M-03.** `REVIEW.md`'s F-15 row said every output was hashed column by
   column. It now says only CSVs are.
+
+**Polish list, 23 October 2026.** A list of four items on `fbc08ab` found one
+fix, B-27 above, and three smaller things, P-01 to P-03.
+
+- **P-01.** The README's first two findings now sit between
+  `<!-- headline -->` and `<!-- /headline -->`, which GitHub does not show, so
+  a check on the top-level README can compare its RS-02 figures against them.
+- **P-02.** The superseded SAM log for Slovenia, 24.8 MB, is committed gzipped
+  at 2.1 MB. Nothing reads it. `run_manifest.py` now hashes a `.csv.gz` on its
+  text, so its column hashes are the ones the plain file had; only its name
+  changes in the manifest.
+- **P-03.** The two live SAM logs, 45.6 MB for Slovenia and 12.6 MB for India,
+  stay plain, since `sam_run.py` appends to them as a resume log and stage 3
+  may extend them. `budget_newer.py` and `null_strength.py` now read a
+  `.csv.gz` in their place when the plain file is absent, so compressing them
+  later is a change of file name and nothing else.
 
 ---
 

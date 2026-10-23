@@ -14,6 +14,7 @@ ground and shows what each method found on it.
 
 ## What holds
 
+<!-- headline -->
 **1. On India, methods never trained on a field boundary still beat FTW.**
 The best public FTW checkpoint, v3 with an EfficientNet-B7 encoder, recovers
 12.9% of labelled Indian parcels. Read at the same object count it emits, 245
@@ -44,6 +45,7 @@ objects recovers 6.3%. v1 recovered 22.2% from 20 objects, and 42.1% of the
 objects it emits match a real parcel, against 4.4% for watershed. Slovenia has
 a complete cadastre, so that is precision. FTW is a good model failing on
 India.
+<!-- /headline -->
 
 **3. Resolution does not explain the Indian failure.** Both countries are the
 same 10 m Sentinel-2. If the imagery set the limit, a parcel of a given ground

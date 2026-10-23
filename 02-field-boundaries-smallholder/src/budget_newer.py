@@ -56,6 +56,7 @@ from __future__ import annotations
 
 import argparse
 import csv
+import gzip
 import sys
 import time
 from collections import defaultdict
@@ -180,13 +181,16 @@ def watershed_sweep(F, chips: list) -> Sweep | None:
 
 def sam_sweeps(F, chips: list) -> list:
     path = F.RESULTS / "sam_raw_vit_h_p32_min500.csv"
+    if not path.exists() and path.with_name(path.name + ".gz").exists():
+        path = path.with_name(path.name + ".gz")     # committed compressed
     if not path.exists():
         print(f"  {path.name} not found, so SAM is left out here")
         return []
     hits = defaultdict(float)
     objs = {}
     keys = set()
-    with path.open(encoding="utf-8", newline="") as fh:
+    opener = gzip.open if path.suffix == ".gz" else open
+    with opener(path, "rt", encoding="utf-8", newline="") as fh:
         for r in csv.DictReader(fh):
             if r["is_null"] != "0":
                 continue

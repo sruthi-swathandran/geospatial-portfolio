@@ -108,9 +108,16 @@ def report(label: str, df: pd.DataFrame, draws: int, rng) -> dict | None:
     bl, bh, nchips = chip_bootstrap(df, draws, rng)
 
     thin = found < BOOTSTRAP_FLOOR
-    # Report the union of the two. Neither method dominates the other at every
-    # count, and the wider of the pair is the one a reader can rely on.
-    ul, uh = min(cl, bl), max(ch, bh)
+    if thin:
+        # The parcel interval governs, as the note above says. Until B-27
+        # this branch took the union as well, so two India rows reported a
+        # lower end from a bootstrap the note calls unreliable.
+        ul, uh = cl, ch
+    else:
+        # Report the union of the two. Neither method dominates the other at
+        # every count, and the wider of the pair is the one a reader can
+        # rely on.
+        ul, uh = min(cl, bl), max(ch, bh)
     ratio = (uh - ul) / (ch - cl) if ch > cl else float("nan")
     note = "few hits, parcel governs" if thin else f"{ratio:.2f}x wider"
     print(f"  {label:<14} {found:>5,}/{total:<6,} {rate * 100:6.2f}%   "
