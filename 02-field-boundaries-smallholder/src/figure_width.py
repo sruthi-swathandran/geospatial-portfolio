@@ -59,7 +59,6 @@ except Exception:                                              # noqa: BLE001
 
 RULE = "=" * 78
 COUNTRIES = ("india", "slovenia")
-SEED = 20261023
 DRAWS = 10000
 LARGE_M = 100.0
 
@@ -162,8 +161,11 @@ def draw(rows: pd.DataFrame, dest: Path, dpi: int) -> None:
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--dpi", type=int, default=150)
+    # declared as an argument, as the other scripts do, so run_manifest.py
+    # finds and records it
+    ap.add_argument("--seed", type=int, default=20261023)
     args = ap.parse_args()
-    rng = np.random.default_rng(SEED)
+    rng = np.random.default_rng(args.seed)
 
     width_rows, reach_rows = [], []
     for key, name, rel, col, _ in METHODS:
