@@ -1,7 +1,7 @@
 {
- "written_at": "2026-10-13T11:25:41+00:00",
+ "written_at": "2026-10-23T09:59:43+00:00",
  "git": {
-  "commit": "e812d4a514db95da4e5a2f9cbba42f6723420209",
+  "commit": "5e32cea96885b871dda60a723223f43febccf623",
   "uncommitted_changes": false
  },
  "interpreter": {
@@ -158,12 +158,12 @@
  "seeds": [
   {
    "script": "bootstrap_ci.py",
-   "line": 137,
+   "line": 144,
    "value": 20260922
   },
   {
    "script": "budget_newer.py",
-   "line": 355,
+   "line": 359,
    "value": 20261011
   },
   {
@@ -203,7 +203,7 @@
   },
   {
    "script": "null_strength.py",
-   "line": 97,
+   "line": 99,
    "value": 20260922
   },
   {
@@ -251,7 +251,7 @@
     "parcel_hi": "21932d04779f6e5ff8e00abda234e8acecb8fd73720e965272de8e428879f8a5",
     "chip_lo": "50e9a971873cef67e0ef9c9ea929ccd148459ee8d8fcdd0b9a4bf4ba5939961f",
     "chip_hi": "325110125d42d31fc9c0628cfb0db54581b67d7f116d2d8ea9d3e2efde57fdc3",
-    "report_lo": "50e9a971873cef67e0ef9c9ea929ccd148459ee8d8fcdd0b9a4bf4ba5939961f",
+    "report_lo": "ff6151ef36cb794c56ddf61ba66de460f94d86b616a160ee676e1c82ceee5775",
     "report_hi": "b773f2e9644d09417020caf0bee3e04c9bc1f76c614ae0ff018ea2c7671a8ab2",
     "widening": "1d730172f45fd47a470d96a06616582c43cd67bedc4524778c903ff02f620707",
     "governs": "56a0c8388cca2f2b03b505c1a0cbe78c4c28fa524f90d453ac57b6a7f45fa74a"
@@ -3991,7 +3991,7 @@
     "seconds": "39dab1e32e3af2eaddd66f5ce9dd7e24dc93f84c0a931af4e93d594daf883d98"
    }
   },
-  "results/slovenia/sam_raw_vit_h_p32_min500_at720m2.csv": {
+  "results/slovenia/sam_raw_vit_h_p32_min500_at720m2.csv.gz": {
    "kind": "csv",
    "rows": 273240,
    "columns": {
