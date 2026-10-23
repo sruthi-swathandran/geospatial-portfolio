@@ -1,7 +1,7 @@
 {
- "written_at": "2026-10-23T09:59:43+00:00",
+ "written_at": "2026-10-23T10:12:08+00:00",
  "git": {
-  "commit": "5e32cea96885b871dda60a723223f43febccf623",
+  "commit": "1a50f9df70d512f229873d9c16d4f3ae914aa489",
   "uncommitted_changes": false
  },
  "interpreter": {
@@ -2770,6 +2770,35 @@
     "50 m up parcels": "939bbf5c83755254696eabca6148796fd44d2eb84b2c33d4de2d40fcb80fcc83"
    }
   },
+  "results/reach_by_method.csv": {
+   "kind": "csv",
+   "rows": 10,
+   "columns": {
+    "method": "98de13ef84a78f41dc219403e0684ecd5ced03ea0f859fb9e41e98853ee6481f",
+    "country": "ccf824ea162acf7364b2aa69d4580cb3614bd9b27b8220f4e9a39090ea129392",
+    "parcels": "3fab24cc98d234ddb177b26acbb7c66ef605655b11e1a7ba7fc90a2bd8652d75",
+    "recall": "afc1475ca54517c10a102086d9da8bbe650993a3daf417e69a4211abb2d89100",
+    "no_object_pct": "b7758d0e5badaea7816bd33589ef072764a7fb82366054d0e24b3535a33a9988",
+    "parcels_100m_up": "684a59159014c1cd8a43ffe611b71b6261cc157c7044092dd1066eac2df061e8",
+    "recall_100m_up_pct": "5465f05f5326573abb128f7e014ceac9feeed0805256e9b1a19886c668f2cec0"
+   }
+  },
+  "results/recall_by_width.csv": {
+   "kind": "csv",
+   "rows": 40,
+   "columns": {
+    "method": "7581269607b1336eab6665d3de1245c2d8914d4974938344d6e2334c635dbd0c",
+    "country": "cbc98304850b0df05a42aee17331f6627e199753b885af0342f570b7da39050f",
+    "band": "2243c2cce0daba4b4be2f8e25b3a7fa78b1009ce7493e66d9c342e023ff45c0a",
+    "found": "53109ea31de804935ccdfa468745ad385953c9f01b32bb15e69bdda79081844e",
+    "parcels": "513928e8fca516da00a1b87d2127f4190ca139a2040bed6e23d8dbc69086e942",
+    "recall": "133c5efb012d092f5cd87c6f3bb5669b6a4db05721e73d16e45cd88637736286",
+    "lo": "49cafe8ba787f691fef940be1efc48f60581e27683744979baa9cb02aab30924",
+    "hi": "cddce64a12103e1dbfe44ad9d1c88f03838201123a79c84778522a8ccd3d4276",
+    "governs": "8816883eac7a837632953a1d2276e5d233657424c7277b67a3fc20ef5d6c5fbf",
+    "slovenia_over_india": "5954c8a6d594e104db200dd27d9a801589f71547c3d93969b5969150e1be1ccd"
+   }
+  },
   "results/saturation_3class_full.csv": {
    "kind": "csv",
    "rows": 2,
@@ -4875,6 +4904,10 @@
   "figures/recall_by_size_3class_full.png": {
    "kind": "file",
    "sha256": "21a2983fa84998c77915f0917e4633fdf8839ce88c438e94974a44fdf4d90d5b"
+  },
+  "figures/recall_by_width.png": {
+   "kind": "file",
+   "sha256": "70fccfa185a62338052bc3efbb64caef2b380ce857721bcdb3669b1cb3c504f4"
   },
   "figures/recall_by_width_3class_full.png": {
    "kind": "file",
