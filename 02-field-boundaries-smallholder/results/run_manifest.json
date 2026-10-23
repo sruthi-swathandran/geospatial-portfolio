@@ -1,7 +1,7 @@
 {
- "written_at": "2026-10-23T10:12:08+00:00",
+ "written_at": "2026-10-23T10:15:03+00:00",
  "git": {
-  "commit": "1a50f9df70d512f229873d9c16d4f3ae914aa489",
+  "commit": "12cf709995232fb12fb32fcde2f5b9ee54b19b89",
   "uncommitted_changes": false
  },
  "interpreter": {
@@ -185,6 +185,11 @@
    "script": "contrast_panel.py",
    "line": 352,
    "value": 20261012
+  },
+  {
+   "script": "figure_width.py",
+   "line": 166,
+   "value": 20261023
   },
   {
    "script": "holdout.py",
