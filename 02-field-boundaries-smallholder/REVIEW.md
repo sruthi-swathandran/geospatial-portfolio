@@ -129,7 +129,7 @@ recall.
 | Last commit | `5b63eae` RS-02 stage 2b: SAM ViT-H on Slovenia, the control |
 | Uncommitted | 125 files (4 modified scripts, 2 modified tables, 119 untracked) |
 | Figures | 5 PNGs, all from stage 2. Nothing from stage 2b |
-| Dependency record | root `requirements.txt`, header states it covers RS-01 |
+| Dependency record | root `requirements.txt`, header states it covers RS-01; moved into `01-sentinel1-flood-extent/` in October 2026 (RS-01 C-37) |
 | Interpreters used | cpython-311 and cpython-314, both present in `src/__pycache__` |
 | Credentials | none found anywhere |
 | Licence | present at repo root |
@@ -350,7 +350,7 @@ are quality.
 | F-06 | Major | SAM's two budget-matched numbers have no generating code | `sam_comparison_vit_h_min500.csv` lacks `recall_at_ftw_budget` |
 | F-07 | Major | Every reported setting is the best of its own sweep, measured on the data it is quoted from | all three sweeps |
 | F-08 | Major | Stale calibration artefacts sit under authoritative filenames. `parcel_width_seg_sam_vit_h_true_min500.csv` is 1,168 bytes from 4 chips beside a 108,839-byte full run | `results/india/` |
-| F-09 | Major | RS-02 has no pinned dependencies and two interpreters ran the code | root `requirements.txt` header; `src/__pycache__` |
+| F-09 | Major | RS-02 has no pinned dependencies and two interpreters ran the code | root `requirements.txt` header, the RS-01 file since moved into `01-sentinel1-flood-extent/`; `src/__pycache__` |
 | F-10 | Major | No object precision on India. Every figure is recall | `seg_score.py` |
 | F-11 | Major | Measured grid resolution never checked against FTW's published specification | `ftw_common.py:grid_pixel_m` |
 | F-12 | Major | Parcel reconstruction validated synthetically only, and `MAX_RING_DIST = 3.0` is load-bearing for every size figure | `ftw_common.py` |

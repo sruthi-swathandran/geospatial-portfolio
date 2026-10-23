@@ -1043,7 +1043,11 @@ change on the map page only.
   stale while `preflight.py`, which read only the report's README digest,
   passed. The figure check now accepts rows added to a key and value table
   when every row the figure read is unchanged, and `preflight.py` fails on any
-  failure the report records.
+  failure the report records. The report also printed "-0.0%" for a
+  difference a hair below zero, which came out "+0.0%" on another machine; it
+  now prints "+0.0%" for any difference that rounds to zero.
+- **RS-02's review** said the RS-01 requirements file sat at the repository
+  root. Both mentions now say where it moved.
 - **A stray screenshot,** `Capture.JPG` from fd228fb, removed, and
   `.gitignore` now skips files the Windows snipping tool names that way.
 

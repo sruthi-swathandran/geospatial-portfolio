@@ -279,7 +279,7 @@ def check_scene_vs_districts():
         d = (dist - scene) / scene * 100 if scene else float("nan")
         status = PASS if abs(d) < 3 else (WARN if abs(d) < 12 else FAIL)
         report(status, f"{label}: scene {scene:,.0f} ha, districts sum to "
-                       f"{dist:,.0f} ha, {d:+.1f}%")
+                       f"{dist:,.0f} ha, {signed(d, 1)}%")
         report(INFO, "districts clip to ADM2 polygons, so a small shortfall "
                      "is expected; a large one is not")
 
@@ -352,7 +352,7 @@ def check_slope_histogram():
         d = (tot - before) / before * 100 if before == before else float("nan")
         status = PASS if abs(d) < 1 else FAIL
         report(status, f"{label}: {len(bins)} slope bins sum to {tot:,.0f} ha "
-                       f"against flood_ha_before {before:,.0f}, {d:+.2f}%")
+                       f"against flood_ha_before {before:,.0f}, {signed(d, 2)}%")
 
         cut = float(j.get("refined", {}).get("slope_cut_deg", cfg.SLOPE_MAX_DEG))
         above = sum(float(r["flood_ha"]) for r in bins
@@ -421,7 +421,7 @@ def check_sensitivity_published():
     report(status, f"grid says {grid_ha:,.0f} ha at the published settings "
                    f"against {pre_mmu:,.0f} ha pre-MMU "
                    f"({after:,.0f} reported + {small:,.0f} removed by the "
-                   f"MMU), {d:+.2f}%")
+                   f"MMU), {signed(d, 2)}%")
     report(INFO, "the grid is pre-MMU by construction; CHANGELOG C-08 says "
                  "so, and the README chain table shows the same value at that "
                  "step")
@@ -727,6 +727,14 @@ FIG_SOURCE = {
     "flood_three_dates.png": ["district_flood_stats.csv"],
     "flood_recession.png": ["district_flood_stats_20160807.csv"],
 }
+
+
+def signed(d: float, places: int) -> str:
+    """A signed percentage with no "-0.0", which a value a hair below zero
+    prints on one machine and not on another, so the saved report would
+    differ between machines for no reason (C-37)."""
+    s = f"{d:+.{places}f}"
+    return "+" + s[1:] if float(s) == 0 else s
 
 
 def last_change(path: Path) -> tuple[float, str]:

@@ -37,11 +37,11 @@ B. INTERNAL CONSISTENCY
   · districts clip to ADM2 polygons, so a small shortfall is expected; a large one is not
 [PASS] 7 Aug, map-optimal: scene 65,356 ha, districts sum to 65,356 ha, +0.0%
   · districts clip to ADM2 polygons, so a small shortfall is expected; a large one is not
-[PASS] 7 Aug, area-matched: scene 91,670 ha, districts sum to 91,670 ha, -0.0%
+[PASS] 7 Aug, area-matched: scene 91,670 ha, districts sum to 91,670 ha, +0.0%
   · districts clip to ADM2 polygons, so a small shortfall is expected; a large one is not
 [PASS] 31 Aug, map-optimal: scene 39,481 ha, districts sum to 39,481 ha, +0.0%
   · districts clip to ADM2 polygons, so a small shortfall is expected; a large one is not
-[PASS] 31 Aug, area-matched: scene 45,648 ha, districts sum to 45,648 ha, -0.0%
+[PASS] 31 Aug, area-matched: scene 45,648 ha, districts sum to 45,648 ha, +0.0%
   · districts clip to ADM2 polygons, so a small shortfall is expected; a large one is not
 
 --- raw threshold output against the refined figure -------------------------
@@ -69,7 +69,7 @@ B. INTERNAL CONSISTENCY
   · 12 Aug, area-matched: 40.2% of mapped flood sits above 8°
   · 12 Aug, area-matched: 0.69% of permanent water sits above 8°, so 99.3% below
 [PASS] 12 Aug, area-matched: CSV footer kept_ha 171,683 against stats flood_ha_after 171,683
-[PASS] 7 Aug, map-optimal: 7 slope bins sum to 78,870 ha against flood_ha_before 78,870, -0.00%
+[PASS] 7 Aug, map-optimal: 7 slope bins sum to 78,870 ha against flood_ha_before 78,870, +0.00%
 [PASS] 7 Aug, map-optimal: bins at or above 8° hold 13,160 ha against removed_steep_ha 13,160, gap +0 ha
   · 7 Aug, map-optimal: 16.7% of mapped flood sits above 8°
   · 7 Aug, map-optimal: 0.42% of permanent water sits above 8°, so 99.6% below
@@ -79,12 +79,12 @@ B. INTERNAL CONSISTENCY
   · 7 Aug, area-matched: 18.8% of mapped flood sits above 8°
   · 7 Aug, area-matched: 0.48% of permanent water sits above 8°, so 99.5% below
 [PASS] 7 Aug, area-matched: CSV footer kept_ha 91,670 against stats flood_ha_after 91,670
-[PASS] 31 Aug, map-optimal: 7 slope bins sum to 51,464 ha against flood_ha_before 51,464, -0.00%
+[PASS] 31 Aug, map-optimal: 7 slope bins sum to 51,464 ha against flood_ha_before 51,464, +0.00%
 [PASS] 31 Aug, map-optimal: bins at or above 8° hold 11,642 ha against removed_steep_ha 11,642, gap +0 ha
   · 31 Aug, map-optimal: 22.6% of mapped flood sits above 8°
   · 31 Aug, map-optimal: 0.42% of permanent water sits above 8°, so 99.6% below
 [PASS] 31 Aug, map-optimal: CSV footer kept_ha 39,481 against stats flood_ha_after 39,481
-[PASS] 31 Aug, area-matched: 7 slope bins sum to 64,734 ha against flood_ha_before 64,734, -0.00%
+[PASS] 31 Aug, area-matched: 7 slope bins sum to 64,734 ha against flood_ha_before 64,734, +0.00%
 [PASS] 31 Aug, area-matched: bins at or above 8° hold 18,599 ha against removed_steep_ha 18,599, gap +0 ha
   · 31 Aug, area-matched: 28.7% of mapped flood sits above 8°
   · 31 Aug, area-matched: 0.46% of permanent water sits above 8°, so 99.5% below
