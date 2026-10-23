@@ -1012,6 +1012,34 @@ def edge_tables() -> list:
     return out
 
 
+def contrast_second_tables() -> list:
+    """The contrast measure against two people, from contrast_second.py."""
+    res = F.PROJECT / "results" / "india"
+    sc = res / "contrast_second_scores.csv"
+    ag = res / "contrast_second_agreement.csv"
+    if not (sc.exists() and ag.exists()):
+        return ["\nMissing contrast_second results. Run contrast_second.py.\n"]
+    out = ["### Rank score of the measure against each judge\n"]
+    out.append("| judge | parcels | n | marked visible | rank score "
+               "| permutation p | reading |")
+    out.append("|---|---|---:|---:|---:|---:|---|")
+    for _, r in pd.read_csv(sc).iterrows():
+        who = "second person" if r["judge"] == "second" else "author"
+        out.append(f"| {who} | {r['parcels']} | {int(r['n'])} "
+                   f"| {int(r['marked_visible'])} | {r['rank_score']:.3f} "
+                   f"| {r['permutation_p']:.4f} | {r['reading']} |")
+    out.append("\n### Agreement between the two judges\n")
+    out.append("| parcels | n | both visible | both not | second only "
+               "| author only | agree | kappa |")
+    out.append("|---|---:|---:|---:|---:|---:|---:|---:|")
+    for _, r in pd.read_csv(ag).iterrows():
+        out.append(f"| {r['parcels']} | {int(r['n'])} | {int(r['both_visible'])} "
+                   f"| {int(r['both_not'])} | {int(r['second_only'])} "
+                   f"| {int(r['author_only'])} | {r['agree_share']:.2f} "
+                   f"| {r['kappa']:.2f} |")
+    return out
+
+
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--sam-setting", default="0p50",
@@ -1102,6 +1130,9 @@ def main() -> None:
 
     out.append("\n## Edge contrast, tested on Slovenia\n")
     out += edge_tables()
+
+    out.append("\n## The contrast measure against two people, India\n")
+    out += contrast_second_tables()
 
     dest = F.PROJECT / "results" / "comparison_tables.md"
     dest.parent.mkdir(parents=True, exist_ok=True)

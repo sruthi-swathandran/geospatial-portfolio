@@ -1,0 +1,9 @@
+judge,parcels,n,marked_visible,rank_score,permutation_p,reading
+second,all 60,60,29,0.7419,0.0004,weak
+second,panel 20260925,20,9,0.6061,0.2309,weak
+second,panel 20261012,20,11,0.7879,0.0155,tracks what a person sees
+second,new 20,20,9,0.8081,0.0098,tracks what a person sees
+author,all 60,60,25,0.664,0.015,weak
+author,panel 20260925,20,6,0.6548,0.1572,weak
+author,panel 20261012,20,10,0.65,0.1449,weak
+author,new 20,20,9,0.7071,0.0668,weak

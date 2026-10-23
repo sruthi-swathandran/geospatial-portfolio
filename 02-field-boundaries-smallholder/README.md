@@ -24,8 +24,9 @@ by FTW's best checkpoint, and more often in Slovenia by every other method
 tested. Parcel width, shape, label placement and season each explain little.
 Weaker edges between Indian fields explain the most so far. Softening
 Slovenia's images until their edges measure like India's closes about 58% of
-the gap for FTW v3 and for watershed. The edge measure agreed only weakly with
-one analyst's eye, so this is the best lead and still short of proof.
+the gap for FTW v3 and for watershed. The edge measure agrees with two
+people's eyes better than chance and below the bar set for it, so this is the
+best lead and still short of proof.
 
 **Three numbers.** FTW v3 with an EfficientNet-B7 encoder finds 12.9% of
 labelled Indian parcels and 33.1% of Slovenian ones. At the object count v3
@@ -150,8 +151,10 @@ of v3's gap to something else.
 **What is still open** is the rest of the gap, and whether the edge measure
 tracks what a person sees. Width, shape, label placement and season each
 explain little, and weak edges explain most. The edge test's blur was set by
-the measure, and a blind check against one analyst agreed with that measure
-only weakly; a second analyst is the next check. Watershed finds
+the measure, and blind checks against two people agree with it weakly. A
+second person's rank score over 60 parcels is 0.742, p = 0.0004, just under the
+0.75 bar set beforehand, and the two people agree with each other more closely
+than either agrees with the measure, kappa 0.67. Watershed finds
 about as many boundaries in the December to February image as in kharif,
 while v1 given that image does no better, so the edges are in the imagery.
 No checkpoint has been fine-tuned on Indian chips here. FTW reports fine-tuning
@@ -195,8 +198,8 @@ is applied to every method. `COMPARISON.md` explains each control.
   independently digitised parcels.
 - **SAM's precision is measured on a subset**, the first 100 test chips, 99 of
   them labelled, because a full pass takes about 26 hours.
-- **The contrast measure rests on one analyst's eye**, over two blind panels of
-  20 parcels, and agrees with it weakly both times. The edge test in finding 9
+- **The contrast measure agrees weakly with two people's eyes**, over 60
+  blind parcels for the second, above chance and below the bar. The edge test in finding 9
   is calibrated on the same measure, and it was run on Slovenia only.
 - **Settings were chosen on the data they are reported from.** Measured on 40
   held-out splits, that is worth at most 0.0066 of recall.

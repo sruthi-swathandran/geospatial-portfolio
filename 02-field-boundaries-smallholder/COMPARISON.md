@@ -94,9 +94,10 @@ and SAM against them, and the README's headline now uses v3 (B-24).
     gradient on the Indian line runs 1.297x the gradient inside the field
     against Slovenia's 1.588x, and on 14.2% of Indian parcels it is no higher
     than inside against 7.2% in Slovenia. The gap widens with parcel size
-    instead of narrowing. A blind check against one analyst agreed only
-    weakly, so this is a difference between countries in how sharp the drawn
-    edge is. It does not say which parcels have an edge a person can see.
+    instead of narrowing. Blind checks against two people agree with it
+    weakly and above chance, a rank score of 0.742 with p = 0.0004 for the
+    second over 60 parcels, short of the 0.75 set beforehand. So this is a
+    difference between countries in how sharp the drawn edge is. It does not say which parcels have an edge a person can see.
 14. Choosing each method's setting on the data it is reported from was worth
     almost nothing. Over 40 chip-level splits per country, picking on one half
     and reading on the other moves recall by between -0.002 and +0.007, and
@@ -142,8 +143,8 @@ and SAM against them, and the README's headline now uses v3 (B-24).
     0.581 of watershed's read at its unblurred object count. The rules for
     reading it were committed before it ran. It shows these methods depend on
     edge contrast enough to explain most of the gap. Blur also softens texture
-    inside fields, and the edge measure it is calibrated on agreed only weakly
-    with an analyst. See What this says.
+    inside fields, and the edge measure it is calibrated on agrees only weakly
+    with two people's eyes. See What this says.
 
 ---
 
@@ -738,7 +739,7 @@ calendar, which FTW's own configuration contradicts; see B-22.
 
 *Source: `label_registration.csv` in each country.*
 
-**Checked blind against a person, the measure agrees weakly.**
+**Checked blind against two people, the measure agrees weakly.**
 `src\contrast_panel.py` draws 20 Indian parcels, five from each quartile of the
 measure, in shuffled order with the value hidden. Each parcel appears twice,
 plain and outlined. One analyst, the author, marked those with a boundary she
@@ -771,6 +772,59 @@ kept out of both scored panels. One person and 20 parcels a panel cannot
 separate weak agreement from moderate, and two panels agreeing on weak is
 reason to stop drawing them rather than to try for a pass. A second analyst
 would test something new.
+
+So a second person judged 60 parcels: the 40 of both scored panels and 20 new
+ones drawn the same way, five from each quartile, from parcels no panel had
+shown. `src\contrast_second.py` drew all 60 in natural colour, in one shuffled
+order, so the panel a parcel came from could not be told. The author judged
+the 20 new ones first, and nothing was scored until both had finished. The
+bars stayed as above, and the primary reading was set as the second person's
+score over all 60. The design was committed before the draw, in `2917a0f`, and
+the draw before any answer, in `c30c1ac`.
+
+| judge | parcels | n | marked visible | rank score | permutation p | reading |
+|---|---|---:|---:|---:|---:|---|
+| second person | all 60 | 60 | 29 | 0.742 | 0.0004 | weak |
+| second person | panel 20260925 | 20 | 9 | 0.606 | 0.2309 | weak |
+| second person | panel 20261012 | 20 | 11 | 0.788 | 0.0155 | tracks what a person sees |
+| second person | new 20 | 20 | 9 | 0.808 | 0.0098 | tracks what a person sees |
+| author | all 60 | 60 | 25 | 0.664 | 0.0150 | weak |
+| author | panel 20260925 | 20 | 6 | 0.655 | 0.1572 | weak |
+| author | panel 20261012 | 20 | 10 | 0.650 | 0.1449 | weak |
+| author | new 20 | 20 | 9 | 0.707 | 0.0668 | weak |
+
+The second person's score over all 60 is 0.742, with p = 0.0004. By the rule
+that is weak, 0.008 below the bar, and F-14 stays scoped. It is also the first
+reading clearly above chance: shuffled answers did as well about 4 times in
+10,000. The author's 60, her two earlier panels and the new 20, give 0.664 with
+p = 0.015. Recomputed here, her two earlier panels reproduce their recorded
+scores to the fourth decimal, which checks that her old answers were matched
+to the right parcels.
+
+Most of the second person's shortfall is on panel 20260925, at 0.606, where
+the author was also weakest. On the other 40 parcels the second person scores
+0.788 and 0.808. Twenty parcels are too few to read alone and the rule was set
+on all 60, so the per-panel rows describe and do not decide.
+
+| parcels | n | both visible | both not | second only | author only | agree | kappa |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| all 60 | 60 | 22 | 28 | 7 | 3 | 0.83 | 0.67 |
+| panel 20260925 | 20 | 6 | 11 | 3 | 0 | 0.85 | 0.69 |
+| panel 20261012 | 20 | 8 | 7 | 3 | 2 | 0.75 | 0.50 |
+| new 20 | 20 | 8 | 10 | 1 | 1 | 0.90 | 0.80 |
+
+The two people agree on 50 of 60 parcels, kappa 0.67, above the 0.40 set in
+advance, and the second person called a few more parcels visible, 29 against
+25. The swapped
+colours of the author's first panel changed little: on its 20 parcels the two
+agree on 17. So the eye is a consistent reference here, and the measure agrees
+with it less well than the two people agree with each other. It stays a
+difference in edge sharpness between countries, now shown to beat chance
+against a person, and it is still not a visibility score per parcel.
+
+*Source: `results/india/contrast_second_scores.csv` and
+`contrast_second_agreement.csv`, with both judges' answers beside the key in
+`contrast_second_answers.csv`; the panels are in `figures/contrast_second/`.*
 
 *Source: `results/india/contrast_panel_scores.csv`, one row per scored panel;
 the natural colour panel's key is `contrast_panel_key.csv` and the first
@@ -1261,8 +1315,8 @@ from the object count. What remains, 0.581, sits beside FTW's 0.585.
 Two things limit what this shows. Blur lowers edge contrast and also smooths
 texture inside and across fields, so watershed at 30 to 50 m falls below
 India's own recall, which an edge effect alone would not do. And the blur is
-calibrated on the edge measure, which agreed only weakly with one analyst's
-eye. So edge contrast at India's measured level is enough to cost FTW v3 more
+calibrated on the edge measure, which agrees only weakly with two people's
+eyes. So edge contrast at India's measured level is enough to cost FTW v3 more
 than half of its gap in every width band, and watershed more than half below
 50 m. The blurred chips stand in for India's on this one measure only, and
 about two fifths of FTW v3's gap is left to something else.
@@ -1889,22 +1943,22 @@ disk and a full pass costs 26 hours, so `precision.py` refuses rather than
 guessing. The claim that SAM is the best method above ten native pixels
 therefore rests on recall alone.
 
-**Boundary contrast agrees only weakly with the eye.** It is measured against
-each parcel's own interior, which removes the chip from the comparison, and the
-machinery behind it passes a self-test against known displacements. Checked
-blind against one analyst on two panels of 20 parcels, the first with red and
-blue swapped and the second in natural colour, it ranks her visible edges
-higher about two times in three, rank scores 0.655 and 0.650, p = 0.16 and
-0.14. It is a difference in edge sharpness between countries and should not be
-read per parcel. A second analyst would strengthen the check more than a third
-panel from the same one.
+**Boundary contrast agrees weakly with the eye, and above chance.** It is
+measured against each parcel's own interior, which removes the chip from the
+comparison, and the machinery behind it passes a self-test against known
+displacements. Checked blind against the author on two panels of 20 parcels it
+scored 0.655 and 0.650, p = 0.16 and 0.14. A second person then judged those
+40 and 20 more: 0.742 over 60, p = 0.0004, just under the 0.75 bar, with the
+two people agreeing at kappa 0.67. It is a difference in edge sharpness
+between countries and should not be read per parcel.
 
 The edge test, finding 20, now checks the measure from the model side.
 Blurring Slovenia until its edges read like India's by this measure costs FTW
 v3 and watershed more than half of the gap, so the models respond to what the
 measure reads. Whether the measure reads what a person sees is a separate
 question, and the edge test cannot answer it, since its blur was set by the
-measure. That question stays scoped, as REVIEW F-14 records.
+measure. The second person answers it in part, and REVIEW F-14 stays
+scoped.
 
 **The measured grid is now reconciled, and it was wrong.** Not the
 measurement itself, which was right about the east to west size, but the
@@ -2065,6 +2119,8 @@ python src\label_registration.py --country india
 python src\label_registration.py --country slovenia
 python src\parcel_contrast.py --country india
 python src\contrast_panel.py --country india --redraw
+python src\contrast_second.py --part redraw
+python src\contrast_second.py --part score --force
 python src\ring_sensitivity.py --country india
 python src\ring_sensitivity.py --country slovenia
 python src\shape_test.py
@@ -2122,6 +2178,9 @@ print and write nothing a document cites: `diagnose_download.py`,
 `explore_ftw.py`, `inspect_ftw_api.py` and `inspect_inference.py`.
 `contrast_panel.py` without `--redraw` draws a fresh blind panel and retires
 the current one, so it is not part of a rerun.
+`contrast_second.py --part draw` refuses once its key exists and `judge`
+asks a person for answers, so a rerun redraws the images and scores the saved
+sheets.
 `edge_test.py` runs its parts in the order listed, each reading the one
 before, and `matched` reuses its saved sweep unless given `--redo`.
 
@@ -2153,6 +2212,11 @@ Outputs land in `results/<country>/`:
 | `contrast_panel_key_spent_2.csv` | the first scored panel, drawn with red and blue swapped |
 | `contrast_panel_key_spent_1.csv` | the earlier panel, spent without a valid score |
 | `contrast_panel_scores.csv` | the analyst's marks and the rank score |
+| `contrast_second_key.csv` | the 60 parcels shown to the second person, with their values and source panel |
+| `contrast_second/sheet_second.csv`, `sheet_author.csv` | each judge's y or n per parcel |
+| `contrast_second_answers.csv` | the key with both judges' answers |
+| `contrast_second_scores.csv` | the rank score per judge, over all 60 and per source panel |
+| `contrast_second_agreement.csv` | agreement and kappa between the two judges |
 | `ring_sensitivity_truth.csv` | parcel area, width and unassigned ring at each reconstruction cap |
 | `ring_sensitivity.csv` | recall by method at each cap |
 | `ring_sensitivity_bands.csv` | recall by method and ground width band at each cap |

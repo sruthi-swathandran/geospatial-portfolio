@@ -623,3 +623,27 @@ Chosen blur: 14.5 m, where the median meets India's 1.297.
 | watershed, matched objects | 30 to 50 m | 45.31% | 28.07% | 22.49% | 0.755 [0.654, 0.861] |  |
 | watershed, matched objects | 50 m up | 69.13% | 57.36% | 41.33% | 0.423 [0.308, 0.531] |  |
 | watershed, matched objects | 20 m up | 47.23% | 34.20% | 24.78% | 0.581 [0.498, 0.665] | credible main cause |
+
+## The contrast measure against two people, India
+
+### Rank score of the measure against each judge
+
+| judge | parcels | n | marked visible | rank score | permutation p | reading |
+|---|---|---:|---:|---:|---:|---|
+| second person | all 60 | 60 | 29 | 0.742 | 0.0004 | weak |
+| second person | panel 20260925 | 20 | 9 | 0.606 | 0.2309 | weak |
+| second person | panel 20261012 | 20 | 11 | 0.788 | 0.0155 | tracks what a person sees |
+| second person | new 20 | 20 | 9 | 0.808 | 0.0098 | tracks what a person sees |
+| author | all 60 | 60 | 25 | 0.664 | 0.0150 | weak |
+| author | panel 20260925 | 20 | 6 | 0.655 | 0.1572 | weak |
+| author | panel 20261012 | 20 | 10 | 0.650 | 0.1449 | weak |
+| author | new 20 | 20 | 9 | 0.707 | 0.0668 | weak |
+
+### Agreement between the two judges
+
+| parcels | n | both visible | both not | second only | author only | agree | kappa |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| all 60 | 60 | 22 | 28 | 7 | 3 | 0.83 | 0.67 |
+| panel 20260925 | 20 | 6 | 11 | 3 | 0 | 0.85 | 0.69 |
+| panel 20261012 | 20 | 8 | 7 | 3 | 2 | 0.75 | 0.50 |
+| new 20 | 20 | 8 | 10 | 1 | 1 | 0.90 | 0.80 |
