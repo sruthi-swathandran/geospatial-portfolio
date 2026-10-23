@@ -214,9 +214,9 @@ def cropland_ha(suffix: str) -> float:
     """Flooded cropland over the whole raster, the figure the README quotes.
 
     Summing flooded_cropland_ha over district_flood_stats*.csv gives a sum over
-    ADM2 polygons instead. On 12 August those polygons account for 110,081 of
-    the 119,779 ha of mapped flood, so the cropland total that goes with them
-    is 43,494 ha against the scene's 46,943, and this sheet was printing the
+    ADM2 polygons instead. On 12 August those polygons account for 110,938 of
+    the 120,790 ha of mapped flood, so the cropland total that goes with them
+    is 43,564 ha against the scene's 47,028, and this sheet was printing the
     smaller one beside a scene-wide flood figure. See CHANGELOG.md C-12. The
     7 and 31 August passes are relative orbit 4 and fall entirely inside Indian
     districts, so for those two the two footprints agree to the hectare.

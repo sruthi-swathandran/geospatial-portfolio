@@ -11,15 +11,15 @@ result, so every project here is built to be checked and then checked.
 
 | | project | the question | state |
 |---|---|---|---|
-| **RS-01** | [Sentinel-1 flood extent](01-sentinel1-flood-extent/) | How much does a flood map move when you change one defensible decision? | Complete, three review findings open |
+| **RS-01** | [Sentinel-1 flood extent](01-sentinel1-flood-extent/) | How much does a flood map move when you change one defensible decision? | Complete; one review finding open: cloud on 31 August and in the hills (F-01, F-02) |
 | **RS-02** | [Field boundaries for smallholdings](02-field-boundaries-smallholder/) | Does the published model fail on Indian fields because of the imagery or because of the model? | Stage 2b complete, stage 3 in progress |
 
 ---
 
 ## What each one found
 
-**RS-01, flood extent on the Brahmaputra.** Between 119,779 and 170,625 hectares
-of flood water on 12 August 2016, of which between 46,943 and 87,127 hectares
+**RS-01, flood extent on the Brahmaputra.** Between 120,790 and 171,683 hectares
+of flood water on 12 August 2016, of which between 47,028 and 87,274 hectares
 was cropland. The range is not measurement noise. It is the distance between two
 operating points that both have an argument behind them and that differ by one
 decibel. Every figure in that project is reported with the decision that moves

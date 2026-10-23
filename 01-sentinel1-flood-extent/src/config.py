@@ -113,7 +113,7 @@ MAX_WATER_THRESHOLD_VV = -12.0
 # other two refinement parameters moved here from argparse defaults.
 #
 # Between them these four set roughly 45% of the subtraction between the raw
-# threshold output (217,490 ha) and the reported flood area (119,779 ha). They
+# threshold output (217,490 ha) and the reported flood area (120,790 ha). They
 # were the least visible decisions in the project and the most consequential,
 # which is the wrong way round.
 #

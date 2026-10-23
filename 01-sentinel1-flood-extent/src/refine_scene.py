@@ -38,9 +38,13 @@ ON THE MINIMUM MAPPING UNIT
 A lone 20 m pixel of flood is one noisy sample and too small to map. Most
 operational flood products drop connected components below a threshold, and
 saying so with a number is better than leaving thousands of single pixels in a
-product and calling it detail. Objects are removed per tile with a 16 pixel
-halo, so a component straddling a tile edge is judged on what falls inside the
-padded window rather than being cut in half.
+product and calling it detail. Objects are removed per tile, on the tile's own
+pixels. The 16 pixel halo feeds the DEM and slope only, so a component that
+straddles a tile edge is judged one side at a time, and a side under 10 pixels
+goes even when the whole is larger. REVIEW S-03 measured it on 12 August: one
+pass over the whole map keeps 289 pixels more, 11.6 ha of 120,790 (C-37). It
+is left as it is, since changing it would move every published figure by that
+much for no gain anyone could see.
 
 Outputs:
     data/dem_scene/India_dem_<res>m_<ty>_<tx>.tif      cached DEM tiles, nearest

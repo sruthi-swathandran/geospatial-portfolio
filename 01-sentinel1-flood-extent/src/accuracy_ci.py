@@ -8,7 +8,8 @@ Review findings addressed:
         content, which weights by pixel count and hides chip-level variance.
 
   F-01  more seriously: these figures describe the CHIP-SCALE product. The
-        reported 119,779 ha comes from a raster that additionally passed
+        reported 120,790 ha, 119,779 before C-31, comes from a raster that
+        additionally passed
         through a slope mask, a swath-edge buffer and a minimum mapping unit,
         none of which existed when these numbers were computed and none of
         which can be validated, because the Sen1Floods11 labels cover 65

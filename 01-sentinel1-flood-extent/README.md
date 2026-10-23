@@ -4,9 +4,11 @@ Mapping flood water with radar is not hard. Saying how much of the answer comes
 from the imagery and how much comes from choices nobody declares is harder, and
 that is what this project is about.
 
+<!-- headline -->
 **Between 120,790 and 171,683 ha of flood water** on 12 August 2016 across 6.26
 million hectares of the central Brahmaputra valley, of which **between 47,028
 and 87,274 ha was cropland**.
+<!-- /headline -->
 
 That range is not measurement noise. It is the gap between two operating points
 that both have an argument behind them: one chosen to maximise agreement with
@@ -162,15 +164,19 @@ footprint and identical viewing geometry, so their comparison is close to pure
 hydrology:
 
 ```
-                          map-optimal      area-matched
-flood, 7 Aug                65,268 ha         91,540 ha
-flood, 31 Aug               39,481 ha         45,648 ha
-drained over 24 days        27,933 ha         49,099 ha
-newly flooded                2,147 ha          3,207 ha
-persistence                     57.2%             46.4%
-net change                   to 60.5%          to 49.9%
-direction              receding 13.0:1   receding 15.3:1
+                               map-optimal      area-matched
+flood, 7 Aug, shared ground      65,268 ha         91,540 ha
+flood, 31 Aug, shared ground     39,481 ha         45,648 ha
+drained over 24 days             27,933 ha         49,099 ha
+newly flooded                     2,147 ha          3,207 ha
+persistence                          57.2%             46.4%
+net change                        to 60.5%          to 49.9%
+direction                   receding 13.0:1   receding 15.3:1
 ```
+
+The 7 August figures here are smaller than in the table above because 88 ha of
+the 7 August flood (130 ha area-matched) lies on 5,432 ha that only the 7 August
+pass imaged, so it is left out.
 
 **Total flood fell 40% or 50% over those 24 days, depending on the operating
 point. Flooded cropland fell 80.6% or 82.4%.**
@@ -942,12 +948,23 @@ All open, all licensed for reuse. No proprietary or client data of any kind.
 Imagery is read through STAC with windowed COG requests. No scene is ever
 downloaded whole.
 
+Every raster is on a 20 m grid in UTM zone 46N (EPSG:32646), and every area is
+a pixel count on that grid. UTM preserves shape and lets area drift a little:
+over the mapped flood its area scale runs from 0.9992 to 0.9995, so each hectare figure here is about
+0.07% below the area on the ground, 88 ha on the 12 August headline
+(`area_scale.py`). No figure is corrected for it.
+
 ---
 
 ## Running it
 
+Run everything from this folder, `01-sentinel1-flood-extent/`. The
+requirements files sit here too.
+
 ```bash
-python -m venv .venv && .venv\Scripts\activate     # Windows
+python -m venv .venv
+.venv\Scripts\activate          # Windows
+source .venv/bin/activate        # macOS and Linux
 pip install -r requirements.txt
 ```
 
@@ -975,6 +992,7 @@ a CSV beside its figure.
 | Audit | `sensitivity_grid.py` | Reported area across all 216 refinement parameter combinations |
 | Audit | `make_manifest.py` | File counts, sizes and SHA-256 digests for reproduction checking |
 | Audit | `edge_rate.py` | Flood called inside the swath-edge buffer against the interior |
+| Audit | `area_scale.py` | How far the UTM grid's hectares sit from hectares on the ground |
 | Audit | `cropland_scene.py` | Flooded cropland over the whole raster rather than over district polygons |
 | Audit | `refine_figure.py` | The before and after of refinement, rebuilt from the two rasters |
 | Audit | `verify_all.py` | Traces the figures in README.md and docs/index.html back to results/ |

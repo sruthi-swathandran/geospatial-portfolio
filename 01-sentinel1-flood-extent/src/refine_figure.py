@@ -6,7 +6,8 @@ of refine_scene.py that no longer exists. It showed 217,490 ha going to
 130,772 ha, which is the slope cut applied to the unbuffered raster: the edge
 rim is full of steep pixels, so removing slope first takes out 86,718 ha
 instead of the 68,437 the current pipeline records. The README section it sits
-in is about the chain that ends at 119,779 ha, so the figure and its caption
+in is about the chain that ends at the reported area, 119,779 ha then and
+120,790 ha since C-31, so the figure and its caption
 described different pipelines.
 
 This rebuilds it from the raw and refined rasters, so it cannot drift again.

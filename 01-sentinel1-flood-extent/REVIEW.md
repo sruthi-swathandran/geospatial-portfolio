@@ -2,6 +2,23 @@
 
 Written with an AI assistant, Claude. It is not independent peer review.
 
+Original review at commit `fc951f1`. The status below is current; the review
+after it is kept as written, so its verdicts and figures are those of
+September 2026.
+
+> **Status now, 22 October 2026.** The headline is 120,790 to 171,683 ha of
+> flood on 12 August (CHANGELOG C-31), with open-water flood in the floodplain
+> estimated at 135,505 ± 13,221 ha from a labelled sample (C-28). Of the 14
+> confirmed findings, 10 are closed or resolved, F-04 is scoped by a published
+> sensitivity grid, F-07 is tested on nine other floods, and F-01 and F-02 are
+> mostly closed: all three dates have sampled estimates with standard errors
+> and second readers (C-34 to C-36). What stays open is cloud. On 31 August
+> the clear part of the floodplain stands in poorly for the cloudy part, and in
+> the hills a stratum with no open water found can still hide tens of
+> thousands of hectares at the 95% bound. Of the five suspicions, S-01 was
+> tested and not adopted, S-02 and S-03 were confirmed, S-05 is partly tested
+> and S-04 is open. The Status and Fixed in columns below give each one.
+
 Reviewed as (a) an operational EO product for methodological defensibility and
 (b) a submission for reproducibility and provenance. Findings below are against
 the repository at `01-sentinel1-flood-extent`, commit `fc951f1` plus 65
@@ -173,32 +190,32 @@ deterministic. Reruns should be bit-identical; not verified.
 
 ### Confirmed
 
-| ID | Severity | Component | Finding | Evidence | Effect on reported area | Required action |
-|---|---|---|---|---|---|---|
-| F-01 | **Blocking** | Area estimation | The reported product has never been validated. All accuracy figures come from 65 chips at 10 m, scored **before** the slope mask, edge buffer and MMU exist. Those three steps remove 45% of the raw area. The validated product and the reported product are different products. | `operating_point.py` scores chips; `refine_scene.py` produces the reported raster; no script scores the latter | Unknown, and currently unquantifiable | State it in Results as well as in the narrative. Report the chip-scale accuracy as applying to the chip-scale product only |
-| F-02 | **Blocking** | Area estimation | 119,779 ha is a pixel count with no uncertainty. Good practice (Olofsson et al. 2014, *Remote Sensing of Environment*) requires a design-based estimator with a standard error. At the chosen operating point recall is 0.608, so the map systematically omits water. | `full_scene.py` totals; `results/final_method.json` | Direction: under-detection at the map level, partly offset by commission. At chip scale the tuned point gave −5% against truth | Either produce a bias-adjusted estimate with CI, or label the figure explicitly as an uncorrected map pixel count and quote the chip-scale bias as the only available guide |
-| F-03 | Major | Accuracy reporting | No confidence intervals on any accuracy figure. n = 65 chips, micro-averaged, which weights by pixel count and hides chip-level variance. | README accuracy table; `metrics.py` | None directly | Bootstrap over chips; report IoU, P and R with 95% CI, and report macro alongside micro |
-| F-04 | Major | Parameter provenance | Three of the four decisions that set the final number (slope 8°, occurrence 50%, edge buffer 30 px) were chosen by inspecting full-scene distributions with no held-out data, and cannot be validated because no labels exist outside the chips. They live in argparse defaults. | `refine_scene.py` argparse | They remove 45% of the raw area between them | Move to config; publish the final area across a grid of all three as well as at the chosen point |
-| F-05 | Major | Config integrity | `config.py` declares `SLOPE_MAX_DEG = 5.0` and `GSW_PERMANENT_MIN = 80`; the pipeline runs 8.0 and 50. The stated source of truth is wrong. | `config.py`; `refine_scene.py`; `full_scene.py:101` | None to the computed number; total loss of auditability | Single source of truth, imported everywhere |
-| F-06 | Major | Resampling | Resampling is declared for WorldCover only. S1 VH, DEM and GSW take the library default without saying so. Both the threshold and the slope mask are sensitive to it. | `full_scene.py:223,232`, `refine_scene.py:105` vs `district_stats.py:132` | Unquantified | Declare explicitly for every load with a one-line justification per variable |
-| F-07 | Major | Validation design | The Sen1Floods11 splits for a single event are spatially adjacent chips from one scene sharing radiometry, terrain and flood state. "Test IoU 0.680" implies a transferability it does not support. | Official split CSVs; `chips.py:split_lookup` | None | Describe the test split as a within-scene check on threshold overfitting, not as evidence of generalisation |
-| F-08 | Major | Representativeness | Quoted accuracy applies to floodplain chips; the area figure is computed over 6.26 M ha including hills and upland the chips never sampled. The three artefact retractions already prove the domains differ. | README "Three times a conclusion did not survive" | None directly; bounds the meaning of every accuracy figure | One sentence in Results, adjacent to the accuracy table |
-| F-09 | Minor | Projection | Areas computed in UTM 46N, a conformal projection. Distortion under ~0.1% over this AOI, about 120 ha. Unstated. | `config.py` `TARGET_CRS` | ~120 ha, negligible | State the CRS and the bound in the README |
-| F-10 | Minor | Dependencies | `requirements.txt` is a 200-package environment freeze including `pywinpty`, which does not install off Windows. No minimal dependency set. | `requirements.txt` | None | Ship a minimal pinned `requirements.txt`; keep the freeze as `requirements-lock.txt` |
-| F-11 | Resolved | Provenance | Was: 62 untracked files including the README, `docs/`, and every result the README cites, with no remote, so the committed repository held only the chip-stage pipeline. A remote was added and the full-scene stage, the figures and the documentation were pushed on 8 September 2026. | `git log`, `git status` | None | Run `git status` before quoting reproducibility; the claim holds only while the working tree is clean |
-| F-12 | Minor | Hard-coding | `TILE`, `HALO`, `OCCURRENCE_CUT` and `PIXEL_HA` each declared independently in three or four files. `PIXEL_HA = 0.01` assumes 10 m and is wrong if those scripts touch the 20 m products. | table above | None today; latent | Centralise; derive `PIXEL_HA` from resolution |
-| F-13 | Minor | Repo hygiene | `notebooks/` and `viewer/` empty. `date_comparison.csv` orphaned by the later `--out` naming. | file tree | None | Remove or populate |
-| F-14 | Editorial | Documentation | No data manifest, so "clean state" reproduction cannot be checked. | absent | None | Add expected file counts and sizes per fetch script |
+| ID | Severity | Component | Finding | Evidence | Effect on reported area | Required action | Status | Fixed in |
+|---|---|---|---|---|---|---|---|---|
+| F-01 | **Blocking** | Area estimation | The reported product has never been validated. All accuracy figures come from 65 chips at 10 m, scored **before** the slope mask, edge buffer and MMU exist. Those three steps remove 45% of the raw area. The validated product and the reported product are different products. | `operating_point.py` scores chips; `refine_scene.py` produces the reported raster; no script scores the latter | Unknown, and currently unquantifiable | State it in Results as well as in the narrative. Report the chip-scale accuracy as applying to the chip-scale product only | Mostly closed | C-28, C-34 to C-36 |
+| F-02 | **Blocking** | Area estimation | 119,779 ha is a pixel count with no uncertainty. Good practice (Olofsson et al. 2014, *Remote Sensing of Environment*) requires a design-based estimator with a standard error. At the chosen operating point recall is 0.608, so the map systematically omits water. | `full_scene.py` totals; `results/final_method.json` | Direction: under-detection at the map level, partly offset by commission. At chip scale the tuned point gave −5% against truth | Either produce a bias-adjusted estimate with CI, or label the figure explicitly as an uncorrected map pixel count and quote the chip-scale bias as the only available guide | Mostly closed | C-28, C-34 to C-36 |
+| F-03 | Major | Accuracy reporting | No confidence intervals on any accuracy figure. n = 65 chips, micro-averaged, which weights by pixel count and hides chip-level variance. | README accuracy table; `metrics.py` | None directly | Bootstrap over chips; report IoU, P and R with 95% CI, and report macro alongside micro | Closed | C-02 |
+| F-04 | Major | Parameter provenance | Three of the four decisions that set the final number (slope 8°, occurrence 50%, edge buffer 30 px) were chosen by inspecting full-scene distributions with no held-out data, and cannot be validated because no labels exist outside the chips. They live in argparse defaults. | `refine_scene.py` argparse | They remove 45% of the raw area between them | Move to config; publish the final area across a grid of all three as well as at the chosen point | Scoped | C-03, C-08 |
+| F-05 | Major | Config integrity | `config.py` declares `SLOPE_MAX_DEG = 5.0` and `GSW_PERMANENT_MIN = 80`; the pipeline runs 8.0 and 50. The stated source of truth is wrong. | `config.py`; `refine_scene.py`; `full_scene.py:101` | None to the computed number; total loss of auditability | Single source of truth, imported everywhere | Closed | C-03 |
+| F-06 | Major | Resampling | Resampling is declared for WorldCover only. S1 VH, DEM and GSW take the library default without saying so. Both the threshold and the slope mask are sensitive to it. | `full_scene.py:223,232`, `refine_scene.py:105` vs `district_stats.py:132` | Unquantified | Declare explicitly for every load with a one-line justification per variable | Closed | C-04, C-31 |
+| F-07 | Major | Validation design | The Sen1Floods11 splits for a single event are spatially adjacent chips from one scene sharing radiometry, terrain and flood state. "Test IoU 0.680" implies a transferability it does not support. | Official split CSVs; `chips.py:split_lookup` | None | Describe the test split as a within-scene check on threshold overfitting, not as evidence of generalisation | Tested | C-02, C-33 |
+| F-08 | Major | Representativeness | Quoted accuracy applies to floodplain chips; the area figure is computed over 6.26 M ha including hills and upland the chips never sampled. The three artefact retractions already prove the domains differ. | README "Three times a conclusion did not survive" | None directly; bounds the meaning of every accuracy figure | One sentence in Results, adjacent to the accuracy table | Closed | C-28, C-34 |
+| F-09 | Minor | Projection | Areas computed in UTM 46N, a conformal projection. Distortion under ~0.1% over this AOI, about 120 ha. Unstated. | `config.py` `TARGET_CRS` | ~120 ha, negligible | State the CRS and the bound in the README | Closed | C-37 |
+| F-10 | Minor | Dependencies | `requirements.txt` is a 200-package environment freeze including `pywinpty`, which does not install off Windows. No minimal dependency set. | `requirements.txt` | None | Ship a minimal pinned `requirements.txt`; keep the freeze as `requirements-lock.txt` | Closed | C-06 |
+| F-11 | Resolved | Provenance | Was: 62 untracked files including the README, `docs/`, and every result the README cites, with no remote, so the committed repository held only the chip-stage pipeline. A remote was added and the full-scene stage, the figures and the documentation were pushed on 8 September 2026. | `git log`, `git status` | None | Run `git status` before quoting reproducibility; the claim holds only while the working tree is clean | Resolved | 8 September 2026 push |
+| F-12 | Minor | Hard-coding | `TILE`, `HALO`, `OCCURRENCE_CUT` and `PIXEL_HA` each declared independently in three or four files. `PIXEL_HA = 0.01` assumes 10 m and is wrong if those scripts touch the 20 m products. | table above | None today; latent | Centralise; derive `PIXEL_HA` from resolution | Closed | C-03 |
+| F-13 | Minor | Repo hygiene | `notebooks/` and `viewer/` empty. `date_comparison.csv` orphaned by the later `--out` naming. | file tree | None | Remove or populate | Closed | C-07 |
+| F-14 | Editorial | Documentation | No data manifest, so "clean state" reproduction cannot be checked. | absent | None | Add expected file counts and sizes per fetch script | Closed | C-07 |
 
 ### Suspected, with the test that would settle each
 
-| ID | Severity if confirmed | Suspicion | Test |
-|---|---|---|---|
-| S-01 | Major | Nearest-neighbour resampling of 10 m VH onto the 20 m grid discards half the samples and inflates speckle variance, which shifts the optimum threshold and therefore the area. | Re-run `full_scene.py --res 20` with `resampling="average"` on the VH load and compare flood area and the slope histogram. One run, ~30 min |
-| S-02 | Major | DEM resampled from 30 m to 20 m by nearest produces a stepped surface and biases computed slope, which sets the 8° cut removing 68,437 ha. | Recompute slope from a bilinear-resampled DEM and re-run `refine_scene.py`; compare the removed area |
-| S-03 | Moderate | MMU applied per padded tile could split a connected flood object across a tile seam. With a 16 px halo and a 10 px MMU the object must be under 10 px on both sides, so the effect should be near zero. | Count components touching tile boundaries and compare against a single-pass run on a subset |
-| S-04 | Moderate | The residual scattered water in the north-west may be genuine wetland rather than artefact. | Cross-tabulate residual flood against JRC seasonality and WorldCover wetland classes |
-| S-05 | Minor | Reruns may not be bit-identical if any load path is order-dependent. | Hash `India_water_20m.tif` across two clean runs |
+| ID | Severity if confirmed | Suspicion | Test | Status | Fixed in |
+|---|---|---|---|---|---|
+| S-01 | Major | Nearest-neighbour resampling of 10 m VH onto the 20 m grid discards half the samples and inflates speckle variance, which shifts the optimum threshold and therefore the area. | Re-run `full_scene.py --res 20` with `resampling="average"` on the VH load and compare flood area and the slope histogram. One run, ~30 min | Tested, not adopted | C-31 |
+| S-02 | Major | DEM resampled from 30 m to 20 m by nearest produces a stepped surface and biases computed slope, which sets the 8° cut removing 68,437 ha. | Recompute slope from a bilinear-resampled DEM and re-run `refine_scene.py`; compare the removed area | Confirmed and fixed | C-31 |
+| S-03 | Moderate | MMU applied per padded tile could split a connected flood object across a tile seam. With a 16 px halo and a 10 px MMU the object must be under 10 px on both sides, so the effect should be near zero. | Count components touching tile boundaries and compare against a single-pass run on a subset | Confirmed, 11.6 ha, left as is | C-37 |
+| S-04 | Moderate | The residual scattered water in the north-west may be genuine wetland rather than artefact. | Cross-tabulate residual flood against JRC seasonality and WorldCover wetland classes | Open |  |
+| S-05 | Minor | Reruns may not be bit-identical if any load path is order-dependent. | Hash `India_water_20m.tif` across two clean runs | Partly tested | C-37 |
 
 Erratum to S-01, added 12 October 2026: a 20 m pixel covers four 10 m pixels and nearest-neighbour keeps one of them, so it discards three quarters of the samples, not half. That strengthens the suspicion. The test is unchanged.
 
@@ -257,14 +274,14 @@ uncertainty column that does not yet exist.
 
 ## Acceptance criteria
 
-| # | Criterion | Status | Evidence |
-|---|---|---|---|
-| 1 | Pipeline runs end to end from clean state using only repository contents | **FAIL** | 62 untracked files; no data manifest |
-| 2 | Reported areas reproduce within a stated tolerance | **FAIL** | No tolerance stated; determinism unverified |
-| 3 | No Blocking or Major finding open, or each documented with quantified effect | **FAIL** | F-01, F-02, F-11 blocking; six Major open |
-| 4 | Every README number traces to a generated artefact | **PASS with exception** | All trace to `results/*.csv` or `*.json`, but those files are untracked (F-11) |
-| 5 | Map carries all required cartographic elements | **FAIL** | See Phase 6 |
-| 6 | No hard-coded credentials, paths or asset IDs outside config | **PARTIAL** | No credentials anywhere (PASS). Paths and parameters scattered (F-12) |
+| # | Criterion | Status at review | Evidence | Now, 22 October 2026 |
+|---|---|---|---|---|
+| 1 | Pipeline runs end to end from clean state using only repository contents | **FAIL** | 62 untracked files; no data manifest | **PARTIAL.** Results, figures and labels are tracked and `MANIFEST.csv` gives counts and digests, but the public page needs the refined rasters, which stay out of git (CHANGELOG R-05), and no clean run from an empty folder has been repeated |
+| 2 | Reported areas reproduce within a stated tolerance | **FAIL** | No tolerance stated; determinism unverified | **PARTIAL.** The refinement step reproduces the published flood count to the pixel from the raw map (S-03 check, C-37), and `score_map.py` checks the as-drawn maps against the hectares the draw recorded. A rerun of `full_scene.py` has not been hashed (S-05) |
+| 3 | No Blocking or Major finding open, or each documented with quantified effect | **FAIL** | F-01, F-02, F-11 blocking; six Major open | **PASS with exception.** F-01 and F-02 are closed except for cloud: on 31 August the clear part stands in poorly for the cloudy floodplain, which is described but not sized, and in the hills the zero-hit bounds give the size. S-04 is open |
+| 4 | Every README number traces to a generated artefact | **PASS with exception** | All trace to `results/*.csv` or `*.json`, but those files are untracked (F-11) | **PASS.** `verify_all.py` reports 0 failures and the results are tracked; its warnings are derived or rounded figures it lists by line |
+| 5 | Map carries all required cartographic elements | **FAIL** | See Phase 6 | **PASS with exception.** `make_map.py` draws the CRS, graticule, scale bar, north arrow, inset and a colour-blind-safe palette. Its area table carries the threshold range, not the sample's standard error |
+| 6 | No hard-coded credentials, paths or asset IDs outside config | **PARTIAL** | No credentials anywhere (PASS). Paths and parameters scattered (F-12) | **PASS.** Constants live in `config.py` (C-03), and `preflight.py` finds no secrets, tokens or machine paths |
 
 Nothing here says the flood map is wrong. It says the repository does not
 currently let anyone else establish that it is right, and that the single most

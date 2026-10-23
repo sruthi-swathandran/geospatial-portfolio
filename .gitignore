@@ -11,6 +11,11 @@ data/
 *.nc
 *.h5
 
+# --- screenshots: the Windows snipping tool saves as Capture.JPG -----------
+Capture*.JPG
+Capture*.jpg
+Capture*.png
+
 # Exception: small vector files you hand-made and cannot regenerate
 # (validation polygons for RS-02, for example) SHOULD be committed.
 !*/data/labels/**

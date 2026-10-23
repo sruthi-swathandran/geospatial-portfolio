@@ -791,8 +791,16 @@ def drawn_from_same_data(fig: Path, src: Path) -> bool:
         return norm(then) == norm(now)
     old = list(csv.reader(norm(then).decode("utf-8").splitlines()))
     new = list(csv.reader(norm(now).decode("utf-8").splitlines()))
-    if not old or not new or len(old) != len(new):
+    if not old or not new:
         return False
+    if len(old) != len(new):
+        # rows added to a key and value table, as compare_dates.py's gained
+        # two in C-37: every row the figure was drawn from must still be
+        # there, unchanged
+        if old[0] != new[0]:
+            return False
+        keyed = {r[0]: r for r in new[1:] if r}
+        return all(keyed.get(o[0]) == o for o in old[1:] if o)
     try:
         idx = [new[0].index(c) for c in old[0]]
     except ValueError:
@@ -901,6 +909,27 @@ def trace_docs(index):
         report(WARN, "clean-up shortfall not checked: register_check_clean.csv "
                      "or its scene-scale row is missing")
 
+    # Rounding (C-37). The page's data holds hectares to one decimal. Where one
+    # ends in exactly .5 on an even integer, JavaScript's Math.round prints one
+    # more than Python's format() does in every README and CSV, so the page
+    # must round half to even as Python does.
+    page = p.read_text(encoding="utf-8", errors="replace")
+    data = " ".join(re.findall(r"<script\b.*?</script>", page, flags=re.S | re.I))
+    # values in the page's JSON only, so the script's own code and comments
+    # are not counted
+    halves = [h for h in re.findall(r"(?<=[:,\[])-?\d+\.5(?=[,\]}])", data)
+              if int(abs(float(h))) % 2 == 0]
+    if "const rhe" in page and "Math.abs(rhe(n))" in page:
+        report(PASS, f"the page rounds half to even, as Python does; {len(halves)} "
+                     f"value(s) in its data would otherwise print one too high")
+    elif halves:
+        report(FAIL, f"{len(halves)} value(s) in the page's data end in .5 on an "
+                     f"even integer, and the page rounds them up where every "
+                     f"README and CSV rounds them down; rebuild it with "
+                     f"build_docs_page.py")
+    else:
+        report(PASS, "no value in the page's data ends in .5 on an even integer")
+
     print(f"  \u00b7 {traced} numbers matched a value in results/")
     if untraced:
         report(WARN, f"{len(untraced)} number(s) on the public page match no "
@@ -927,7 +956,7 @@ def main() -> None:
     # preflight.py reads this to tell whether the report is older than the
     # README it describes (C-24)
     print(f"README sha256 {digest}")
-    print(f"project: {ROOT}")
+    print(f"project: {ROOT.name}")
     print("read-only; nothing in the repo is modified\n")
 
     index = build_index()
@@ -964,6 +993,8 @@ def main() -> None:
           "this script\ncannot decide on its own and a person has to. A "
           "failure is a contradiction\nbetween two files that both claim to "
           "describe the same thing.")
+    # a failure fails the run, so an automated check can go red (C-37)
+    sys.exit(1 if n_fail else 0)
 
 
 if __name__ == "__main__":

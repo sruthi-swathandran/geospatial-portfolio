@@ -273,6 +273,12 @@ def main() -> None:
                          ("a_only_flood", f"wedge_flood_{base_date}"),
                          ("b_only_flood", f"wedge_flood_{other_date}")):
             w_.writerow([label, round(c[k] * px_ha, 1)])
+        # each date's flood on the shared ground, the figures the README's
+        # recession block quotes, so they trace to this file (C-37)
+        w_.writerow([f"flood_{base_date}_shared_ground",
+                     round((c["ov_both"] + c["ov_a_only"]) * px_ha, 1)])
+        w_.writerow([f"flood_{other_date}_shared_ground",
+                     round((c["ov_both"] + c["ov_b_only"]) * px_ha, 1)])
         w_.writerow(["persistence_fraction", round(persist, 4)])
         w_.writerow(["date_to_date_iou", round(iou, 4)])
 

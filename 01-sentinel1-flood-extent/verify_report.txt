@@ -1,28 +1,26 @@
 VERIFICATION REPORT
-README sha256 898e98581a255ae2
-project: D:\geospatial-portfolio\01-sentinel1-flood-extent
+README sha256 a7d9577c36378d26
+project: 01-sentinel1-flood-extent
 read-only; nothing in the repo is modified
 
-indexed 47258 numeric values from results/
+indexed 47291 numeric values from results/
 
 
 ==============================================================================
 A. EVERY NUMBER IN THE README, TRACED TO A FILE
 ==============================================================================
-  · 701 numbers matched a value in results/
-  · 312 skipped as years, codes or section numbers
-[WARN] 4 numbers could not be matched to any file. Each needs a human decision: derived, rounded, or wrong.
+  · 710 numbers matched a value in results/
+  · 320 skipped as years, codes or section numbers
+[WARN] 1 numbers could not be matched to any file. Each needs a human decision: derived, rounded, or wrong.
 
 --- unmatched README numbers ------------------------------------------------
-  L166           65,268   flood, 7 Aug                65,268 ha         91,540 ha
-  L166           91,540   flood, 7 Aug                65,268 ha         91,540 ha
-  L816           65,268   | Acquisition date | 7 Aug vs 31 Aug, same ground | 65,268 ha to 39,481 ha |
-  L874          155,000   figure by that ratio gives about 155,000 ha. The scene also drops water patches
+  L880          155,000   figure by that ratio gives about 155,000 ha. The scene also drops water patches
 
 ==============================================================================
 A2. NUMBERS ON docs/index.html, TRACED TO A FILE
 ==============================================================================
 [PASS] clean-up shortfall 10.2% <- register_check_clean.csv area_vs_labels_after
+[PASS] the page rounds half to even, as Python does; 27 value(s) in its data would otherwise print one too high
   · 15 numbers matched a value in results/
 [PASS] every thousands-separated number on the public page traces to results/
         A match means some file in results/ holds that value, not that it is
@@ -127,9 +125,9 @@ B. INTERNAL CONSISTENCY
 [PASS] 31 Aug, area-matched: resampling matches config
 
 --- the 7 to 31 August change figures ---------------------------------------
-  · map-optimal: seen_by_both 3,159,751.7, seen_only_2016-08-07 5,432.3, seen_only_2016-08-31 0.0, overlap_flood_both_dates 37,334.3, overlap_drained_by_2016-08-31 27,933.4, overlap_new_by_2016-08-31 2,146.6, wedge_flood_2016-08-07 88.3, wedge_flood_2016-08-31 0.0, persistence_fraction 0.6, date_to_date_iou 0.6
+  · map-optimal: seen_by_both 3,159,751.7, seen_only_2016-08-07 5,432.3, seen_only_2016-08-31 0.0, overlap_flood_both_dates 37,334.3, overlap_drained_by_2016-08-31 27,933.4, overlap_new_by_2016-08-31 2,146.6, wedge_flood_2016-08-07 88.3, wedge_flood_2016-08-31 0.0, flood_2016-08-07_shared_ground 65,267.6, flood_2016-08-31_shared_ground 39,480.8, persistence_fraction 0.6, date_to_date_iou 0.6
   · map-optimal: implied flood 7 Aug 65,268 ha, 31 Aug 39,481 ha, fall 39.5%, persistence 57.2%
-  · area-matched: seen_by_both 3,159,751.7, seen_only_2016-08-07 5,432.3, seen_only_2016-08-31 0.0, overlap_flood_both_dates 42,440.8, overlap_drained_by_2016-08-31 49,099.5, overlap_new_by_2016-08-31 3,207.3, wedge_flood_2016-08-07 130.0, wedge_flood_2016-08-31 0.0, persistence_fraction 0.5, date_to_date_iou 0.4
+  · area-matched: seen_by_both 3,159,751.7, seen_only_2016-08-07 5,432.3, seen_only_2016-08-31 0.0, overlap_flood_both_dates 42,440.8, overlap_drained_by_2016-08-31 49,099.5, overlap_new_by_2016-08-31 3,207.3, wedge_flood_2016-08-07 130.0, wedge_flood_2016-08-31 0.0, flood_2016-08-07_shared_ground 91,540.3, flood_2016-08-31_shared_ground 45,648.1, persistence_fraction 0.5, date_to_date_iou 0.4
   · area-matched: implied flood 7 Aug 91,540 ha, 31 Aug 45,648 ha, fall 50.1%, persistence 46.4%
 
 --- the accuracy headline ---------------------------------------------------
@@ -190,8 +188,11 @@ D. FIGURE FRESHNESS
 [PASS] accuracy_ci.png is not older than its source data
 [PASS] change_detection.png is not older than its source data
 [PASS] change_sweep.png is not older than its source data
+[PASS] compare_0807_vs_0831.png: compare_0807_vs_0831.csv changed after it was drawn, but every column it held then is unchanged
 [PASS] compare_0807_vs_0831.png is not older than its source data
+[PASS] compare_0807_vs_0831_am.png: compare_0807_vs_0831_am.csv changed after it was drawn, but every column it held then is unchanged
 [PASS] compare_0807_vs_0831_am.png is not older than its source data
+[PASS] compare_0812_vs_0807.png: compare_0812_vs_0807.csv changed after it was drawn, but every column it held then is unchanged
 [PASS] compare_0812_vs_0807.png is not older than its source data
 [PASS] flood_extent_map.pdf is not older than its source data
 [PASS] flood_extent_map.png is not older than its source data

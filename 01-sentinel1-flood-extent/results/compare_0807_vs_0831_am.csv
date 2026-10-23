@@ -7,5 +7,7 @@ overlap_drained_by_2016-08-31,49099.5
 overlap_new_by_2016-08-31,3207.3
 wedge_flood_2016-08-07,130.0
 wedge_flood_2016-08-31,0.0
+flood_2016-08-07_shared_ground,91540.3
+flood_2016-08-31_shared_ground,45648.1
 persistence_fraction,0.4636
 date_to_date_iou,0.4479

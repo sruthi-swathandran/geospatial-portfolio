@@ -9,9 +9,9 @@ a full source and method block, and an area table that carries the
 operating-point range rather than a single figure.
 
 The range in that table is NOT a confidence interval. It spans the two
-thresholds described in CHANGELOG.md C-10. A design-based area estimate with a
-standard error would need a probability sample of the mapped area that has not
-been drawn; see REVIEW.md F-02.
+thresholds described in CHANGELOG.md C-10. A design-based estimate with a
+standard error now exists for the floodplain (C-28), but the sheet still
+carries only the threshold range; see REVIEW.md F-02.
 
 Outputs:
     results/figures/flood_extent_map.png    300 dpi
@@ -72,9 +72,9 @@ def crop_scene_ha(label):
     """Flooded cropland over the whole raster, the figure the README quotes.
 
     Summing flooded_cropland_ha over district_flood_stats.csv gives a sum over
-    ADM2 polygons instead. On 12 August those polygons account for 110,081 of
-    the 119,779 ha of mapped flood, so the cropland total that goes with them
-    is 43,494 ha against the scene's 46,943. Every other row of the area table
+    ADM2 polygons instead. On 12 August those polygons account for 110,938 of
+    the 120,790 ha of mapped flood, so the cropland total that goes with them
+    is 43,564 ha against the scene's 47,028. Every other row of the area table
     is a pixel count over the whole scene, so mixing the two footprints in one
     table put a district figure beside a scene figure and invited the reader
     to divide one by the other. See CHANGELOG.md C-12.

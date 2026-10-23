@@ -1,9 +1,9 @@
 """
 Flooded cropland over the whole scene, inside district polygons and outside them.
 
-The README pairs a scene-wide flood figure (119,779 ha) with a cropland figure
-(43,494 ha) that district_stats.py computes by summing over ADM2 polygons.
-Those polygons only account for 110,081 ha of the flood, so the two numbers are
+The README pairs a scene-wide flood figure (120,790 ha) with a cropland figure
+(43,564 ha) that district_stats.py computes by summing over ADM2 polygons.
+Those polygons only account for 110,938 ha of the flood, so the two numbers are
 on different footprints. This measures the cropland figure on the same ground
 the flood figure uses, so the pair can be quoted together honestly.
 

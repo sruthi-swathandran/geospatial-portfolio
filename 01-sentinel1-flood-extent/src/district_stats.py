@@ -1,7 +1,7 @@
 """
 RS-01 / step 12 - flooded cropland by district.
 
-"119,779 hectares of flood" is a remote sensing result. "X hectares of cropland
+"120,790 hectares of flood" is a remote sensing result. "X hectares of cropland
 flooded in Barpeta district" is something a relief officer, an insurer or an
 agriculture department can act on. This is the step that turns one into the
 other, and it is the only output of this project a non-specialist will read.

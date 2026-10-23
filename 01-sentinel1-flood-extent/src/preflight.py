@@ -116,8 +116,8 @@ required = [
     (RESULTS / "validation" / "floodplain_summary.csv", "independent check"),
     (RESULTS / "validation" / "sample" / "labels.csv", "independent labels"),
     (REPO / "LICENSE", "licence"),
-    (REPO / "requirements.txt", "minimal requirements"),
-    (REPO / "requirements-lock.txt", "environment lock"),
+    (ROOT / "requirements.txt", "minimal requirements"),
+    (ROOT / "requirements-lock.txt", "environment lock"),
 ]
 for p, what in required:
     (ok if p.exists() else fail)(f"{what}: {p.relative_to(REPO)}")
@@ -338,7 +338,7 @@ else:
         ok("every digested artefact matches")
 
 # ------------------------------------------------- 8b verify report current
-head("8b. verify_report.txt written after the last README edit")
+head("8b. verify_report.txt current, and clean")
 vr = ROOT / "verify_report.txt"
 if not vr.exists():
     warn("verify_report.txt missing, run verify_all.py")
@@ -353,6 +353,17 @@ else:
     else:
         fail("verify_report.txt was not written from the current README; "
              "rerun verify_all.py")
+    # and it must have found nothing wrong: three stale figures once got as
+    # far as a clean preflight because only the README digest was read (C-37)
+    m = re.search(r"^\s*(\d+) failures?\s*$",
+                  vr.read_text(encoding="utf-8", errors="ignore"), flags=re.M)
+    if m is None:
+        warn("verify_report.txt has no failure count; rerun verify_all.py")
+    elif int(m.group(1)):
+        fail(f"verify_report.txt records {m.group(1)} failure(s); fix them "
+             "and rerun verify_all.py")
+    else:
+        ok("verify_report.txt records 0 failures")
 
 # ------------------------------------------------------------ 9 placeholders
 head("9. Placeholders")

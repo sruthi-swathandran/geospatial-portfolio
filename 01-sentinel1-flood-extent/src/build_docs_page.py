@@ -865,9 +865,16 @@ function chg(i) {
 function seen(i) { return mode === "change" ? !!chg(i) : !!at(i, mode); }
 
 /* Thousands separators every three digits. toLocaleString("en-IN") groups by
-   lakh, so 119779 came out as 1,19,779 while every other document in this
-   repository writes 119,779. */
-const grp = n => String(Math.abs(Math.round(n))).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+   lakh, so 120790 came out as 1,20,790 while every other document in this
+   repository writes 120,790.
+   Rounding is half to even, as Python's round() and format() do. Math.round
+   takes a half up, so a stored 120,790.5 showed as 120,791 here and 120,790
+   in every README and CSV (C-37). */
+const rhe = n => {
+  const f = Math.floor(n), d = n - f;
+  return d > 0.5 ? f + 1 : d < 0.5 ? f : (f % 2 === 0 ? f : f + 1);
+};
+const grp = n => String(Math.abs(rhe(n))).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 const num = v => (v == null ? "&mdash;" : (v < 0 ? "-" : "") + grp(v));
 const sgn = v => (v > 0 ? "+" : v < 0 ? "-" : "") + grp(v);
 function flag(c) {
@@ -962,7 +969,7 @@ function figs() {
     const c = HEAD.change;
     el.innerHTML =
       fig("-w", "Flood, 7 Aug", num(c.a), "ha", "map-optimal, over the shared footprint") +
-      fig("-w", "Flood, 31 Aug", num(c.b), "ha", Math.round(100 * c.b / c.a) + "% of the 7 August extent") +
+      fig("-w", "Flood, 31 Aug", num(c.b), "ha", rhe(100 * c.b / c.a) + "% of the 7 August extent") +
       fig("-d", "Drained", num(c.drained), "ha", "flood on 7 Aug, dry on 31 Aug") +
       fig("-n", "Newly flooded", num(c.new), "ha", "dry on 7 Aug, flood on 31 Aug");
     return;
@@ -1035,7 +1042,7 @@ function detail(i) {
       return;
     }
     el.innerHTML = '<h3>' + name + '</h3>' +
-      '<p class="cov">' + Math.round(c.cov) + '% of the district imaged on both dates</p>' +
+      '<p class="cov">' + rhe(c.cov) + '% of the district imaged on both dates</p>' +
       '<dl>' +
       '<dt>Flood, 7 Aug</dt><dd class="hi">' + num(c.fa) + ' ha</dd>' +
       '<dt>Flood, 31 Aug</dt><dd class="hi">' + num(c.fb) + ' ha</dd>' +
@@ -1055,7 +1062,7 @@ function detail(i) {
   }
   const c = r[F.imaged_pct_of_district];
   el.innerHTML = '<h3>' + name + '</h3>' +
-    '<p class="cov">' + Math.round(c) + '% of the district imaged on ' + HEAD[mode].label + '</p>' +
+    '<p class="cov">' + rhe(c) + '% of the district imaged on ' + HEAD[mode].label + '</p>' +
     '<dl>' +
     '<dt>Flood water</dt><dd class="hi">' + num(r[F.flood_ha]) + ' ha</dd>' +
     '<dt>Flooded cropland</dt><dd class="crop">' + num(r[F.flooded_cropland_ha]) + ' ha</dd>' +
@@ -1067,7 +1074,7 @@ function detail(i) {
 }
 function warn(c) {
   if (c >= 50) return "";
-  return '<p class="warn">The swath covered ' + Math.round(c) + '% of this ' +
+  return '<p class="warn">The swath covered ' + rhe(c) + '% of this ' +
     'district, so the hectares above are a floor rather than a measurement, ' +
     'and the share is computed only over the cropland that was imaged.</p>';
 }

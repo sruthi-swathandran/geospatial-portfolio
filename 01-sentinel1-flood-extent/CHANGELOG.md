@@ -588,6 +588,9 @@ smaller points.
 
 ### Fourth and fifth rounds, S-01 to S-05 and T-01, T-02
 
+These S numbers belong to the register. `REVIEW.md` uses S-01 to S-05 for its
+own suspicions, which are a different list. C-31 and C-37 refer to those.
+
 A fourth register found five points left after R-01 to R-05, and a fifth, at
 `2717c21`, found them still open and two slips in the comment clean-up.
 
@@ -805,6 +808,9 @@ Published figures:
 
 Every district row moves by a few hectares; the ranking does not change.
 
+The top-level README kept the September figures until C-37 brought it into
+line.
+
 ### C-32 A second top-up, where the headline's uncertainty sat (V-01, V-02)
 
 The eighth register found that land within about 1 km of flood held 624,310 ha
@@ -986,6 +992,60 @@ renumbered SB001 onward and cut again. No published map figure changes.
   fell by about one standard error of the difference between 7 and 31 August;
   on the second person's, from 34,776 to 22,551 ha, by about two. The README
   now says the answer turns on the reader.
+
+### C-37 A fix and polish list on fbc08ab
+
+A list of eight items, none of them in the analysis. Two published figures
+change on the map page only.
+
+| Quantity | Superseded | Corrected |
+|---|---:|---:|
+| 12 August flood on the map page's headline tile | 120,791 ha | 120,790 ha |
+| Nagaon flood on the map page | 17,281 ha | 17,280 ha |
+
+- **The map page rounded halves up.** `build_docs_page.py` wrote the page's
+  numbers with JavaScript's `Math.round`, which takes 120,790.5 to 120,791,
+  where Python's round half to even, used for every README and CSV, gives
+  120,790. 27 values in the page's data end in .5 on an even integer. The page
+  now rounds half to even, and `verify_all.py` fails if it ever does not.
+- **The top-level README** still gave the September figures, 119,779 to
+  170,625 ha and 46,943 to 87,127 ha of cropland. It now gives C-31's, and its
+  status cell names the one open finding. Docstrings in seven scripts that
+  quoted the September figures are updated or marked as such.
+- **`REVIEW.md` has a current status.** A dated box under the title, Status
+  and Fixed in columns on both finding tables, and a Now column on the
+  acceptance criteria. The original text is kept as written.
+- **S-03 measured.** `refine_scene.py` said the clean-up ran per tile with a
+  16 pixel halo. The halo feeds the DEM only; the clean-up runs on each tile's
+  own pixels, so a component split by a seam is judged one side at a time. On
+  12 August one pass over the whole map keeps 289 pixels more, 11.6 ha of
+  120,790. The same rebuild from the raw map reproduces the published flood
+  count to the pixel, which is the part of S-05 tested so far. The clean-up is
+  left as it is; the docstring now says what it does.
+- **F-09.** The README now names the grid as UTM zone 46N and gives its effect
+  on area: an area scale of 0.9992 to 0.9995 over the flood, so the hectares are
+  about 0.07% below the ground, 88 ha on the headline. `area_scale.py` measures
+  it and writes `results/area_scale.csv`.
+- **The 7 August figure that looked like a typo.** The recession block's 65,268
+  and 91,540 ha are flood on ground both passes saw, against 65,356 and 91,670
+  ha for the whole pass. The block now says "shared ground" and gives the 88
+  and 130 ha left out. `compare_dates.py` writes both dates' shared-ground
+  flood, so the block traces to a file.
+- **Setup.** `requirements.txt` and `requirements-lock.txt` moved from the
+  repository root into this folder, the README says to run from here and gives
+  the macOS and Linux activation line, and `verify_report.txt` names the
+  project folder instead of a local path.
+- **Checks.** `verify_all.py` now exits with 1 on any failure. The README's
+  headline sits between `<!-- headline -->` markers, so a check on the
+  top-level README can compare against it. Rerunning `compare_dates.py` then
+  showed a gap: its three figures came out byte for byte the same, so their
+  last commit stayed older than the CSVs, and `verify_all.py` called them
+  stale while `preflight.py`, which read only the report's README digest,
+  passed. The figure check now accepts rows added to a key and value table
+  when every row the figure read is unchanged, and `preflight.py` fails on any
+  failure the report records.
+- **A stray screenshot,** `Capture.JPG` from fd228fb, removed, and
+  `.gitignore` now skips files the Windows snipping tool names that way.
 
 ---
 

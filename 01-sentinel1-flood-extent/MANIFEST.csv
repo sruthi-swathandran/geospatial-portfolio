@@ -10,7 +10,7 @@ data/sen1floods11,1616,1007177915,1007.18,".tif x1610, .csv x4, .json x1, .geojs
 data/transfer,622,1305686228,1305.69,.tif x622
 data/validation,3523,359059752,359.06,".png x3513, .tif x5, .zip x2, .py x1, .npz x1, .csv x1"
 data/worldcover,49,11072261,11.07,.tif x49
-results,67,9186823,9.19,".csv x47, .json x11, .geojson x7, (none) x1, .txt x1"
+results,68,9187299,9.19,".csv x48, .json x11, .geojson x7, (none) x1, .txt x1"
 results/figures,32,14857664,14.86,".png x29, .pdf x3"
 results/fullscene,40,26005503,26.01,".png x17, .tif x16, .json x7"
 results/transfer,23,62912,0.06,.csv x23
