@@ -209,7 +209,7 @@ def score(args, key_path: Path) -> None:
     print(RULE)
 
 
-def render(sel, bands):
+def render(sel, bands, dest=None):
     """Draw each parcel twice, plain on the left and outlined on the right.
 
     The outline is a contour traced between pixels, so it sits on the pixel
@@ -263,7 +263,8 @@ def render(sel, bands):
              "to look. The measured value is withheld until you have.",
              fontsize=9.5, color="#52514e", ha="left", va="top")
 
-    dest = F.PROJECT / "figures" / f"contrast_panel_{F.COUNTRY}.png"
+    if dest is None:
+        dest = F.PROJECT / "figures" / f"contrast_panel_{F.COUNTRY}.png"
     dest.parent.mkdir(parents=True, exist_ok=True)
     fig.savefig(dest, dpi=170, facecolor="#fcfcfb")
     plt.close(fig)
