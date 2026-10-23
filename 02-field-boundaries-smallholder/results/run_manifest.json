@@ -1,7 +1,7 @@
 {
- "written_at": "2026-10-23T10:59:13+00:00",
+ "written_at": "2026-10-23T11:18:22+00:00",
  "git": {
-  "commit": "39b69a5b360600f7e920711179b806ac6f91c2ab",
+  "commit": "ef0ffaf7ee25b9f69327139bd2fd522ac9a80576",
   "uncommitted_changes": false
  },
  "interpreter": {
@@ -183,8 +183,13 @@
   },
   {
    "script": "contrast_panel.py",
-   "line": 352,
+   "line": 353,
    "value": 20261012
+  },
+  {
+   "script": "contrast_second.py",
+   "line": 422,
+   "value": 20261025
   },
   {
    "script": "edge_test.py",
@@ -288,7 +293,7 @@
   },
   "results/comparison_tables.md": {
    "kind": "text, LF",
-   "sha256": "92e0e8cf2efc5456bd893c12a73de4bde0d7e79cf28597db1b2c9f153e03a4e7"
+   "sha256": "4ba93eeea70bcccb2044b2154cae454e3c895694744e51ecf058ed67f57d0095"
   },
   "results/country_comparison.csv": {
    "kind": "csv",
@@ -431,6 +436,81 @@
     "rank_score": "14101851c5e33a72c72ac052c1badce9d81153c2d54b84db76ae6b9eaaea6e2f",
     "permutation_p": "4e254fb1cd5658947e98b89cb6bfe5023edb82d781a382ac129439100b8cb46a",
     "median_split_agree": "26bb5425a261c9c369c53f9638a752cbf93f8fb2ae46960c9e91300782921655"
+   }
+  },
+  "results/india/contrast_second/sheet_author.csv": {
+   "kind": "csv",
+   "rows": 20,
+   "columns": {
+    "no": "b76ae83c50d6104039c80d312402af3027661e07066325526ad997daf6362bbc",
+    "visible": "b14ffda4033673e611d20e77094c2b1872d2854649b2d1561e7f649cd7f55247"
+   }
+  },
+  "results/india/contrast_second/sheet_second.csv": {
+   "kind": "csv",
+   "rows": 60,
+   "columns": {
+    "no": "8dba4fa035371e3287a5928722c1dc65421047b7c10763c9003b5d894353a596",
+    "visible": "a051c5cee2a63fbd30d0377b4d172a84a3c6388ea0572205fb08665a43e3f208"
+   }
+  },
+  "results/india/contrast_second_agreement.csv": {
+   "kind": "csv",
+   "rows": 4,
+   "columns": {
+    "parcels": "e2e7321d109bd570454033ca48a4a00f352eb94f5004b7c602ed132188861e9f",
+    "n": "c0fe6da71a90ec3df7ae820b8ca83d5b8a4e4aac45f8a30ae252b5964334bb04",
+    "both_visible": "6f9365cca2619cfd52baeda0f32ccaa11620111298d58abe373b45b54233a921",
+    "both_not": "3206cebc04c54150306f0608c3c9b46439c55ce14e31c9bfaafa947446f24e6a",
+    "second_only": "fa8ab827b8eb62a3aa38490e97c653c970350c4cb1b5bd9a37ce790a08ed0310",
+    "author_only": "663f5b9f1d35c2633dab5ca48f47096639d5abdcc2d8e2e5543f81986bb7831d",
+    "agree_share": "37dc2e132fbda6303eabdab15f30da98031d5a09dcf2148bcfb1672408a3de6f",
+    "kappa": "8bc5ff4649cbee86434a9e08183ddb33ca73e1c70845bfd715a1dd80ccb95f59"
+   }
+  },
+  "results/india/contrast_second_answers.csv": {
+   "kind": "csv",
+   "rows": 60,
+   "columns": {
+    "second_no": "8dba4fa035371e3287a5928722c1dc65421047b7c10763c9003b5d894353a596",
+    "author_no": "0787cb6587b5c67dacd3c9f8f4ccbfbab4c2e2a40b6afbba2ccb424e80f32240",
+    "source": "1254d63fa4d3b97a24689cab4bb0398d7fbdee4547a7cfde6fdab037c175dbc5",
+    "source_no": "b2675489c047c0a93f54f3b24054b21d4e54799a0f5dc71a78fcb9971b17e461",
+    "chip": "05d2b1f53d20567cd813f32197d816dd96df60c1ddd41b024019d1613dd167e4",
+    "parcel_id": "ef1b850dc795468473ce540af580a8424e1626f303ebd2489b946d99c4f62d96",
+    "edge_over_interior": "6a76e9513e06a57bca42cd47e0caf0dc0f190d9c343887838d8a5f92a395c489",
+    "width_native_px": "4072b0d96e3133b23e8ca3e655840672588f0538ba3d2324bebaefc957f0412c",
+    "seed": "b470794bcab2464e3e3c5cffcdcc5b7b380a343f937d34ca8fe705331c9ee5b9",
+    "second_visible": "7c9d65ee229699269caf03c6ac7f4b655902c2e110da820b9524a43ce650d31e",
+    "author_visible": "a617b0a9be799eff0d5767fb3eb407ebf3dce2a199ccc56b0c8b92f500db40c0"
+   }
+  },
+  "results/india/contrast_second_key.csv": {
+   "kind": "csv",
+   "rows": 60,
+   "columns": {
+    "second_no": "8dba4fa035371e3287a5928722c1dc65421047b7c10763c9003b5d894353a596",
+    "author_no": "8bde9f745c5b974568a86dfd66874674f7aafd9735ec5da08791ec34ae53dc23",
+    "source": "1254d63fa4d3b97a24689cab4bb0398d7fbdee4547a7cfde6fdab037c175dbc5",
+    "source_no": "b2675489c047c0a93f54f3b24054b21d4e54799a0f5dc71a78fcb9971b17e461",
+    "chip": "05d2b1f53d20567cd813f32197d816dd96df60c1ddd41b024019d1613dd167e4",
+    "parcel_id": "ef1b850dc795468473ce540af580a8424e1626f303ebd2489b946d99c4f62d96",
+    "edge_over_interior": "6a76e9513e06a57bca42cd47e0caf0dc0f190d9c343887838d8a5f92a395c489",
+    "width_native_px": "4072b0d96e3133b23e8ca3e655840672588f0538ba3d2324bebaefc957f0412c",
+    "seed": "b470794bcab2464e3e3c5cffcdcc5b7b380a343f937d34ca8fe705331c9ee5b9"
+   }
+  },
+  "results/india/contrast_second_scores.csv": {
+   "kind": "csv",
+   "rows": 8,
+   "columns": {
+    "judge": "69a3b986f988f04ee7be73584d1ebb7fa7b4b275ec2554d1d414869931ee6f01",
+    "parcels": "3ee7887d0a125840ee74bf5636fe547c1de9d0bc62a7fc68ed9f64e6f764ffcc",
+    "n": "c620f7769ae9c16dc90838f0d68fe1dfde65a37e9b58e1acc6be9f9cdb233b2c",
+    "marked_visible": "87fb760f3846988df8fcca3911f456b5e8cf23128113cc0cbb6a66cbb6d83067",
+    "rank_score": "d775dbceee7c600a38594a8bdc89f221e21b65012870b5de7e5866cc29fc7732",
+    "permutation_p": "5d7e4cdf0b265960fb7b0d1aed8a3d3a8bdc819a0d64bd81601f33b71603ec23",
+    "reading": "b25d2698590d16d2326fd0c3baa056bc56c2dfa2afa621eaa9ce505800067a2b"
    }
   },
   "results/india/district_profile.csv": {
@@ -4970,6 +5050,22 @@
   "figures/contrast_panel_india.png": {
    "kind": "file",
    "sha256": "b1dc5aaecc03c390da805cd13ee682eea47bbdad869b844e5ad9dddf30f4dc3f"
+  },
+  "figures/contrast_second/author.png": {
+   "kind": "file",
+   "sha256": "09898d8607374b99e07c8ffff40aeabcc704251ee985e6a371cc9a1e89c66642"
+  },
+  "figures/contrast_second/second_1.png": {
+   "kind": "file",
+   "sha256": "4679372d77183a26cb0769fdceced2e410b2d5fcc3d3c37ccc499d56d164ec79"
+  },
+  "figures/contrast_second/second_2.png": {
+   "kind": "file",
+   "sha256": "a333c5ccdbae14976f90ddb1e90122bd9c2ad4ef3287a33ce95a4530c06d5839"
+  },
+  "figures/contrast_second/second_3.png": {
+   "kind": "file",
+   "sha256": "b5dee4d95ee6b3e2b913b786362729ee3d3ed1f5f95af95d013e220e3786bc86"
   },
   "figures/india/chip_sparsity.png": {
    "kind": "file",
