@@ -136,6 +136,14 @@ and SAM against them, and the README's headline now uses v3 (B-24).
     ahead. Against v1 the margins were 8.01 and 13.05. On Slovenia v3 B7 beats
     every SAM composite while drawing about a quarter of their objects, where
     v1 was level with SAM. See What this says.
+20. Weak edges are enough to explain most of the gap, in a test on Slovenia.
+    Blurring Slovenian chips until their labelled edges measure like India's
+    closes 0.585 of FTW v3 B7's gap to India on parcels 20 m and wider, and
+    0.581 of watershed's read at its unblurred object count. The rules for
+    reading it were committed before it ran. It shows these methods depend on
+    edge contrast enough to explain most of the gap. Blur also softens texture
+    inside fields, and the edge measure it is calibrated on agreed only weakly
+    with an analyst. See What this says.
 
 ---
 
@@ -719,9 +727,12 @@ artefact takes. Only parcels wide enough to survive two erosions can be
 measured, 1,467 of 1,983 in India and 4,307 of 6,823 in Slovenia, so this is
 silent about the narrowest band in each country.
 
-A 1.2x deficit in edge gradient is a contributor of measured size and cannot
-by itself explain a 6 to 29 times recall gap. Parcel shape and FTW's two
-seasonal windows were the candidates left, and both are tested below. An
+A 1.2x deficit in edge gradient looked too small to explain a 6 to 29 times
+recall gap, and this paragraph said it could not. Tested directly, it can
+explain most of it: softening Slovenia's edges to India's level closes more
+than half of the gap for FTW v3 and for watershed (B-28, and the edge test
+below). Parcel shape and FTW's two seasonal windows were the other candidates,
+and both are tested below. An
 earlier version of this paragraph said the windows were set for a European
 calendar, which FTW's own configuration contradicts; see B-22.
 
@@ -1197,6 +1208,69 @@ is a factor of about two and a half where it was eight.
 the per-chip files in `results/<country>/newer_ckpt/` and
 `results/<country>/watershed_chips_min500.csv`.*
 
+**Weak edges are enough to explain most of the gap, tested on Slovenia.**
+The edge measure above says Indian field edges are weaker than Slovenian ones.
+It does not say a model cares. `src\edge_test.py` tests that from the other
+side: if weak edges cost a model this much, softening Slovenia's edges until
+they measure like India's should cost it a large part of the gap. The design
+and the rules for reading it were committed before anything ran, in
+`b1272f2`.
+
+Slovenia's 185 labelled test chips were split at random into 60 for
+calibration and 125 for scoring. On the calibration chips a Gaussian blur of
+rising width, the same on the ground in both directions though Slovenian
+pixels are 4.14 m wide and 6.00 m tall, was applied to every band of both
+windows, and the median edge over interior measured as above. It falls
+steadily, and meets India's 1.297 at 14.5 m. That is a heavy blur, smearing an
+edge over roughly 34 m of ground. On the scoring chips the median at 14.5 m is
+1.267, within the 0.05 the rules allowed. FTW v3 B7 and watershed at h 0.05
+were then run on the scoring chips with no blur and at 14.5 m. With no blur
+both reproduce the published per-parcel results exactly, all 4,286 parcels.
+
+The reading is the share of the Slovenia to India gap that the blur closes,
+(S0 - S1) / (S0 - I), with S0 and S1 Slovenia's recall without and with the
+blur and I India's, by width band. For all parcels 20 m and wider, India's
+recall is weighted to Slovenia's mix of widths. Intervals resample the scoring
+chips 2,000 times. The rules called weak edges a credible main cause for a
+method if the share is 0.5 or more with a lower end of 0.25 or more.
+
+| method | band | Slovenia | blurred | India | share closed | reading |
+|---|---|---:|---:|---:|---:|---|
+| FTW v3 B7 | 20 to 30 m | 16.64% | 5.82% | 1.22% | 0.702 [0.593, 0.815] |  |
+| FTW v3 B7 | 30 to 50 m | 38.34% | 17.52% | 4.96% | 0.624 [0.559, 0.693] |  |
+| FTW v3 B7 | 50 m up | 69.32% | 49.66% | 31.11% | 0.514 [0.437, 0.607] |  |
+| FTW v3 B7 | 20 m up | 43.95% | 26.09% | 13.41% | 0.585 [0.523, 0.666] | credible main cause |
+| watershed | 20 to 30 m | 19.22% | 6.90% | 4.90% | 0.860 [0.718, 1.010] |  |
+| watershed | 30 to 50 m | 45.31% | 20.29% | 22.49% | 1.097 [0.984, 1.225] |  |
+| watershed | 50 m up | 69.13% | 55.90% | 41.33% | 0.476 [0.385, 0.566] |  |
+| watershed | 20 m up | 47.23% | 29.68% | 24.78% | 0.782 [0.691, 0.890] | credible main cause |
+| watershed, matched objects | 20 to 30 m | 19.22% | 10.77% | 4.90% | 0.590 [0.447, 0.723] |  |
+| watershed, matched objects | 30 to 50 m | 45.31% | 28.07% | 22.49% | 0.755 [0.654, 0.861] |  |
+| watershed, matched objects | 50 m up | 69.13% | 57.36% | 41.33% | 0.423 [0.308, 0.531] |  |
+| watershed, matched objects | 20 m up | 47.23% | 34.20% | 24.78% | 0.581 [0.498, 0.665] | credible main cause |
+
+The blur also cut the objects each method emits, FTW's from 18.2 per chip to
+11.9 and watershed's from 298.5 to 118.2, and fewer, larger objects lose recall
+on their own. FTW sets its own count, so its drop is how it responds to the
+blur. Watershed's count is a setting, so after the first reading one more part
+was added, marked as added in the script: watershed swept across h on the
+blurred chips and read at its unblurred 298.5 objects per chip, as the budget
+column reads every method. About a quarter of watershed's first share came
+from the object count. What remains, 0.581, sits beside FTW's 0.585.
+
+Two things limit what this shows. Blur lowers edge contrast and also smooths
+texture inside and across fields, so watershed at 30 to 50 m falls below
+India's own recall, which an edge effect alone would not do. And the blur is
+calibrated on the edge measure, which agreed only weakly with one analyst's
+eye. So edge contrast at India's measured level is enough to cost FTW v3 more
+than half of its gap in every width band, and watershed more than half below
+50 m. The blurred chips stand in for India's on this one measure only, and
+about two fifths of FTW v3's gap is left to something else.
+
+*Source: `results/edge_test.csv` and `results/edge_test_matched.csv`, with the
+calibration in `results/slovenia/edge_test_calibration.csv` and the per-parcel
+and per-chip rows beside it.*
+
 **Above the floor, the method is the lever.** Between three and ten native
 pixels an untrained watershed finds between five and thirteen times as many
 Indian parcels as the v1 checkpoint, and above ten pixels SAM finds three
@@ -1552,6 +1626,16 @@ where the parcel interval is 0.01 to 2.25%, and the 30 to 50 m band 0.12 to
 labelled. No other row changes, no figure quoted elsewhere moves, and the
 error only ever widened an interval.
 
+**B-28. The edge gradient was ruled out by argument, not by test.** The width
+band paragraph said a 1.2x deficit in edge gradient "cannot by itself explain a
+6 to 29 times recall gap". A ratio of gradients and a ratio of recalls are on
+different scales, and nothing tied one to the other, so the size of the first
+said little about the second. Tested by softening Slovenia's edges until they
+measure like India's (finding 20, and the edge test below), the deficit closes
+0.585 of the gap for FTW v3 B7 and 0.581 for watershed at a matched object
+count, over parcels 20 m and wider. The sentence is withdrawn and the
+paragraph now cites the test. No figure changes.
+
 ### Errata round, October 2026
 
 An audit of the repository at `4375154` on 12 October 2026 listed 25 problems
@@ -1815,6 +1899,13 @@ higher about two times in three, rank scores 0.655 and 0.650, p = 0.16 and
 read per parcel. A second analyst would strengthen the check more than a third
 panel from the same one.
 
+The edge test, finding 20, now checks the measure from the model side.
+Blurring Slovenia until its edges read like India's by this measure costs FTW
+v3 and watershed more than half of the gap, so the models respond to what the
+measure reads. Whether the measure reads what a person sees is a separate
+question, and the edge test cannot answer it, since its blur was set by the
+measure. That question stays scoped, as REVIEW F-14 records.
+
 **The measured grid is now reconciled, and it was wrong.** Not the
 measurement itself, which was right about the east to west size, but the
 assumption that one number describes a pixel. Slovenia's are 1.450 times taller
@@ -1990,6 +2081,10 @@ python src\newer_checkpoints.py --part run
 python src\newer_checkpoints.py --part report
 python src\budget_newer.py --part watershed
 python src\budget_newer.py --part report
+python src\edge_test.py --part calibrate
+python src\edge_test.py --part run
+python src\edge_test.py --part report
+python src\edge_test.py --part matched
 python src\precision.py --country india --method ftw
 python src\precision.py --country india --method ftw --min-size-m2 0
 python src\precision.py --country india --method watershed --setting 0.02
@@ -2027,6 +2122,8 @@ print and write nothing a document cites: `diagnose_download.py`,
 `explore_ftw.py`, `inspect_ftw_api.py` and `inspect_inference.py`.
 `contrast_panel.py` without `--redraw` draws a fresh blind panel and retires
 the current one, so it is not part of a rerun.
+`edge_test.py` runs its parts in the order listed, each reading the one
+before, and `matched` reuses its saved sweep unless given `--redo`.
 
 The nulls are seeded, so the comparison runs reproduce to the digit. Runtime on
 a CPU-only machine is about 27 minutes for India and 25 for Slovenia on the

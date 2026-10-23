@@ -1,0 +1,5 @@
+method,band,sigma_m,objects_target,objects_swept,clamped,slovenia_no_blur,slovenia_blurred,india,share_closed,share_lo,share_hi,reading
+"watershed, matched objects",20 to 30 m,14.5,298.5,118.2 to 484.6,False,0.1922,0.1077,0.049,0.59,0.447,0.723,
+"watershed, matched objects",30 to 50 m,14.5,298.5,118.2 to 484.6,False,0.4531,0.2807,0.2249,0.755,0.654,0.861,
+"watershed, matched objects",50 m up,14.5,298.5,118.2 to 484.6,False,0.6913,0.5736,0.4133,0.423,0.308,0.531,
+"watershed, matched objects",20 m up,14.5,298.5,118.2 to 484.6,False,0.4723,0.342,0.2478,0.581,0.498,0.665,credible main cause

@@ -65,6 +65,21 @@ enough to explain the gap, not that weak edges are what India has. A small
 one would show that edge contrast of India's level does not, on its own, stop
 the model in Slovenia.
 
+Added after the result, 23 October 2026
+---------------------------------------
+Everything above was committed before any run. The run then showed blur
+cutting watershed's objects per chip from 298.5 to 118.2 at the same h, and
+fewer, larger objects lose recall on their own, which the rest of this project
+controls by reading every method at a matched object count. So one more part,
+not in the rules above:
+
+  matched    Runs watershed on the blurred scoring chips across a sweep of h,
+             and reads its recall at the objects per chip it emitted without
+             blur, by linear interpolation along the sweep as COMPARISON.md's
+             budget column does, with the same chip resampling. If the share
+             closed stays near the first reading, object count was not what
+             drove it. FTW sets its own count, so it has no such reading.
+
 Outputs
 -------
   results/slovenia/edge_test_calibration.csv  blur width against median edge
@@ -73,12 +88,15 @@ Outputs
                                               blur
   results/slovenia/edge_test_chips.csv        objects per chip, method and blur
   results/edge_test.csv                       the reading, per method and band
+  results/slovenia/edge_test_matched_chips.csv  matched: hits per chip, band and h
+  results/edge_test_matched.csv               matched: the reading for watershed
 
 Usage
 -----
     python src\\edge_test.py --part calibrate
     python src\\edge_test.py --part run
     python src\\edge_test.py --part report
+    python src\\edge_test.py --part matched
 """
 
 from __future__ import annotations
@@ -381,15 +399,135 @@ def report(args) -> None:
     print(f"  wrote results/edge_test.csv")
 
 
+# -------------------------------------------------------------------- matched
+H_SWEEP = [0.001, 0.002, 0.005, 0.01, 0.02, 0.05]
+
+
+def matched(args) -> None:
+    """Watershed on the blurred chips, read at its unblurred object count."""
+    import pandas as pd
+    F, C, S = T.load_country("slovenia")
+    _, test = split(F, args.seed)
+    sigma = chosen_sigma(F)
+    min_px = int(round(500.0 / F.grid_pixel_area_m2()))
+    px_m = F.grid_pixel_m()
+    out = F.RESULTS / "edge_test_matched_chips.csv"
+    if not out.exists() or args.redo:
+        print(RULE)
+        print(f"WATERSHED AT {sigma} m BLUR, {len(H_SWEEP)} settings, {len(test)} chips")
+        print(RULE)
+        rows, tic = [], time.time()
+        for i, chip in enumerate(test, 1):
+            _, _, _, full = F.load_labels(chip)
+            x_m, y_m = F.chip_pixel_xy_m(chip)
+            stack, grad = gradient_of(C, blur(raw_windows(F, chip), sigma, x_m, y_m))
+            for h in H_SWEEP:
+                seg = C.drop_small(C.segment(stack, grad, "watershed", h), min_px)
+                pr = S.rows_for_chip(chip, full, seg, F.COUNTRY, px_m, px_xy=(x_m, y_m))
+                row = dict(h=h, chip=chip, objects=C.object_count(seg))
+                for band, lo, hi in BANDS[:3]:
+                    sel = [r for r in pr if lo <= r["width_native_px"] * 10.0 < hi]
+                    row[f"{band} parcels"] = len(sel)
+                    row[f"{band} hits"] = sum(r["found"] for r in sel)
+                rows.append(row)
+            if i % 10 == 0 or i == len(test):
+                rate = i / (time.time() - tic)
+                print(f"    {i:>3} / {len(test)}   {(len(test) - i) / rate / 60:.1f} min left")
+        write(out, rows)
+
+    m = pd.read_csv(out)
+    par = pd.read_csv(F.RESULTS / "edge_test_parcels.csv")
+    obj = pd.read_csv(F.RESULTS / "edge_test_chips.csv")
+    base = F.PROJECT / "results"
+    ws0 = par[(par["method"] == "watershed") & (par["sigma_m"] == 0)]
+    target = obj[(obj["method"] == "watershed") & (obj["sigma_m"] == 0)].set_index("chip")["objects"]
+    chips = list(target.index)
+    ia = pd.read_csv(base / "india" / "parcel_width_seg_watershed_min500.csv")
+    ia["width_m"] = ia["width_native_px"] * 10.0
+
+    # per chip arrays: unblurred hits and parcels per band; blurred hits per h
+    hs = sorted(m["h"].unique())
+    def band_arrays(band):
+        lo, hi = {b: (l, h_) for b, l, h_ in BANDS}[band]
+        sel = ws0[(ws0["width_m"] >= lo) & (ws0["width_m"] < hi)]
+        g = sel.groupby("chip")["found"].agg(["sum", "count"]).reindex(chips, fill_value=0)
+        return g["sum"].to_numpy(float), g["count"].to_numpy(float)
+    objs = np.array([[m[(m["h"] == h) & (m["chip"] == c)]["objects"].iloc[0] for c in chips] for h in hs])
+    def blurred_hits(bands):
+        return np.array([[sum(m[(m["h"] == h) & (m["chip"] == c)][f"{b} hits"].iloc[0] for b in bands)
+                          for c in chips] for h in hs])
+    tgt = target.to_numpy(float)
+
+    def at_target(hits_h, idx):
+        """Recall along the sweep, read at the unblurred object count."""
+        o = objs[:, idx].mean(axis=1)
+        order = np.argsort(o)
+        return np.interp(tgt[idx].mean(), o[order], hits_h[order]), o
+
+    rng = np.random.default_rng(args.seed)
+    k = len(chips)
+    boots = rng.integers(0, k, size=(args.boots, k))
+    rows = []
+    for band, lo, hi in BANDS:
+        bands = [b for b, l, h_ in BANDS[:3] if (band == "20 m up" or b == band)]
+        h0 = sum(band_arrays(b)[0] for b in bands)
+        n0 = sum(band_arrays(b)[1] for b in bands)
+        hb = blurred_hits(bands)
+        if band == "20 m up":
+            parts = [(band_arrays(b)[1].sum(),
+                      ia[(ia["width_m"] >= l) & (ia["width_m"] < h_)]["found"].mean())
+                     for b, l, h_ in BANDS[:3]]
+            iv = sum(n * r for n, r in parts) / sum(n for n, _ in parts)
+        else:
+            iv = ia[(ia["width_m"] >= lo) & (ia["width_m"] < hi)]["found"].mean()
+
+        def share(idx):
+            s0 = h0[idx].sum() / n0[idx].sum()
+            rec_h = hb[:, idx].sum(axis=1) / n0[idx].sum()
+            s1, o = at_target(rec_h, idx)
+            return s0, s1, (s0 - s1) / (s0 - iv) if s0 > iv else np.nan, o
+        all_idx = np.arange(k)
+        s0, s1, sh, o = share(all_idx)
+        bs = np.array([share(b)[2] for b in boots])
+        lo_, hi_ = np.nanpercentile(bs, (2.5, 97.5))
+        clamped = not (o.min() <= tgt.mean() <= o.max())
+        reading = ""
+        if band == "20 m up":
+            reading = ("credible main cause" if sh >= 0.5 and lo_ >= 0.25
+                       else "minor cause at most" if hi_ < 0.25 else "partial")
+        rows.append(dict(method="watershed, matched objects", band=band, sigma_m=sigma,
+                         objects_target=round(tgt.mean(), 1),
+                         objects_swept=f"{o.min():.1f} to {o.max():.1f}",
+                         clamped=clamped, slovenia_no_blur=round(s0, 4),
+                         slovenia_blurred=round(float(s1), 4), india=round(iv, 4),
+                         share_closed=round(float(sh), 3), share_lo=round(lo_, 3),
+                         share_hi=round(hi_, 3), reading=reading))
+    write(base / "edge_test_matched.csv", rows)
+    print(f"\n  watershed at {sigma} m blur, read at {tgt.mean():.1f} objects per chip, "
+          f"the unblurred count; the sweep spans {rows[0]['objects_swept']}")
+    print(f"  {'band':<11} {'Slovenia':>9} {'blurred':>8} {'India':>7} {'share closed':>24}")
+    for r in rows:
+        print(f"  {r['band']:<11} {r['slovenia_no_blur'] * 100:8.2f}% "
+              f"{r['slovenia_blurred'] * 100:7.2f}% {r['india'] * 100:6.2f}% "
+              f"{r['share_closed']:>8} [{r['share_lo']}, {r['share_hi']}]"
+              f"{'  clamped' if r['clamped'] else ''}  {r['reading']}")
+    print("\n  Added after the first reading; see the docstring. Read beside")
+    print("  results/edge_test.csv, not in place of it.")
+    print("  wrote results/edge_test_matched.csv")
+
+
 def main() -> None:
     ap = argparse.ArgumentParser()
-    ap.add_argument("--part", required=True, choices=["calibrate", "run", "report"])
+    ap.add_argument("--part", required=True,
+                    choices=["calibrate", "run", "report", "matched"])
     ap.add_argument("--seed", type=int, default=20261024)
     ap.add_argument("--boots", type=int, default=2000)
     ap.add_argument("--limit", type=int, default=0, help="run only: first n chips")
     ap.add_argument("--threads", type=int, default=0)
+    ap.add_argument("--redo", action="store_true", help="matched only: rerun the sweep")
     args = ap.parse_args()
-    {"calibrate": calibrate, "run": run, "report": report}[args.part](args)
+    {"calibrate": calibrate, "run": run, "report": report,
+     "matched": matched}[args.part](args)
 
 
 if __name__ == "__main__":

@@ -22,8 +22,10 @@ too coarse for small fields, or because of the model?
 given ground width is found 2.3 to 16.5 times as often in Slovenia as in India
 by FTW's best checkpoint, and more often in Slovenia by every other method
 tested. Parcel width, shape, label placement and season each explain little.
-What does explain it is not yet shown. The lead suspect, a weaker edge between
-Indian fields in the imagery, agreed only weakly with one analyst's eye.
+Weaker edges between Indian fields explain the most so far. Softening
+Slovenia's images until their edges measure like India's closes about 58% of
+the gap for FTW v3 and for watershed. The edge measure agreed only weakly with
+one analyst's eye, so this is the best lead and still short of proof.
 
 **Three numbers.** FTW v3 with an EfficientNet-B7 encoder finds 12.9% of
 labelled Indian parcels and 33.1% of Slovenian ones. At the object count v3
@@ -128,11 +130,28 @@ from better placed boundaries. India rises from 0.12 to 0.39 of Slovenia with
 the same checkpoint. The gain is on parcels 30 m and wider; below that every
 checkpoint stays near 1%.
 
-**What is still open** is why even v3 reads Indian field edges so much worse
-than Slovenian ones. Width, shape, label placement and season each explain
-little. The labelled Indian boundaries carry a weaker image gradient than
-Slovenia's, 1.297 times their interior against 1.588, but a blind check
-against one analyst agreed with that measure only weakly. Watershed finds
+**9. Weak edges are enough to cost most of the gap.** The labelled Indian
+boundaries carry a weaker image gradient than Slovenia's, 1.297 times their
+interior against 1.588. To test whether that matters to a model, Slovenia's
+test chips were blurred until their edges measured like India's, and the
+methods rerun. The design and the rules for reading it were committed before
+anything ran. For parcels 20 m and wider:
+
+| method | Slovenia | blurred | India | share of gap closed |
+|---|---:|---:|---:|---:|
+| FTW v3 B7 | 43.95% | 26.09% | 13.41% | 0.585 [0.523, 0.666] |
+| watershed, same object count | 47.23% | 34.20% | 24.78% | 0.581 [0.498, 0.665] |
+
+The blur closes more than half of the gap in every width band for FTW v3.
+Blur also smooths texture inside fields, so the test shows that edge contrast
+at India's level is enough to cost most of the gap. It leaves about two fifths
+of v3's gap to something else.
+
+**What is still open** is the rest of the gap, and whether the edge measure
+tracks what a person sees. Width, shape, label placement and season each
+explain little, and weak edges explain most. The edge test's blur was set by
+the measure, and a blind check against one analyst agreed with that measure
+only weakly; a second analyst is the next check. Watershed finds
 about as many boundaries in the December to February image as in kharif,
 while v1 given that image does no better, so the edges are in the imagery.
 No checkpoint has been fine-tuned on Indian chips here. FTW reports fine-tuning
@@ -165,7 +184,7 @@ is applied to every method. `COMPARISON.md` explains each control.
 - **Some findings rest on v1 alone.** Findings 6 and 7, the coverage
   figures in finding 5, and most tables in `COMPARISON.md` were measured with
   v1 before v3 was tested (B-24), and were not repeated. Findings 1 to 3, the
-  rest of 5, finding 8, both figures and the interactive map use v3. The later
+  rest of 5, findings 8 and 9, both figures and the interactive map use v3. The later
   checkpoints are in findings 18 and 19 of `COMPARISON.md`.
 - **FTW's FULL checkpoints carry noncommercial terms** from some of their
   training labels. v3.1 is the CC-BY version, and it probably did not see
@@ -177,7 +196,8 @@ is applied to every method. `COMPARISON.md` explains each control.
 - **SAM's precision is measured on a subset**, the first 100 test chips, 99 of
   them labelled, because a full pass takes about 26 hours.
 - **The contrast measure rests on one analyst's eye**, over two blind panels of
-  20 parcels, and agrees with it weakly both times.
+  20 parcels, and agrees with it weakly both times. The edge test in finding 9
+  is calibrated on the same measure, and it was run on Slovenia only.
 - **Settings were chosen on the data they are reported from.** Measured on 40
   held-out splits, that is worth at most 0.0066 of recall.
 - **Intervals resample whole chips**, since parcels in one chip share a scene.
@@ -194,7 +214,7 @@ is applied to every method. `COMPARISON.md` explains each control.
 assistant, Claude. It is not independent peer review. It lists 21 findings,
 and every one is now closed or scoped with the reason stated.
 
-`COMPARISON.md` carries 27 corrections, B-01 to B-27, each with the published
+`COMPARISON.md` carries 28 corrections, B-01 to B-28, each with the published
 value, the corrected one and why the first was wrong, and an errata round from
 October 2026 that carried them into older files and sentences they had missed.
 The largest: FTW ships Slovenia on pixels 4.14 m across and 6.00 m tall, and

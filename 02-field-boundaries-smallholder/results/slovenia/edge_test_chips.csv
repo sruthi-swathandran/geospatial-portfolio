@@ -1,0 +1,501 @@
+sigma_m,method,chip,objects
+0.0,FTW v3 B7,g13_00050_9.tif,28
+0.0,watershed,g13_00050_9.tif,269
+14.5,FTW v3 B7,g13_00050_9.tif,22
+14.5,watershed,g13_00050_9.tif,121
+0.0,FTW v3 B7,g13_00002_18.tif,0
+0.0,watershed,g13_00002_18.tif,360
+14.5,FTW v3 B7,g13_00002_18.tif,0
+14.5,watershed,g13_00002_18.tif,152
+0.0,FTW v3 B7,g13_00054_11.tif,0
+0.0,watershed,g13_00054_11.tif,361
+14.5,FTW v3 B7,g13_00054_11.tif,0
+14.5,watershed,g13_00054_11.tif,154
+0.0,FTW v3 B7,g13_00003_13.tif,0
+0.0,watershed,g13_00003_13.tif,367
+14.5,FTW v3 B7,g13_00003_13.tif,0
+14.5,watershed,g13_00003_13.tif,133
+0.0,FTW v3 B7,g13_00026_18.tif,0
+0.0,watershed,g13_00026_18.tif,254
+14.5,FTW v3 B7,g13_00026_18.tif,0
+14.5,watershed,g13_00026_18.tif,64
+0.0,FTW v3 B7,g6_00017_4.tif,12
+0.0,watershed,g6_00017_4.tif,284
+14.5,FTW v3 B7,g6_00017_4.tif,7
+14.5,watershed,g6_00017_4.tif,110
+0.0,FTW v3 B7,g6_00030_0.tif,51
+0.0,watershed,g6_00030_0.tif,302
+14.5,FTW v3 B7,g6_00030_0.tif,31
+14.5,watershed,g6_00030_0.tif,124
+0.0,FTW v3 B7,g6_00047_17.tif,0
+0.0,watershed,g6_00047_17.tif,302
+14.5,FTW v3 B7,g6_00047_17.tif,0
+14.5,watershed,g6_00047_17.tif,104
+0.0,FTW v3 B7,g13_00050_7.tif,34
+0.0,watershed,g13_00050_7.tif,312
+14.5,FTW v3 B7,g13_00050_7.tif,18
+14.5,watershed,g13_00050_7.tif,152
+0.0,FTW v3 B7,g6_00038_11.tif,0
+0.0,watershed,g6_00038_11.tif,367
+14.5,FTW v3 B7,g6_00038_11.tif,0
+14.5,watershed,g6_00038_11.tif,119
+0.0,FTW v3 B7,g6_00045_10.tif,26
+0.0,watershed,g6_00045_10.tif,312
+14.5,FTW v3 B7,g6_00045_10.tif,22
+14.5,watershed,g6_00045_10.tif,126
+0.0,FTW v3 B7,g6_00053_14.tif,12
+0.0,watershed,g6_00053_14.tif,317
+14.5,FTW v3 B7,g6_00053_14.tif,3
+14.5,watershed,g6_00053_14.tif,94
+0.0,FTW v3 B7,g6_00003_16.tif,26
+0.0,watershed,g6_00003_16.tif,338
+14.5,FTW v3 B7,g6_00003_16.tif,16
+14.5,watershed,g6_00003_16.tif,150
+0.0,FTW v3 B7,g13_00034_3.tif,62
+0.0,watershed,g13_00034_3.tif,235
+14.5,FTW v3 B7,g13_00034_3.tif,42
+14.5,watershed,g13_00034_3.tif,107
+0.0,FTW v3 B7,g13_00023_3.tif,37
+0.0,watershed,g13_00023_3.tif,339
+14.5,FTW v3 B7,g13_00023_3.tif,23
+14.5,watershed,g13_00023_3.tif,149
+0.0,FTW v3 B7,g13_00003_18.tif,15
+0.0,watershed,g13_00003_18.tif,304
+14.5,FTW v3 B7,g13_00003_18.tif,11
+14.5,watershed,g13_00003_18.tif,129
+0.0,FTW v3 B7,g13_00049_7.tif,51
+0.0,watershed,g13_00049_7.tif,207
+14.5,FTW v3 B7,g13_00049_7.tif,41
+14.5,watershed,g13_00049_7.tif,85
+0.0,FTW v3 B7,g6_00044_17.tif,0
+0.0,watershed,g6_00044_17.tif,264
+14.5,FTW v3 B7,g6_00044_17.tif,0
+14.5,watershed,g6_00044_17.tif,81
+0.0,FTW v3 B7,g6_00009_5.tif,2
+0.0,watershed,g6_00009_5.tif,366
+14.5,FTW v3 B7,g6_00009_5.tif,0
+14.5,watershed,g6_00009_5.tif,136
+0.0,FTW v3 B7,g13_00035_15.tif,94
+0.0,watershed,g13_00035_15.tif,225
+14.5,FTW v3 B7,g13_00035_15.tif,74
+14.5,watershed,g13_00035_15.tif,97
+0.0,FTW v3 B7,g6_00050_13.tif,4
+0.0,watershed,g6_00050_13.tif,329
+14.5,FTW v3 B7,g6_00050_13.tif,0
+14.5,watershed,g6_00050_13.tif,136
+0.0,FTW v3 B7,g6_00026_18.tif,73
+0.0,watershed,g6_00026_18.tif,289
+14.5,FTW v3 B7,g6_00026_18.tif,48
+14.5,watershed,g6_00026_18.tif,128
+0.0,FTW v3 B7,g6_00032_10.tif,0
+0.0,watershed,g6_00032_10.tif,330
+14.5,FTW v3 B7,g6_00032_10.tif,0
+14.5,watershed,g6_00032_10.tif,108
+0.0,FTW v3 B7,g13_00029_10.tif,0
+0.0,watershed,g13_00029_10.tif,225
+14.5,FTW v3 B7,g13_00029_10.tif,0
+14.5,watershed,g13_00029_10.tif,72
+0.0,FTW v3 B7,g13_00016_0.tif,0
+0.0,watershed,g13_00016_0.tif,303
+14.5,FTW v3 B7,g13_00016_0.tif,0
+14.5,watershed,g13_00016_0.tif,107
+0.0,FTW v3 B7,g6_00027_1.tif,35
+0.0,watershed,g6_00027_1.tif,311
+14.5,FTW v3 B7,g6_00027_1.tif,22
+14.5,watershed,g6_00027_1.tif,122
+0.0,FTW v3 B7,g13_00052_1.tif,1
+0.0,watershed,g13_00052_1.tif,364
+14.5,FTW v3 B7,g13_00052_1.tif,1
+14.5,watershed,g13_00052_1.tif,145
+0.0,FTW v3 B7,g6_00006_17.tif,66
+0.0,watershed,g6_00006_17.tif,227
+14.5,FTW v3 B7,g6_00006_17.tif,41
+14.5,watershed,g6_00006_17.tif,97
+0.0,FTW v3 B7,g6_00044_16.tif,0
+0.0,watershed,g6_00044_16.tif,269
+14.5,FTW v3 B7,g6_00044_16.tif,0
+14.5,watershed,g6_00044_16.tif,97
+0.0,FTW v3 B7,g6_00039_15.tif,3
+0.0,watershed,g6_00039_15.tif,347
+14.5,FTW v3 B7,g6_00039_15.tif,3
+14.5,watershed,g6_00039_15.tif,132
+0.0,FTW v3 B7,g13_00043_4.tif,32
+0.0,watershed,g13_00043_4.tif,191
+14.5,FTW v3 B7,g13_00043_4.tif,22
+14.5,watershed,g13_00043_4.tif,82
+0.0,FTW v3 B7,g13_00054_12.tif,0
+0.0,watershed,g13_00054_12.tif,406
+14.5,FTW v3 B7,g13_00054_12.tif,0
+14.5,watershed,g13_00054_12.tif,164
+0.0,FTW v3 B7,g13_00006_13.tif,29
+0.0,watershed,g13_00006_13.tif,318
+14.5,FTW v3 B7,g13_00006_13.tif,18
+14.5,watershed,g13_00006_13.tif,145
+0.0,FTW v3 B7,g6_00048_10.tif,0
+0.0,watershed,g6_00048_10.tif,402
+14.5,FTW v3 B7,g6_00048_10.tif,0
+14.5,watershed,g6_00048_10.tif,150
+0.0,FTW v3 B7,g6_00045_16.tif,0
+0.0,watershed,g6_00045_16.tif,311
+14.5,FTW v3 B7,g6_00045_16.tif,0
+14.5,watershed,g6_00045_16.tif,101
+0.0,FTW v3 B7,g13_00040_9.tif,18
+0.0,watershed,g13_00040_9.tif,259
+14.5,FTW v3 B7,g13_00040_9.tif,11
+14.5,watershed,g13_00040_9.tif,124
+0.0,FTW v3 B7,g6_00006_15.tif,24
+0.0,watershed,g6_00006_15.tif,425
+14.5,FTW v3 B7,g6_00006_15.tif,16
+14.5,watershed,g6_00006_15.tif,192
+0.0,FTW v3 B7,g13_00037_12.tif,3
+0.0,watershed,g13_00037_12.tif,224
+14.5,FTW v3 B7,g13_00037_12.tif,2
+14.5,watershed,g13_00037_12.tif,72
+0.0,FTW v3 B7,g6_00042_9.tif,23
+0.0,watershed,g6_00042_9.tif,284
+14.5,FTW v3 B7,g6_00042_9.tif,9
+14.5,watershed,g6_00042_9.tif,99
+0.0,FTW v3 B7,g13_00053_0.tif,2
+0.0,watershed,g13_00053_0.tif,254
+14.5,FTW v3 B7,g13_00053_0.tif,0
+14.5,watershed,g13_00053_0.tif,102
+0.0,FTW v3 B7,g13_00045_16.tif,37
+0.0,watershed,g13_00045_16.tif,244
+14.5,FTW v3 B7,g13_00045_16.tif,27
+14.5,watershed,g13_00045_16.tif,105
+0.0,FTW v3 B7,g13_00002_17.tif,0
+0.0,watershed,g13_00002_17.tif,249
+14.5,FTW v3 B7,g13_00002_17.tif,0
+14.5,watershed,g13_00002_17.tif,92
+0.0,FTW v3 B7,g13_00033_2.tif,110
+0.0,watershed,g13_00033_2.tif,188
+14.5,FTW v3 B7,g13_00033_2.tif,73
+14.5,watershed,g13_00033_2.tif,92
+0.0,FTW v3 B7,g6_00042_10.tif,50
+0.0,watershed,g6_00042_10.tif,312
+14.5,FTW v3 B7,g6_00042_10.tif,23
+14.5,watershed,g6_00042_10.tif,136
+0.0,FTW v3 B7,g6_00056_16.tif,2
+0.0,watershed,g6_00056_16.tif,348
+14.5,FTW v3 B7,g6_00056_16.tif,0
+14.5,watershed,g6_00056_16.tif,103
+0.0,FTW v3 B7,g6_00060_17.tif,0
+0.0,watershed,g6_00060_17.tif,250
+14.5,FTW v3 B7,g6_00060_17.tif,0
+14.5,watershed,g6_00060_17.tif,85
+0.0,FTW v3 B7,g6_00009_17.tif,51
+0.0,watershed,g6_00009_17.tif,346
+14.5,FTW v3 B7,g6_00009_17.tif,29
+14.5,watershed,g6_00009_17.tif,155
+0.0,FTW v3 B7,g6_00006_16.tif,37
+0.0,watershed,g6_00006_16.tif,278
+14.5,FTW v3 B7,g6_00006_16.tif,25
+14.5,watershed,g6_00006_16.tif,138
+0.0,FTW v3 B7,g13_00050_8.tif,6
+0.0,watershed,g13_00050_8.tif,391
+14.5,FTW v3 B7,g13_00050_8.tif,0
+14.5,watershed,g13_00050_8.tif,165
+0.0,FTW v3 B7,g6_00009_18.tif,70
+0.0,watershed,g6_00009_18.tif,260
+14.5,FTW v3 B7,g6_00009_18.tif,48
+14.5,watershed,g6_00009_18.tif,108
+0.0,FTW v3 B7,g6_00037_7.tif,0
+0.0,watershed,g6_00037_7.tif,374
+14.5,FTW v3 B7,g6_00037_7.tif,0
+14.5,watershed,g6_00037_7.tif,122
+0.0,FTW v3 B7,g13_00016_1.tif,0
+0.0,watershed,g13_00016_1.tif,288
+14.5,FTW v3 B7,g13_00016_1.tif,0
+14.5,watershed,g13_00016_1.tif,84
+0.0,FTW v3 B7,g13_00052_0.tif,11
+0.0,watershed,g13_00052_0.tif,285
+14.5,FTW v3 B7,g13_00052_0.tif,10
+14.5,watershed,g13_00052_0.tif,104
+0.0,FTW v3 B7,g13_00049_6.tif,37
+0.0,watershed,g13_00049_6.tif,232
+14.5,FTW v3 B7,g13_00049_6.tif,26
+14.5,watershed,g13_00049_6.tif,91
+0.0,FTW v3 B7,g6_00030_3.tif,8
+0.0,watershed,g6_00030_3.tif,285
+14.5,FTW v3 B7,g6_00030_3.tif,6
+14.5,watershed,g6_00030_3.tif,89
+0.0,FTW v3 B7,g6_00017_5.tif,5
+0.0,watershed,g6_00017_5.tif,231
+14.5,FTW v3 B7,g6_00017_5.tif,4
+14.5,watershed,g6_00017_5.tif,72
+0.0,FTW v3 B7,g6_00064_1.tif,18
+0.0,watershed,g6_00064_1.tif,259
+14.5,FTW v3 B7,g6_00064_1.tif,6
+14.5,watershed,g6_00064_1.tif,86
+0.0,FTW v3 B7,g13_00020_11.tif,47
+0.0,watershed,g13_00020_11.tif,316
+14.5,FTW v3 B7,g13_00020_11.tif,36
+14.5,watershed,g13_00020_11.tif,141
+0.0,FTW v3 B7,g13_00035_13.tif,65
+0.0,watershed,g13_00035_13.tif,180
+14.5,FTW v3 B7,g13_00035_13.tif,56
+14.5,watershed,g13_00035_13.tif,84
+0.0,FTW v3 B7,g6_00027_0.tif,27
+0.0,watershed,g6_00027_0.tif,359
+14.5,FTW v3 B7,g6_00027_0.tif,16
+14.5,watershed,g6_00027_0.tif,184
+0.0,FTW v3 B7,g6_00035_12.tif,12
+0.0,watershed,g6_00035_12.tif,264
+14.5,FTW v3 B7,g6_00035_12.tif,3
+14.5,watershed,g6_00035_12.tif,92
+0.0,FTW v3 B7,g6_00043_5.tif,0
+0.0,watershed,g6_00043_5.tif,364
+14.5,FTW v3 B7,g6_00043_5.tif,0
+14.5,watershed,g6_00043_5.tif,115
+0.0,FTW v3 B7,g13_00047_16.tif,18
+0.0,watershed,g13_00047_16.tif,306
+14.5,FTW v3 B7,g13_00047_16.tif,9
+14.5,watershed,g13_00047_16.tif,157
+0.0,FTW v3 B7,g6_00024_0.tif,16
+0.0,watershed,g6_00024_0.tif,354
+14.5,FTW v3 B7,g6_00024_0.tif,11
+14.5,watershed,g6_00024_0.tif,137
+0.0,FTW v3 B7,g13_00036_15.tif,61
+0.0,watershed,g13_00036_15.tif,262
+14.5,FTW v3 B7,g13_00036_15.tif,43
+14.5,watershed,g13_00036_15.tif,120
+0.0,FTW v3 B7,g6_00006_3.tif,3
+0.0,watershed,g6_00006_3.tif,335
+14.5,FTW v3 B7,g6_00006_3.tif,1
+14.5,watershed,g6_00006_3.tif,148
+0.0,FTW v3 B7,g13_00035_0.tif,1
+0.0,watershed,g13_00035_0.tif,294
+14.5,FTW v3 B7,g13_00035_0.tif,0
+14.5,watershed,g13_00035_0.tif,92
+0.0,FTW v3 B7,g13_00002_16.tif,0
+0.0,watershed,g13_00002_16.tif,194
+14.5,FTW v3 B7,g13_00002_16.tif,0
+14.5,watershed,g13_00002_16.tif,66
+0.0,FTW v3 B7,g13_00047_14.tif,29
+0.0,watershed,g13_00047_14.tif,337
+14.5,FTW v3 B7,g13_00047_14.tif,20
+14.5,watershed,g13_00047_14.tif,181
+0.0,FTW v3 B7,g6_00009_6.tif,1
+0.0,watershed,g6_00009_6.tif,419
+14.5,FTW v3 B7,g6_00009_6.tif,0
+14.5,watershed,g6_00009_6.tif,170
+0.0,FTW v3 B7,g6_00014_5.tif,9
+0.0,watershed,g6_00014_5.tif,351
+14.5,FTW v3 B7,g6_00014_5.tif,2
+14.5,watershed,g6_00014_5.tif,127
+0.0,FTW v3 B7,g6_00053_15.tif,4
+0.0,watershed,g6_00053_15.tif,376
+14.5,FTW v3 B7,g6_00053_15.tif,2
+14.5,watershed,g6_00053_15.tif,162
+0.0,FTW v3 B7,g13_00036_17.tif,0
+0.0,watershed,g13_00036_17.tif,209
+14.5,FTW v3 B7,g13_00036_17.tif,0
+14.5,watershed,g13_00036_17.tif,75
+0.0,FTW v3 B7,g13_00054_13.tif,1
+0.0,watershed,g13_00054_13.tif,367
+14.5,FTW v3 B7,g13_00054_13.tif,0
+14.5,watershed,g13_00054_13.tif,189
+0.0,FTW v3 B7,g6_00048_0.tif,0
+0.0,watershed,g6_00048_0.tif,354
+14.5,FTW v3 B7,g6_00048_0.tif,0
+14.5,watershed,g6_00048_0.tif,141
+0.0,FTW v3 B7,g6_00003_3.tif,1
+0.0,watershed,g6_00003_3.tif,331
+14.5,FTW v3 B7,g6_00003_3.tif,0
+14.5,watershed,g6_00003_3.tif,123
+0.0,FTW v3 B7,g13_00045_14.tif,30
+0.0,watershed,g13_00045_14.tif,148
+14.5,FTW v3 B7,g13_00045_14.tif,28
+14.5,watershed,g13_00045_14.tif,59
+0.0,FTW v3 B7,g13_00034_5.tif,0
+0.0,watershed,g13_00034_5.tif,265
+14.5,FTW v3 B7,g13_00034_5.tif,0
+14.5,watershed,g13_00034_5.tif,88
+0.0,FTW v3 B7,g13_00003_14.tif,0
+0.0,watershed,g13_00003_14.tif,250
+14.5,FTW v3 B7,g13_00003_14.tif,0
+14.5,watershed,g13_00003_14.tif,94
+0.0,FTW v3 B7,g6_00003_4.tif,0
+0.0,watershed,g6_00003_4.tif,376
+14.5,FTW v3 B7,g6_00003_4.tif,0
+14.5,watershed,g6_00003_4.tif,162
+0.0,FTW v3 B7,g6_00003_2.tif,0
+0.0,watershed,g6_00003_2.tif,347
+14.5,FTW v3 B7,g6_00003_2.tif,0
+14.5,watershed,g6_00003_2.tif,144
+0.0,FTW v3 B7,g13_00047_15.tif,13
+0.0,watershed,g13_00047_15.tif,295
+14.5,FTW v3 B7,g13_00047_15.tif,6
+14.5,watershed,g13_00047_15.tif,154
+0.0,FTW v3 B7,g6_00034_7.tif,2
+0.0,watershed,g6_00034_7.tif,337
+14.5,FTW v3 B7,g6_00034_7.tif,0
+14.5,watershed,g6_00034_7.tif,136
+0.0,FTW v3 B7,g6_00030_2.tif,12
+0.0,watershed,g6_00030_2.tif,296
+14.5,FTW v3 B7,g6_00030_2.tif,10
+14.5,watershed,g6_00030_2.tif,114
+0.0,FTW v3 B7,g13_00006_6.tif,0
+0.0,watershed,g13_00006_6.tif,374
+14.5,FTW v3 B7,g13_00006_6.tif,0
+14.5,watershed,g13_00006_6.tif,146
+0.0,FTW v3 B7,g6_00009_4.tif,1
+0.0,watershed,g6_00009_4.tif,335
+14.5,FTW v3 B7,g6_00009_4.tif,0
+14.5,watershed,g6_00009_4.tif,117
+0.0,FTW v3 B7,g6_00026_16.tif,107
+0.0,watershed,g6_00026_16.tif,289
+14.5,FTW v3 B7,g6_00026_16.tif,84
+14.5,watershed,g6_00026_16.tif,151
+0.0,FTW v3 B7,g6_00029_18.tif,63
+0.0,watershed,g6_00029_18.tif,308
+14.5,FTW v3 B7,g6_00029_18.tif,37
+14.5,watershed,g6_00029_18.tif,134
+0.0,FTW v3 B7,g6_00044_18.tif,0
+0.0,watershed,g6_00044_18.tif,345
+14.5,FTW v3 B7,g6_00044_18.tif,0
+14.5,watershed,g6_00044_18.tif,126
+0.0,FTW v3 B7,g13_00003_12.tif,0
+0.0,watershed,g13_00003_12.tif,292
+14.5,FTW v3 B7,g13_00003_12.tif,0
+14.5,watershed,g13_00003_12.tif,101
+0.0,FTW v3 B7,g6_00046_7.tif,2
+0.0,watershed,g6_00046_7.tif,353
+14.5,FTW v3 B7,g6_00046_7.tif,1
+14.5,watershed,g6_00046_7.tif,120
+0.0,FTW v3 B7,g6_00056_14.tif,0
+0.0,watershed,g6_00056_14.tif,336
+14.5,FTW v3 B7,g6_00056_14.tif,0
+14.5,watershed,g6_00056_14.tif,96
+0.0,FTW v3 B7,g13_00034_7.tif,0
+0.0,watershed,g13_00034_7.tif,207
+14.5,FTW v3 B7,g13_00034_7.tif,0
+14.5,watershed,g13_00034_7.tif,81
+0.0,FTW v3 B7,g6_00020_6.tif,6
+0.0,watershed,g6_00020_6.tif,293
+14.5,FTW v3 B7,g6_00020_6.tif,1
+14.5,watershed,g6_00020_6.tif,99
+0.0,FTW v3 B7,g6_00032_11.tif,16
+0.0,watershed,g6_00032_11.tif,358
+14.5,FTW v3 B7,g6_00032_11.tif,2
+14.5,watershed,g6_00032_11.tif,138
+0.0,FTW v3 B7,g13_00023_5.tif,54
+0.0,watershed,g13_00023_5.tif,237
+14.5,FTW v3 B7,g13_00023_5.tif,42
+14.5,watershed,g13_00023_5.tif,109
+0.0,FTW v3 B7,g13_00005_9.tif,0
+0.0,watershed,g13_00005_9.tif,185
+14.5,FTW v3 B7,g13_00005_9.tif,0
+14.5,watershed,g13_00005_9.tif,58
+0.0,FTW v3 B7,g6_00026_17.tif,92
+0.0,watershed,g6_00026_17.tif,332
+14.5,FTW v3 B7,g6_00026_17.tif,54
+14.5,watershed,g6_00026_17.tif,138
+0.0,FTW v3 B7,g13_00053_1.tif,6
+0.0,watershed,g13_00053_1.tif,226
+14.5,FTW v3 B7,g13_00053_1.tif,4
+14.5,watershed,g13_00053_1.tif,65
+0.0,FTW v3 B7,g6_00037_8.tif,0
+0.0,watershed,g6_00037_8.tif,339
+14.5,FTW v3 B7,g6_00037_8.tif,0
+14.5,watershed,g6_00037_8.tif,114
+0.0,FTW v3 B7,g6_00053_13.tif,4
+0.0,watershed,g6_00053_13.tif,371
+14.5,FTW v3 B7,g6_00053_13.tif,1
+14.5,watershed,g6_00053_13.tif,129
+0.0,FTW v3 B7,g13_00004_0.tif,13
+0.0,watershed,g13_00004_0.tif,232
+14.5,FTW v3 B7,g13_00004_0.tif,12
+14.5,watershed,g13_00004_0.tif,105
+0.0,FTW v3 B7,g13_00006_12.tif,4
+0.0,watershed,g13_00006_12.tif,329
+14.5,FTW v3 B7,g13_00006_12.tif,0
+14.5,watershed,g13_00006_12.tif,150
+0.0,FTW v3 B7,g13_00020_10.tif,36
+0.0,watershed,g13_00020_10.tif,313
+14.5,FTW v3 B7,g13_00020_10.tif,21
+14.5,watershed,g13_00020_10.tif,148
+0.0,FTW v3 B7,g6_00038_13.tif,21
+0.0,watershed,g6_00038_13.tif,299
+14.5,FTW v3 B7,g6_00038_13.tif,5
+14.5,watershed,g6_00038_13.tif,113
+0.0,FTW v3 B7,g13_00006_5.tif,0
+0.0,watershed,g13_00006_5.tif,359
+14.5,FTW v3 B7,g13_00006_5.tif,0
+14.5,watershed,g13_00006_5.tif,143
+0.0,FTW v3 B7,g13_00037_0.tif,0
+0.0,watershed,g13_00037_0.tif,283
+14.5,FTW v3 B7,g13_00037_0.tif,0
+14.5,watershed,g13_00037_0.tif,117
+0.0,FTW v3 B7,g6_00006_4.tif,5
+0.0,watershed,g6_00006_4.tif,362
+14.5,FTW v3 B7,g6_00006_4.tif,0
+14.5,watershed,g6_00006_4.tif,141
+0.0,FTW v3 B7,g13_00034_6.tif,0
+0.0,watershed,g13_00034_6.tif,241
+14.5,FTW v3 B7,g13_00034_6.tif,0
+14.5,watershed,g13_00034_6.tif,95
+0.0,FTW v3 B7,g13_00053_2.tif,53
+0.0,watershed,g13_00053_2.tif,264
+14.5,FTW v3 B7,g13_00053_2.tif,33
+14.5,watershed,g13_00053_2.tif,119
+0.0,FTW v3 B7,g6_00024_1.tif,16
+0.0,watershed,g6_00024_1.tif,341
+14.5,FTW v3 B7,g6_00024_1.tif,12
+14.5,watershed,g6_00024_1.tif,133
+0.0,FTW v3 B7,g6_00045_9.tif,1
+0.0,watershed,g6_00045_9.tif,310
+14.5,FTW v3 B7,g6_00045_9.tif,0
+14.5,watershed,g6_00045_9.tif,103
+0.0,FTW v3 B7,g6_00041_16.tif,7
+0.0,watershed,g6_00041_16.tif,324
+14.5,FTW v3 B7,g6_00041_16.tif,1
+14.5,watershed,g6_00041_16.tif,121
+0.0,FTW v3 B7,g13_00040_10.tif,39
+0.0,watershed,g13_00040_10.tif,247
+14.5,FTW v3 B7,g13_00040_10.tif,32
+14.5,watershed,g13_00040_10.tif,118
+0.0,FTW v3 B7,g6_00061_0.tif,11
+0.0,watershed,g6_00061_0.tif,181
+14.5,FTW v3 B7,g6_00061_0.tif,5
+14.5,watershed,g6_00061_0.tif,51
+0.0,FTW v3 B7,g13_00040_11.tif,18
+0.0,watershed,g13_00040_11.tif,193
+14.5,FTW v3 B7,g13_00040_11.tif,13
+14.5,watershed,g13_00040_11.tif,70
+0.0,FTW v3 B7,g6_00020_7.tif,5
+0.0,watershed,g6_00020_7.tif,286
+14.5,FTW v3 B7,g6_00020_7.tif,3
+14.5,watershed,g6_00020_7.tif,104
+0.0,FTW v3 B7,g13_00017_18.tif,73
+0.0,watershed,g13_00017_18.tif,283
+14.5,FTW v3 B7,g13_00017_18.tif,59
+14.5,watershed,g13_00017_18.tif,138
+0.0,FTW v3 B7,g6_00042_16.tif,6
+0.0,watershed,g6_00042_16.tif,303
+14.5,FTW v3 B7,g6_00042_16.tif,3
+14.5,watershed,g6_00042_16.tif,140
+0.0,FTW v3 B7,g13_00036_18.tif,0
+0.0,watershed,g13_00036_18.tif,274
+14.5,FTW v3 B7,g13_00036_18.tif,0
+14.5,watershed,g13_00036_18.tif,121
+0.0,FTW v3 B7,g6_00039_14.tif,4
+0.0,watershed,g6_00039_14.tif,299
+14.5,FTW v3 B7,g6_00039_14.tif,1
+14.5,watershed,g6_00039_14.tif,117
+0.0,FTW v3 B7,g6_00060_18.tif,3
+0.0,watershed,g6_00060_18.tif,285
+14.5,FTW v3 B7,g6_00060_18.tif,0
+14.5,watershed,g6_00060_18.tif,97
+0.0,FTW v3 B7,g6_00030_1.tif,16
+0.0,watershed,g6_00030_1.tif,345
+14.5,FTW v3 B7,g6_00030_1.tif,12
+14.5,watershed,g6_00030_1.tif,127
+0.0,FTW v3 B7,g13_00004_1.tif,35
+0.0,watershed,g13_00004_1.tif,202
+14.5,FTW v3 B7,g13_00004_1.tif,31
+14.5,watershed,g13_00004_1.tif,102
+0.0,FTW v3 B7,g6_00042_17.tif,0
+0.0,watershed,g6_00042_17.tif,319
+14.5,FTW v3 B7,g6_00042_17.tif,0
+14.5,watershed,g6_00042_17.tif,130

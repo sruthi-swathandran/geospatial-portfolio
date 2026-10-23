@@ -977,6 +977,41 @@ def budget_newer_tables() -> list:
     return out
 
 
+def edge_tables() -> list:
+    """The edge contrast test on Slovenia, from edge_test.py."""
+    res = F.PROJECT / "results"
+    cal = res / "slovenia" / "edge_test_calibration.csv"
+    main = res / "edge_test.csv"
+    matched = res / "edge_test_matched.csv"
+    if not (cal.exists() and main.exists()):
+        return ["\nMissing edge_test results. Run edge_test.py.\n"]
+    out = ["### Calibration, 60 Slovenian chips never scored\n"]
+    c = pd.read_csv(cal)
+    out.append("| blur, m | parcels | median edge over interior |")
+    out.append("|---:|---:|---:|")
+    for _, r in c.iterrows():
+        out.append(f"| {r['sigma_m']:g} | {int(r['parcels']):,} "
+                   f"| {r['median_edge_over_interior']:.4f} |")
+    out.append(f"\nChosen blur: {c['chosen_sigma_m'].iloc[0]:g} m, where the "
+               f"median meets India's 1.297.\n")
+    rows = pd.read_csv(main)
+    if matched.exists():
+        rows = pd.concat([rows, pd.read_csv(matched)], ignore_index=True)
+    out.append("### The share of the gap closed, 125 scoring chips\n")
+    out.append("| method | band | Slovenia | blurred | India | share closed "
+               "| reading |")
+    out.append("|---|---|---:|---:|---:|---:|---|")
+    for _, r in rows.iterrows():
+        reading = r["reading"] if isinstance(r["reading"], str) else ""
+        out.append(f"| {r['method']} | {r['band']} "
+                   f"| {r['slovenia_no_blur'] * 100:.2f}% "
+                   f"| {r['slovenia_blurred'] * 100:.2f}% "
+                   f"| {r['india'] * 100:.2f}% "
+                   f"| {r['share_closed']:.3f} [{r['share_lo']:.3f}, "
+                   f"{r['share_hi']:.3f}] | {reading} |")
+    return out
+
+
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--sam-setting", default="0p50",
@@ -1064,6 +1099,9 @@ def main() -> None:
 
     out.append("\n## Watershed and SAM at the later checkpoints' budgets\n")
     out += budget_newer_tables()
+
+    out.append("\n## Edge contrast, tested on Slovenia\n")
+    out += edge_tables()
 
     dest = F.PROJECT / "results" / "comparison_tables.md"
     dest.parent.mkdir(parents=True, exist_ok=True)

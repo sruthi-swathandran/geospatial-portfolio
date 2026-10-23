@@ -587,3 +587,39 @@ Parcels per band: under 20 m 2,163, 20 to 30 m 1,229, 30 to 50 m 1,740, 50 m up 
 | v3.1 cc-by b7 | 15.2 | 22.44% | SAM NIR-blue-green | 72.7 | 20.63% | -1.82 [-4.63, +0.96] | level |
 | v3.1 cc-by b7 | 15.2 | 22.44% | SAM natural colour | 85.9 | 25.72% | +3.28 [+0.40, +6.00] | unresolved under P2 |
 | v3.1 cc-by b7 | 15.2 | 22.44% | SAM blue-green-red | 78.8 | 23.38% | +0.94 [-1.88, +4.02] | level |
+
+## Edge contrast, tested on Slovenia
+
+### Calibration, 60 Slovenian chips never scored
+
+| blur, m | parcels | median edge over interior |
+|---:|---:|---:|
+| 0 | 1,646 | 1.6347 |
+| 2 | 1,646 | 1.6291 |
+| 4 | 1,646 | 1.5816 |
+| 6 | 1,646 | 1.5247 |
+| 8 | 1,646 | 1.4681 |
+| 10 | 1,646 | 1.4020 |
+| 12 | 1,646 | 1.3473 |
+| 15 | 1,646 | 1.2870 |
+| 18 | 1,646 | 1.2321 |
+| 24 | 1,646 | 1.1463 |
+
+Chosen blur: 14.5 m, where the median meets India's 1.297.
+
+### The share of the gap closed, 125 scoring chips
+
+| method | band | Slovenia | blurred | India | share closed | reading |
+|---|---|---:|---:|---:|---:|---|
+| FTW v3 B7 | 20 to 30 m | 16.64% | 5.82% | 1.22% | 0.702 [0.593, 0.815] |  |
+| FTW v3 B7 | 30 to 50 m | 38.34% | 17.52% | 4.96% | 0.624 [0.559, 0.693] |  |
+| FTW v3 B7 | 50 m up | 69.32% | 49.66% | 31.11% | 0.514 [0.437, 0.607] |  |
+| FTW v3 B7 | 20 m up | 43.95% | 26.09% | 13.41% | 0.585 [0.523, 0.666] | credible main cause |
+| watershed | 20 to 30 m | 19.22% | 6.90% | 4.90% | 0.860 [0.718, 1.010] |  |
+| watershed | 30 to 50 m | 45.31% | 20.29% | 22.49% | 1.097 [0.984, 1.225] |  |
+| watershed | 50 m up | 69.13% | 55.90% | 41.33% | 0.476 [0.385, 0.566] |  |
+| watershed | 20 m up | 47.23% | 29.68% | 24.78% | 0.782 [0.691, 0.890] | credible main cause |
+| watershed, matched objects | 20 to 30 m | 19.22% | 10.77% | 4.90% | 0.590 [0.447, 0.723] |  |
+| watershed, matched objects | 30 to 50 m | 45.31% | 28.07% | 22.49% | 0.755 [0.654, 0.861] |  |
+| watershed, matched objects | 50 m up | 69.13% | 57.36% | 41.33% | 0.423 [0.308, 0.531] |  |
+| watershed, matched objects | 20 m up | 47.23% | 34.20% | 24.78% | 0.581 [0.498, 0.665] | credible main cause |
