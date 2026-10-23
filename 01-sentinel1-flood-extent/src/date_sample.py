@@ -82,7 +82,7 @@ Under results/validation/sample_<date>/, committed:
   points_key.csv  labels.csv  strata.csv  screened_out.csv  rasters.csv
   draw_log.txt  LABELLING.txt
   after labelling: estimates.csv, strata_estimates.csv, labels_by_stratum.csv,
-                   zero_hit_bounds.csv
+                   zero_hit_bounds.csv, user_accuracy_bounds.csv
 Under data/validation/chips_<date>/, not committed: one image per point
 
 Usage
@@ -129,7 +129,8 @@ from estimate_accuracy import (DEM_DIR, EDGE, IN_MAP, label_counts,   # noqa: E4
                                terrain_at, write_csv)
 from floodplain_layer import CUTOFFS, LOW, MAIN, MIN_TESTED            # noqa: E402
 from landsat_clear_sky import CLOUDY_BITS, UNSEEN, WORK                # noqa: E402
-from score_map import print_bounds, score, zero_hit_bounds             # noqa: E402
+from score_map import (counts, print_bounds, print_ua_bounds, score,  # noqa: E402
+                       user_accuracy_bound, zero_hit_bounds)
 
 # Planetary Computer answers 503 when busy. GDAL then retries on its own,
 # waiting a little longer each time, before the read counts as failed.
@@ -773,14 +774,29 @@ def score_rows(scopes, map_date):
     for mname, field in MAPS.items():
         for scope, (pts, ar) in scopes.items():
             flags = {p["point_id"]: int(p[field]) == FLOOD for p in pts}
+            n_read, n_flag = counts(pts, flags)
             for layer, lname in (("mapped", "whole"), ("eligible", "clear part")):
                 for vname, letters in LETTERS.items():
                     for metric, val, se in score(pts, flags, ar, layer, letters):
                         rows.append(dict(map_date=map_date, map=mname, scope=scope,
                                          layer=lname, variant=vname, metric=metric,
                                          value=round(val, 4 if abs(val) < 2 else 0),
-                                         se=round(se, 4 if abs(val) < 2 else 0)))
+                                         se=round(se, 4 if abs(val) < 2 else 0),
+                                         n_readable=n_read, n_map_flood=n_flag))
     return rows
+
+
+def ua_bound_rows(scopes):
+    """User's accuracy of exactly 1 or 0, and its 95% bound (score_map.py)."""
+    out = []
+    for mname, field in MAPS.items():
+        for scope, (pts, _) in scopes.items():
+            flags = {p["point_id"]: int(p[field]) == FLOOD for p in pts}
+            for vname, letters in LETTERS.items():
+                b = user_accuracy_bound(pts, flags, letters)
+                if b:
+                    out.append(dict(map=mname, scope=scope, variant=vname, **b))
+    return out
 
 
 def estimate(P, map_date):
@@ -826,6 +842,8 @@ def estimate(P, map_date):
     bounds = [r for scope, (pts, ar) in scopes.items()
               for r in zero_hit_bounds(pts, ar, scope)]
     write_csv(out / "zero_hit_bounds.csv", bounds)
+    ua_bounds = ua_bound_rows(scopes)
+    write_csv(out / "user_accuracy_bounds.csv", ua_bounds)
     write_csv(out / "estimates.csv", rows)
     write_csv(out / "strata_estimates.csv", strata_rows)
     write_csv(out / "labels_by_stratum.csv", label_counts(points))
@@ -860,6 +878,7 @@ def estimate(P, map_date):
                 print(f"      {mname:<10} mapped {m['value']:>9,.0f} ha   user "
                       f"{ua}   producer {pr['value']:.3f} +/- {pr['se']:.3f}")
     print_bounds(bounds)
+    print_ua_bounds(ua_bounds)
     days = (date.fromisoformat(map_date) - date.fromisoformat(P["scene"])).days
     print(f"\n  The reference image is {days} days before the radar, with the")
     print("  flood receding, so it probably shows more water than the radar saw.")

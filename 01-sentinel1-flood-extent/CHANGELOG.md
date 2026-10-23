@@ -1051,6 +1051,30 @@ change on the map page only.
 - **A stray screenshot,** `Capture.JPG` from fd228fb, removed, and
   `.gitignore` now skips files the Windows snipping tool names that way.
 
+### C-38 The zero-hit bound, the other way round
+
+A review on fda900f found the C-34 bound covered only one direction. A land
+stratum with no open water found got its 95% bound, but a map whose flood
+points were all open water, or none of them, still printed a user's accuracy
+of 1.000 ± 0.000 or 0.000 ± 0.000 with nothing to say how few points stood
+behind it. No published figure changes.
+
+- **The bound.** `score_map.py` and `date_sample.py` now write
+  `user_accuracy_bounds.csv`: for every map, scope and variant where the user's
+  accuracy is exactly 1 or 0, the readable points behind it and the 95%
+  Clopper-Pearson bound, 0.025^(1/n) or 1 minus it, counted on the points
+  without stratum weights. On 12 August, low sloped ground has 8 such points on
+  the map as drawn, bound 0.631, and 11 on the published map, bound 0.715.
+  Above 150 m at −17.75 dB, 7 August has 3 points and 31 August 1, none open
+  water, bounds 0.708 and 0.975.
+- **Counts.** Every row of `map_scores.csv` and of each date's `estimates.csv`
+  now carries `n_readable` and `n_map_flood`, so a thin figure shows itself.
+- **Wording.** The review's numbers, 0.78 and 0.69 for 12 and 8 points, are
+  one-sided 95% bounds. These are two-sided, as the C-34 bounds are, so they
+  sit lower: 0.735 and 0.631.
+- **README.** "What finding nothing rules out" gains the mirror case, and the
+  7 and 31 August section gives the −17.75 dB points above 150 m.
+
 ---
 
 ## Open, not fixed

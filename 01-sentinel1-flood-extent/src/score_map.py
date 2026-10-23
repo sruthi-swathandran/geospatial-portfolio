@@ -68,10 +68,20 @@ So for each such group the script also gives the 95% upper bound on the share
 (Clopper-Pearson, 1 - 0.025^(1/n) for n readable points) and the clear hectares
 it could hide, which is what the sample can rule out and no more.
 
+The mirror case gets the same treatment. Where every readable point a map
+calls flood is open water, or none is, its user's accuracy prints as 1.000 or
+0.000 with no variance. user_accuracy_bounds.csv gives the 95% Clopper-Pearson
+bound on the points instead: at least 0.025^(1/n) in the first case, at most
+1 - 0.025^(1/n) in the second. It counts points, unweighted by stratum, which
+is the plain reading of "n out of n". Every row of map_scores.csv also carries
+n_readable and n_map_flood, the readable points in its scope and those the map
+calls flood, so a thin row shows itself.
+
 Outputs, under results/validation/
 ----------------------------------
   map_scores.csv
-  zero_hit_bounds.csv   groups with no open water found, and their bound
+  zero_hit_bounds.csv        groups with no open water found, and their bound
+  user_accuracy_bounds.csv   user's accuracy of exactly 1 or 0, and its bound
 
 Usage
 -----
@@ -241,6 +251,43 @@ def zero_hit_bounds(points, areas, scope, letters=("W",)):
     return rows
 
 
+def user_accuracy_bound(points, flags, letters):
+    """Where every readable point the map calls flood is reference flood, or
+    none is, the 95% Clopper-Pearson bound on the points; otherwise None."""
+    use = [p for p in points if p["label"] in ("W", "V", "N")
+           and p["code"] in IN_MAP and flags[p["point_id"]]]
+    if not use:
+        return None
+    hits = sum(1 for p in use if p["label"] in letters and not p["permanent"])
+    tail = 0.025 ** (1 / len(use))
+    if hits == len(use):
+        return dict(n_map_flood=len(use), user_accuracy=1.0, bound="lower",
+                    bound_95=round(tail, 4))
+    if hits == 0:
+        return dict(n_map_flood=len(use), user_accuracy=0.0, bound="upper",
+                    bound_95=round(1 - tail, 4))
+    return None
+
+
+def counts(points, flags):
+    """Readable points in a scope, and those the map calls flood."""
+    use = [p for p in points if p["label"] in ("W", "V", "N") and p["code"] in IN_MAP]
+    return len(use), sum(1 for p in use if flags[p["point_id"]])
+
+
+def print_ua_bounds(rows):
+    if not rows:
+        return
+    print("\n  User's accuracy of exactly 1 or 0, which has no variance; the 95% "
+          "bound on the points:")
+    print(f"  {'map':<22} {'scope':<20} {'variant':<8} {'n':>4} {'value':>6} "
+          f"{'bound':>14}")
+    for r in rows:
+        print(f"  {r['map']:<22} {r['scope']:<20} {r['variant']:<8} "
+              f"{r['n_map_flood']:>4} {r['user_accuracy']:>6.3f} "
+              f"{r['bound'] + ' ' + format(r['bound_95'], '.3f'):>14}")
+
+
 def print_bounds(rows):
     if not rows:
         return
@@ -310,7 +357,7 @@ def main():
 
     with rasterio.open(MAP) as d:
         shape = (d.height, d.width)
-    rows = []
+    rows, ua_bounds = [], []
     for name, path in CANDIDATES.items():
         if not path.exists():
             print(f"  {name:<22} {path.name} not found, skipped")
@@ -325,15 +372,21 @@ def main():
                           ("above 150 m", whole_ha - low_ha)):
             rows.append(dict(map=name, scope=scope, layer="whole", variant="",
                              metric="mapped flood, ha, counted",
-                             value=round(ha), se=0))
+                             value=round(ha), se=0, n_readable="", n_map_flood=""))
         for scope, (pts, areas) in scopes.items():
+            n_read, n_flag = counts(pts, flags)
+            for vname, letters in VARIANTS.items():
+                b = user_accuracy_bound(pts, flags, letters)
+                if b:
+                    ua_bounds.append(dict(map=name, scope=scope, variant=vname, **b))
             for layer, lname in (("mapped", "whole"), ("eligible", "clear part")):
                 for vname, letters in VARIANTS.items():
                     for metric, val, se in score(pts, flags, areas, layer, letters):
                         rows.append(dict(map=name, scope=scope, layer=lname,
                                          variant=vname, metric=metric,
                                          value=round(val, 4 if abs(val) < 2 else 0),
-                                         se=round(se, 4 if abs(val) < 2 else 0)))
+                                         se=round(se, 4 if abs(val) < 2 else 0),
+                                         n_readable=n_read, n_map_flood=n_flag))
 
     # the map as drawn must reproduce floodplain_layer.py before anything else
     with open(OUT / "floodplain_summary.csv", encoding="utf-8") as fh:
@@ -409,6 +462,8 @@ def main():
               for r in zero_hit_bounds(pts, areas, scope)]
     write_csv(OUT / "zero_hit_bounds.csv", bounds)
     print_bounds(bounds)
+    write_csv(OUT / "user_accuracy_bounds.csv", ua_bounds)
+    print_ua_bounds(ua_bounds)
     print("\n  Flood on the ground is the same for every map; it is in map_scores.csv.")
     print(f"  wrote {OUT / 'map_scores.csv'}")
 

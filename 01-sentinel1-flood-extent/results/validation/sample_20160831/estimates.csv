@@ -1,165 +1,165 @@
-map_date,map,scope,layer,variant,metric,value,se
-2016-08-31,-18.75 dB,floodplain,whole,W only,"flood on the ground, ha",27717.0,6235.0
-2016-08-31,-18.75 dB,floodplain,whole,W only,"mapped flood, ha",33768.0,0.0
-2016-08-31,-18.75 dB,floodplain,whole,W only,user's accuracy,0.5417,0.0727
-2016-08-31,-18.75 dB,floodplain,whole,W only,producer's accuracy,0.6599,0.1397
-2016-08-31,-18.75 dB,floodplain,whole,W only,overall accuracy,0.9427,0.0143
-2016-08-31,-18.75 dB,floodplain,whole,W or V,"flood on the ground, ha",38283.0,8286.0
-2016-08-31,-18.75 dB,floodplain,whole,W or V,"mapped flood, ha",33768.0,0.0
-2016-08-31,-18.75 dB,floodplain,whole,W or V,user's accuracy,0.5833,0.0719
-2016-08-31,-18.75 dB,floodplain,whole,W or V,producer's accuracy,0.5145,0.1108
-2016-08-31,-18.75 dB,floodplain,whole,W or V,overall accuracy,0.9249,0.0191
-2016-08-31,-18.75 dB,floodplain,clear part,W only,"flood on the ground, ha",11274.0,3254.0
-2016-08-31,-18.75 dB,floodplain,clear part,W only,"mapped flood, ha",11432.0,0.0
-2016-08-31,-18.75 dB,floodplain,clear part,W only,user's accuracy,0.5417,0.0727
-2016-08-31,-18.75 dB,floodplain,clear part,W only,producer's accuracy,0.5493,0.1568
-2016-08-31,-18.75 dB,floodplain,clear part,W only,overall accuracy,0.9525,0.015
-2016-08-31,-18.75 dB,floodplain,clear part,W or V,"flood on the ground, ha",16721.0,4427.0
-2016-08-31,-18.75 dB,floodplain,clear part,W or V,"mapped flood, ha",11432.0,0.0
-2016-08-31,-18.75 dB,floodplain,clear part,W or V,user's accuracy,0.5833,0.0719
-2016-08-31,-18.75 dB,floodplain,clear part,W or V,producer's accuracy,0.3988,0.1079
-2016-08-31,-18.75 dB,floodplain,clear part,W or V,overall accuracy,0.9318,0.0204
-2016-08-31,-18.75 dB,whole map,whole,W only,"flood on the ground, ha",33505.0,6883.0
-2016-08-31,-18.75 dB,whole map,whole,W only,"mapped flood, ha",39481.0,0.0
-2016-08-31,-18.75 dB,whole map,whole,W only,user's accuracy,0.5424,0.0654
-2016-08-31,-18.75 dB,whole map,whole,W only,producer's accuracy,0.6391,0.1248
-2016-08-31,-18.75 dB,whole map,whole,W only,overall accuracy,0.9905,0.0022
-2016-08-31,-18.75 dB,whole map,whole,W or V,"flood on the ground, ha",113850.0,68597.0
-2016-08-31,-18.75 dB,whole map,whole,W or V,"mapped flood, ha",39481.0,0.0
-2016-08-31,-18.75 dB,whole map,whole,W or V,user's accuracy,0.5763,0.0649
-2016-08-31,-18.75 dB,whole map,whole,W or V,producer's accuracy,0.1998,0.1217
-2016-08-31,-18.75 dB,whole map,whole,W or V,overall accuracy,0.9659,0.0217
-2016-08-31,-18.75 dB,whole map,clear part,W only,"flood on the ground, ha",12297.0,3276.0
-2016-08-31,-18.75 dB,whole map,clear part,W only,"mapped flood, ha",12758.0,0.0
-2016-08-31,-18.75 dB,whole map,clear part,W only,user's accuracy,0.5424,0.0654
-2016-08-31,-18.75 dB,whole map,clear part,W only,producer's accuracy,0.5627,0.148
-2016-08-31,-18.75 dB,whole map,clear part,W only,overall accuracy,0.9858,0.0042
-2016-08-31,-18.75 dB,whole map,clear part,W or V,"flood on the ground, ha",32375.0,15300.0
-2016-08-31,-18.75 dB,whole map,clear part,W or V,"mapped flood, ha",12758.0,0.0
-2016-08-31,-18.75 dB,whole map,clear part,W or V,user's accuracy,0.5763,0.0649
-2016-08-31,-18.75 dB,whole map,clear part,W or V,producer's accuracy,0.2271,0.109
-2016-08-31,-18.75 dB,whole map,clear part,W or V,overall accuracy,0.9614,0.0194
-2016-08-31,-18.75 dB,"below 150 m, sloped",whole,W only,"flood on the ground, ha",3491.0,867.0
-2016-08-31,-18.75 dB,"below 150 m, sloped",whole,W only,"mapped flood, ha",5308.0,0.0
-2016-08-31,-18.75 dB,"below 150 m, sloped",whole,W only,user's accuracy,0.5455,0.1575
-2016-08-31,-18.75 dB,"below 150 m, sloped",whole,W only,producer's accuracy,0.8294,0.0684
-2016-08-31,-18.75 dB,"below 150 m, sloped",whole,W only,overall accuracy,0.9911,0.0026
-2016-08-31,-18.75 dB,"below 150 m, sloped",whole,W or V,"flood on the ground, ha",45973.0,42130.0
-2016-08-31,-18.75 dB,"below 150 m, sloped",whole,W or V,"mapped flood, ha",5308.0,0.0
-2016-08-31,-18.75 dB,"below 150 m, sloped",whole,W or V,user's accuracy,0.5455,0.1575
-2016-08-31,-18.75 dB,"below 150 m, sloped",whole,W or V,producer's accuracy,0.063,0.0602
-2016-08-31,-18.75 dB,"below 150 m, sloped",whole,W or V,overall accuracy,0.8647,0.1253
-2016-08-31,-18.75 dB,"below 150 m, sloped",clear part,W only,"flood on the ground, ha",969.0,230.0
-2016-08-31,-18.75 dB,"below 150 m, sloped",clear part,W only,"mapped flood, ha",1397.0,0.0
-2016-08-31,-18.75 dB,"below 150 m, sloped",clear part,W only,user's accuracy,0.5455,0.1575
-2016-08-31,-18.75 dB,"below 150 m, sloped",clear part,W only,producer's accuracy,0.7865,0.0736
-2016-08-31,-18.75 dB,"below 150 m, sloped",clear part,W only,overall accuracy,0.9943,0.0016
-2016-08-31,-18.75 dB,"below 150 m, sloped",clear part,W or V,"flood on the ground, ha",18057.0,17061.0
-2016-08-31,-18.75 dB,"below 150 m, sloped",clear part,W or V,"mapped flood, ha",1397.0,0.0
-2016-08-31,-18.75 dB,"below 150 m, sloped",clear part,W or V,user's accuracy,0.5455,0.1575
-2016-08-31,-18.75 dB,"below 150 m, sloped",clear part,W or V,producer's accuracy,0.0422,0.0415
-2016-08-31,-18.75 dB,"below 150 m, sloped",clear part,W or V,overall accuracy,0.879,0.1152
-2016-08-31,-18.75 dB,above 150 m,whole,W only,"flood on the ground, ha",381.0,381.0
-2016-08-31,-18.75 dB,above 150 m,whole,W only,"mapped flood, ha",0.0,0.0
-2016-08-31,-18.75 dB,above 150 m,whole,W only,user's accuracy,nan,nan
-2016-08-31,-18.75 dB,above 150 m,whole,W only,producer's accuracy,0.0,0.0
-2016-08-31,-18.75 dB,above 150 m,whole,W only,overall accuracy,0.9996,0.0002
-2016-08-31,-18.75 dB,above 150 m,whole,W or V,"flood on the ground, ha",932.0,530.0
-2016-08-31,-18.75 dB,above 150 m,whole,W or V,"mapped flood, ha",0.0,0.0
-2016-08-31,-18.75 dB,above 150 m,whole,W or V,user's accuracy,nan,nan
-2016-08-31,-18.75 dB,above 150 m,whole,W or V,producer's accuracy,0.0,0.0
-2016-08-31,-18.75 dB,above 150 m,whole,W or V,overall accuracy,0.9994,0.0002
-2016-08-31,-18.75 dB,above 150 m,clear part,W only,"flood on the ground, ha",16.0,16.0
-2016-08-31,-18.75 dB,above 150 m,clear part,W only,"mapped flood, ha",0.0,0.0
-2016-08-31,-18.75 dB,above 150 m,clear part,W only,user's accuracy,nan,nan
-2016-08-31,-18.75 dB,above 150 m,clear part,W only,producer's accuracy,0.0,0.0
-2016-08-31,-18.75 dB,above 150 m,clear part,W only,overall accuracy,0.9998,0.0
-2016-08-31,-18.75 dB,above 150 m,clear part,W or V,"flood on the ground, ha",63.0,22.0
-2016-08-31,-18.75 dB,above 150 m,clear part,W or V,"mapped flood, ha",0.0,0.0
-2016-08-31,-18.75 dB,above 150 m,clear part,W or V,user's accuracy,nan,nan
-2016-08-31,-18.75 dB,above 150 m,clear part,W or V,producer's accuracy,0.0,0.0
-2016-08-31,-18.75 dB,above 150 m,clear part,W or V,overall accuracy,0.9997,0.0001
-2016-08-31,-17.75 dB,floodplain,whole,W only,"flood on the ground, ha",27717.0,6235.0
-2016-08-31,-17.75 dB,floodplain,whole,W only,"mapped flood, ha",38853.0,0.0
-2016-08-31,-17.75 dB,floodplain,whole,W only,user's accuracy,0.5003,0.064
-2016-08-31,-17.75 dB,floodplain,whole,W only,producer's accuracy,0.7013,0.1472
-2016-08-31,-17.75 dB,floodplain,whole,W only,overall accuracy,0.9363,0.0143
-2016-08-31,-17.75 dB,floodplain,whole,W or V,"flood on the ground, ha",38283.0,8286.0
-2016-08-31,-17.75 dB,floodplain,whole,W or V,"mapped flood, ha",38853.0,0.0
-2016-08-31,-17.75 dB,floodplain,whole,W or V,user's accuracy,0.5619,0.0636
-2016-08-31,-17.75 dB,floodplain,whole,W or V,producer's accuracy,0.5702,0.121
-2016-08-31,-17.75 dB,floodplain,whole,W or V,overall accuracy,0.923,0.0191
-2016-08-31,-17.75 dB,floodplain,clear part,W only,"flood on the ground, ha",11274.0,3254.0
-2016-08-31,-17.75 dB,floodplain,clear part,W only,"mapped flood, ha",13919.0,0.0
-2016-08-31,-17.75 dB,floodplain,clear part,W only,user's accuracy,0.4852,0.0612
-2016-08-31,-17.75 dB,floodplain,clear part,W only,producer's accuracy,0.5991,0.1696
-2016-08-31,-17.75 dB,floodplain,clear part,W only,overall accuracy,0.9462,0.015
-2016-08-31,-17.75 dB,floodplain,clear part,W or V,"flood on the ground, ha",16721.0,4427.0
-2016-08-31,-17.75 dB,floodplain,clear part,W or V,"mapped flood, ha",13919.0,0.0
-2016-08-31,-17.75 dB,floodplain,clear part,W or V,user's accuracy,0.554,0.0612
-2016-08-31,-17.75 dB,floodplain,clear part,W or V,producer's accuracy,0.4612,0.1229
-2016-08-31,-17.75 dB,floodplain,clear part,W or V,overall accuracy,0.93,0.0204
-2016-08-31,-17.75 dB,whole map,whole,W only,"flood on the ground, ha",33505.0,6883.0
-2016-08-31,-17.75 dB,whole map,whole,W only,"mapped flood, ha",45648.0,0.0
-2016-08-31,-17.75 dB,whole map,whole,W only,user's accuracy,0.5068,0.0573
-2016-08-31,-17.75 dB,whole map,whole,W only,producer's accuracy,0.6905,0.1334
-2016-08-31,-17.75 dB,whole map,whole,W only,overall accuracy,0.9896,0.0022
-2016-08-31,-17.75 dB,whole map,whole,W or V,"flood on the ground, ha",113850.0,68597.0
-2016-08-31,-17.75 dB,whole map,whole,W or V,"mapped flood, ha",45648.0,0.0
-2016-08-31,-17.75 dB,whole map,whole,W or V,user's accuracy,0.5581,0.0571
-2016-08-31,-17.75 dB,whole map,whole,W or V,producer's accuracy,0.2238,0.1359
-2016-08-31,-17.75 dB,whole map,whole,W or V,overall accuracy,0.9656,0.0217
-2016-08-31,-17.75 dB,whole map,clear part,W only,"flood on the ground, ha",12297.0,3276.0
-2016-08-31,-17.75 dB,whole map,clear part,W only,"mapped flood, ha",15677.0,0.0
-2016-08-31,-17.75 dB,whole map,clear part,W only,user's accuracy,0.4933,0.0548
-2016-08-31,-17.75 dB,whole map,clear part,W only,producer's accuracy,0.629,0.1638
-2016-08-31,-17.75 dB,whole map,clear part,W only,overall accuracy,0.9841,0.0042
-2016-08-31,-17.75 dB,whole map,clear part,W or V,"flood on the ground, ha",32375.0,15300.0
-2016-08-31,-17.75 dB,whole map,clear part,W or V,"mapped flood, ha",15677.0,0.0
-2016-08-31,-17.75 dB,whole map,clear part,W or V,user's accuracy,0.5512,0.0547
-2016-08-31,-17.75 dB,whole map,clear part,W or V,producer's accuracy,0.2669,0.1274
-2016-08-31,-17.75 dB,whole map,clear part,W or V,overall accuracy,0.9609,0.0194
-2016-08-31,-17.75 dB,"below 150 m, sloped",whole,W only,"flood on the ground, ha",3491.0,867.0
-2016-08-31,-17.75 dB,"below 150 m, sloped",whole,W only,"mapped flood, ha",6221.0,0.0
-2016-08-31,-17.75 dB,"below 150 m, sloped",whole,W only,user's accuracy,0.5321,0.1363
-2016-08-31,-17.75 dB,"below 150 m, sloped",whole,W only,producer's accuracy,0.9483,0.0506
-2016-08-31,-17.75 dB,"below 150 m, sloped",whole,W only,overall accuracy,0.9908,0.0026
-2016-08-31,-17.75 dB,"below 150 m, sloped",whole,W or V,"flood on the ground, ha",45973.0,42130.0
-2016-08-31,-17.75 dB,"below 150 m, sloped",whole,W or V,"mapped flood, ha",6221.0,0.0
-2016-08-31,-17.75 dB,"below 150 m, sloped",whole,W or V,user's accuracy,0.5321,0.1363
-2016-08-31,-17.75 dB,"below 150 m, sloped",whole,W or V,producer's accuracy,0.072,0.0682
-2016-08-31,-17.75 dB,"below 150 m, sloped",whole,W or V,overall accuracy,0.8645,0.1253
-2016-08-31,-17.75 dB,"below 150 m, sloped",clear part,W only,"flood on the ground, ha",969.0,230.0
-2016-08-31,-17.75 dB,"below 150 m, sloped",clear part,W only,"mapped flood, ha",1820.0,0.0
-2016-08-31,-17.75 dB,"below 150 m, sloped",clear part,W only,user's accuracy,0.5243,0.1263
-2016-08-31,-17.75 dB,"below 150 m, sloped",clear part,W only,producer's accuracy,0.9851,0.0151
-2016-08-31,-17.75 dB,"below 150 m, sloped",clear part,W only,overall accuracy,0.9941,0.0016
-2016-08-31,-17.75 dB,"below 150 m, sloped",clear part,W or V,"flood on the ground, ha",18057.0,17061.0
-2016-08-31,-17.75 dB,"below 150 m, sloped",clear part,W or V,"mapped flood, ha",1820.0,0.0
-2016-08-31,-17.75 dB,"below 150 m, sloped",clear part,W or V,user's accuracy,0.5243,0.1263
-2016-08-31,-17.75 dB,"below 150 m, sloped",clear part,W or V,producer's accuracy,0.0528,0.0514
-2016-08-31,-17.75 dB,"below 150 m, sloped",clear part,W or V,overall accuracy,0.8787,0.1152
-2016-08-31,-17.75 dB,above 150 m,whole,W only,"flood on the ground, ha",381.0,381.0
-2016-08-31,-17.75 dB,above 150 m,whole,W only,"mapped flood, ha",169.0,0.0
-2016-08-31,-17.75 dB,above 150 m,whole,W only,user's accuracy,0.0,0.0
-2016-08-31,-17.75 dB,above 150 m,whole,W only,producer's accuracy,0.0,0.0
-2016-08-31,-17.75 dB,above 150 m,whole,W only,overall accuracy,0.9996,0.0002
-2016-08-31,-17.75 dB,above 150 m,whole,W or V,"flood on the ground, ha",932.0,530.0
-2016-08-31,-17.75 dB,above 150 m,whole,W or V,"mapped flood, ha",169.0,0.0
-2016-08-31,-17.75 dB,above 150 m,whole,W or V,user's accuracy,1.0,0.0
-2016-08-31,-17.75 dB,above 150 m,whole,W or V,producer's accuracy,0.1814,0.1031
-2016-08-31,-17.75 dB,above 150 m,whole,W or V,overall accuracy,0.9995,0.0002
-2016-08-31,-17.75 dB,above 150 m,clear part,W only,"flood on the ground, ha",16.0,16.0
-2016-08-31,-17.75 dB,above 150 m,clear part,W only,"mapped flood, ha",32.0,0.0
-2016-08-31,-17.75 dB,above 150 m,clear part,W only,user's accuracy,0.0,0.0
-2016-08-31,-17.75 dB,above 150 m,clear part,W only,producer's accuracy,0.0,0.0
-2016-08-31,-17.75 dB,above 150 m,clear part,W only,overall accuracy,0.9997,0.0
-2016-08-31,-17.75 dB,above 150 m,clear part,W or V,"flood on the ground, ha",63.0,22.0
-2016-08-31,-17.75 dB,above 150 m,clear part,W or V,"mapped flood, ha",32.0,0.0
-2016-08-31,-17.75 dB,above 150 m,clear part,W or V,user's accuracy,1.0,0.0
-2016-08-31,-17.75 dB,above 150 m,clear part,W or V,producer's accuracy,0.5024,0.1736
-2016-08-31,-17.75 dB,above 150 m,clear part,W or V,overall accuracy,0.9998,0.0001
-2016-08-31,,swath edge,whole,W only,"real flood inside the swath-edge buffer, ha",0,0
-2016-08-31,,swath edge,clear part,W only,"real flood inside the swath-edge buffer, ha",0,0
-2016-08-31,,swath edge,whole,W or V,"real flood inside the swath-edge buffer, ha",0,0
-2016-08-31,,swath edge,clear part,W or V,"real flood inside the swath-edge buffer, ha",0,0
+map_date,map,scope,layer,variant,metric,value,se,n_readable,n_map_flood
+2016-08-31,-18.75 dB,floodplain,whole,W only,"flood on the ground, ha",27717.0,6235.0,147,48
+2016-08-31,-18.75 dB,floodplain,whole,W only,"mapped flood, ha",33768.0,0.0,147,48
+2016-08-31,-18.75 dB,floodplain,whole,W only,user's accuracy,0.5417,0.0727,147,48
+2016-08-31,-18.75 dB,floodplain,whole,W only,producer's accuracy,0.6599,0.1397,147,48
+2016-08-31,-18.75 dB,floodplain,whole,W only,overall accuracy,0.9427,0.0143,147,48
+2016-08-31,-18.75 dB,floodplain,whole,W or V,"flood on the ground, ha",38283.0,8286.0,147,48
+2016-08-31,-18.75 dB,floodplain,whole,W or V,"mapped flood, ha",33768.0,0.0,147,48
+2016-08-31,-18.75 dB,floodplain,whole,W or V,user's accuracy,0.5833,0.0719,147,48
+2016-08-31,-18.75 dB,floodplain,whole,W or V,producer's accuracy,0.5145,0.1108,147,48
+2016-08-31,-18.75 dB,floodplain,whole,W or V,overall accuracy,0.9249,0.0191,147,48
+2016-08-31,-18.75 dB,floodplain,clear part,W only,"flood on the ground, ha",11274.0,3254.0,147,48
+2016-08-31,-18.75 dB,floodplain,clear part,W only,"mapped flood, ha",11432.0,0.0,147,48
+2016-08-31,-18.75 dB,floodplain,clear part,W only,user's accuracy,0.5417,0.0727,147,48
+2016-08-31,-18.75 dB,floodplain,clear part,W only,producer's accuracy,0.5493,0.1568,147,48
+2016-08-31,-18.75 dB,floodplain,clear part,W only,overall accuracy,0.9525,0.015,147,48
+2016-08-31,-18.75 dB,floodplain,clear part,W or V,"flood on the ground, ha",16721.0,4427.0,147,48
+2016-08-31,-18.75 dB,floodplain,clear part,W or V,"mapped flood, ha",11432.0,0.0,147,48
+2016-08-31,-18.75 dB,floodplain,clear part,W or V,user's accuracy,0.5833,0.0719,147,48
+2016-08-31,-18.75 dB,floodplain,clear part,W or V,producer's accuracy,0.3988,0.1079,147,48
+2016-08-31,-18.75 dB,floodplain,clear part,W or V,overall accuracy,0.9318,0.0204,147,48
+2016-08-31,-18.75 dB,whole map,whole,W only,"flood on the ground, ha",33505.0,6883.0,277,59
+2016-08-31,-18.75 dB,whole map,whole,W only,"mapped flood, ha",39481.0,0.0,277,59
+2016-08-31,-18.75 dB,whole map,whole,W only,user's accuracy,0.5424,0.0654,277,59
+2016-08-31,-18.75 dB,whole map,whole,W only,producer's accuracy,0.6391,0.1248,277,59
+2016-08-31,-18.75 dB,whole map,whole,W only,overall accuracy,0.9905,0.0022,277,59
+2016-08-31,-18.75 dB,whole map,whole,W or V,"flood on the ground, ha",113850.0,68597.0,277,59
+2016-08-31,-18.75 dB,whole map,whole,W or V,"mapped flood, ha",39481.0,0.0,277,59
+2016-08-31,-18.75 dB,whole map,whole,W or V,user's accuracy,0.5763,0.0649,277,59
+2016-08-31,-18.75 dB,whole map,whole,W or V,producer's accuracy,0.1998,0.1217,277,59
+2016-08-31,-18.75 dB,whole map,whole,W or V,overall accuracy,0.9659,0.0217,277,59
+2016-08-31,-18.75 dB,whole map,clear part,W only,"flood on the ground, ha",12297.0,3276.0,277,59
+2016-08-31,-18.75 dB,whole map,clear part,W only,"mapped flood, ha",12758.0,0.0,277,59
+2016-08-31,-18.75 dB,whole map,clear part,W only,user's accuracy,0.5424,0.0654,277,59
+2016-08-31,-18.75 dB,whole map,clear part,W only,producer's accuracy,0.5627,0.148,277,59
+2016-08-31,-18.75 dB,whole map,clear part,W only,overall accuracy,0.9858,0.0042,277,59
+2016-08-31,-18.75 dB,whole map,clear part,W or V,"flood on the ground, ha",32375.0,15300.0,277,59
+2016-08-31,-18.75 dB,whole map,clear part,W or V,"mapped flood, ha",12758.0,0.0,277,59
+2016-08-31,-18.75 dB,whole map,clear part,W or V,user's accuracy,0.5763,0.0649,277,59
+2016-08-31,-18.75 dB,whole map,clear part,W or V,producer's accuracy,0.2271,0.109,277,59
+2016-08-31,-18.75 dB,whole map,clear part,W or V,overall accuracy,0.9614,0.0194,277,59
+2016-08-31,-18.75 dB,"below 150 m, sloped",whole,W only,"flood on the ground, ha",3491.0,867.0,61,11
+2016-08-31,-18.75 dB,"below 150 m, sloped",whole,W only,"mapped flood, ha",5308.0,0.0,61,11
+2016-08-31,-18.75 dB,"below 150 m, sloped",whole,W only,user's accuracy,0.5455,0.1575,61,11
+2016-08-31,-18.75 dB,"below 150 m, sloped",whole,W only,producer's accuracy,0.8294,0.0684,61,11
+2016-08-31,-18.75 dB,"below 150 m, sloped",whole,W only,overall accuracy,0.9911,0.0026,61,11
+2016-08-31,-18.75 dB,"below 150 m, sloped",whole,W or V,"flood on the ground, ha",45973.0,42130.0,61,11
+2016-08-31,-18.75 dB,"below 150 m, sloped",whole,W or V,"mapped flood, ha",5308.0,0.0,61,11
+2016-08-31,-18.75 dB,"below 150 m, sloped",whole,W or V,user's accuracy,0.5455,0.1575,61,11
+2016-08-31,-18.75 dB,"below 150 m, sloped",whole,W or V,producer's accuracy,0.063,0.0602,61,11
+2016-08-31,-18.75 dB,"below 150 m, sloped",whole,W or V,overall accuracy,0.8647,0.1253,61,11
+2016-08-31,-18.75 dB,"below 150 m, sloped",clear part,W only,"flood on the ground, ha",969.0,230.0,61,11
+2016-08-31,-18.75 dB,"below 150 m, sloped",clear part,W only,"mapped flood, ha",1397.0,0.0,61,11
+2016-08-31,-18.75 dB,"below 150 m, sloped",clear part,W only,user's accuracy,0.5455,0.1575,61,11
+2016-08-31,-18.75 dB,"below 150 m, sloped",clear part,W only,producer's accuracy,0.7865,0.0736,61,11
+2016-08-31,-18.75 dB,"below 150 m, sloped",clear part,W only,overall accuracy,0.9943,0.0016,61,11
+2016-08-31,-18.75 dB,"below 150 m, sloped",clear part,W or V,"flood on the ground, ha",18057.0,17061.0,61,11
+2016-08-31,-18.75 dB,"below 150 m, sloped",clear part,W or V,"mapped flood, ha",1397.0,0.0,61,11
+2016-08-31,-18.75 dB,"below 150 m, sloped",clear part,W or V,user's accuracy,0.5455,0.1575,61,11
+2016-08-31,-18.75 dB,"below 150 m, sloped",clear part,W or V,producer's accuracy,0.0422,0.0415,61,11
+2016-08-31,-18.75 dB,"below 150 m, sloped",clear part,W or V,overall accuracy,0.879,0.1152,61,11
+2016-08-31,-18.75 dB,above 150 m,whole,W only,"flood on the ground, ha",381.0,381.0,69,0
+2016-08-31,-18.75 dB,above 150 m,whole,W only,"mapped flood, ha",0.0,0.0,69,0
+2016-08-31,-18.75 dB,above 150 m,whole,W only,user's accuracy,nan,nan,69,0
+2016-08-31,-18.75 dB,above 150 m,whole,W only,producer's accuracy,0.0,0.0,69,0
+2016-08-31,-18.75 dB,above 150 m,whole,W only,overall accuracy,0.9996,0.0002,69,0
+2016-08-31,-18.75 dB,above 150 m,whole,W or V,"flood on the ground, ha",932.0,530.0,69,0
+2016-08-31,-18.75 dB,above 150 m,whole,W or V,"mapped flood, ha",0.0,0.0,69,0
+2016-08-31,-18.75 dB,above 150 m,whole,W or V,user's accuracy,nan,nan,69,0
+2016-08-31,-18.75 dB,above 150 m,whole,W or V,producer's accuracy,0.0,0.0,69,0
+2016-08-31,-18.75 dB,above 150 m,whole,W or V,overall accuracy,0.9994,0.0002,69,0
+2016-08-31,-18.75 dB,above 150 m,clear part,W only,"flood on the ground, ha",16.0,16.0,69,0
+2016-08-31,-18.75 dB,above 150 m,clear part,W only,"mapped flood, ha",0.0,0.0,69,0
+2016-08-31,-18.75 dB,above 150 m,clear part,W only,user's accuracy,nan,nan,69,0
+2016-08-31,-18.75 dB,above 150 m,clear part,W only,producer's accuracy,0.0,0.0,69,0
+2016-08-31,-18.75 dB,above 150 m,clear part,W only,overall accuracy,0.9998,0.0,69,0
+2016-08-31,-18.75 dB,above 150 m,clear part,W or V,"flood on the ground, ha",63.0,22.0,69,0
+2016-08-31,-18.75 dB,above 150 m,clear part,W or V,"mapped flood, ha",0.0,0.0,69,0
+2016-08-31,-18.75 dB,above 150 m,clear part,W or V,user's accuracy,nan,nan,69,0
+2016-08-31,-18.75 dB,above 150 m,clear part,W or V,producer's accuracy,0.0,0.0,69,0
+2016-08-31,-18.75 dB,above 150 m,clear part,W or V,overall accuracy,0.9997,0.0001,69,0
+2016-08-31,-17.75 dB,floodplain,whole,W only,"flood on the ground, ha",27717.0,6235.0,147,79
+2016-08-31,-17.75 dB,floodplain,whole,W only,"mapped flood, ha",38853.0,0.0,147,79
+2016-08-31,-17.75 dB,floodplain,whole,W only,user's accuracy,0.5003,0.064,147,79
+2016-08-31,-17.75 dB,floodplain,whole,W only,producer's accuracy,0.7013,0.1472,147,79
+2016-08-31,-17.75 dB,floodplain,whole,W only,overall accuracy,0.9363,0.0143,147,79
+2016-08-31,-17.75 dB,floodplain,whole,W or V,"flood on the ground, ha",38283.0,8286.0,147,79
+2016-08-31,-17.75 dB,floodplain,whole,W or V,"mapped flood, ha",38853.0,0.0,147,79
+2016-08-31,-17.75 dB,floodplain,whole,W or V,user's accuracy,0.5619,0.0636,147,79
+2016-08-31,-17.75 dB,floodplain,whole,W or V,producer's accuracy,0.5702,0.121,147,79
+2016-08-31,-17.75 dB,floodplain,whole,W or V,overall accuracy,0.923,0.0191,147,79
+2016-08-31,-17.75 dB,floodplain,clear part,W only,"flood on the ground, ha",11274.0,3254.0,147,79
+2016-08-31,-17.75 dB,floodplain,clear part,W only,"mapped flood, ha",13919.0,0.0,147,79
+2016-08-31,-17.75 dB,floodplain,clear part,W only,user's accuracy,0.4852,0.0612,147,79
+2016-08-31,-17.75 dB,floodplain,clear part,W only,producer's accuracy,0.5991,0.1696,147,79
+2016-08-31,-17.75 dB,floodplain,clear part,W only,overall accuracy,0.9462,0.015,147,79
+2016-08-31,-17.75 dB,floodplain,clear part,W or V,"flood on the ground, ha",16721.0,4427.0,147,79
+2016-08-31,-17.75 dB,floodplain,clear part,W or V,"mapped flood, ha",13919.0,0.0,147,79
+2016-08-31,-17.75 dB,floodplain,clear part,W or V,user's accuracy,0.554,0.0612,147,79
+2016-08-31,-17.75 dB,floodplain,clear part,W or V,producer's accuracy,0.4612,0.1229,147,79
+2016-08-31,-17.75 dB,floodplain,clear part,W or V,overall accuracy,0.93,0.0204,147,79
+2016-08-31,-17.75 dB,whole map,whole,W only,"flood on the ground, ha",33505.0,6883.0,277,102
+2016-08-31,-17.75 dB,whole map,whole,W only,"mapped flood, ha",45648.0,0.0,277,102
+2016-08-31,-17.75 dB,whole map,whole,W only,user's accuracy,0.5068,0.0573,277,102
+2016-08-31,-17.75 dB,whole map,whole,W only,producer's accuracy,0.6905,0.1334,277,102
+2016-08-31,-17.75 dB,whole map,whole,W only,overall accuracy,0.9896,0.0022,277,102
+2016-08-31,-17.75 dB,whole map,whole,W or V,"flood on the ground, ha",113850.0,68597.0,277,102
+2016-08-31,-17.75 dB,whole map,whole,W or V,"mapped flood, ha",45648.0,0.0,277,102
+2016-08-31,-17.75 dB,whole map,whole,W or V,user's accuracy,0.5581,0.0571,277,102
+2016-08-31,-17.75 dB,whole map,whole,W or V,producer's accuracy,0.2238,0.1359,277,102
+2016-08-31,-17.75 dB,whole map,whole,W or V,overall accuracy,0.9656,0.0217,277,102
+2016-08-31,-17.75 dB,whole map,clear part,W only,"flood on the ground, ha",12297.0,3276.0,277,102
+2016-08-31,-17.75 dB,whole map,clear part,W only,"mapped flood, ha",15677.0,0.0,277,102
+2016-08-31,-17.75 dB,whole map,clear part,W only,user's accuracy,0.4933,0.0548,277,102
+2016-08-31,-17.75 dB,whole map,clear part,W only,producer's accuracy,0.629,0.1638,277,102
+2016-08-31,-17.75 dB,whole map,clear part,W only,overall accuracy,0.9841,0.0042,277,102
+2016-08-31,-17.75 dB,whole map,clear part,W or V,"flood on the ground, ha",32375.0,15300.0,277,102
+2016-08-31,-17.75 dB,whole map,clear part,W or V,"mapped flood, ha",15677.0,0.0,277,102
+2016-08-31,-17.75 dB,whole map,clear part,W or V,user's accuracy,0.5512,0.0547,277,102
+2016-08-31,-17.75 dB,whole map,clear part,W or V,producer's accuracy,0.2669,0.1274,277,102
+2016-08-31,-17.75 dB,whole map,clear part,W or V,overall accuracy,0.9609,0.0194,277,102
+2016-08-31,-17.75 dB,"below 150 m, sloped",whole,W only,"flood on the ground, ha",3491.0,867.0,61,22
+2016-08-31,-17.75 dB,"below 150 m, sloped",whole,W only,"mapped flood, ha",6221.0,0.0,61,22
+2016-08-31,-17.75 dB,"below 150 m, sloped",whole,W only,user's accuracy,0.5321,0.1363,61,22
+2016-08-31,-17.75 dB,"below 150 m, sloped",whole,W only,producer's accuracy,0.9483,0.0506,61,22
+2016-08-31,-17.75 dB,"below 150 m, sloped",whole,W only,overall accuracy,0.9908,0.0026,61,22
+2016-08-31,-17.75 dB,"below 150 m, sloped",whole,W or V,"flood on the ground, ha",45973.0,42130.0,61,22
+2016-08-31,-17.75 dB,"below 150 m, sloped",whole,W or V,"mapped flood, ha",6221.0,0.0,61,22
+2016-08-31,-17.75 dB,"below 150 m, sloped",whole,W or V,user's accuracy,0.5321,0.1363,61,22
+2016-08-31,-17.75 dB,"below 150 m, sloped",whole,W or V,producer's accuracy,0.072,0.0682,61,22
+2016-08-31,-17.75 dB,"below 150 m, sloped",whole,W or V,overall accuracy,0.8645,0.1253,61,22
+2016-08-31,-17.75 dB,"below 150 m, sloped",clear part,W only,"flood on the ground, ha",969.0,230.0,61,22
+2016-08-31,-17.75 dB,"below 150 m, sloped",clear part,W only,"mapped flood, ha",1820.0,0.0,61,22
+2016-08-31,-17.75 dB,"below 150 m, sloped",clear part,W only,user's accuracy,0.5243,0.1263,61,22
+2016-08-31,-17.75 dB,"below 150 m, sloped",clear part,W only,producer's accuracy,0.9851,0.0151,61,22
+2016-08-31,-17.75 dB,"below 150 m, sloped",clear part,W only,overall accuracy,0.9941,0.0016,61,22
+2016-08-31,-17.75 dB,"below 150 m, sloped",clear part,W or V,"flood on the ground, ha",18057.0,17061.0,61,22
+2016-08-31,-17.75 dB,"below 150 m, sloped",clear part,W or V,"mapped flood, ha",1820.0,0.0,61,22
+2016-08-31,-17.75 dB,"below 150 m, sloped",clear part,W or V,user's accuracy,0.5243,0.1263,61,22
+2016-08-31,-17.75 dB,"below 150 m, sloped",clear part,W or V,producer's accuracy,0.0528,0.0514,61,22
+2016-08-31,-17.75 dB,"below 150 m, sloped",clear part,W or V,overall accuracy,0.8787,0.1152,61,22
+2016-08-31,-17.75 dB,above 150 m,whole,W only,"flood on the ground, ha",381.0,381.0,69,1
+2016-08-31,-17.75 dB,above 150 m,whole,W only,"mapped flood, ha",169.0,0.0,69,1
+2016-08-31,-17.75 dB,above 150 m,whole,W only,user's accuracy,0.0,0.0,69,1
+2016-08-31,-17.75 dB,above 150 m,whole,W only,producer's accuracy,0.0,0.0,69,1
+2016-08-31,-17.75 dB,above 150 m,whole,W only,overall accuracy,0.9996,0.0002,69,1
+2016-08-31,-17.75 dB,above 150 m,whole,W or V,"flood on the ground, ha",932.0,530.0,69,1
+2016-08-31,-17.75 dB,above 150 m,whole,W or V,"mapped flood, ha",169.0,0.0,69,1
+2016-08-31,-17.75 dB,above 150 m,whole,W or V,user's accuracy,1.0,0.0,69,1
+2016-08-31,-17.75 dB,above 150 m,whole,W or V,producer's accuracy,0.1814,0.1031,69,1
+2016-08-31,-17.75 dB,above 150 m,whole,W or V,overall accuracy,0.9995,0.0002,69,1
+2016-08-31,-17.75 dB,above 150 m,clear part,W only,"flood on the ground, ha",16.0,16.0,69,1
+2016-08-31,-17.75 dB,above 150 m,clear part,W only,"mapped flood, ha",32.0,0.0,69,1
+2016-08-31,-17.75 dB,above 150 m,clear part,W only,user's accuracy,0.0,0.0,69,1
+2016-08-31,-17.75 dB,above 150 m,clear part,W only,producer's accuracy,0.0,0.0,69,1
+2016-08-31,-17.75 dB,above 150 m,clear part,W only,overall accuracy,0.9997,0.0,69,1
+2016-08-31,-17.75 dB,above 150 m,clear part,W or V,"flood on the ground, ha",63.0,22.0,69,1
+2016-08-31,-17.75 dB,above 150 m,clear part,W or V,"mapped flood, ha",32.0,0.0,69,1
+2016-08-31,-17.75 dB,above 150 m,clear part,W or V,user's accuracy,1.0,0.0,69,1
+2016-08-31,-17.75 dB,above 150 m,clear part,W or V,producer's accuracy,0.5024,0.1736,69,1
+2016-08-31,-17.75 dB,above 150 m,clear part,W or V,overall accuracy,0.9998,0.0001,69,1
+2016-08-31,,swath edge,whole,W only,"real flood inside the swath-edge buffer, ha",0,0,,
+2016-08-31,,swath edge,clear part,W only,"real flood inside the swath-edge buffer, ha",0,0,,
+2016-08-31,,swath edge,whole,W or V,"real flood inside the swath-edge buffer, ha",0,0,,
+2016-08-31,,swath edge,clear part,W or V,"real flood inside the swath-edge buffer, ha",0,0,,

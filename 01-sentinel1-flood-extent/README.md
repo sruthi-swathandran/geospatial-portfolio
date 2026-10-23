@@ -595,7 +595,8 @@ The rest of the 12 August map splits in two on the same DEM: ground at or below
 
 **Low ground the DEM calls sloped.** It holds 8,801 ha of flood on the map as
 drawn and 9,551 ha on the published map, and 84 points, 18 of them open water.
-Every point the map called flood there was open water, but in the clear part
+Every point the map called flood there was open water, 8 on the map as drawn
+and 11 on the published map, but in the clear part
 the map found only 0.263 ± 0.120 of the open water: 14,732 ± 6,747 ha on the
 ground against 3,874 ha mapped. 16 of the 18 open-water points lie between 57
 and 81 m, on the valley floor, and the 30 m DEM gives them slopes of 2 to 15°.
@@ -625,6 +626,14 @@ bound, up to 3.85% of the stratum's 1,191,667 clear hectares could be open
 water, about 45,859 ha. On low sloped ground the same stratum has only 12
 readable points and the bound is 49,430 ha. `score_map.py` writes this bound
 for every group with no open water found to `zero_hit_bounds.csv`.
+
+The same holds the other way round. On low sloped ground every point the map
+calls flood is open water, so its user's accuracy prints as 1.000 ± 0.000. That
+too says only that no false flood was found, among 8 points on the map as drawn
+and 11 on the published map. At the 95% bound user's accuracy there could be as
+low as 0.631 or 0.715. `score_map.py` writes this bound, for a user's accuracy
+of exactly 1 or exactly 0, to `user_accuracy_bounds.csv`, and every row of
+`map_scores.csv` now carries the number of readable points behind it.
 
 ---
 
@@ -679,7 +688,10 @@ producer's accuracy down to about 0.54. On 31 August only two points fell in
 floodplain land far from flood, and the bound there allows up to 75,300 ha.
 
 Outside the floodplain these samples have few points. No point fell in either
-map's flood above 150 m. On low sloped ground, 42 points on 7 August and 66 on
+map's flood above 150 m at −18.75 dB. At −17.75 dB three did on 7 August and
+one on 31 August, none of them open water, so user's accuracy there prints as
+0.000 ± 0.000 when the bound allows up to 0.708 and 0.975
+(`user_accuracy_bounds.csv` in each sample folder). On low sloped ground, 42 points on 7 August and 66 on
 31 August give user's accuracies of 0.571 ± 0.202 and 0.545 ± 0.158.
 
 **Clear sky against cloud.** `date_checks.py terrain` repeats the 12 August

@@ -1,0 +1,3 @@
+map,scope,variant,n_map_flood,user_accuracy,bound,bound_95
+-17.75 dB,above 150 m,W only,3,0.0,upper,0.7076
+-17.75 dB,above 150 m,W or V,3,1.0,lower,0.2924

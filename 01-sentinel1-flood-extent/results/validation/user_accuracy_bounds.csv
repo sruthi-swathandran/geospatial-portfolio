@@ -1,0 +1,11 @@
+map,scope,variant,n_map_flood,user_accuracy,bound,bound_95
+"as drawn, -18.75 dB","below 150 m, sloped",W only,8,1.0,lower,0.6306
+"as drawn, -18.75 dB","below 150 m, sloped",W or V,8,1.0,lower,0.6306
+"as drawn, -17.75 dB","below 150 m, sloped",W only,8,1.0,lower,0.6306
+"as drawn, -17.75 dB","below 150 m, sloped",W or V,8,1.0,lower,0.6306
+"published, -18.75 dB","below 150 m, sloped",W only,11,1.0,lower,0.7151
+"published, -18.75 dB","below 150 m, sloped",W or V,11,1.0,lower,0.7151
+"published, -17.75 dB","below 150 m, sloped",W only,12,1.0,lower,0.7354
+"published, -17.75 dB","below 150 m, sloped",W or V,12,1.0,lower,0.7354
+"S-01, VH averaged","below 150 m, sloped",W only,8,1.0,lower,0.6306
+"S-01, VH averaged","below 150 m, sloped",W or V,8,1.0,lower,0.6306

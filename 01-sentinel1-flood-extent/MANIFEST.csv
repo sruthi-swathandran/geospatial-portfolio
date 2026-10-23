@@ -14,4 +14,4 @@ results,68,9187299,9.19,".csv x48, .json x11, .geojson x7, (none) x1, .txt x1"
 results/figures,32,14857664,14.86,".png x29, .pdf x3"
 results/fullscene,40,26005503,26.01,".png x17, .tif x16, .json x7"
 results/transfer,23,62912,0.06,.csv x23
-results/validation,73,564811,0.56,".csv x65, .txt x8"
+results/validation,76,570804,0.57,".csv x68, .txt x8"
