@@ -1,0 +1,11 @@
+method,country,parcels,recall,no_object_pct,parcels_100m_up,recall_100m_up_pct
+"FTW v3, EfficientNet-B7",india,1983,0.1291,27.0,126,46.0
+"FTW v3, EfficientNet-B7",slovenia,6831,0.3306,39.7,319,79.3
+watershed,india,1983,0.2461,0.0,126,23.0
+watershed,slovenia,6831,0.3484,0.0,319,69.9
+FTW v1,india,1983,0.0272,74.4,126,17.5
+FTW v1,slovenia,6831,0.2222,53.3,319,72.7
+SAM ViT-H natural colour,india,1983,0.1669,2.8,126,50.8
+SAM ViT-H natural colour,slovenia,6831,0.2954,2.5,319,80.6
+SAM ViT-H colour infrared,india,1983,0.1831,6.1,126,52.4
+SAM ViT-H colour infrared,slovenia,6831,0.2593,5.1,319,76.8

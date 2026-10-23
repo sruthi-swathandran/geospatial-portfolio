@@ -1740,6 +1740,28 @@ fix, B-27 above, and three smaller things, P-01 to P-03.
   `.csv.gz` in their place when the plain file is absent, so compressing them
   later is a change of file name and nothing else.
 
+**Story round, 23 October 2026.** The README read as a study of FTW v1, two
+releases old, with v3 in a later finding. It now leads with v3 wherever v3 was
+measured. H-01 to H-04; no published figure changes.
+
+- **H-01.** The README opens with a short summary: the question, the answer so
+  far, three numbers and what to use today.
+- **H-02.** Finding 3's width table gives FTW v3 B7 where it gave v1, with
+  v1's ratios kept in the text, and a new figure,
+  `figures/recall_by_width.png`, draws v3 and watershed by width in both
+  countries. `src/figure_width.py` draws it and writes
+  `results/recall_by_width.csv` from the per-parcel files, with intervals over
+  whole chips or, below ten found parcels, at parcel level as B-27 has it.
+- **H-03.** Finding 5 now gives v3 B7 beside v1: no object on 27.0% of Indian
+  parcels against 74.4%, and 46.0% of the 126 fields over about 100 m found
+  against 17.5%. The README's 50.8% for SAM on those fields had no generated
+  file behind it. It is SAM on natural colour at the 0.50 threshold the width
+  tables use; colour infrared gives 52.4%. Both are now in
+  `results/reach_by_method.csv`, and the README names the composite. Findings 6
+  and 7, measured with v1 only, now say so.
+- **H-04.** The README counted 26 corrections after B-27 was added. It counts
+  27.
+
 ---
 
 ## Known gaps
@@ -1982,6 +2004,7 @@ python src\holdout.py --country slovenia
 python src\bootstrap_ci.py --country india --by-width
 python src\bootstrap_ci.py --country slovenia --by-width
 python src\figure_budget.py
+python src\figure_width.py
 python src\pick_district.py
 python src\district_profile.py
 python src\district_plan.py
