@@ -54,6 +54,14 @@ the same resample for every checkpoint, giving a 95% interval.
     python src\\finetune_score.py --part run --limit 5
     python src\\finetune_score.py --part run
     python src\\finetune_score.py --part report
+    python src\\finetune_score.py --part sam
+
+Added after the result, 26 October 2026
+---------------------------------------
+T3 reads watershed only. Finding 1 also sets SAM against FTW, so --part sam
+reads SAM's saved sweeps at each checkpoint's object count, interpolated and
+judged as budget_newer.py judges them. It was written after the report above
+had been seen, so it describes and decides nothing.
 """
 
 from __future__ import annotations
@@ -380,10 +388,62 @@ def report(args) -> None:
     print(RULE)
 
 
+def sam(args) -> None:
+    """SAM at each checkpoint's object count, added after the result."""
+    import season_test as T
+    import newer_checkpoints as NC
+    import budget_newer as BN
+    register()
+    keys = [BASE] + list(FT)
+    rng = np.random.default_rng(args.seed)
+    rows = []
+    print(RULE)
+    print("SAM AT EACH CHECKPOINT'S OBJECT COUNT, ADDED AFTER THE RESULT")
+    print(RULE)
+    for country in COUNTRIES:
+        F, _, _ = T.load_country(country)
+        res = {k: {r["chip"]: r for r in NC.read_rows(
+            F.RESULTS / "newer_ckpt" / f"{NC.slug(k)}_chips.csv")}
+            for k in keys}
+        chips = sorted(c for c in set.intersection(*(set(v) for v in
+                                                     res.values()))
+                       if float(res[BASE][c]["parcels"]) > 0)
+        sweeps = BN.sam_sweeps(SimpleNamespace(RESULTS=F.RESULTS), chips)
+        n = NC.arrays(res, BASE, chips)[0]
+        idx = rng.integers(0, len(chips), (args.boots, len(chips)))
+        for k in keys:
+            _, h, _, o = NC.arrays(res, k, chips)
+            budget = float(o.mean())
+            f_rec = h.sum() / n.sum()
+            for m in sweeps:
+                r, used = m.at(budget, n)
+                clamped = abs(used - budget) > 1e-9
+                diff = np.array([m.at(budget, n, i)[0]
+                                 - h[i].sum() / n[i].sum() for i in idx])
+                lo, hi = interval(diff)
+                call = BN.verdict(lo, hi, used, budget, clamped)
+                note = f" (read at {used:.1f})" if clamped else ""
+                print(f"  {country:<9}{k:<25}{budget:>7.1f}  FTW "
+                      f"{f_rec * 100:5.2f}%  {m.name:<22}{r * 100:6.2f}%  "
+                      f"[{lo * 100:+6.2f}, {hi * 100:+6.2f}]  {call}{note}")
+                rows.append({"country": country, "checkpoint": k,
+                             "budget": round(budget, 1),
+                             "ftw_recall": round(f_rec, 4), "method": m.name,
+                             "objects_used": round(used, 1),
+                             "clamped": clamped, "recall_at_budget": round(r, 4),
+                             "minus_ftw": round(r - f_rec, 4),
+                             "lo": round(lo, 4), "hi": round(hi, 4),
+                             "reading": call})
+        print()
+    write_csv(PROJECT / "results" / "finetune_sam.csv", rows)
+    print("  wrote results\\finetune_sam.csv")
+    print(RULE)
+
+
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--part", required=True,
-                    choices=["check", "run", "report"])
+                    choices=["check", "run", "report", "sam"])
     ap.add_argument("--limit", type=int, default=0)
     ap.add_argument("--batch", type=int, default=4)
     ap.add_argument("--threads", type=int, default=0)
@@ -401,6 +461,8 @@ def main() -> None:
         check()
     elif args.part == "run":
         run(args)
+    elif args.part == "sam":
+        sam(args)
     else:
         report(args)
 

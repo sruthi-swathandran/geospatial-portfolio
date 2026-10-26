@@ -31,7 +31,9 @@ best lead and still short of proof.
 **Three numbers.** FTW v3 with an EfficientNet-B7 encoder finds 12.9% of
 labelled Indian parcels and 33.1% of Slovenian ones. At the object count v3
 emits in India, watershed, which is never trained, finds 14.8%, and SAM 18.3%
-from fewer objects.
+from fewer objects. Fine-tuned here on India's own train chips, v3 B7 rises to
+15.1% from fewer than half the objects and draws level with SAM, while its
+Slovenian recall falls to 19.5%.
 
 **What to use today.** On Indian fields over about 100 m across, SAM and FTW
 v3 each find about half, 50.8% and 46.0%. Below 30 m no method tested finds
@@ -56,6 +58,10 @@ per chip, watershed and SAM do better:
 SAM cannot draw more than 222 objects per Indian chip, so it is read there,
 with fewer objects than FTW, and its lead of 5.40 points stands. Watershed's
 lead is 1.92 points, with an interval from +0.21 to +3.59.
+
+That holds for every public checkpoint. Fine-tuned on India's own train chips,
+v3 B7 pulls ahead of watershed and level with SAM at its own object count
+(finding 10).
 
 This project first tested FTW's v1 checkpoint of October 2024 and called it the
 released state of the art, after FTW had replaced it (B-24). v1 recovers 2.7%.
@@ -148,6 +154,24 @@ Blur also smooths texture inside fields, so the test shows that edge contrast
 at India's level is enough to cost most of the gap. It leaves about two fifths
 of v3's gap to something else.
 
+**10. Fine-tuning on India helps India a little and costs Slovenia.** v3 B7
+was fine-tuned on a free Kaggle GPU in two arms, India's train chips alone and
+India's mixed with Slovenia's, with the recipe and the rules for reading it
+committed before training. On the test chips:
+
+| checkpoint | objects per Indian chip | India recall | Slovenia recall |
+|---|---:|---:|---:|
+| v3 B7, untouched | 245.3 | 12.91% | 33.06% |
+| fine-tuned on India | 108.8 | 15.13% | 19.48% |
+| fine-tuned on India and Slovenia | 141.1 | 13.57% | 35.18% |
+
+Trained on India alone, it finds 2.22 points more Indian parcels, interval
++0.86 to +3.63, from fewer than half the objects. At that count watershed finds
+5.71% and SAM on colour infrared 14.52%, read at its coarsest 155 objects. It
+forgets Slovenia, because India's labels hold no background. Mixing in
+Slovenian chips keeps Slovenia and leaves the Indian gain too small to measure.
+Below 30 m neither arm moves.
+
 **What is still open** is the rest of the gap, and whether the edge measure
 tracks what a person sees. Width, shape, label placement and season each
 explain little, and weak edges explain most. The edge test's blur was set by
@@ -157,8 +181,10 @@ second person's rank score over 60 parcels is 0.742, p = 0.0004, just under the
 than either agrees with the measure, kappa 0.67. Watershed finds
 about as many boundaries in the December to February image as in kharif,
 while v1 given that image does no better, so the edges are in the imagery.
-No checkpoint has been fine-tuned on Indian chips here. FTW reports fine-tuning
-a model trained without India moving it from 0.14 to 0.19 in its own scoring.
+Fine-tuning on India's own labels adds 2.2 points and loses Slovenia unless
+Slovenian chips are mixed in, and then the Indian gain is too small to
+measure. A recipe that keeps both, or Indian labels that mark background too,
+is untested.
 
 ![Recall against objects emitted per chip](figures/recall_by_object_budget.png)
 
@@ -187,11 +213,14 @@ is applied to every method. `COMPARISON.md` explains each control.
 - **Some findings rest on v1 alone.** Findings 6 and 7, the coverage
   figures in finding 5, and most tables in `COMPARISON.md` were measured with
   v1 before v3 was tested (B-24), and were not repeated. Findings 1 to 3, the
-  rest of 5, findings 8 and 9, both figures and the interactive map use v3. The later
+  rest of 5, findings 8 to 10, both figures and the interactive map use v3. The later
   checkpoints are in findings 18 and 19 of `COMPARISON.md`.
 - **FTW's FULL checkpoints carry noncommercial terms** from some of their
   training labels. v3.1 is the CC-BY version, and it probably did not see
-  Slovenia, which flatters its India to Slovenia ratio.
+  Slovenia, which flatters its India to Slovenia ratio. The fine-tuned
+  checkpoints in finding 10 inherit those terms and are not published.
+- **Fine-tuning ran one recipe,** with one learning rate and one seed, set in
+  advance and not tuned, so a better recipe may exist.
 - **The parcel reconstruction is bounded, not validated.** FTW erodes each
   parcel's edge and this project gives it back. Varying that step moves no
   recall by more than 0.0017, but it has never been checked against

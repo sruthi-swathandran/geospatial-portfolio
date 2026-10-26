@@ -365,7 +365,11 @@ than recall.
 anyone would pick up, so what it does untouched is the honest thing to report
 first. FTW's own Table 5 shows fine-tuning moving India's object recall from
 0.14 to 0.19, so it helps and does not transform. FTW's later checkpoints,
-untouched, are in `COMPARISON.md` findings 18 and 19.
+untouched, are in `COMPARISON.md` findings 18 and 19. Since then v3 B7 has
+been fine-tuned on India's own train chips, in `COMPARISON.md` finding 21:
+India rises from 12.91% to 15.13% and Slovenia falls from 33.06% to 19.48%,
+and mixing Slovenian chips into the training keeps Slovenia and leaves the
+Indian gain too small to measure.
 
 **O-06. Licensing cuts against the better model.** The FULL checkpoint trains
 on Latvia, Portugal, South Africa and Lithuania, whose labels are CC-BY-NC or

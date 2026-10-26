@@ -647,3 +647,118 @@ Chosen blur: 14.5 m, where the median meets India's 1.297.
 | panel 20260925 | 20 | 6 | 11 | 3 | 0 | 0.85 | 0.69 |
 | panel 20261012 | 20 | 8 | 7 | 3 | 2 | 0.75 | 0.50 |
 | new 20 | 20 | 8 | 10 | 1 | 1 | 0.90 | 0.80 |
+
+## v3 B7 fine-tuned on India
+
+### Val recall per epoch, on Kaggle
+
+| epoch | India arm, India val | India arm, Slovenia val | mixed arm, India val | mixed arm, Slovenia val |
+|---:|---:|---:|---:|---:|
+| 0 | 12.02% | 35.10% | 12.02% | 35.10% |
+| 1 | 14.84% | 25.79% | 14.71% | 35.47% |
+| 2 | 14.51% | 20.09% | 15.25% | 34.81% |
+| 3 | 14.91% | 21.04% | 13.83% | 36.26% |
+| 4 | 16.05% | 20.44% | 12.63% | 35.10% |
+| 5 | 17.19% | 20.40% | 13.57% | 36.00% |
+| 6 | 15.85% | 18.97% | 15.38% | 36.60% |
+| 7 | 15.85% | 19.61% | 12.02% | 35.58% |
+| 8 | 17.46% | 19.41% | 15.72% | 36.99% |
+| 9 | 17.53% | 20.54% | 12.83% | 36.57% |
+| 10 | 15.72% | 21.21% | 12.89% | 35.75% |
+| 11 | 17.26% | 19.94% | 14.64% | 36.78% |
+| 12 | 17.73% | 20.22% | 15.51% | 36.24% |
+| 13 | 18.33% | 19.44% | 11.89% | 35.83% |
+| 14 | 18.00% | 17.76% | 12.22% | 35.24% |
+| 15 | 17.46% | 19.17% | 13.63% | 35.53% |
+| 16 | 17.73% | 18.56% | 13.36% | 37.48% |
+| 17 | 17.53% | 17.30% | 13.16% | 36.19% |
+| 18 | 15.78% | 17.44% | 15.38% | 37.12% |
+| 19 | 17.19% | 16.29% | 13.43% | 36.39% |
+| 20 | 17.80% | 17.47% | 13.23% | 35.27% |
+
+### Test chips
+
+| country | checkpoint | objects per chip | recall | interval | null | above null |
+|---|---|---:|---:|---:|---:|---:|
+| india | v3 full b7 | 245.3 | 12.91% | [10.84, 15.27] | 2.50% | 10.41% |
+| india | v3 b7 ft india | 108.8 | 15.13% | [12.93, 17.47] | 0.71% | 14.42% |
+| india | v3 b7 ft india+slovenia | 141.1 | 13.57% | [11.39, 15.79] | 1.13% | 12.44% |
+| slovenia | v3 full b7 | 20.5 | 33.06% | [29.15, 36.64] | 0.58% | 32.48% |
+| slovenia | v3 b7 ft india | 47.8 | 19.48% | [16.91, 21.92] | 0.90% | 18.59% |
+| slovenia | v3 b7 ft india+slovenia | 23.0 | 35.18% | [31.36, 38.81] | 0.67% | 34.51% |
+
+### Readings against v3 full B7
+
+| test | checkpoint | difference | interval | reading |
+|---|---|---:|---:|---|
+| T1 India recall minus v3 | v3 b7 ft india | +2.22 | [+0.86, +3.63] | helps on India, from better placed boundaries |
+| T2 India above null minus v3 | v3 b7 ft india | +4.02 | [+2.62, +5.41] |  |
+| T4 India over Slovenia minus v3 | v3 b7 ft india | 0.386 | [0.293, 0.489] |  |
+| T5 Slovenia recall minus v3 | v3 b7 ft india | -13.57 | [-15.46, -11.64] |  |
+| T1 India recall minus v3 | v3 b7 ft india+slovenia | +0.66 | [-0.60, +1.91] | no gain on India |
+| T2 India above null minus v3 | v3 b7 ft india+slovenia | +2.03 | [+0.69, +3.31] |  |
+| T4 India over Slovenia minus v3 | v3 b7 ft india+slovenia | -0.005 | [-0.046, 0.033] |  |
+| T5 Slovenia recall minus v3 | v3 b7 ft india+slovenia | +2.12 | [+1.16, +3.33] |  |
+
+### Watershed at each checkpoint's object count
+
+| country | checkpoint | objects per chip | FTW | watershed | watershed minus FTW | interval | reading |
+|---|---|---:|---:|---:|---:|---:|---|
+| india | v3 full b7 | 245.3 | 12.91% | 14.83% | +1.92 | [+0.20, +3.60] | method ahead |
+| india | v3 b7 ft india | 108.8 | 15.13% | 5.71% | -9.42 | [-11.43, -7.41] | FTW ahead |
+| india | v3 b7 ft india+slovenia | 141.1 | 13.57% | 8.16% | -5.40 | [-7.27, -3.53] | FTW ahead |
+| slovenia | v3 full b7 | 20.5 | 33.06% | 6.27% | -26.78 | [-30.09, -23.24] | FTW ahead |
+| slovenia | v3 b7 ft india | 47.8 | 19.48% | 14.88% | -4.60 | [-6.72, -2.51] | FTW ahead |
+| slovenia | v3 b7 ft india+slovenia | 23.0 | 35.18% | 7.11% | -28.07 | [-31.17, -24.72] | FTW ahead |
+
+### SAM at each checkpoint's object count, added after the result
+
+| country | checkpoint | objects per chip | FTW | method | read at | recall | minus FTW | interval | reading |
+|---|---|---:|---:|---|---:|---:|---:|---:|---|
+| india | v3 full b7 | 245.3 | 12.91% | SAM colour infrared | 222.4 | 18.31% | +5.40 | [+3.53, +7.26] | method ahead, stands under P2 |
+| india | v3 full b7 | 245.3 | 12.91% | SAM NIR-blue-green | 212.6 | 17.25% | +4.34 | [+2.42, +6.23] | method ahead, stands under P2 |
+| india | v3 full b7 | 245.3 | 12.91% | SAM natural colour | 194.6 | 16.69% | +3.78 | [+1.97, +5.65] | method ahead, stands under P2 |
+| india | v3 full b7 | 245.3 | 12.91% | SAM blue-green-red | 184.5 | 15.63% | +2.72 | [+0.86, +4.70] | method ahead, stands under P2 |
+| india | v3 b7 ft india | 108.8 | 15.13% | SAM colour infrared | 155.3 | 14.52% | -0.61 | [-2.52, +1.46] | level |
+| india | v3 b7 ft india | 108.8 | 15.13% | SAM NIR-blue-green | 146.8 | 13.87% | -1.26 | [-3.22, +0.71] | level |
+| india | v3 b7 ft india | 108.8 | 15.13% | SAM natural colour | 135.4 | 12.96% | -2.17 | [-4.13, -0.10] | FTW ahead, stands under P2 |
+| india | v3 b7 ft india | 108.8 | 15.13% | SAM blue-green-red | 128.7 | 12.15% | -2.98 | [-4.94, -1.01] | FTW ahead, stands under P2 |
+| india | v3 b7 ft india+slovenia | 141.1 | 13.57% | SAM colour infrared | 155.3 | 14.52% | +0.96 | [-0.86, +2.82] | level |
+| india | v3 b7 ft india+slovenia | 141.1 | 13.57% | SAM NIR-blue-green | 146.8 | 13.87% | +0.30 | [-1.56, +2.07] | level |
+| india | v3 b7 ft india+slovenia | 141.1 | 13.57% | SAM natural colour | 141.1 | 13.28% | -0.29 | [-2.13, +1.52] | level |
+| india | v3 b7 ft india+slovenia | 141.1 | 13.57% | SAM blue-green-red | 141.1 | 12.93% | -0.63 | [-2.43, +1.21] | level |
+| slovenia | v3 full b7 | 20.5 | 33.06% | SAM colour infrared | 73.8 | 21.21% | -11.84 | [-14.62, -9.17] | FTW ahead, stands under P2 |
+| slovenia | v3 full b7 | 20.5 | 33.06% | SAM NIR-blue-green | 72.7 | 20.63% | -12.43 | [-15.15, -9.84] | FTW ahead, stands under P2 |
+| slovenia | v3 full b7 | 20.5 | 33.06% | SAM natural colour | 85.9 | 25.72% | -7.33 | [-9.98, -4.87] | FTW ahead, stands under P2 |
+| slovenia | v3 full b7 | 20.5 | 33.06% | SAM blue-green-red | 78.8 | 23.38% | -9.68 | [-12.35, -7.00] | FTW ahead, stands under P2 |
+| slovenia | v3 b7 ft india | 47.8 | 19.48% | SAM colour infrared | 73.8 | 21.21% | +1.73 | [-0.15, +3.56] | level |
+| slovenia | v3 b7 ft india | 47.8 | 19.48% | SAM NIR-blue-green | 72.7 | 20.63% | +1.14 | [-0.72, +3.13] | level |
+| slovenia | v3 b7 ft india | 47.8 | 19.48% | SAM natural colour | 85.9 | 25.72% | +6.24 | [+4.51, +7.99] | unresolved under P2 |
+| slovenia | v3 b7 ft india | 47.8 | 19.48% | SAM blue-green-red | 78.8 | 23.38% | +3.89 | [+2.08, +5.73] | unresolved under P2 |
+| slovenia | v3 b7 ft india+slovenia | 23.0 | 35.18% | SAM colour infrared | 73.8 | 21.21% | -13.97 | [-16.59, -11.37] | FTW ahead, stands under P2 |
+| slovenia | v3 b7 ft india+slovenia | 23.0 | 35.18% | SAM NIR-blue-green | 72.7 | 20.63% | -14.55 | [-17.18, -11.94] | FTW ahead, stands under P2 |
+| slovenia | v3 b7 ft india+slovenia | 23.0 | 35.18% | SAM natural colour | 85.9 | 25.72% | -9.46 | [-12.00, -6.95] | FTW ahead, stands under P2 |
+| slovenia | v3 b7 ft india+slovenia | 23.0 | 35.18% | SAM blue-green-red | 78.8 | 23.38% | -11.80 | [-14.44, -9.09] | FTW ahead, stands under P2 |
+
+### Recall by ground width, description only
+
+| country | checkpoint | band | parcels | recall |
+|---|---|---|---:|---:|
+| india | v3 full b7 | 20 to 30 m | 245 | 1.22% |
+| india | v3 full b7 | 30 to 50 m | 867 | 4.96% |
+| india | v3 full b7 | 50 m up | 675 | 31.11% |
+| india | v3 b7 ft india | 20 to 30 m | 245 | 1.63% |
+| india | v3 b7 ft india | 30 to 50 m | 867 | 7.50% |
+| india | v3 b7 ft india | 50 m up | 675 | 34.07% |
+| india | v3 b7 ft india+slovenia | 20 to 30 m | 245 | 0.41% |
+| india | v3 b7 ft india+slovenia | 30 to 50 m | 867 | 6.46% |
+| india | v3 b7 ft india+slovenia | 50 m up | 675 | 31.41% |
+| slovenia | v3 full b7 | 20 to 30 m | 1,229 | 20.26% |
+| slovenia | v3 full b7 | 30 to 50 m | 1,740 | 40.98% |
+| slovenia | v3 full b7 | 50 m up | 1,699 | 71.69% |
+| slovenia | v3 b7 ft india | 20 to 30 m | 1,229 | 7.49% |
+| slovenia | v3 b7 ft india | 30 to 50 m | 1,740 | 20.80% |
+| slovenia | v3 b7 ft india | 50 m up | 1,699 | 50.26% |
+| slovenia | v3 b7 ft india+slovenia | 20 to 30 m | 1,229 | 23.03% |
+| slovenia | v3 b7 ft india+slovenia | 30 to 50 m | 1,740 | 44.25% |
+| slovenia | v3 b7 ft india+slovenia | 50 m up | 1,699 | 74.57% |

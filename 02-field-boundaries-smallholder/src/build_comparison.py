@@ -1040,6 +1040,81 @@ def contrast_second_tables() -> list:
     return out
 
 
+def finetune_tables() -> list:
+    """Fine-tuned v3 B7, from kaggle/finetune_v3.py and finetune_score.py."""
+    res = F.PROJECT / "results"
+    need = [res / f for f in ("finetune_scores.csv", "finetune_tests.csv",
+                              "finetune_budget.csv", "finetune_widths.csv")]
+    if not all(p.exists() for p in need):
+        return ["\nMissing finetune results. Run finetune_score.py.\n"]
+    out = []
+    logs = {arm: res / "finetune" / arm / "log.csv"
+            for arm in ("india", "india_slovenia")}
+    if all(p.exists() for p in logs.values()):
+        a, b = (pd.read_csv(p) for p in logs.values())
+        out.append("### Val recall per epoch, on Kaggle\n")
+        out.append("| epoch | India arm, India val | India arm, Slovenia val "
+                   "| mixed arm, India val | mixed arm, Slovenia val |")
+        out.append("|---:|---:|---:|---:|---:|")
+        for (_, x), (_, y) in zip(a.iterrows(), b.iterrows()):
+            out.append(f"| {int(x['epoch'])} "
+                       f"| {x['india_val_recall'] * 100:.2f}% "
+                       f"| {x['slovenia_val_recall'] * 100:.2f}% "
+                       f"| {y['india_val_recall'] * 100:.2f}% "
+                       f"| {y['slovenia_val_recall'] * 100:.2f}% |")
+        out.append("")
+    out.append("### Test chips\n")
+    out.append("| country | checkpoint | objects per chip | recall | interval "
+               "| null | above null |")
+    out.append("|---|---|---:|---:|---:|---:|---:|")
+    for _, r in pd.read_csv(need[0]).iterrows():
+        out.append(f"| {r['country']} | {r['checkpoint']} | {r['objects']:.1f} "
+                   f"| {r['recall'] * 100:.2f}% | [{r['lo'] * 100:.2f}, "
+                   f"{r['hi'] * 100:.2f}] | {r['null'] * 100:.2f}% "
+                   f"| {r['above_null'] * 100:.2f}% |")
+    out.append("\n### Readings against v3 full B7\n")
+    out.append("| test | checkpoint | difference | interval | reading |")
+    out.append("|---|---|---:|---:|---|")
+    for _, r in pd.read_csv(need[1]).iterrows():
+        s, f = (1, ".3f") if r["test"].startswith("T4") else (100, "+.2f")
+        reading = r["reading"] if isinstance(r["reading"], str) else ""
+        out.append(f"| {r['test']} | {r['checkpoint']} "
+                   f"| {r['point'] * s:{f}} | [{r['lo'] * s:{f}}, "
+                   f"{r['hi'] * s:{f}}] | {reading} |")
+    out.append("\n### Watershed at each checkpoint's object count\n")
+    out.append("| country | checkpoint | objects per chip | FTW | watershed "
+               "| watershed minus FTW | interval | reading |")
+    out.append("|---|---|---:|---:|---:|---:|---:|---|")
+    for _, r in pd.read_csv(need[2]).iterrows():
+        out.append(f"| {r['country']} | {r['checkpoint']} | {r['budget']:.1f} "
+                   f"| {r['ftw_recall'] * 100:.2f}% "
+                   f"| {r['watershed_at_budget'] * 100:.2f}% "
+                   f"| {r['minus_ftw'] * 100:+.2f} | [{r['lo'] * 100:+.2f}, "
+                   f"{r['hi'] * 100:+.2f}] | {r['reading']} |")
+    sam = res / "finetune_sam.csv"
+    if sam.exists():
+        out.append("\n### SAM at each checkpoint's object count, added after "
+                   "the result\n")
+        out.append("| country | checkpoint | objects per chip | FTW | method "
+                   "| read at | recall | minus FTW | interval | reading |")
+        out.append("|---|---|---:|---:|---|---:|---:|---:|---:|---|")
+        for _, r in pd.read_csv(sam).iterrows():
+            out.append(f"| {r['country']} | {r['checkpoint']} "
+                       f"| {r['budget']:.1f} | {r['ftw_recall'] * 100:.2f}% "
+                       f"| {r['method']} | {r['objects_used']:.1f} "
+                       f"| {r['recall_at_budget'] * 100:.2f}% "
+                       f"| {r['minus_ftw'] * 100:+.2f} "
+                       f"| [{r['lo'] * 100:+.2f}, {r['hi'] * 100:+.2f}] "
+                       f"| {r['reading']} |")
+    out.append("\n### Recall by ground width, description only\n")
+    out.append("| country | checkpoint | band | parcels | recall |")
+    out.append("|---|---|---|---:|---:|")
+    for _, r in pd.read_csv(need[3]).iterrows():
+        out.append(f"| {r['country']} | {r['checkpoint']} | {r['band']} "
+                   f"| {int(r['parcels']):,} | {r['recall'] * 100:.2f}% |")
+    return out
+
+
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--sam-setting", default="0p50",
@@ -1133,6 +1208,9 @@ def main() -> None:
 
     out.append("\n## The contrast measure against two people, India\n")
     out += contrast_second_tables()
+
+    out.append("\n## v3 B7 fine-tuned on India\n")
+    out += finetune_tables()
 
     dest = F.PROJECT / "results" / "comparison_tables.md"
     dest.parent.mkdir(parents=True, exist_ok=True)

@@ -1,0 +1,25 @@
+country,checkpoint,budget,ftw_recall,method,objects_used,clamped,recall_at_budget,minus_ftw,lo,hi,reading
+india,v3 full b7,245.3,0.1291,SAM colour infrared,222.4,True,0.1831,0.054,0.0353,0.0726,"method ahead, stands under P2"
+india,v3 full b7,245.3,0.1291,SAM NIR-blue-green,212.6,True,0.1725,0.0434,0.0242,0.0623,"method ahead, stands under P2"
+india,v3 full b7,245.3,0.1291,SAM natural colour,194.6,True,0.1669,0.0378,0.0197,0.0565,"method ahead, stands under P2"
+india,v3 full b7,245.3,0.1291,SAM blue-green-red,184.5,True,0.1563,0.0272,0.0086,0.047,"method ahead, stands under P2"
+india,v3 b7 ft india,108.8,0.1513,SAM colour infrared,155.3,True,0.1452,-0.0061,-0.0252,0.0146,level
+india,v3 b7 ft india,108.8,0.1513,SAM NIR-blue-green,146.8,True,0.1387,-0.0126,-0.0322,0.0071,level
+india,v3 b7 ft india,108.8,0.1513,SAM natural colour,135.4,True,0.1296,-0.0217,-0.0413,-0.001,"FTW ahead, stands under P2"
+india,v3 b7 ft india,108.8,0.1513,SAM blue-green-red,128.7,True,0.1215,-0.0298,-0.0494,-0.0101,"FTW ahead, stands under P2"
+india,v3 b7 ft india+slovenia,141.1,0.1357,SAM colour infrared,155.3,True,0.1452,0.0096,-0.0086,0.0282,level
+india,v3 b7 ft india+slovenia,141.1,0.1357,SAM NIR-blue-green,146.8,True,0.1387,0.003,-0.0156,0.0207,level
+india,v3 b7 ft india+slovenia,141.1,0.1357,SAM natural colour,141.1,False,0.1328,-0.0029,-0.0213,0.0152,level
+india,v3 b7 ft india+slovenia,141.1,0.1357,SAM blue-green-red,141.1,False,0.1293,-0.0063,-0.0243,0.0121,level
+slovenia,v3 full b7,20.5,0.3306,SAM colour infrared,73.8,True,0.2121,-0.1184,-0.1462,-0.0917,"FTW ahead, stands under P2"
+slovenia,v3 full b7,20.5,0.3306,SAM NIR-blue-green,72.7,True,0.2063,-0.1243,-0.1515,-0.0984,"FTW ahead, stands under P2"
+slovenia,v3 full b7,20.5,0.3306,SAM natural colour,85.9,True,0.2572,-0.0733,-0.0998,-0.0487,"FTW ahead, stands under P2"
+slovenia,v3 full b7,20.5,0.3306,SAM blue-green-red,78.8,True,0.2338,-0.0968,-0.1235,-0.07,"FTW ahead, stands under P2"
+slovenia,v3 b7 ft india,47.8,0.1948,SAM colour infrared,73.8,True,0.2121,0.0173,-0.0015,0.0356,level
+slovenia,v3 b7 ft india,47.8,0.1948,SAM NIR-blue-green,72.7,True,0.2063,0.0114,-0.0072,0.0313,level
+slovenia,v3 b7 ft india,47.8,0.1948,SAM natural colour,85.9,True,0.2572,0.0624,0.0451,0.0799,unresolved under P2
+slovenia,v3 b7 ft india,47.8,0.1948,SAM blue-green-red,78.8,True,0.2338,0.0389,0.0208,0.0573,unresolved under P2
+slovenia,v3 b7 ft india+slovenia,23.0,0.3518,SAM colour infrared,73.8,True,0.2121,-0.1397,-0.1659,-0.1137,"FTW ahead, stands under P2"
+slovenia,v3 b7 ft india+slovenia,23.0,0.3518,SAM NIR-blue-green,72.7,True,0.2063,-0.1455,-0.1718,-0.1194,"FTW ahead, stands under P2"
+slovenia,v3 b7 ft india+slovenia,23.0,0.3518,SAM natural colour,85.9,True,0.2572,-0.0946,-0.12,-0.0695,"FTW ahead, stands under P2"
+slovenia,v3 b7 ft india+slovenia,23.0,0.3518,SAM blue-green-red,78.8,True,0.2338,-0.118,-0.1444,-0.0909,"FTW ahead, stands under P2"

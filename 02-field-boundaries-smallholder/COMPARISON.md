@@ -20,7 +20,8 @@ should be read are listed under Known gaps below.
 Every FTW figure up to finding 17 is for FTW's v1 checkpoint of October 2024,
 the one stage 2 ran. FTW has released three more since then, and v3 does much
 better on India. Findings 18 and 19 run the later releases and read watershed
-and SAM against them, and the README's headline now uses v3 (B-24).
+and SAM against them, and the README's headline now uses v3 (B-24). Finding 21
+fine-tunes v3 B7 on India's own train chips.
 
 ---
 
@@ -145,6 +146,14 @@ and SAM against them, and the README's headline now uses v3 (B-24).
     edge contrast enough to explain most of the gap. Blur also softens texture
     inside fields, and the edge measure it is calibrated on agrees only weakly
     with two people's eyes. See What this says.
+21. Fine-tuning v3 B7 on India's own train chips helps India a little and
+    costs Slovenia. Trained on India alone, it finds 15.13% of Indian test
+    parcels against v3's 12.91%, from 108.8 objects per chip against 245.3,
+    and at that count it beats watershed and draws level with SAM, which
+    reverses finding 19 for this model. Slovenia falls from 33.06% to 19.48%.
+    Trained on India with Slovenian chips mixed in, Slovenia holds and India
+    gains nothing measurable. The recipe and the rules for reading it were
+    committed before training. See What this says.
 
 ---
 
@@ -1325,6 +1334,92 @@ about two fifths of FTW v3's gap is left to something else.
 calibration in `results/slovenia/edge_test_calibration.csv` and the per-parcel
 and per-chip rows beside it.*
 
+**Fine-tuning v3 B7 on India helps India a little and costs Slovenia.**
+Every FTW figure so far is a released checkpoint, untouched.
+`kaggle/finetune_v3.py` fine-tunes v3 full B7 on a free Kaggle GPU, from the
+released weights, with v3's own loss, class weights and ignore index, at a
+tenth of its learning rate, for 20 epochs. v3 had already trained on India,
+whose masks mark fields and boundaries and leave everything else unknown, so
+this tests more weight on India and not a first sight of it. One arm trains
+on India's 1,261 labelled train chips alone. The other adds as many Slovenian
+train chips each epoch, which carry the background India's labels lack. Each
+arm keeps the epoch with the best recall on India's 300 val chips. The recipe
+was committed in `543f646` with the readings in `src\finetune_score.py`,
+before any training, and the test chips were then read once, through the same
+code that scored v3.
+
+The first run's files were lost when its Kaggle session ended. The recipe was
+run again, unchanged, as a saved version, and it printed the same loss, val
+recall and object count at every epoch of both arms, to every digit shown. The
+first run's console is kept in `results/finetune/run1_console.txt`.
+
+| country | checkpoint | objects per chip | recall | interval | null | above null |
+|---|---|---:|---:|---:|---:|---:|
+| india | v3 full b7 | 245.3 | 12.91% | [10.84, 15.27] | 2.50% | 10.41% |
+| india | v3 b7 ft india | 108.8 | 15.13% | [12.93, 17.47] | 0.71% | 14.42% |
+| india | v3 b7 ft india+slovenia | 141.1 | 13.57% | [11.39, 15.79] | 1.13% | 12.44% |
+| slovenia | v3 full b7 | 20.5 | 33.06% | [29.15, 36.64] | 0.58% | 32.48% |
+| slovenia | v3 b7 ft india | 47.8 | 19.48% | [16.91, 21.92] | 0.90% | 18.59% |
+| slovenia | v3 b7 ft india+slovenia | 23.0 | 35.18% | [31.36, 38.81] | 0.67% | 34.51% |
+
+| test | checkpoint | difference | interval | reading |
+|---|---|---:|---:|---|
+| T1 India recall minus v3 | v3 b7 ft india | +2.22 | [+0.86, +3.63] | helps on India, from better placed boundaries |
+| T2 India above null minus v3 | v3 b7 ft india | +4.02 | [+2.62, +5.41] |  |
+| T4 India over Slovenia minus v3 | v3 b7 ft india | 0.386 | [0.293, 0.489] |  |
+| T5 Slovenia recall minus v3 | v3 b7 ft india | -13.57 | [-15.46, -11.64] |  |
+| T1 India recall minus v3 | v3 b7 ft india+slovenia | +0.66 | [-0.60, +1.91] | no gain on India |
+| T2 India above null minus v3 | v3 b7 ft india+slovenia | +2.03 | [+0.69, +3.31] |  |
+| T4 India over Slovenia minus v3 | v3 b7 ft india+slovenia | -0.005 | [-0.046, 0.033] |  |
+| T5 Slovenia recall minus v3 | v3 b7 ft india+slovenia | +2.12 | [+1.16, +3.33] |  |
+
+The India arm meets T1 and T2: 2.22 points more Indian parcels, with an
+interval from +0.86 to +3.63, and 4.02 more above its null. It draws 108.8
+objects per chip where v3 drew 245.3, so the gain does not come from drawing
+more. T3 reads watershed at that count, where it finds 5.71% and FTW leads by
+9.42 points, the reverse of finding 19. The cost is Slovenia, down 13.57
+points to 19.48% while drawing more objects there, 47.8 per chip against 20.5.
+India's labels hold no background, and twenty epochs on them alone taught the
+model less about what is not a field. T4 passes, the ratio of India to
+Slovenia rising from 0.391 to 0.776, but it passes because Slovenia fell.
+India's own recall moved 2.22 points.
+
+The mixed arm keeps Slovenia, up 2.12 points to 35.18%, and fails T1 on India,
++0.66 with an interval from -0.60 to +1.91. It reaches v3's Indian recall with
+141.1 objects per chip in place of 245.3, so T2 holds and watershed at that
+count falls 5.40 points behind it. By the rules one arm helps and the other
+does not, so the gain is reported for the India arm and not as an effect of
+fine-tuning in general.
+
+SAM was read at the same counts after the report above had been seen, so as
+description only. SAM cannot draw fewer than about 129 to 155 objects on an
+Indian chip, depending on the composite, so against the India arm it is read
+there, with more objects than FTW:
+
+| method, India | objects per chip | recall | minus FTW | interval | reading |
+|---|---:|---:|---:|---:|---|
+| v3 b7 ft india | 108.8 | 15.13% |  |  |  |
+| SAM colour infrared | 155.3 | 14.52% | -0.61 | [-2.52, +1.46] | level |
+| SAM NIR-blue-green | 146.8 | 13.87% | -1.26 | [-3.22, +0.71] | level |
+| SAM natural colour | 135.4 | 12.96% | -2.17 | [-4.13, -0.10] | FTW ahead, stands under P2 |
+| SAM blue-green-red | 128.7 | 12.15% | -2.98 | [-4.94, -1.01] | FTW ahead, stands under P2 |
+
+With more objects and no lead, SAM no longer beats FTW on India once FTW has
+been fine-tuned there. By ground width, the India arm's gain sits at 30 to 50
+m, 4.96% to 7.50%, and above 50 m, 31.11% to 34.07%. Between 20 and 30 m it
+finds one parcel more of 245.
+
+Three limits. One recipe was run, with one learning rate and one seed, all set
+in advance and none tuned, so a better recipe may exist. Each arm's kept epoch
+is the best of 20 noisy val readings, which flatters its val figure; the test
+chips were not part of that choice. And the fine-tuned weights inherit v3
+FULL's noncommercial terms, so they are not published.
+
+*Source: `results/finetune_scores.csv`, `finetune_tests.csv`,
+`finetune_budget.csv`, `finetune_sam.csv` and `finetune_widths.csv`, the val
+logs in `results/finetune/<arm>/`, and the per-chip and per-parcel rows in
+`results/<country>/newer_ckpt/v3_b7_ft_*`.*
+
 **Above the floor, the method is the lever.** Between three and ten native
 pixels an untrained watershed finds between five and thirteen times as many
 Indian parcels as the v1 checkpoint, and above ten pixels SAM finds three
@@ -1334,8 +1429,9 @@ v3 checkpoint recovers part of that ground (finding 18).
 **The advice that follows differs by parcel size.** For Indian ground where
 fields are under about 30 m across, nothing in this study recovers them at a
 usable rate and the honest answer is that the problem is open. For ground above
-that, the model is the lever: the v1 checkpoint left a great deal on the table
-and v3 recovers part of it. For large fields specifically, SAM at 50.79% is the first result
+that, the model is the lever: the v1 checkpoint left a great deal on the table,
+v3 recovers part of it, and fine-tuning on India's own chips adds a little
+more at the cost of Slovenia (finding 21). For large fields specifically, SAM at 50.79% is the first result
 in this project that a product could be built on.
 
 ---
@@ -2141,6 +2237,10 @@ python src\edge_test.py --part calibrate
 python src\edge_test.py --part run
 python src\edge_test.py --part report
 python src\edge_test.py --part matched
+python src\finetune_score.py --part check
+python src\finetune_score.py --part run
+python src\finetune_score.py --part report
+python src\finetune_score.py --part sam
 python src\precision.py --country india --method ftw
 python src\precision.py --country india --method ftw --min-size-m2 0
 python src\precision.py --country india --method watershed --setting 0.02
@@ -2181,6 +2281,8 @@ the current one, so it is not part of a rerun.
 `contrast_second.py --part draw` refuses once its key exists and `judge`
 asks a person for answers, so a rerun redraws the images and scores the saved
 sheets.
+`finetune_score.py` needs the two checkpoints `kaggle/finetune_v3.py` writes
+on a Kaggle GPU, as its docstring describes; they are not committed.
 `edge_test.py` runs its parts in the order listed, each reading the one
 before, and `matched` reuses its saved sweep unless given `--redo`.
 
