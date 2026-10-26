@@ -1,0 +1,7 @@
+country,checkpoint,objects,recall,lo,hi,null,above_null
+india,v3 full b7,245.3,0.1291,0.1084,0.1527,0.025,0.1041
+india,v3 b7 ft india,108.8,0.1513,0.1293,0.1747,0.0071,0.1442
+india,v3 b7 ft india+slovenia,141.1,0.1357,0.1139,0.1579,0.0113,0.1244
+slovenia,v3 full b7,20.5,0.3306,0.2915,0.3664,0.0058,0.3248
+slovenia,v3 b7 ft india,47.8,0.1948,0.1691,0.2192,0.009,0.1859
+slovenia,v3 b7 ft india+slovenia,23.0,0.3518,0.3136,0.3881,0.0067,0.3451

@@ -1,0 +1,7 @@
+country,checkpoint,budget,ftw_recall,watershed_at_budget,objects_used,minus_ftw,lo,hi,reading
+india,v3 full b7,245.3,0.1291,0.1483,245.3,0.0192,0.002,0.036,method ahead
+india,v3 b7 ft india,108.8,0.1513,0.0571,108.8,-0.0942,-0.1143,-0.0741,FTW ahead
+india,v3 b7 ft india+slovenia,141.1,0.1357,0.0816,141.1,-0.054,-0.0727,-0.0353,FTW ahead
+slovenia,v3 full b7,20.5,0.3306,0.0627,20.5,-0.2678,-0.3009,-0.2324,FTW ahead
+slovenia,v3 b7 ft india,47.8,0.1948,0.1488,47.8,-0.046,-0.0672,-0.0251,FTW ahead
+slovenia,v3 b7 ft india+slovenia,23.0,0.3518,0.0711,23.0,-0.2807,-0.3117,-0.2472,FTW ahead

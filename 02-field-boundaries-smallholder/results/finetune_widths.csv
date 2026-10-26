@@ -1,0 +1,19 @@
+country,checkpoint,band,parcels,recall
+india,v3 full b7,20 to 30 m,245,0.0122
+india,v3 full b7,30 to 50 m,867,0.0496
+india,v3 full b7,50 m up,675,0.3111
+india,v3 b7 ft india,20 to 30 m,245,0.0163
+india,v3 b7 ft india,30 to 50 m,867,0.075
+india,v3 b7 ft india,50 m up,675,0.3407
+india,v3 b7 ft india+slovenia,20 to 30 m,245,0.0041
+india,v3 b7 ft india+slovenia,30 to 50 m,867,0.0646
+india,v3 b7 ft india+slovenia,50 m up,675,0.3141
+slovenia,v3 full b7,20 to 30 m,1229,0.2026
+slovenia,v3 full b7,30 to 50 m,1740,0.4098
+slovenia,v3 full b7,50 m up,1699,0.7169
+slovenia,v3 b7 ft india,20 to 30 m,1229,0.0749
+slovenia,v3 b7 ft india,30 to 50 m,1740,0.208
+slovenia,v3 b7 ft india,50 m up,1699,0.5026
+slovenia,v3 b7 ft india+slovenia,20 to 30 m,1229,0.2303
+slovenia,v3 b7 ft india+slovenia,30 to 50 m,1740,0.4425
+slovenia,v3 b7 ft india+slovenia,50 m up,1699,0.7457

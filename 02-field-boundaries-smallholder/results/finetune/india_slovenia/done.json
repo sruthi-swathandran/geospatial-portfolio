@@ -1,0 +1,9 @@
+{
+  "arm": "india_slovenia",
+  "best_epoch": 8,
+  "india_val_recall_epoch0": 0.1202,
+  "india_val_recall_best": 0.1572,
+  "checkpoint": "v3b7_ft_india_slovenia.ckpt",
+  "sha256": "d7d1d465f27e79750682ad759ba90ca9d9b2267332c85dd591aacf5a70a09bbd",
+  "smoke": false
+}

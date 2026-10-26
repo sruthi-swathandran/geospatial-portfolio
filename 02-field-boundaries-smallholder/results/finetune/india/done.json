@@ -1,0 +1,10 @@
+
+{
+  "arm": "india",
+  "best_epoch": 13,
+  "india_val_recall_epoch0": 0.1202,
+  "india_val_recall_best": 0.1833,
+  "checkpoint": "v3b7_ft_india.ckpt",
+  "sha256": "1678f30c25edbd7261c731cea9bc74c8f3cacbaf1e0e7c12ee540631bd0c70e7",
+  "smoke": false
+}

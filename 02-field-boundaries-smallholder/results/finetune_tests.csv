@@ -1,0 +1,9 @@
+test,checkpoint,country,point,lo,hi,interval,reading
+T1 India recall minus v3,v3 b7 ft india,india,0.0222,0.0086,0.0363,above zero,"helps on India, from better placed boundaries"
+T2 India above null minus v3,v3 b7 ft india,india,0.0402,0.0262,0.0541,above zero,
+T4 India over Slovenia minus v3,v3 b7 ft india,both,0.3859,0.2933,0.4887,above zero,
+T5 Slovenia recall minus v3,v3 b7 ft india,slovenia,-0.1357,-0.1546,-0.1164,below zero,
+T1 India recall minus v3,v3 b7 ft india+slovenia,india,0.0066,-0.006,0.0191,includes zero,no gain on India
+T2 India above null minus v3,v3 b7 ft india+slovenia,india,0.0203,0.0069,0.0331,above zero,
+T4 India over Slovenia minus v3,v3 b7 ft india+slovenia,both,-0.0049,-0.0465,0.0325,includes zero,
+T5 Slovenia recall minus v3,v3 b7 ft india+slovenia,slovenia,0.0212,0.0116,0.0333,above zero,

@@ -1,0 +1,78 @@
+Run 1 of kaggle/finetune_v3.py, SMOKE = False, on a Kaggle T4, 23 October 2026.
+It ran in an open notebook session, not a saved version, and its output folder
+was lost when the session ended. The recipe was then run again unchanged as a
+saved version, run 2, on 26 October 2026. The test chips were not read before
+the rerun. Run 2 printed the same train loss, val recall and object count as
+run 1 at every epoch of both arms, to every digit shown, and kept the same
+epochs, 13 and 8. Below is run 1's console output as printed.
+
+==============================================================================
+FINE-TUNING FTW v3 B7 ON INDIA
+==============================================================================
+  Tesla T4, torch 2.11.0+cu128, smp 0.5.0
+  prue_efnet7_checkpoint.ckpt matches the release
+  efficientnet-b7, loss logcoshdice, class weights [0.05, 0.2, 0.75], ignore_index 3
+  india train: 1261 of 1261 chips have labelled pixels
+  slovenia train: 1733 of 1733 chips have labelled pixels
+  india val: 300 chips
+  slovenia val: 216 chips
+
+==============================================================================
+ARM india: india
+==============================================================================
+  epoch 0  train_loss nan  india_val_recall 0.1202  india_val_objects 253.5  slovenia_val_recall 0.351  slovenia_val_objects 28.7  secs 0
+  0.26 s a step, 157 steps an epoch
+  epoch 1  train_loss 0.00886  india_val_recall 0.1484  india_val_objects 162.3  slovenia_val_recall 0.2579  slovenia_val_objects 38.5  secs 53
+  epoch 2  train_loss 0.00621  india_val_recall 0.1451  india_val_objects 90.4  slovenia_val_recall 0.2009  slovenia_val_objects 38.5  secs 41
+  epoch 3  train_loss 0.00607  india_val_recall 0.1491  india_val_objects 99.3  slovenia_val_recall 0.2104  slovenia_val_objects 44.2  secs 40
+  epoch 4  train_loss 0.00585  india_val_recall 0.1605  india_val_objects 102.5  slovenia_val_recall 0.2044  slovenia_val_objects 44.5  secs 41
+  epoch 5  train_loss 0.00563  india_val_recall 0.1719  india_val_objects 102.9  slovenia_val_recall 0.204  slovenia_val_objects 46.9  secs 41
+  epoch 6  train_loss 0.00571  india_val_recall 0.1585  india_val_objects 96.6  slovenia_val_recall 0.1897  slovenia_val_objects 41.1  secs 41
+  epoch 7  train_loss 0.00563  india_val_recall 0.1585  india_val_objects 103.1  slovenia_val_recall 0.1961  slovenia_val_objects 45.0  secs 41
+  epoch 8  train_loss 0.00554  india_val_recall 0.1746  india_val_objects 93.3  slovenia_val_recall 0.1941  slovenia_val_objects 44.1  secs 41
+  epoch 9  train_loss 0.00548  india_val_recall 0.1753  india_val_objects 103.6  slovenia_val_recall 0.2054  slovenia_val_objects 46.2  secs 41
+  epoch 10  train_loss 0.0055  india_val_recall 0.1572  india_val_objects 93.5  slovenia_val_recall 0.2121  slovenia_val_objects 55.2  secs 41
+  epoch 11  train_loss 0.00545  india_val_recall 0.1726  india_val_objects 108.8  slovenia_val_recall 0.1994  slovenia_val_objects 53.2  secs 41
+  epoch 12  train_loss 0.00542  india_val_recall 0.1773  india_val_objects 102.7  slovenia_val_recall 0.2022  slovenia_val_objects 49.6  secs 41
+  epoch 13  train_loss 0.00533  india_val_recall 0.1833  india_val_objects 108.8  slovenia_val_recall 0.1944  slovenia_val_objects 52.5  secs 41
+  epoch 14  train_loss 0.0053  india_val_recall 0.18  india_val_objects 104.3  slovenia_val_recall 0.1776  slovenia_val_objects 44.3  secs 41
+  epoch 15  train_loss 0.00527  india_val_recall 0.1746  india_val_objects 98.0  slovenia_val_recall 0.1917  slovenia_val_objects 48.8  secs 41
+  epoch 16  train_loss 0.0053  india_val_recall 0.1773  india_val_objects 105.4  slovenia_val_recall 0.1856  slovenia_val_objects 50.0  secs 41
+  epoch 17  train_loss 0.00518  india_val_recall 0.1753  india_val_objects 104.0  slovenia_val_recall 0.173  slovenia_val_objects 44.6  secs 41
+  epoch 18  train_loss 0.00522  india_val_recall 0.1578  india_val_objects 106.6  slovenia_val_recall 0.1744  slovenia_val_objects 44.7  secs 41
+  epoch 19  train_loss 0.00515  india_val_recall 0.1719  india_val_objects 101.9  slovenia_val_recall 0.1629  slovenia_val_objects 43.3  secs 41
+  epoch 20  train_loss 0.00512  india_val_recall 0.178  india_val_objects 100.7  slovenia_val_recall 0.1747  slovenia_val_objects 48.2  secs 41
+  kept epoch 13, India val recall 0.1202 at epoch 0, 0.1833 kept
+  wrote /kaggle/working/finetune/india/v3b7_ft_india.ckpt
+
+==============================================================================
+ARM india_slovenia: india, slovenia
+==============================================================================
+  epoch 0  train_loss nan  india_val_recall 0.1202  india_val_objects 253.5  slovenia_val_recall 0.351  slovenia_val_objects 28.7  secs 0
+  0.26 s a step, 315 steps an epoch
+  epoch 1  train_loss 0.01358  india_val_recall 0.1471  india_val_objects 187.3  slovenia_val_recall 0.3547  slovenia_val_objects 29.7  secs 93
+  epoch 2  train_loss 0.01272  india_val_recall 0.1525  india_val_objects 165.5  slovenia_val_recall 0.3481  slovenia_val_objects 28.6  secs 82
+  epoch 3  train_loss 0.01254  india_val_recall 0.1383  india_val_objects 170.3  slovenia_val_recall 0.3626  slovenia_val_objects 29.4  secs 82
+  epoch 4  train_loss 0.01208  india_val_recall 0.1263  india_val_objects 150.6  slovenia_val_recall 0.351  slovenia_val_objects 28.6  secs 82
+  epoch 5  train_loss 0.01216  india_val_recall 0.1357  india_val_objects 165.5  slovenia_val_recall 0.36  slovenia_val_objects 29.3  secs 82
+  epoch 6  train_loss 0.01197  india_val_recall 0.1538  india_val_objects 162.9  slovenia_val_recall 0.366  slovenia_val_objects 29.5  secs 82
+  epoch 7  train_loss 0.01174  india_val_recall 0.1202  india_val_objects 163.9  slovenia_val_recall 0.3558  slovenia_val_objects 29.6  secs 82
+  epoch 8  train_loss 0.01211  india_val_recall 0.1572  india_val_objects 146.0  slovenia_val_recall 0.3699  slovenia_val_objects 31.5  secs 82
+  epoch 9  train_loss 0.01175  india_val_recall 0.1283  india_val_objects 164.6  slovenia_val_recall 0.3657  slovenia_val_objects 29.5  secs 82
+  epoch 10  train_loss 0.01175  india_val_recall 0.1289  india_val_objects 135.2  slovenia_val_recall 0.3575  slovenia_val_objects 28.4  secs 82
+  epoch 11  train_loss 0.01174  india_val_recall 0.1464  india_val_objects 149.7  slovenia_val_recall 0.3678  slovenia_val_objects 29.6  secs 82
+  epoch 12  train_loss 0.01177  india_val_recall 0.1551  india_val_objects 157.4  slovenia_val_recall 0.3624  slovenia_val_objects 30.1  secs 82
+  epoch 13  train_loss 0.01184  india_val_recall 0.1189  india_val_objects 150.1  slovenia_val_recall 0.3583  slovenia_val_objects 29.0  secs 82
+  epoch 14  train_loss 0.01154  india_val_recall 0.1222  india_val_objects 154.0  slovenia_val_recall 0.3524  slovenia_val_objects 28.2  secs 82
+  epoch 15  train_loss 0.01141  india_val_recall 0.1363  india_val_objects 139.2  slovenia_val_recall 0.3553  slovenia_val_objects 28.5  secs 82
+  epoch 16  train_loss 0.01154  india_val_recall 0.1336  india_val_objects 146.6  slovenia_val_recall 0.3748  slovenia_val_objects 30.9  secs 82
+  epoch 17  train_loss 0.01155  india_val_recall 0.1316  india_val_objects 114.7  slovenia_val_recall 0.3619  slovenia_val_objects 29.5  secs 82
+  epoch 18  train_loss 0.01135  india_val_recall 0.1538  india_val_objects 160.7  slovenia_val_recall 0.3712  slovenia_val_objects 30.5  secs 82
+  epoch 19  train_loss 0.01158  india_val_recall 0.1343  india_val_objects 135.7  slovenia_val_recall 0.3639  slovenia_val_objects 29.9  secs 82
+  epoch 20  train_loss 0.01117  india_val_recall 0.1323  india_val_objects 134.0  slovenia_val_recall 0.3527  slovenia_val_objects 29.3  secs 82
+  kept epoch 8, India val recall 0.1202 at epoch 0, 0.1572 kept
+  wrote /kaggle/working/finetune/india_slovenia/v3b7_ft_india_slovenia.ckpt
+
+==============================================================================
+Done. Download /kaggle/working/finetune from the notebook's output.
+==============================================================================
